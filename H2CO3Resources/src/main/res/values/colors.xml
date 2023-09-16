@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="appBlack_35">#35000000</color>
+    <color name="appBlack_ff">#AA000000</color>
+    <color name="appBlack_ff_l">#AA000000</color>
+    <color name="appBlack_70">#70000000</color>
+    <color name="appWhite_ff_l">#FFFFFFFF</color>
+    <color name="appTint">#AA000000</color>
+
+    <color name="md_theme_primary">#4359A9</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#DCE1FF</color>
+    <color name="md_theme_onPrimaryContainer">#001551</color>
+    <color name="md_theme_secondary">#595D72</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_secondaryContainer">#DEE1F9</color>
+    <color name="md_theme_onSecondaryContainer">#161B2C</color>
+    <color name="md_theme_tertiary">#375CA9</color>
+    <color name="md_theme_onTertiary">#FFFFFF</color>
+    <color name="md_theme_tertiaryContainer">#D9E2FF</color>
+    <color name="md_theme_onTertiaryContainer">#001945</color>
+    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_errorContainer">#FFDAD6</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_onErrorContainer">#410002</color>
+    <color name="md_theme_background">#FEFBFF</color>
+    <color name="md_theme_onBackground">#1B1B1F</color>
+    <color name="md_theme_surface">#FEFBFF</color>
+    <color name="md_theme_onSurface">#1B1B1F</color>
+    <color name="md_theme_surfaceVariant">#E2E1EC</color>
+    <color name="md_theme_onSurfaceVariant">#45464F</color>
+    <color name="md_theme_outline">#767680</color>
+    <color name="md_theme_inverseOnSurface">#F2F0F4</color>
+    <color name="md_theme_inverseSurface">#303034</color>
+    <color name="md_theme_inversePrimary">#B7C4FF</color>
+
+    <color name="app_green_normal">#FF06A869</color>
+    <color name="app_blue_normal">#FF7093DB</color>
+
+    <color name="transparent">#00FFFFFF</color>
+</resources>

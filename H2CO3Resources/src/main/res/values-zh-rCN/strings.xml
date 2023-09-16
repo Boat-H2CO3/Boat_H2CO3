@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_home">主页</string>
+    <string name="title_directory">目录管理</string>
+    <string name="title_manage">更多</string>
+</resources>

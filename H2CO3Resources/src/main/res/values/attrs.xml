@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="H2CO3CardView">
+        <!--圆角度-->
+        <attr name="android:radius" />
+        <attr name="android:topLeftRadius" />
+        <attr name="android:topRightRadius" />
+        <attr name="android:bottomLeftRadius" />
+        <attr name="android:bottomRightRadius" />
+        <!--阴影的X轴偏移-->
+        <attr name="android:x" />
+        <!--阴影的Y轴偏移-->
+        <attr name="android:y" />
+        <!--阴影的X+Y轴偏移-->
+        <attr name="shadowOffset" format="dimension" />
+        <!--阴影颜色-->
+        <attr name="android:shadowColor" />
+        <attr name="cardBackgroundColor" format="color" />
+        <!--阴影半径，越大越模糊 阴影越宽-->
+        <attr name="shadowRadius" format="dimension" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="?attr/colorControlNormal" />
+            <stroke android:color="?attr/colorControlNormal"
+                android:width="25dp"/>
+            <size
+                android:width="40dp"
+                android:height="40dp" />
+        </shape>
+    </item>
+    <item
+        android:width="40dp"
+        android:height="40dp">
+        <inset
+            android:inset="5dp"
+            android:drawable="@drawable/ic_h2o2_low_px" />
+    </item>
+</layer-list>

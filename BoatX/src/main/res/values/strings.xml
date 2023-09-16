@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Boat_H2CO3</string>
+    <string name="app_version" translatable="false">Boat_H2CO3 DEV</string>
+    <string name="install">Install</string>
+
+    <string name="app_restart">Restart</string>
+
+    <string name="crash_test">Crash test</string>
+    <string name="crash_hint">App is crashed! Do not worry, app will restart if you press the restart button. You can also view the information from this page.</string>
+    <string name="crash_title">Error</string>
+
+</resources>
