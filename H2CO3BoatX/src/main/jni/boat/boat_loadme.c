@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <android/log.h>
 #include <sys/mman.h>
-#include "xhook.h"
+#include <xhook.h>
 
 static volatile jobject exitTrap_ctx;
 static volatile jclass exitTrap_exitClass;
@@ -81,7 +81,7 @@ Java_cosine_boat_LoadMe_setupExitTrap(JNIEnv *env, jclass clazz, jobject context
     exitTrap_ctx = (*env)->NewGlobalRef(env, context);
     (*env)->GetJavaVM(env, &exitTrap_jvm);
     exitTrap_exitClass = (*env)->NewGlobalRef(env,
-                                              (*env)->FindClass(env, "cosine/boat/BOATActivity"));
+                                              (*env)->FindClass(env, "cosine/boat/BoatActivity"));
     exitTrap_staticMethod = (*env)->GetStaticMethodID(env, exitTrap_exitClass, "onExit",
                                                       "(Landroid/content/Context;I)V");
     xhook_enable_debug(1);

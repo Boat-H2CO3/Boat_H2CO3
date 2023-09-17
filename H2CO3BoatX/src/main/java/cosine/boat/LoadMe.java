@@ -10,15 +10,16 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
+import org.koishi.launcher.h2co3.core.utils.Architecture;
+import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
+
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import cosine.boat.function.BoatLaunchCallback;
-import org.koishi.launcher.h2co3.core.utils.Architecture;
 import cosine.boat.utils.BoatUtils;
-import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
 
 public class LoadMe {
 
@@ -26,7 +27,7 @@ public class LoadMe {
     public static WeakReference<LogReceiver> mReceiver;
 
     static {
-        System.loadLibrary("loadme");
+        System.loadLibrary("boat");
     }
 
     public static native int chdir(String path);

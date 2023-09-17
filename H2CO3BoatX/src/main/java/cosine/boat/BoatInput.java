@@ -91,7 +91,7 @@ public class BoatInput {
                     uri = Uri.parse(targetLink);
                 } else {
                     //can`t get authority by R.string.file_browser_provider
-                    uri = FileProvider.getUriForFile(context, "com.tungsten.fcl.provider", new File(targetLink));
+                    uri = FileProvider.getUriForFile(context, "org.koishi.launcher.h2co3.provider", new File(targetLink));
                 }
                 intent.setDataAndType(uri, "*/*");
                 context.startActivity(intent);

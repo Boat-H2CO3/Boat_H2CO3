@@ -26,28 +26,21 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE     := boat
-        LOCAL_SRC_FILES  := boat/boat.c \
+LOCAL_SRC_FILES  := boat/boat_loadme.c \
+                    xhook/xh_core.c \
+                    xhook/xh_elf.c \
+                    xhook/xh_jni.c \
+                    xhook/xh_log.c \
+                    xhook/xh_util.c \
+                    xhook/xh_version.c \
+                    xhook/xhook.c\
+                    boat/boat.c \
                     boat/boat_clipboard.c \
                     boat/boat_internal.h \
                     boat/boat_event.c
-        LOCAL_C_INCLUDES := $(LOCAL_PATH)/boat/include
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/boat/include \
+                    $(LOCAL_PATH)/xhook
 LOCAL_CFLAGS     := -Wall -Wall -Werror
-LOCAL_CONLYFLAGS := -std=c99
-LOCAL_LDLIBS     := -llog -ldl -landroid
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE     := loadme
-        LOCAL_SRC_FILES  := loadme/loadme.c \
-                    loadme/xh_core.c \
-                    loadme/xh_elf.c \
-                    loadme/xh_jni.c \
-                    loadme/xh_log.c \
-                    loadme/xh_util.c \
-                    loadme/xh_version.c \
-                    loadme/xhook.c
-        LOCAL_C_INCLUDES := $(LOCAL_PATH)/loadme/include
-LOCAL_CFLAGS     := -Wall -Wall -Werror -DBUILD_BOAT
 LOCAL_CONLYFLAGS := -std=c99
 LOCAL_LDLIBS     := -llog -ldl -landroid
 include $(BUILD_SHARED_LIBRARY)
