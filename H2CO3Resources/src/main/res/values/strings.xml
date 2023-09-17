@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name" translatable="false">Boat_H2CO3</string>
+
     <string name="title_home">Home</string>
     <string name="title_directory">Directory</string>
     <string name="title_manage">Manage</string>
+
+    <string name="app_restart">Restart</string>
+
+    <string name="crash_test">Crash test</string>
+    <string name="crash_hint">App is crashed! Do not worry, app will restart if you press the restart button. You can also view the information from this page.</string>
+    <string name="crash_title">Error</string>
+
+    <string name="file_browser_provider" translatable="false">org.koishi.launcher.h2co3.provider</string>
 </resources>

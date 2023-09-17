@@ -7,9 +7,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        minSdk 26
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdk 28
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -20,8 +18,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 configurations.configureEach {
@@ -31,7 +29,6 @@ configurations.configureEach {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':H2CO3Core')
-    implementation "androidx.core:core-splashscreen:1.0.0"
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment:2.6.0'
@@ -87,5 +84,7 @@ dependencies {
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'androidx.webkit:webkit:1.7.0-alpha03'
     implementation "org.greenrobot:eventbus:3.3.1"
-    implementation 'commons-codec:commons-codec:1.15'
+    // https://mvnrepository.com/artifact/commons-codec/commons-codec
+    implementation 'commons-codec:commons-codec:1.16.0'
+
 }

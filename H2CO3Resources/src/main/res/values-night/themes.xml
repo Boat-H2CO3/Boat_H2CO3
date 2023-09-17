@@ -47,11 +47,4 @@
         <item name="fontFamily">@font/josefin_sans</item>
         <item name="android:fontFamily">@font/josefin_sans</item>
     </style>
-
-    <style name="AppTheme.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/md_theme_surface</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
-        <item name="windowSplashScreenAnimationDuration">200</item>
-        <item name="postSplashScreenTheme">@style/Theme.H2CO3</item>
-    </style>
 </resources>

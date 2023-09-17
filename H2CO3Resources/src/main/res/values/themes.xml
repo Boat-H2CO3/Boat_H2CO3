@@ -133,13 +133,6 @@
         <item name="android:textColor">@color/material_on_background_disabled</item>
     </style>
 
-    <style name="AppTheme.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/md_theme_surface</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
-        <item name="windowSplashScreenAnimationDuration">200</item>
-        <item name="postSplashScreenTheme">@style/Theme.H2CO3</item>
-    </style>
-
     <style name="AppTheme.TabLayout" parent="Widget.Material3.TabLayout">
         <item name="tabIndicatorAnimationMode">elastic</item>
         <item name="tabIndicatorFullWidth">false</item>

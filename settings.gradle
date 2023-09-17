@@ -47,4 +47,4 @@ rootProject.name = "Boat_H2CO3"
 include ':H2CO3'
 include ':H2CO3Resources'
 include ':H2CO3Core'
-include ':BoatX'
+include ':H2CO3BoatX'
