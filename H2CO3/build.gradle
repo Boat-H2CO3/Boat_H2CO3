@@ -35,7 +35,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':H2CO3Core')
     implementation project(path: ':H2CO3Resources')
-    implementation project(path: ':H2CO3BoatX')
+    implementation project(path: ':H2CO3Boat')
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment:2.6.0'
