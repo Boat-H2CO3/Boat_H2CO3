@@ -9,6 +9,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StyleRes;
 
+import org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar;
+
 /**
  * @since 1.6
  */
@@ -531,7 +533,7 @@ public class BasicDialog extends H2CO3Dialog {
      * @since 1.6
      */
     @Override
-    public TextView getTitleTextView() {
+    public H2CO3ToolBar getTitleTextView() {
         return super.getTitleTextView();
     }
 

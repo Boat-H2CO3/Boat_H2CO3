@@ -24,6 +24,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar;
+
+import java.util.Objects;
+
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public abstract class H2CO3Dialog {
 
@@ -103,6 +107,7 @@ public abstract class H2CO3Dialog {
     private int newTheme = -1;
     private boolean usesDefaultTheme = true;
     private boolean isSwipeToDismiss = true;
+    private boolean isSetCancelable = true;
     private boolean isDefaultOnTouchListener = true;
     private boolean isNotDefaultInsets = false;
     private boolean setInsets = true;
@@ -132,7 +137,7 @@ public abstract class H2CO3Dialog {
                 new Dialog(new ContextThemeWrapper(context, theme));
         setContentView(layoutResID);
         setDialogSize();
-        dialog.getWindow().getAttributes().gravity = Gravity.BOTTOM;
+        Objects.requireNonNull(dialog.getWindow()).getAttributes().gravity = Gravity.CENTER;
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = org.koishi.launcher.h2co3.resources.R.style.Theme_H2CO3_DialogAnimation;
         background = dialog.findViewById(R.id.dialogBackground);
@@ -162,8 +167,8 @@ public abstract class H2CO3Dialog {
      * @since 1.3
      */
     protected H2CO3Dialog setTitle(String title) {
-        TextView TitleTv = getTitleTextView();
-        TitleTv.setText(title);
+        H2CO3ToolBar TitleTv = getTitleTextView();
+        TitleTv.setTitle(title);
         return this;
     }
 
@@ -189,8 +194,7 @@ public abstract class H2CO3Dialog {
      * @since 1.6
      */
     protected H2CO3Dialog setTitleAlignment(@TextAlignment int textAlignment) {
-        TextView title = getTitleTextView();
-        title.setGravity(Gravity.RIGHT);
+        H2CO3ToolBar title = getTitleTextView();
         title.setTextAlignment(textAlignment);
 
         return this;
@@ -230,7 +234,7 @@ public abstract class H2CO3Dialog {
      * @since 1.6
      */
     protected H2CO3Dialog setTitleTextColor(@ColorInt int color) {
-        getTitleTextView().setTextColor(color);
+        getTitleTextView().setTitleTextColor(color);
         return this;
     }
 
@@ -505,7 +509,7 @@ public abstract class H2CO3Dialog {
      * @return current class
      * @since 1.0
      */
-    protected H2CO3Dialog onButtonClick(DialogButtonEvents dialogButtonEvents) {
+    public H2CO3Dialog onButtonClick(DialogButtonEvents dialogButtonEvents) {
         this.dialogButtonEvents = dialogButtonEvents;
 
         return this;
@@ -539,7 +543,7 @@ public abstract class H2CO3Dialog {
      *
      * @since 1.3
      */
-    protected H2CO3Dialog show() {
+    public H2CO3Dialog show() {
         setDialogTouchListener();
         addOnClickListener();
         if (!isNotDefaultInsets)
@@ -594,7 +598,7 @@ public abstract class H2CO3Dialog {
 
     private void applyWindowInsets() {
 
-        ViewCompat.setOnApplyWindowInsetsListener(dialog.getWindow().getDecorView(), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(Objects.requireNonNull(dialog.getWindow()).getDecorView(), (v, insets) -> {
             Insets insetsSB = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             Insets insetsDC = insets.getInsets(WindowInsetsCompat.Type.displayCutout());
 
@@ -648,6 +652,7 @@ public abstract class H2CO3Dialog {
     public void dismiss() {
         dialog.dismiss();
     }
+
 
     private void setContentView(@LayoutRes int layoutResID) {
         dialog.setContentView(layoutResID);
@@ -730,7 +735,7 @@ public abstract class H2CO3Dialog {
         button2.setVisibility(visibility);
     }
 
-    protected TextView getTitleTextView() {
+    protected H2CO3ToolBar getTitleTextView() {
         return dialog.findViewById(R.id.titleText);
     }
 
@@ -771,7 +776,7 @@ public abstract class H2CO3Dialog {
      * @since 1.5
      */
     protected H2CO3Dialog setDialogAnimations(@StyleRes int styleRes) {
-        dialog.getWindow().getAttributes().windowAnimations = styleRes;
+        Objects.requireNonNull(dialog.getWindow()).getAttributes().windowAnimations = styleRes;
         return this;
     }
 
@@ -784,6 +789,12 @@ public abstract class H2CO3Dialog {
      */
     protected H2CO3Dialog swipeToDismiss(boolean isSwipeToDismiss) {
         this.isSwipeToDismiss = isSwipeToDismiss;
+        return this;
+    }
+
+    public H2CO3Dialog setCancelable(boolean isSetCancelable) {
+        this.isSetCancelable = isSetCancelable;
+        dialog.setCancelable(this.isSetCancelable);
         return this;
     }
 
@@ -805,7 +816,7 @@ public abstract class H2CO3Dialog {
 
         if (isDefaultOnTouchListener)
             dialogOnTouchListener = new SwipeDismissTouchListener(
-                    dialog.getWindow().getDecorView(),
+                    Objects.requireNonNull(dialog.getWindow()).getDecorView(),
                     new SwipeDismissTouchListener.DismissCallbacks() {
                         @Override
                         public boolean canDismiss() {
@@ -819,7 +830,7 @@ public abstract class H2CO3Dialog {
                     }
             );
 
-        dialog.getWindow().getDecorView().setOnTouchListener(dialogOnTouchListener);
+        Objects.requireNonNull(dialog.getWindow()).getDecorView().setOnTouchListener(dialogOnTouchListener);
     }
 
     private OneButtonException OneButtonException() {

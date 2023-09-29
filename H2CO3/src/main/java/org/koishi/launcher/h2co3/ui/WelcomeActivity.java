@@ -16,6 +16,7 @@ import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.core.utils.Logging;
 import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
 import org.koishi.launcher.h2co3.dialog.BasicDialog;
+import org.koishi.launcher.h2co3.dialog.DialogButtonEvents;
 import org.koishi.launcher.h2co3.resources.component.H2CO3Activity;
 import org.koishi.launcher.h2co3.ui.fragment.welcome.RuntimeFragment;
 import org.koishi.launcher.h2co3.ui.fragment.welcome.WelcomeFragment;
@@ -87,11 +88,22 @@ public class WelcomeActivity extends H2CO3Activity {
                         } else {
                             BasicDialog dialog = new BasicDialog();
                             dialog.Builder(WelcomeActivity.this)
-                                    .setTitle("Title")
-                                    .setLeftButtonText("button1")
-                                    .setRightButtonText("button2")
-                                    .onButtonClick(() -> {
-                                        // Do something
+                                    .setTitle(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.title_warn))
+                                    .setMessage(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.welcome_permission_hint))
+                                    .setLeftButtonText(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.button_ok))
+                                    .setRightButtonText(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.button_cancel))
+                                    .swipeToDismiss(false)
+                                    .setCancelable(false)
+                                    .onButtonClick(new DialogButtonEvents() {
+                                        @Override
+                                        public void onLeftButtonClick() {
+                                            XXPermissions.startPermissionActivity(WelcomeActivity.this, permissions);
+                                        }
+
+                                        @Override
+                                        public void onRightButtonClick() {
+                                            finish();
+                                        }
                                     })
                                     .show();
                         }

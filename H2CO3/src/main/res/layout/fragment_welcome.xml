@@ -5,4 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.welcome.WelcomeFragment">
 
+    <org.koishi.launcher.h2co3.resources.component.H2CO3Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sddsdfffdsf"
+        tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

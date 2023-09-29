@@ -30,7 +30,7 @@
         <item name="colorPrimaryInverse">@color/md_theme_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="materialButtonStyle">@style/Theme.H2CO3.ButtonStyle</item>
+        <item name="materialButtonStyle">@style/Theme.H2CO3.DialogButtonStyle</item>
     </style>
 
     <style name="Theme.H2CO3.Base" parent="Theme.H2CO3.Material">
@@ -61,7 +61,7 @@
         <!--    Font    -->
         <item name="fontFamily">@font/josefin_sans</item>
         <item name="android:fontFamily">@font/josefin_sans</item>
-        <item name="materialButtonStyle">@style/Theme.H2CO3.ButtonStyle</item>
+        <item name="materialButtonStyle">@style/Theme.H2CO3.DialogButtonStyle</item>
     </style>
 
     <style name="Theme.H2CO3.Base.DynamicColors" parent="Theme.H2CO3.Material.DynamicColors">
@@ -72,7 +72,7 @@
         <item name="android:fontFamily">@font/josefin_sans</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="materialButtonStyle">@style/Theme.H2CO3.ButtonStyle</item>
+        <item name="materialButtonStyle">@style/Theme.H2CO3.DialogButtonStyle</item>
     </style>
 
     <style name="Theme.H2CO3.Styled.DynamicColors" parent="Theme.H2CO3.Base.DynamicColors">
@@ -195,7 +195,7 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
-    <style name="Theme.H2CO3.ButtonStyle" parent="Widget.Material3.Button">
+    <style name="Theme.H2CO3.DialogButtonStyle" parent="Widget.Material3.Button">
         <item name="android:textSize">12dp</item>
         <item name="android:paddingStart">15dp</item>
         <item name="android:paddingEnd">15dp</item>
@@ -208,7 +208,7 @@
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 
-    <style name="Theme.H2CO3.ButtonStyle.Red" parent="@style/Theme.H2CO3.ButtonStyle">
+    <style name="Theme.H2CO3.ButtonStyle.Red" parent="@style/Theme.H2CO3.DialogButtonStyle">
         <item name="backgroundTint">?colorError</item>
         <item name="android:textColor">?colorOnError</item>
     </style>

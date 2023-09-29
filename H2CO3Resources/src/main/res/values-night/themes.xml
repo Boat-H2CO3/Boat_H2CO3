@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.H2CO3.Material" parent="Theme.Material3.Dark.Rikka">
         <item name="colorPrimary">@color/md_theme_primary</item>
@@ -29,7 +29,7 @@
         <item name="colorPrimaryInverse">@color/md_theme_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="materialButtonStyle">@style/Theme.H2CO3.ButtonStyle</item>
+        <item name="materialButtonStyle">@style/Theme.H2CO3.DialogButtonStyle</item>
     </style>
 
     <style name="Theme.H2CO3" parent="Theme.H2CO3.Styled">
@@ -47,6 +47,6 @@
         <!--    Font    -->
         <item name="fontFamily">@font/josefin_sans</item>
         <item name="android:fontFamily">@font/josefin_sans</item>
-        <item name="materialButtonStyle">@style/Theme.H2CO3.ButtonStyle</item>
+        <item name="materialButtonStyle">@style/Theme.H2CO3.DialogButtonStyle</item>
     </style>
 </resources>

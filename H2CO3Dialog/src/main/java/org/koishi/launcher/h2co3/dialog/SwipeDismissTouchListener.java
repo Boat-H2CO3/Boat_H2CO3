@@ -56,7 +56,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
         }
 
         switch (motionEvent.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN: {
+            case MotionEvent.ACTION_DOWN -> {
                 // TODO: ensure this is a finger, and set a flag
                 mDownX = motionEvent.getRawX();
                 mDownY = motionEvent.getRawY();
@@ -66,8 +66,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
                 }
                 return true;
             }
-
-            case MotionEvent.ACTION_UP: {
+            case MotionEvent.ACTION_UP -> {
                 if (mVelocityTracker == null) {
                     break;
                 }
@@ -113,10 +112,8 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
                 mDownX = 0;
                 mDownY = 0;
                 mSwiping = false;
-                break;
             }
-
-            case MotionEvent.ACTION_CANCEL: {
+            case MotionEvent.ACTION_CANCEL -> {
                 if (mVelocityTracker == null) {
                     break;
                 }
@@ -131,10 +128,8 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
                 mDownX = 0;
                 mDownY = 0;
                 mSwiping = false;
-                break;
             }
-
-            case MotionEvent.ACTION_MOVE: {
+            case MotionEvent.ACTION_MOVE -> {
                 if (mVelocityTracker == null) {
                     break;
                 }
@@ -160,9 +155,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
                     else mView.setTranslationY(deltaY - mSwipingSlop);
                     return true;
                 }
-                break;
             }
-
         }
         return returnTrue;
     }

@@ -18,6 +18,7 @@ import org.koishi.launcher.h2co3.dialog.list.adapter.DefaultListAdapter;
 import org.koishi.launcher.h2co3.dialog.list.adapter.DefaultListAdapterGeneric;
 import org.koishi.launcher.h2co3.dialog.list.events.ListItemClick;
 import org.koishi.launcher.h2co3.dialog.list.events.ListItemClickObj;
+import org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar;
 
 import java.util.ArrayList;
 
@@ -585,7 +586,7 @@ public class ListDialog extends H2CO3Dialog {
      * @since 1.6
      */
     @Override
-    public TextView getTitleTextView() {
+    public H2CO3ToolBar getTitleTextView() {
         return super.getTitleTextView();
     }
 

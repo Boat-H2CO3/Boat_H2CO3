@@ -50,11 +50,11 @@
             android:orientation="horizontal">
 
 
-            <Button
+            <org.koishi.launcher.h2co3.resources.component.H2CO3Button
                 android:id="@+id/btn"
-                style="@style/Theme.H2CO3.ButtonStyle"
+                style="@style/Theme.H2CO3.DialogButtonStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:autoSizeMaxTextSize="14dp"
                 android:autoSizeMinTextSize="5dp"
