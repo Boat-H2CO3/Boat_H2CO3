@@ -65,18 +65,16 @@ public class WelcomeActivity extends H2CO3Activity {
         startActivity(intent);
     }
 
+    BasicDialog dialog = new BasicDialog();
+
     private void checkPermission() {
         XXPermissions.with(this)
-                // 申请单个权限
                 .permission(Permission.MANAGE_EXTERNAL_STORAGE)
-                // 设置权限请求拦截器（局部设置）
-                //.interceptor(new PermissionInterceptor())
-                // 设置不触发错误检测机制（局部设置）
-                //.unchecked()
                 .request(new OnPermissionCallback() {
-
                     @Override
                     public void onGranted(@NonNull List<String> permissions, boolean allGranted) {
+                        // 权限被授予
+                        dismissDialog(); // 关闭弹窗
                         init();
                     }
 
@@ -86,28 +84,43 @@ public class WelcomeActivity extends H2CO3Activity {
                             // 如果是被永久拒绝就跳转到应用权限系统设置页面
                             XXPermissions.startPermissionActivity(WelcomeActivity.this, permissions);
                         } else {
-                            BasicDialog dialog = new BasicDialog();
-                            dialog.Builder(WelcomeActivity.this)
-                                    .setTitle(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.title_warn))
-                                    .setMessage(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.welcome_permission_hint))
-                                    .setLeftButtonText(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.button_ok))
-                                    .setRightButtonText(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.button_cancel))
-                                    .swipeToDismiss(false)
-                                    .setCancelable(false)
-                                    .onButtonClick(new DialogButtonEvents() {
-                                        @Override
-                                        public void onLeftButtonClick() {
-                                            XXPermissions.startPermissionActivity(WelcomeActivity.this, permissions);
-                                        }
-
-                                        @Override
-                                        public void onRightButtonClick() {
-                                            finish();
-                                        }
-                                    })
-                                    .show();
+                            showDialog(permissions); // 显示弹窗
                         }
                     }
                 });
+    }
+
+    private void showDialog(List<String> permissions) {
+        dialog.Builder(WelcomeActivity.this)
+                .setTitle(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.title_warn))
+                .setMessage(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.welcome_permission_hint))
+                .setLeftButtonText(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.button_ok))
+                .setRightButtonText(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.button_cancel))
+                .swipeToDismiss(false)
+                .setCancelable(false)
+                .onButtonClick(new DialogButtonEvents() {
+                    @Override
+                    public void onLeftButtonClick() {
+                        XXPermissions.startPermissionActivity(WelcomeActivity.this, permissions, XXPermissions.REQUEST_CODE);
+                    }
+
+                    @Override
+                    public void onRightButtonClick() {
+                        finish();
+                    }
+                })
+                .show();
+    }
+
+    private void dismissDialog() {
+        dialog.dismiss();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == XXPermissions.REQUEST_CODE) {
+            checkPermission(); // 重新执行权限检查
+        }
     }
 }
