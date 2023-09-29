@@ -1,14 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdk 34
-    ndkVersion '25.2.9519653'
-
+    compileSdkVersion 34
     defaultConfig {
         minSdkVersion 28
         targetSdkVersion 34
     }
-    ndkVersion '25.2.9519653'
     externalNativeBuild {
         ndkBuild {
             path file('src/main/jni/Android.mk')
@@ -17,20 +14,21 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled = false
+            minifyEnabled false
         }
     }
 
     lint {
-        baseline = file("lint-baseline.xml")
+        baseline file("lint-baseline.xml")
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     namespace 'cosine.boat'
 }
+
 configurations.configureEach {
     exclude group: 'androidx.appcompat', module: 'appcompat'
 }
@@ -55,7 +53,7 @@ dependencies {
     implementation 'com.android.billingclient:billing:5.1.0'
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     implementation 'com.google.android.material:material:1.9.0'
-    implementation 'com.google.dagger:hilt-android:2.47'
+    implementation 'com.google.dagger:hilt-android:2.48'
 
     implementation 'org.apache.commons:commons-text:1.10.0'
     implementation 'commons-io:commons-io:20030203.000550'
@@ -82,19 +80,11 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.preference:preference:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    testImplementation 'junit:junit:4.13.2'
-
-    implementation 'com.alibaba:fastjson:2.0.36'
-    //implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.alibaba:fastjson:2.0.40'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'androidx.webkit:webkit:1.7.0-alpha03'
     implementation "org.greenrobot:eventbus:3.3.1"
-    // https://mvnrepository.com/artifact/commons-codec/commons-codec
     implementation 'commons-codec:commons-codec:1.16.0'
-
 }

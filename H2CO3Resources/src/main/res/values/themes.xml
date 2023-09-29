@@ -1,5 +1,5 @@
 <!-- Base application theme. -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Theme.H2CO3.Material" parent="Theme.Material3.Light.Rikka">
         <item name="colorPrimary">@color/md_theme_primary</item>
@@ -209,8 +209,8 @@
     </style>
 
     <style name="Theme.H2CO3.ButtonStyle.Red" parent="@style/Theme.H2CO3.ButtonStyle">
-        <item name="backgroundTint">@color/md_theme_error</item>
-        <item name="android:textColor">@color/md_theme_onError</item>
+        <item name="backgroundTint">?colorError</item>
+        <item name="android:textColor">?colorOnError</item>
     </style>
 
     <style name="Theme.H2CO3.DialogAnimation">

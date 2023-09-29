@@ -11,6 +11,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import org.koishi.launcher.h2co3.resources.R;
+import org.koishi.launcher.h2co3.ui.CrashActivity;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;

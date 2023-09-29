@@ -66,7 +66,7 @@ public class CHTools {
     }
 
     @SuppressLint("SdCardPath")
-    public static void loadPaths(Context context) {
+    public static void initPaths(Context context) {
         CONTEXT = context;
 
         NATIVE_LIB_DIR = context.getApplicationInfo().nativeLibraryDir;

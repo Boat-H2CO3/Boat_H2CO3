@@ -1,76 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".application.CrashActivity">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.CrashActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:elevation="0dp"
-            app:title="@string/crash_title" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/restart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/app_15dp"
-        android:text="@string/app_restart"
-        app:cornerRadius="30dp" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/app_15dp"
-        android:layout_marginEnd="@dimen/app_15dp"
-        android:layout_marginBottom="@dimen/app_15dp"
-        android:drawablePadding="@dimen/app_15dp"
-        android:gravity="center_vertical"
-        android:text="@string/crash_hint"
-        app:drawableStartCompat="@drawable/ic_boat_action" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/app_15dp"
-        android:layout_marginEnd="@dimen/app_15dp"
-        android:layout_marginBottom="@dimen/app_10dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:visibility="visible"
-        app:cardCornerRadius="@dimen/card_radius"
-        style="@style/Theme.H2CO3.CardViewOutlined">
-
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/app_15dp"
-            android:paddingVertical="@dimen/app_15dp">
+            app:elevation="0dp">
 
-            <androidx.core.widget.NestedScrollView
+            <org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="?attr/actionBarSize"
+                app:elevation="0dp"
+                app:title="@string/crash_title" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/crash"
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <org.koishi.launcher.h2co3.resources.component.H2CO3CardView
+            style="@style/Theme.H2CO3.CardViewFilled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_15dp"
+            android:layout_marginEnd="@dimen/app_15dp"
+            android:layout_marginBottom="@dimen/app_10dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:visibility="visible"
+            app:cardBackgroundColor="?colorError">
+
+            <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/crash_hint"
+                android:textColor="?colorOnError"
+                app:drawableStartCompat="@drawable/ic_warning" />
+        </org.koishi.launcher.h2co3.resources.component.H2CO3CardView>
+
+        <org.koishi.launcher.h2co3.resources.component.H2CO3CardView
+            style="@style/Theme.H2CO3.CardViewOutlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_15dp"
+            android:layout_marginEnd="@dimen/app_15dp"
+            android:layout_marginBottom="@dimen/app_10dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/app_15dp"
+                android:paddingVertical="@dimen/app_15dp">
+
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textIsSelectable="true" />
+                    android:layout_height="wrap_content">
 
-            </androidx.core.widget.NestedScrollView>
+                    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                        android:id="@+id/crash"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textIsSelectable="true" />
 
-        </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
 
-    </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
-</LinearLayout>
+        </org.koishi.launcher.h2co3.resources.component.H2CO3CardView>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/app_restart"
+        app:icon="@drawable/ic_refresh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

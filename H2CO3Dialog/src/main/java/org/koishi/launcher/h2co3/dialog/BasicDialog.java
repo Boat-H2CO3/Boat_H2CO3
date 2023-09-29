@@ -9,12 +9,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StyleRes;
 
-import org.koishi.launcher.h2co3.resources.R;
-
 /**
  * @since 1.6
  */
-@SuppressWarnings("unused")
 public class BasicDialog extends H2CO3Dialog {
     @Deprecated
     public static final String LONG_TYPE = "long";
@@ -98,9 +95,6 @@ public class BasicDialog extends H2CO3Dialog {
                 .setRightButtonText("Delete");
     }
 
-    /**
-     * @deprecated Use {@link BasicDialog#Builder(Context)}
-     */
     public BasicDialog DialogBuilder(Context context) {
         return Builder(context);
     }
@@ -114,25 +108,14 @@ public class BasicDialog extends H2CO3Dialog {
         return Builder(context, useAppTheme);
     }
 
-    /**
-     * @deprecated Use {@link BasicDialog#Builder(Context, int)}
-     */
     public BasicDialog DialogBuilder(Context context, int theme) {
         return Builder(context, theme);
     }
 
-    /**
-     * @since 1.3
-     * @deprecated Dialog type is automatic. Use {@link BasicDialog#Builder(Context)}
-     */
     public BasicDialog DialogBuilder(Context context, String dialogType) {
         return Builder(context);
     }
 
-    /**
-     * @since 1.0
-     * @deprecated Use {@link BasicDialog#Builder(Context, String, String, String, String)}
-     */
     public BasicDialog DialogBuilder(Context context, String Title, String Text, String Btn1Txt, String Btn2Txt) {
         return Builder(context, Title, Text, Btn1Txt, Btn2Txt);
     }
@@ -182,19 +165,6 @@ public class BasicDialog extends H2CO3Dialog {
     @Deprecated
     public BasicDialog setDialogType(String dialogType) {
         //Nothing here!!
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1.5
-     */
-    @Override
-    public BasicDialog setOldTheme() {
-        super.setOldTheme();
-        if (isDeleteDialog)
-            super.setRightButtonColor(RED_BUTTON);
         return this;
     }
 

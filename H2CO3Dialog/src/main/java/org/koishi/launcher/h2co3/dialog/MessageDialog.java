@@ -53,27 +53,10 @@ public class MessageDialog extends H2CO3Dialog {
 
     private MessageDialog errorDialogAttributes() {
         isErrorDialog = true;
-        return setDialogBackgroundResource(R.drawable.dialog_background_material3_red)
-                .setTextColor(context.getResources().getColor(R.color.SJDialog_ErrorTextColor, context.getTheme()))
+        return setDialogBackgroundResource(org.koishi.launcher.h2co3.resources.R.drawable.dialog_background_material3_red)
+                .setTextColor(context.getResources().getColor(org.koishi.launcher.h2co3.resources.R.color.H2CO3_ErrorTextColor, context.getTheme()))
                 .setButtonColor(MATERIAL3_RED_BUTTON)
                 .setTitle("Error");
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1.5
-     */
-    @Override
-    public MessageDialog setOldTheme() {
-        super.setOldTheme();
-        if (isErrorDialog) {
-            setDialogBackgroundResource(R.drawable.dialog_background_red);
-            setTextColor(defaultOldColorWhite);
-            setButtonColor(defaultOldColorWhite);
-            setButtonTextColor(defaultOldColorBlack);
-        }
-        return this;
     }
 
     /**

@@ -9,9 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.koishi.launcher.h2co3.resources.R;
 import org.koishi.launcher.h2co3.dialog.ListItemValue;
 import org.koishi.launcher.h2co3.dialog.ListItemValues;
+import org.koishi.launcher.h2co3.dialog.R;
 import org.koishi.launcher.h2co3.dialog.list.events.ListItemClickObj;
 
 import java.util.ArrayList;

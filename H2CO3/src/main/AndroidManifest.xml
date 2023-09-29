@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.koishi.launcher.h2co3.application.CrashActivity"
+            android:name="org.koishi.launcher.h2co3.ui.CrashActivity"
             android:screenOrientation="sensorPortrait"
             tools:ignore="LockedOrientationActivity"></activity>
         <activity

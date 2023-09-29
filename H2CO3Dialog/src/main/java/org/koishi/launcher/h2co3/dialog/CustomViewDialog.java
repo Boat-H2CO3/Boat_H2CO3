@@ -10,8 +10,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StyleRes;
 
-import org.koishi.launcher.h2co3.resources.R;
-
 /**
  * @since 1.5
  */
@@ -39,17 +37,6 @@ public class CustomViewDialog extends H2CO3Dialog {
         super.Builder(context, R.layout.custom_view_dialog, useAppTheme);
         rootView = dialog.findViewById(R.id.customViewRoot);
         onLeftButtonClick(dialog::dismiss);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1.5
-     */
-    @Override
-    public CustomViewDialog setOldTheme() {
-        super.setOldTheme();
         return this;
     }
 

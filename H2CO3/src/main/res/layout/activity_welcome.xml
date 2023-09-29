@@ -21,33 +21,15 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="20dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/appBlack_35"
-        android:layout_marginVertical="20dp"
-        android:visibility="gone" />
-
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/perm"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

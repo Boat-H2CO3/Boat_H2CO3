@@ -24,8 +24,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import org.koishi.launcher.h2co3.resources.R;
-
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public abstract class H2CO3Dialog {
 
@@ -86,7 +84,7 @@ public abstract class H2CO3Dialog {
      * @since 1.6.1
      */
     public static final int INSETS_ALL = 13;
-    private final int defaultTheme = R.style.Theme_H2CO3;
+    private final int defaultTheme = org.koishi.launcher.h2co3.resources.R.style.Theme_H2CO3;
     public Dialog dialog;
     protected Button button1, button2;
     protected boolean onlyOneButton = false;
@@ -128,7 +126,7 @@ public abstract class H2CO3Dialog {
 
     protected H2CO3Dialog Builder(Context context, @LayoutRes int layoutResID, @StyleRes int theme, boolean useAppTheme) {
         this.context = context;
-        defaultOldThemeTextColor = context.getResources().getColor(R.color.H2CO3_OldThemeTextColor, context.getTheme());
+        defaultOldThemeTextColor = context.getResources().getColor(org.koishi.launcher.h2co3.resources.R.color.H2CO3_OldThemeTextColor, context.getTheme());
         dialog = useAppTheme ?
                 new Dialog(new ContextThemeWrapper(context, context.getTheme())) :
                 new Dialog(new ContextThemeWrapper(context, theme));
@@ -136,7 +134,7 @@ public abstract class H2CO3Dialog {
         setDialogSize();
         dialog.getWindow().getAttributes().gravity = Gravity.BOTTOM;
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.Theme_H2CO3_DialogAnimation;
+        dialog.getWindow().getAttributes().windowAnimations = org.koishi.launcher.h2co3.resources.R.style.Theme_H2CO3_DialogAnimation;
         background = dialog.findViewById(R.id.dialogBackground);
         setButtons();
         if (theme != defaultTheme || useAppTheme) {
@@ -154,21 +152,6 @@ public abstract class H2CO3Dialog {
             throw new NullPointerException("dialog is null");
         }
         functions.SetDialogSize(context, dialog, maxDialogWidth);
-    }
-
-    /**
-     * By default dialog colors will be set to material3 dynamic colors.
-     * With this method you can set the dialog color for the background
-     * and buttons to the older non-dynamic colors
-     *
-     * @return current class
-     * @since 1.5
-     */
-    protected H2CO3Dialog setOldTheme() {
-        setButtonsColor(OLD_BUTTON_COLOR);
-        setDialogBackgroundResource(R.drawable.dialog_background_old);
-        setTextColor(defaultOldThemeTextColor);
-        return this;
     }
 
     /**
@@ -392,20 +375,19 @@ public abstract class H2CO3Dialog {
     protected H2CO3Dialog setLeftButtonColor(@ButtonColor String color) {
         checkButtonResource(0);
         switch (color) {
-            case RED_BUTTON:
-                setLeftButtonBackgroundResource(R.drawable.ripple_button_red);
+            case RED_BUTTON -> {
+                setLeftButtonBackgroundResource(org.koishi.launcher.h2co3.resources.R.drawable.ripple_button_red);
                 setLeftButtonTextColor(Color.WHITE);
-                break;
-            case MATERIAL3_RED_BUTTON:
-                setLeftButtonBackgroundResource(R.drawable.ripple_button_material3_red);
-                setLeftButtonTextColor(context.getResources().getColor(R.color.md_theme_onError, context.getTheme()));
-                break;
-            case OLD_BUTTON_COLOR:
-                setLeftButtonBackgroundResource(R.drawable.ripple_button_old);
+            }
+            case MATERIAL3_RED_BUTTON -> {
+                setLeftButtonBackgroundResource(org.koishi.launcher.h2co3.resources.R.drawable.ripple_button_material3_red);
+                setLeftButtonTextColor(context.getResources().getColor(org.koishi.launcher.h2co3.resources.R.color.md_theme_onError, context.getTheme()));
+            }
+            case OLD_BUTTON_COLOR -> {
+                setLeftButtonBackgroundResource(org.koishi.launcher.h2co3.resources.R.drawable.ripple_button_old);
                 setLeftButtonTextColor(Color.WHITE);
-                break;
-            default:
-                throw new IllegalArgumentException(color + " is not a valid argument");
+            }
+            default -> throw new IllegalArgumentException(color + " is not a valid argument");
         }
         return this;
     }
@@ -415,21 +397,19 @@ public abstract class H2CO3Dialog {
             throw OneButtonException();
         checkButtonResource(1);
         switch (color) {
-            case RED_BUTTON:
-                setRightButtonBackgroundResource(R.drawable.ripple_button_red);
+            case RED_BUTTON -> {
+                setRightButtonBackgroundResource(org.koishi.launcher.h2co3.resources.R.drawable.ripple_button_red);
                 setRightButtonTextColor(Color.WHITE);
-                break;
-            case MATERIAL3_RED_BUTTON:
-                setRightButtonBackgroundResource(R.drawable.ripple_button_material3_red);
-                setRightButtonTextColor(context.getResources().getColor(R.color.md_theme_onError, context.getTheme()));
-                break;
-            case OLD_BUTTON_COLOR:
-                setRightButtonBackgroundResource(R.drawable.ripple_button_old);
+            }
+            case MATERIAL3_RED_BUTTON -> {
+                setRightButtonBackgroundResource(org.koishi.launcher.h2co3.resources.R.drawable.ripple_button_material3_red);
+                setRightButtonTextColor(context.getResources().getColor(org.koishi.launcher.h2co3.resources.R.color.md_theme_onError, context.getTheme()));
+            }
+            case OLD_BUTTON_COLOR -> {
+                setRightButtonBackgroundResource(org.koishi.launcher.h2co3.resources.R.drawable.ripple_button_old);
                 setRightButtonTextColor(Color.WHITE);
-
-                break;
-            default:
-                throw new IllegalArgumentException(color + " is not a valid argument");
+            }
+            default -> throw new IllegalArgumentException(color + " is not a valid argument");
         }
         return this;
     }

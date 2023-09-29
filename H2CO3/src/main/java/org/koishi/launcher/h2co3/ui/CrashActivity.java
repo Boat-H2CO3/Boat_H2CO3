@@ -1,4 +1,4 @@
-package org.koishi.launcher.h2co3.application;
+package org.koishi.launcher.h2co3.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

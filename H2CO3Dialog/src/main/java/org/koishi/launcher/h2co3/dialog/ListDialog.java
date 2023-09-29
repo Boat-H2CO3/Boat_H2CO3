@@ -19,8 +19,6 @@ import org.koishi.launcher.h2co3.dialog.list.adapter.DefaultListAdapterGeneric;
 import org.koishi.launcher.h2co3.dialog.list.events.ListItemClick;
 import org.koishi.launcher.h2co3.dialog.list.events.ListItemClickObj;
 
-import org.koishi.launcher.h2co3.resources.R;
-
 import java.util.ArrayList;
 
 /**
@@ -40,8 +38,8 @@ public class ListDialog extends H2CO3Dialog {
     RecyclerView.Adapter<?> adapter;
     ArrayList<?> selectedItems = new ArrayList<>();
     TextView emptyListTxt;
-    private @DrawableRes int listItemBgRes = R.drawable.ripple_list;
-    private @DrawableRes int listItemBgResSelected = R.drawable.ripple_list_selected;
+    private @DrawableRes int listItemBgRes = org.koishi.launcher.h2co3.resources.R.drawable.ripple_list;
+    private @DrawableRes int listItemBgResSelected = org.koishi.launcher.h2co3.resources.R.drawable.ripple_list_selected;
     private @ColorInt int listItemBgColor = -1;
     private @ColorInt int listItemBgColorSelected = -1;
     private int listItemTextColor = 1;
@@ -68,18 +66,6 @@ public class ListDialog extends H2CO3Dialog {
         listRV = dialog.findViewById(R.id.list);
         onLeftButtonClick(dialog::dismiss);
         emptyListTxt = dialog.findViewById(R.id.emptyListTxt);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1.5
-     */
-    @Override
-    public ListDialog setOldTheme() {
-        super.setOldTheme();
-        setListOldColor();
         return this;
     }
 
@@ -461,8 +447,8 @@ public class ListDialog extends H2CO3Dialog {
     }
 
     private void setListOldColor() {
-        listItemBgRes = R.drawable.ripple_list_old;
-        listItemBgResSelected = R.drawable.ripple_list_selected_old;
+        listItemBgRes = org.koishi.launcher.h2co3.resources.R.drawable.ripple_list_old;
+        listItemBgResSelected = org.koishi.launcher.h2co3.resources.R.drawable.ripple_list_selected_old;
     }
 
     /**

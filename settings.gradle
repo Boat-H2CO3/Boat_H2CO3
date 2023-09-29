@@ -1,11 +1,8 @@
 pluginManagement {
     repositories {
-        // 阿里云云效仓库：https://maven.aliyun.com/mvn/guide
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
-        // 华为开源镜像：https://mirrors.huaweicloud.com/
         maven { url 'https://repo.huaweicloud.com/repository/maven/' }
-        // JitPack 远程仓库：https://jitpack.io
         maven { url 'https://jitpack.io' }
         maven {
             url("https://s01.oss.sonatype.org/content/repositories/releases/")
@@ -15,20 +12,17 @@ pluginManagement {
         }
         mavenCentral()
         google()
-        // noinspection JcenterRepositoryObsolete
-        jcenter()
+        mavenCentral()
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        // 阿里云云效仓库：https://maven.aliyun.com/mvn/guide
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
-        // 华为开源镜像：https://mirrors.huaweicloud.com/
         maven { url 'https://repo.huaweicloud.com/repository/maven/' }
-        // JitPack 远程仓库：https://jitpack.io
         maven { url 'https://jitpack.io' }
         maven {
             url("https://s01.oss.sonatype.org/content/repositories/releases/")
@@ -38,8 +32,7 @@ dependencyResolutionManagement {
         }
         mavenCentral()
         google()
-        // noinspection JcenterRepositoryObsolete
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -50,3 +43,4 @@ include ':H2CO3Core'
 include ':H2CO3Boat'
 include ':H2CO3Dialog'
 include ':LWJGL'
+include ':ultimatebarx'
