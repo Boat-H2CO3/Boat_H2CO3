@@ -30,6 +30,7 @@
         <item name="colorPrimaryInverse">@color/md_theme_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="materialButtonStyle">@style/Theme.H2CO3.ButtonStyle</item>
     </style>
 
     <style name="Theme.H2CO3.Base" parent="Theme.H2CO3.Material">
@@ -49,10 +50,31 @@
         <item name="textAppearanceBodySmall">@style/TextAppearance.H2CO3.BodySmall</item>
     </style>
 
-    <style name="Theme.H2CO3" parent="Theme.H2CO3.Styled">
-    </style>
+    <style name="Theme.H2CO3" parent="Theme.H2CO3.Styled"></style>
 
     <!---DynamicColors-->
+
+    <style name="Theme.H2CO3.Material.DynamicColors" parent="Theme.Material3.DynamicColors.Light.Rikka">
+        <!--    Colors    -->
+        <item name="android:textCursorDrawable">@drawable/textfield_cursor</item>
+
+        <!--    Font    -->
+        <item name="fontFamily">@font/josefin_sans</item>
+        <item name="android:fontFamily">@font/josefin_sans</item>
+        <item name="materialButtonStyle">@style/Theme.H2CO3.ButtonStyle</item>
+    </style>
+
+    <style name="Theme.H2CO3.Base.DynamicColors" parent="Theme.H2CO3.Material.DynamicColors">
+        <!--    Colors    -->
+        <item name="android:textCursorDrawable">@drawable/textfield_cursor</item>
+        <!--    Font    -->
+        <item name="fontFamily">@font/josefin_sans</item>
+        <item name="android:fontFamily">@font/josefin_sans</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="materialButtonStyle">@style/Theme.H2CO3.ButtonStyle</item>
+    </style>
+
     <style name="Theme.H2CO3.Styled.DynamicColors" parent="Theme.H2CO3.Base.DynamicColors">
         <item name="switchPreferenceCompatStyle">@style/PreferenceThemeOverlay.Rikka.Material3
         </item>
@@ -61,19 +83,7 @@
         <item name="textAppearanceBodySmall">@style/TextAppearance.H2CO3.BodySmall</item>
     </style>
 
-
-    <style name="Theme.H2CO3.Base.DynamicColors" parent="Theme.Material3.DynamicColors.Light.Rikka">
-        <!--    Colors    -->
-        <item name="android:textCursorDrawable">@drawable/textfield_cursor</item>
-        <!--    Font    -->
-        <item name="fontFamily">@font/josefin_sans</item>
-        <item name="android:fontFamily">@font/josefin_sans</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.H2CO3.DynamicColors" parent="Theme.H2CO3.Styled.DynamicColors">
-    </style>
+    <style name="Theme.H2CO3.DynamicColors" parent="Theme.H2CO3.Styled.DynamicColors"></style>
 
     <!---CardView-->
     <style name="Theme.H2CO3.CardViewOutlined" parent="@style/Widget.Material3.CardView.Outlined">
@@ -167,8 +177,8 @@
     <!-- Alert Dialog -->
     <style name="AppTheme.MaterialAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="shapeAppearanceOverlay">@style/MaterialDialog.ShapeAppearance</item>
-        <item name="android:windowEnterAnimation">@animator/dialog_in</item>
-        <item name="android:windowExitAnimation">@animator/dialog_out</item>
+        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out</item>
     </style>
 
     <style name="MaterialDialog.ShapeAppearance" parent="">
@@ -183,6 +193,29 @@
     <style name="AppTheme.SheetAboveKeyboard" parent="Theme.Material3.Dark.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="Theme.H2CO3.ButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:textSize">12dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
+        <!--        <item name="android:padding">14dp</item>-->
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmallInverse</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+
+    <style name="Theme.H2CO3.ButtonStyle.Red" parent="@style/Theme.H2CO3.ButtonStyle">
+        <item name="backgroundTint">@color/md_theme_error</item>
+        <item name="android:textColor">@color/md_theme_onError</item>
+    </style>
+
+    <style name="Theme.H2CO3.DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out</item>
     </style>
 
 </resources>

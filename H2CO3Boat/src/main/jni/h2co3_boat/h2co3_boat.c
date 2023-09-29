@@ -63,4 +63,3 @@ Java_org_koishi_launcher_h2co3_boat_H2CO3BoatActivity_nOnCreate(JNIEnv *env, job
     }
     mBoat.h2co3Activity = (*env)->NewGlobalRef(env, thiz);
 }
-

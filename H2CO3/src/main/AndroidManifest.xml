@@ -17,12 +17,12 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:name="org.koishi.launcher.h2co3.resources.application.H2CO3Application"
+        android:name="org.koishi.launcher.h2co3.application.H2CO3Application"
         android:allowBackup="true"
         android:allowNativeHeapPointerTagging="false"
         android:extractNativeLibs="true"
         android:appCategory="game"
-        android:icon="@drawable/ic_h2o2_low_px"
+        android:icon="@drawable/ic_launcher"
         android:isGame="true"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
@@ -30,7 +30,7 @@
         android:theme="@style/Theme.H2CO3"
         tools:targetApi="r">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,10 +39,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.koishi.launcher.h2co3.resources.application.CrashActivity"
+            android:name="org.koishi.launcher.h2co3.application.CrashActivity"
             android:screenOrientation="sensorPortrait"
-            tools:ignore="LockedOrientationActivity">
-        </activity>
+            tools:ignore="LockedOrientationActivity"></activity>
+        <activity
+            android:name="org.koishi.launcher.h2co3.ui.activity.H2CO3MainActivity"
+            android:screenOrientation="sensorPortrait"
+            tools:ignore="LockedOrientationActivity"></activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="@string/file_browser_provider"

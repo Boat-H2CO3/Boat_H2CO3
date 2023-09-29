@@ -1,0 +1,14 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/md_theme_primary" />
+        </shape>
+    </item>
+    <item
+        android:width="40dp"
+        android:height="40dp">
+        <inset
+            android:drawable="@drawable/ic_h2co3_low_px"
+            android:inset="1dp" />
+    </item>
+</layer-list>

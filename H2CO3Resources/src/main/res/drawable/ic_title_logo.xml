@@ -14,6 +14,6 @@
         android:height="40dp">
         <inset
             android:inset="5dp"
-            android:drawable="@drawable/ic_h2o2_low_px" />
+            android:drawable="@drawable/ic_h2co3_low_px" />
     </item>
 </layer-list>

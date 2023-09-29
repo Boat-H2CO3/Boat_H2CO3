@@ -14,15 +14,12 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 
 import org.koishi.launcher.h2co3.boat.function.H2CO3Callback;
-import org.koishi.launcher.h2co3.resources.R;
 import org.koishi.launcher.h2co3.resources.component.H2CO3Activity;
 
 import java.util.Timer;
 import java.util.Vector;
 
 public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.SurfaceTextureListener {
-
-    public static IH2CO3 h2co3Interface;
 
     static {
         System.loadLibrary("h2co3_boat");
@@ -75,7 +72,6 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
     public void init() {
         nOnCreate();
         timer = new Timer();
-        mainTextureView = findViewById(R.id.main_surface);
         mainTextureView.setSurfaceTextureListener(this);
     }
 
@@ -177,28 +173,6 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
     }
 
     public void setGrabCursor(boolean isGrabbed) {
-        runOnUiThread(() -> h2co3Interface.setGrabCursor(isGrabbed));
-    }
-
-    // Override addContentView method to dynamically add views
-    @Override
-    public void addContentView(View view, ViewGroup.LayoutParams params) {
-        if (params instanceof RelativeLayout.LayoutParams) {
-            base.addView(view, params);
-        } else {
-            RelativeLayout.LayoutParams newParams = new RelativeLayout.LayoutParams(params.width, params.height);
-            base.addView(view, newParams);
-        }
-    }
-
-    // Override the dispatchGenericMotionEvent method to redirect events to H2CO3
-    @Override
-    public boolean dispatchGenericMotionEvent(MotionEvent event) {
-        if (h2co3Interface.dispatchGenericMotionEvent(event)) {
-            return true;
-        }
-
-        return super.dispatchGenericMotionEvent(event);
     }
 
     public int[] getPointer() {
@@ -215,21 +189,6 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
 
     public void setPointer(int x, int y) {
         H2CO3BoatLib.setPointer(x, y);
-    }
-
-    public interface IH2CO3 {
-
-        void onActivityCreate(H2CO3BoatActivity h2co3Activity);
-
-        void setGrabCursor(boolean isGrabbed);
-
-        void onStop();
-
-        void onResume();
-
-        void onPause();
-
-        boolean dispatchGenericMotionEvent(MotionEvent event);
     }
 }
 

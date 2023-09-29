@@ -126,7 +126,7 @@ JNIEXPORT void JNICALL Java_org_koishi_launcher_h2co3_boat_LoadMe_setupExitTrap(
     exitTrap_ctx = (*env)->NewGlobalRef(env, context);
     (*env)->GetJavaVM(env, &exitTrap_jvm);
     exitTrap_exitClass = (*env)->NewGlobalRef(env, (*env)->FindClass(env,
-                                                                     "org/koishi/launcher/h2co3/boat/ExitActivity"));
+                                                                     "org/koishi/launcher/h2co3/boat/ui/ExitActivity"));
     exitTrap_staticMethod = (*env)->GetStaticMethodID(env, exitTrap_exitClass, "showExitMessage",
                                                       "(Landroid/content/Context;I)V");
     xhook_enable_debug(0);

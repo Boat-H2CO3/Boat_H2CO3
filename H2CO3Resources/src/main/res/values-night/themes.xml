@@ -29,6 +29,7 @@
         <item name="colorPrimaryInverse">@color/md_theme_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="materialButtonStyle">@style/Theme.H2CO3.ButtonStyle</item>
     </style>
 
     <style name="Theme.H2CO3" parent="Theme.H2CO3.Styled">
@@ -39,12 +40,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.H2CO3.Base.DynamicColors" parent="Theme.Material3.DynamicColors.Dark.Rikka">
+    <style name="Theme.H2CO3.Material.DynamicColors" parent="Theme.Material3.DynamicColors.Dark.Rikka">
         <!--    Colors    -->
         <item name="android:textCursorDrawable">@drawable/textfield_cursor</item>
 
         <!--    Font    -->
         <item name="fontFamily">@font/josefin_sans</item>
         <item name="android:fontFamily">@font/josefin_sans</item>
+        <item name="materialButtonStyle">@style/Theme.H2CO3.ButtonStyle</item>
     </style>
 </resources>
