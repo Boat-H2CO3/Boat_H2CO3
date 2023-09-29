@@ -14,7 +14,7 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
         dalvikJavaVMPtr = vm;
         JNIEnv *env = NULL;
         (*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_4);
-        class_H2CO3BoatLib = mBoat.class_H2CO3BoatLib;
+        class_H2CO3BoatLib = h2co3Boat->class_H2CO3BoatLib;
         method_OpenLink = (*env)->GetStaticMethodID(env, class_H2CO3BoatLib, "openLink",
                                                     "(Ljava/lang/String;)V");
     }

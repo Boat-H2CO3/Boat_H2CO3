@@ -1,5 +1,5 @@
-#ifndef Boat_KEYCODES_H
-#define Boat_KEYCODES_H
+#ifndef H2CO3_BOAT_KEYCODES_H
+#define H2CO3_BOAT_KEYCODES_H
 
 /*
  * from linux/input-event-codes.h
@@ -142,4 +142,4 @@
 
 #define KEY_UNKNOWN      240
 
-#endif // Boat_KEYCODES_H
+#endif // H2CO3_BOAT_KEYCODES_H

@@ -54,50 +54,50 @@ void EventQueue_clear(EventQueue *queue) {
 }
 
 void h2co3SetCursorMode(int mode) {
-    if (mBoat.android_jvm == 0) {
+    if (h2co3Boat->android_jvm == 0) {
         return;
     }
     JNIEnv *env = 0;
 
-    jint result = (*mBoat.android_jvm)->AttachCurrentThread(mBoat.android_jvm, &env, 0);
+    jint result = (*h2co3Boat->android_jvm)->AttachCurrentThread(h2co3Boat->android_jvm, &env, 0);
 
     if (result != JNI_OK || env == 0) {
         //__android_log_print(ANDROID_LOG_ERROR, "Boat", "Failed to attach thread to JavaVM.");
         abort();
     }
 
-    jclass class_H2CO3BoatActivity = mBoat.class_H2CO3BoatActivity;
+    jclass class_H2CO3BoatActivity = h2co3Boat->class_H2CO3BoatActivity;
 
     if (class_H2CO3BoatActivity == 0) {
         //__android_log_print(ANDROID_LOG_ERROR, "Boat", "Failed to find class: org/koishi/launcher/h2co3/boat/H2CO3BoatActivity.");
         abort();
     }
 
-    jmethodID H2CO3BoatActivity_setCursorMode = mBoat.setCursorMode;
+    jmethodID H2CO3BoatActivity_setCursorMode = h2co3Boat->setCursorMode;
 
     if (H2CO3BoatActivity_setCursorMode == 0) {
         //__android_log_print(ANDROID_LOG_ERROR, "Boat", "Failed to find method H2CO3BoatActivity::setCursorMode");
         abort();
     }
-    (*env)->CallVoidMethod(env, mBoat.h2co3Activity, H2CO3BoatActivity_setCursorMode, mode);
-    (*env)->CallVoidMethod(env, mBoat.class_H2CO3BoatActivity, mBoat.setGrabCursorId,
+    (*env)->CallVoidMethod(env, h2co3Boat->h2co3Activity, H2CO3BoatActivity_setCursorMode, mode);
+    (*env)->CallVoidMethod(env, h2co3Boat->class_H2CO3BoatActivity, h2co3Boat->setGrabCursorId,
                            mode == CursorDisabled ? JNI_TRUE : JNI_FALSE);
-    (*mBoat.android_jvm)->DetachCurrentThread(mBoat.android_jvm);
+    (*h2co3Boat->android_jvm)->DetachCurrentThread(h2co3Boat->android_jvm);
 }
 
 int h2co3GetEventFd() {
-    if (!mBoat.has_event_pipe) {
+    if (!h2co3Boat->has_event_pipe) {
         return -1;
     }
-    return mBoat.event_pipe_fd[0];
+    return h2co3Boat->event_pipe_fd[0];
 }
 
 int h2co3WaitForEvent(int timeout) {
-    if (!mBoat.has_event_pipe) {
+    if (!h2co3Boat->has_event_pipe) {
         return 0;
     }
     struct epoll_event ev;
-    int ret = epoll_wait(mBoat.epoll_fd, &ev, 1, timeout);
+    int ret = epoll_wait(h2co3Boat->epoll_fd, &ev, 1, timeout);
     if (ret > 0 && (ev.events & EPOLLIN)) {
         return 1;
     }
@@ -105,20 +105,20 @@ int h2co3WaitForEvent(int timeout) {
 }
 
 int h2co3PollEvent(H2CO3BoatEvent *event) {
-    if (!mBoat.has_event_pipe) {
+    if (!h2co3Boat->has_event_pipe) {
         return 0;
     }
-    if (pthread_mutex_lock(&mBoat.event_queue_mutex)) {
-        Boat_INTERNAL_LOG("Failed to acquire mutex");
+    if (pthread_mutex_lock(&h2co3Boat->event_queue_mutex)) {
+        H2CO3_BOAT_INTERNAL_LOG("Failed to acquire mutex");
         return 0;
     }
     char c;
     int ret = 0;
-    if (read(mBoat.event_pipe_fd[0], &c, 1) > 0) {
-        ret = EventQueue_take(&mBoat.event_queue, event);
+    if (read(h2co3Boat->event_pipe_fd[0], &c, 1) > 0) {
+        ret = EventQueue_take(&h2co3Boat->event_queue, event);
     }
-    if (pthread_mutex_unlock(&mBoat.event_queue_mutex)) {
-        Boat_INTERNAL_LOG("Failed to release mutex");
+    if (pthread_mutex_unlock(&h2co3Boat->event_queue_mutex)) {
+        H2CO3_BOAT_INTERNAL_LOG("Failed to release mutex");
         return 0;
     }
     return ret;
@@ -136,16 +136,16 @@ JNIEXPORT void JNICALL
 Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_pushEvent(JNIEnv *env, jclass clazz, jlong time,
                                                            jint type, jint p1,
                                                            jint p2) {
-    if (!mBoat.has_event_pipe) {
+    if (!h2co3Boat->has_event_pipe) {
         return;
     }
-    if (pthread_mutex_lock(&mBoat.event_queue_mutex)) {
-        Boat_INTERNAL_LOG("Failed to acquire mutex");
+    if (pthread_mutex_lock(&h2co3Boat->event_queue_mutex)) {
+        H2CO3_BOAT_INTERNAL_LOG("Failed to acquire mutex");
         return;
     }
-    H2CO3BoatEvent *event = EventQueue_add(&mBoat.event_queue);
+    H2CO3BoatEvent *event = EventQueue_add(&h2co3Boat->event_queue);
     if (event == NULL) {
-        Boat_INTERNAL_LOG("Failed to add event to event queue");
+        H2CO3_BOAT_INTERNAL_LOG("Failed to add event to event queue");
         return;
     }
     event->time = time;
@@ -176,34 +176,34 @@ Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_pushEvent(JNIEnv *env, jclass c
             event->message = p1;
             break;
     }
-    write(mBoat.event_pipe_fd[1], "E", 1);
-    if (pthread_mutex_unlock(&mBoat.event_queue_mutex)) {
-        Boat_INTERNAL_LOG("Failed to release mutex");
+    write(h2co3Boat->event_pipe_fd[1], "E", 1);
+    if (pthread_mutex_unlock(&h2co3Boat->event_queue_mutex)) {
+        H2CO3_BOAT_INTERNAL_LOG("Failed to release mutex");
     }
 }
 
 JNIEXPORT void JNICALL
 Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_setEventPipe(JNIEnv *env, jclass clazz) {
-    if (pipe(mBoat.event_pipe_fd) == -1) {
-        Boat_INTERNAL_LOG("Failed to create event pipe : %s", strerror(errno));
+    if (pipe(h2co3Boat->event_pipe_fd) == -1) {
+        H2CO3_BOAT_INTERNAL_LOG("Failed to create event pipe : %s", strerror(errno));
         return;
     }
-    mBoat.epoll_fd = epoll_create(3);
-    if (mBoat.epoll_fd == -1) {
-        Boat_INTERNAL_LOG("Failed to get epoll fd : %s", strerror(errno));
+    h2co3Boat->epoll_fd = epoll_create(3);
+    if (h2co3Boat->epoll_fd == -1) {
+        H2CO3_BOAT_INTERNAL_LOG("Failed to get epoll fd : %s", strerror(errno));
         return;
     }
     struct epoll_event ev;
     ev.events = EPOLLIN;
-    ev.data.fd = mBoat.event_pipe_fd[0];
-    if (epoll_ctl(mBoat.epoll_fd, EPOLL_CTL_ADD, mBoat.event_pipe_fd[0], &ev) == -1) {
-        Boat_INTERNAL_LOG("Failed to add epoll event : %s", strerror(errno));
+    ev.data.fd = h2co3Boat->event_pipe_fd[0];
+    if (epoll_ctl(h2co3Boat->epoll_fd, EPOLL_CTL_ADD, h2co3Boat->event_pipe_fd[0], &ev) == -1) {
+        H2CO3_BOAT_INTERNAL_LOG("Failed to add epoll event : %s", strerror(errno));
         return;
     }
-    EventQueue_init(&mBoat.event_queue);
-    pthread_mutex_init(&mBoat.event_queue_mutex, NULL);
-    mBoat.has_event_pipe = 1;
-    Boat_INTERNAL_LOG("Succeeded to set event pipe");
+    EventQueue_init(&h2co3Boat->event_queue);
+    pthread_mutex_init(&h2co3Boat->event_queue_mutex, NULL);
+    h2co3Boat->has_event_pipe = 1;
+    H2CO3_BOAT_INTERNAL_LOG("Succeeded to set event pipe");
 }
 int injector_mode = 0;
 
@@ -216,7 +216,7 @@ int h2co3GetInjectorMode() {
 }
 
 void h2co3SetHitResultType(int type) {
-    if (!mBoat.has_event_pipe) {
+    if (!h2co3Boat->has_event_pipe) {
         return;
     }
     PrepareH2CO3BoatLibJNI();

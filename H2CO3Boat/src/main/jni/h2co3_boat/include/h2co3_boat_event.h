@@ -1,5 +1,5 @@
-#ifndef Boat_EVENT_H
-#define Boat_EVENT_H
+#ifndef H2CO3_BOAT_EVENT_H
+#define H2CO3_BOAT_EVENT_H
 
 #define KeyPress              2
 #define KeyRelease            3
@@ -46,4 +46,4 @@ typedef struct {
     int height;
 } H2CO3BoatEvent;
 
-#endif // Boat_EVENT_H
+#endif // H2CO3_BOAT_EVENT_H

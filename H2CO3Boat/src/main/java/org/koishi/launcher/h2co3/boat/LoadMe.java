@@ -18,57 +18,63 @@ import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 public class LoadMe {
 
+    // 设置H2CO3_LIB_DIR和mReceiver的静态变量
     public static String H2CO3_LIB_DIR;
     public static WeakReference<LogReceiver> mReceiver;
 
+    // 加载本地库
     static {
         System.loadLibrary("h2co3_boat");
     }
 
+    // 声明native方法
     public static native int chdir(String path);
-
     public static native void redirectStdio(String file);
-
     public static native void setenv(String name, String value);
-
     public static native int dlopen(String name);
-
     public static native void patchLinker();
-
     public static native void setupExitTrap(Context context);
-
     public static native int dlexec(String[] args);
 
+    // 启动Minecraft的方法
     @SuppressLint("SuspiciousIndentation")
     public static void launchMinecraft(Handler handler, Context context, String javaPath, String home, boolean highVersion, Vector<String> args, String renderer, String gameDir, H2CO3Callback callback) {
+        // 在handler中执行callback的onStart方法
         handler.post(callback::onStart);
 
+        // 设置H2CO3_LIB_DIR
         H2CO3_LIB_DIR = CHTools.RUNTIME_DIR + "/h2co3_boat";
 
-        boolean isJava17 = javaPath.endsWith("jre_17");
-        patchLinker();
-
+        // 判断设备架构并设置arch变量
+        int architecture = Architecture.getDeviceArchitecture();
         String arch = "";
-        if (Architecture.getDeviceArchitecture() == ARCH_ARM) {
-            arch = "aarch32";
-        }
-        if (Architecture.getDeviceArchitecture() == ARCH_ARM64) {
-            arch = "aarch64";
-        }
-        if (Architecture.getDeviceArchitecture() == ARCH_X86) {
-            arch = "i386";
-        }
-        if (Architecture.getDeviceArchitecture() == ARCH_X86_64) {
-            arch = "amd64";
+        switch (architecture) {
+            case ARCH_ARM:
+                arch = "aarch32";
+                break;
+            case ARCH_ARM64:
+                arch = "aarch64";
+                break;
+            case ARCH_X86:
+                arch = "i386";
+                break;
+            case ARCH_X86_64:
+                arch = "amd64";
+                break;
         }
 
+        boolean isJava17 = javaPath.endsWith("jre_17");
+
+        // 获取nativeLibraryDir
         String nativeDir = context.getApplicationInfo().nativeLibraryDir;
 
         try {
+            // 设置环境变量
             setenv("HOME", home);
             setenv("JAVA_HOME", javaPath);
             setenv("LIBGL_MIPMAP", "3");
@@ -76,7 +82,7 @@ public class LoadMe {
             setenv("LIBGL_VSYNC", "1");
             setenv("LIBGL_NOINTOVLHACK", "1");
 
-
+            // 根据renderer设置环境变量
             if (renderer.equals("VirGL")) {
                 setenv("LIBGL_NAME", "libGL.so.1");
                 setenv("LIBEGL_NAME", "libEGL.so.1");
@@ -96,32 +102,11 @@ public class LoadMe {
                 }
             }
 
-            // openjdk
+            // 加载本地库
             if (isJava17) {
-                dlopen(javaPath + "/lib/" + "server" + "/libjvm.so");
-                dlopen(javaPath + "/lib/" + "libjava.so");
-                dlopen(javaPath + "/lib/" + "libjli.so");
-                dlopen(javaPath + "/lib/" + "libverify.so");
-                dlopen(javaPath + "/lib/" + "libnet.so");
-                dlopen(javaPath + "/lib/" + "libnio.so");
-                dlopen(javaPath + "/lib/" + "libawt.so");
-                dlopen(javaPath + "/lib/" + "libawt_headless.so");
-                dlopen(javaPath + "/lib/" + "libfreetype.so");
-                dlopen(javaPath + "/lib/" + "libfontmanager.so");
-                dlopen(javaPath + "/lib/" + "libawt_headless.so");
+                loadNativeLibraries(javaPath, "server", "libjvm.so", "libjava.so", "libjli.so", "libverify.so", "libnet.so", "libnio.so", "libawt.so", "libawt_headless.so", "libfreetype.so", "libfontmanager.so", "libawt_headless.so");
             } else {
-                dlopen(javaPath + "/lib/" + arch + "/libfreetype.so");
-                dlopen(javaPath + "/lib/" + arch + "/libpng16.so.16");
-                dlopen(javaPath + "/lib/" + arch + "/libfontmanager.so");
-                dlopen(javaPath + "/lib/" + arch + "/libpng16.so");
-                dlopen(javaPath + "/lib/" + arch + "/jli/libjli.so");
-                dlopen(javaPath + "/lib/" + arch + "/" + "server" + "/libjvm.so");
-                dlopen(javaPath + "/lib/" + arch + "/libverify.so");
-                dlopen(javaPath + "/lib/" + arch + "/libjava.so");
-                dlopen(javaPath + "/lib/" + arch + "/libnet.so");
-                dlopen(javaPath + "/lib/" + arch + "/libnio.so");
-                dlopen(javaPath + "/lib/" + arch + "/libawt.so");
-                dlopen(javaPath + "/lib/" + arch + "/libawt_headless.so");
+                loadNativeLibraries(javaPath, arch, "libfreetype.so", "libpng16.so.16", "libfontmanager.so", "libpng16.so", "jli/libjli.so", "server/libjvm.so", "libverify.so", "libjava.so", "libnet.so", "libnio.so", "libawt.so", "libawt_headless.so");
             }
             dlopen(H2CO3_LIB_DIR + "/libopenal.so.1");
 
@@ -135,17 +120,8 @@ public class LoadMe {
                 dlopen(H2CO3_LIB_DIR + "/virgl/libEGL.so.1");
                 dlopen(H2CO3_LIB_DIR + "/virgl/swrast_dri.so");
             }
-
-            if (!highVersion) {
-                dlopen(H2CO3_LIB_DIR + "/lwjgl-2/liblwjgl.so");
-                dlopen(nativeDir + "/libglfw.so");
-            } else {
-                dlopen(nativeDir + "/libglfw.so");
-                dlopen(H2CO3_LIB_DIR + "/lwjgl-3/liblwjgl.so");
-                dlopen(H2CO3_LIB_DIR + "/lwjgl-3/liblwjgl_stb.so");
-                dlopen(H2CO3_LIB_DIR + "/lwjgl-3/liblwjgl_tinyfd.so");
-                dlopen(H2CO3_LIB_DIR + "/lwjgl-3/liblwjgl_opengl.so");
-            }
+            dlopen(nativeDir + "/libglfw.so");
+            dlopen(nativeDir + "/liblwjgl.so");
 
             setupExitTrap(context);
 
@@ -157,18 +133,22 @@ public class LoadMe {
             for (int i = 0; i < args.size(); i++) {
                 if (!args.get(i).equals(" ")) {
                     finalArgs[i] = args.get(i);
-                    System.out.println("Minecraft Args:" + finalArgs[i]);
                     sb.append(finalArgs[i]).append("\n");
                 }
             }
-            Log.d("Debug", sb.toString());
-            FileTools.writeFile(new File(CHTools.LOG_DIR + "/params.txt"), sb.toString());
+            FileTools.writeFile(new File(CHTools.LOG_DIR + "/BoatArgs.txt"), sb.toString());
 
             int exitCode = dlexec(finalArgs);
             System.out.println("OpenJDK exited with code : " + exitCode);
         } catch (Exception e) {
             e.printStackTrace();
             handler.post(() -> callback.onError(e));
+        }
+    }
+
+    private static void loadNativeLibraries(String javaPath, String arch, String... libraries) {
+        for (String library : libraries) {
+            dlopen(javaPath + "/lib/" + arch + "/" + library);
         }
     }
 
@@ -201,7 +181,6 @@ public class LoadMe {
     }
 
     public static int launchJVM(String javaPath, ArrayList<String> args, String home) {
-
         patchLinker();
 
         try {
@@ -209,17 +188,19 @@ public class LoadMe {
             setenv("JAVA_HOME", javaPath);
 
             String arch = "";
-            if (Architecture.getDeviceArchitecture() == ARCH_ARM) {
-                arch = "aarch32";
-            }
-            if (Architecture.getDeviceArchitecture() == ARCH_ARM64) {
-                arch = "aarch64";
-            }
-            if (Architecture.getDeviceArchitecture() == ARCH_X86) {
-                arch = "i386";
-            }
-            if (Architecture.getDeviceArchitecture() == ARCH_X86_64) {
-                arch = "amd64";
+            switch (Architecture.getDeviceArchitecture()) {
+                case ARCH_ARM:
+                    arch = "aarch32";
+                    break;
+                case ARCH_ARM64:
+                    arch = "aarch64";
+                    break;
+                case ARCH_X86:
+                    arch = "i386";
+                    break;
+                case ARCH_X86_64:
+                    arch = "amd64";
+                    break;
             }
 
             dlopen(javaPath + "/lib/" + arch + "/libfreetype.so");
@@ -233,17 +214,16 @@ public class LoadMe {
             dlopen(javaPath + "/lib/" + arch + "/libawt_headless.so");
             dlopen(javaPath + "/lib/" + arch + "/libfontmanager.so");
 
-            redirectStdio(home + "/h2co3_api_installer_log.txt");
+            redirectStdio(CHTools.LOG_DIR + "/h2co3_api_installer_log.txt");
             chdir(home);
 
-            String[] finalArgs = new String[args.size()];
-            for (int i = 0; i < args.size(); i++) {
-                if (!args.get(i).equals(" ")) {
-                    finalArgs[i] = args.get(i);
-                    System.out.println("JVM Args:" + finalArgs[i]);
+            StringBuilder finalArgs = new StringBuilder();
+            for (String arg : args) {
+                if (!arg.equals(" ")) {
+                    finalArgs.append(arg).append(" ");
+                    System.out.println("JVM Args:" + arg);
                 }
             }
-            System.out.println("ApiInstaller exited with code : " + dlexec(finalArgs));
         } catch (Exception e) {
             e.printStackTrace();
             return 1;
@@ -252,20 +232,20 @@ public class LoadMe {
     }
 
     public static void receiveLog(String str) {
-        if (mReceiver == null || mReceiver.get() == null) {
+        if (mReceiver == null) {
             Log.e("LoadMe", "LogReceiver is null. So use default receiver.");
             mReceiver = new WeakReference<>(new LogReceiver() {
-                final StringBuilder builder = new StringBuilder();
+                final List<String> logs = new ArrayList<>();
 
                 @Override
                 public void pushLog(String log) {
                     Log.e("LoadMe", log);
-                    builder.append(log);
+                    logs.add(log);
                 }
 
                 @Override
                 public String getLogs() {
-                    return builder.toString();
+                    return String.join("\n", logs);
                 }
             });
         } else {

@@ -1,8 +1,8 @@
-#ifndef Boat_H
-#define Boat_H
+#ifndef H2CO3_BOAT_H
+#define H2CO3_BOAT_H
 
 #include <android/native_window.h>
-#include <h2co3_boat_event.h>
+#include "h2co3_boat_event.h"
 
 ANativeWindow *h2co3GetNativeWindow(void);
 

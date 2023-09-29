@@ -1,5 +1,5 @@
-#ifndef Boat_INTERNAL_H
-#define Boat_INTERNAL_H
+#ifndef H2CO3_BOAT_INTERNAL_H
+#define H2CO3_BOAT_INTERNAL_H
 
 #include <stdlib.h>
 #include <pthread.h>
@@ -24,7 +24,7 @@ typedef struct {
     QueueElement *tail;
 } EventQueue;
 
-typedef struct {
+struct H2CO3BoatInternal {
     uint8_t isLoaded;
     JavaVM *android_jvm;
     jmethodID setGrabCursorId;
@@ -39,11 +39,11 @@ typedef struct {
     int has_event_pipe;
     int event_pipe_fd[2];
     int epoll_fd;
-} BoatInternal;
+};
 
-extern BoatInternal mBoat;
+extern struct H2CO3BoatInternal *h2co3Boat;
 
-#define Boat_INTERNAL_LOG(x...) do { \
+#define H2CO3_BOAT_INTERNAL_LOG(x...) do { \
     fprintf(stderr, "[Boat Internal] %s:%d\n", __FILE__, __LINE__); \
     fprintf(stderr, x); \
     fprintf(stderr, "\n"); \
@@ -51,23 +51,23 @@ extern BoatInternal mBoat;
     } while (0)
 
 #define PrepareH2CO3BoatLibJNI() \
-    JavaVM* vm = mBoat.android_jvm; \
+    JavaVM* vm = h2co3Boat->android_jvm; \
     JNIEnv* env = NULL; \
     jint attached = (*vm)->GetEnv(vm, (void**)&env, JNI_VERSION_1_2); \
     if (attached == JNI_EDETACHED) { \
         attached = (*vm)->AttachCurrentThread(vm, &env, NULL); \
         if (attached != JNI_OK || env == NULL) { \
-            Boat_INTERNAL_LOG("Failed to attach thread to Android JavaVM."); \
+            H2CO3_BOAT_INTERNAL_LOG("Failed to attach thread to Android JavaVM."); \
         } \
     } \
     do {} while(0)
 
 #define CallH2CO3BoatLibJNIFunc(return_exp, func_type, func_name, signature, args...) \
-    jmethodID H2CO3BoatLib_##func_name = (*env)->GetStaticMethodID(env, mBoat.class_H2CO3BoatLib, #func_name, signature); \
+    jmethodID H2CO3BoatLib_##func_name = (*env)->GetStaticMethodID(env, h2co3Boat->class_H2CO3BoatLib, #func_name, signature); \
     if (H2CO3BoatLib_##func_name == NULL) { \
-        Boat_INTERNAL_LOG("Failed to find static method H2CO3BoatLib_"#func_name ); \
+        H2CO3_BOAT_INTERNAL_LOG("Failed to find static method H2CO3BoatLib_"#func_name ); \
     } \
-    return_exp (*env)->CallStatic##func_type##Method(env, mBoat.class_H2CO3BoatLib, H2CO3BoatLib_##func_name, ##args); \
+    return_exp (*env)->CallStatic##func_type##Method(env, h2co3Boat->class_H2CO3BoatLib, H2CO3BoatLib_##func_name, ##args); \
     do {} while(0)
 
-#endif // Boat_INTERNAL_H
+#endif // H2CO3_BOAT_INTERNAL_H

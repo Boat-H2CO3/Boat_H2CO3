@@ -52,7 +52,7 @@ public final class IOUtils {
     }
 
     public static String readFullyAsString(InputStream stream, Charset charset) throws IOException {
-        return readFully(stream).toString(charset.name());
+        return readFully(stream).toString(charset);
     }
 
     public static void write(String text, OutputStream outputStream) throws IOException {

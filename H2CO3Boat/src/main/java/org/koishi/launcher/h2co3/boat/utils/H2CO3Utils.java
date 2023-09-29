@@ -55,7 +55,7 @@ public class H2CO3Utils implements Runnable {
         return new Gson().fromJson(json, type);
     }
 
-    private String replaceVariables(String str) throws ParseException {
+    private String replaceVariables(String str) {
         if (str == null) {
             str = "";
         }

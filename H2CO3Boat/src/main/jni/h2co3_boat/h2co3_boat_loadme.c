@@ -94,8 +94,6 @@ Java_org_koishi_launcher_h2co3_boat_LoadMe_setupExitTrap(JNIEnv *env, jclass cla
     xhook_refresh(1);
 }
 
-extern char **environ;
-
 JNIEXPORT int JNICALL
 Java_org_koishi_launcher_h2co3_boat_LoadMe_dlexec(JNIEnv *env, jclass clazz,
                                                   jobjectArray argsArray) {
@@ -224,15 +222,49 @@ Java_org_koishi_launcher_h2co3_boat_LoadMe_patchLinker(JNIEnv *env, jclass clazz
 #define PAGE_START(x) ((void*)((unsigned long)(x) & ~((unsigned long)getpagesize() - 1)))
 
     void *libdl_handle = dlopen("libdl.so", RTLD_GLOBAL);
+    if (libdl_handle == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to open libdl.so");
+        return;
+    }
 
     unsigned *dlopen_addr = (unsigned *) dlsym(libdl_handle, "dlopen");
+    if (dlopen_addr == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to find dlopen");
+        return;
+    }
     unsigned *dlsym_addr = (unsigned *) dlsym(libdl_handle, "dlsym");
+    if (dlsym_addr == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to find dlsym");
+        return;
+    }
     unsigned *dlvsym_addr = (unsigned *) dlsym(libdl_handle, "dlvsym");
+    if (dlvsym_addr == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to find dlvsym");
+        return;
+    }
+
     unsigned *buffer = (unsigned *) dlsym(libdl_handle, "android_get_LD_LIBRARY_PATH");
-    mprotect(PAGE_START(buffer), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC);
-    mprotect(PAGE_START(dlopen_addr), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC);
-    mprotect(PAGE_START(dlsym_addr), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC);
-    mprotect(PAGE_START(dlvsym_addr), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC);
+    if (buffer == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to find android_get_LD_LIBRARY_PATH");
+        return;
+    }
+
+    if (mprotect(PAGE_START(buffer), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
+        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to mprotect buffer");
+        return;
+    }
+    if (mprotect(PAGE_START(dlopen_addr), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
+        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to mprotect dlopen_addr");
+        return;
+    }
+    if (mprotect(PAGE_START(dlsym_addr), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
+        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to mprotect dlsym_addr");
+        return;
+    }
+    if (mprotect(PAGE_START(dlvsym_addr), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
+        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to mprotect dlvsym_addr");
+        return;
+    }
 
     unsigned ins_ret = gen_ret(30);
     unsigned ins_mov_x0_0 = gen_mov_imm(0, 0);

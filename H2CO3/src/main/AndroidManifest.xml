@@ -30,7 +30,7 @@
         android:theme="@style/Theme.H2CO3"
         tools:targetApi="r">
         <activity
-            android:name=".ui.activity.WelcomeActivity"
+            android:name=".ui.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,7 +43,7 @@
             android:screenOrientation="sensorPortrait"
             tools:ignore="LockedOrientationActivity"></activity>
         <activity
-            android:name="org.koishi.launcher.h2co3.ui.activity.H2CO3MainActivity"
+            android:name="org.koishi.launcher.h2co3.ui.H2CO3MainActivity"
             android:screenOrientation="sensorPortrait"
             tools:ignore="LockedOrientationActivity"></activity>
 

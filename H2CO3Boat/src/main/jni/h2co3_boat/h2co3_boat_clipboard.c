@@ -8,9 +8,9 @@ void h2co3SetPrimaryClipString(const char *string) {
 
 const char *h2co3GetPrimaryClipString() {
     PrepareH2CO3BoatLibJNI();
-    if (mBoat.clipboard_string != NULL) {
-        free(mBoat.clipboard_string);
-        mBoat.clipboard_string = NULL;
+    if (h2co3Boat->clipboard_string != NULL) {
+        free(h2co3Boat->clipboard_string);
+        h2co3Boat->clipboard_string = NULL;
     }
     CallH2CO3BoatLibJNIFunc(jstring clipstr =, Object, getPrimaryClipString,
                             "()Ljava/lang/String;");
@@ -18,8 +18,8 @@ const char *h2co3GetPrimaryClipString() {
     if (clipstr != NULL) {
         string = (*env)->GetStringUTFChars(env, clipstr, NULL);
         if (string != NULL) {
-            mBoat.clipboard_string = strdup(string);
+            h2co3Boat->clipboard_string = strdup(string);
         }
     }
-    return mBoat.clipboard_string;
+    return h2co3Boat->clipboard_string;
 }

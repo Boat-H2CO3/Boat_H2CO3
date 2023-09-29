@@ -35,7 +35,7 @@ public class CHTools {
     public static String CONTROLLER_DIR;
 
     public static String MINECRAFT_DIR;
-    public static String SHARED_COMMON_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FCL/.minecraft";
+    public static String SHARED_COMMON_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/org.koishi.launcher/h2co3/.minecraft";
 
     public static String AUTHLIB_INJECTOR_PATH;
     public static String MULTIPLAYER_FIX_PATH;
