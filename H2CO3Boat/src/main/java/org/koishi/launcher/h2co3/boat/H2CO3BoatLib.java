@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.view.Surface;
 
 import androidx.core.content.FileProvider;
 
@@ -75,6 +76,11 @@ public class H2CO3BoatLib {
     public static void setPrimaryClipString(String string) {
     }
 
+    public static native int[] getPointer();
+
+    // 设置H2CO3本地窗口
+    public static native void setH2CO3NativeWindow(Surface surface);
+
     public static void openLink(final String link) {
         Context context = CHTools.CONTEXT;
         ((Activity) context).runOnUiThread(() -> {
@@ -101,6 +107,5 @@ public class H2CO3BoatLib {
         });
     }
 
-    public static native int[] getPointer();
 
 }

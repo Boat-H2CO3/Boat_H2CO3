@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import org.koishi.launcher.h2co3.boat.function.H2CO3Callback;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
+import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MessageDialog;
 
 import java.util.Timer;
 import java.util.Vector;
@@ -46,9 +48,6 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
     public int baseY;
     // 输出
     int output = 0;
-
-    // 设置H2CO3本地窗口
-    public static native void setH2CO3NativeWindow(Surface surface);
 
     // 退出
     public static void onExit(Context ctx, int code) {
@@ -134,11 +133,13 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
             LoadMe.launchMinecraft(handler, H2CO3BoatActivity.this, javaPath, home, highVersion, args, renderer, gameDir, new H2CO3Callback() {
                 @Override
                 public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+                    H2CO3BoatLib.setH2CO3NativeWindow(new Surface(surface));
+                    H2CO3BoatLib.setEventPipe();
                 }
 
                 @Override
                 public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-
+                    H2CO3BoatLib.pushEventWindow(width, height);
                 }
 
                 @Override
@@ -163,7 +164,11 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
 
                 @Override
                 public void onExit(int code) {
-
+                    AlertDialog exitDialog = new H2CO3MessageDialog(H2CO3BoatActivity.this)
+                            .setMessage("Error" + code)
+                            .setPositiveButton("Exit", (dialog, which) -> finish())
+                            .setOnDismissListener(dialog -> H2CO3BoatActivity.this.finish())
+                            .show();
                 }
             });
         });

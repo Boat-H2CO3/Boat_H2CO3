@@ -8,7 +8,6 @@ import static org.koishi.launcher.h2co3.core.utils.Architecture.ARCH_X86_64;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
-import android.util.Log;
 
 import org.koishi.launcher.h2co3.boat.function.H2CO3Callback;
 import org.koishi.launcher.h2co3.core.utils.Architecture;
@@ -16,16 +15,13 @@ import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 public class LoadMe {
 
     // 设置H2CO3_LIB_DIR和mReceiver的静态变量
     public static String H2CO3_LIB_DIR;
-    public static WeakReference<LogReceiver> mReceiver;
 
     // 加载本地库
     static {
@@ -52,21 +48,12 @@ public class LoadMe {
 
         // 判断设备架构并设置arch变量
         int architecture = Architecture.getDeviceArchitecture();
-        String arch = "";
-        switch (architecture) {
-            case ARCH_ARM:
-                arch = "aarch32";
-                break;
-            case ARCH_ARM64:
-                arch = "aarch64";
-                break;
-            case ARCH_X86:
-                arch = "i386";
-                break;
-            case ARCH_X86_64:
-                arch = "amd64";
-                break;
-        }
+        String arch = switch (architecture) {
+            case ARCH_ARM -> "aarch32";
+            case ARCH_X86 -> "i386";
+            case ARCH_X86_64 -> "amd64";
+            default -> "aarch64";
+        };
 
         boolean isJava17 = javaPath.endsWith("jre_17");
 
@@ -95,7 +82,6 @@ public class LoadMe {
                 setenv("MESA_GLSL_CACHE_DIR", context.getCacheDir().getAbsolutePath());
                 setenv("LIBGL_STRING", "Holy-VirGLRenderer");
             } else {
-
                 dlopen(nativeDir + "/libgl4es_114.so");
                 dlopen(nativeDir + "/libEGL.so");
                 setenv("LIBGL_NAME", "libgl4es_114.so");
@@ -112,18 +98,7 @@ public class LoadMe {
             } else {
                 loadNativeLibraries(javaPath, arch, "libfreetype.so", "libpng16.so.16", "libfontmanager.so", "libpng16.so", "jli/libjli.so", "server/libjvm.so", "libverify.so", "libjava.so", "libnet.so", "libnio.so", "libawt.so", "libawt_headless.so");
             }
-            dlopen(H2CO3_LIB_DIR + "/libopenal.so.1");
-
-            if (!renderer.equals("VirGL")) {
-                dlopen(H2CO3_LIB_DIR + "/gl4es/libgl4es_114.so");
-                dlopen(H2CO3_LIB_DIR + "/gl4es/libEGL_wrapper.so");
-            } else {
-                dlopen(H2CO3_LIB_DIR + "/virgl/libexpat.so.1");
-                dlopen(H2CO3_LIB_DIR + "/virgl/libglapi.so.0");
-                dlopen(H2CO3_LIB_DIR + "/virgl/libGL.so.1");
-                dlopen(H2CO3_LIB_DIR + "/virgl/libEGL.so.1");
-                dlopen(H2CO3_LIB_DIR + "/virgl/swrast_dri.so");
-            }
+            dlopen(nativeDir + "/libopenal.so");
             dlopen(nativeDir + "/libglfw.so");
             dlopen(nativeDir + "/liblwjgl.so");
 
@@ -134,10 +109,9 @@ public class LoadMe {
 
             String[] finalArgs = new String[args.size()];
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < args.size(); i++) {
-                if (!args.get(i).equals(" ")) {
-                    finalArgs[i] = args.get(i);
-                    sb.append(finalArgs[i]).append("\n");
+            for (String arg : args) {
+                if (!arg.equals(" ")) {
+                    sb.append(arg).append("\n");
                 }
             }
             FileTools.writeFile(new File(CHTools.LOG_DIR + "/BoatArgs.txt"), sb.toString());
@@ -191,21 +165,13 @@ public class LoadMe {
             setenv("HOME", home);
             setenv("JAVA_HOME", javaPath);
 
-            String arch = "";
-            switch (Architecture.getDeviceArchitecture()) {
-                case ARCH_ARM:
-                    arch = "aarch32";
-                    break;
-                case ARCH_ARM64:
-                    arch = "aarch64";
-                    break;
-                case ARCH_X86:
-                    arch = "i386";
-                    break;
-                case ARCH_X86_64:
-                    arch = "amd64";
-                    break;
-            }
+            String arch = switch (Architecture.getDeviceArchitecture()) {
+                case ARCH_ARM -> "aarch32";
+                case ARCH_ARM64 -> "aarch64";
+                case ARCH_X86 -> "i386";
+                case ARCH_X86_64 -> "amd64";
+                default -> "";
+            };
 
             dlopen(javaPath + "/lib/" + arch + "/libfreetype.so");
             dlopen(javaPath + "/lib/" + arch + "/jli/libjli.so");
@@ -233,34 +199,6 @@ public class LoadMe {
             return 1;
         }
         return 0;
-    }
-
-    public static void receiveLog(String str) {
-        if (mReceiver == null) {
-            Log.e("LoadMe", "LogReceiver is null. So use default receiver.");
-            mReceiver = new WeakReference<>(new LogReceiver() {
-                final List<String> logs = new ArrayList<>();
-
-                @Override
-                public void pushLog(String log) {
-                    Log.e("LoadMe", log);
-                    logs.add(log);
-                }
-
-                @Override
-                public String getLogs() {
-                    return String.join("\n", logs);
-                }
-            });
-        } else {
-            mReceiver.get().pushLog(str);
-        }
-    }
-
-    public interface LogReceiver {
-        void pushLog(String log);
-
-        String getLogs();
     }
 
 }

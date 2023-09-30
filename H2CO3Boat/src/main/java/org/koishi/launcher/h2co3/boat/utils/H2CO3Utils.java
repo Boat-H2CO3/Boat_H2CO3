@@ -15,7 +15,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -114,41 +113,34 @@ public class H2CO3Utils implements Runnable {
                     args[i] = replaceVariables(args[i]);
                 }
                 switch (args[0]) {
-                    case "patchLinker": {
+                    case "patchLinker" -> {
                         patchLinker();
-                        break;
                     }
-                    case "setenv": {
+                    case "setenv" -> {
                         setenv(args[1], args[2]);
-                        break;
                     }
-                    case "chdir": {
+                    case "chdir" -> {
                         chdir(args[1]);
-                        break;
                     }
-                    case "redirectStdio": {
+                    case "redirectStdio" -> {
                         redirectStdio(args[1]);
-                        break;
                     }
-                    case "dlopen": {
+                    case "dlopen" -> {
                         dlopen(args[1]);
-                        break;
                     }
-                    case "dlexec": {
+                    case "dlexec" -> {
                         String[] finalArgs = new String[args.length - 1];
                         System.arraycopy(args, 1, finalArgs, 0, args.length - 1);
                         dlexec(finalArgs);
-                        break;
                     }
-                    case "strdef": {
+                    case "strdef" -> {
                         String value = args[2];
                         if (value == null) {
                             value = "";
                         }
                         this.variables.put(args[1], value);
-                        break;
                     }
-                    case "strcat": {
+                    case "strcat" -> {
                         String value = this.variables.get(args[1]);
                         if (value == null) {
                             value = "";
@@ -160,18 +152,15 @@ public class H2CO3Utils implements Runnable {
                             }
                         }
                         this.variables.put(args[1], builder.toString());
-                        break;
                     }
-                    case "json": {
+                    case "json" -> {
                         if (this.scriptFile.equals(args[1])) {
                             throw new Exception("Recursive script!");
                         }
                         LinkedList<String[]> includes = parseJson(args[1]);
                         new H2CO3Utils(this.variables, false, includes, args[1]).execute();
-                        break;
                     }
-                    default: {
-                        break;
+                    default -> {
                     }
                 }
             }

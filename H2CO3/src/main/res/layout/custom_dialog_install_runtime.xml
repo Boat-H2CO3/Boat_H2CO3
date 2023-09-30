@@ -44,6 +44,7 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:indeterminate="true"
+                        android:layout_marginStart="@dimen/app_10dp"
                         android:visibility="visible" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -51,7 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="@dimen/app_10dp"
                         android:tint="@android:color/darker_gray" />
 
                     <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
@@ -83,6 +84,7 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:indeterminate="true"
+                        android:layout_marginStart="@dimen/app_10dp"
                         android:visibility="visible" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -90,7 +92,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="@dimen/app_10dp"
                         android:tint="@android:color/darker_gray" />
 
                     <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
@@ -122,6 +124,7 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:indeterminate="true"
+                        android:layout_marginStart="@dimen/app_10dp"
                         android:visibility="visible" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -129,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="@dimen/app_10dp"
                         android:tint="@android:color/darker_gray" />
 
                     <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
@@ -162,6 +165,7 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:indeterminate="true"
+                        android:layout_marginStart="@dimen/app_10dp"
                         android:visibility="visible" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -169,7 +173,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="@dimen/app_10dp"
                         android:backgroundTint="@android:color/darker_gray" />
 
                     <org.koishi.launcher.h2co3.resources.component.H2CO3TextView

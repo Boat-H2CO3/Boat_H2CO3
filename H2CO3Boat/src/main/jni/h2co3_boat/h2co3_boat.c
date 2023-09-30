@@ -10,9 +10,9 @@ ANativeWindow *h2co3GetNativeWindow() {
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_boat_H2CO3BoatActivity_setH2CO3NativeWindow(JNIEnv *env,
-                                                                           jclass clazz,
-                                                                           jobject surface) {
+Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_setH2CO3NativeWindow(JNIEnv *env,
+                                                                      jclass clazz,
+                                                                      jobject surface) {
     h2co3Boat->window = ANativeWindow_fromSurface(env, surface);
     H2CO3_BOAT_INTERNAL_LOG("setBoatNativeWindow : %p", h2co3Boat->window);
 }

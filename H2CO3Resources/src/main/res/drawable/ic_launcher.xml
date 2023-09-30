@@ -4,9 +4,7 @@
             <solid android:color="@color/md_theme_primary" />
         </shape>
     </item>
-    <item
-        android:width="40dp"
-        android:height="40dp">
+    <item>
         <inset
             android:drawable="@drawable/ic_h2co3_low_px"
             android:inset="1dp" />

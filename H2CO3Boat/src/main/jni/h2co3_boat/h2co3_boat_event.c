@@ -139,18 +139,23 @@ Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_pushEvent(JNIEnv *env, jclass c
     if (!h2co3Boat->has_event_pipe) {
         return;
     }
+
     if (pthread_mutex_lock(&h2co3Boat->event_queue_mutex)) {
         H2CO3_BOAT_INTERNAL_LOG("Failed to acquire mutex");
         return;
     }
+
     H2CO3BoatEvent *event = EventQueue_add(&h2co3Boat->event_queue);
     if (event == NULL) {
         H2CO3_BOAT_INTERNAL_LOG("Failed to add event to event queue");
+        pthread_mutex_unlock(&h2co3Boat->event_queue_mutex);
         return;
     }
+
     event->time = time;
     event->type = type;
     event->state = 0;
+
     switch (type) {
         case MotionNotify:
             event->x = p1;
@@ -175,8 +180,13 @@ Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_pushEvent(JNIEnv *env, jclass c
         case BoatMessage:
             event->message = p1;
             break;
+        default:
+            // 处理未覆盖的代码路径
+            break;
     }
+
     write(h2co3Boat->event_pipe_fd[1], "E", 1);
+
     if (pthread_mutex_unlock(&h2co3Boat->event_queue_mutex)) {
         H2CO3_BOAT_INTERNAL_LOG("Failed to release mutex");
     }
