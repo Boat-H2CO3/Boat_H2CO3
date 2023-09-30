@@ -5,7 +5,6 @@ import org.apache.commons.io.IOUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
@@ -20,7 +19,7 @@ import java.util.logging.Logger;
 import java.util.logging.StreamHandler;
 
 public final class Logging {
-    public static final Logger LOG = Logger.getLogger("Boat");
+    public static final Logger LOG = Logger.getLogger("Boat_H2CO3");
     private static final ByteArrayOutputStream storedLogs = new ByteArrayOutputStream(IOUtils.DEFAULT_BUFFER_SIZE);
     private static volatile String[] accessTokens = new String[0];
 
@@ -61,7 +60,7 @@ public final class Logging {
             fileHandler.setEncoding("UTF-8");
             LOG.addHandler(fileHandler);
         } catch (IOException e) {
-            System.err.println("Unable to create fcl.log\n" + StringUtils.getStackTrace(e));
+            System.err.println("Unable to create client_output.log\n" + StringUtils.getStackTrace(e));
         }
 
         ConsoleHandler consoleHandler = new ConsoleHandler();
@@ -100,7 +99,7 @@ public final class Logging {
     }
 
     public static String getLogs() {
-        return storedLogs.toString(StandardCharsets.UTF_8);
+        return storedLogs.toString();
     }
 
     private static final class DefaultFormatter extends Formatter {
