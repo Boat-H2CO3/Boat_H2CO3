@@ -71,10 +71,6 @@ dependencies {
     implementation 'androidx.webkit:webkit:1.7.0-alpha03'
     implementation "org.greenrobot:eventbus:3.3.1"
 
-    // Testing dependencies
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    testImplementation 'junit:junit:4.13.2'
     implementation 'com.alibaba:fastjson:2.0.40'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
     implementation 'com.larswerkman:HoloColorPicker:1.5'
