@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ Material-You ]
+    branches: [ H2CO3_main ]
   pull_request:
-    branches: [ Material-You ]
+    branches: [ H2CO3_main ]
 
 jobs:
   build:
