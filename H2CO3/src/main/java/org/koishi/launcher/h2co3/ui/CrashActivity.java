@@ -6,15 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import org.koishi.launcher.h2co3.R;
+import org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar;
+import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 
-public class CrashActivity extends AppCompatActivity {
+public class CrashActivity extends H2CO3Activity {
 
     public TextView crash;
     public Button restart;
@@ -24,11 +23,10 @@ public class CrashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crash);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        H2CO3ToolBar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.crash_title));
         crash = findViewById(R.id.crash);
-        TextView bigTitle = (TextView) toolbar.getChildAt(0);
-        bigTitle.setText(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.crash_title));
         restart = findViewById(R.id.restart);
         restart.setOnClickListener(rv -> restart());
         initData();

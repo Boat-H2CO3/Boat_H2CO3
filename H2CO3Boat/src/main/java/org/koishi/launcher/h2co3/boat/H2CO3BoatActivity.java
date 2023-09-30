@@ -4,17 +4,15 @@ import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
 import org.koishi.launcher.h2co3.boat.function.H2CO3Callback;
-import org.koishi.launcher.h2co3.resources.component.H2CO3Activity;
+import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 
 import java.util.Timer;
 import java.util.Vector;

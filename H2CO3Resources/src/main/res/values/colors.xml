@@ -40,11 +40,6 @@
     <color name="app_blue_normal">#FF7093DB</color>
 
     <color name="transparent">#00FFFFFF</color>
-    <color name="H2CO3_oldBackground">#E5E5E5</color>
-    <color name="H2CO3_oldBackground2">#D5D5D5</color>
-    <color name="H2CO3_oldButton">#0060f4</color>
-    <color name="H2CO3_red">#BA1B1B</color>
-    <color name="H2CO3_OldThemeErrorDialog">#930006</color>
-    <color name="H2CO3_OldThemeTextColor">#333333</color>
-    <color name="H2CO3_ErrorTextColor">#410001</color>
+    <color name="H2CO3_Error">?colorError</color>
+    <color name="H2CO3_onError">?colorOnError</color>
 </resources>

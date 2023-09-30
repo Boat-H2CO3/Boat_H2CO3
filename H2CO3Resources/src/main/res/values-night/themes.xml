@@ -27,17 +27,18 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_inverseOnSurface</item>
         <item name="colorSurfaceInverse">@color/md_theme_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_inversePrimary</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="materialButtonStyle">@style/Theme.H2CO3.DialogButtonStyle</item>
+        <item name="android:statusBarColor">?android:colorBackground</item>
     </style>
 
     <style name="Theme.H2CO3" parent="Theme.H2CO3.Styled">
     </style>
 
     <style name="Theme.H2CO3.DynamicColors" parent="Theme.H2CO3.Styled.DynamicColors">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.H2CO3.Material.DynamicColors" parent="Theme.Material3.DynamicColors.Dark.Rikka">
@@ -48,5 +49,10 @@
         <item name="fontFamily">@font/josefin_sans</item>
         <item name="android:fontFamily">@font/josefin_sans</item>
         <item name="materialButtonStyle">@style/Theme.H2CO3.DialogButtonStyle</item>
+        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 </resources>

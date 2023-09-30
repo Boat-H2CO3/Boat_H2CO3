@@ -27,11 +27,10 @@
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.H2CO3"
-        tools:targetApi="r">
+        android:theme="@style/Theme.H2CO3.DynamicColors"
+        tools:targetApi="34">
         <activity
             android:name=".ui.WelcomeActivity"
-            android:screenOrientation="sensorPortrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,12 +40,10 @@
         </activity>
         <activity
             android:name="org.koishi.launcher.h2co3.ui.CrashActivity"
-            android:screenOrientation="sensorPortrait"
-            tools:ignore="LockedOrientationActivity"></activity>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="org.koishi.launcher.h2co3.ui.H2CO3MainActivity"
-            android:screenOrientation="sensorPortrait"
-            tools:ignore="LockedOrientationActivity"></activity>
+            tools:ignore="LockedOrientationActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!---CardView-->
+    <style name="Theme.H2CO3.CardViewOutlined" parent="@style/Widget.Material3.CardView.Outlined">
+        <item name="android:checkable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+        <item name="contentPaddingStart">@dimen/app_16dp</item>
+        <item name="contentPaddingEnd">@dimen/app_16dp</item>
+        <item name="contentPaddingLeft">@dimen/app_16dp</item>
+        <item name="contentPaddingRight">@dimen/app_16dp</item>
+        <item name="contentPaddingTop">@dimen/app_16dp</item>
+        <item name="contentPaddingBottom">@dimen/app_16dp</item>
+    </style>
+
+    <style name="Theme.H2CO3.CardViewElevated" parent="@style/Widget.Material3.CardView.Elevated">
+        <item name="android:checkable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+        <item name="contentPaddingStart">@dimen/app_16dp</item>
+        <item name="contentPaddingEnd">@dimen/app_16dp</item>
+        <item name="contentPaddingLeft">@dimen/app_16dp</item>
+        <item name="contentPaddingRight">@dimen/app_16dp</item>
+        <item name="contentPaddingTop">@dimen/app_16dp</item>
+        <item name="contentPaddingBottom">@dimen/app_16dp</item>
+        <item name="cardElevation">@dimen/elevation_2</item>
+    </style>
+
+    <style name="Theme.H2CO3.CardViewFilled" parent="@style/Widget.Material3.CardView.Filled">
+        <item name="android:checkable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+        <item name="contentPaddingStart">@dimen/app_16dp</item>
+        <item name="contentPaddingEnd">@dimen/app_16dp</item>
+        <item name="contentPaddingLeft">@dimen/app_16dp</item>
+        <item name="contentPaddingRight">@dimen/app_16dp</item>
+        <item name="contentPaddingTop">@dimen/app_16dp</item>
+        <item name="contentPaddingBottom">@dimen/app_16dp</item>
+        <item name="cardElevation">@dimen/elevation_0</item>
+    </style>
+
+
+    <style name="TextAppearance.H2CO3.TitleLarge.Bold" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="TextAppearance.H2CO3.BodySmall" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textColor">@color/material_on_background_disabled</item>
+    </style>
+
+    <style name="AppTheme.TabLayout" parent="Widget.Material3.TabLayout">
+        <item name="tabIndicatorAnimationMode">elastic</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabIndicatorGravity">bottom</item>
+        <item name="tabIndicatorHeight">3dp</item>
+        <item name="tabMode">scrollable</item>
+    </style>
+
+    <style name="AppTheme.TabLayout.Title" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="AppTheme.ShapeOverlay.Large" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="AppTheme.ShapeAppearance.MainFragment.Logo" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">25dp</item>
+    </style>
+
+    <style name="AppTheme.ShapeOverlay.TemplateImage" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- Alert Dialog -->
+    <style name="AppTheme.MaterialAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog.Centered">
+        <item name="shapeAppearanceOverlay">@style/MaterialDialog.ShapeAppearance</item>
+        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out</item>
+    </style>
+
+    <style name="MaterialDialog.ShapeAppearance" parent="">
+        <item name="cornerSize">@dimen/card_radius</item>
+    </style>
+
+    <style name="PopupAnimation">
+        <item name="android:windowEnterAnimation">@anim/popup_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_out</item>
+    </style>
+
+    <style name="AppTheme.SheetAboveKeyboard" parent="Theme.Material3.Dark.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="Theme.H2CO3.DialogButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:textSize">12dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
+        <!--        <item name="android:padding">14dp</item>-->
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmallInverse</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+    </style>
+
+    <style name="Theme.H2CO3.ButtonStyle.Red" parent="@style/Theme.H2CO3.DialogButtonStyle">
+        <item name="backgroundTint">?colorError</item>
+        <item name="android:textColor">?colorOnError</item>
+    </style>
+
+    <style name="Theme.H2CO3.DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out</item>
+    </style>
+</resources>

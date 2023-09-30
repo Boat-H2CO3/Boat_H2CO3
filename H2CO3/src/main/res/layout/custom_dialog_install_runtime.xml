@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="false"
+    app:consumeSystemWindowsInsets="start|end"
+    app:edgeToEdge="true"
+    app:fitsSystemWindowsInsets="start|end">
+
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Theme.H2CO3.CardViewFilled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/app_10dp"
+                android:layout_marginTop="@dimen/app_10dp"
+                android:layout_marginEnd="@dimen/app_10dp"
+                android:layout_marginBottom="5dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ProgressBar
+                        android:id="@+id/boat_progress"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:indeterminate="true"
+                        android:visibility="visible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/boat_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:tint="@android:color/darker_gray" />
+
+                    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/splash_runtime_boat" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Theme.H2CO3.CardViewFilled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/app_10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="@dimen/app_10dp"
+                android:layout_marginBottom="5dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ProgressBar
+                        android:id="@+id/keyboard_progress"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:indeterminate="true"
+                        android:visibility="visible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/keyboard_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:tint="@android:color/darker_gray" />
+
+                    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/splash_control_keyboard" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Theme.H2CO3.CardViewFilled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/app_10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="@dimen/app_10dp"
+                android:layout_marginBottom="5dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ProgressBar
+                        android:id="@+id/java8_progress"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:indeterminate="true"
+                        android:visibility="visible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/java8_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:tint="@android:color/darker_gray" />
+
+                    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/splash_runtime_java8" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Theme.H2CO3.CardViewFilled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/app_10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="@dimen/app_10dp"
+                android:layout_marginBottom="5dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ProgressBar
+                        android:id="@+id/java17_progress"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:indeterminate="true"
+                        android:visibility="visible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/java17_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:backgroundTint="@android:color/darker_gray" />
+
+                    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/splash_runtime_java17" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

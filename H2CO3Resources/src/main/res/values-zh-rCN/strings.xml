@@ -3,15 +3,20 @@
     <string name="title_home">主页</string>
     <string name="title_directory">目录管理</string>
     <string name="title_manage">更多</string>
+    <string name="title_install_runtime">Runtime is installing</string>
+    <string name="title_warn">警告</string>
 
     <string name="app_restart">重新启动</string>
 
     <string name="crash_test">崩溃测试</string>
     <string name="crash_hint">启动器崩溃了！但请不要担心，点击重启按钮即可重新启动app。在这之前，您也可以查看下方崩溃日志。</string>
     <string name="crash_title">错误</string>
+
     <string name="sweet_smell">114514</string>
-    <string name="title_warn">警告</string>
+
     <string name="button_ok">确定</string>
     <string name="button_cancel">取消</string>
+
     <string name="welcome_permission_hint">Boat_H2CO3 需要一些必要的权限以确保能够正常运行</string>
+
 </resources>

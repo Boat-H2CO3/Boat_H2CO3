@@ -10,7 +10,7 @@ import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import org.koishi.launcher.h2co3.resources.component.H2CO3Activity;
+import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 
 @Keep
 public class ExitActivity extends H2CO3Activity {

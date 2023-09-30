@@ -1,20 +1,28 @@
 <resources>
     <string name="app_name" translatable="false">Boat_H2CO3</string>
+    <string name="app_restart">Restart</string>
+    <string name="file_browser_provider" translatable="false">org.koishi.launcher.h2co3.provider</string>
 
     <string name="title_home">Home</string>
     <string name="title_directory">Directory</string>
     <string name="title_manage">Manage</string>
-
-    <string name="app_restart">Restart</string>
+    <string name="title_install_runtime">Runtime is installing</string>
+    <string name="title_warn">Warn</string>
 
     <string name="crash_test">Crash test</string>
     <string name="crash_hint">App is crashed! Do not worry, app will restart if you press the restart button. You can also view the information from this page.</string>
     <string name="crash_title">Error</string>
 
-    <string name="file_browser_provider" translatable="false">org.koishi.launcher.h2co3.provider</string>
+
     <string name="sweet_smell">114514</string>
-    <string name="title_warn">Warn</string>
+
     <string name="button_ok">OK</string>
-    <string name="button_cancel">CANCEL</string>
+    <string name="button_cancel">Cancel</string>
+
     <string name="welcome_permission_hint">Boat_H2CO3 needs some necessary permissions to ensure its normal operation.</string>
+
+    <string name="splash_runtime_boat" translatable="false">Boat Library</string>
+    <string name="splash_control_keyboard" translatable="false">Default Keyboard</string>
+    <string name="splash_runtime_java8" translatable="false">JRE 8</string>
+    <string name="splash_runtime_java17" translatable="false">JRE 17</string>
 </resources>
