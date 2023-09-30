@@ -77,6 +77,7 @@ public class LoadMe {
             // 设置环境变量
             setenv("HOME", home);
             setenv("JAVA_HOME", javaPath);
+            setenv("LIBGL_ES", "2");
             setenv("LIBGL_MIPMAP", "3");
             setenv("LIBGL_NORMALIZE", "1");
             setenv("LIBGL_VSYNC", "1");
@@ -84,19 +85,22 @@ public class LoadMe {
 
             // 根据renderer设置环境变量
             if (renderer.equals("VirGL")) {
-                setenv("LIBGL_NAME", "libGL.so.1");
-                setenv("LIBEGL_NAME", "libEGL.so.1");
+                dlopen(nativeDir + "/libOSMesa_8.so");
+                dlopen(nativeDir + "/libEGL.so");
                 setenv("LIBGL_DRIVERS_PATH", H2CO3_LIB_DIR + "/virgl/");
                 setenv("MESA_GL_VERSION_OVERRIDE", "4.3");
                 setenv("MESA_GLSL_VERSION_OVERRIDE", "430");
                 setenv("VIRGL_VTEST_SOCKET_NAME", context.getCacheDir().getAbsolutePath() + "/.virgl_test");
                 setenv("GALLIUM_DRIVER", "virpipe");
                 setenv("MESA_GLSL_CACHE_DIR", context.getCacheDir().getAbsolutePath());
+                setenv("LIBGL_STRING", "Holy-VirGLRenderer");
             } else {
-                dlopen(H2CO3_LIB_DIR + "/gl4es/libgl4es_114.so");
-                dlopen(H2CO3_LIB_DIR + "/gl4es/libEGL_wrapper.so");
+
+                dlopen(nativeDir + "/libgl4es_114.so");
+                dlopen(nativeDir + "/libEGL.so");
                 setenv("LIBGL_NAME", "libgl4es_114.so");
-                setenv("LIBEGL_NAME", "libEGL_wrapper.so");
+                setenv("LIBEGL_NAME", "libEGL.so");
+                setenv("LIBGL_STRING", "Holy-GL4ES");
                 if (highVersion) {
                     setenv("LIBGL_GL", "32");
                 }

@@ -21,7 +21,7 @@ public class H2CO3MainActivity extends H2CO3Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        H2CO3ToolBar toolbar = findViewById(R.id.toolbar);
+        H2CO3ToolBar toolbar = findViewById(org.koishi.launcher.h2co3.resources.R.id.toolbar);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 

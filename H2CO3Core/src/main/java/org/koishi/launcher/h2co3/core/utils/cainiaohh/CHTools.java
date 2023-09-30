@@ -35,14 +35,14 @@ public class CHTools {
     public static String CONTROLLER_DIR;
 
     public static String MINECRAFT_DIR;
-    public static String SHARED_COMMON_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/org.koishi.launcher/h2co3/.minecraft";
+    public static String SHARED_COMMON_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FCL/.minecraft";
 
     public static String AUTHLIB_INJECTOR_PATH;
     public static String MULTIPLAYER_FIX_PATH;
     public static String APP_DATA_PATH;
     public static String PUBLIC_FILE_PATH;
     public static String BOATCFG;
-    final CHTools.ZipListener zipListener;
+    final ZipListener zipListener;
     @SuppressLint("HandlerLeak")
     private final Handler zipHandler = new Handler(Looper.getMainLooper()) {
         @Override
@@ -61,12 +61,12 @@ public class CHTools {
     };
     int lastProgress = 0;
 
-    public CHTools(CHTools.ZipListener zipListener) {
+    public CHTools(ZipListener zipListener) {
         this.zipListener = zipListener;
     }
 
     @SuppressLint("SdCardPath")
-    public static void initPaths(Context context) {
+    public static void loadPaths(Context context) {
         CONTEXT = context;
 
         NATIVE_LIB_DIR = context.getApplicationInfo().nativeLibraryDir;

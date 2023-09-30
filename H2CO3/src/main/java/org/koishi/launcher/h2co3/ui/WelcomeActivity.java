@@ -34,22 +34,19 @@ import java.util.Locale;
 
 public class WelcomeActivity extends H2CO3Activity {
 
-    boolean boat = false;
-    boolean java8 = false;
-    boolean java17 = false;
-    boolean keyboard = false;
+    private boolean boat = false;
+    private boolean java8 = false;
+    private boolean java17 = false;
+    private boolean keyboard = false;
     private H2CO3MessageDialog permissionDialog;
     private ProgressBar boatProgress;
     private ProgressBar keyboardProgress;
     private ProgressBar java8Progress;
     private ProgressBar java17Progress;
-
     private ImageView boatState;
     private ImageView keyboardState;
     private ImageView java8State;
-
     private ImageView java17State;
-
     private boolean installing = false;
 
     @Override
@@ -60,7 +57,7 @@ public class WelcomeActivity extends H2CO3Activity {
     }
 
     private void init() {
-        CHTools.initPaths(this);
+        CHTools.loadPaths(this);
         Logging.start(new File(CHTools.LOG_DIR, "logs").toPath());
         installRuntime();
     }
@@ -70,7 +67,7 @@ public class WelcomeActivity extends H2CO3Activity {
         installDialog.setCustomView(R.layout.custom_dialog_install_runtime);
         installDialog.setCancelable(false);
         installDialog.show();
-        H2CO3ToolBar toolBar = installDialog.findViewById(R.id.toolbar);
+        H2CO3ToolBar toolBar = installDialog.findViewById(org.koishi.launcher.h2co3.resources.R.id.toolbar);
         toolBar.setTitle(getString(org.koishi.launcher.h2co3.resources.R.string.title_install_runtime));
         boatProgress = installDialog.findViewById(R.id.boat_progress);
         keyboardProgress = installDialog.findViewById(R.id.keyboard_progress);
@@ -202,8 +199,7 @@ public class WelcomeActivity extends H2CO3Activity {
                 this.runOnUiThread(() -> {
                     boatState.setVisibility(View.VISIBLE);
                     boatProgress.setVisibility(View.GONE);
-                    refreshDrawables();
-                    check();
+                    checkInstallations();
                 });
             }).start();
         }
@@ -220,8 +216,7 @@ public class WelcomeActivity extends H2CO3Activity {
                 this.runOnUiThread(() -> {
                     keyboardState.setVisibility(View.VISIBLE);
                     keyboardProgress.setVisibility(View.GONE);
-                    refreshDrawables();
-                    check();
+                    checkInstallations();
                 });
             }).start();
         }
@@ -238,8 +233,7 @@ public class WelcomeActivity extends H2CO3Activity {
                 this.runOnUiThread(() -> {
                     java8State.setVisibility(View.VISIBLE);
                     java8Progress.setVisibility(View.GONE);
-                    refreshDrawables();
-                    check();
+                    checkInstallations();
                 });
             }).start();
         }
@@ -261,11 +255,15 @@ public class WelcomeActivity extends H2CO3Activity {
                 this.runOnUiThread(() -> {
                     java17State.setVisibility(View.VISIBLE);
                     java17Progress.setVisibility(View.GONE);
-                    refreshDrawables();
-                    check();
+                    checkInstallations();
                 });
             }).start();
         }
+    }
+
+    private void checkInstallations() {
+        refreshDrawables();
+        check();
     }
 
     @Override

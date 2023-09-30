@@ -61,10 +61,6 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.webkit:webkit:1.7.0-alpha03'
 
-    // Apache Commons
-    implementation 'org.apache.commons:commons-text:1.10.0'
-    implementation 'commons-io:commons-io:20030203.000550'
-
     // Activity Permissions
     implementation 'com.github.getActivity:XXPermissions:16.8'
 
@@ -101,9 +97,6 @@ dependencies {
 
     // GreenRobot EventBus
     implementation "org.greenrobot:eventbus:3.3.1"
-
-    // Commons IO
-    implementation 'commons-io:commons-io:2.11.0'
 
     // Billing Client
     implementation 'com.android.billingclient:billing:5.1.0'

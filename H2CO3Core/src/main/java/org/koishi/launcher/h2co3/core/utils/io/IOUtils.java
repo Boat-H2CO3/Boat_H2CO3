@@ -1,6 +1,10 @@
 package org.koishi.launcher.h2co3.core.utils.io;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 
 /**
@@ -52,7 +56,7 @@ public final class IOUtils {
     }
 
     public static String readFullyAsString(InputStream stream, Charset charset) throws IOException {
-        return readFully(stream).toString(charset);
+        return readFully(stream).toString(charset.name());
     }
 
     public static void write(String text, OutputStream outputStream) throws IOException {

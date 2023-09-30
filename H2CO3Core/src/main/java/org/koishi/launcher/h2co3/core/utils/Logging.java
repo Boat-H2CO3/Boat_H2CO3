@@ -1,7 +1,6 @@
 package org.koishi.launcher.h2co3.core.utils;
 
 import org.apache.commons.io.IOUtils;
-import org.koishi.launcher.h2co3.core.utils.StringUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -62,7 +61,7 @@ public final class Logging {
             fileHandler.setEncoding("UTF-8");
             LOG.addHandler(fileHandler);
         } catch (IOException e) {
-            System.err.println("Unable to create boat.log\n" + StringUtils.getStackTrace(e));
+            System.err.println("Unable to create fcl.log\n" + StringUtils.getStackTrace(e));
         }
 
         ConsoleHandler consoleHandler = new ConsoleHandler();

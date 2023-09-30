@@ -404,7 +404,7 @@ public final class FileUtils {
     }
 
     public static boolean makeFile(File file) {
-        return makeDirectory(file.getAbsoluteFile().getParentFile()) && (file.exists() || Lang.test(file::createNewFile));
+        return makeDirectory(Objects.requireNonNull(file.getAbsoluteFile().getParentFile())) && (file.exists() || Lang.test(file::createNewFile));
     }
 
     public static List<File> listFilesByExtension(File file, String extension) {
