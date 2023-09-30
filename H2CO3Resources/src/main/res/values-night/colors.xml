@@ -38,12 +38,6 @@
 
     <color name="app_green_normal">#96D7BE</color>
     <color name="app_blue_normal">#FFADEAEA</color>
-    <color name="H2CO3_oldBackground">#333333</color>
-    <color name="H2CO3_oldBackground2">#4a4a4a</color>
-    <color name="H2CO3_oldButton">#0060f4</color>
-    <color name="H2CO3_red">#BA1B1B</color>
-    <color name="H2CO3_OldThemeTextColor">#E5E5E5</color>
-    <color name="H2CO3_ErrorTextColor">#FFDAD4</color>
 
 
 </resources>
