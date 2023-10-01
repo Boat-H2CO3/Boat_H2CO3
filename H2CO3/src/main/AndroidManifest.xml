@@ -20,7 +20,6 @@
         android:name="org.koishi.launcher.h2co3.application.H2CO3Application"
         android:allowBackup="true"
         android:allowNativeHeapPointerTagging="false"
-        android:extractNativeLibs="true"
         android:appCategory="game"
         android:icon="@drawable/ic_launcher"
         android:isGame="true"
