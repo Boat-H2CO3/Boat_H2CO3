@@ -32,7 +32,6 @@ jobs:
         run: |
           # Build the launcher
           gradle :H2CO3:assembleDebug
-          mv H2CO3/build/outputs/apk/debug/H2CO3-debug.apk out/app-debug.apk
 
       # 获取apk版本号
       - name: Get Version Name
@@ -47,4 +46,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app-debug
-          path: out/app-debug.*
+          path: /H2CO3/build/outputs/apk/debug/H2CO3-debug.*
