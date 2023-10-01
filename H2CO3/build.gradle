@@ -51,7 +51,7 @@ android {
     ndkVersion '25.2.9519653'
 }
 
-task upgradeVersion {
+tasks.register('upgradeVersion') {
     group 'help'
     description '构建新版本'
     doLast {
