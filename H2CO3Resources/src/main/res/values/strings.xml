@@ -22,7 +22,7 @@
     <string name="welcome_permission_hint">Boat_H2CO3 needs some necessary permissions to ensure its normal operation.</string>
 
     <string name="splash_runtime_boat" translatable="false">Boat Library</string>
-    <string name="splash_control_keyboard" translatable="false">Default Keyboard</string>
+    <string name="splash_control_h2co3_app" translatable="false">H2CO3 Library</string>
     <string name="splash_runtime_java8" translatable="false">JRE 8</string>
     <string name="splash_runtime_java17" translatable="false">JRE 17</string>
 </resources>

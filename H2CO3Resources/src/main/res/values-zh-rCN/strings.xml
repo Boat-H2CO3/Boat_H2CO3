@@ -3,7 +3,7 @@
     <string name="title_home">主页</string>
     <string name="title_directory">目录管理</string>
     <string name="title_manage">更多</string>
-    <string name="title_install_runtime">Runtime is installing</string>
+    <string name="title_install_runtime">正在安装运行库</string>
     <string name="title_warn">警告</string>
 
     <string name="app_restart">重新启动</string>

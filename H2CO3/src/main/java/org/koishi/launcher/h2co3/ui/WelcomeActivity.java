@@ -34,16 +34,17 @@ import java.util.Locale;
 public class WelcomeActivity extends H2CO3Activity {
 
     private boolean boat = false;
+    private boolean h2co3_app = false;
     private boolean java8 = false;
     private boolean java17 = false;
-    private boolean keyboard = false;
+
     private H2CO3MessageDialog permissionDialog;
     private ProgressBar boatProgress;
-    private ProgressBar keyboardProgress;
+    private ProgressBar h2co3AppProgress;
     private ProgressBar java8Progress;
     private ProgressBar java17Progress;
     private ImageView boatState;
-    private ImageView keyboardState;
+    private ImageView h2co3AppState;
     private ImageView java8State;
     private ImageView java17State;
     private boolean installing = false;
@@ -68,12 +69,12 @@ public class WelcomeActivity extends H2CO3Activity {
         H2CO3ToolBar toolBar = installDialog.findViewById(org.koishi.launcher.h2co3.resources.R.id.toolbar);
         toolBar.setTitle(getString(org.koishi.launcher.h2co3.resources.R.string.title_install_runtime));
         boatProgress = installDialog.findViewById(R.id.boat_progress);
-        keyboardProgress = installDialog.findViewById(R.id.keyboard_progress);
+        h2co3AppProgress = installDialog.findViewById(R.id.h2co3_app_progress);
         java8Progress = installDialog.findViewById(R.id.java8_progress);
         java17Progress = installDialog.findViewById(R.id.java17_progress);
 
         boatState = installDialog.findViewById(R.id.boat_state);
-        keyboardState = installDialog.findViewById(R.id.keyboard_state);
+        h2co3AppState = installDialog.findViewById(R.id.h2co3_app_state);
         java8State = installDialog.findViewById(R.id.java8_state);
         java17State = installDialog.findViewById(R.id.java17_state);
 
@@ -134,7 +135,7 @@ public class WelcomeActivity extends H2CO3Activity {
         boat = isLatest(CHTools.BOAT_LIBRARY_DIR, "/assets/app_runtime/boat");
         java8 = isLatest(CHTools.JAVA_8_PATH, "/assets/app_runtime/jre_8");
         java17 = isLatest(CHTools.JAVA_17_PATH, "/assets/app_runtime/jre_17");
-        keyboard = isLatest(CHTools.CONTROLLER_DIR, "/assets/keyboards");
+        h2co3_app = isLatest(CHTools.H2CO3_LIBRARY_DIR, "/assets/h2co3");
     }
 
     private boolean isLatest(String dir, String path) {
@@ -153,14 +154,14 @@ public class WelcomeActivity extends H2CO3Activity {
             stateDone.setTint(Color.GRAY);
         }
 
-        boatState.setBackground(stateDone);
-        keyboardState.setBackground(keyboard ? stateDone : stateUpdate);
+        boatState.setBackground(boat ? stateDone : stateUpdate);
+        h2co3AppState.setBackground(h2co3_app ? stateDone : stateUpdate);
         java8State.setBackground(java8 ? stateDone : stateUpdate);
         java17State.setBackground(java17 ? stateDone : stateUpdate);
     }
 
     private boolean isLatest() {
-        return boat && java8 && java17 && keyboard;
+        return boat && java8 && java17 && h2co3_app;
     }
 
     private void check() {
@@ -170,46 +171,70 @@ public class WelcomeActivity extends H2CO3Activity {
     }
 
     private void install() {
-        if (installing) {
+        if (installing)
             return;
-        }
-        installing = true;
-        boolean needInstallBoat = !boat;
-        boolean needInstallKeyboard = !keyboard;
-        boolean needInstallJava8 = !java8;
-        boolean needInstallJava17 = !java17;
 
-        Thread installThread = new Thread(() -> {
-            if (needInstallBoat) {
+        installing = true;
+        if (!boat) {
+            boatState.setVisibility(View.GONE);
+            boatProgress.setVisibility(View.VISIBLE);
+            new Thread(() -> {
                 try {
-                    RuntimeUtils.install(this, CHTools.BOAT_LIBRARY_DIR, "app_runtime/boat");
+                    RuntimeUtils.install(WelcomeActivity.this, CHTools.BOAT_LIBRARY_DIR, "app_runtime/boat");
                     boat = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-
-            if (needInstallKeyboard) {
+                WelcomeActivity.this.runOnUiThread(() -> {
+                    boatState.setVisibility(View.VISIBLE);
+                    boatProgress.setVisibility(View.GONE);
+                    refreshDrawables();
+                    check();
+                });
+            }).start();
+        }
+        if (!h2co3_app) {
+            h2co3AppState.setVisibility(View.GONE);
+            h2co3AppProgress.setVisibility(View.VISIBLE);
+            new Thread(() -> {
                 try {
-                    RuntimeUtils.install(this, CHTools.CONTROLLER_DIR, "keyboards");
-                    keyboard = true;
+                    RuntimeUtils.install(WelcomeActivity.this, CHTools.H2CO3_LIBRARY_DIR, "h2co3");
+                    h2co3_app = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-
-            if (needInstallJava8) {
+                WelcomeActivity.this.runOnUiThread(() -> {
+                    h2co3AppState.setVisibility(View.VISIBLE);
+                    h2co3AppProgress.setVisibility(View.GONE);
+                    refreshDrawables();
+                    check();
+                });
+            }).start();
+        }
+        if (!java8) {
+            java8State.setVisibility(View.GONE);
+            java8Progress.setVisibility(View.VISIBLE);
+            new Thread(() -> {
                 try {
-                    RuntimeUtils.installJava(this, CHTools.JAVA_8_PATH, "app_runtime/jre_8");
+                    RuntimeUtils.installJava(WelcomeActivity.this, CHTools.JAVA_8_PATH, "app_runtime/jre_8");
                     java8 = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-
-            if (needInstallJava17) {
+                WelcomeActivity.this.runOnUiThread(() -> {
+                    java8State.setVisibility(View.VISIBLE);
+                    java8Progress.setVisibility(View.GONE);
+                    refreshDrawables();
+                    check();
+                });
+            }).start();
+        }
+        if (!java17) {
+            java17State.setVisibility(View.GONE);
+            java17Progress.setVisibility(View.VISIBLE);
+            new Thread(() -> {
                 try {
-                    RuntimeUtils.installJava(this, CHTools.JAVA_17_PATH, "app_runtime/jre_17");
+                    RuntimeUtils.installJava(WelcomeActivity.this, CHTools.JAVA_17_PATH, "app_runtime/jre_17");
                     if (!LocaleUtils.getSystemLocale().getDisplayName().equals(Locale.CHINA.getDisplayName())) {
                         FileUtils.writeText(new File(CHTools.JAVA_17_PATH + "/resolv.conf"), "nameserver 1.1.1.1\n" + "nameserver 1.0.0.1");
                     } else {
@@ -219,39 +244,14 @@ public class WelcomeActivity extends H2CO3Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-
-            runOnUiThread(() -> {
-                if (needInstallBoat) {
-                    boatState.setVisibility(View.VISIBLE);
-                    boatProgress.setVisibility(View.GONE);
-                }
-                if (needInstallKeyboard) {
-                    keyboardState.setVisibility(View.VISIBLE);
-                    keyboardProgress.setVisibility(View.GONE);
-                }
-                if (needInstallJava8) {
-                    java8State.setVisibility(View.VISIBLE);
-                    java8Progress.setVisibility(View.GONE);
-                }
-                if (needInstallJava17) {
+                WelcomeActivity.this.runOnUiThread(() -> {
                     java17State.setVisibility(View.VISIBLE);
                     java17Progress.setVisibility(View.GONE);
-                }
-                checkInstallations();
-            });
-        });
-
-        installThread.start();
-
-        if (!needInstallBoat && !needInstallKeyboard && !needInstallJava8 && !needInstallJava17) {
-            checkInstallations();
+                    refreshDrawables();
+                    check();
+                });
+            }).start();
         }
-    }
-
-    private void checkInstallations() {
-        refreshDrawables();
-        check();
     }
 
     @Override

@@ -45,7 +45,7 @@
                         android:layout_gravity="center"
                         android:indeterminate="true"
                         android:layout_marginStart="@dimen/app_10dp"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/boat_state"
@@ -79,16 +79,16 @@
                     android:orientation="horizontal">
 
                     <ProgressBar
-                        android:id="@+id/keyboard_progress"
+                        android:id="@+id/h2co3_app_progress"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:indeterminate="true"
                         android:layout_marginStart="@dimen/app_10dp"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/keyboard_state"
+                        android:id="@+id/h2co3_app_state"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -99,7 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@string/splash_control_keyboard" />
+                        android:text="@string/splash_control_h2co3_app" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </com.google.android.material.card.MaterialCardView>
@@ -125,7 +125,7 @@
                         android:layout_gravity="center"
                         android:indeterminate="true"
                         android:layout_marginStart="@dimen/app_10dp"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/java8_state"
@@ -166,7 +166,7 @@
                         android:layout_gravity="center"
                         android:indeterminate="true"
                         android:layout_marginStart="@dimen/app_10dp"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/java17_state"

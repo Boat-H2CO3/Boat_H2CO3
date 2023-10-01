@@ -32,7 +32,7 @@ public class CHTools {
 
     public static String FILES_DIR;
     public static String PLUGIN_DIR;
-    public static String CONTROLLER_DIR;
+    public static String H2CO3_LIBRARY_DIR;
 
     public static String MINECRAFT_DIR;
     public static String SHARED_COMMON_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FCL/.minecraft";
@@ -82,7 +82,7 @@ public class CHTools {
         JAVA_17_PATH = RUNTIME_DIR + "/jre_17";
         BOAT_LIBRARY_DIR = RUNTIME_DIR + "/boat";
         PLUGIN_DIR = RUNTIME_DIR + "/boat/plugin";
-        CONTROLLER_DIR = APP_DATA_PATH + "/keyboards";
+        H2CO3_LIBRARY_DIR = APP_DATA_PATH + "/h2co3";
 
         FILES_DIR = context.getFilesDir().getAbsolutePath();
 
@@ -101,7 +101,7 @@ public class CHTools {
         init(BOAT_LIBRARY_DIR);
         init(FILES_DIR);
         init(PLUGIN_DIR);
-        init(CONTROLLER_DIR);
+        init(H2CO3_LIBRARY_DIR);
         init(MINECRAFT_DIR);
         init(APP_DATA_PATH);
         init(SHARED_COMMON_DIR);
