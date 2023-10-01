@@ -83,7 +83,7 @@ tasks.register('upgradeVersion') {
         def tag = "v${versionProps['versionName']}"
         cmdExecute("git pull")
         cmdExecute("git add version.properties")
-        cmdExecute("git commit -m \"版本号升级为：$tag\"")
+        cmdExecute("git commit -a -m \"版本号升级为：$tag\"")
         cmdExecute("git push origin")
         cmdExecute("git tag $tag")
         cmdExecute("git push origin $tag")
