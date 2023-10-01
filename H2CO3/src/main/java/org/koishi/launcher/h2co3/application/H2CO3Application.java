@@ -10,8 +10,12 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import org.koishi.launcher.h2co3.core.utils.Logging;
+import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
 import org.koishi.launcher.h2co3.resources.R;
 import org.koishi.launcher.h2co3.ui.CrashActivity;
+
+import java.io.File;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
@@ -48,7 +52,7 @@ public class H2CO3Application extends Application implements Application.Activit
     public void onActivityStarted(@NonNull Activity p1) {
         // TODO: Implement this method
         H2CO3Application.mCurrentActivity = p1;
-        System.out.println(H2CO3Application.mCurrentActivity);
+        Logging.start(new File(CHTools.LOG_DIR, "logs").toPath());
     }
 
     @Override

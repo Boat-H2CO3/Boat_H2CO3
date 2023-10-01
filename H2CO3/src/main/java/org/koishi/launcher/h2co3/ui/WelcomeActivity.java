@@ -19,7 +19,6 @@ import com.hjq.permissions.XXPermissions;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.core.utils.FileUtils;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
-import org.koishi.launcher.h2co3.core.utils.Logging;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
 import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
 import org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar;
@@ -58,7 +57,6 @@ public class WelcomeActivity extends H2CO3Activity {
 
     private void init() {
         CHTools.loadPaths(this);
-        Logging.start(new File(CHTools.LOG_DIR, "logs").toPath());
         installRuntime();
     }
 

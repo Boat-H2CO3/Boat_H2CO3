@@ -52,7 +52,7 @@ public final class Pbuffer extends DrawableGL {
     /**
      * Indicates that Pbuffers can be created.
      */
-    public static final int PBUFFER_SUPPORTED = 1 << 0;
+    public static final int PBUFFER_SUPPORTED = 1;
 
     /**
      * Indicates that Pbuffers can be used as render-textures.

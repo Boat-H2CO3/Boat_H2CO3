@@ -294,16 +294,15 @@ public class Vector3f extends Vector implements Serializable, ReadableVector3f, 
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        StringBuilder sb = new StringBuilder(64);
 
-        sb.append("Vector3f[");
-        sb.append(x);
-        sb.append(", ");
-        sb.append(y);
-        sb.append(", ");
-        sb.append(z);
-        sb.append(']');
-        return sb.toString();
+        String sb = "Vector3f[" +
+                x +
+                ", " +
+                y +
+                ", " +
+                z +
+                ']';
+        return sb;
     }
 
     /**
@@ -360,8 +359,6 @@ public class Vector3f extends Vector implements Serializable, ReadableVector3f, 
         if (getClass() != obj.getClass()) return false;
         Vector3f other = (Vector3f) obj;
 
-        if (x == other.x && y == other.y && z == other.z) return true;
-
-        return false;
+        return x == other.x && y == other.y && z == other.z;
     }
 }

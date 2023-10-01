@@ -5,12 +5,20 @@
  */
 package org.lwjgl.system.libc;
 
-import java.nio.*;
+import static org.lwjgl.system.Checks.CHECKS;
+import static org.lwjgl.system.Checks.check;
+import static org.lwjgl.system.MemoryUtil.memAddress;
 
-import org.lwjgl.system.*;
+import org.lwjgl.system.CustomBuffer;
+import org.lwjgl.system.Library;
+import org.lwjgl.system.NativeType;
 
-import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import java.nio.ByteBuffer;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+import java.nio.LongBuffer;
+import java.nio.ShortBuffer;
 
 /**
  * Native bindings to string.h.
@@ -332,7 +340,7 @@ public class LibCString {
      */
     @NativeType("void *")
     public static long memset(@NativeType("void *") byte[] dest, int c) {
-        return nmemset(dest, c, Integer.toUnsignedLong(dest.length) << 0);
+        return nmemset(dest, c, Integer.toUnsignedLong(dest.length));
     }
 
     /**
@@ -413,7 +421,7 @@ public class LibCString {
         if (CHECKS) {
             check(dest, src.length);
         }
-        return nmemcpy(dest, src, Integer.toUnsignedLong(src.length) << 0);
+        return nmemcpy(dest, src, Integer.toUnsignedLong(src.length));
     }
 
     /**
@@ -509,7 +517,7 @@ public class LibCString {
         if (CHECKS) {
             check(dest, src.length);
         }
-        return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 0);
+        return nmemmove(dest, src, Integer.toUnsignedLong(src.length));
     }
 
     /**

@@ -33,12 +33,11 @@ package org.lwjgl.util;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
@@ -58,7 +57,7 @@ public class XPMFile {
     /**
      * Array of bytes (RGBA)
      */
-    private byte bytes[];
+    private byte[] bytes;
 
     private static final int WIDTH = 0;
 
@@ -84,7 +83,7 @@ public class XPMFile {
      * @throws IOException If any IO exceptions occurs while reading file
      */
     public static XPMFile load(String file) throws IOException {
-        return load(new FileInputStream(new File(file)));
+        return load(Files.newInputStream(new File(file).toPath()));
     }
 
     /**
@@ -210,6 +209,28 @@ public class XPMFile {
     }
 
     /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println("usage:\nXPMFile <file>");
+        }
+
+        try {
+            String out = args[0].substring(0, args[0].indexOf(".")) + ".raw";
+            XPMFile file = XPMFile.load(args[0]);
+            BufferedOutputStream bos = new BufferedOutputStream(
+                    Files.newOutputStream(new File(out).toPath()));
+            bos.write(file.getBytes());
+            bos.close();
+
+            // showResult(file.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Parses an Image line into its byte values
      *
      * @param line   Line of chars to parse
@@ -232,32 +253,10 @@ public class XPMFile {
             int color = colors.get(key);
             bytes[offset + (i * 4)] = (byte) ((color & 0x00ff0000) >> 16);
             bytes[offset + ((i * 4) + 1)] = (byte) ((color & 0x0000ff00) >> 8);
-            bytes[offset + ((i * 4) + 2)] = (byte) ((color & 0x000000ff) >> 0); // looks
+            bytes[offset + ((i * 4) + 2)] = (byte) ((color & 0x000000ff)); // looks
             // better
             // :)
             bytes[offset + ((i * 4) + 3)] = (byte) 0xff; // always 0xff alpha
-        }
-    }
-
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("usage:\nXPMFile <file>");
-        }
-
-        try {
-            String out = args[0].substring(0, args[0].indexOf(".")) + ".raw";
-            XPMFile file = XPMFile.load(args[0]);
-            BufferedOutputStream bos = new BufferedOutputStream(
-                    new FileOutputStream(new File(out)));
-            bos.write(file.getBytes());
-            bos.close();
-
-            // showResult(file.getBytes());
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 	/*

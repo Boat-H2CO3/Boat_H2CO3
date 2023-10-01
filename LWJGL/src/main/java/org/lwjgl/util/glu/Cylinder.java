@@ -186,21 +186,12 @@ public class Cylinder extends Quadric {
                         x = sin((i * da));
                         y = cos((i * da));
                     }
-                    if (nsign == 1.0f) {
-                        normal3f((x * nsign), (y * nsign), (nz * nsign));
-                        TXTR_COORD(s, t);
-                        glVertex3f((x * r), (y * r), z);
-                        normal3f((x * nsign), (y * nsign), (nz * nsign));
-                        TXTR_COORD(s, t + dt);
-                        glVertex3f((x * (r + dr)), (y * (r + dr)), (z + dz));
-                    } else {
-                        normal3f(x * nsign, y * nsign, nz * nsign);
-                        TXTR_COORD(s, t);
-                        glVertex3f((x * r), (y * r), z);
-                        normal3f(x * nsign, y * nsign, nz * nsign);
-                        TXTR_COORD(s, t + dt);
-                        glVertex3f((x * (r + dr)), (y * (r + dr)), (z + dz));
-                    }
+                    normal3f((x * nsign), (y * nsign), (nz * nsign));
+                    TXTR_COORD(s, t);
+                    glVertex3f((x * r), (y * r), z);
+                    normal3f((x * nsign), (y * nsign), (nz * nsign));
+                    TXTR_COORD(s, t + dt);
+                    glVertex3f((x * (r + dr)), (y * (r + dr)), (z + dz));
                     s += ds;
                 } // for slices
                 glEnd();

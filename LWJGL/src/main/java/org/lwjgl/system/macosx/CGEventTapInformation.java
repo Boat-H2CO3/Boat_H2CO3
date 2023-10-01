@@ -5,15 +5,23 @@
  */
 package org.lwjgl.system.macosx;
 
-import javax.annotation.*;
+import static org.lwjgl.system.MemoryStack.stackGet;
+import static org.lwjgl.system.MemoryUtil.NULL;
+import static org.lwjgl.system.MemoryUtil.memAddress;
+import static org.lwjgl.system.MemoryUtil.memGetAddress;
+import static org.lwjgl.system.MemoryUtil.nmemAllocChecked;
+import static org.lwjgl.system.MemoryUtil.nmemCallocChecked;
 
-import java.nio.*;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.system.MemoryStack;
+import org.lwjgl.system.NativeResource;
+import org.lwjgl.system.NativeType;
+import org.lwjgl.system.Struct;
+import org.lwjgl.system.StructBuffer;
 
-import org.lwjgl.*;
-import org.lwjgl.system.*;
+import java.nio.ByteBuffer;
 
-import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.MemoryStack.*;
+import javax.annotation.Nullable;
 
 /**
  * The structure used to report information about event taps.
@@ -198,16 +206,10 @@ public class CGEventTapInformation extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code CGEventTapInformation} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
     public static CGEventTapInformation malloc() {
         return wrap(CGEventTapInformation.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code CGEventTapInformation} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
     public static CGEventTapInformation calloc() {
         return wrap(CGEventTapInformation.class, nmemCallocChecked(1, SIZEOF));
     }
@@ -236,7 +238,7 @@ public class CGEventTapInformation extends Struct implements NativeResource {
     }
 
     /**
-     * Returns a new {@link Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     * Returns a new {@link Buffer} instance allocated with . The instance must be explicitly freed.
      *
      * @param capacity the buffer capacity
      */
@@ -244,11 +246,6 @@ public class CGEventTapInformation extends Struct implements NativeResource {
         return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
-    /**
-     * Returns a new {@link Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
     public static Buffer calloc(int capacity) {
         return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }

@@ -412,7 +412,7 @@ public class LWJGLUtil {
 		}
 
 		//create needed string array
-		return possible_paths.toArray(new String[possible_paths.size()]);
+		return possible_paths.toArray(new String[0]);
 	}
 
 	static void execPrivileged(final String[] cmd_array) throws Exception {

@@ -68,7 +68,7 @@ final class LWJGLKeyboard extends Keyboard {
                 throw new RuntimeException(e);
             }
         }
-        return components.toArray(new Component[components.size()]);
+        return components.toArray(new Component[0]);
     }
 
     public synchronized void pollDevice() throws IOException {

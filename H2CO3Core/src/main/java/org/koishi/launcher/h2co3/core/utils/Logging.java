@@ -1,10 +1,7 @@
 package org.koishi.launcher.h2co3.core.utils;
 
-import org.apache.commons.io.IOUtils;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
@@ -16,11 +13,11 @@ import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
-import java.util.logging.StreamHandler;
+import java.util.logging.SimpleFormatter;
 
 public final class Logging {
     public static final Logger LOG = Logger.getLogger("Boat_H2CO3");
-    private static final ByteArrayOutputStream storedLogs = new ByteArrayOutputStream(IOUtils.DEFAULT_BUFFER_SIZE);
+    private static final ByteArrayOutputStream storedLogs = new ByteArrayOutputStream();
     private static volatile String[] accessTokens = new String[0];
 
     private Logging() {
@@ -54,34 +51,13 @@ public final class Logging {
                 Files.delete(logFolder);
 
             Files.createDirectories(logFolder);
-            FileHandler fileHandler = new FileHandler(logFolder.resolve("client_output.txt").toAbsolutePath().toString());
-            fileHandler.setLevel(Level.FINEST);
-            fileHandler.setFormatter(DefaultFormatter.INSTANCE);
-            fileHandler.setEncoding("UTF-8");
+            FileHandler fileHandler = new FileHandler(logFolder.resolve("client_output.log").toAbsolutePath().toString());
+            fileHandler.setLevel(Level.ALL);
+            fileHandler.setFormatter(new SimpleFormatter());
             LOG.addHandler(fileHandler);
         } catch (IOException e) {
             System.err.println("Unable to create client_output.log\n" + StringUtils.getStackTrace(e));
         }
-
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(DefaultFormatter.INSTANCE);
-        consoleHandler.setLevel(Level.FINER);
-        LOG.addHandler(consoleHandler);
-
-        StreamHandler streamHandler = new StreamHandler(storedLogs, DefaultFormatter.INSTANCE) {
-            @Override
-            public synchronized void publish(LogRecord record) {
-                super.publish(record);
-                flush();
-            }
-        };
-        try {
-            streamHandler.setEncoding("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        streamHandler.setLevel(Level.ALL);
-        LOG.addHandler(streamHandler);
     }
 
     public static void initForTest() {
@@ -89,7 +65,7 @@ public final class Logging {
         LOG.setUseParentHandlers(false);
 
         ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(DefaultFormatter.INSTANCE);
+        consoleHandler.setFormatter(new DefaultFormatter());
         consoleHandler.setLevel(Level.FINER);
         LOG.addHandler(consoleHandler);
     }
@@ -104,21 +80,27 @@ public final class Logging {
 
     private static final class DefaultFormatter extends Formatter {
 
-        static final DefaultFormatter INSTANCE = new DefaultFormatter();
         private static final MessageFormat format = new MessageFormat("[{0,date,HH:mm:ss}] [{1}.{2}/{3}] {4}\n");
 
         @Override
-        public String format(LogRecord record) {
-            String log = format.format(new Object[]{
+        public synchronized String format(LogRecord record) {
+            StringBuilder sb = new StringBuilder(128);
+            MessageFormat.format(Arrays.toString(new Object[]{
                     new Date(record.getMillis()),
                     record.getSourceClassName(), record.getSourceMethodName(), record.getLevel().getName(),
                     record.getMessage()
-            }, new StringBuffer(128), null).toString();
+            }), sb, null);
             if (record.getThrown() != null)
-                log += StringUtils.getStackTrace(record.getThrown());
+                sb.append(StringUtils.getStackTrace(record.getThrown()));
 
-            return log;
+            String formattedLog = sb.toString();
+            try {
+                storedLogs.write(formattedLog.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            return formattedLog;
         }
-
     }
 }

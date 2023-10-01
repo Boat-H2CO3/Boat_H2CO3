@@ -194,13 +194,7 @@ class Sweep {
 
 
     static void DeleteRegion(GLUtessellatorImpl tess, ActiveRegion reg) {
-        if (reg.fixUpperEdge) {
-            /* It was created with zero winding number, so it better be
-             * deleted with zero winding number (ie. it better not get merged
-             * with a real edge).
-             */
-            assert (reg.eUp.winding == 0);
-        }
+        assert !reg.fixUpperEdge || (reg.eUp.winding == 0);
         reg.eUp.activeRegion = null;
         Dict.dictDelete(tess.dict, reg.nodeUp); /* __gl_dictListDelete */
     }

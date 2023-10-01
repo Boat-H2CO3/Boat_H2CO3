@@ -179,7 +179,7 @@ public final class StringUtils {
     public static boolean containsChinese(String str) {
         for (int i = 0; i < str.length(); i++) {
             char ch = str.charAt(i);
-            if (ch >= '\u4e00' && ch <= '\u9fa5')
+            if (ch >= '一' && ch <= '龥')
                 return true;
         }
         return false;
@@ -204,10 +204,10 @@ public final class StringUtils {
     }
 
     public static String parseColorEscapes(String original) {
-        if (original.indexOf('\u00A7') < 0)
+        if (original.indexOf('§') < 0)
             return original;
 
-        return original.replaceAll("\u00A7[0-9a-gklmnor]", "");
+        return original.replaceAll("§[0-9a-gklmnor]", "");
     }
 
     public static String parseEscapeSequence(String str) {

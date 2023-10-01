@@ -38,7 +38,6 @@ public class JsonGenerator {
      * @param value the value used to parse
      * @return the json value returns raw type of {@link JsonValue}
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T> JsonValue toJson(T value) {
         JsonValue jsonValue;
         if (value == null) {
@@ -147,7 +146,6 @@ public class JsonGenerator {
      * @param clazz     the clazz is used to determine object in {@link List}
      * @return T is a list with cast {@link Class<T>}
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public <T extends List<K>, K> T fromJson(JsonValue jsonValue, Class<T> listClazz, Class<K> clazz) {
         return listClazz.cast(fromJson(null, jsonValue, clazz));
     }

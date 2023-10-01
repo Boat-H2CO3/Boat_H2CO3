@@ -85,8 +85,10 @@ DEFINE_CB_HANDLER(S, jshort,   's', Short)
 DEFINE_CB_HANDLER(I, jint,     'i', Int)
 DEFINE_CB_HANDLER(J, jlong,    'l', Long)
 DEFINE_CB_HANDLER(N, long,     'j', Long)
-DEFINE_CB_HANDLER(F, jfloat,   'f', Float)
-DEFINE_CB_HANDLER(D, jdouble,  'd', Double)
+DEFINE_CB_HANDLER(F, jfloat, 'f', Float)
+
+DEFINE_CB_HANDLER(D, jdouble, 'd', Double)
+
 DEFINE_CB_HANDLER(P, intptr_t, 'p', Long)
 
 EXTERN_C_ENTER
@@ -95,11 +97,13 @@ EXTERN_C_ENTER
     javaCallback##Type = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, Index)); \
     callbacks[Index] = (uintptr_t)&cbHandler##Type;
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_Callback_getNativeCallbacks(JNIEnv *env, jclass clazz, jobjectArray methods, jlong callbacksAddress) {
-    uintptr_t* callbacks = (uintptr_t *)(intptr_t)callbacksAddress;
+JNIEXPORT jlong JNICALL
+Java_org_lwjgl_system_Callback_getNativeCallbacks(JNIEnv *env, jclass clazz, jobjectArray methods,
+                                                  jlong callbacksAddress) {
+    uintptr_t *callbacks = (uintptr_t *) (intptr_t) callbacksAddress;
 
     UNUSED_PARAMS(env, clazz)
-    
+
     SETUP_CALLBACK(0, V)
     SETUP_CALLBACK(1, Z)
     SETUP_CALLBACK(2, B)
