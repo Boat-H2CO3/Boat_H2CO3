@@ -131,26 +131,15 @@ public class WelcomeActivity extends H2CO3Activity {
     }
 
     private void initState() {
-        try {
-            boat = RuntimeUtils.isLatest(CHTools.BOAT_LIBRARY_DIR, "/assets/app_runtime/boat");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            java8 = RuntimeUtils.isLatest(CHTools.JAVA_8_PATH, "/assets/app_runtime/jre_8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            java17 = RuntimeUtils.isLatest(CHTools.JAVA_17_PATH, "/assets/app_runtime/jre_17");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            keyboard = RuntimeUtils.isLatest(CHTools.CONTROLLER_DIR, "/assets/keyboards");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        boat = isLatest(CHTools.BOAT_LIBRARY_DIR, "/assets/app_runtime/boat");
+        java8 = isLatest(CHTools.JAVA_8_PATH, "/assets/app_runtime/jre_8");
+        java17 = isLatest(CHTools.JAVA_17_PATH, "/assets/app_runtime/jre_17");
+        keyboard = isLatest(CHTools.CONTROLLER_DIR, "/assets/keyboards");
+    }
+
+    private boolean isLatest(String dir, String path) {
+        File file = new File(dir, path);
+        return file.exists();
     }
 
     private void refreshDrawables() {
@@ -176,69 +165,49 @@ public class WelcomeActivity extends H2CO3Activity {
 
     private void check() {
         if (isLatest()) {
-            this.enterLauncher();
+            enterLauncher();
         }
     }
 
     private void install() {
-        if (installing)
+        if (installing) {
             return;
+        }
         installing = true;
-        if (!boat) {
-            boatState.setVisibility(View.GONE);
-            boatProgress.setVisibility(View.VISIBLE);
-            new Thread(() -> {
+        boolean needInstallBoat = !boat;
+        boolean needInstallKeyboard = !keyboard;
+        boolean needInstallJava8 = !java8;
+        boolean needInstallJava17 = !java17;
+
+        Thread installThread = new Thread(() -> {
+            if (needInstallBoat) {
                 try {
                     RuntimeUtils.install(this, CHTools.BOAT_LIBRARY_DIR, "app_runtime/boat");
                     boat = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                this.runOnUiThread(() -> {
-                    boatState.setVisibility(View.VISIBLE);
-                    boatProgress.setVisibility(View.GONE);
-                    checkInstallations();
-                });
-            }).start();
-        }
-        if (!keyboard) {
-            keyboardState.setVisibility(View.GONE);
-            keyboardProgress.setVisibility(View.VISIBLE);
-            new Thread(() -> {
+            }
+
+            if (needInstallKeyboard) {
                 try {
                     RuntimeUtils.install(this, CHTools.CONTROLLER_DIR, "keyboards");
                     keyboard = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                this.runOnUiThread(() -> {
-                    keyboardState.setVisibility(View.VISIBLE);
-                    keyboardProgress.setVisibility(View.GONE);
-                    checkInstallations();
-                });
-            }).start();
-        }
-        if (!java8) {
-            java8State.setVisibility(View.GONE);
-            java8Progress.setVisibility(View.VISIBLE);
-            new Thread(() -> {
+            }
+
+            if (needInstallJava8) {
                 try {
                     RuntimeUtils.installJava(this, CHTools.JAVA_8_PATH, "app_runtime/jre_8");
                     java8 = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                this.runOnUiThread(() -> {
-                    java8State.setVisibility(View.VISIBLE);
-                    java8Progress.setVisibility(View.GONE);
-                    checkInstallations();
-                });
-            }).start();
-        }
-        if (!java17) {
-            java17State.setVisibility(View.GONE);
-            java17Progress.setVisibility(View.VISIBLE);
-            new Thread(() -> {
+            }
+
+            if (needInstallJava17) {
                 try {
                     RuntimeUtils.installJava(this, CHTools.JAVA_17_PATH, "app_runtime/jre_17");
                     if (!LocaleUtils.getSystemLocale().getDisplayName().equals(Locale.CHINA.getDisplayName())) {
@@ -250,12 +219,33 @@ public class WelcomeActivity extends H2CO3Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                this.runOnUiThread(() -> {
+            }
+
+            runOnUiThread(() -> {
+                if (needInstallBoat) {
+                    boatState.setVisibility(View.VISIBLE);
+                    boatProgress.setVisibility(View.GONE);
+                }
+                if (needInstallKeyboard) {
+                    keyboardState.setVisibility(View.VISIBLE);
+                    keyboardProgress.setVisibility(View.GONE);
+                }
+                if (needInstallJava8) {
+                    java8State.setVisibility(View.VISIBLE);
+                    java8Progress.setVisibility(View.GONE);
+                }
+                if (needInstallJava17) {
                     java17State.setVisibility(View.VISIBLE);
                     java17Progress.setVisibility(View.GONE);
-                    checkInstallations();
-                });
-            }).start();
+                }
+                checkInstallations();
+            });
+        });
+
+        installThread.start();
+
+        if (!needInstallBoat && !needInstallKeyboard && !needInstallJava8 && !needInstallJava17) {
+            checkInstallations();
         }
     }
 

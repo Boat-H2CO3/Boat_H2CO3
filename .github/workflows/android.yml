@@ -20,10 +20,10 @@ jobs:
           distribution: 'temurin'  # 使用 Temurin 发行版
           cache: gradle  # 缓存 Gradle
 
-      - name: Grant execute permission for gradlew  # 赋予 gradlew 执行权限
-        run: chmod +x gradlew
       - name: Gradle Building...  # 执行 Gradle 构建
-        run: ./gradlew build
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 8.1.1
       - name: Build Debug .apk  # 构建 Debug APK
         run: |
           # Build the launcher

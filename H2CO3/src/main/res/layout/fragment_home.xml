@@ -14,7 +14,7 @@
         android:paddingVertical="5dp">
 
         <com.google.android.material.card.MaterialCardView
-            style="@style/Theme.H2CO3.CardViewOutlined"
+            style="@style/Theme.H2CO3.CardViewElevated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
