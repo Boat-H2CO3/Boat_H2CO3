@@ -47,9 +47,6 @@ public final class Logging {
         });
 
         try {
-            if (Files.isRegularFile(logFolder))
-                Files.delete(logFolder);
-
             Files.createDirectories(logFolder);
             FileHandler fileHandler = new FileHandler(logFolder.resolve("client_output.log").toAbsolutePath().toString());
             fileHandler.setLevel(Level.ALL);

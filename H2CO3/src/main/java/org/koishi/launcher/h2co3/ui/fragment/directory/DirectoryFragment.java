@@ -14,7 +14,6 @@ public class DirectoryFragment extends H2CO3Fragment {
 
 
     View view;
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_directory, container, false);
 

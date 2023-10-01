@@ -27,10 +27,12 @@
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/Theme.H2CO3.DynamicColors"
         tools:targetApi="34">
         <activity
             android:name=".ui.WelcomeActivity"
+            tools:ignore="LockedOrientationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

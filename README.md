@@ -9,5 +9,4 @@
 本项目与衍生项目基于[BoatAPP](https://github.com/AOF-Dev/Boat)完成，所有相关修改请遵守GPL-3协议进行开源。
 
 # 状态
-
 [![Android CI](https://github.com/bilicainiaohh/Boat_H2CO3NewUI/actions/workflows/android.yml/badge.svg)](https://github.com/bilicainiaohh/Boat_H2CO3NewUI/actions/workflows/android.yml)

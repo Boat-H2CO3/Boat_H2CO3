@@ -9,17 +9,17 @@ public class H2CO3ToolBar extends MaterialToolbar {
 
     public H2CO3ToolBar(Context context) {
         super(context);
-        setTitleCentered(true);
+        setTitleCentered(false);
     }
 
     public H2CO3ToolBar(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setTitleCentered(true);
+        setTitleCentered(false);
     }
 
     public H2CO3ToolBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setTitleCentered(true);
+        setTitleCentered(false);
     }
 
     @Override

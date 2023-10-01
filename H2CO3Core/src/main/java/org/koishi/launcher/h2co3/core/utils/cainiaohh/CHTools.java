@@ -3,18 +3,15 @@ package org.koishi.launcher.h2co3.core.utils.cainiaohh;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 
-import androidx.annotation.NonNull;
-
+import org.json.JSONException;
 import org.json.JSONObject;
-import org.koishi.launcher.h2co3.core.utils.FileUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class CHTools {
 
@@ -33,6 +30,7 @@ public class CHTools {
     public static String FILES_DIR;
     public static String PLUGIN_DIR;
     public static String H2CO3_LIBRARY_DIR;
+    public static String H2CO3_SETTING_DIR;
 
     public static String MINECRAFT_DIR;
     public static String SHARED_COMMON_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FCL/.minecraft";
@@ -41,29 +39,6 @@ public class CHTools {
     public static String MULTIPLAYER_FIX_PATH;
     public static String APP_DATA_PATH;
     public static String PUBLIC_FILE_PATH;
-    public static String BOATCFG;
-    final ZipListener zipListener;
-    @SuppressLint("HandlerLeak")
-    private final Handler zipHandler = new Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 0) {
-                zipListener.onStart();
-            } else if (msg.what == 1) {
-                zipListener.onProgress((int) msg.obj);
-            } else if (msg.what == 2) {
-                zipListener.onFinish();
-            } else if (msg.what == 3) {
-                zipListener.onError((String) msg.obj);
-            }
-        }
-    };
-    int lastProgress = 0;
-
-    public CHTools(ZipListener zipListener) {
-        this.zipListener = zipListener;
-    }
 
     @SuppressLint("SdCardPath")
     public static void loadPaths(Context context) {
@@ -83,6 +58,7 @@ public class CHTools {
         BOAT_LIBRARY_DIR = RUNTIME_DIR + "/boat";
         PLUGIN_DIR = RUNTIME_DIR + "/boat/plugin";
         H2CO3_LIBRARY_DIR = APP_DATA_PATH + "/h2co3";
+        H2CO3_SETTING_DIR = APP_DATA_PATH + "/h2co3_setting";
 
         FILES_DIR = context.getFilesDir().getAbsolutePath();
 
@@ -91,7 +67,6 @@ public class CHTools {
         AUTHLIB_INJECTOR_PATH = PLUGIN_DIR + "/authlib-injector.jar";
         MULTIPLAYER_FIX_PATH = PLUGIN_DIR + "/MultiplayerFix.jar";
 
-        BOATCFG = PUBLIC_FILE_PATH + "/config.txt";
 
         init(LOG_DIR);
         init(CACHE_DIR);
@@ -102,11 +77,11 @@ public class CHTools {
         init(FILES_DIR);
         init(PLUGIN_DIR);
         init(H2CO3_LIBRARY_DIR);
+        init(H2CO3_SETTING_DIR);
         init(MINECRAFT_DIR);
         init(APP_DATA_PATH);
         init(SHARED_COMMON_DIR);
         init(PUBLIC_FILE_PATH);
-        init(BOATCFG);
     }
 
     private static boolean init(String path) {
@@ -116,148 +91,194 @@ public class CHTools {
         return true;
     }
 
-    /**************版本隔离核心代码************/
-    public static String H2CO3CfgPath() {
-        String h2co3Cfg = getBoatCfg("currentVersion", PUBLIC_FILE_PATH) + "/h2co3Cfg.json";
-        boolean exH2co3cfg = FileUtils.isFileExists(getBoatCfg("currentVersion", PUBLIC_FILE_PATH) + "/h2co3Cfg.json" );
-        if (exH2co3cfg){
-        }else {
-        }
-        String pdir = getExtraCfg("allVerLoad", "false", h2co3Cfg);
-        getBoatCfg("currentVersion", PUBLIC_FILE_PATH);
-        String H2CO3CfgPath;
-        if (pdir.equals("false")) {
-            H2CO3CfgPath = PUBLIC_FILE_PATH + "/h2co3Cfg.json";
-        } else {
-            H2CO3CfgPath = getBoatCfg("currentVersion", PUBLIC_FILE_PATH) + "/h2co3Cfg.json";
-        }
-        return H2CO3CfgPath;
+    public static boolean getConfigValue(String key, boolean defaultValue) {
+        return getConfigValue(key, defaultValue, boolean.class);
     }
 
-    //---------------------获取json的值---------------------
+    public static String getConfigValueString(String key, String defaultValue) {
+        return getConfigValue(key, defaultValue, String.class);
+    }
 
-    private static Boolean getCfgBoolean(String value, Boolean defaultValue, String dir) {
+    private static <T> T getConfigValue(String key, T defaultValue, Class<T> type) {
+        String globalConfigFilePath = getBoatValueString("currentVersion", H2CO3_SETTING_DIR) + "/config.cfg";
+        String configFilePath = globalConfigFilePath;
+
         try {
-            FileInputStream in = new FileInputStream(dir);
-            byte[] b = new byte[in.available()];
-            in.read(b);
-            in.close();
-            String str = new String(b);
-            JSONObject json = new JSONObject(str);
-            return json.getString(value).equals("true");
-        } catch (Exception e) {
-            System.out.println(e);
+            Path globalConfigPath = Paths.get(globalConfigFilePath);
+            if (!Files.exists(globalConfigPath)) {
+                Files.createDirectories(globalConfigPath.getParent());
+                Files.createFile(globalConfigPath);
+                JSONObject globalConfigJson = new JSONObject();
+                globalConfigJson.put("usesGlobal", false);
+                Files.write(globalConfigPath, globalConfigJson.toString().getBytes());
+            }
+
+            String globalConfigContent = new String(Files.readAllBytes(globalConfigPath));
+            JSONObject globalConfigJson = new JSONObject(globalConfigContent);
+
+            if (!globalConfigJson.optBoolean("usesGlobal", false)) {
+                configFilePath = getBoatValueString("currentVersion", H2CO3_SETTING_DIR) + "/config.cfg";
+                Path configPath = Paths.get(configFilePath);
+                if (!Files.exists(configPath)) {
+                    Files.createDirectories(configPath.getParent());
+                    Files.createFile(configPath);
+                    JSONObject defaultConfigJson = new JSONObject();
+                    defaultConfigJson.put(key, defaultValue);
+                    Files.write(configPath, defaultConfigJson.toString().getBytes());
+                    return defaultValue;
+                }
+            }
+
+            Path configPath = Paths.get(configFilePath);
+            if (!Files.exists(configPath)) {
+                throw new RuntimeException("Config file does not exist: " + configFilePath);
+            }
+
+            String configContent = new String(Files.readAllBytes(configPath));
+            JSONObject configJson = new JSONObject(configContent);
+
+            if (!configJson.has(key)) {
+                configJson.put(key, defaultValue);
+                Files.write(configPath, configJson.toString().getBytes());
+                return defaultValue;
+            }
+
+            if (type == boolean.class) {
+                return type.cast(configJson.optBoolean(key));
+            } else if (type == String.class) {
+                return type.cast(configJson.optString(key));
+            } else {
+                throw new IllegalArgumentException("Unsupported type: " + type);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read or create config file: " + configFilePath, e);
+        } catch (JSONException e) {
+            throw new RuntimeException("Failed to parse config file: " + configFilePath, e);
         }
-        return defaultValue;
     }
 
-    public static void setBoatJson(String name, String value) {
+    public static void setConfigValue(String key, Object value) {
+        String globalConfigFilePath = getBoatValueString("currentVersion", H2CO3_SETTING_DIR) + "/config.cfg";
+        String configFilePath = globalConfigFilePath;
+
         try {
-            FileInputStream in = new FileInputStream(BOATCFG);
-            byte[] b = new byte[in.available()];
-            in.read(b);
-            in.close();
-            String str = new String(b);
-            JSONObject json = new JSONObject(str);
-            json.remove(name);
-            json.put(name, value);
-            FileWriter fr = new FileWriter(BOATCFG);
-            fr.write(json.toString());
-            fr.close();
-        } catch (Exception e) {
-            System.out.println(e);
+            Path globalConfigPath = Paths.get(globalConfigFilePath);
+            if (!Files.exists(globalConfigPath)) {
+                Files.createDirectories(globalConfigPath.getParent());
+                Files.createFile(globalConfigPath);
+                JSONObject globalConfigJson = new JSONObject();
+                globalConfigJson.put("usesGlobal", true);
+                Files.write(globalConfigPath, globalConfigJson.toString().getBytes());
+            }
+
+            String globalConfigContent = new String(Files.readAllBytes(globalConfigPath));
+            JSONObject globalConfigJson = new JSONObject(globalConfigContent);
+
+            if (!globalConfigJson.optBoolean("usesGlobal", false)) {
+                configFilePath = getBoatValueString("currentVersion", H2CO3_SETTING_DIR) + "/config.cfg";
+                Path configPath = Paths.get(configFilePath);
+                if (!Files.exists(configPath)) {
+                    Files.createDirectories(configPath.getParent());
+                    Files.createFile(configPath);
+                    JSONObject defaultConfigJson = new JSONObject();
+                    defaultConfigJson.put(key, value);
+                    Files.write(configPath, defaultConfigJson.toString().getBytes());
+                    return;
+                }
+            }
+
+            Path configPath = Paths.get(configFilePath);
+            if (!Files.exists(configPath)) {
+                throw new RuntimeException("Config file does not exist: " + configFilePath);
+            }
+
+            String configContent = new String(Files.readAllBytes(configPath));
+            JSONObject configJson = new JSONObject(configContent);
+
+            configJson.put(key, value);
+            Files.write(configPath, configJson.toString().getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read or create config file: " + configFilePath, e);
+        } catch (JSONException e) {
+            throw new RuntimeException("Failed to parse config file: " + configFilePath, e);
         }
     }
 
-    public static void setAppJson(String name, String value) {
+
+    public static String getBoatValueString(String key, String defaultValue) {
+        return getBoatValue(key, defaultValue, String.class);
+    }
+
+    public static boolean getBoatValue(String key, boolean defaultValue) {
+        return getBoatValue(key, defaultValue, boolean.class);
+    }
+
+    private static <T> T getBoatValue(String key, T defaultValue, Class<T> type) {
+        String configFilePath = H2CO3_SETTING_DIR + "/boat.cfg";
         try {
-            FileInputStream in = new FileInputStream(CHTools.H2CO3CfgPath());
-            byte[] b = new byte[in.available()];
-            in.read(b);
-            in.close();
-            String str = new String(b);
-            JSONObject json = new JSONObject(str);
-            json.remove(name);
-            json.put(name, value);
-            FileWriter fr = new FileWriter(CHTools.H2CO3CfgPath());
-            fr.write(json.toString());
-            fr.close();
-        } catch (Exception e) {
-            System.out.println(e);
+            Path configPath = Paths.get(configFilePath);
+            if (!Files.exists(configPath)) {
+                Files.createDirectories(configPath.getParent());
+                Files.createFile(configPath);
+                JSONObject defaultConfigJson = new JSONObject();
+                defaultConfigJson.put(key, defaultValue);
+                Files.write(configPath, defaultConfigJson.toString().getBytes());
+                return defaultValue;
+            }
+            if (!Files.exists(configPath)) {
+                throw new RuntimeException("Config file does not exist: " + configFilePath);
+            }
+
+            String configContent = new String(Files.readAllBytes(configPath));
+            JSONObject configJson = new JSONObject(configContent);
+
+            if (!configJson.has(key)) {
+                configJson.put(key, defaultValue);
+                Files.write(configPath, configJson.toString().getBytes());
+                return defaultValue;
+            }
+
+            if (type == String.class) {
+                return type.cast(configJson.optString(key));
+            } else if (type == boolean.class) {
+                return type.cast(configJson.optBoolean(key));
+            } else {
+                throw new IllegalArgumentException("Unsupported type: " + type);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read or create config file: " + configFilePath, e);
+        } catch (JSONException e) {
+            throw new RuntimeException("Failed to parse config file: " + configFilePath, e);
         }
     }
 
-    public static void setExtraJson(String name, String value, String dir) {
+    public static void setBoatValue(String key, Object value) {
+        String configFilePath = H2CO3_SETTING_DIR + "/boat.cfg";
+
         try {
-            FileInputStream in = new FileInputStream(dir);
-            byte[] b = new byte[in.available()];
-            in.read(b);
-            in.close();
-            String str = new String(b);
-            JSONObject json = new JSONObject(str);
-            json.remove(name);
-            json.put(name, value);
-            FileWriter fr = new FileWriter(dir);
-            fr.write(json.toString());
-            fr.close();
-        } catch (Exception e) {
-            System.out.println(e);
+            Path configPath = Paths.get(configFilePath);
+            if (!Files.exists(configPath)) {
+                Files.createDirectories(configPath.getParent());
+                Files.createFile(configPath);
+                JSONObject defaultConfigJson = new JSONObject();
+                defaultConfigJson.put(key, value);
+                Files.write(configPath, defaultConfigJson.toString().getBytes());
+                return;
+            }
+            if (!Files.exists(configPath)) {
+                throw new RuntimeException("Config file does not exist: " + configFilePath);
+            }
+
+            String configContent = new String(Files.readAllBytes(configPath));
+            JSONObject configJson = new JSONObject(configContent);
+
+            configJson.put(key, value);
+            Files.write(configPath, configJson.toString().getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read or create config file: " + configFilePath, e);
+        } catch (JSONException e) {
+            throw new RuntimeException("Failed to parse config file: " + configFilePath, e);
         }
     }
 
-    //h2co3cfg
-    public static String getBoatCfg(String name, String defaultValue) {
-        try {
-            FileInputStream in = new FileInputStream(BOATCFG);
-            byte[] b = new byte[in.available()];
-            in.read(b);
-            in.close();
-            String str = new String(b);
-            JSONObject json = new JSONObject(str);
-            return json.getString(name);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return defaultValue;
-    }
-
-    public static String getAppCfg(String name, String defaultValue) {
-        try {
-            FileInputStream in = new FileInputStream(CHTools.H2CO3CfgPath());
-            byte[] b = new byte[in.available()];
-            in.read(b);
-            in.close();
-            String str = new String(b);
-            JSONObject json = new JSONObject(str);
-            return json.getString(name);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return defaultValue;
-    }
-
-    public static String getExtraCfg(String value, String defaultValue, String dir) {
-        try {
-            FileInputStream in = new FileInputStream(dir);
-            byte[] b = new byte[in.available()];
-            in.read(b);
-            in.close();
-            String str = new String(b);
-            JSONObject json = new JSONObject(str);
-            return json.getString(value);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return defaultValue;
-    }
-
-    public interface ZipListener {
-        void onStart();
-
-        void onProgress(int progress);
-
-        void onFinish();
-
-        void onError(String err);
-    }
 }
