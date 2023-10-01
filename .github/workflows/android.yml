@@ -35,7 +35,7 @@ jobs:
       # 创建release
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v2
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           #GitHub 会自动创建 GITHUB_TOKEN 密码以在工作流程中使用。
