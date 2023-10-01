@@ -48,6 +48,60 @@
         <item name="cardElevation">@dimen/elevation_0</item>
     </style>
 
+    <style name="Theme.H2CO3.CardViewNormal" parent="@style/Widget.Material3.CardView.Filled">
+        <item name="android:checkable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+        <item name="contentPaddingStart">@dimen/app_16dp</item>
+        <item name="contentPaddingEnd">@dimen/app_16dp</item>
+        <item name="contentPaddingLeft">@dimen/app_16dp</item>
+        <item name="contentPaddingRight">@dimen/app_16dp</item>
+        <item name="contentPaddingTop">@dimen/app_16dp</item>
+        <item name="contentPaddingBottom">@dimen/app_16dp</item>
+    </style>
+
+    <style name="Theme.H2CO3.IconMaterial">
+        <item name="android:layout_marginRight">@dimen/app_15dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_circle_icon_background</item>
+        <item name="android:tint">?colorOnPrimaryContainer</item>
+        <item name="android:tintMode">src_in</item>
+        <item name="android:backgroundTint">?colorPrimaryContainer</item>
+        <item name="android:backgroundTintMode">src_in</item>
+    </style>
+
+    <style name="Theme.H2CO3.IconNormal">
+        <item name="android:layout_marginRight">@dimen/app_15dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_circle_icon_background</item>
+        <item name="android:tintMode">src_in</item>
+        <item name="android:backgroundTint">?colorPrimaryContainer</item>
+        <item name="android:backgroundTintMode">src_in</item>
+    </style>
+
+    <style name="Theme.H2CO3.CardButton" parent="Widget.Material3.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconPadding">12dp</item>
+    </style>
+
+    <style name="Theme.H2CO3.CardTitle">
+        <item name="android:textAppearance">?textAppearanceBodyLarge</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+    </style>
+
+    <style name="Theme.H2CO3.CardContent">
+        <item name="android:textAppearance">?textAppearanceBodyMedium</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
 
     <style name="TextAppearance.H2CO3.TitleLarge.Bold" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textStyle">bold</item>
@@ -108,27 +162,5 @@
     <style name="AppTheme.SheetAboveKeyboard" parent="Theme.Material3.Dark.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
-    </style>
-
-    <style name="Theme.H2CO3.DialogButtonStyle" parent="Widget.Material3.Button">
-        <item name="android:textSize">12dp</item>
-        <item name="android:paddingStart">15dp</item>
-        <item name="android:paddingEnd">15dp</item>
-        <!--        <item name="android:padding">14dp</item>-->
-        <item name="android:focusable">true</item>
-        <item name="android:clickable">true</item>
-        <item name="textAllCaps">true</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceSmallInverse</item>
-        <item name="android:textColor">?colorOnPrimary</item>
-    </style>
-
-    <style name="Theme.H2CO3.ButtonStyle.Red" parent="@style/Theme.H2CO3.DialogButtonStyle">
-        <item name="backgroundTint">?colorError</item>
-        <item name="android:textColor">?colorOnError</item>
-    </style>
-
-    <style name="Theme.H2CO3.DialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
-        <item name="android:windowExitAnimation">@anim/dialog_out</item>
     </style>
 </resources>

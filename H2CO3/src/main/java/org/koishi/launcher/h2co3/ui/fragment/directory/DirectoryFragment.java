@@ -13,9 +13,10 @@ import org.koishi.launcher.h2co3.resources.component.H2CO3Fragment;
 public class DirectoryFragment extends H2CO3Fragment {
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_directory, container, false);
+    View view;
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_directory, container, false);
 
         return view;
     }

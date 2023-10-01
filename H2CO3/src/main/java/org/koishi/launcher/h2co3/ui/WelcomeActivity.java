@@ -1,7 +1,6 @@
 package org.koishi.launcher.h2co3.ui;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +20,6 @@ import org.koishi.launcher.h2co3.core.utils.FileUtils;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
 import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
-import org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3CustomViewDialog;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MessageDialog;
@@ -65,9 +63,8 @@ public class WelcomeActivity extends H2CO3Activity {
         H2CO3CustomViewDialog installDialog = new H2CO3CustomViewDialog(this);
         installDialog.setCustomView(R.layout.custom_dialog_install_runtime);
         installDialog.setCancelable(false);
+        installDialog.setTitle(getString(org.koishi.launcher.h2co3.resources.R.string.title_install_runtime));
         installDialog.show();
-        H2CO3ToolBar toolBar = installDialog.findViewById(org.koishi.launcher.h2co3.resources.R.id.toolbar);
-        toolBar.setTitle(getString(org.koishi.launcher.h2co3.resources.R.string.title_install_runtime));
         boatProgress = installDialog.findViewById(R.id.boat_progress);
         h2co3AppProgress = installDialog.findViewById(R.id.h2co3_app_progress);
         java8Progress = installDialog.findViewById(R.id.java8_progress);
@@ -132,10 +129,26 @@ public class WelcomeActivity extends H2CO3Activity {
     }
 
     private void initState() {
-        boat = isLatest(CHTools.BOAT_LIBRARY_DIR, "/assets/app_runtime/boat");
-        java8 = isLatest(CHTools.JAVA_8_PATH, "/assets/app_runtime/jre_8");
-        java17 = isLatest(CHTools.JAVA_17_PATH, "/assets/app_runtime/jre_17");
-        h2co3_app = isLatest(CHTools.H2CO3_LIBRARY_DIR, "/assets/h2co3");
+        try {
+            boat = RuntimeUtils.isLatest(CHTools.BOAT_LIBRARY_DIR, "/assets/app_runtime/boat");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            java8 = RuntimeUtils.isLatest(CHTools.JAVA_8_PATH, "/assets/app_runtime/jre_8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            java17 = RuntimeUtils.isLatest(CHTools.JAVA_17_PATH, "/assets/app_runtime/jre_17");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            h2co3_app = RuntimeUtils.isLatest(CHTools.H2CO3_LIBRARY_DIR, "/assets/h2co3");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean isLatest(String dir, String path) {
@@ -146,13 +159,6 @@ public class WelcomeActivity extends H2CO3Activity {
     private void refreshDrawables() {
         Drawable stateUpdate = ContextCompat.getDrawable(this, org.koishi.launcher.h2co3.resources.R.drawable.ic_update);
         Drawable stateDone = ContextCompat.getDrawable(this, org.koishi.launcher.h2co3.resources.R.drawable.ic_done);
-
-        if (stateUpdate != null) {
-            stateUpdate.setTint(Color.GRAY);
-        }
-        if (stateDone != null) {
-            stateDone.setTint(Color.GRAY);
-        }
 
         boatState.setBackground(boat ? stateDone : stateUpdate);
         h2co3AppState.setBackground(h2co3_app ? stateDone : stateUpdate);
