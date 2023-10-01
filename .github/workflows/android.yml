@@ -48,6 +48,3 @@ jobs:
         id: create-download-link
         run: |
           echo "::set-output name=download-link::https://github.com/$GITHUB_REPOSITORY/actions/artifacts/$GITHUB_RUN_ID"
-
-  outputs:
-    download-link: ${{ steps.create-download-link.outputs.download-link }}
