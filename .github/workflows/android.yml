@@ -28,9 +28,9 @@ jobs:
         run: |
           # Build the launcher
           gradle :H2CO3:assembleDebug  # 使用 Gradle 构建 H2CO3 模块的 Debug 版本
-          mv H2CO3/build/outputs/apk/debug/app-debug.apk out/app-debug.apk  # 将构建好的 APK 移动到 out 目录下
+          mv /H2CO3/build/outputs/apk/debug/H2CO3-debug.apk out/H2CO3-debug.apk  # 将构建好的 APK 移动到 out 目录下
       - name: Upload APK  # 上传 APK
         uses: actions/upload-artifact@v3  # 使用 GitHub 提供的 upload-artifact 动作，用于上传构建产物
         with:
-          name: app-debug  # 设置构建产物的名称为 app-debug
-          path: out/app-debug.*  # 设置构建产物的路径为 out 目录下的 app-debug 文件
+          name: H2CO3-debug  # 设置构建产物的名称为 app-debug
+          path: out/H2CO3-debug.*  # 设置构建产物的路径为 out 目录下的 app-debug 文件
