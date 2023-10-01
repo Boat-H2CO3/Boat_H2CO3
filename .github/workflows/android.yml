@@ -26,7 +26,7 @@ jobs:
       - name: Build LWJGL
         run: |
           # Build the launcher
-               gradle :LWJGL:assemble
+          gradle :LWJGL:assemble
       # 打包
       - name: Build Debug .apk
         run: |
@@ -35,15 +35,19 @@ jobs:
 
       # 获取apk版本号
       - name: Get Version Name
-        uses: actions/github-script@v3
         id: get-version
-        with:
-          script: |
-            const str=process.env.GITHUB_REF;
-            return str.substring(str.indexOf("v"));
-          result-encoding: string
+        run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
+
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
           name: app-debug
-          path: /H2CO3/build/outputs/apk/debug/H2CO3-debug.*
+          path: H2CO3/build/outputs/apk/debug/*.apk
+
+      - name: Create Download Link
+        id: create-download-link
+        run: |
+          echo "::set-output name=download-link::https://github.com/$GITHUB_REPOSITORY/actions/artifacts/$GITHUB_RUN_ID"
+
+  outputs:
+    download-link: ${{ steps.create-download-link.outputs.download-link }}
