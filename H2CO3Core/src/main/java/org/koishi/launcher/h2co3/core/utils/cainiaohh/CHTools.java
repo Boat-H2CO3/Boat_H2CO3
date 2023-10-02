@@ -84,23 +84,22 @@ public class CHTools {
         init(PUBLIC_FILE_PATH);
     }
 
-    private static boolean init(String path) {
+    private static void init(String path) {
         if (!new File(path).exists()) {
-            return new File(path).mkdirs();
+            new File(path).mkdirs();
         }
-        return true;
     }
 
-    public static boolean getConfigValue(String key, boolean defaultValue) {
-        return getConfigValue(key, defaultValue, boolean.class);
+    public static boolean getBoatValue(String key, boolean defaultValue) {
+        return getBoatValue(key, defaultValue, boolean.class);
     }
 
-    public static String getConfigValueString(String key, String defaultValue) {
-        return getConfigValue(key, defaultValue, String.class);
+    public static String getBoatValueString(String key, String defaultValue) {
+        return getBoatValue(key, defaultValue, String.class);
     }
 
-    private static <T> T getConfigValue(String key, T defaultValue, Class<T> type) {
-        String globalConfigFilePath = getBoatValueString("currentVersion", H2CO3_SETTING_DIR) + "/config.cfg";
+    private static <T> T getBoatValue(String key, T defaultValue, Class<T> type) {
+        String globalConfigFilePath = getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json";
         String configFilePath = globalConfigFilePath;
 
         try {
@@ -117,7 +116,7 @@ public class CHTools {
             JSONObject globalConfigJson = new JSONObject(globalConfigContent);
 
             if (!globalConfigJson.optBoolean("usesGlobal", false)) {
-                configFilePath = getBoatValueString("currentVersion", H2CO3_SETTING_DIR) + "/config.cfg";
+                configFilePath = getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json";
                 Path configPath = Paths.get(configFilePath);
                 if (!Files.exists(configPath)) {
                     Files.createDirectories(configPath.getParent());
@@ -143,10 +142,10 @@ public class CHTools {
                 return defaultValue;
             }
 
-            if (type == boolean.class) {
-                return type.cast(configJson.optBoolean(key));
-            } else if (type == String.class) {
-                return type.cast(configJson.optString(key));
+            if (type.isAssignableFrom(boolean.class)) {
+                return (T) Boolean.valueOf(configJson.optBoolean(key));
+            } else if (type.isAssignableFrom(String.class)) {
+                return (T) configJson.optString(key);
             } else {
                 throw new IllegalArgumentException("Unsupported type: " + type);
             }
@@ -157,8 +156,8 @@ public class CHTools {
         }
     }
 
-    public static void setConfigValue(String key, Object value) {
-        String globalConfigFilePath = getBoatValueString("currentVersion", H2CO3_SETTING_DIR) + "/config.cfg";
+    public static void setBoatValue(String key, Object value) {
+        String globalConfigFilePath = getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json";
         String configFilePath = globalConfigFilePath;
 
         try {
@@ -175,7 +174,7 @@ public class CHTools {
             JSONObject globalConfigJson = new JSONObject(globalConfigContent);
 
             if (!globalConfigJson.optBoolean("usesGlobal", false)) {
-                configFilePath = getBoatValueString("currentVersion", H2CO3_SETTING_DIR) + "/config.cfg";
+                configFilePath = getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json";
                 Path configPath = Paths.get(configFilePath);
                 if (!Files.exists(configPath)) {
                     Files.createDirectories(configPath.getParent());
@@ -204,17 +203,16 @@ public class CHTools {
         }
     }
 
-
-    public static String getBoatValueString(String key, String defaultValue) {
-        return getBoatValue(key, defaultValue, String.class);
+    public static String getH2CO3ValueString(String key, String defaultValue) {
+        return getH2CO3Value(key, defaultValue, String.class);
     }
 
-    public static boolean getBoatValue(String key, boolean defaultValue) {
-        return getBoatValue(key, defaultValue, boolean.class);
+    public static boolean getH2CO3Value(String key, boolean defaultValue) {
+        return getH2CO3Value(key, defaultValue, boolean.class);
     }
 
-    private static <T> T getBoatValue(String key, T defaultValue, Class<T> type) {
-        String configFilePath = H2CO3_SETTING_DIR + "/boat.cfg";
+    private static <T> T getH2CO3Value(String key, T defaultValue, Class<T> type) {
+        String configFilePath = H2CO3_SETTING_DIR + "/H2CO3Config.json";
         try {
             Path configPath = Paths.get(configFilePath);
             if (!Files.exists(configPath)) {
@@ -239,9 +237,9 @@ public class CHTools {
             }
 
             if (type == String.class) {
-                return type.cast(configJson.optString(key));
+                return (T) configJson.optString(key);
             } else if (type == boolean.class) {
-                return type.cast(configJson.optBoolean(key));
+                return (T) Boolean.valueOf(configJson.optBoolean(key));
             } else {
                 throw new IllegalArgumentException("Unsupported type: " + type);
             }
@@ -252,8 +250,8 @@ public class CHTools {
         }
     }
 
-    public static void setBoatValue(String key, Object value) {
-        String configFilePath = H2CO3_SETTING_DIR + "/boat.cfg";
+    public static void setH2CO3Value(String key, Object value) {
+        String configFilePath = H2CO3_SETTING_DIR + "/H2CO3Config.json";
 
         try {
             Path configPath = Paths.get(configFilePath);
@@ -280,5 +278,4 @@ public class CHTools {
             throw new RuntimeException("Failed to parse config file: " + configFilePath, e);
         }
     }
-
 }

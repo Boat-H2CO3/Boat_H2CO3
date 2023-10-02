@@ -14,7 +14,7 @@ Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_setH2CO3NativeWindow(JNIEnv *en
                                                                       jclass clazz,
                                                                       jobject surface) {
     h2co3Boat->window = ANativeWindow_fromSurface(env, surface);
-    H2CO3_BOAT_INTERNAL_LOG("setBoatNativeWindow : %p", h2co3Boat->window);
+    H2CO3_BOAT_INTERNAL_LOG("setH2CO3BoatNativeWindow : %p", h2co3Boat->window);
 }
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {

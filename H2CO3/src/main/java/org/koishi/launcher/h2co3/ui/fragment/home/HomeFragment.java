@@ -26,7 +26,7 @@ public class HomeFragment extends H2CO3Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         findView();
         home_file_check_title = view.findViewById(R.id.home_file_check_title);
-        home_file_check_title.setText(CHTools.getBoatValueString("test", "fsduhsdfhhjdsfhjfdshjdfshjdfshjfsdhjfsdhkhjdsfhjdfshjfdshjsdf"));
+        home_file_check_title.setText(CHTools.getH2CO3ValueString("test", "fsduhsdfhhjdsfhjfdshjdfshjdfshjfsdhjfsdhkhjdsfhjdfshjfdshjsdf"));
         home_file_check.setCardBackgroundColor(getResources().getColor(rikka.material.R.color.material_green_500));
         checkFile();
         return view;
