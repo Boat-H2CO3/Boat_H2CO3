@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.BuildConfig;
@@ -15,14 +14,8 @@ import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 
-import org.koishi.launcher.h2co3.application.logger.ExpDiskLogAdapter;
-import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
 import org.koishi.launcher.h2co3.resources.R;
 import org.koishi.launcher.h2co3.ui.CrashActivity;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
@@ -52,7 +45,6 @@ public class H2CO3Application extends Application implements Application.Activit
     @Override
     public void onCreate() {
         super.onCreate();
-        initLogger();
         this.registerActivityLifecycleCallbacks(this);
         CaocConfig.Builder.create()
                 .backgroundMode(CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM)
@@ -65,23 +57,6 @@ public class H2CO3Application extends Application implements Application.Activit
                 .errorActivity(CrashActivity.class)
                 .eventListener(new CustomEventListener())
                 .apply();
-    }
-
-    private void initLogger() {
-        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
-                .showThreadInfo(true)  // (可选) 是否显示线程信息，默认为ture
-                .methodOffset(7)        // (可选)
-                .tag(getResources().getString(R.string.app_name))   // (可选) 每个日志的全局标记. 默认 PRETTY_LOGGER
-                .build();
-        Logger.addLogAdapter(new ExpDiskLogAdapter());
-        Logger.addLogAdapter(new AndroidLogAdapter() {
-            @Override public boolean isLoggable(int priority, String tag) {
-                return BuildConfig.DEBUG;
-            }
-        });
-
-        Logger.addLogAdapter(new DiskLogAdapter());
-
     }
 
     @Override

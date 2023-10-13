@@ -19,7 +19,7 @@ import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.core.utils.FileUtils;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
-import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
+import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3CustomViewDialog;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MessageDialog;
@@ -55,7 +55,7 @@ public class WelcomeActivity extends H2CO3Activity {
     }
 
     private void init() {
-        CHTools.loadPaths(this);
+        H2CO3Tools.loadPaths(this);
         installRuntime();
     }
 
@@ -130,22 +130,22 @@ public class WelcomeActivity extends H2CO3Activity {
 
     private void initState() {
         try {
-            boat = RuntimeUtils.isLatest(CHTools.BOAT_LIBRARY_DIR, "/assets/app_runtime/boat");
+            boat = RuntimeUtils.isLatest(H2CO3Tools.BOAT_LIBRARY_DIR, "/assets/app_runtime/boat");
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            java8 = RuntimeUtils.isLatest(CHTools.JAVA_8_PATH, "/assets/app_runtime/jre_8");
+            java8 = RuntimeUtils.isLatest(H2CO3Tools.JAVA_8_PATH, "/assets/app_runtime/jre_8");
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            java17 = RuntimeUtils.isLatest(CHTools.JAVA_17_PATH, "/assets/app_runtime/jre_17");
+            java17 = RuntimeUtils.isLatest(H2CO3Tools.JAVA_17_PATH, "/assets/app_runtime/jre_17");
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            h2co3_app = RuntimeUtils.isLatest(CHTools.H2CO3_LIBRARY_DIR, "/assets/h2co3");
+            h2co3_app = RuntimeUtils.isLatest(H2CO3Tools.H2CO3_LIBRARY_DIR, "/assets/h2co3");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -186,7 +186,7 @@ public class WelcomeActivity extends H2CO3Activity {
             boatProgress.setVisibility(View.VISIBLE);
             new Thread(() -> {
                 try {
-                    RuntimeUtils.install(WelcomeActivity.this, CHTools.BOAT_LIBRARY_DIR, "app_runtime/boat");
+                    RuntimeUtils.install(WelcomeActivity.this, H2CO3Tools.BOAT_LIBRARY_DIR, "app_runtime/boat");
                     boat = true;
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -204,7 +204,7 @@ public class WelcomeActivity extends H2CO3Activity {
             h2co3AppProgress.setVisibility(View.VISIBLE);
             new Thread(() -> {
                 try {
-                    RuntimeUtils.install(WelcomeActivity.this, CHTools.H2CO3_LIBRARY_DIR, "h2co3");
+                    RuntimeUtils.install(WelcomeActivity.this, H2CO3Tools.H2CO3_LIBRARY_DIR, "h2co3");
                     h2co3_app = true;
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -222,7 +222,7 @@ public class WelcomeActivity extends H2CO3Activity {
             java8Progress.setVisibility(View.VISIBLE);
             new Thread(() -> {
                 try {
-                    RuntimeUtils.installJava(WelcomeActivity.this, CHTools.JAVA_8_PATH, "app_runtime/jre_8");
+                    RuntimeUtils.installJava(WelcomeActivity.this, H2CO3Tools.JAVA_8_PATH, "app_runtime/jre_8");
                     java8 = true;
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -240,11 +240,11 @@ public class WelcomeActivity extends H2CO3Activity {
             java17Progress.setVisibility(View.VISIBLE);
             new Thread(() -> {
                 try {
-                    RuntimeUtils.installJava(WelcomeActivity.this, CHTools.JAVA_17_PATH, "app_runtime/jre_17");
+                    RuntimeUtils.installJava(WelcomeActivity.this, H2CO3Tools.JAVA_17_PATH, "app_runtime/jre_17");
                     if (!LocaleUtils.getSystemLocale().getDisplayName().equals(Locale.CHINA.getDisplayName())) {
-                        FileUtils.writeText(new File(CHTools.JAVA_17_PATH + "/resolv.conf"), "nameserver 1.1.1.1\n" + "nameserver 1.0.0.1");
+                        FileUtils.writeText(new File(H2CO3Tools.JAVA_17_PATH + "/resolv.conf"), "nameserver 1.1.1.1\n" + "nameserver 1.0.0.1");
                     } else {
-                        FileUtils.writeText(new File(CHTools.JAVA_17_PATH + "/resolv.conf"), "nameserver 8.8.8.8\n" + "nameserver 8.8.4.4");
+                        FileUtils.writeText(new File(H2CO3Tools.JAVA_17_PATH + "/resolv.conf"), "nameserver 8.8.8.8\n" + "nameserver 8.8.4.4");
                     }
                     java17 = true;
                 } catch (IOException e) {

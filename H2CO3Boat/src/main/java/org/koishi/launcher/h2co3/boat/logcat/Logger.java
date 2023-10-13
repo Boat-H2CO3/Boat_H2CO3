@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.Keep;
 
-import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
+import org.koishi.launcher.h2co3.core.H2CO3Tools;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class Logger {
 
     /* No public construction */
     private Logger(Context context){
-        this(CHTools.LOG_DIR + "/client_output.txt");
+        this(H2CO3Tools.LOG_DIR + "/client_output.txt");
     }
 
     private Logger(String path){

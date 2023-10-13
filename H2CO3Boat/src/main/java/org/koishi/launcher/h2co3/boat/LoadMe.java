@@ -11,7 +11,7 @@ import android.os.Handler;
 
 import org.koishi.launcher.h2co3.boat.function.H2CO3Callback;
 import org.koishi.launcher.h2co3.core.utils.Architecture;
-import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
+import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 
 import java.io.File;
@@ -44,7 +44,7 @@ public class LoadMe {
         handler.post(callback::onStart);
 
         // 设置H2CO3_LIB_DIR
-        H2CO3_LIB_DIR = CHTools.RUNTIME_DIR + "/h2co3_boat";
+        H2CO3_LIB_DIR = H2CO3Tools.RUNTIME_DIR + "/h2co3_boat";
 
         // 判断设备架构并设置arch变量
         int architecture = Architecture.getDeviceArchitecture();
@@ -104,7 +104,7 @@ public class LoadMe {
 
             setupExitTrap(context);
 
-            redirectStdio(CHTools.LOG_DIR + "/client_output.txt");
+            redirectStdio(H2CO3Tools.LOG_DIR + "/client_output.txt");
             chdir(gameDir);
 
             String[] finalArgs = new String[args.size()];
@@ -114,7 +114,7 @@ public class LoadMe {
                     sb.append(arg).append("\n");
                 }
             }
-            FileTools.writeFile(new File(CHTools.LOG_DIR + "/BoatArgs.txt"), sb.toString());
+            FileTools.writeFile(new File(H2CO3Tools.LOG_DIR + "/BoatArgs.txt"), sb.toString());
 
             int exitCode = dlexec(finalArgs);
             System.out.println("OpenJDK exited with code : " + exitCode);
@@ -132,12 +132,12 @@ public class LoadMe {
 
     public static void startVirGLService(Context context, String home, String tmpdir) {
 
-        H2CO3_LIB_DIR = CHTools.RUNTIME_DIR + "/h2co3_boat";
+        H2CO3_LIB_DIR = H2CO3Tools.RUNTIME_DIR + "/h2co3_boat";
 
         patchLinker();
 
         try {
-            redirectStdio(CHTools.LOG_DIR + "/h2co3_service_log.txt");
+            redirectStdio(H2CO3Tools.LOG_DIR + "/h2co3_service_log.txt");
 
             setenv("HOME", home);
             setenv("TMPDIR", tmpdir);
@@ -184,7 +184,7 @@ public class LoadMe {
             dlopen(javaPath + "/lib/" + arch + "/libawt_headless.so");
             dlopen(javaPath + "/lib/" + arch + "/libfontmanager.so");
 
-            redirectStdio(CHTools.LOG_DIR + "/h2co3_api_installer_log.txt");
+            redirectStdio(H2CO3Tools.LOG_DIR + "/h2co3_api_installer_log.txt");
             chdir(home);
 
             StringBuilder finalArgs = new StringBuilder();

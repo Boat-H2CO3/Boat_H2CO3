@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
+import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.resources.R;
 
 import rikka.material.app.MaterialActivity;
@@ -15,10 +15,10 @@ public class H2CO3Activity extends MaterialActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CHTools.loadPaths(this);
+        H2CO3Tools.loadPaths(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             //这里做你想做的事
-            boolean spIsAuth = CHTools.getH2CO3Value("enable_monet", true);
+            boolean spIsAuth = H2CO3Tools.getH2CO3Value("enable_monet", true);
             if (spIsAuth) {
                 setTheme(R.style.Theme_H2CO3_DynamicColors);
             } else {

@@ -9,7 +9,7 @@ import android.view.Surface;
 
 import androidx.core.content.FileProvider;
 
-import org.koishi.launcher.h2co3.core.utils.cainiaohh.CHTools;
+import org.koishi.launcher.h2co3.core.H2CO3Tools;
 
 import java.io.File;
 
@@ -82,7 +82,7 @@ public class H2CO3BoatLib {
     public static native void setH2CO3NativeWindow(Surface surface);
 
     public static void openLink(final String link) {
-        Context context = CHTools.CONTEXT;
+        Context context = H2CO3Tools.CONTEXT;
         ((Activity) context).runOnUiThread(() -> {
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
