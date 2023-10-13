@@ -38,7 +38,7 @@ public class EXTThreadLocalContext {
      */
     @NativeType("ALCboolean")
     public static boolean alcSetThreadContext(@NativeType("ALCcontext *") long context) {
-        long __functionAddress = ALC.getICD().alcSetThreadContext;
+		long __functionAddress = ALC.getICD().alcSetThreadContext;
         if (CHECKS) {
             check(__functionAddress);
         }
@@ -47,12 +47,10 @@ public class EXTThreadLocalContext {
 
     // --- [ alcGetThreadContext ] ---
 
-    /**
-     * Retrieves a handle to the thread-specific context of the calling thread. This function will return {@code NULL} if no thread-specific context is set.
-     */
+    /** Retrieves a handle to the thread-specific context of the calling thread. This function will return {@code NULL} if no thread-specific context is set. */
     @NativeType("ALCcontext *")
     public static long alcGetThreadContext() {
-        long __functionAddress = ALC.getICD().alcGetThreadContext;
+		long __functionAddress = ALC.getICD().alcGetThreadContext;
         if (CHECKS) {
             check(__functionAddress);
         }

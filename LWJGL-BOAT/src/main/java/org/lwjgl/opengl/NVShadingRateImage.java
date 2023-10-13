@@ -152,9 +152,7 @@ public class NVShadingRateImage {
         nglGetShadingRateSampleLocationivNV(rate, samples, index, memAddress(location));
     }
 
-    /**
-     * Array version of: {@link #glShadingRateImagePaletteNV ShadingRateImagePaletteNV}
-     */
+    /** Array version of: {@link #glShadingRateImagePaletteNV ShadingRateImagePaletteNV} */
     public static void glShadingRateImagePaletteNV(@NativeType("GLuint") int viewport, @NativeType("GLuint") int first, @NativeType("GLenum const *") int[] rates) {
         long __functionAddress = GL.getICD().glShadingRateImagePaletteNV;
         if (CHECKS) {
@@ -163,9 +161,7 @@ public class NVShadingRateImage {
         callPV(viewport, first, rates.length, rates, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetShadingRateImagePaletteNV GetShadingRateImagePaletteNV}
-     */
+    /** Array version of: {@link #glGetShadingRateImagePaletteNV GetShadingRateImagePaletteNV} */
     public static void glGetShadingRateImagePaletteNV(@NativeType("GLuint") int viewport, @NativeType("GLuint") int entry, @NativeType("GLenum *") int[] rate) {
         long __functionAddress = GL.getICD().glGetShadingRateImagePaletteNV;
         if (CHECKS) {
@@ -175,9 +171,7 @@ public class NVShadingRateImage {
         callPV(viewport, entry, rate, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glShadingRateSampleOrderCustomNV ShadingRateSampleOrderCustomNV}
-     */
+    /** Array version of: {@link #glShadingRateSampleOrderCustomNV ShadingRateSampleOrderCustomNV} */
     public static void glShadingRateSampleOrderCustomNV(@NativeType("GLenum") int rate, @NativeType("GLuint") int samples, @NativeType("GLint const *") int[] locations) {
         long __functionAddress = GL.getICD().glShadingRateSampleOrderCustomNV;
         if (CHECKS) {
@@ -186,9 +180,7 @@ public class NVShadingRateImage {
         callPV(rate, samples, locations, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetShadingRateSampleLocationivNV GetShadingRateSampleLocationivNV}
-     */
+    /** Array version of: {@link #glGetShadingRateSampleLocationivNV GetShadingRateSampleLocationivNV} */
     public static void glGetShadingRateSampleLocationivNV(@NativeType("GLenum") int rate, @NativeType("GLuint") int samples, @NativeType("GLuint") int index, @NativeType("GLint *") int[] location) {
         long __functionAddress = GL.getICD().glGetShadingRateSampleLocationivNV;
         if (CHECKS) {

@@ -35,19 +35,13 @@ public final class ARBTextureRectangle {
      */
     public static final int GL_TEXTURE_RECTANGLE_ARB = 0x84F5;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev. */
     public static final int GL_TEXTURE_BINDING_RECTANGLE_ARB = 0x84F6;
 
-    /**
-     * Accepted by the {@code target} parameter of GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv and TexImage2D.
-     */
+    /** Accepted by the {@code target} parameter of GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv and TexImage2D. */
     public static final int GL_PROXY_TEXTURE_RECTANGLE_ARB = 0x84F7;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv. */
     public static final int GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB = 0x84F8;
 
     /**

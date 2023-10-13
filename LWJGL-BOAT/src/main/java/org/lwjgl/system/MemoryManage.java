@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import javax.annotation.*;
-
 import java.util.*;
 import java.util.Map.*;
 import java.util.concurrent.*;
@@ -122,9 +121,7 @@ final class MemoryManage {
 
     }
 
-    /**
-     * Wraps a MemoryAllocator to track allocations and detect memory leaks.
-     */
+    /** Wraps a MemoryAllocator to track allocations and detect memory leaks. */
     static class DebugAllocator implements MemoryAllocator {
 
         private static final ConcurrentMap<Long, Allocation> ALLOCATIONS = new ConcurrentHashMap<>();
@@ -390,7 +387,7 @@ final class MemoryManage {
                     return false;
                 }
 
-                Allocation that = (Allocation) o;
+                Allocation that = (Allocation)o;
 
                 return Arrays.equals(this.getElements(), that.getElements());
             }
@@ -428,14 +425,14 @@ final class MemoryManage {
                             aggregate(allocation.threadId, allocation.size, mapThread);
                         }
                         for (Entry<Long, AtomicLong> entry : mapThread.entrySet()) {
-                            report.invoke(NULL, entry.getValue().get(), entry.getKey(), THREADS.get(entry.getKey()), (StackTraceElement[]) null);
+                            report.invoke(NULL, entry.getValue().get(), entry.getKey(), THREADS.get(entry.getKey()), (StackTraceElement[])null);
                         }
                     } else {
                         long total = 0L;
                         for (Allocation allocation : ALLOCATIONS.values()) {
                             total += allocation.size;
                         }
-                        report.invoke(NULL, total, NULL, null, (StackTraceElement[]) null);
+                        report.invoke(NULL, total, NULL, null, (StackTraceElement[])null);
                     }
                     break;
                 case GROUP_BY_METHOD:

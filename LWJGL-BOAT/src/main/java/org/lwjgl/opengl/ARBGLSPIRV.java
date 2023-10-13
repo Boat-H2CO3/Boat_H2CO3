@@ -5,19 +5,14 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.Checks.checkNT1;
-import static org.lwjgl.system.JNI.callPPPV;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_gl_spirv.txt">ARB_gl_spirv</a> extension.
@@ -37,14 +32,10 @@ import java.nio.IntBuffer;
  */
 public class ARBGLSPIRV {
 
-    /**
-     * Accepted by the {@code binaryformat} parameter of {@link GL41C#glShaderBinary ShaderBinary}.
-     */
+    /** Accepted by the {@code binaryformat} parameter of {@link GL41C#glShaderBinary ShaderBinary}. */
     public static final int GL_SHADER_BINARY_FORMAT_SPIR_V_ARB = 0x9551;
 
-    /**
-     * Accepted by the {@code pname} parameter of {@link GL20C#glGetShaderiv GetShaderiv}.
-     */
+    /** Accepted by the {@code pname} parameter of {@link GL20C#glGetShaderiv GetShaderiv}. */
     public static final int GL_SPIR_V_BINARY_ARB = 0x9552;
 
     static {
@@ -57,7 +48,7 @@ public class ARBGLSPIRV {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glSpecializeShaderARB
+            caps.glSpecializeShaderARB
         );
     }
 
@@ -153,9 +144,7 @@ public class ARBGLSPIRV {
         }
     }
 
-    /**
-     * Array version of: {@link #glSpecializeShaderARB SpecializeShaderARB}
-     */
+    /** Array version of: {@link #glSpecializeShaderARB SpecializeShaderARB} */
     public static void glSpecializeShaderARB(@NativeType("GLuint") int shader, @NativeType("GLchar const *") ByteBuffer pEntryPoint, @NativeType("GLuint const *") int[] pConstantIndex, @NativeType("GLuint const *") int[] pConstantValue) {
         long __functionAddress = GL.getICD().glSpecializeShaderARB;
         if (CHECKS) {
@@ -166,9 +155,7 @@ public class ARBGLSPIRV {
         callPPPV(shader, memAddress(pEntryPoint), pConstantIndex.length, pConstantIndex, pConstantValue, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSpecializeShaderARB SpecializeShaderARB}
-     */
+    /** Array version of: {@link #glSpecializeShaderARB SpecializeShaderARB} */
     public static void glSpecializeShaderARB(@NativeType("GLuint") int shader, @NativeType("GLchar const *") CharSequence pEntryPoint, @NativeType("GLuint const *") int[] pConstantIndex, @NativeType("GLuint const *") int[] pConstantValue) {
         long __functionAddress = GL.getICD().glSpecializeShaderARB;
         if (CHECKS) {

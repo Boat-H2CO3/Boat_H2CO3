@@ -5,25 +5,16 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.Checks.checkSafe;
-import static org.lwjgl.system.Checks.lengthSafe;
-import static org.lwjgl.system.Checks.remainingSafe;
-import static org.lwjgl.system.JNI.callPPPPPPI;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.memAddress;
-import static org.lwjgl.system.MemoryUtil.memAddressSafe;
+import javax.annotation.*;
 
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_debug_output.txt">ARB_debug_output</a> extension.
@@ -294,9 +285,7 @@ public class ARBDebugOutput {
 
     // --- [ glDebugMessageCallbackARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glDebugMessageCallbackARB DebugMessageCallbackARB}
-     */
+    /** Unsafe version of: {@link #glDebugMessageCallbackARB DebugMessageCallbackARB} */
     public static native void nglDebugMessageCallbackARB(long callback, long userParam);
 
     /**
@@ -391,9 +380,7 @@ public class ARBDebugOutput {
         return nglGetDebugMessageLogARB(count, remainingSafe(messageLog), memAddressSafe(sources), memAddressSafe(types), memAddressSafe(ids), memAddressSafe(severities), memAddressSafe(lengths), memAddressSafe(messageLog));
     }
 
-    /**
-     * Array version of: {@link #glDebugMessageControlARB DebugMessageControlARB}
-     */
+    /** Array version of: {@link #glDebugMessageControlARB DebugMessageControlARB} */
     public static void glDebugMessageControlARB(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @Nullable @NativeType("GLuint const *") int[] ids, @NativeType("GLboolean") boolean enabled) {
         long __functionAddress = GL.getICD().glDebugMessageControlARB;
         if (CHECKS) {
@@ -402,9 +389,7 @@ public class ARBDebugOutput {
         callPV(source, type, severity, lengthSafe(ids), ids, enabled, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetDebugMessageLogARB GetDebugMessageLogARB}
-     */
+    /** Array version of: {@link #glGetDebugMessageLogARB GetDebugMessageLogARB} */
     @NativeType("GLuint")
     public static int glGetDebugMessageLogARB(@NativeType("GLuint") int count, @Nullable @NativeType("GLenum *") int[] sources, @Nullable @NativeType("GLenum *") int[] types, @Nullable @NativeType("GLuint *") int[] ids, @Nullable @NativeType("GLenum *") int[] severities, @Nullable @NativeType("GLsizei *") int[] lengths, @Nullable @NativeType("GLchar *") ByteBuffer messageLog) {
         long __functionAddress = GL.getICD().glGetDebugMessageLogARB;

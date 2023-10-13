@@ -49,9 +49,7 @@ public abstract class GLDebugMessageCallback extends Callback implements GLDebug
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLDebugMessageCallback} instance that delegates to the specified {@code GLDebugMessageCallbackI} instance.
-     */
+    /** Creates a {@code GLDebugMessageCallback} instance that delegates to the specified {@code GLDebugMessageCallbackI} instance. */
     public static GLDebugMessageCallback create(GLDebugMessageCallbackI instance) {
         return instance instanceof GLDebugMessageCallback
                 ? (GLDebugMessageCallback) instance
@@ -73,6 +71,7 @@ public abstract class GLDebugMessageCallback extends Callback implements GLDebug
      *
      * @param length  the GLDebugMessageCallback {@code length} argument
      * @param message the GLDebugMessageCallback {@code message} argument
+     *
      * @return the message as a String
      */
     public static String getMessage(int length, long message) {

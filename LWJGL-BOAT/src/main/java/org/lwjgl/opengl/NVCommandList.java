@@ -156,9 +156,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVCommandList {
 
-    /**
-     * Used in DrawCommandsStates buffer formats, in GetCommandHeaderNV to return the header.
-     */
+    /** Used in DrawCommandsStates buffer formats, in GetCommandHeaderNV to return the header. */
     public static final int
             GL_TERMINATE_SEQUENCE_COMMAND_NV = 0x0,
             GL_NOP_COMMAND_NV = 0x1,
@@ -215,9 +213,7 @@ public class NVCommandList {
         nglCreateStatesNV(states.remaining(), memAddress(states));
     }
 
-    /**
-     * Returns {@code n} previously unused state object names in {@code states}, and creates a state object in the initial state for each name.
-     */
+    /** Returns {@code n} previously unused state object names in {@code states}, and creates a state object in the initial state for each name. */
     @NativeType("void")
     public static int glCreateStatesNV() {
         MemoryStack stack = stackGet();
@@ -451,9 +447,7 @@ public class NVCommandList {
         nglCreateCommandListsNV(lists.remaining(), memAddress(lists));
     }
 
-    /**
-     * Returns {@code n} previously unused command list names in {@code lists}, and creates a command list in the initial state for each name.
-     */
+    /** Returns {@code n} previously unused command list names in {@code lists}, and creates a command list in the initial state for each name. */
     @NativeType("void")
     public static int glCreateCommandListsNV() {
         MemoryStack stack = stackGet();
@@ -585,9 +579,7 @@ public class NVCommandList {
      */
     public static native void glCallCommandListNV(@NativeType("GLuint") int list);
 
-    /**
-     * Array version of: {@link #glCreateStatesNV CreateStatesNV}
-     */
+    /** Array version of: {@link #glCreateStatesNV CreateStatesNV} */
     public static void glCreateStatesNV(@NativeType("GLuint *") int[] states) {
         long __functionAddress = GL.getICD().glCreateStatesNV;
         if (CHECKS) {
@@ -596,9 +588,7 @@ public class NVCommandList {
         callPV(states.length, states, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glDeleteStatesNV DeleteStatesNV}
-     */
+    /** Array version of: {@link #glDeleteStatesNV DeleteStatesNV} */
     public static void glDeleteStatesNV(@NativeType("GLuint const *") int[] states) {
         long __functionAddress = GL.getICD().glDeleteStatesNV;
         if (CHECKS) {
@@ -607,9 +597,7 @@ public class NVCommandList {
         callPV(states.length, states, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glDrawCommandsNV DrawCommandsNV}
-     */
+    /** Array version of: {@link #glDrawCommandsNV DrawCommandsNV} */
     public static void glDrawCommandsNV(@NativeType("GLenum") int primitiveMode, @NativeType("GLuint") int buffer, @NativeType("GLintptr const *") PointerBuffer indirects, @NativeType("GLsizei const *") int[] sizes) {
         long __functionAddress = GL.getICD().glDrawCommandsNV;
         if (CHECKS) {
@@ -619,9 +607,7 @@ public class NVCommandList {
         callPPV(primitiveMode, buffer, memAddress(indirects), sizes, indirects.remaining(), __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glDrawCommandsAddressNV DrawCommandsAddressNV}
-     */
+    /** Array version of: {@link #glDrawCommandsAddressNV DrawCommandsAddressNV} */
     public static void glDrawCommandsAddressNV(@NativeType("GLenum") int primitiveMode, @NativeType("GLuint64 const *") long[] indirects, @NativeType("GLsizei const *") int[] sizes) {
         long __functionAddress = GL.getICD().glDrawCommandsAddressNV;
         if (CHECKS) {
@@ -631,9 +617,7 @@ public class NVCommandList {
         callPPV(primitiveMode, indirects, sizes, indirects.length, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glDrawCommandsStatesNV DrawCommandsStatesNV}
-     */
+    /** Array version of: {@link #glDrawCommandsStatesNV DrawCommandsStatesNV} */
     public static void glDrawCommandsStatesNV(@NativeType("GLuint") int buffer, @NativeType("GLintptr const *") PointerBuffer indirects, @NativeType("GLsizei const *") int[] sizes, @NativeType("GLuint const *") int[] states, @NativeType("GLuint const *") int[] fbos) {
         long __functionAddress = GL.getICD().glDrawCommandsStatesNV;
         if (CHECKS) {
@@ -645,9 +629,7 @@ public class NVCommandList {
         callPPPPV(buffer, memAddress(indirects), sizes, states, fbos, indirects.remaining(), __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glDrawCommandsStatesAddressNV DrawCommandsStatesAddressNV}
-     */
+    /** Array version of: {@link #glDrawCommandsStatesAddressNV DrawCommandsStatesAddressNV} */
     public static void glDrawCommandsStatesAddressNV(@NativeType("GLuint64 const *") long[] indirects, @NativeType("GLsizei const *") int[] sizes, @NativeType("GLuint const *") int[] states, @NativeType("GLuint const *") int[] fbos) {
         long __functionAddress = GL.getICD().glDrawCommandsStatesAddressNV;
         if (CHECKS) {
@@ -659,9 +641,7 @@ public class NVCommandList {
         callPPPPV(indirects, sizes, states, fbos, indirects.length, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glCreateCommandListsNV CreateCommandListsNV}
-     */
+    /** Array version of: {@link #glCreateCommandListsNV CreateCommandListsNV} */
     public static void glCreateCommandListsNV(@NativeType("GLuint *") int[] lists) {
         long __functionAddress = GL.getICD().glCreateCommandListsNV;
         if (CHECKS) {
@@ -670,9 +650,7 @@ public class NVCommandList {
         callPV(lists.length, lists, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glDeleteCommandListsNV DeleteCommandListsNV}
-     */
+    /** Array version of: {@link #glDeleteCommandListsNV DeleteCommandListsNV} */
     public static void glDeleteCommandListsNV(@NativeType("GLuint const *") int[] lists) {
         long __functionAddress = GL.getICD().glDeleteCommandListsNV;
         if (CHECKS) {
@@ -681,9 +659,7 @@ public class NVCommandList {
         callPV(lists.length, lists, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glListDrawCommandsStatesClientNV ListDrawCommandsStatesClientNV}
-     */
+    /** Array version of: {@link #glListDrawCommandsStatesClientNV ListDrawCommandsStatesClientNV} */
     public static void glListDrawCommandsStatesClientNV(@NativeType("GLuint") int list, @NativeType("GLuint") int segment, @NativeType("void const **") PointerBuffer indirects, @NativeType("size_t const *") PointerBuffer sizes, @NativeType("GLuint const *") int[] states, @NativeType("GLuint const *") int[] fbos) {
         long __functionAddress = GL.getICD().glListDrawCommandsStatesClientNV;
         if (CHECKS) {

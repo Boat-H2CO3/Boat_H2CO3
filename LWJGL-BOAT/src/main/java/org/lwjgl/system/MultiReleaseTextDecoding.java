@@ -44,7 +44,7 @@ final class MultiReleaseTextDecoding {
 
             int b0 = UNSAFE.getByte(null, source + position++) & 0xFF;
             if (b0 < 0x80) {
-                c = (char) b0;
+                c = (char)b0;
             } else {
                 int b1 = UNSAFE.getByte(null, source + position++) & 0x3F;
                 if ((b0 & 0xE0) == 0xC0) {

@@ -5,7 +5,9 @@
  */
 #include "common_tools.h"
 #include <stddef.h>
+DISABLE_WARNINGS()
 #include "stb_truetype.h"
+ENABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
     #define alignof __alignof
 #else

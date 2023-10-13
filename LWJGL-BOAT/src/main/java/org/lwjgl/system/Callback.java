@@ -7,7 +7,6 @@ package org.lwjgl.system;
 import org.lwjgl.*;
 
 import javax.annotation.*;
-
 import java.lang.reflect.*;
 
 import static org.lwjgl.system.Checks.*;
@@ -122,6 +121,7 @@ public abstract class Callback implements Pointer, NativeResource {
      *
      * @param signature the {@code dyncall} function signature
      * @param instance  the callback instance
+     *
      * @return the dynamically generated native function
      */
     static long create(String signature, Object instance) {
@@ -171,6 +171,7 @@ public abstract class Callback implements Pointer, NativeResource {
      *
      * @param functionPointer a function pointer
      * @param <T>             the {@code CallbackI} instance type
+     *
      * @return the {@code CallbackI} instance
      */
     public static <T extends CallbackI> T get(long functionPointer) {
@@ -207,7 +208,7 @@ public abstract class Callback implements Pointer, NativeResource {
             return false;
         }
 
-        Callback that = (Callback) o;
+        Callback that = (Callback)o;
 
         return address == that.address();
     }

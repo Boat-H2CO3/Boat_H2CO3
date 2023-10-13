@@ -5,11 +5,11 @@
  */
 package org.lwjgl.openal;
 
-import static org.lwjgl.system.APIUtil.apiLog;
-
-import org.lwjgl.system.FunctionProviderLocal;
+import org.lwjgl.system.*;
 
 import java.util.Set;
+
+import static org.lwjgl.system.APIUtil.*;
 
 /**
  * Defines the capabilities of the OpenAL Context API.
@@ -48,17 +48,11 @@ public final class ALCCapabilities {
             alcDevicePauseSOFT,
             alcDeviceResumeSOFT;
 
-    /**
-     * When true, {@link ALC10} is supported.
-     */
+    /** When true, {@link ALC10} is supported. */
     public final boolean OpenALC10;
-    /**
-     * When true, {@link ALC11} is supported.
-     */
+    /** When true, {@link ALC11} is supported. */
     public final boolean OpenALC11;
-    /**
-     * When true, {@link EnumerateAllExt} is supported.
-     */
+    /** When true, {@link EnumerateAllExt} is supported. */
     public final boolean ALC_ENUMERATE_ALL_EXT;
     /**
      * An OpenAL 1.1 implementation will always support the {@code ALC_ENUMERATION_EXT} extension. This extension provides for enumeration of the available OpenAL devices
@@ -66,53 +60,29 @@ public final class ALCCapabilities {
      * device name will be separated by a single {@code NULL} character and the list will be terminated with two {@code NULL} characters.
      */
     public final boolean ALC_ENUMERATION_EXT;
-    /**
-     * When true, {@link EXTCapture} is supported.
-     */
+    /** When true, {@link EXTCapture} is supported. */
     public final boolean ALC_EXT_CAPTURE;
-    /**
-     * When true, {@link EXTDedicated} is supported.
-     */
+    /** When true, {@link EXTDedicated} is supported. */
     public final boolean ALC_EXT_DEDICATED;
-    /**
-     * When true, {@link EXTDefaultFilterOrder} is supported.
-     */
+    /** When true, {@link EXTDefaultFilterOrder} is supported. */
     public final boolean ALC_EXT_DEFAULT_FILTER_ORDER;
-    /**
-     * When true, {@link EXTDisconnect} is supported.
-     */
+    /** When true, {@link EXTDisconnect} is supported. */
     public final boolean ALC_EXT_disconnect;
-    /**
-     * When true, {@link EXTEfx} is supported.
-     */
+    /** When true, {@link EXTEfx} is supported. */
     public final boolean ALC_EXT_EFX;
-    /**
-     * When true, {@link EXTThreadLocalContext} is supported.
-     */
+    /** When true, {@link EXTThreadLocalContext} is supported. */
     public final boolean ALC_EXT_thread_local_context;
-    /**
-     * When true, {@link LOKIAudioChannel} is supported.
-     */
+    /** When true, {@link LOKIAudioChannel} is supported. */
     public final boolean ALC_LOKI_audio_channel;
-    /**
-     * When true, {@link SOFTDeviceClock} is supported.
-     */
+    /** When true, {@link SOFTDeviceClock} is supported. */
     public final boolean ALC_SOFT_device_clock;
-    /**
-     * When true, {@link SOFTHRTF} is supported.
-     */
+    /** When true, {@link SOFTHRTF} is supported. */
     public final boolean ALC_SOFT_HRTF;
-    /**
-     * When true, {@link SOFTLoopback} is supported.
-     */
+    /** When true, {@link SOFTLoopback} is supported. */
     public final boolean ALC_SOFT_loopback;
-    /**
-     * When true, {@link SOFTOutputLimiter} is supported.
-     */
+    /** When true, {@link SOFTOutputLimiter} is supported. */
     public final boolean ALC_SOFT_output_limiter;
-    /**
-     * When true, {@link SOFTPauseDevice} is supported.
-     */
+    /** When true, {@link SOFTPauseDevice} is supported. */
     public final boolean ALC_SOFT_pause_device;
 
     ALCCapabilities(FunctionProviderLocal provider, long device, Set<String> ext) {

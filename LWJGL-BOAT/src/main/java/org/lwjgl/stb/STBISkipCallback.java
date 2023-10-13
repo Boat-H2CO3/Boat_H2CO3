@@ -36,17 +36,13 @@ public abstract class STBISkipCallback extends Callback implements STBISkipCallb
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static STBISkipCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code STBISkipCallback} instance that delegates to the specified {@code STBISkipCallbackI} instance.
-     */
+    /** Creates a {@code STBISkipCallback} instance that delegates to the specified {@code STBISkipCallbackI} instance. */
     public static STBISkipCallback create(STBISkipCallbackI instance) {
         return instance instanceof STBISkipCallback
                 ? (STBISkipCallback) instance

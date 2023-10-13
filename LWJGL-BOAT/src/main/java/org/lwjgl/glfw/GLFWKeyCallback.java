@@ -41,17 +41,13 @@ public abstract class GLFWKeyCallback extends Callback implements GLFWKeyCallbac
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWKeyCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWKeyCallback} instance that delegates to the specified {@code GLFWKeyCallbackI} instance.
-     */
+    /** Creates a {@code GLFWKeyCallback} instance that delegates to the specified {@code GLFWKeyCallbackI} instance. */
     public static GLFWKeyCallback create(GLFWKeyCallbackI instance) {
         return instance instanceof GLFWKeyCallback
                 ? (GLFWKeyCallback) instance
@@ -66,9 +62,7 @@ public abstract class GLFWKeyCallback extends Callback implements GLFWKeyCallbac
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetKeyCallback SetKeyCallback}.
-     */
+    /** See {@link GLFW#glfwSetKeyCallback SetKeyCallback}. */
     public GLFWKeyCallback set(long window) {
         glfwSetKeyCallback(window, this);
         return this;

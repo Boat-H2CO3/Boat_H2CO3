@@ -4,7 +4,9 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
+DISABLE_WARNINGS()
 #include "stb_easy_font.h"
+ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 

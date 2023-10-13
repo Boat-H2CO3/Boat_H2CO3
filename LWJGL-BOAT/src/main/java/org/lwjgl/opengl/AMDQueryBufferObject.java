@@ -26,9 +26,7 @@ package org.lwjgl.opengl;
  */
 public final class AMDQueryBufferObject {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetQueryObjectiv, GetQueryObjectuiv, GetQueryObjecti64v and GetQueryObjectui64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetQueryObjectiv, GetQueryObjectuiv, GetQueryObjecti64v and GetQueryObjectui64v. */
     public static final int GL_QUERY_RESULT_NO_WAIT_AMD = 0x9194;
 
     /**
@@ -37,9 +35,7 @@ public final class AMDQueryBufferObject {
      */
     public static final int GL_QUERY_BUFFER_AMD = 0x9192;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_QUERY_BUFFER_BINDING_AMD = 0x9193;
 
     private AMDQueryBufferObject() {

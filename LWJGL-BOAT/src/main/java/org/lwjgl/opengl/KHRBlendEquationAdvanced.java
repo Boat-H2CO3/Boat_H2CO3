@@ -52,9 +52,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class KHRBlendEquationAdvanced {
 
-    /**
-     * Accepted by the {@code mode} parameter of BlendEquation and BlendEquationi.
-     */
+    /** Accepted by the {@code mode} parameter of BlendEquation and BlendEquationi. */
     public static final int
             GL_MULTIPLY_KHR = 0x9294,
             GL_SCREEN_KHR = 0x9295,

@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transform_feedback3.txt">ARB_transform_feedback3</a> extension.
@@ -47,9 +47,7 @@ import java.nio.IntBuffer;
  */
 public class ARBTransformFeedback3 {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int
             GL_MAX_TRANSFORM_FEEDBACK_BUFFERS = 0x8E70,
             GL_MAX_VERTEX_STREAMS = 0x8E71;
@@ -108,9 +106,7 @@ public class ARBTransformFeedback3 {
 
     // --- [ glGetQueryIndexediv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetQueryIndexediv GetQueryIndexediv}
-     */
+    /** Unsafe version of: {@link #glGetQueryIndexediv GetQueryIndexediv} */
     public static void nglGetQueryIndexediv(int target, int index, int pname, long params) {
         GL40C.nglGetQueryIndexediv(target, index, pname, params);
     }
@@ -139,9 +135,7 @@ public class ARBTransformFeedback3 {
         return GL40C.glGetQueryIndexedi(target, index, pname);
     }
 
-    /**
-     * Array version of: {@link #glGetQueryIndexediv GetQueryIndexediv}
-     */
+    /** Array version of: {@link #glGetQueryIndexediv GetQueryIndexediv} */
     public static void glGetQueryIndexediv(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL40C.glGetQueryIndexediv(target, index, pname, params);
     }

@@ -40,17 +40,13 @@ public abstract class GLFWJoystickCallback extends Callback implements GLFWJoyst
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWJoystickCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWJoystickCallback} instance that delegates to the specified {@code GLFWJoystickCallbackI} instance.
-     */
+    /** Creates a {@code GLFWJoystickCallback} instance that delegates to the specified {@code GLFWJoystickCallbackI} instance. */
     public static GLFWJoystickCallback create(GLFWJoystickCallbackI instance) {
         return instance instanceof GLFWJoystickCallback
                 ? (GLFWJoystickCallback) instance
@@ -65,9 +61,7 @@ public abstract class GLFWJoystickCallback extends Callback implements GLFWJoyst
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetJoystickCallback SetJoystickCallback}.
-     */
+    /** See {@link GLFW#glfwSetJoystickCallback SetJoystickCallback}. */
     public GLFWJoystickCallback set() {
         glfwSetJoystickCallback(this);
         return this;

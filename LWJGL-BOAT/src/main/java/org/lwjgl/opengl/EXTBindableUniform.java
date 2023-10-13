@@ -25,9 +25,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTBindableUniform {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_MAX_VERTEX_BINDABLE_UNIFORMS_EXT = 0x8DE2,
             GL_MAX_FRAGMENT_BINDABLE_UNIFORMS_EXT = 0x8DE3,
@@ -35,9 +33,7 @@ public class EXTBindableUniform {
             GL_MAX_BINDABLE_UNIFORM_SIZE_EXT = 0x8DED,
             GL_UNIFORM_BUFFER_BINDING_EXT = 0x8DEF;
 
-    /**
-     * Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.
-     */
+    /** Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv. */
     public static final int GL_UNIFORM_BUFFER_EXT = 0x8DEE;
 
     static {

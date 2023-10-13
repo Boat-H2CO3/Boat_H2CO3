@@ -24,9 +24,7 @@ package org.lwjgl.opengl;
  */
 public final class NVRobustnessVideoMemoryPurge {
 
-    /**
-     * Returned by GetGraphicsResetStatusARB, in addition to other tokens defined in ARB_robustness.
-     */
+    /** Returned by GetGraphicsResetStatusARB, in addition to other tokens defined in ARB_robustness. */
     public static final int GL_PURGED_CONTEXT_RESET_NV = 0x92BB;
 
     private NVRobustnessVideoMemoryPurge() {

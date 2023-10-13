@@ -16,9 +16,7 @@ package org.lwjgl.opengl;
  */
 public final class ARBExplicitUniformLocation {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v. */
     public static final int GL_MAX_UNIFORM_LOCATIONS = 0x826E;
 
     private ARBExplicitUniformLocation() {

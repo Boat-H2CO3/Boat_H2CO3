@@ -4,48 +4,28 @@
  */
 package org.lwjgl.system;
 
-import static org.lwjgl.system.Checks.DEBUG;
-import static org.lwjgl.system.MemoryUtil.BUFFER_BYTE;
-import static org.lwjgl.system.MemoryUtil.NATIVE_ORDER;
-import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjgl.system.MemoryUtil.memAddress;
-import static org.lwjgl.system.MemoryUtil.memGetAddress;
-import static org.lwjgl.system.MemoryUtil.memPointerBuffer;
-import static org.lwjgl.system.MemoryUtil.nmemFree;
-import static org.lwjgl.system.MemoryUtil.wrap;
-import static org.lwjgl.system.Pointer.POINTER_SHIFT;
-import static org.lwjgl.system.Pointer.POINTER_SIZE;
+import org.lwjgl.*;
+import org.lwjgl.system.boat.*;
+import org.lwjgl.system.linux.*;
+import org.lwjgl.system.macosx.*;
+import org.lwjgl.system.windows.*;
 
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.boat.BoatLibrary;
-import org.lwjgl.system.linux.LinuxLibrary;
-import org.lwjgl.system.macosx.MacOSXLibrary;
-import org.lwjgl.system.windows.WindowsLibrary;
+import javax.annotation.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.net.URL;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.function.BiPredicate;
-import java.util.function.Supplier;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
+import java.io.*;
+import java.lang.reflect.*;
+import java.net.*;
+import java.nio.*;
+import java.nio.file.*;
+import java.util.*;
+import java.util.function.*;
+import java.util.jar.*;
+import java.util.regex.*;
+import java.util.stream.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.Pointer.*;
 
 /**
  * Utility class useful to API bindings. [INTERNAL USE ONLY]
@@ -102,6 +82,7 @@ public final class APIUtil {
      * Returns the value of the specified manifest attribute in the LWJGL JAR file.
      *
      * @param attributeName the attribute name
+     *
      * @return the attribute value or null if the attribute was not found or there is no LWJGL JAR file
      */
     public static Optional<String> apiGetManifestValue(String attributeName) {
@@ -141,7 +122,7 @@ public final class APIUtil {
             case WINDOWS:
                 return new WindowsLibrary(name);
             case H2CO3Boat:
-                return new BoatLibrary(name);
+                return new H2CO3BoatLibrary(name);
             case LINUX:
                 return new LinuxLibrary(name);
             case MACOSX:
@@ -194,23 +175,15 @@ public final class APIUtil {
      */
     public static class APIVersion implements Comparable<APIVersion> {
 
-        /**
-         * Returns the API major version.
-         */
+        /** Returns the API major version. */
         public final int major;
-        /**
-         * Returns the API minor version.
-         */
+        /** Returns the API minor version. */
         public final int minor;
 
-        /**
-         * Returns the API revision. May be null.
-         */
+        /** Returns the API revision. May be null. */
         @Nullable
         public final String revision;
-        /**
-         * Returns the API implementation-specific versioning information. May be null.
-         */
+        /** Returns the API implementation-specific versioning information. May be null. */
         @Nullable
         public final String implementation;
 
@@ -247,7 +220,7 @@ public final class APIUtil {
                 return false;
             }
 
-            APIVersion that = (APIVersion) o;
+            APIVersion that = (APIVersion)o;
 
             return this.major == that.major &&
                     this.minor == that.major &&
@@ -291,7 +264,7 @@ public final class APIUtil {
         if (state instanceof String) {
             version = apiParseVersion((String) state, null);
         } else if (state instanceof APIVersion) {
-            version = (APIVersion) state;
+            version = (APIVersion)state;
         } else {
             version = null;
         }
@@ -305,6 +278,7 @@ public final class APIUtil {
      * information (string, optional).
      *
      * @param version the API version string
+     *
      * @return the parsed {@link APIVersion}
      */
     public static APIVersion apiParseVersion(String version) {
@@ -318,6 +292,7 @@ public final class APIUtil {
      *
      * @param version the version string
      * @param prefix  the version string prefix, may be null
+     *
      * @return the parsed {@link APIVersion}
      */
     public static APIVersion apiParseVersion(String version, @Nullable String prefix) {
@@ -356,6 +331,7 @@ public final class APIUtil {
      * @param filter       the filter to use (optional)
      * @param target       the target map (optional)
      * @param tokenClasses the classes to get tokens from
+     *
      * @return the token map
      */
     public static Map<Integer, String> apiClassTokens(@Nullable BiPredicate<Field, Integer> filter, @Nullable Map<Integer, String> target, Class<?>... tokenClasses) {
@@ -399,6 +375,7 @@ public final class APIUtil {
      *
      * @param stack     the stack to use
      * @param addresses the pointer addresses to store
+     *
      * @return the pointer array address on the stack
      */
     public static long apiArray(MemoryStack stack, long... addresses) {
@@ -416,6 +393,7 @@ public final class APIUtil {
      *
      * @param stack   the stack to use
      * @param buffers the buffers to store
+     *
      * @return the pointer array address on the stack
      */
     public static long apiArray(MemoryStack stack, ByteBuffer... buffers) {
@@ -434,6 +412,7 @@ public final class APIUtil {
      *
      * @param stack   the stack to use
      * @param buffers the buffers to store
+     *
      * @return the pointer array address on the stack
      */
     public static long apiArrayp(MemoryStack stack, ByteBuffer... buffers) {
@@ -460,6 +439,7 @@ public final class APIUtil {
      * @param stack   the stack to use
      * @param encoder the encoder to use
      * @param strings the strings to encode
+     *
      * @return the pointer array address on the stack
      */
     public static long apiArray(MemoryStack stack, Encoder encoder, CharSequence... strings) {
@@ -481,6 +461,7 @@ public final class APIUtil {
      * @param stack   the stack to use
      * @param encoder the encoder to use
      * @param strings the strings to encode
+     *
      * @return the pointer array address on the stack
      */
     public static long apiArrayi(MemoryStack stack, Encoder encoder, CharSequence... strings) {
@@ -508,6 +489,7 @@ public final class APIUtil {
      * @param stack   the stack to use
      * @param encoder the encoder to use
      * @param strings the strings to encode
+     *
      * @return the pointer array address on the stack
      */
     public static long apiArrayp(MemoryStack stack, Encoder encoder, CharSequence... strings) {

@@ -49,9 +49,7 @@ public abstract class GLDebugMessageARBCallback extends Callback implements GLDe
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLDebugMessageARBCallback} instance that delegates to the specified {@code GLDebugMessageARBCallbackI} instance.
-     */
+    /** Creates a {@code GLDebugMessageARBCallback} instance that delegates to the specified {@code GLDebugMessageARBCallbackI} instance. */
     public static GLDebugMessageARBCallback create(GLDebugMessageARBCallbackI instance) {
         return instance instanceof GLDebugMessageARBCallback
                 ? (GLDebugMessageARBCallback) instance
@@ -73,6 +71,7 @@ public abstract class GLDebugMessageARBCallback extends Callback implements GLDe
      *
      * @param length  the GLDebugMessageARBCallback {@code length} argument
      * @param message the GLDebugMessageARBCallback {@code message} argument
+     *
      * @return the message as a String
      */
     public static String getMessage(int length, long message) {

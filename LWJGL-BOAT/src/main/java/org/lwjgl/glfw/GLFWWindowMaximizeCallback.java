@@ -40,17 +40,13 @@ public abstract class GLFWWindowMaximizeCallback extends Callback implements GLF
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWWindowMaximizeCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWWindowMaximizeCallback} instance that delegates to the specified {@code GLFWWindowMaximizeCallbackI} instance.
-     */
+    /** Creates a {@code GLFWWindowMaximizeCallback} instance that delegates to the specified {@code GLFWWindowMaximizeCallbackI} instance. */
     public static GLFWWindowMaximizeCallback create(GLFWWindowMaximizeCallbackI instance) {
         return instance instanceof GLFWWindowMaximizeCallback
                 ? (GLFWWindowMaximizeCallback) instance
@@ -65,9 +61,7 @@ public abstract class GLFWWindowMaximizeCallback extends Callback implements GLF
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetWindowMaximizeCallback SetWindowMaximizeCallback}.
-     */
+    /** See {@link GLFW#glfwSetWindowMaximizeCallback SetWindowMaximizeCallback}. */
     public GLFWWindowMaximizeCallback set(long window) {
         glfwSetWindowMaximizeCallback(window, this);
         return this;

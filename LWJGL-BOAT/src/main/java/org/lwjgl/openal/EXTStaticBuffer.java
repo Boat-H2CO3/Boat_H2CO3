@@ -28,7 +28,7 @@ public class EXTStaticBuffer {
 
     static boolean isAvailable(ALCapabilities caps) {
         return checkFunctions(
-                caps.alBufferDataStatic
+            caps.alBufferDataStatic
         );
     }
 
@@ -99,9 +99,7 @@ public class EXTStaticBuffer {
         nalBufferDataStatic(buffer, format, memAddress(data), data.remaining() << 2, freq);
     }
 
-    /**
-     * Array version of: {@link #alBufferDataStatic BufferDataStatic}
-     */
+    /** Array version of: {@link #alBufferDataStatic BufferDataStatic} */
     @NativeType("ALvoid")
     public static void alBufferDataStatic(@NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") short[] data, @NativeType("ALsizei") int freq) {
         long __functionAddress = AL.getICD().alBufferDataStatic;
@@ -111,9 +109,7 @@ public class EXTStaticBuffer {
         invokePV(buffer, format, data, data.length << 1, freq, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alBufferDataStatic BufferDataStatic}
-     */
+    /** Array version of: {@link #alBufferDataStatic BufferDataStatic} */
     @NativeType("ALvoid")
     public static void alBufferDataStatic(@NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") int[] data, @NativeType("ALsizei") int freq) {
         long __functionAddress = AL.getICD().alBufferDataStatic;
@@ -123,9 +119,7 @@ public class EXTStaticBuffer {
         invokePV(buffer, format, data, data.length << 2, freq, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alBufferDataStatic BufferDataStatic}
-     */
+    /** Array version of: {@link #alBufferDataStatic BufferDataStatic} */
     @NativeType("ALvoid")
     public static void alBufferDataStatic(@NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") float[] data, @NativeType("ALsizei") int freq) {
         long __functionAddress = AL.getICD().alBufferDataStatic;

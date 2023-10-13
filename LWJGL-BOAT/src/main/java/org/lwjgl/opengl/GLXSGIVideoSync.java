@@ -32,9 +32,7 @@ public class GLXSGIVideoSync {
 
     // --- [ glXGetVideoSyncSGI ] ---
 
-    /**
-     * Unsafe version of: {@link #glXGetVideoSyncSGI GetVideoSyncSGI}
-     */
+    /** Unsafe version of: {@link #glXGetVideoSyncSGI GetVideoSyncSGI} */
     public static int nglXGetVideoSyncSGI(long count) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetVideoSyncSGI;
         if (CHECKS) {
@@ -58,9 +56,7 @@ public class GLXSGIVideoSync {
 
     // --- [ glXWaitVideoSyncSGI ] ---
 
-    /**
-     * Unsafe version of: {@link #glXWaitVideoSyncSGI WaitVideoSyncSGI}
-     */
+    /** Unsafe version of: {@link #glXWaitVideoSyncSGI WaitVideoSyncSGI} */
     public static int nglXWaitVideoSyncSGI(int divisor, int remainder, long count) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXWaitVideoSyncSGI;
         if (CHECKS) {
@@ -90,9 +86,7 @@ public class GLXSGIVideoSync {
         return nglXWaitVideoSyncSGI(divisor, remainder, memAddress(count));
     }
 
-    /**
-     * Array version of: {@link #glXGetVideoSyncSGI GetVideoSyncSGI}
-     */
+    /** Array version of: {@link #glXGetVideoSyncSGI GetVideoSyncSGI} */
     @NativeType("GLint")
     public static int glXGetVideoSyncSGI(@NativeType("unsigned int *") int[] count) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetVideoSyncSGI;
@@ -103,9 +97,7 @@ public class GLXSGIVideoSync {
         return callPI(count, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glXWaitVideoSyncSGI WaitVideoSyncSGI}
-     */
+    /** Array version of: {@link #glXWaitVideoSyncSGI WaitVideoSyncSGI} */
     @NativeType("GLint")
     public static int glXWaitVideoSyncSGI(int divisor, int remainder, @NativeType("unsigned int *") int[] count) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXWaitVideoSyncSGI;

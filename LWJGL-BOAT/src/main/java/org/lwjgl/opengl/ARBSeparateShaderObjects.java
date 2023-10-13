@@ -5,17 +5,15 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import javax.annotation.*;
 
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.*;
 
-import javax.annotation.Nullable;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_separate_shader_objects.txt">ARB_separate_shader_objects</a> extension.
@@ -67,9 +65,7 @@ import javax.annotation.Nullable;
  */
 public class ARBSeparateShaderObjects {
 
-    /**
-     * Accepted by {@code stages} parameter to UseProgramStages.
-     */
+    /** Accepted by {@code stages} parameter to UseProgramStages. */
     public static final int
             GL_VERTEX_SHADER_BIT = 0x1,
             GL_FRAGMENT_SHADER_BIT = 0x2,
@@ -78,23 +74,16 @@ public class ARBSeparateShaderObjects {
             GL_TESS_EVALUATION_SHADER_BIT = 0x10,
             GL_ALL_SHADER_BITS = 0xFFFFFFFF;
 
-    /**
-     * Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv.
-     */
+    /** Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv. */
     public static final int GL_PROGRAM_SEPARABLE = 0x8258;
 
-    /**
-     * Accepted by {@code type} parameter to GetProgramPipelineiv.
-     */
+    /** Accepted by {@code type} parameter to GetProgramPipelineiv. */
     public static final int GL_ACTIVE_PROGRAM = 0x8259;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_PROGRAM_PIPELINE_BINDING = 0x825A;
 
-    static {
-        GL.initialize();
+    static { GL.initialize();
     }
 
     protected ARBSeparateShaderObjects() {
@@ -300,9 +289,7 @@ public class ARBSeparateShaderObjects {
         GL41C.glDeleteProgramPipelines(pipelines);
     }
 
-    /**
-     * Deletes program pipeline objects.
-     */
+    /** Deletes program pipeline objects. */
     public static void glDeleteProgramPipelines(@NativeType("GLuint const *") int pipeline) {
         GL41C.glDeleteProgramPipelines(pipeline);
     }
@@ -327,9 +314,7 @@ public class ARBSeparateShaderObjects {
         GL41C.glGenProgramPipelines(pipelines);
     }
 
-    /**
-     * Reserves program pipeline object names.
-     */
+    /** Reserves program pipeline object names. */
     @NativeType("void")
     public static int glGenProgramPipelines() {
         return GL41C.glGenProgramPipelines();
@@ -362,9 +347,7 @@ public class ARBSeparateShaderObjects {
 
     // --- [ glGetProgramPipelineiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramPipelineiv GetProgramPipelineiv}
-     */
+    /** Unsafe version of: {@link #glGetProgramPipelineiv GetProgramPipelineiv} */
     public static void nglGetProgramPipelineiv(int pipeline, int pname, long params) {
         GL41C.nglGetProgramPipelineiv(pipeline, pname, params);
     }
@@ -1443,268 +1426,192 @@ public class ARBSeparateShaderObjects {
         return glGetProgramPipelineInfoLog(pipeline, glGetProgramPipelinei(pipeline, GL20.GL_INFO_LOG_LENGTH));
     }
 
-    /**
-     * Array version of: {@link #glDeleteProgramPipelines DeleteProgramPipelines}
-     */
+    /** Array version of: {@link #glDeleteProgramPipelines DeleteProgramPipelines} */
     public static void glDeleteProgramPipelines(@NativeType("GLuint const *") int[] pipelines) {
         GL41C.glDeleteProgramPipelines(pipelines);
     }
 
-    /**
-     * Array version of: {@link #glGenProgramPipelines GenProgramPipelines}
-     */
+    /** Array version of: {@link #glGenProgramPipelines GenProgramPipelines} */
     public static void glGenProgramPipelines(@NativeType("GLuint *") int[] pipelines) {
         GL41C.glGenProgramPipelines(pipelines);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramPipelineiv GetProgramPipelineiv}
-     */
+    /** Array version of: {@link #glGetProgramPipelineiv GetProgramPipelineiv} */
     public static void glGetProgramPipelineiv(@NativeType("GLuint") int pipeline, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL41C.glGetProgramPipelineiv(pipeline, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform1iv ProgramUniform1iv}
-     */
+    /** Array version of: {@link #glProgramUniform1iv ProgramUniform1iv} */
     public static void glProgramUniform1iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         GL41C.glProgramUniform1iv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform2iv ProgramUniform2iv}
-     */
+    /** Array version of: {@link #glProgramUniform2iv ProgramUniform2iv} */
     public static void glProgramUniform2iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         GL41C.glProgramUniform2iv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform3iv ProgramUniform3iv}
-     */
+    /** Array version of: {@link #glProgramUniform3iv ProgramUniform3iv} */
     public static void glProgramUniform3iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         GL41C.glProgramUniform3iv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform4iv ProgramUniform4iv}
-     */
+    /** Array version of: {@link #glProgramUniform4iv ProgramUniform4iv} */
     public static void glProgramUniform4iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         GL41C.glProgramUniform4iv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform1uiv ProgramUniform1uiv}
-     */
+    /** Array version of: {@link #glProgramUniform1uiv ProgramUniform1uiv} */
     public static void glProgramUniform1uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         GL41C.glProgramUniform1uiv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform2uiv ProgramUniform2uiv}
-     */
+    /** Array version of: {@link #glProgramUniform2uiv ProgramUniform2uiv} */
     public static void glProgramUniform2uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         GL41C.glProgramUniform2uiv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform3uiv ProgramUniform3uiv}
-     */
+    /** Array version of: {@link #glProgramUniform3uiv ProgramUniform3uiv} */
     public static void glProgramUniform3uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         GL41C.glProgramUniform3uiv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform4uiv ProgramUniform4uiv}
-     */
+    /** Array version of: {@link #glProgramUniform4uiv ProgramUniform4uiv} */
     public static void glProgramUniform4uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         GL41C.glProgramUniform4uiv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform1fv ProgramUniform1fv}
-     */
+    /** Array version of: {@link #glProgramUniform1fv ProgramUniform1fv} */
     public static void glProgramUniform1fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniform1fv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform2fv ProgramUniform2fv}
-     */
+    /** Array version of: {@link #glProgramUniform2fv ProgramUniform2fv} */
     public static void glProgramUniform2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniform2fv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform3fv ProgramUniform3fv}
-     */
+    /** Array version of: {@link #glProgramUniform3fv ProgramUniform3fv} */
     public static void glProgramUniform3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniform3fv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform4fv ProgramUniform4fv}
-     */
+    /** Array version of: {@link #glProgramUniform4fv ProgramUniform4fv} */
     public static void glProgramUniform4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniform4fv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform1dv ProgramUniform1dv}
-     */
+    /** Array version of: {@link #glProgramUniform1dv ProgramUniform1dv} */
     public static void glProgramUniform1dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniform1dv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform2dv ProgramUniform2dv}
-     */
+    /** Array version of: {@link #glProgramUniform2dv ProgramUniform2dv} */
     public static void glProgramUniform2dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniform2dv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform3dv ProgramUniform3dv}
-     */
+    /** Array version of: {@link #glProgramUniform3dv ProgramUniform3dv} */
     public static void glProgramUniform3dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniform3dv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform4dv ProgramUniform4dv}
-     */
+    /** Array version of: {@link #glProgramUniform4dv ProgramUniform4dv} */
     public static void glProgramUniform4dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniform4dv(program, location, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2fv ProgramUniformMatrix2fv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2fv ProgramUniformMatrix2fv} */
     public static void glProgramUniformMatrix2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniformMatrix2fv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3fv ProgramUniformMatrix3fv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3fv ProgramUniformMatrix3fv} */
     public static void glProgramUniformMatrix3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniformMatrix3fv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4fv ProgramUniformMatrix4fv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4fv ProgramUniformMatrix4fv} */
     public static void glProgramUniformMatrix4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniformMatrix4fv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2dv ProgramUniformMatrix2dv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2dv ProgramUniformMatrix2dv} */
     public static void glProgramUniformMatrix2dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniformMatrix2dv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3dv ProgramUniformMatrix3dv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3dv ProgramUniformMatrix3dv} */
     public static void glProgramUniformMatrix3dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniformMatrix3dv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4dv ProgramUniformMatrix4dv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4dv ProgramUniformMatrix4dv} */
     public static void glProgramUniformMatrix4dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniformMatrix4dv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2x3fv ProgramUniformMatrix2x3fv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2x3fv ProgramUniformMatrix2x3fv} */
     public static void glProgramUniformMatrix2x3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniformMatrix2x3fv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3x2fv ProgramUniformMatrix3x2fv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3x2fv ProgramUniformMatrix3x2fv} */
     public static void glProgramUniformMatrix3x2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniformMatrix3x2fv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2x4fv ProgramUniformMatrix2x4fv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2x4fv ProgramUniformMatrix2x4fv} */
     public static void glProgramUniformMatrix2x4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniformMatrix2x4fv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4x2fv ProgramUniformMatrix4x2fv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4x2fv ProgramUniformMatrix4x2fv} */
     public static void glProgramUniformMatrix4x2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniformMatrix4x2fv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3x4fv ProgramUniformMatrix3x4fv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3x4fv ProgramUniformMatrix3x4fv} */
     public static void glProgramUniformMatrix3x4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniformMatrix3x4fv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4x3fv ProgramUniformMatrix4x3fv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4x3fv ProgramUniformMatrix4x3fv} */
     public static void glProgramUniformMatrix4x3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         GL41C.glProgramUniformMatrix4x3fv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2x3dv ProgramUniformMatrix2x3dv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2x3dv ProgramUniformMatrix2x3dv} */
     public static void glProgramUniformMatrix2x3dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniformMatrix2x3dv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3x2dv ProgramUniformMatrix3x2dv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3x2dv ProgramUniformMatrix3x2dv} */
     public static void glProgramUniformMatrix3x2dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniformMatrix3x2dv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2x4dv ProgramUniformMatrix2x4dv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2x4dv ProgramUniformMatrix2x4dv} */
     public static void glProgramUniformMatrix2x4dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniformMatrix2x4dv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4x2dv ProgramUniformMatrix4x2dv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4x2dv ProgramUniformMatrix4x2dv} */
     public static void glProgramUniformMatrix4x2dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniformMatrix4x2dv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3x4dv ProgramUniformMatrix3x4dv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3x4dv ProgramUniformMatrix3x4dv} */
     public static void glProgramUniformMatrix3x4dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniformMatrix3x4dv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4x3dv ProgramUniformMatrix4x3dv}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4x3dv ProgramUniformMatrix4x3dv} */
     public static void glProgramUniformMatrix4x3dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL41C.glProgramUniformMatrix4x3dv(program, location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramPipelineInfoLog GetProgramPipelineInfoLog}
-     */
+    /** Array version of: {@link #glGetProgramPipelineInfoLog GetProgramPipelineInfoLog} */
     public static void glGetProgramPipelineInfoLog(@NativeType("GLuint") int pipeline, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer infoLog) {
         GL41C.glGetProgramPipelineInfoLog(pipeline, length, infoLog);
     }

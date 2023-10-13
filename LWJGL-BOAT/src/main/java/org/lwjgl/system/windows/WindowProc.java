@@ -38,17 +38,13 @@ public abstract class WindowProc extends Callback implements WindowProcI {
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static WindowProc createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code WindowProc} instance that delegates to the specified {@code WindowProcI} instance.
-     */
+    /** Creates a {@code WindowProc} instance that delegates to the specified {@code WindowProcI} instance. */
     public static WindowProc create(WindowProcI instance) {
         return instance instanceof WindowProc
                 ? (WindowProc) instance

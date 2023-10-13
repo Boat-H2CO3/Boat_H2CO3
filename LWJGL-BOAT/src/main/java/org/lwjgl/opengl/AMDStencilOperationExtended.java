@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_stencil_operation_extended.txt">AMD_stencil_operation_extended</a> extension.
@@ -23,16 +23,12 @@ import org.lwjgl.system.NativeType;
  */
 public class AMDStencilOperationExtended {
 
-    /**
-     * Accepted by the {@code sfail}, {@code dpfail} and {@code dppass} parameters of StencilOp and StencilOpSeparate.
-     */
+    /** Accepted by the {@code sfail}, {@code dpfail} and {@code dppass} parameters of StencilOp and StencilOpSeparate. */
     public static final int
             GL_SET_AMD = 0x874A,
             GL_REPLACE_VALUE_AMD = 0x874B;
 
-    /**
-     * Accepted by the {@code param} parameter of GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v.
-     */
+    /** Accepted by the {@code param} parameter of GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v. */
     public static final int
             GL_STENCIL_OP_VALUE_AMD = 0x874C,
             GL_STENCIL_BACK_OP_VALUE_AMD = 0x874D;

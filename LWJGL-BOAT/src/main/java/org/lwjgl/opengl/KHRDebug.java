@@ -84,21 +84,15 @@ import static org.lwjgl.system.Checks.*;
  */
 public class KHRDebug {
 
-    /**
-     * Tokens accepted by the {@code target} parameters of Enable, Disable, and IsEnabled.
-     */
+    /** Tokens accepted by the {@code target} parameters of Enable, Disable, and IsEnabled. */
     public static final int
             GL_DEBUG_OUTPUT = 0x92E0,
             GL_DEBUG_OUTPUT_SYNCHRONOUS = 0x8242;
 
-    /**
-     * Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.
-     */
+    /** Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS. */
     public static final int GL_CONTEXT_FLAG_DEBUG_BIT = 0x2;
 
-    /**
-     * Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v.
-     */
+    /** Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v. */
     public static final int
             GL_MAX_DEBUG_MESSAGE_LENGTH = 0x9143,
             GL_MAX_DEBUG_LOGGED_MESSAGES = 0x9144,
@@ -108,9 +102,7 @@ public class KHRDebug {
             GL_DEBUG_GROUP_STACK_DEPTH = 0x826D,
             GL_MAX_LABEL_LENGTH = 0x82E8;
 
-    /**
-     * Tokens accepted by the {@code pname} parameter of GetPointerv.
-     */
+    /** Tokens accepted by the {@code pname} parameter of GetPointerv. */
     public static final int
             GL_DEBUG_CALLBACK_FUNCTION = 0x8244,
             GL_DEBUG_CALLBACK_USER_PARAM = 0x8245;
@@ -140,9 +132,7 @@ public class KHRDebug {
             GL_DEBUG_TYPE_OTHER = 0x8251,
             GL_DEBUG_TYPE_MARKER = 0x8268;
 
-    /**
-     * Tokens accepted or provided by the {@code type} parameters of DebugMessageControl and DEBUGPROC, and the {@code types} parameter of GetDebugMessageLog.
-     */
+    /** Tokens accepted or provided by the {@code type} parameters of DebugMessageControl and DEBUGPROC, and the {@code types} parameter of GetDebugMessageLog. */
     public static final int
             GL_DEBUG_TYPE_PUSH_GROUP = 0x8269,
             GL_DEBUG_TYPE_POP_GROUP = 0x826A;
@@ -157,9 +147,7 @@ public class KHRDebug {
             GL_DEBUG_SEVERITY_LOW = 0x9148,
             GL_DEBUG_SEVERITY_NOTIFICATION = 0x826B;
 
-    /**
-     * Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.
-     */
+    /** Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel. */
     public static final int
             GL_BUFFER = 0x82E0,
             GL_SHADER = 0x82E1,
@@ -323,9 +311,7 @@ public class KHRDebug {
 
     // --- [ glDebugMessageCallback ] ---
 
-    /**
-     * Unsafe version of: {@link #glDebugMessageCallback DebugMessageCallback}
-     */
+    /** Unsafe version of: {@link #glDebugMessageCallback DebugMessageCallback} */
     public static void nglDebugMessageCallback(long callback, long userParam) {
         GL43C.nglDebugMessageCallback(callback, userParam);
     }
@@ -633,31 +619,23 @@ public class KHRDebug {
         return glGetObjectPtrLabel(ptr, GL11.glGetInteger(GL_MAX_LABEL_LENGTH));
     }
 
-    /**
-     * Array version of: {@link #glDebugMessageControl DebugMessageControl}
-     */
+    /** Array version of: {@link #glDebugMessageControl DebugMessageControl} */
     public static void glDebugMessageControl(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @Nullable @NativeType("GLuint const *") int[] ids, @NativeType("GLboolean") boolean enabled) {
         GL43C.glDebugMessageControl(source, type, severity, ids, enabled);
     }
 
-    /**
-     * Array version of: {@link #glGetDebugMessageLog GetDebugMessageLog}
-     */
+    /** Array version of: {@link #glGetDebugMessageLog GetDebugMessageLog} */
     @NativeType("GLuint")
     public static int glGetDebugMessageLog(@NativeType("GLuint") int count, @Nullable @NativeType("GLenum *") int[] sources, @Nullable @NativeType("GLenum *") int[] types, @Nullable @NativeType("GLuint *") int[] ids, @Nullable @NativeType("GLenum *") int[] severities, @Nullable @NativeType("GLsizei *") int[] lengths, @Nullable @NativeType("GLchar *") ByteBuffer messageLog) {
         return GL43C.glGetDebugMessageLog(count, sources, types, ids, severities, lengths, messageLog);
     }
 
-    /**
-     * Array version of: {@link #glGetObjectLabel GetObjectLabel}
-     */
+    /** Array version of: {@link #glGetObjectLabel GetObjectLabel} */
     public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer label) {
         GL43C.glGetObjectLabel(identifier, name, length, label);
     }
 
-    /**
-     * Array version of: {@link #glGetObjectPtrLabel GetObjectPtrLabel}
-     */
+    /** Array version of: {@link #glGetObjectPtrLabel GetObjectPtrLabel} */
     public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer label) {
         GL43C.glGetObjectPtrLabel(ptr, length, label);
     }

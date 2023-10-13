@@ -36,25 +36,19 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVSampleLocations {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
             GL_SAMPLE_LOCATION_SUBPIXEL_BITS_NV = 0x933D,
             GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_NV = 0x933E,
             GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_NV = 0x933F,
             GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_NV = 0x9340;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetMultisamplefv.
-     */
+    /** Accepted by the {@code pname} parameter of GetMultisamplefv. */
     public static final int
             GL_SAMPLE_LOCATION_NV = 0x8E50,
             GL_PROGRAMMABLE_SAMPLE_LOCATION_NV = 0x9341;
 
-    /**
-     * Accepted by the {@code pname} parameter of FramebufferParameteri, GetFramebufferParameteriv.
-     */
+    /** Accepted by the {@code pname} parameter of FramebufferParameteri, GetFramebufferParameteriv. */
     public static final int
             GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_NV = 0x9342,
             GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV = 0x9343;
@@ -122,9 +116,7 @@ public class NVSampleLocations {
      */
     public static native void glResolveDepthValuesNV();
 
-    /**
-     * Array version of: {@link #glFramebufferSampleLocationsfvNV FramebufferSampleLocationsfvNV}
-     */
+    /** Array version of: {@link #glFramebufferSampleLocationsfvNV FramebufferSampleLocationsfvNV} */
     public static void glFramebufferSampleLocationsfvNV(@NativeType("GLenum") int target, @NativeType("GLuint") int start, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glFramebufferSampleLocationsfvNV;
         if (CHECKS) {
@@ -133,9 +125,7 @@ public class NVSampleLocations {
         callPV(target, start, v.length >> 1, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedFramebufferSampleLocationsfvNV NamedFramebufferSampleLocationsfvNV}
-     */
+    /** Array version of: {@link #glNamedFramebufferSampleLocationsfvNV NamedFramebufferSampleLocationsfvNV} */
     public static void glNamedFramebufferSampleLocationsfvNV(@NativeType("GLuint") int framebuffer, @NativeType("GLuint") int start, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glNamedFramebufferSampleLocationsfvNV;
         if (CHECKS) {

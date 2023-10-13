@@ -20,13 +20,10 @@ public class GLFWNativeNSGL {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * Contains the function pointers loaded from {@code GLFW.getLibrary()}.
-     */
+    /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
     public static final class Functions {
 
-        private Functions() {
-        }
+        private Functions() {}
 
         /**
          * Function address.
@@ -44,7 +41,9 @@ public class GLFWNativeNSGL {
      * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
      *
      * @param window the GLFW window
+     *
      * @return The {@code NSOpenGLContext} of the specified window, or nil if an error occurred.
+     *
      * @since version 3.0
      */
     @NativeType("id")

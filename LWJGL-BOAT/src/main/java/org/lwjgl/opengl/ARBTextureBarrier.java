@@ -5,7 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_barrier.txt">ARB_texture_barrier</a> extension.
@@ -26,15 +28,13 @@ public class ARBTextureBarrier {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glTextureBarrier
+            caps.glTextureBarrier
         );
     }
 
     // --- [ glTextureBarrier ] ---
 
-    /**
-     * Guarantees that writes have completed and caches have been invalidated before subsequent Draws are executed.
-     */
+    /** Guarantees that writes have completed and caches have been invalidated before subsequent Draws are executed. */
     public static void glTextureBarrier() {
         GL45C.glTextureBarrier();
     }

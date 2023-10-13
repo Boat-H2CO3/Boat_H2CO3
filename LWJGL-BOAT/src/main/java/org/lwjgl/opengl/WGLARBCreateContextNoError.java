@@ -15,9 +15,7 @@ package org.lwjgl.opengl;
  */
 public final class WGLARBCreateContextNoError {
 
-    /**
-     * Accepted as an attribute name in the {@code *attrib_list} argument to {@link WGLARBCreateContext#wglCreateContextAttribsARB CreateContextAttribsARB}.
-     */
+    /** Accepted as an attribute name in the {@code *attrib_list} argument to {@link WGLARBCreateContext#wglCreateContextAttribsARB CreateContextAttribsARB}. */
     public static final int WGL_CONTEXT_OPENGL_NO_ERROR_ARB = 0x31B3;
 
     private WGLARBCreateContextNoError() {

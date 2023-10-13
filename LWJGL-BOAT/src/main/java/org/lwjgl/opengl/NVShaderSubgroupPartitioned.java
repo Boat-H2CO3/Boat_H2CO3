@@ -18,9 +18,7 @@ package org.lwjgl.opengl;
  */
 public final class NVShaderSubgroupPartitioned {
 
-    /**
-     * Returned as bitfield in the {@code data} argument when {@link GL11C#glGetIntegerv GetIntegerv} is queried with a {@code pname} of {@link KHRShaderSubgroup#GL_SUBGROUP_SUPPORTED_FEATURES_KHR SUBGROUP_SUPPORTED_FEATURES_KHR}.
-     */
+    /** Returned as bitfield in the {@code data} argument when {@link GL11C#glGetIntegerv GetIntegerv} is queried with a {@code pname} of {@link KHRShaderSubgroup#GL_SUBGROUP_SUPPORTED_FEATURES_KHR SUBGROUP_SUPPORTED_FEATURES_KHR}. */
     public static final int GL_SUBGROUP_FEATURE_PARTITIONED_BIT_NV = 0x100;
 
     private NVShaderSubgroupPartitioned() {

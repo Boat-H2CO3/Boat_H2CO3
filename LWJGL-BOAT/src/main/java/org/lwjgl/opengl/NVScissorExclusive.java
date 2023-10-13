@@ -69,9 +69,7 @@ public class NVScissorExclusive {
 
     public static native void glScissorExclusiveNV(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
 
-    /**
-     * Array version of: {@link #glScissorExclusiveArrayvNV ScissorExclusiveArrayvNV}
-     */
+    /** Array version of: {@link #glScissorExclusiveArrayvNV ScissorExclusiveArrayvNV} */
     public static void glScissorExclusiveArrayvNV(@NativeType("GLuint") int first, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glScissorExclusiveArrayvNV;
         if (CHECKS) {

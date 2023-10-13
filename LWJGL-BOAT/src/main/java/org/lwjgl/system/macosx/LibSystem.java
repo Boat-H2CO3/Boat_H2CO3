@@ -22,9 +22,7 @@ public final class LibSystem {
 
     private static final SharedLibrary SYSTEM = Library.loadNative(LibSystem.class, "org.lwjgl", "System");
 
-    /**
-     * Returns the System {@link SharedLibrary}.
-     */
+    /** Returns the System {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return SYSTEM;
     }

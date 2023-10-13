@@ -5,26 +5,16 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.DEBUG;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjgl.system.MemoryUtil.memAddress;
-import static org.lwjgl.system.MemoryUtil.memAddressSafe;
+import javax.annotation.*;
 
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_robustness.txt">ARB_robustness</a> extension.
@@ -85,29 +75,21 @@ import javax.annotation.Nullable;
  */
 public class ARBRobustness {
 
-    /**
-     * Returned by GetGraphicsResetStatusARB.
-     */
+    /** Returned by GetGraphicsResetStatusARB. */
     public static final int
             GL_GUILTY_CONTEXT_RESET_ARB = 0x8253,
             GL_INNOCENT_CONTEXT_RESET_ARB = 0x8254,
             GL_UNKNOWN_CONTEXT_RESET_ARB = 0x8255;
 
-    /**
-     * Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_RESET_NOTIFICATION_STRATEGY_ARB = 0x8256;
 
-    /**
-     * Returned by GetIntegerv and related simple queries when {@code value} is RESET_NOTIFICATION_STRATEGY_ARB.
-     */
+    /** Returned by GetIntegerv and related simple queries when {@code value} is RESET_NOTIFICATION_STRATEGY_ARB. */
     public static final int
             GL_LOSE_CONTEXT_ON_RESET_ARB = 0x8252,
             GL_NO_RESET_NOTIFICATION_ARB = 0x8261;
 
-    /**
-     * Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.
-     */
+    /** Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS. */
     public static final int GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT_ARB = 0x4;
 
     static {
@@ -944,9 +926,7 @@ public class ARBRobustness {
         }
     }
 
-    /**
-     * Array version of: {@link #glGetnMapdvARB GetnMapdvARB}
-     */
+    /** Array version of: {@link #glGetnMapdvARB GetnMapdvARB} */
     public static void glGetnMapdvARB(@NativeType("GLenum") int target, @NativeType("GLenum") int query, @NativeType("GLdouble *") double[] data) {
         long __functionAddress = GL.getICD().glGetnMapdvARB;
         if (CHECKS) {
@@ -955,9 +935,7 @@ public class ARBRobustness {
         callPV(target, query, data.length, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnMapfvARB GetnMapfvARB}
-     */
+    /** Array version of: {@link #glGetnMapfvARB GetnMapfvARB} */
     public static void glGetnMapfvARB(@NativeType("GLenum") int target, @NativeType("GLenum") int query, @NativeType("GLfloat *") float[] data) {
         long __functionAddress = GL.getICD().glGetnMapfvARB;
         if (CHECKS) {
@@ -966,9 +944,7 @@ public class ARBRobustness {
         callPV(target, query, data.length, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnMapivARB GetnMapivARB}
-     */
+    /** Array version of: {@link #glGetnMapivARB GetnMapivARB} */
     public static void glGetnMapivARB(@NativeType("GLenum") int target, @NativeType("GLenum") int query, @NativeType("GLint *") int[] data) {
         long __functionAddress = GL.getICD().glGetnMapivARB;
         if (CHECKS) {
@@ -977,9 +953,7 @@ public class ARBRobustness {
         callPV(target, query, data.length, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnPixelMapfvARB GetnPixelMapfvARB}
-     */
+    /** Array version of: {@link #glGetnPixelMapfvARB GetnPixelMapfvARB} */
     public static void glGetnPixelMapfvARB(@NativeType("GLenum") int map, @NativeType("GLfloat *") float[] data) {
         long __functionAddress = GL.getICD().glGetnPixelMapfvARB;
         if (CHECKS) {
@@ -988,9 +962,7 @@ public class ARBRobustness {
         callPV(map, data.length, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnPixelMapuivARB GetnPixelMapuivARB}
-     */
+    /** Array version of: {@link #glGetnPixelMapuivARB GetnPixelMapuivARB} */
     public static void glGetnPixelMapuivARB(@NativeType("GLenum") int map, @NativeType("GLuint *") int[] data) {
         long __functionAddress = GL.getICD().glGetnPixelMapuivARB;
         if (CHECKS) {
@@ -999,9 +971,7 @@ public class ARBRobustness {
         callPV(map, data.length, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnPixelMapusvARB GetnPixelMapusvARB}
-     */
+    /** Array version of: {@link #glGetnPixelMapusvARB GetnPixelMapusvARB} */
     public static void glGetnPixelMapusvARB(@NativeType("GLenum") int map, @NativeType("GLushort *") short[] data) {
         long __functionAddress = GL.getICD().glGetnPixelMapusvARB;
         if (CHECKS) {
@@ -1010,9 +980,7 @@ public class ARBRobustness {
         callPV(map, data.length, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnTexImageARB GetnTexImageARB}
-     */
+    /** Array version of: {@link #glGetnTexImageARB GetnTexImageARB} */
     public static void glGetnTexImageARB(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] img) {
         long __functionAddress = GL.getICD().glGetnTexImageARB;
         if (CHECKS) {
@@ -1021,9 +989,7 @@ public class ARBRobustness {
         callPV(tex, level, format, type, img.length << 1, img, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnTexImageARB GetnTexImageARB}
-     */
+    /** Array version of: {@link #glGetnTexImageARB GetnTexImageARB} */
     public static void glGetnTexImageARB(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] img) {
         long __functionAddress = GL.getICD().glGetnTexImageARB;
         if (CHECKS) {
@@ -1032,9 +998,7 @@ public class ARBRobustness {
         callPV(tex, level, format, type, img.length << 2, img, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnTexImageARB GetnTexImageARB}
-     */
+    /** Array version of: {@link #glGetnTexImageARB GetnTexImageARB} */
     public static void glGetnTexImageARB(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] img) {
         long __functionAddress = GL.getICD().glGetnTexImageARB;
         if (CHECKS) {
@@ -1043,9 +1007,7 @@ public class ARBRobustness {
         callPV(tex, level, format, type, img.length << 2, img, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnTexImageARB GetnTexImageARB}
-     */
+    /** Array version of: {@link #glGetnTexImageARB GetnTexImageARB} */
     public static void glGetnTexImageARB(@NativeType("GLenum") int tex, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") double[] img) {
         long __functionAddress = GL.getICD().glGetnTexImageARB;
         if (CHECKS) {
@@ -1054,9 +1016,7 @@ public class ARBRobustness {
         callPV(tex, level, format, type, img.length << 3, img, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glReadnPixelsARB ReadnPixelsARB}
-     */
+    /** Array version of: {@link #glReadnPixelsARB ReadnPixelsARB} */
     public static void glReadnPixelsARB(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] data) {
         long __functionAddress = GL.getICD().glReadnPixelsARB;
         if (CHECKS) {
@@ -1065,9 +1025,7 @@ public class ARBRobustness {
         callPV(x, y, width, height, format, type, data.length << 1, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glReadnPixelsARB ReadnPixelsARB}
-     */
+    /** Array version of: {@link #glReadnPixelsARB ReadnPixelsARB} */
     public static void glReadnPixelsARB(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] data) {
         long __functionAddress = GL.getICD().glReadnPixelsARB;
         if (CHECKS) {
@@ -1076,9 +1034,7 @@ public class ARBRobustness {
         callPV(x, y, width, height, format, type, data.length << 2, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glReadnPixelsARB ReadnPixelsARB}
-     */
+    /** Array version of: {@link #glReadnPixelsARB ReadnPixelsARB} */
     public static void glReadnPixelsARB(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] data) {
         long __functionAddress = GL.getICD().glReadnPixelsARB;
         if (CHECKS) {
@@ -1087,9 +1043,7 @@ public class ARBRobustness {
         callPV(x, y, width, height, format, type, data.length << 2, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnColorTableARB GetnColorTableARB}
-     */
+    /** Array version of: {@link #glGetnColorTableARB GetnColorTableARB} */
     public static void glGetnColorTableARB(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] table) {
         long __functionAddress = GL.getICD().glGetnColorTableARB;
         if (CHECKS) {
@@ -1098,9 +1052,7 @@ public class ARBRobustness {
         callPV(target, format, type, table.length << 1, table, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnColorTableARB GetnColorTableARB}
-     */
+    /** Array version of: {@link #glGetnColorTableARB GetnColorTableARB} */
     public static void glGetnColorTableARB(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] table) {
         long __functionAddress = GL.getICD().glGetnColorTableARB;
         if (CHECKS) {
@@ -1109,9 +1061,7 @@ public class ARBRobustness {
         callPV(target, format, type, table.length << 2, table, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnColorTableARB GetnColorTableARB}
-     */
+    /** Array version of: {@link #glGetnColorTableARB GetnColorTableARB} */
     public static void glGetnColorTableARB(@NativeType("GLenum") int target, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] table) {
         long __functionAddress = GL.getICD().glGetnColorTableARB;
         if (CHECKS) {
@@ -1120,9 +1070,7 @@ public class ARBRobustness {
         callPV(target, format, type, table.length << 2, table, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnUniformfvARB GetnUniformfvARB}
-     */
+    /** Array version of: {@link #glGetnUniformfvARB GetnUniformfvARB} */
     public static void glGetnUniformfvARB(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetnUniformfvARB;
         if (CHECKS) {
@@ -1131,9 +1079,7 @@ public class ARBRobustness {
         callPV(program, location, params.length, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnUniformivARB GetnUniformivARB}
-     */
+    /** Array version of: {@link #glGetnUniformivARB GetnUniformivARB} */
     public static void glGetnUniformivARB(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetnUniformivARB;
         if (CHECKS) {
@@ -1142,9 +1088,7 @@ public class ARBRobustness {
         callPV(program, location, params.length, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnUniformuivARB GetnUniformuivARB}
-     */
+    /** Array version of: {@link #glGetnUniformuivARB GetnUniformuivARB} */
     public static void glGetnUniformuivARB(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glGetnUniformuivARB;
         if (CHECKS) {
@@ -1153,9 +1097,7 @@ public class ARBRobustness {
         callPV(program, location, params.length, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetnUniformdvARB GetnUniformdvARB}
-     */
+    /** Array version of: {@link #glGetnUniformdvARB GetnUniformdvARB} */
     public static void glGetnUniformdvARB(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble *") double[] params) {
         long __functionAddress = GL.getICD().glGetnUniformdvARB;
         if (CHECKS) {

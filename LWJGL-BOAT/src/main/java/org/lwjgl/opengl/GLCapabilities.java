@@ -6,9 +6,7 @@
 package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
-
 import java.util.Set;
-
 import org.lwjgl.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -2231,81 +2229,43 @@ public final class GLCapabilities {
             glFramebufferTextureMultiviewOVR,
             glNamedFramebufferTextureMultiviewOVR;
 
-    /**
-     * When true, {@link GL11} is supported.
-     */
+    /** When true, {@link GL11} is supported. */
     public final boolean OpenGL11;
-    /**
-     * When true, {@link GL12} is supported.
-     */
+    /** When true, {@link GL12} is supported. */
     public final boolean OpenGL12;
-    /**
-     * When true, {@link GL13} is supported.
-     */
+    /** When true, {@link GL13} is supported. */
     public final boolean OpenGL13;
-    /**
-     * When true, {@link GL14} is supported.
-     */
+    /** When true, {@link GL14} is supported. */
     public final boolean OpenGL14;
-    /**
-     * When true, {@link GL15} is supported.
-     */
+    /** When true, {@link GL15} is supported. */
     public final boolean OpenGL15;
-    /**
-     * When true, {@link GL20} is supported.
-     */
+    /** When true, {@link GL20} is supported. */
     public final boolean OpenGL20;
-    /**
-     * When true, {@link GL21} is supported.
-     */
+    /** When true, {@link GL21} is supported. */
     public final boolean OpenGL21;
-    /**
-     * When true, {@link GL30} is supported.
-     */
+    /** When true, {@link GL30} is supported. */
     public final boolean OpenGL30;
-    /**
-     * When true, {@link GL31} is supported.
-     */
+    /** When true, {@link GL31} is supported. */
     public final boolean OpenGL31;
-    /**
-     * When true, {@link GL32} is supported.
-     */
+    /** When true, {@link GL32} is supported. */
     public final boolean OpenGL32;
-    /**
-     * When true, {@link GL33} is supported.
-     */
+    /** When true, {@link GL33} is supported. */
     public final boolean OpenGL33;
-    /**
-     * When true, {@link GL40} is supported.
-     */
+    /** When true, {@link GL40} is supported. */
     public final boolean OpenGL40;
-    /**
-     * When true, {@link GL41} is supported.
-     */
+    /** When true, {@link GL41} is supported. */
     public final boolean OpenGL41;
-    /**
-     * When true, {@link GL42} is supported.
-     */
+    /** When true, {@link GL42} is supported. */
     public final boolean OpenGL42;
-    /**
-     * When true, {@link GL43} is supported.
-     */
+    /** When true, {@link GL43} is supported. */
     public final boolean OpenGL43;
-    /**
-     * When true, {@link GL44} is supported.
-     */
+    /** When true, {@link GL44} is supported. */
     public final boolean OpenGL44;
-    /**
-     * When true, {@link GL45} is supported.
-     */
+    /** When true, {@link GL45} is supported. */
     public final boolean OpenGL45;
-    /**
-     * When true, {@link GL46} is supported.
-     */
+    /** When true, {@link GL46} is supported. */
     public final boolean OpenGL46;
-    /**
-     * When true, {@link AMDBlendMinmaxFactor} is supported.
-     */
+    /** When true, {@link AMDBlendMinmaxFactor} is supported. */
     public final boolean GL_AMD_blend_minmax_factor;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_conservative_depth.txt">AMD_conservative_depth</a> extension is supported.
@@ -2322,21 +2282,13 @@ public final class GLCapabilities {
      * <p>Requires {@link GL30 OpenGL 3.0}. Promoted to core in {@link GL42 OpenGL 4.2}.</p>
      */
     public final boolean GL_AMD_conservative_depth;
-    /**
-     * When true, {@link AMDDebugOutput} is supported.
-     */
+    /** When true, {@link AMDDebugOutput} is supported. */
     public final boolean GL_AMD_debug_output;
-    /**
-     * When true, {@link AMDDepthClampSeparate} is supported.
-     */
+    /** When true, {@link AMDDepthClampSeparate} is supported. */
     public final boolean GL_AMD_depth_clamp_separate;
-    /**
-     * When true, {@link AMDDrawBuffersBlend} is supported.
-     */
+    /** When true, {@link AMDDrawBuffersBlend} is supported. */
     public final boolean GL_AMD_draw_buffers_blend;
-    /**
-     * When true, {@link AMDFramebufferMultisampleAdvanced} is supported.
-     */
+    /** When true, {@link AMDFramebufferMultisampleAdvanced} is supported. */
     public final boolean GL_AMD_framebuffer_multisample_advanced;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_gcn_shader.txt">AMD_gcn_shader</a> extension is supported.
@@ -2348,13 +2300,9 @@ public final class GLCapabilities {
      * <p>Requires {@link #GL_AMD_gpu_shader_int64 AMD_gpu_shader_int64} or {@link #GL_NV_gpu_shader5 NV_gpu_shader5}.</p>
      */
     public final boolean GL_AMD_gcn_shader;
-    /**
-     * When true, {@link AMDGPUShaderHalfFloat} is supported.
-     */
+    /** When true, {@link AMDGPUShaderHalfFloat} is supported. */
     public final boolean GL_AMD_gpu_shader_half_float;
-    /**
-     * When true, {@link AMDGPUShaderHalfFloatFetch} is supported.
-     */
+    /** When true, {@link AMDGPUShaderHalfFloatFetch} is supported. */
     public final boolean GL_AMD_gpu_shader_half_float_fetch;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_gpu_shader_int16.txt">AMD_gpu_shader_int16</a> extension is supported.
@@ -2373,37 +2321,21 @@ public final class GLCapabilities {
      * <p>Requires GLSL 4.00.</p>
      */
     public final boolean GL_AMD_gpu_shader_int16;
-    /**
-     * When true, {@link AMDGPUShaderInt64} is supported.
-     */
+    /** When true, {@link AMDGPUShaderInt64} is supported. */
     public final boolean GL_AMD_gpu_shader_int64;
-    /**
-     * When true, {@link AMDInterleavedElements} is supported.
-     */
+    /** When true, {@link AMDInterleavedElements} is supported. */
     public final boolean GL_AMD_interleaved_elements;
-    /**
-     * When true, {@link AMDOcclusionQueryEvent} is supported.
-     */
+    /** When true, {@link AMDOcclusionQueryEvent} is supported. */
     public final boolean GL_AMD_occlusion_query_event;
-    /**
-     * When true, {@link AMDPerformanceMonitor} is supported.
-     */
+    /** When true, {@link AMDPerformanceMonitor} is supported. */
     public final boolean GL_AMD_performance_monitor;
-    /**
-     * When true, {@link AMDPinnedMemory} is supported.
-     */
+    /** When true, {@link AMDPinnedMemory} is supported. */
     public final boolean GL_AMD_pinned_memory;
-    /**
-     * When true, {@link AMDQueryBufferObject} is supported.
-     */
+    /** When true, {@link AMDQueryBufferObject} is supported. */
     public final boolean GL_AMD_query_buffer_object;
-    /**
-     * When true, {@link AMDSamplePositions} is supported.
-     */
+    /** When true, {@link AMDSamplePositions} is supported. */
     public final boolean GL_AMD_sample_positions;
-    /**
-     * When true, {@link AMDSeamlessCubemapPerTexture} is supported.
-     */
+    /** When true, {@link AMDSeamlessCubemapPerTexture} is supported. */
     public final boolean GL_AMD_seamless_cubemap_per_texture;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_shader_atomic_counter_ops.txt">AMD_shader_atomic_counter_ops</a> extension is supported.
@@ -2469,13 +2401,9 @@ public final class GLCapabilities {
      * <p>Requires {@link GL20 OpenGL 2.0} or {@link #GL_ARB_shader_objects ARB_shader_objects}.</p>
      */
     public final boolean GL_AMD_shader_trinary_minmax;
-    /**
-     * When true, {@link AMDSparseTexture} is supported.
-     */
+    /** When true, {@link AMDSparseTexture} is supported. */
     public final boolean GL_AMD_sparse_texture;
-    /**
-     * When true, {@link AMDStencilOperationExtended} is supported.
-     */
+    /** When true, {@link AMDStencilOperationExtended} is supported. */
     public final boolean GL_AMD_stencil_operation_extended;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_texture_gather_bias_lod.txt">AMD_texture_gather_bias_lod</a> extension is supported.
@@ -2506,9 +2434,7 @@ public final class GLCapabilities {
      * <p>Requires {@link GL40 OpenGL 4.0} or {@link ARBTransformFeedback3 ARB_transform_feedback3}.</p>
      */
     public final boolean GL_AMD_transform_feedback3_lines_triangles;
-    /**
-     * When true, {@link AMDTransformFeedback4} is supported.
-     */
+    /** When true, {@link AMDTransformFeedback4} is supported. */
     public final boolean GL_AMD_transform_feedback4;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_vertex_shader_layer.txt">AMD_vertex_shader_layer</a> extension is supported.
@@ -2527,9 +2453,7 @@ public final class GLCapabilities {
      * <p>Requires {@link GL30 OpenGL 3.0} or {@link #GL_EXT_texture_array EXT_texture_array}.</p>
      */
     public final boolean GL_AMD_vertex_shader_layer;
-    /**
-     * When true, {@link AMDVertexShaderTessellator} is supported.
-     */
+    /** When true, {@link AMDVertexShaderTessellator} is supported. */
     public final boolean GL_AMD_vertex_shader_tessellator;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_vertex_shader_viewport_index.txt">AMD_vertex_shader_viewport_index</a> extension is supported.
@@ -2553,37 +2477,21 @@ public final class GLCapabilities {
      * <p>Requires GLSL 1.2. Promoted to core in {@link GL43 OpenGL 4.3}.</p>
      */
     public final boolean GL_ARB_arrays_of_arrays;
-    /**
-     * When true, {@link ARBBaseInstance} is supported.
-     */
+    /** When true, {@link ARBBaseInstance} is supported. */
     public final boolean GL_ARB_base_instance;
-    /**
-     * When true, {@link ARBBindlessTexture} is supported.
-     */
+    /** When true, {@link ARBBindlessTexture} is supported. */
     public final boolean GL_ARB_bindless_texture;
-    /**
-     * When true, {@link ARBBlendFuncExtended} is supported.
-     */
+    /** When true, {@link ARBBlendFuncExtended} is supported. */
     public final boolean GL_ARB_blend_func_extended;
-    /**
-     * When true, {@link ARBBufferStorage} is supported.
-     */
+    /** When true, {@link ARBBufferStorage} is supported. */
     public final boolean GL_ARB_buffer_storage;
-    /**
-     * When true, {@link ARBClearBufferObject} is supported.
-     */
+    /** When true, {@link ARBClearBufferObject} is supported. */
     public final boolean GL_ARB_clear_buffer_object;
-    /**
-     * When true, {@link ARBClearTexture} is supported.
-     */
+    /** When true, {@link ARBClearTexture} is supported. */
     public final boolean GL_ARB_clear_texture;
-    /**
-     * When true, {@link ARBClipControl} is supported.
-     */
+    /** When true, {@link ARBClipControl} is supported. */
     public final boolean GL_ARB_clip_control;
-    /**
-     * When true, {@link ARBColorBufferFloat} is supported.
-     */
+    /** When true, {@link ARBColorBufferFloat} is supported. */
     public final boolean GL_ARB_color_buffer_float;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_compatibility.txt">ARB_compatibility</a> extension is supported.
@@ -2591,21 +2499,13 @@ public final class GLCapabilities {
      * <p>This extension restores features deprecated by {@link GL30 OpenGL 3.0}.</p>
      */
     public final boolean GL_ARB_compatibility;
-    /**
-     * When true, {@link ARBCompressedTexturePixelStorage} is supported.
-     */
+    /** When true, {@link ARBCompressedTexturePixelStorage} is supported. */
     public final boolean GL_ARB_compressed_texture_pixel_storage;
-    /**
-     * When true, {@link ARBComputeShader} is supported.
-     */
+    /** When true, {@link ARBComputeShader} is supported. */
     public final boolean GL_ARB_compute_shader;
-    /**
-     * When true, {@link ARBComputeVariableGroupSize} is supported.
-     */
+    /** When true, {@link ARBComputeVariableGroupSize} is supported. */
     public final boolean GL_ARB_compute_variable_group_size;
-    /**
-     * When true, {@link ARBConditionalRenderInverted} is supported.
-     */
+    /** When true, {@link ARBConditionalRenderInverted} is supported. */
     public final boolean GL_ARB_conditional_render_inverted;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_conservative_depth.txt">ARB_conservative_depth</a> extension is supported.
@@ -2622,33 +2522,19 @@ public final class GLCapabilities {
      * <p>Requires {@link GL30 OpenGL 3.0}. Promoted to core in {@link GL42 OpenGL 4.2}.</p>
      */
     public final boolean GL_ARB_conservative_depth;
-    /**
-     * When true, {@link ARBCopyBuffer} is supported.
-     */
+    /** When true, {@link ARBCopyBuffer} is supported. */
     public final boolean GL_ARB_copy_buffer;
-    /**
-     * When true, {@link ARBCopyImage} is supported.
-     */
+    /** When true, {@link ARBCopyImage} is supported. */
     public final boolean GL_ARB_copy_image;
-    /**
-     * When true, {@link ARBCullDistance} is supported.
-     */
+    /** When true, {@link ARBCullDistance} is supported. */
     public final boolean GL_ARB_cull_distance;
-    /**
-     * When true, {@link ARBDebugOutput} is supported.
-     */
+    /** When true, {@link ARBDebugOutput} is supported. */
     public final boolean GL_ARB_debug_output;
-    /**
-     * When true, {@link ARBDepthBufferFloat} is supported.
-     */
+    /** When true, {@link ARBDepthBufferFloat} is supported. */
     public final boolean GL_ARB_depth_buffer_float;
-    /**
-     * When true, {@link ARBDepthClamp} is supported.
-     */
+    /** When true, {@link ARBDepthClamp} is supported. */
     public final boolean GL_ARB_depth_clamp;
-    /**
-     * When true, {@link ARBDepthTexture} is supported.
-     */
+    /** When true, {@link ARBDepthTexture} is supported. */
     public final boolean GL_ARB_depth_texture;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_derivative_control.txt">ARB_derivative_control</a> extension is supported.
@@ -2685,49 +2571,27 @@ public final class GLCapabilities {
      * <p>Requires {@link GL40 OpenGL 4.0} and GLSL 4.00. Promoted to core in {@link GL45 OpenGL 4.5}.</p>
      */
     public final boolean GL_ARB_derivative_control;
-    /**
-     * When true, {@link ARBDirectStateAccess} is supported.
-     */
+    /** When true, {@link ARBDirectStateAccess} is supported. */
     public final boolean GL_ARB_direct_state_access;
-    /**
-     * When true, {@link ARBDrawBuffers} is supported.
-     */
+    /** When true, {@link ARBDrawBuffers} is supported. */
     public final boolean GL_ARB_draw_buffers;
-    /**
-     * When true, {@link ARBDrawBuffersBlend} is supported.
-     */
+    /** When true, {@link ARBDrawBuffersBlend} is supported. */
     public final boolean GL_ARB_draw_buffers_blend;
-    /**
-     * When true, {@link ARBDrawElementsBaseVertex} is supported.
-     */
+    /** When true, {@link ARBDrawElementsBaseVertex} is supported. */
     public final boolean GL_ARB_draw_elements_base_vertex;
-    /**
-     * When true, {@link ARBDrawIndirect} is supported.
-     */
+    /** When true, {@link ARBDrawIndirect} is supported. */
     public final boolean GL_ARB_draw_indirect;
-    /**
-     * When true, {@link ARBDrawInstanced} is supported.
-     */
+    /** When true, {@link ARBDrawInstanced} is supported. */
     public final boolean GL_ARB_draw_instanced;
-    /**
-     * When true, {@link ARBEnhancedLayouts} is supported.
-     */
+    /** When true, {@link ARBEnhancedLayouts} is supported. */
     public final boolean GL_ARB_enhanced_layouts;
-    /**
-     * When true, {@link ARBES2Compatibility} is supported.
-     */
+    /** When true, {@link ARBES2Compatibility} is supported. */
     public final boolean GL_ARB_ES2_compatibility;
-    /**
-     * When true, {@link ARBES31Compatibility} is supported.
-     */
+    /** When true, {@link ARBES31Compatibility} is supported. */
     public final boolean GL_ARB_ES3_1_compatibility;
-    /**
-     * When true, {@link ARBES32Compatibility} is supported.
-     */
+    /** When true, {@link ARBES32Compatibility} is supported. */
     public final boolean GL_ARB_ES3_2_compatibility;
-    /**
-     * When true, {@link ARBES3Compatibility} is supported.
-     */
+    /** When true, {@link ARBES3Compatibility} is supported. */
     public final boolean GL_ARB_ES3_compatibility;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_explicit_attrib_location.txt">ARB_explicit_attrib_location</a> extension is supported.
@@ -2739,9 +2603,7 @@ public final class GLCapabilities {
      * <p>Requires {@link GL20 OpenGL 2.0} or {@link #GL_ARB_vertex_shader ARB_vertex_shader}. Promoted to core in {@link GL33 OpenGL 3.3}.</p>
      */
     public final boolean GL_ARB_explicit_attrib_location;
-    /**
-     * When true, {@link ARBExplicitUniformLocation} is supported.
-     */
+    /** When true, {@link ARBExplicitUniformLocation} is supported. */
     public final boolean GL_ARB_explicit_uniform_location;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_coord_conventions.txt">ARB_fragment_coord_conventions</a> extension is supported.
@@ -2796,9 +2658,7 @@ public final class GLCapabilities {
      * <p>Requires {@link GL30 OpenGL 3.0} and {@link #GL_ARB_geometry_shader4 ARB_geometry_shader4}, or {@link GL32 OpenGL 3.2}. Promoted to core in {@link GL43 OpenGL 4.3}.</p>
      */
     public final boolean GL_ARB_fragment_layer_viewport;
-    /**
-     * When true, {@link ARBFragmentProgram} is supported.
-     */
+    /** When true, {@link ARBFragmentProgram} is supported. */
     public final boolean GL_ARB_fragment_program;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_program_shadow.txt">ARB_fragment_program_shadow</a> extension is supported.
@@ -2808,9 +2668,7 @@ public final class GLCapabilities {
      * <p>Requires {@link #GL_ARB_fragment_program ARB_fragment_program} and {@link #GL_ARB_shadow ARB_shadow}.</p>
      */
     public final boolean GL_ARB_fragment_program_shadow;
-    /**
-     * When true, {@link ARBFragmentShader} is supported.
-     */
+    /** When true, {@link ARBFragmentShader} is supported. */
     public final boolean GL_ARB_fragment_shader;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_shader_interlock.txt">ARB_fragment_shader_interlock</a> extension is supported.
@@ -2850,137 +2708,71 @@ public final class GLCapabilities {
      * <p>Requires {@link GL42 OpenGL 4.2} or {@link ARBShaderImageLoadStore ARB_shader_image_load_store}.</p>
      */
     public final boolean GL_ARB_fragment_shader_interlock;
-    /**
-     * When true, {@link ARBFramebufferNoAttachments} is supported.
-     */
+    /** When true, {@link ARBFramebufferNoAttachments} is supported. */
     public final boolean GL_ARB_framebuffer_no_attachments;
-    /**
-     * When true, {@link ARBFramebufferObject} is supported.
-     */
+    /** When true, {@link ARBFramebufferObject} is supported. */
     public final boolean GL_ARB_framebuffer_object;
-    /**
-     * When true, {@link ARBFramebufferSRGB} is supported.
-     */
+    /** When true, {@link ARBFramebufferSRGB} is supported. */
     public final boolean GL_ARB_framebuffer_sRGB;
-    /**
-     * When true, {@link ARBGeometryShader4} is supported.
-     */
+    /** When true, {@link ARBGeometryShader4} is supported. */
     public final boolean GL_ARB_geometry_shader4;
-    /**
-     * When true, {@link ARBGetProgramBinary} is supported.
-     */
+    /** When true, {@link ARBGetProgramBinary} is supported. */
     public final boolean GL_ARB_get_program_binary;
-    /**
-     * When true, {@link ARBGetTextureSubImage} is supported.
-     */
+    /** When true, {@link ARBGetTextureSubImage} is supported. */
     public final boolean GL_ARB_get_texture_sub_image;
-    /**
-     * When true, {@link ARBGLSPIRV} is supported.
-     */
+    /** When true, {@link ARBGLSPIRV} is supported. */
     public final boolean GL_ARB_gl_spirv;
-    /**
-     * When true, {@link ARBGPUShader5} is supported.
-     */
+    /** When true, {@link ARBGPUShader5} is supported. */
     public final boolean GL_ARB_gpu_shader5;
-    /**
-     * When true, {@link ARBGPUShaderFP64} is supported.
-     */
+    /** When true, {@link ARBGPUShaderFP64} is supported. */
     public final boolean GL_ARB_gpu_shader_fp64;
-    /**
-     * When true, {@link ARBGPUShaderInt64} is supported.
-     */
+    /** When true, {@link ARBGPUShaderInt64} is supported. */
     public final boolean GL_ARB_gpu_shader_int64;
-    /**
-     * When true, {@link ARBHalfFloatPixel} is supported.
-     */
+    /** When true, {@link ARBHalfFloatPixel} is supported. */
     public final boolean GL_ARB_half_float_pixel;
-    /**
-     * When true, {@link ARBHalfFloatVertex} is supported.
-     */
+    /** When true, {@link ARBHalfFloatVertex} is supported. */
     public final boolean GL_ARB_half_float_vertex;
-    /**
-     * When true, {@link ARBImaging} is supported.
-     */
+    /** When true, {@link ARBImaging} is supported. */
     public final boolean GL_ARB_imaging;
-    /**
-     * When true, {@link ARBIndirectParameters} is supported.
-     */
+    /** When true, {@link ARBIndirectParameters} is supported. */
     public final boolean GL_ARB_indirect_parameters;
-    /**
-     * When true, {@link ARBInstancedArrays} is supported.
-     */
+    /** When true, {@link ARBInstancedArrays} is supported. */
     public final boolean GL_ARB_instanced_arrays;
-    /**
-     * When true, {@link ARBInternalformatQuery} is supported.
-     */
+    /** When true, {@link ARBInternalformatQuery} is supported. */
     public final boolean GL_ARB_internalformat_query;
-    /**
-     * When true, {@link ARBInternalformatQuery2} is supported.
-     */
+    /** When true, {@link ARBInternalformatQuery2} is supported. */
     public final boolean GL_ARB_internalformat_query2;
-    /**
-     * When true, {@link ARBInvalidateSubdata} is supported.
-     */
+    /** When true, {@link ARBInvalidateSubdata} is supported. */
     public final boolean GL_ARB_invalidate_subdata;
-    /**
-     * When true, {@link ARBMapBufferAlignment} is supported.
-     */
+    /** When true, {@link ARBMapBufferAlignment} is supported. */
     public final boolean GL_ARB_map_buffer_alignment;
-    /**
-     * When true, {@link ARBMapBufferRange} is supported.
-     */
+    /** When true, {@link ARBMapBufferRange} is supported. */
     public final boolean GL_ARB_map_buffer_range;
-    /**
-     * When true, {@link ARBMatrixPalette} is supported.
-     */
+    /** When true, {@link ARBMatrixPalette} is supported. */
     public final boolean GL_ARB_matrix_palette;
-    /**
-     * When true, {@link ARBMultiBind} is supported.
-     */
+    /** When true, {@link ARBMultiBind} is supported. */
     public final boolean GL_ARB_multi_bind;
-    /**
-     * When true, {@link ARBMultiDrawIndirect} is supported.
-     */
+    /** When true, {@link ARBMultiDrawIndirect} is supported. */
     public final boolean GL_ARB_multi_draw_indirect;
-    /**
-     * When true, {@link ARBMultisample} is supported.
-     */
+    /** When true, {@link ARBMultisample} is supported. */
     public final boolean GL_ARB_multisample;
-    /**
-     * When true, {@link ARBMultitexture} is supported.
-     */
+    /** When true, {@link ARBMultitexture} is supported. */
     public final boolean GL_ARB_multitexture;
-    /**
-     * When true, {@link ARBOcclusionQuery} is supported.
-     */
+    /** When true, {@link ARBOcclusionQuery} is supported. */
     public final boolean GL_ARB_occlusion_query;
-    /**
-     * When true, {@link ARBOcclusionQuery2} is supported.
-     */
+    /** When true, {@link ARBOcclusionQuery2} is supported. */
     public final boolean GL_ARB_occlusion_query2;
-    /**
-     * When true, {@link ARBParallelShaderCompile} is supported.
-     */
+    /** When true, {@link ARBParallelShaderCompile} is supported. */
     public final boolean GL_ARB_parallel_shader_compile;
-    /**
-     * When true, {@link ARBPipelineStatisticsQuery} is supported.
-     */
+    /** When true, {@link ARBPipelineStatisticsQuery} is supported. */
     public final boolean GL_ARB_pipeline_statistics_query;
-    /**
-     * When true, {@link ARBPixelBufferObject} is supported.
-     */
+    /** When true, {@link ARBPixelBufferObject} is supported. */
     public final boolean GL_ARB_pixel_buffer_object;
-    /**
-     * When true, {@link ARBPointParameters} is supported.
-     */
+    /** When true, {@link ARBPointParameters} is supported. */
     public final boolean GL_ARB_point_parameters;
-    /**
-     * When true, {@link ARBPointSprite} is supported.
-     */
+    /** When true, {@link ARBPointSprite} is supported. */
     public final boolean GL_ARB_point_sprite;
-    /**
-     * When true, {@link ARBPolygonOffsetClamp} is supported.
-     */
+    /** When true, {@link ARBPolygonOffsetClamp} is supported. */
     public final boolean GL_ARB_polygon_offset_clamp;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_post_depth_coverage.txt">ARB_post_depth_coverage</a> extension is supported.
@@ -2994,17 +2786,11 @@ public final class GLCapabilities {
      * <p>Use of this feature implicitly enables early fragment tests.</p>
      */
     public final boolean GL_ARB_post_depth_coverage;
-    /**
-     * When true, {@link ARBProgramInterfaceQuery} is supported.
-     */
+    /** When true, {@link ARBProgramInterfaceQuery} is supported. */
     public final boolean GL_ARB_program_interface_query;
-    /**
-     * When true, {@link ARBProvokingVertex} is supported.
-     */
+    /** When true, {@link ARBProvokingVertex} is supported. */
     public final boolean GL_ARB_provoking_vertex;
-    /**
-     * When true, {@link ARBQueryBufferObject} is supported.
-     */
+    /** When true, {@link ARBQueryBufferObject} is supported. */
     public final boolean GL_ARB_query_buffer_object;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_robust_buffer_access_behavior.txt">ARB_robust_buffer_access_behavior</a> extension is supported.
@@ -3018,9 +2804,7 @@ public final class GLCapabilities {
      * <p>Requires {@link ARBRobustness ARB_robustness}. Promoted to core in {@link GL43 OpenGL 4.3}.</p>
      */
     public final boolean GL_ARB_robust_buffer_access_behavior;
-    /**
-     * When true, {@link ARBRobustness} is supported.
-     */
+    /** When true, {@link ARBRobustness} is supported. */
     public final boolean GL_ARB_robustness;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_robustness_application_isolation.txt">ARB_robustness_application_isolation</a> extension is supported.
@@ -3060,29 +2844,17 @@ public final class GLCapabilities {
      * </ol>
      */
     public final boolean GL_ARB_robustness_share_group_isolation;
-    /**
-     * When true, {@link ARBSampleLocations} is supported.
-     */
+    /** When true, {@link ARBSampleLocations} is supported. */
     public final boolean GL_ARB_sample_locations;
-    /**
-     * When true, {@link ARBSampleShading} is supported.
-     */
+    /** When true, {@link ARBSampleShading} is supported. */
     public final boolean GL_ARB_sample_shading;
-    /**
-     * When true, {@link ARBSamplerObjects} is supported.
-     */
+    /** When true, {@link ARBSamplerObjects} is supported. */
     public final boolean GL_ARB_sampler_objects;
-    /**
-     * When true, {@link ARBSeamlessCubeMap} is supported.
-     */
+    /** When true, {@link ARBSeamlessCubeMap} is supported. */
     public final boolean GL_ARB_seamless_cube_map;
-    /**
-     * When true, {@link ARBSeamlessCubemapPerTexture} is supported.
-     */
+    /** When true, {@link ARBSeamlessCubemapPerTexture} is supported. */
     public final boolean GL_ARB_seamless_cubemap_per_texture;
-    /**
-     * When true, {@link ARBSeparateShaderObjects} is supported.
-     */
+    /** When true, {@link ARBSeparateShaderObjects} is supported. */
     public final boolean GL_ARB_separate_shader_objects;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_atomic_counter_ops.txt">ARB_shader_atomic_counter_ops</a> extension is supported.
@@ -3101,9 +2873,7 @@ public final class GLCapabilities {
      * <p>Requires {@link GL42 OpenGL 4.2} or {@link ARBShaderAtomicCounters ARB_shader_atomic_counters}.</p>
      */
     public final boolean GL_ARB_shader_atomic_counter_ops;
-    /**
-     * When true, {@link ARBShaderAtomicCounters} is supported.
-     */
+    /** When true, {@link ARBShaderAtomicCounters} is supported. */
     public final boolean GL_ARB_shader_atomic_counters;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_ballot.txt">ARB_shader_ballot</a> extension is supported.
@@ -3192,9 +2962,7 @@ public final class GLCapabilities {
      * <p>Requires {@link GL43 OpenGL 4.3} or {@link ARBComputeShader ARB_compute_shader}.</p>
      */
     public final boolean GL_ARB_shader_group_vote;
-    /**
-     * When true, {@link ARBShaderImageLoadStore} is supported.
-     */
+    /** When true, {@link ARBShaderImageLoadStore} is supported. */
     public final boolean GL_ARB_shader_image_load_store;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_image_size.txt">ARB_shader_image_size</a> extension is supported.
@@ -3204,9 +2972,7 @@ public final class GLCapabilities {
      * <p>Requires {@link GL42 OpenGL 4.2} and GLSL 4.20. Promoted to core in {@link GL43 OpenGL 4.3}.</p>
      */
     public final boolean GL_ARB_shader_image_size;
-    /**
-     * When true, {@link ARBShaderObjects} is supported.
-     */
+    /** When true, {@link ARBShaderObjects} is supported. */
     public final boolean GL_ARB_shader_objects;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_precision.txt">ARB_shader_precision</a> extension is supported.
@@ -3231,13 +2997,9 @@ public final class GLCapabilities {
      * <p>Requires {@link #GL_ARB_fragment_shader ARB_fragment_shader}.</p>
      */
     public final boolean GL_ARB_shader_stencil_export;
-    /**
-     * When true, {@link ARBShaderStorageBufferObject} is supported.
-     */
+    /** When true, {@link ARBShaderStorageBufferObject} is supported. */
     public final boolean GL_ARB_shader_storage_buffer_object;
-    /**
-     * When true, {@link ARBShaderSubroutine} is supported.
-     */
+    /** When true, {@link ARBShaderSubroutine} is supported. */
     public final boolean GL_ARB_shader_subroutine;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_texture_image_samples.txt">ARB_shader_texture_image_samples</a> extension is supported.
@@ -3358,9 +3120,7 @@ public final class GLCapabilities {
      * <p>Requires {@link GL41 OpenGL 4.1}.</p>
      */
     public final boolean GL_ARB_shader_viewport_layer_array;
-    /**
-     * When true, {@link ARBShadingLanguage100} is supported.
-     */
+    /** When true, {@link ARBShadingLanguage100} is supported. */
     public final boolean GL_ARB_shading_language_100;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shading_language_420pack.txt">ARB_shading_language_420pack</a> extension is supported.
@@ -3387,9 +3147,7 @@ public final class GLCapabilities {
      * <p>Requires GLSL 1.30. Requires GLSL 1.40 for uniform block bindings. Promoted to core in {@link GL42 OpenGL 4.2}.</p>
      */
     public final boolean GL_ARB_shading_language_420pack;
-    /**
-     * When true, {@link ARBShadingLanguageInclude} is supported.
-     */
+    /** When true, {@link ARBShadingLanguageInclude} is supported. */
     public final boolean GL_ARB_shading_language_include;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shading_language_packing.txt">ARB_shading_language_packing</a> extension is supported.
@@ -3409,21 +3167,13 @@ public final class GLCapabilities {
      * <p>Promoted to core in {@link GL42 OpenGL 4.2}.</p>
      */
     public final boolean GL_ARB_shading_language_packing;
-    /**
-     * When true, {@link ARBShadow} is supported.
-     */
+    /** When true, {@link ARBShadow} is supported. */
     public final boolean GL_ARB_shadow;
-    /**
-     * When true, {@link ARBShadowAmbient} is supported.
-     */
+    /** When true, {@link ARBShadowAmbient} is supported. */
     public final boolean GL_ARB_shadow_ambient;
-    /**
-     * When true, {@link ARBSparseBuffer} is supported.
-     */
+    /** When true, {@link ARBSparseBuffer} is supported. */
     public final boolean GL_ARB_sparse_buffer;
-    /**
-     * When true, {@link ARBSparseTexture} is supported.
-     */
+    /** When true, {@link ARBSparseTexture} is supported. */
     public final boolean GL_ARB_sparse_texture;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_sparse_texture2.txt">ARB_sparse_texture2</a> extension is supported.
@@ -3461,33 +3211,19 @@ public final class GLCapabilities {
      * <p>Requires {@link #GL_ARB_sparse_texture2 ARB_sparse_texture2}</p>
      */
     public final boolean GL_ARB_sparse_texture_clamp;
-    /**
-     * When true, {@link ARBSPIRVExtensions} is supported.
-     */
+    /** When true, {@link ARBSPIRVExtensions} is supported. */
     public final boolean GL_ARB_spirv_extensions;
-    /**
-     * When true, {@link ARBStencilTexturing} is supported.
-     */
+    /** When true, {@link ARBStencilTexturing} is supported. */
     public final boolean GL_ARB_stencil_texturing;
-    /**
-     * When true, {@link ARBSync} is supported.
-     */
+    /** When true, {@link ARBSync} is supported. */
     public final boolean GL_ARB_sync;
-    /**
-     * When true, {@link ARBTessellationShader} is supported.
-     */
+    /** When true, {@link ARBTessellationShader} is supported. */
     public final boolean GL_ARB_tessellation_shader;
-    /**
-     * When true, {@link ARBTextureBarrier} is supported.
-     */
+    /** When true, {@link ARBTextureBarrier} is supported. */
     public final boolean GL_ARB_texture_barrier;
-    /**
-     * When true, {@link ARBTextureBorderClamp} is supported.
-     */
+    /** When true, {@link ARBTextureBorderClamp} is supported. */
     public final boolean GL_ARB_texture_border_clamp;
-    /**
-     * When true, {@link ARBTextureBufferObject} is supported.
-     */
+    /** When true, {@link ARBTextureBufferObject} is supported. */
     public final boolean GL_ARB_texture_buffer_object;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_buffer_object_rgb32.txt">ARB_texture_buffer_object_rgb32</a> extension is supported.
@@ -3498,29 +3234,17 @@ public final class GLCapabilities {
      * <p>Promoted to core in {@link GL40 OpenGL 4.0}.</p>
      */
     public final boolean GL_ARB_texture_buffer_object_rgb32;
-    /**
-     * When true, {@link ARBTextureBufferRange} is supported.
-     */
+    /** When true, {@link ARBTextureBufferRange} is supported. */
     public final boolean GL_ARB_texture_buffer_range;
-    /**
-     * When true, {@link ARBTextureCompression} is supported.
-     */
+    /** When true, {@link ARBTextureCompression} is supported. */
     public final boolean GL_ARB_texture_compression;
-    /**
-     * When true, {@link ARBTextureCompressionBPTC} is supported.
-     */
+    /** When true, {@link ARBTextureCompressionBPTC} is supported. */
     public final boolean GL_ARB_texture_compression_bptc;
-    /**
-     * When true, {@link ARBTextureCompressionRGTC} is supported.
-     */
+    /** When true, {@link ARBTextureCompressionRGTC} is supported. */
     public final boolean GL_ARB_texture_compression_rgtc;
-    /**
-     * When true, {@link ARBTextureCubeMap} is supported.
-     */
+    /** When true, {@link ARBTextureCubeMap} is supported. */
     public final boolean GL_ARB_texture_cube_map;
-    /**
-     * When true, {@link ARBTextureCubeMapArray} is supported.
-     */
+    /** When true, {@link ARBTextureCubeMapArray} is supported. */
     public final boolean GL_ARB_texture_cube_map_array;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_add.txt">ARB_texture_env_add</a> extension is supported.
@@ -3530,9 +3254,7 @@ public final class GLCapabilities {
      * <p>Promoted to core in {@link GL13 OpenGL 1.3}.</p>
      */
     public final boolean GL_ARB_texture_env_add;
-    /**
-     * When true, {@link ARBTextureEnvCombine} is supported.
-     */
+    /** When true, {@link ARBTextureEnvCombine} is supported. */
     public final boolean GL_ARB_texture_env_combine;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_env_crossbar.txt">ARB_texture_env_crossbar</a> extension is supported.
@@ -3544,37 +3266,21 @@ public final class GLCapabilities {
      * <p>Requires {@link #GL_ARB_multitexture ARB_multitexture} and {@link ARBTextureEnvCombine ARB_texture_env_combine}. Promoted to core in {@link GL14 OpenGL 1.4}.</p>
      */
     public final boolean GL_ARB_texture_env_crossbar;
-    /**
-     * When true, {@link ARBTextureEnvDot3} is supported.
-     */
+    /** When true, {@link ARBTextureEnvDot3} is supported. */
     public final boolean GL_ARB_texture_env_dot3;
-    /**
-     * When true, {@link ARBTextureFilterAnisotropic} is supported.
-     */
+    /** When true, {@link ARBTextureFilterAnisotropic} is supported. */
     public final boolean GL_ARB_texture_filter_anisotropic;
-    /**
-     * When true, {@link ARBTextureFilterMinmax} is supported.
-     */
+    /** When true, {@link ARBTextureFilterMinmax} is supported. */
     public final boolean GL_ARB_texture_filter_minmax;
-    /**
-     * When true, {@link ARBTextureFloat} is supported.
-     */
+    /** When true, {@link ARBTextureFloat} is supported. */
     public final boolean GL_ARB_texture_float;
-    /**
-     * When true, {@link ARBTextureGather} is supported.
-     */
+    /** When true, {@link ARBTextureGather} is supported. */
     public final boolean GL_ARB_texture_gather;
-    /**
-     * When true, {@link ARBTextureMirrorClampToEdge} is supported.
-     */
+    /** When true, {@link ARBTextureMirrorClampToEdge} is supported. */
     public final boolean GL_ARB_texture_mirror_clamp_to_edge;
-    /**
-     * When true, {@link ARBTextureMirroredRepeat} is supported.
-     */
+    /** When true, {@link ARBTextureMirroredRepeat} is supported. */
     public final boolean GL_ARB_texture_mirrored_repeat;
-    /**
-     * When true, {@link ARBTextureMultisample} is supported.
-     */
+    /** When true, {@link ARBTextureMultisample} is supported. */
     public final boolean GL_ARB_texture_multisample;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_non_power_of_two.txt">ARB_texture_non_power_of_two</a> extension is supported.
@@ -3612,17 +3318,11 @@ public final class GLCapabilities {
      * <p>Requires {@link GL20 OpenGL 2.0}, {@link #GL_EXT_gpu_shader4 EXT_gpu_shader4}, {@link #GL_EXT_texture_array EXT_texture_array} and GLSL 1.30. Promoted to core in {@link GL40 OpenGL 4.0}.</p>
      */
     public final boolean GL_ARB_texture_query_lod;
-    /**
-     * When true, {@link ARBTextureRectangle} is supported.
-     */
+    /** When true, {@link ARBTextureRectangle} is supported. */
     public final boolean GL_ARB_texture_rectangle;
-    /**
-     * When true, {@link ARBTextureRG} is supported.
-     */
+    /** When true, {@link ARBTextureRG} is supported. */
     public final boolean GL_ARB_texture_rg;
-    /**
-     * When true, {@link ARBTextureRGB10_A2UI} is supported.
-     */
+    /** When true, {@link ARBTextureRGB10_A2UI} is supported. */
     public final boolean GL_ARB_texture_rgb10_a2ui;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_stencil8.txt">ARB_texture_stencil8</a> extension is supported.
@@ -3633,81 +3333,43 @@ public final class GLCapabilities {
      * <p>Promoted to core in {@link GL44 OpenGL 4.4}.</p>
      */
     public final boolean GL_ARB_texture_stencil8;
-    /**
-     * When true, {@link ARBTextureStorage} is supported.
-     */
+    /** When true, {@link ARBTextureStorage} is supported. */
     public final boolean GL_ARB_texture_storage;
-    /**
-     * When true, {@link ARBTextureStorageMultisample} is supported.
-     */
+    /** When true, {@link ARBTextureStorageMultisample} is supported. */
     public final boolean GL_ARB_texture_storage_multisample;
-    /**
-     * When true, {@link ARBTextureSwizzle} is supported.
-     */
+    /** When true, {@link ARBTextureSwizzle} is supported. */
     public final boolean GL_ARB_texture_swizzle;
-    /**
-     * When true, {@link ARBTextureView} is supported.
-     */
+    /** When true, {@link ARBTextureView} is supported. */
     public final boolean GL_ARB_texture_view;
-    /**
-     * When true, {@link ARBTimerQuery} is supported.
-     */
+    /** When true, {@link ARBTimerQuery} is supported. */
     public final boolean GL_ARB_timer_query;
-    /**
-     * When true, {@link ARBTransformFeedback2} is supported.
-     */
+    /** When true, {@link ARBTransformFeedback2} is supported. */
     public final boolean GL_ARB_transform_feedback2;
-    /**
-     * When true, {@link ARBTransformFeedback3} is supported.
-     */
+    /** When true, {@link ARBTransformFeedback3} is supported. */
     public final boolean GL_ARB_transform_feedback3;
-    /**
-     * When true, {@link ARBTransformFeedbackInstanced} is supported.
-     */
+    /** When true, {@link ARBTransformFeedbackInstanced} is supported. */
     public final boolean GL_ARB_transform_feedback_instanced;
-    /**
-     * When true, {@link ARBTransformFeedbackOverflowQuery} is supported.
-     */
+    /** When true, {@link ARBTransformFeedbackOverflowQuery} is supported. */
     public final boolean GL_ARB_transform_feedback_overflow_query;
-    /**
-     * When true, {@link ARBTransposeMatrix} is supported.
-     */
+    /** When true, {@link ARBTransposeMatrix} is supported. */
     public final boolean GL_ARB_transpose_matrix;
-    /**
-     * When true, {@link ARBUniformBufferObject} is supported.
-     */
+    /** When true, {@link ARBUniformBufferObject} is supported. */
     public final boolean GL_ARB_uniform_buffer_object;
-    /**
-     * When true, {@link ARBVertexArrayBGRA} is supported.
-     */
+    /** When true, {@link ARBVertexArrayBGRA} is supported. */
     public final boolean GL_ARB_vertex_array_bgra;
-    /**
-     * When true, {@link ARBVertexArrayObject} is supported.
-     */
+    /** When true, {@link ARBVertexArrayObject} is supported. */
     public final boolean GL_ARB_vertex_array_object;
-    /**
-     * When true, {@link ARBVertexAttrib64Bit} is supported.
-     */
+    /** When true, {@link ARBVertexAttrib64Bit} is supported. */
     public final boolean GL_ARB_vertex_attrib_64bit;
-    /**
-     * When true, {@link ARBVertexAttribBinding} is supported.
-     */
+    /** When true, {@link ARBVertexAttribBinding} is supported. */
     public final boolean GL_ARB_vertex_attrib_binding;
-    /**
-     * When true, {@link ARBVertexBlend} is supported.
-     */
+    /** When true, {@link ARBVertexBlend} is supported. */
     public final boolean GL_ARB_vertex_blend;
-    /**
-     * When true, {@link ARBVertexBufferObject} is supported.
-     */
+    /** When true, {@link ARBVertexBufferObject} is supported. */
     public final boolean GL_ARB_vertex_buffer_object;
-    /**
-     * When true, {@link ARBVertexProgram} is supported.
-     */
+    /** When true, {@link ARBVertexProgram} is supported. */
     public final boolean GL_ARB_vertex_program;
-    /**
-     * When true, {@link ARBVertexShader} is supported.
-     */
+    /** When true, {@link ARBVertexShader} is supported. */
     public final boolean GL_ARB_vertex_shader;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_type_10f_11f_11f_rev.txt">ARB_vertex_type_10f_11f_11f_rev</a> extension is supported.
@@ -3720,149 +3382,77 @@ public final class GLCapabilities {
      * <p>Requires {@link GL30 OpenGL 3.0} and {@link ARBVertexType2_10_10_10_REV ARB_vertex_type_2_10_10_10_rev}. Promoted to core in {@link GL44 OpenGL 4.4}.</p>
      */
     public final boolean GL_ARB_vertex_type_10f_11f_11f_rev;
-    /**
-     * When true, {@link ARBVertexType2_10_10_10_REV} is supported.
-     */
+    /** When true, {@link ARBVertexType2_10_10_10_REV} is supported. */
     public final boolean GL_ARB_vertex_type_2_10_10_10_rev;
-    /**
-     * When true, {@link ARBViewportArray} is supported.
-     */
+    /** When true, {@link ARBViewportArray} is supported. */
     public final boolean GL_ARB_viewport_array;
-    /**
-     * When true, {@link ARBWindowPos} is supported.
-     */
+    /** When true, {@link ARBWindowPos} is supported. */
     public final boolean GL_ARB_window_pos;
-    /**
-     * When true, {@link ATIMeminfo} is supported.
-     */
+    /** When true, {@link ATIMeminfo} is supported. */
     public final boolean GL_ATI_meminfo;
-    /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ATI/ATI_shader_texture_lod.txt">ATI_shader_texture_lod</a> extension is supported.
-     */
+    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ATI/ATI_shader_texture_lod.txt">ATI_shader_texture_lod</a> extension is supported. */
     public final boolean GL_ATI_shader_texture_lod;
-    /**
-     * When true, {@link ATITextureCompression3DC} is supported.
-     */
+    /** When true, {@link ATITextureCompression3DC} is supported. */
     public final boolean GL_ATI_texture_compression_3dc;
-    /**
-     * When true, {@link EXT422Pixels} is supported.
-     */
+    /** When true, {@link EXT422Pixels} is supported. */
     public final boolean GL_EXT_422_pixels;
-    /**
-     * When true, {@link EXTABGR} is supported.
-     */
+    /** When true, {@link EXTABGR} is supported. */
     public final boolean GL_EXT_abgr;
-    /**
-     * When true, {@link EXTBGRA} is supported.
-     */
+    /** When true, {@link EXTBGRA} is supported. */
     public final boolean GL_EXT_bgra;
-    /**
-     * When true, {@link EXTBindableUniform} is supported.
-     */
+    /** When true, {@link EXTBindableUniform} is supported. */
     public final boolean GL_EXT_bindable_uniform;
-    /**
-     * When true, {@link EXTBlendColor} is supported.
-     */
+    /** When true, {@link EXTBlendColor} is supported. */
     public final boolean GL_EXT_blend_color;
-    /**
-     * When true, {@link EXTBlendEquationSeparate} is supported.
-     */
+    /** When true, {@link EXTBlendEquationSeparate} is supported. */
     public final boolean GL_EXT_blend_equation_separate;
-    /**
-     * When true, {@link EXTBlendFuncSeparate} is supported.
-     */
+    /** When true, {@link EXTBlendFuncSeparate} is supported. */
     public final boolean GL_EXT_blend_func_separate;
-    /**
-     * When true, {@link EXTBlendMinmax} is supported.
-     */
+    /** When true, {@link EXTBlendMinmax} is supported. */
     public final boolean GL_EXT_blend_minmax;
-    /**
-     * When true, {@link EXTBlendSubtract} is supported.
-     */
+    /** When true, {@link EXTBlendSubtract} is supported. */
     public final boolean GL_EXT_blend_subtract;
-    /**
-     * When true, {@link EXTClipVolumeHint} is supported.
-     */
+    /** When true, {@link EXTClipVolumeHint} is supported. */
     public final boolean GL_EXT_clip_volume_hint;
-    /**
-     * When true, {@link EXTCompiledVertexArray} is supported.
-     */
+    /** When true, {@link EXTCompiledVertexArray} is supported. */
     public final boolean GL_EXT_compiled_vertex_array;
-    /**
-     * When true, {@link EXTDebugLabel} is supported.
-     */
+    /** When true, {@link EXTDebugLabel} is supported. */
     public final boolean GL_EXT_debug_label;
-    /**
-     * When true, {@link EXTDebugMarker} is supported.
-     */
+    /** When true, {@link EXTDebugMarker} is supported. */
     public final boolean GL_EXT_debug_marker;
-    /**
-     * When true, {@link EXTDepthBoundsTest} is supported.
-     */
+    /** When true, {@link EXTDepthBoundsTest} is supported. */
     public final boolean GL_EXT_depth_bounds_test;
-    /**
-     * When true, {@link EXTDirectStateAccess} is supported.
-     */
+    /** When true, {@link EXTDirectStateAccess} is supported. */
     public final boolean GL_EXT_direct_state_access;
-    /**
-     * When true, {@link EXTDrawBuffers2} is supported.
-     */
+    /** When true, {@link EXTDrawBuffers2} is supported. */
     public final boolean GL_EXT_draw_buffers2;
-    /**
-     * When true, {@link EXTDrawInstanced} is supported.
-     */
+    /** When true, {@link EXTDrawInstanced} is supported. */
     public final boolean GL_EXT_draw_instanced;
-    /**
-     * When true, {@link EXTEGLImageStorage} is supported.
-     */
+    /** When true, {@link EXTEGLImageStorage} is supported. */
     public final boolean GL_EXT_EGL_image_storage;
-    /**
-     * When true, {@link EXTExternalBuffer} is supported.
-     */
+    /** When true, {@link EXTExternalBuffer} is supported. */
     public final boolean GL_EXT_external_buffer;
-    /**
-     * When true, {@link EXTFramebufferBlit} is supported.
-     */
+    /** When true, {@link EXTFramebufferBlit} is supported. */
     public final boolean GL_EXT_framebuffer_blit;
-    /**
-     * When true, {@link EXTFramebufferMultisample} is supported.
-     */
+    /** When true, {@link EXTFramebufferMultisample} is supported. */
     public final boolean GL_EXT_framebuffer_multisample;
-    /**
-     * When true, {@link EXTFramebufferMultisampleBlitScaled} is supported.
-     */
+    /** When true, {@link EXTFramebufferMultisampleBlitScaled} is supported. */
     public final boolean GL_EXT_framebuffer_multisample_blit_scaled;
-    /**
-     * When true, {@link EXTFramebufferObject} is supported.
-     */
+    /** When true, {@link EXTFramebufferObject} is supported. */
     public final boolean GL_EXT_framebuffer_object;
-    /**
-     * When true, {@link EXTFramebufferSRGB} is supported.
-     */
+    /** When true, {@link EXTFramebufferSRGB} is supported. */
     public final boolean GL_EXT_framebuffer_sRGB;
-    /**
-     * When true, {@link EXTGeometryShader4} is supported.
-     */
+    /** When true, {@link EXTGeometryShader4} is supported. */
     public final boolean GL_EXT_geometry_shader4;
-    /**
-     * When true, {@link EXTGPUProgramParameters} is supported.
-     */
+    /** When true, {@link EXTGPUProgramParameters} is supported. */
     public final boolean GL_EXT_gpu_program_parameters;
-    /**
-     * When true, {@link EXTGPUShader4} is supported.
-     */
+    /** When true, {@link EXTGPUShader4} is supported. */
     public final boolean GL_EXT_gpu_shader4;
-    /**
-     * When true, {@link EXTMemoryObject} is supported.
-     */
+    /** When true, {@link EXTMemoryObject} is supported. */
     public final boolean GL_EXT_memory_object;
-    /**
-     * When true, {@link EXTMemoryObjectFD} is supported.
-     */
+    /** When true, {@link EXTMemoryObjectFD} is supported. */
     public final boolean GL_EXT_memory_object_fd;
-    /**
-     * When true, {@link EXTMemoryObjectWin32} is supported.
-     */
+    /** When true, {@link EXTMemoryObjectWin32} is supported. */
     public final boolean GL_EXT_memory_object_win32;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multiview_tessellation_geometry_shader.txt">EXT_multiview_tessellation_geometry_shader</a> extension is supported.
@@ -3913,25 +3503,15 @@ public final class GLCapabilities {
      * <p>Requires {@link GL40 OpenGL 4.0} and {@link OVRMultiview OVR_multiview}.</p>
      */
     public final boolean GL_EXT_multiview_timer_query;
-    /**
-     * When true, {@link EXTPackedDepthStencil} is supported.
-     */
+    /** When true, {@link EXTPackedDepthStencil} is supported. */
     public final boolean GL_EXT_packed_depth_stencil;
-    /**
-     * When true, {@link EXTPackedFloat} is supported.
-     */
+    /** When true, {@link EXTPackedFloat} is supported. */
     public final boolean GL_EXT_packed_float;
-    /**
-     * When true, {@link EXTPixelBufferObject} is supported.
-     */
+    /** When true, {@link EXTPixelBufferObject} is supported. */
     public final boolean GL_EXT_pixel_buffer_object;
-    /**
-     * When true, {@link EXTPointParameters} is supported.
-     */
+    /** When true, {@link EXTPointParameters} is supported. */
     public final boolean GL_EXT_point_parameters;
-    /**
-     * When true, {@link EXTPolygonOffsetClamp} is supported.
-     */
+    /** When true, {@link EXTPolygonOffsetClamp} is supported. */
     public final boolean GL_EXT_polygon_offset_clamp;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_post_depth_coverage.txt">EXT_post_depth_coverage</a> extension is supported.
@@ -3948,41 +3528,23 @@ public final class GLCapabilities {
      * layout(early_fragment_tests) in;</code></pre>
      */
     public final boolean GL_EXT_post_depth_coverage;
-    /**
-     * When true, {@link EXTProvokingVertex} is supported.
-     */
+    /** When true, {@link EXTProvokingVertex} is supported. */
     public final boolean GL_EXT_provoking_vertex;
-    /**
-     * When true, {@link EXTRasterMultisample} is supported.
-     */
+    /** When true, {@link EXTRasterMultisample} is supported. */
     public final boolean GL_EXT_raster_multisample;
-    /**
-     * When true, {@link EXTSecondaryColor} is supported.
-     */
+    /** When true, {@link EXTSecondaryColor} is supported. */
     public final boolean GL_EXT_secondary_color;
-    /**
-     * When true, {@link EXTSemaphore} is supported.
-     */
+    /** When true, {@link EXTSemaphore} is supported. */
     public final boolean GL_EXT_semaphore;
-    /**
-     * When true, {@link EXTSemaphoreFD} is supported.
-     */
+    /** When true, {@link EXTSemaphoreFD} is supported. */
     public final boolean GL_EXT_semaphore_fd;
-    /**
-     * When true, {@link EXTSemaphoreWin32} is supported.
-     */
+    /** When true, {@link EXTSemaphoreWin32} is supported. */
     public final boolean GL_EXT_semaphore_win32;
-    /**
-     * When true, {@link EXTSeparateShaderObjects} is supported.
-     */
+    /** When true, {@link EXTSeparateShaderObjects} is supported. */
     public final boolean GL_EXT_separate_shader_objects;
-    /**
-     * When true, {@link EXTShaderFramebufferFetch} is supported.
-     */
+    /** When true, {@link EXTShaderFramebufferFetch} is supported. */
     public final boolean GL_EXT_shader_framebuffer_fetch;
-    /**
-     * When true, {@link EXTShaderFramebufferFetchNonCoherent} is supported.
-     */
+    /** When true, {@link EXTShaderFramebufferFetchNonCoherent} is supported. */
     public final boolean GL_EXT_shader_framebuffer_fetch_non_coherent;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_image_load_formatted.txt">EXT_shader_image_load_formatted</a> extension is supported.
@@ -3992,9 +3554,7 @@ public final class GLCapabilities {
      * {@code imageLoad} can be format-converted based on the format of the image binding.</p>
      */
     public final boolean GL_EXT_shader_image_load_formatted;
-    /**
-     * When true, {@link EXTShaderImageLoadStore} is supported.
-     */
+    /** When true, {@link EXTShaderImageLoadStore} is supported. */
     public final boolean GL_EXT_shader_image_load_store;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_integer_mix.txt">EXT_shader_integer_mix</a> extension is supported.
@@ -4014,9 +3574,7 @@ public final class GLCapabilities {
      * <p>Requires {@link #GL_ARB_depth_texture ARB_depth_texture} and {@link #GL_ARB_shadow ARB_shadow}.</p>
      */
     public final boolean GL_EXT_shadow_funcs;
-    /**
-     * When true, {@link EXTSharedTexturePalette} is supported.
-     */
+    /** When true, {@link EXTSharedTexturePalette} is supported. */
     public final boolean GL_EXT_shared_texture_palette;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_sparse_texture2.txt">EXT_sparse_texture2</a> extension is supported.
@@ -4044,53 +3602,29 @@ public final class GLCapabilities {
      * <p>Requires {@link ARBSparseTexture ARB_sparse_texture}.</p>
      */
     public final boolean GL_EXT_sparse_texture2;
-    /**
-     * When true, {@link EXTStencilClearTag} is supported.
-     */
+    /** When true, {@link EXTStencilClearTag} is supported. */
     public final boolean GL_EXT_stencil_clear_tag;
-    /**
-     * When true, {@link EXTStencilTwoSide} is supported.
-     */
+    /** When true, {@link EXTStencilTwoSide} is supported. */
     public final boolean GL_EXT_stencil_two_side;
-    /**
-     * When true, {@link EXTStencilWrap} is supported.
-     */
+    /** When true, {@link EXTStencilWrap} is supported. */
     public final boolean GL_EXT_stencil_wrap;
-    /**
-     * When true, {@link EXTTextureArray} is supported.
-     */
+    /** When true, {@link EXTTextureArray} is supported. */
     public final boolean GL_EXT_texture_array;
-    /**
-     * When true, {@link EXTTextureBufferObject} is supported.
-     */
+    /** When true, {@link EXTTextureBufferObject} is supported. */
     public final boolean GL_EXT_texture_buffer_object;
-    /**
-     * When true, {@link EXTTextureCompressionLATC} is supported.
-     */
+    /** When true, {@link EXTTextureCompressionLATC} is supported. */
     public final boolean GL_EXT_texture_compression_latc;
-    /**
-     * When true, {@link EXTTextureCompressionRGTC} is supported.
-     */
+    /** When true, {@link EXTTextureCompressionRGTC} is supported. */
     public final boolean GL_EXT_texture_compression_rgtc;
-    /**
-     * When true, {@link EXTTextureCompressionS3TC} is supported.
-     */
+    /** When true, {@link EXTTextureCompressionS3TC} is supported. */
     public final boolean GL_EXT_texture_compression_s3tc;
-    /**
-     * When true, {@link EXTTextureFilterAnisotropic} is supported.
-     */
+    /** When true, {@link EXTTextureFilterAnisotropic} is supported. */
     public final boolean GL_EXT_texture_filter_anisotropic;
-    /**
-     * When true, {@link EXTTextureFilterMinmax} is supported.
-     */
+    /** When true, {@link EXTTextureFilterMinmax} is supported. */
     public final boolean GL_EXT_texture_filter_minmax;
-    /**
-     * When true, {@link EXTTextureInteger} is supported.
-     */
+    /** When true, {@link EXTTextureInteger} is supported. */
     public final boolean GL_EXT_texture_integer;
-    /**
-     * When true, {@link EXTTextureMirrorClamp} is supported.
-     */
+    /** When true, {@link EXTTextureMirrorClamp} is supported. */
     public final boolean GL_EXT_texture_mirror_clamp;
     /**
      * This extension adds support for various shadow sampler types with texture functions having interactions with the LOD of texture lookups.
@@ -4103,37 +3637,21 @@ public final class GLCapabilities {
      * <p>Requires {@link GL20 OpenGL 2.0} and {@link EXTGPUShader4 EXT_gpu_shader4} or equivalent functionality.</p>
      */
     public final boolean GL_EXT_texture_shadow_lod;
-    /**
-     * When true, {@link EXTTextureSharedExponent} is supported.
-     */
+    /** When true, {@link EXTTextureSharedExponent} is supported. */
     public final boolean GL_EXT_texture_shared_exponent;
-    /**
-     * When true, {@link EXTTextureSnorm} is supported.
-     */
+    /** When true, {@link EXTTextureSnorm} is supported. */
     public final boolean GL_EXT_texture_snorm;
-    /**
-     * When true, {@link EXTTextureSRGB} is supported.
-     */
+    /** When true, {@link EXTTextureSRGB} is supported. */
     public final boolean GL_EXT_texture_sRGB;
-    /**
-     * When true, {@link EXTTextureSRGBDecode} is supported.
-     */
+    /** When true, {@link EXTTextureSRGBDecode} is supported. */
     public final boolean GL_EXT_texture_sRGB_decode;
-    /**
-     * When true, {@link EXTTextureSRGBR8} is supported.
-     */
+    /** When true, {@link EXTTextureSRGBR8} is supported. */
     public final boolean GL_EXT_texture_sRGB_R8;
-    /**
-     * When true, {@link EXTTextureSwizzle} is supported.
-     */
+    /** When true, {@link EXTTextureSwizzle} is supported. */
     public final boolean GL_EXT_texture_swizzle;
-    /**
-     * When true, {@link EXTTimerQuery} is supported.
-     */
+    /** When true, {@link EXTTimerQuery} is supported. */
     public final boolean GL_EXT_timer_query;
-    /**
-     * When true, {@link EXTTransformFeedback} is supported.
-     */
+    /** When true, {@link EXTTransformFeedback} is supported. */
     public final boolean GL_EXT_transform_feedback;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_vertex_array_bgra.txt">EXT_vertex_array_bgra</a> extension is supported.
@@ -4175,37 +3693,21 @@ public final class GLCapabilities {
      * <p>This approach mimics that of the EXT_bgra extension for pixel and texel formats except for vertex instead of image data.</p>
      */
     public final boolean GL_EXT_vertex_array_bgra;
-    /**
-     * When true, {@link EXTVertexAttrib64bit} is supported.
-     */
+    /** When true, {@link EXTVertexAttrib64bit} is supported. */
     public final boolean GL_EXT_vertex_attrib_64bit;
-    /**
-     * When true, {@link EXTWin32KeyedMutex} is supported.
-     */
+    /** When true, {@link EXTWin32KeyedMutex} is supported. */
     public final boolean GL_EXT_win32_keyed_mutex;
-    /**
-     * When true, {@link EXTWindowRectangles} is supported.
-     */
+    /** When true, {@link EXTWindowRectangles} is supported. */
     public final boolean GL_EXT_window_rectangles;
-    /**
-     * When true, {@link EXTX11SyncObject} is supported.
-     */
+    /** When true, {@link EXTX11SyncObject} is supported. */
     public final boolean GL_EXT_x11_sync_object;
-    /**
-     * When true, {@link GREMEDYFrameTerminator} is supported.
-     */
+    /** When true, {@link GREMEDYFrameTerminator} is supported. */
     public final boolean GL_GREMEDY_frame_terminator;
-    /**
-     * When true, {@link GREMEDYStringMarker} is supported.
-     */
+    /** When true, {@link GREMEDYStringMarker} is supported. */
     public final boolean GL_GREMEDY_string_marker;
-    /**
-     * When true, {@link INTELBlackholeRender} is supported.
-     */
+    /** When true, {@link INTELBlackholeRender} is supported. */
     public final boolean GL_INTEL_blackhole_render;
-    /**
-     * When true, {@link INTELConservativeRasterization} is supported.
-     */
+    /** When true, {@link INTELConservativeRasterization} is supported. */
     public final boolean GL_INTEL_conservative_rasterization;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_fragment_shader_ordering.txt">INTEL_fragment_shader_ordering</a> extension is supported.
@@ -4219,41 +3721,23 @@ public final class GLCapabilities {
      * beginFragmentShaderOrderingINTEL() when the function returns.</p>
      */
     public final boolean GL_INTEL_fragment_shader_ordering;
-    /**
-     * When true, {@link INTELFramebufferCMAA} is supported.
-     */
+    /** When true, {@link INTELFramebufferCMAA} is supported. */
     public final boolean GL_INTEL_framebuffer_CMAA;
-    /**
-     * When true, {@link INTELMapTexture} is supported.
-     */
+    /** When true, {@link INTELMapTexture} is supported. */
     public final boolean GL_INTEL_map_texture;
-    /**
-     * When true, {@link INTELPerformanceQuery} is supported.
-     */
+    /** When true, {@link INTELPerformanceQuery} is supported. */
     public final boolean GL_INTEL_performance_query;
-    /**
-     * When true, {@link KHRBlendEquationAdvanced} is supported.
-     */
+    /** When true, {@link KHRBlendEquationAdvanced} is supported. */
     public final boolean GL_KHR_blend_equation_advanced;
-    /**
-     * When true, {@link KHRBlendEquationAdvancedCoherent} is supported.
-     */
+    /** When true, {@link KHRBlendEquationAdvancedCoherent} is supported. */
     public final boolean GL_KHR_blend_equation_advanced_coherent;
-    /**
-     * When true, {@link KHRContextFlushControl} is supported.
-     */
+    /** When true, {@link KHRContextFlushControl} is supported. */
     public final boolean GL_KHR_context_flush_control;
-    /**
-     * When true, {@link KHRDebug} is supported.
-     */
+    /** When true, {@link KHRDebug} is supported. */
     public final boolean GL_KHR_debug;
-    /**
-     * When true, {@link KHRNoError} is supported.
-     */
+    /** When true, {@link KHRNoError} is supported. */
     public final boolean GL_KHR_no_error;
-    /**
-     * When true, {@link KHRParallelShaderCompile} is supported.
-     */
+    /** When true, {@link KHRParallelShaderCompile} is supported. */
     public final boolean GL_KHR_parallel_shader_compile;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_robust_buffer_access_behavior.txt">KHR_robust_buffer_access_behavior</a> extension is supported.
@@ -4267,13 +3751,9 @@ public final class GLCapabilities {
      * <p>Requires {@link GL32 OpenGL 3.2} and {@link #GL_KHR_robustness KHR_robustness}.</p>
      */
     public final boolean GL_KHR_robust_buffer_access_behavior;
-    /**
-     * When true, {@link KHRRobustness} is supported.
-     */
+    /** When true, {@link KHRRobustness} is supported. */
     public final boolean GL_KHR_robustness;
-    /**
-     * When true, {@link KHRShaderSubgroup} is supported.
-     */
+    /** When true, {@link KHRShaderSubgroup} is supported. */
     public final boolean GL_KHR_shader_subgroup;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_texture_compression_astc_hdr.txt">KHR_texture_compression_astc_hdr</a> extension is supported.
@@ -4281,9 +3761,7 @@ public final class GLCapabilities {
      * <p>This extension corresponds to the ASTC HDR Profile, see {@link KHRTextureCompressionASTCLDR KHR_texture_compression_astc_ldr} for details.</p>
      */
     public final boolean GL_KHR_texture_compression_astc_hdr;
-    /**
-     * When true, {@link KHRTextureCompressionASTCLDR} is supported.
-     */
+    /** When true, {@link KHRTextureCompressionASTCLDR} is supported. */
     public final boolean GL_KHR_texture_compression_astc_ldr;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_texture_compression_astc_sliced_3d.txt">KHR_texture_compression_astc_sliced_3d</a> extension is supported.
@@ -4298,45 +3776,25 @@ public final class GLCapabilities {
      * <p>Requires {@link KHRTextureCompressionASTCLDR KHR_texture_compression_astc_ldr}.</p>
      */
     public final boolean GL_KHR_texture_compression_astc_sliced_3d;
-    /**
-     * When true, {@link NVAlphaToCoverageDitherControl} is supported.
-     */
+    /** When true, {@link NVAlphaToCoverageDitherControl} is supported. */
     public final boolean GL_NV_alpha_to_coverage_dither_control;
-    /**
-     * When true, {@link NVBindlessMultiDrawIndirect} is supported.
-     */
+    /** When true, {@link NVBindlessMultiDrawIndirect} is supported. */
     public final boolean GL_NV_bindless_multi_draw_indirect;
-    /**
-     * When true, {@link NVBindlessMultiDrawIndirectCount} is supported.
-     */
+    /** When true, {@link NVBindlessMultiDrawIndirectCount} is supported. */
     public final boolean GL_NV_bindless_multi_draw_indirect_count;
-    /**
-     * When true, {@link NVBindlessTexture} is supported.
-     */
+    /** When true, {@link NVBindlessTexture} is supported. */
     public final boolean GL_NV_bindless_texture;
-    /**
-     * When true, {@link NVBlendEquationAdvanced} is supported.
-     */
+    /** When true, {@link NVBlendEquationAdvanced} is supported. */
     public final boolean GL_NV_blend_equation_advanced;
-    /**
-     * When true, {@link NVBlendEquationAdvancedCoherent} is supported.
-     */
+    /** When true, {@link NVBlendEquationAdvancedCoherent} is supported. */
     public final boolean GL_NV_blend_equation_advanced_coherent;
-    /**
-     * When true, {@link NVBlendMinmaxFactor} is supported.
-     */
+    /** When true, {@link NVBlendMinmaxFactor} is supported. */
     public final boolean GL_NV_blend_minmax_factor;
-    /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_blend_square.txt">NV_blend_square</a> extension is supported.
-     */
+    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_blend_square.txt">NV_blend_square</a> extension is supported. */
     public final boolean GL_NV_blend_square;
-    /**
-     * When true, {@link NVClipSpaceWScaling} is supported.
-     */
+    /** When true, {@link NVClipSpaceWScaling} is supported. */
     public final boolean GL_NV_clip_space_w_scaling;
-    /**
-     * When true, {@link NVCommandList} is supported.
-     */
+    /** When true, {@link NVCommandList} is supported. */
     public final boolean GL_NV_command_list;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_compute_shader_derivatives.txt">NV_compute_shader_derivatives</a> extension is supported.
@@ -4351,25 +3809,15 @@ public final class GLCapabilities {
      * <p>Requires {@link GL45 OpenGL 4.5}.</p>
      */
     public final boolean GL_NV_compute_shader_derivatives;
-    /**
-     * When true, {@link NVConditionalRender} is supported.
-     */
+    /** When true, {@link NVConditionalRender} is supported. */
     public final boolean GL_NV_conditional_render;
-    /**
-     * When true, {@link NVConservativeRaster} is supported.
-     */
+    /** When true, {@link NVConservativeRaster} is supported. */
     public final boolean GL_NV_conservative_raster;
-    /**
-     * When true, {@link NVConservativeRasterDilate} is supported.
-     */
+    /** When true, {@link NVConservativeRasterDilate} is supported. */
     public final boolean GL_NV_conservative_raster_dilate;
-    /**
-     * When true, {@link NVConservativeRasterPreSnap} is supported.
-     */
+    /** When true, {@link NVConservativeRasterPreSnap} is supported. */
     public final boolean GL_NV_conservative_raster_pre_snap;
-    /**
-     * When true, {@link NVConservativeRasterPreSnapTriangles} is supported.
-     */
+    /** When true, {@link NVConservativeRasterPreSnapTriangles} is supported. */
     public final boolean GL_NV_conservative_raster_pre_snap_triangles;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_conservative_raster_underestimation.txt">NV_conservative_raster_underestimation</a> extension is supported.
@@ -4382,69 +3830,37 @@ public final class GLCapabilities {
      * {@code gl_FragFullyCoveredNV}.</p>
      */
     public final boolean GL_NV_conservative_raster_underestimation;
-    /**
-     * When true, {@link NVCopyDepthToColor} is supported.
-     */
+    /** When true, {@link NVCopyDepthToColor} is supported. */
     public final boolean GL_NV_copy_depth_to_color;
-    /**
-     * When true, {@link NVCopyImage} is supported.
-     */
+    /** When true, {@link NVCopyImage} is supported. */
     public final boolean GL_NV_copy_image;
-    /**
-     * When true, {@link NVDeepTexture3D} is supported.
-     */
+    /** When true, {@link NVDeepTexture3D} is supported. */
     public final boolean GL_NV_deep_texture3D;
-    /**
-     * When true, {@link NVDepthBufferFloat} is supported.
-     */
+    /** When true, {@link NVDepthBufferFloat} is supported. */
     public final boolean GL_NV_depth_buffer_float;
-    /**
-     * When true, {@link NVDepthClamp} is supported.
-     */
+    /** When true, {@link NVDepthClamp} is supported. */
     public final boolean GL_NV_depth_clamp;
-    /**
-     * When true, {@link NVDrawTexture} is supported.
-     */
+    /** When true, {@link NVDrawTexture} is supported. */
     public final boolean GL_NV_draw_texture;
-    /**
-     * When true, {@link NVDrawVulkanImage} is supported.
-     */
+    /** When true, {@link NVDrawVulkanImage} is supported. */
     public final boolean GL_NV_draw_vulkan_image;
-    /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_ES3_1_compatibility.txt">NV_ES3_1_compatibility</a> extension is supported.
-     */
+    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_ES3_1_compatibility.txt">NV_ES3_1_compatibility</a> extension is supported. */
     public final boolean GL_NV_ES3_1_compatibility;
-    /**
-     * When true, {@link NVExplicitMultisample} is supported.
-     */
+    /** When true, {@link NVExplicitMultisample} is supported. */
     public final boolean GL_NV_explicit_multisample;
-    /**
-     * When true, {@link NVFence} is supported.
-     */
+    /** When true, {@link NVFence} is supported. */
     public final boolean GL_NV_fence;
-    /**
-     * When true, {@link NVFillRectangle} is supported.
-     */
+    /** When true, {@link NVFillRectangle} is supported. */
     public final boolean GL_NV_fill_rectangle;
-    /**
-     * When true, {@link NVFloatBuffer} is supported.
-     */
+    /** When true, {@link NVFloatBuffer} is supported. */
     public final boolean GL_NV_float_buffer;
-    /**
-     * When true, {@link NVFogDistance} is supported.
-     */
+    /** When true, {@link NVFogDistance} is supported. */
     public final boolean GL_NV_fog_distance;
-    /**
-     * When true, {@link NVFragmentCoverageToColor} is supported.
-     */
+    /** When true, {@link NVFragmentCoverageToColor} is supported. */
     public final boolean GL_NV_fragment_coverage_to_color;
-    /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_program4.txt">NV_fragment_program4</a> extension is supported.
-     */
+    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_program4.txt">NV_fragment_program4</a> extension is supported. */
     public final boolean GL_NV_fragment_program4;
-    /**
-     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_program_option.txt">NV_fragment_program_option</a> extension is supported.
-     */
+    /** When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_program_option.txt">NV_fragment_program_option</a> extension is supported. */
     public final boolean GL_NV_fragment_program_option;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_fragment_shader_barycentric.txt">NV_fragment_shader_barycentric</a> extension is supported.
@@ -4494,13 +3910,9 @@ public final class GLCapabilities {
      * <p>Requires {@link GL43 OpenGL 4.3} and GLSL 4.30.</p>
      */
     public final boolean GL_NV_fragment_shader_interlock;
-    /**
-     * When true, {@link NVFramebufferMixedSamples} is supported.
-     */
+    /** When true, {@link NVFramebufferMixedSamples} is supported. */
     public final boolean GL_NV_framebuffer_mixed_samples;
-    /**
-     * When true, {@link NVFramebufferMultisampleCoverage} is supported.
-     */
+    /** When true, {@link NVFramebufferMultisampleCoverage} is supported. */
     public final boolean GL_NV_framebuffer_multisample_coverage;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_geometry_shader4.txt">NV_geometry_shader4</a> extension is supported.
@@ -4524,85 +3936,45 @@ public final class GLCapabilities {
      * vertices to output vertices.</p>
      */
     public final boolean GL_NV_geometry_shader_passthrough;
-    /**
-     * When true, {@link NVGPUMulticast} is supported.
-     */
+    /** When true, {@link NVGPUMulticast} is supported. */
     public final boolean GL_NV_gpu_multicast;
-    /**
-     * When true, {@link NVGPUShader5} is supported.
-     */
+    /** When true, {@link NVGPUShader5} is supported. */
     public final boolean GL_NV_gpu_shader5;
-    /**
-     * When true, {@link NVHalfFloat} is supported.
-     */
+    /** When true, {@link NVHalfFloat} is supported. */
     public final boolean GL_NV_half_float;
-    /**
-     * When true, {@link NVInternalformatSampleQuery} is supported.
-     */
+    /** When true, {@link NVInternalformatSampleQuery} is supported. */
     public final boolean GL_NV_internalformat_sample_query;
-    /**
-     * When true, {@link NVLightMaxExponent} is supported.
-     */
+    /** When true, {@link NVLightMaxExponent} is supported. */
     public final boolean GL_NV_light_max_exponent;
-    /**
-     * When true, {@link NVMemoryAttachment} is supported.
-     */
+    /** When true, {@link NVMemoryAttachment} is supported. */
     public final boolean GL_NV_memory_attachment;
-    /**
-     * When true, {@link NVMeshShader} is supported.
-     */
+    /** When true, {@link NVMeshShader} is supported. */
     public final boolean GL_NV_mesh_shader;
-    /**
-     * When true, {@link NVMultisampleCoverage} is supported.
-     */
+    /** When true, {@link NVMultisampleCoverage} is supported. */
     public final boolean GL_NV_multisample_coverage;
-    /**
-     * When true, {@link NVMultisampleFilterHint} is supported.
-     */
+    /** When true, {@link NVMultisampleFilterHint} is supported. */
     public final boolean GL_NV_multisample_filter_hint;
-    /**
-     * When true, {@link NVPackedDepthStencil} is supported.
-     */
+    /** When true, {@link NVPackedDepthStencil} is supported. */
     public final boolean GL_NV_packed_depth_stencil;
-    /**
-     * When true, {@link NVPathRendering} is supported.
-     */
+    /** When true, {@link NVPathRendering} is supported. */
     public final boolean GL_NV_path_rendering;
-    /**
-     * When true, {@link NVPathRenderingSharedEdge} is supported.
-     */
+    /** When true, {@link NVPathRenderingSharedEdge} is supported. */
     public final boolean GL_NV_path_rendering_shared_edge;
-    /**
-     * When true, {@link NVPixelDataRange} is supported.
-     */
+    /** When true, {@link NVPixelDataRange} is supported. */
     public final boolean GL_NV_pixel_data_range;
-    /**
-     * When true, {@link NVPointSprite} is supported.
-     */
+    /** When true, {@link NVPointSprite} is supported. */
     public final boolean GL_NV_point_sprite;
-    /**
-     * When true, {@link NVPrimitiveRestart} is supported.
-     */
+    /** When true, {@link NVPrimitiveRestart} is supported. */
     public final boolean GL_NV_primitive_restart;
-    /**
-     * When true, {@link NVQueryResource} is supported.
-     */
+    /** When true, {@link NVQueryResource} is supported. */
     public final boolean GL_NV_query_resource;
-    /**
-     * When true, {@link NVQueryResourceTag} is supported.
-     */
+    /** When true, {@link NVQueryResourceTag} is supported. */
     public final boolean GL_NV_query_resource_tag;
-    /**
-     * When true, {@link NVRepresentativeFragmentTest} is supported.
-     */
+    /** When true, {@link NVRepresentativeFragmentTest} is supported. */
     public final boolean GL_NV_representative_fragment_test;
-    /**
-     * When true, {@link NVRobustnessVideoMemoryPurge} is supported.
-     */
+    /** When true, {@link NVRobustnessVideoMemoryPurge} is supported. */
     public final boolean GL_NV_robustness_video_memory_purge;
-    /**
-     * When true, {@link NVSampleLocations} is supported.
-     */
+    /** When true, {@link NVSampleLocations} is supported. */
     public final boolean GL_NV_sample_locations;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_sample_mask_override_coverage.txt">NV_sample_mask_override_coverage</a> extension is supported.
@@ -4611,9 +3983,7 @@ public final class GLCapabilities {
      * primitive, or that failed the early depth/stencil tests.</p>
      */
     public final boolean GL_NV_sample_mask_override_coverage;
-    /**
-     * When true, {@link NVScissorExclusive} is supported.
-     */
+    /** When true, {@link NVScissorExclusive} is supported. */
     public final boolean GL_NV_scissor_exclusive;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_atomic_float.txt">NV_shader_atomic_float</a> extension is supported.
@@ -4658,17 +4028,11 @@ public final class GLCapabilities {
      * operations on 64-bit signed and unsigned integers stored in buffer object memory.</p>
      */
     public final boolean GL_NV_shader_atomic_int64;
-    /**
-     * When true, {@link NVShaderBufferLoad} is supported.
-     */
+    /** When true, {@link NVShaderBufferLoad} is supported. */
     public final boolean GL_NV_shader_buffer_load;
-    /**
-     * When true, {@link NVShaderBufferStore} is supported.
-     */
+    /** When true, {@link NVShaderBufferStore} is supported. */
     public final boolean GL_NV_shader_buffer_store;
-    /**
-     * When true, {@link NVShaderSubgroupPartitioned} is supported.
-     */
+    /** When true, {@link NVShaderSubgroupPartitioned} is supported. */
     public final boolean GL_NV_shader_subgroup_partitioned;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_texture_footprint.txt">NV_shader_texture_footprint</a> extension is supported.
@@ -4702,9 +4066,7 @@ public final class GLCapabilities {
      * <p>Requires {@link GL45 OpenGL 4.5}.</p>
      */
     public final boolean GL_NV_shader_texture_footprint;
-    /**
-     * When true, {@link NVShaderThreadGroup} is supported.
-     */
+    /** When true, {@link NVShaderThreadGroup} is supported. */
     public final boolean GL_NV_shader_thread_group;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_shader_thread_shuffle.txt">NV_shader_thread_shuffle</a> extension is supported.
@@ -4716,9 +4078,7 @@ public final class GLCapabilities {
      * <p>Requires {@link GL43 OpenGL 4.3} and GLSL 4.3.</p>
      */
     public final boolean GL_NV_shader_thread_shuffle;
-    /**
-     * When true, {@link NVShadingRateImage} is supported.
-     */
+    /** When true, {@link NVShadingRateImage} is supported. */
     public final boolean GL_NV_shading_rate_image;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_stereo_view_rendering.txt">NV_stereo_view_rendering</a> extension is supported.
@@ -4739,13 +4099,9 @@ public final class GLCapabilities {
      * <p>Requires {@link #GL_NV_viewport_array2 NV_viewport_array2}.</p>
      */
     public final boolean GL_NV_stereo_view_rendering;
-    /**
-     * When true, {@link NVTexgenReflection} is supported.
-     */
+    /** When true, {@link NVTexgenReflection} is supported. */
     public final boolean GL_NV_texgen_reflection;
-    /**
-     * When true, {@link NVTextureBarrier} is supported.
-     */
+    /** When true, {@link NVTextureBarrier} is supported. */
     public final boolean GL_NV_texture_barrier;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_compression_vtc.txt">NV_texture_compression_vtc</a> extension is supported.
@@ -4755,9 +4111,7 @@ public final class GLCapabilities {
      * supported), or 4x4x4 blocks.</p>
      */
     public final boolean GL_NV_texture_compression_vtc;
-    /**
-     * When true, {@link NVTextureMultisample} is supported.
-     */
+    /** When true, {@link NVTextureMultisample} is supported. */
     public final boolean GL_NV_texture_multisample;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_texture_rectangle_compressed.txt">NV_texture_rectangle_compressed</a> extension is supported.
@@ -4766,33 +4120,19 @@ public final class GLCapabilities {
      * prohibited such usage globally for rectangle textures.</p>
      */
     public final boolean GL_NV_texture_rectangle_compressed;
-    /**
-     * When true, {@link NVTransformFeedback} is supported.
-     */
+    /** When true, {@link NVTransformFeedback} is supported. */
     public final boolean GL_NV_transform_feedback;
-    /**
-     * When true, {@link NVTransformFeedback2} is supported.
-     */
+    /** When true, {@link NVTransformFeedback2} is supported. */
     public final boolean GL_NV_transform_feedback2;
-    /**
-     * When true, {@link NVUniformBufferUnifiedMemory} is supported.
-     */
+    /** When true, {@link NVUniformBufferUnifiedMemory} is supported. */
     public final boolean GL_NV_uniform_buffer_unified_memory;
-    /**
-     * When true, {@link NVVertexArrayRange} is supported.
-     */
+    /** When true, {@link NVVertexArrayRange} is supported. */
     public final boolean GL_NV_vertex_array_range;
-    /**
-     * When true, {@link NVVertexArrayRange2} is supported.
-     */
+    /** When true, {@link NVVertexArrayRange2} is supported. */
     public final boolean GL_NV_vertex_array_range2;
-    /**
-     * When true, {@link NVVertexAttribInteger64bit} is supported.
-     */
+    /** When true, {@link NVVertexAttribInteger64bit} is supported. */
     public final boolean GL_NV_vertex_attrib_integer_64bit;
-    /**
-     * When true, {@link NVVertexBufferUnifiedMemory} is supported.
-     */
+    /** When true, {@link NVVertexBufferUnifiedMemory} is supported. */
     public final boolean GL_NV_vertex_buffer_unified_memory;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array2.txt">NV_viewport_array2</a> extension is supported.
@@ -4810,9 +4150,7 @@ public final class GLCapabilities {
      * expected to be exported if GL_NV_viewport_array2 is supported.</p>
      */
     public final boolean GL_NV_viewport_array2;
-    /**
-     * When true, {@link NVViewportSwizzle} is supported.
-     */
+    /** When true, {@link NVViewportSwizzle} is supported. */
     public final boolean GL_NV_viewport_swizzle;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NVX/NVX_blend_equation_advanced_multi_draw_buffers.txt">NVX_blend_equation_advanced_multi_draw_buffers</a> extension is supported.
@@ -4825,25 +4163,15 @@ public final class GLCapabilities {
      * <p>Requires either {@link NVBlendEquationAdvanced NV_blend_equation_advanced} or {@link KHRBlendEquationAdvanced KHR_blend_equation_advanced}.</p>
      */
     public final boolean GL_NVX_blend_equation_advanced_multi_draw_buffers;
-    /**
-     * When true, {@link NVXConditionalRender} is supported.
-     */
+    /** When true, {@link NVXConditionalRender} is supported. */
     public final boolean GL_NVX_conditional_render;
-    /**
-     * When true, {@link NVXGPUMemoryInfo} is supported.
-     */
+    /** When true, {@link NVXGPUMemoryInfo} is supported. */
     public final boolean GL_NVX_gpu_memory_info;
-    /**
-     * When true, {@link NVXGpuMulticast2} is supported.
-     */
+    /** When true, {@link NVXGpuMulticast2} is supported. */
     public final boolean GL_NVX_gpu_multicast2;
-    /**
-     * When true, {@link NVXProgressFence} is supported.
-     */
+    /** When true, {@link NVXProgressFence} is supported. */
     public final boolean GL_NVX_progress_fence;
-    /**
-     * When true, {@link OVRMultiview} is supported.
-     */
+    /** When true, {@link OVRMultiview} is supported. */
     public final boolean GL_OVR_multiview;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/OVR/OVR_multiview2.txt">OVR_multiview2</a> extension is supported.
@@ -4855,14 +4183,10 @@ public final class GLCapabilities {
      */
     public final boolean GL_OVR_multiview2;
 
-    /**
-     * When true, deprecated functions are not available.
-     */
+    /** When true, deprecated functions are not available. */
     public final boolean forwardCompatible;
 
-    /**
-     * Off-heap array of the above function addresses.
-     */
+    /** Off-heap array of the above function addresses. */
     final PointerBuffer addresses;
 
     GLCapabilities(FunctionProvider provider, Set<String> ext, boolean fc) {

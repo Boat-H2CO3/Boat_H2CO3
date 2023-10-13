@@ -35,17 +35,13 @@ public abstract class EnumerationMutationHandler extends Callback implements Enu
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static EnumerationMutationHandler createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code EnumerationMutationHandler} instance that delegates to the specified {@code EnumerationMutationHandlerI} instance.
-     */
+    /** Creates a {@code EnumerationMutationHandler} instance that delegates to the specified {@code EnumerationMutationHandlerI} instance. */
     public static EnumerationMutationHandler create(EnumerationMutationHandlerI instance) {
         return instance instanceof EnumerationMutationHandler
                 ? (EnumerationMutationHandler) instance

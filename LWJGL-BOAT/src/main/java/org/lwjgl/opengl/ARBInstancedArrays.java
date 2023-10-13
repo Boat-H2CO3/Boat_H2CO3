@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_instanced_arrays.txt">ARB_instanced_arrays</a> extension.
@@ -31,9 +31,7 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBInstancedArrays {
 
-    /**
-     * Accepted by the {@code pname} parameters of GetVertexAttribdv, GetVertexAttribfv, and GetVertexAttribiv.
-     */
+    /** Accepted by the {@code pname} parameters of GetVertexAttribdv, GetVertexAttribfv, and GetVertexAttribiv. */
     public static final int GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ARB = 0x88FE;
 
     static {
@@ -46,7 +44,7 @@ public class ARBInstancedArrays {
 
     static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
         return checkFunctions(
-                caps.glVertexAttribDivisorARB
+            caps.glVertexAttribDivisorARB
         );
     }
 

@@ -24,14 +24,10 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVConservativeRaster {
 
-    /**
-     * Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.
-     */
+    /** Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled. */
     public static final int GL_CONSERVATIVE_RASTERIZATION_NV = 0x9346;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int
             GL_SUBPIXEL_PRECISION_BIAS_X_BITS_NV = 0x9347,
             GL_SUBPIXEL_PRECISION_BIAS_Y_BITS_NV = 0x9348,

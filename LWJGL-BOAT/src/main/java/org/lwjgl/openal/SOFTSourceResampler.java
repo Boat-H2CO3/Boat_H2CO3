@@ -23,21 +23,15 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class SOFTSourceResampler {
 
-    /**
-     * Accepted as the {@code pname} parameter of {@link AL10#alGetInteger GetInteger} and {@link AL10#alGetIntegerv GetIntegerv}.
-     */
+    /** Accepted as the {@code pname} parameter of {@link AL10#alGetInteger GetInteger} and {@link AL10#alGetIntegerv GetIntegerv}. */
     public static final int
             AL_NUM_RESAMPLERS_SOFT = 0x1210,
             AL_DEFAULT_RESAMPLER_SOFT = 0x1211;
 
-    /**
-     * Accepted as the {@code param} parameter of {@link AL10#alSourcei Sourcei}, {@link AL11#alSourceiv Sourceiv}, {@link AL10#alGetSourcei GetSourcei}, and {@link AL10#alGetSourceiv GetSourceiv}.
-     */
+    /** Accepted as the {@code param} parameter of {@link AL10#alSourcei Sourcei}, {@link AL11#alSourceiv Sourceiv}, {@link AL10#alGetSourcei GetSourcei}, and {@link AL10#alGetSourceiv GetSourceiv}. */
     public static final int AL_SOURCE_RESAMPLER_SOFT = 0x1212;
 
-    /**
-     * Accepted as the {@code pname} parameter of {@link #alGetStringiSOFT GetStringiSOFT}.
-     */
+    /** Accepted as the {@code pname} parameter of {@link #alGetStringiSOFT GetStringiSOFT}. */
     public static final int AL_RESAMPLER_NAME_SOFT = 0x1213;
 
     protected SOFTSourceResampler() {
@@ -46,7 +40,7 @@ public class SOFTSourceResampler {
 
     static boolean isAvailable(ALCapabilities caps) {
         return checkFunctions(
-                caps.alGetStringiSOFT
+            caps.alGetStringiSOFT
         );
     }
 

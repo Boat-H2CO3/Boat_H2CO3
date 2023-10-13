@@ -47,21 +47,15 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class ObjCRuntime {
 
-    /**
-     * Nil value.
-     */
+    /** Nil value. */
     public static final long nil = 0x0L;
 
-    /**
-     * Boolean values.
-     */
+    /** Boolean values. */
     public static final byte
             YES = 1,
             NO = 0;
 
-    /**
-     * Types.
-     */
+    /** Types. */
     public static final char
             _C_ID = '@',
             _C_CLASS = '#',
@@ -94,9 +88,7 @@ public class ObjCRuntime {
             _C_VECTOR = '!',
             _C_CONST = 'r';
 
-    /**
-     * Policies related to associative references.
-     */
+    /** Policies related to associative references. */
     public static final int
             OBJC_ASSOCIATION_ASSIGN = 0,
             OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1,
@@ -110,17 +102,13 @@ public class ObjCRuntime {
 
     private static final SharedLibrary OBJC = Library.loadNative(ObjCRuntime.class, "org.lwjgl", "objc");
 
-    /**
-     * Contains the function pointers loaded from the objc {@link SharedLibrary}.
-     */
+    /** Contains the function pointers loaded from the objc {@link SharedLibrary}. */
     public static final class Functions {
 
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 object_copy = apiGetFunctionAddress(OBJC, "object_copy"),
                 object_dispose = apiGetFunctionAddress(OBJC, "object_dispose"),
@@ -224,9 +212,7 @@ public class ObjCRuntime {
 
     }
 
-    /**
-     * Returns the objc {@link SharedLibrary}.
-     */
+    /** Returns the objc {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return OBJC;
     }
@@ -238,6 +224,7 @@ public class ObjCRuntime {
      *
      * @param obj  an Objective-C object
      * @param size the size of the object {@code obj}
+     *
      * @return a copy of obj
      */
     @NativeType("id")
@@ -255,6 +242,7 @@ public class ObjCRuntime {
      * Frees the memory occupied by a given object.
      *
      * @param obj an Objective-C object
+     *
      * @return {@link #nil}
      */
     @NativeType("id")
@@ -272,6 +260,7 @@ public class ObjCRuntime {
      * Returns the class of an object.
      *
      * @param obj an Objective-C object
+     *
      * @return the class object of which object is an instance, or Nil if {@code obj} is {@link #nil}
      */
     @NativeType("Class")
@@ -287,6 +276,7 @@ public class ObjCRuntime {
      *
      * @param obj the object to modify
      * @param cls a class object
+     *
      * @return the previous value of object's class, or Nil if {@code obj} is {@link #nil}
      */
     @NativeType("Class")
@@ -300,9 +290,7 @@ public class ObjCRuntime {
 
     // --- [ object_getClassName ] ---
 
-    /**
-     * Unsafe version of: {@link #object_getClassName}
-     */
+    /** Unsafe version of: {@link #object_getClassName} */
     public static long nobject_getClassName(long obj) {
         long __functionAddress = Functions.object_getClassName;
         return invokePP(obj, __functionAddress);
@@ -312,6 +300,7 @@ public class ObjCRuntime {
      * Returns the class name of a given object.
      *
      * @param obj an Objective-C object
+     *
      * @return the name of the class of which {@code obj} is an instance
      */
     @Nullable
@@ -333,8 +322,9 @@ public class ObjCRuntime {
      * <p>In a garbage-collected environment, the memory is scanned conservatively.</p>
      *
      * @param obj an Objective-C object
+     *
      * @return a pointer to any extra bytes allocated with {@code obj}. If {@code obj} was not allocated with any extra bytes, then dereferencing the returned pointer
-     * is undefined.
+     *         is undefined.
      */
     @NativeType("void *")
     public static long object_getIndexedIvars(@NativeType("id") long obj) {
@@ -352,6 +342,7 @@ public class ObjCRuntime {
      *
      * @param obj  the object containing the instance variable whose value you want to read
      * @param ivar the Ivar describing the instance variable whose value you want to read
+     *
      * @return the value of the instance variable specified by {@code ivar}, or {@link #nil} if {@code obj} is {@link #nil}
      */
     @NativeType("id")
@@ -386,9 +377,7 @@ public class ObjCRuntime {
 
     // --- [ object_setInstanceVariable ] ---
 
-    /**
-     * Unsafe version of: {@link #object_setInstanceVariable}
-     */
+    /** Unsafe version of: {@link #object_setInstanceVariable} */
     public static long nobject_setInstanceVariable(long obj, long name, long value) {
         long __functionAddress = Functions.object_setInstanceVariable;
         if (CHECKS) {
@@ -403,6 +392,7 @@ public class ObjCRuntime {
      * @param obj   a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to modify
      * @param name  a C string. Pass the name of the instance variable whose value you wish to modify
      * @param value the new value for the instance variable
+     *
      * @return a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name
      */
     @NativeType("Ivar")
@@ -419,6 +409,7 @@ public class ObjCRuntime {
      * @param obj   a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to modify
      * @param name  a C string. Pass the name of the instance variable whose value you wish to modify
      * @param value the new value for the instance variable
+     *
      * @return a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name
      */
     @NativeType("Ivar")
@@ -436,9 +427,7 @@ public class ObjCRuntime {
 
     // --- [ object_getInstanceVariable ] ---
 
-    /**
-     * Unsafe version of: {@link #object_getInstanceVariable}
-     */
+    /** Unsafe version of: {@link #object_getInstanceVariable} */
     public static long nobject_getInstanceVariable(long obj, long name, long outValue) {
         long __functionAddress = Functions.object_getInstanceVariable;
         if (CHECKS) {
@@ -453,6 +442,7 @@ public class ObjCRuntime {
      * @param obj      a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to obtain
      * @param name     a C string. Pass the name of the instance variable whose value you wish to obtain
      * @param outValue on return, contains a pointer to the value of the instance variable
+     *
      * @return a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name
      */
     @NativeType("Ivar")
@@ -470,6 +460,7 @@ public class ObjCRuntime {
      * @param obj      a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to obtain
      * @param name     a C string. Pass the name of the instance variable whose value you wish to obtain
      * @param outValue on return, contains a pointer to the value of the instance variable
+     *
      * @return a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name
      */
     @NativeType("Ivar")
@@ -490,9 +481,7 @@ public class ObjCRuntime {
 
     // --- [ objc_getClass ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_getClass}
-     */
+    /** Unsafe version of: {@link #objc_getClass} */
     public static long nobjc_getClass(long name) {
         long __functionAddress = Functions.objc_getClass;
         return invokePP(name, __functionAddress);
@@ -505,6 +494,7 @@ public class ObjCRuntime {
      * checks a second time to see whether the class is registered. objc_lookUpClass does not call the class handler callback.</p>
      *
      * @param name the name of the class to look up
+     *
      * @return the Class object for the named class, or {@link #nil} if the class is not registered with the Objective-C runtime
      */
     @NativeType("Class")
@@ -522,6 +512,7 @@ public class ObjCRuntime {
      * checks a second time to see whether the class is registered. objc_lookUpClass does not call the class handler callback.</p>
      *
      * @param name the name of the class to look up
+     *
      * @return the Class object for the named class, or {@link #nil} if the class is not registered with the Objective-C runtime
      */
     @NativeType("Class")
@@ -539,9 +530,7 @@ public class ObjCRuntime {
 
     // --- [ objc_getMetaClass ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_getMetaClass}
-     */
+    /** Unsafe version of: {@link #objc_getMetaClass} */
     public static long nobjc_getMetaClass(long name) {
         long __functionAddress = Functions.objc_getMetaClass;
         return invokePP(name, __functionAddress);
@@ -555,6 +544,7 @@ public class ObjCRuntime {
      * whether it’s valid or not.</p>
      *
      * @param name the name of the class to look up
+     *
      * @return the Class object for the metaclass of the named class, or {@link #nil} if the class is not registered with the Objective-C runtime
      */
     @NativeType("Class")
@@ -573,6 +563,7 @@ public class ObjCRuntime {
      * whether it’s valid or not.</p>
      *
      * @param name the name of the class to look up
+     *
      * @return the Class object for the metaclass of the named class, or {@link #nil} if the class is not registered with the Objective-C runtime
      */
     @NativeType("Class")
@@ -590,9 +581,7 @@ public class ObjCRuntime {
 
     // --- [ objc_lookUpClass ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_lookUpClass}
-     */
+    /** Unsafe version of: {@link #objc_lookUpClass} */
     public static long nobjc_lookUpClass(long name) {
         long __functionAddress = Functions.objc_lookUpClass;
         return invokePP(name, __functionAddress);
@@ -605,6 +594,7 @@ public class ObjCRuntime {
      * a second time to see whether the class is registered. This function does not call the class handler callback.</p>
      *
      * @param name the name of the class to look up
+     *
      * @return the Class object for the named class, or {@link #nil} if the class is not registered with the Objective-C runtime
      */
     @NativeType("Class")
@@ -622,6 +612,7 @@ public class ObjCRuntime {
      * a second time to see whether the class is registered. This function does not call the class handler callback.</p>
      *
      * @param name the name of the class to look up
+     *
      * @return the Class object for the named class, or {@link #nil} if the class is not registered with the Objective-C runtime
      */
     @NativeType("Class")
@@ -639,9 +630,7 @@ public class ObjCRuntime {
 
     // --- [ objc_getRequiredClass ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_getRequiredClass}
-     */
+    /** Unsafe version of: {@link #objc_getRequiredClass} */
     public static long nobjc_getRequiredClass(long name) {
         long __functionAddress = Functions.objc_getRequiredClass;
         return invokePP(name, __functionAddress);
@@ -655,6 +644,7 @@ public class ObjCRuntime {
      * <p>This function is used by ZeroLink, where failing to find a class would be a compile-time link error without ZeroLink.</p>
      *
      * @param name the name of the class to look up
+     *
      * @return the Class object for the named class
      */
     @NativeType("Class")
@@ -673,6 +663,7 @@ public class ObjCRuntime {
      * <p>This function is used by ZeroLink, where failing to find a class would be a compile-time link error without ZeroLink.</p>
      *
      * @param name the name of the class to look up
+     *
      * @return the Class object for the named class
      */
     @NativeType("Class")
@@ -715,6 +706,7 @@ public class ObjCRuntime {
      * @param buffer an array of Class values. On output, each Class value points to one class definition, up to either {@code bufferCount} or the total number of
      *               registered classes, whichever is less. You can pass {@code NULL} to obtain the total number of registered class definitions without actually retrieving
      *               any class definitions.
+     *
      * @return an integer value indicating the total number of registered classes
      */
     public static int objc_getClassList(@Nullable @NativeType("Class *") PointerBuffer buffer) {
@@ -754,9 +746,7 @@ public class ObjCRuntime {
 
     // --- [ class_getName ] ---
 
-    /**
-     * Unsafe version of: {@link #class_getName}
-     */
+    /** Unsafe version of: {@link #class_getName} */
     public static long nclass_getName(long cls) {
         long __functionAddress = Functions.class_getName;
         return invokePP(cls, __functionAddress);
@@ -766,6 +756,7 @@ public class ObjCRuntime {
      * Returns the name of a class.
      *
      * @param cls a class object
+     *
      * @return the name of the class, or the empty string if cls is Nil
      */
     @Nullable
@@ -781,6 +772,7 @@ public class ObjCRuntime {
      * Returns a Boolean value that indicates whether a class object is a metaclass.
      *
      * @param cls a class object
+     *
      * @return {@link #YES} if cls is a metaclass, {@link #NO} if cls is a non-meta class, {@link #NO} if cls is Nil
      */
     @NativeType("BOOL")
@@ -795,6 +787,7 @@ public class ObjCRuntime {
      * Returns the superclass of a class.
      *
      * @param cls a class object
+     *
      * @return the superclass of the class, or Nil if cls is a root class, or Nil if cls is Nil
      */
     @NativeType("Class")
@@ -816,6 +809,7 @@ public class ObjCRuntime {
      * implemented using the class_getVersion function.</p>
      *
      * @param cls a pointer to an Class data structure. Pass the class definition for which you wish to obtain the version
+     *
      * @return an integer indicating the version number of the class definition
      */
     public static int class_getVersion(@NativeType("Class") long cls) {
@@ -855,6 +849,7 @@ public class ObjCRuntime {
      * Returns the size of instances of a class.
      *
      * @param cls a class object
+     *
      * @return the size in bytes of instances of the class {@code cls}, or 0 if {@code cls} is Nil
      */
     @NativeType("size_t")
@@ -865,9 +860,7 @@ public class ObjCRuntime {
 
     // --- [ class_getInstanceVariable ] ---
 
-    /**
-     * Unsafe version of: {@link #class_getInstanceVariable}
-     */
+    /** Unsafe version of: {@link #class_getInstanceVariable} */
     public static long nclass_getInstanceVariable(long cls, long name) {
         long __functionAddress = Functions.class_getInstanceVariable;
         if (CHECKS) {
@@ -881,6 +874,7 @@ public class ObjCRuntime {
      *
      * @param cls  the class whose instance variable you wish to obtain
      * @param name the name of the instance variable definition to obtain
+     *
      * @return a pointer to an Ivar data structure containing information about the instance variable specified by name
      */
     @NativeType("Ivar")
@@ -896,6 +890,7 @@ public class ObjCRuntime {
      *
      * @param cls  the class whose instance variable you wish to obtain
      * @param name the name of the instance variable definition to obtain
+     *
      * @return a pointer to an Ivar data structure containing information about the instance variable specified by name
      */
     @NativeType("Ivar")
@@ -913,9 +908,7 @@ public class ObjCRuntime {
 
     // --- [ class_getClassVariable ] ---
 
-    /**
-     * Unsafe version of: {@link #class_getClassVariable}
-     */
+    /** Unsafe version of: {@link #class_getClassVariable} */
     public static long nclass_getClassVariable(long cls, long name) {
         long __functionAddress = Functions.class_getClassVariable;
         if (CHECKS) {
@@ -929,6 +922,7 @@ public class ObjCRuntime {
      *
      * @param cls  the class definition whose class variable you wish to obtain
      * @param name the name of the class variable definition to obtain
+     *
      * @return a pointer to an Ivar data structure containing information about the class variable specified by name
      */
     @NativeType("Ivar")
@@ -944,6 +938,7 @@ public class ObjCRuntime {
      *
      * @param cls  the class definition whose class variable you wish to obtain
      * @param name the name of the class variable definition to obtain
+     *
      * @return a pointer to an Ivar data structure containing information about the class variable specified by name
      */
     @NativeType("Ivar")
@@ -975,10 +970,11 @@ public class ObjCRuntime {
      * Describes the instance variables declared by a class.
      *
      * @param cls the class to inspect
-     * @return an array of pointers of type Ivar describing the instance variables declared by the class. Any instance variables declared by superclasses are not
-     * included. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array with free().
      *
-     * <p>If the class declares no instance variables, or {@code cls} is Nil, {@code NULL} is returned and {@code *outCount} is 0.</p>
+     * @return an array of pointers of type Ivar describing the instance variables declared by the class. Any instance variables declared by superclasses are not
+     *         included. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array with free().
+     *
+     *         <p>If the class declares no instance variables, or {@code cls} is Nil, {@code NULL} is returned and {@code *outCount} is 0.</p>
      */
     @Nullable
     @NativeType("Ivar *")
@@ -1003,8 +999,9 @@ public class ObjCRuntime {
      *
      * @param cls  the class you want to inspect
      * @param name the selector of the method you want to retrieve
+     *
      * @return the method that corresponds to the implementation of the selector specified by aSelector for the class specified by {@code cls}, or {@code NULL} if the
-     * specified class or its superclasses do not contain an instance method with the specified selector.
+     *         specified class or its superclasses do not contain an instance method with the specified selector.
      */
     @NativeType("Method")
     public static long class_getInstanceMethod(@NativeType("Class") long cls, @NativeType("SEL") long name) {
@@ -1025,8 +1022,9 @@ public class ObjCRuntime {
      *
      * @param cls  a pointer to a class definition. Pass the class that contains the method you want to retrieve
      * @param name a pointer of type SEL. Pass the selector of the method you want to retrieve
+     *
      * @return a pointer to the Method data structure that corresponds to the implementation of the selector specified by {@code name} for the class specified by
-     * {@code cls}, or {@code NULL} if the specified class or its superclasses do not contain a class method with the specified selector.
+     *         {@code cls}, or {@code NULL} if the specified class or its superclasses do not contain a class method with the specified selector.
      */
     @NativeType("Method")
     public static long class_getClassMethod(@NativeType("Class") long cls, @NativeType("SEL") long name) {
@@ -1050,6 +1048,7 @@ public class ObjCRuntime {
      *
      * @param cls  the class you want to inspect
      * @param name a selector
+     *
      * @return the function pointer that would be called if {@code [object name]} were called with an instance of the class, or {@code NULL} if {@code cls} is Nil
      */
     @NativeType("IMP")
@@ -1070,6 +1069,7 @@ public class ObjCRuntime {
      *
      * @param cls  the class you want to inspect
      * @param name a selector
+     *
      * @return {@link #YES} if instances of the class respond to the selector, otherwise {@link #NO}
      */
     @NativeType("BOOL")
@@ -1098,10 +1098,11 @@ public class ObjCRuntime {
      * Describes the instance methods implemented by a class.
      *
      * @param cls the class you want to inspect
-     * @return an array of pointers of type Method describing the instance methods implemented by the class—any instance methods implemented by superclasses are not
-     * included. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array with free().
      *
-     * <p>If {@code cls} implements no instance methods, or {@code cls} is Nil, returns {@code NULL} and {@code *outCount} is 0.</p>
+     * @return an array of pointers of type Method describing the instance methods implemented by the class—any instance methods implemented by superclasses are not
+     *         included. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array with free().
+     *
+     *         <p>If {@code cls} implements no instance methods, or {@code cls} is Nil, returns {@code NULL} and {@code *outCount} is 0.</p>
      */
     @Nullable
     @NativeType("Method *")
@@ -1126,6 +1127,7 @@ public class ObjCRuntime {
      *
      * @param cls      the class you want to inspect
      * @param protocol a protocol
+     *
      * @return {@link #YES} if {@code cls} conforms to {@code protocol}, otherwise {@link #NO}
      */
     @NativeType("BOOL")
@@ -1154,10 +1156,11 @@ public class ObjCRuntime {
      * Describes the protocols adopted by a class.
      *
      * @param cls the class you want to inspect
-     * @return an array of pointers of type Protocol* describing the protocols adopted by the class. Any protocols adopted by superclasses or other protocols are not
-     * included. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array with free().
      *
-     * <p>If {@code cls} adopts no protocols, or {@code cls} is Nil, returns {@code NULL} and {@code *outCount} is 0.</p>
+     * @return an array of pointers of type Protocol* describing the protocols adopted by the class. Any protocols adopted by superclasses or other protocols are not
+     *         included. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array with free().
+     *
+     *         <p>If {@code cls} adopts no protocols, or {@code cls} is Nil, returns {@code NULL} and {@code *outCount} is 0.</p>
      */
     @Nullable
     @NativeType("Protocol **")
@@ -1175,9 +1178,7 @@ public class ObjCRuntime {
 
     // --- [ class_getProperty ] ---
 
-    /**
-     * Unsafe version of: {@link #class_getProperty}
-     */
+    /** Unsafe version of: {@link #class_getProperty} */
     public static long nclass_getProperty(long cls, long name) {
         long __functionAddress = Functions.class_getProperty;
         return invokePPP(cls, name, __functionAddress);
@@ -1188,8 +1189,9 @@ public class ObjCRuntime {
      *
      * @param cls  the class you want to inspect
      * @param name a C string. Pass the name of the instance variable whose value you wish to modify.
+     *
      * @return a pointer of type {@code objc_property_t} describing the property, or {@code NULL} if the class does not declare a property with that name, or {@code NULL} if
-     * {@code cls} is Nil.
+     *         {@code cls} is Nil.
      */
     @NativeType("objc_property_t")
     public static long class_getProperty(@NativeType("Class") long cls, @NativeType("char const *") ByteBuffer name) {
@@ -1204,8 +1206,9 @@ public class ObjCRuntime {
      *
      * @param cls  the class you want to inspect
      * @param name a C string. Pass the name of the instance variable whose value you wish to modify.
+     *
      * @return a pointer of type {@code objc_property_t} describing the property, or {@code NULL} if the class does not declare a property with that name, or {@code NULL} if
-     * {@code cls} is Nil.
+     *         {@code cls} is Nil.
      */
     @NativeType("objc_property_t")
     public static long class_getProperty(@NativeType("Class") long cls, @NativeType("char const *") CharSequence name) {
@@ -1236,10 +1239,11 @@ public class ObjCRuntime {
      * Describes the properties declared by a class.
      *
      * @param cls the class you want to inspect
-     * @return an array of pointers of type {@code objc_property_t} describing the properties declared by the class. Any properties declared by superclasses are not
-     * included. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array with free().
      *
-     * <p>If {@code cls} declares no properties, or {@code cls} is Nil, returns {@code NULL} and {@code *outCount} is 0.</p>
+     * @return an array of pointers of type {@code objc_property_t} describing the properties declared by the class. Any properties declared by superclasses are not
+     *         included. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array with free().
+     *
+     *         <p>If {@code cls} declares no properties, or {@code cls} is Nil, returns {@code NULL} and {@code *outCount} is 0.</p>
      */
     @Nullable
     @NativeType("objc_property_t *")
@@ -1257,9 +1261,7 @@ public class ObjCRuntime {
 
     // --- [ class_getIvarLayout ] ---
 
-    /**
-     * Unsafe version of: {@link #class_getIvarLayout}
-     */
+    /** Unsafe version of: {@link #class_getIvarLayout} */
     public static long nclass_getIvarLayout(long cls) {
         long __functionAddress = Functions.class_getIvarLayout;
         if (CHECKS) {
@@ -1272,6 +1274,7 @@ public class ObjCRuntime {
      * Returns a description of the Ivar layout for a given class.
      *
      * @param cls the class to inspect
+     *
      * @return a description of the Ivar layout for {@code cls}
      */
     @Nullable
@@ -1283,9 +1286,7 @@ public class ObjCRuntime {
 
     // --- [ class_getWeakIvarLayout ] ---
 
-    /**
-     * Unsafe version of: {@link #class_getWeakIvarLayout}
-     */
+    /** Unsafe version of: {@link #class_getWeakIvarLayout} */
     public static long nclass_getWeakIvarLayout(long cls) {
         long __functionAddress = Functions.class_getWeakIvarLayout;
         if (CHECKS) {
@@ -1298,6 +1299,7 @@ public class ObjCRuntime {
      * Returns a description of the layout of weak Ivars for a given class.
      *
      * @param cls the class to inspect
+     *
      * @return a description of the layout of the weak Ivars for {@code cls}
      */
     @Nullable
@@ -1309,9 +1311,7 @@ public class ObjCRuntime {
 
     // --- [ class_addMethod ] ---
 
-    /**
-     * Unsafe version of: {@link #class_addMethod}
-     */
+    /** Unsafe version of: {@link #class_addMethod} */
     public static boolean nclass_addMethod(long cls, long name, long imp, long types) {
         long __functionAddress = Functions.class_addMethod;
         if (CHECKS) {
@@ -1350,6 +1350,7 @@ public class ObjCRuntime {
      * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming
      *              Guide</em> &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self}
      *              and {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+     *
      * @return {@link #YES} if the method was added successfully, otherwise {@link #NO} (for example, the class already contains a method implementation with that name)
      */
     @NativeType("BOOL")
@@ -1388,6 +1389,7 @@ public class ObjCRuntime {
      * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming
      *              Guide</em> &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self}
      *              and {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+     *
      * @return {@link #YES} if the method was added successfully, otherwise {@link #NO} (for example, the class already contains a method implementation with that name)
      */
     @NativeType("BOOL")
@@ -1405,9 +1407,7 @@ public class ObjCRuntime {
 
     // --- [ class_replaceMethod ] ---
 
-    /**
-     * Unsafe version of: {@link #class_replaceMethod}
-     */
+    /** Unsafe version of: {@link #class_replaceMethod} */
     public static long nclass_replaceMethod(long cls, long name, long imp, long types) {
         long __functionAddress = Functions.class_replaceMethod;
         if (CHECKS) {
@@ -1438,6 +1438,7 @@ public class ObjCRuntime {
      * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming
      *              Guide</em> &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self}
      *              and {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+     *
      * @return the previous implementation of the method identified by {@code name} for the class identified by {@code cls}
      */
     @NativeType("IMP")
@@ -1468,6 +1469,7 @@ public class ObjCRuntime {
      * @param types an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming
      *              Guide</em> &gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self}
      *              and {@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+     *
      * @return the previous implementation of the method identified by {@code name} for the class identified by {@code cls}
      */
     @NativeType("IMP")
@@ -1485,9 +1487,7 @@ public class ObjCRuntime {
 
     // --- [ class_addIvar ] ---
 
-    /**
-     * Unsafe version of: {@link #class_addIvar}
-     */
+    /** Unsafe version of: {@link #class_addIvar} */
     public static boolean nclass_addIvar(long cls, long name, long size, byte alignment, long types) {
         long __functionAddress = Functions.class_addIvar;
         if (CHECKS) {
@@ -1553,6 +1553,7 @@ public class ObjCRuntime {
      *
      * @param cls      the class to modify
      * @param protocol the protocol to add to {@code cls}
+     *
      * @return {@link #YES} if the protocol was added successfully, otherwise {@link #NO} (for example, the class already conforms to that protocol)
      */
     @NativeType("BOOL")
@@ -1587,6 +1588,7 @@ public class ObjCRuntime {
      * @param cls        the class to modify
      * @param name       the name of the property
      * @param attributes an array of property attributes
+     *
      * @return {@link #YES} if the property was added successfully; otherwise {@link #NO} (for example, this function returns {@link #NO} if the class already has that property)
      */
     @NativeType("BOOL")
@@ -1603,6 +1605,7 @@ public class ObjCRuntime {
      * @param cls        the class to modify
      * @param name       the name of the property
      * @param attributes an array of property attributes
+     *
      * @return {@link #YES} if the property was added successfully; otherwise {@link #NO} (for example, this function returns {@link #NO} if the class already has that property)
      */
     @NativeType("BOOL")
@@ -1669,9 +1672,7 @@ public class ObjCRuntime {
 
     // --- [ class_setIvarLayout ] ---
 
-    /**
-     * Unsafe version of: {@link #class_setIvarLayout}
-     */
+    /** Unsafe version of: {@link #class_setIvarLayout} */
     public static void nclass_setIvarLayout(long cls, long layout) {
         long __functionAddress = Functions.class_setIvarLayout;
         if (CHECKS) {
@@ -1713,9 +1714,7 @@ public class ObjCRuntime {
 
     // --- [ class_setWeakIvarLayout ] ---
 
-    /**
-     * Unsafe version of: {@link #class_setWeakIvarLayout}
-     */
+    /** Unsafe version of: {@link #class_setWeakIvarLayout} */
     public static void nclass_setWeakIvarLayout(long cls, long layout) {
         long __functionAddress = Functions.class_setWeakIvarLayout;
         if (CHECKS) {
@@ -1763,6 +1762,7 @@ public class ObjCRuntime {
      * @param cls        the class that you want to allocate an instance of
      * @param extraBytes an integer indicating the number of extra bytes to allocate. The additional bytes can be used to store additional instance variables beyond those
      *                   defined in the class definition.
+     *
      * @return an instance of the class {@code cls}
      */
     @NativeType("id")
@@ -1776,9 +1776,7 @@ public class ObjCRuntime {
 
     // --- [ objc_constructInstance ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_constructInstance}
-     */
+    /** Unsafe version of: {@link #objc_constructInstance} */
     public static long nobjc_constructInstance(long cls, long bytes) {
         long __functionAddress = Functions.objc_constructInstance;
         return invokePPP(cls, bytes, __functionAddress);
@@ -1790,6 +1788,7 @@ public class ObjCRuntime {
      * @param cls   the class that you want to allocate an instance of
      * @param bytes the location at which to allocate an instance of the {@code cls} class. {@code bytes} must point to at least {@code class_getInstanceSize(cls)}
      *              bytes of well-aligned, zero-filled memory.
+     *
      * @return an instance of the class {@code cls} at {@code bytes}, if successful; otherwise {@link #nil} (for example, if {@code cls} or {@code bytes} are themselves {@link #nil})
      */
     @NativeType("id")
@@ -1827,9 +1826,7 @@ public class ObjCRuntime {
 
     // --- [ objc_allocateClassPair ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_allocateClassPair}
-     */
+    /** Unsafe version of: {@link #objc_allocateClassPair} */
     public static long nobjc_allocateClassPair(long superclass, long name, long extraBytes) {
         long __functionAddress = Functions.objc_allocateClassPair;
         return invokePPPP(superclass, name, extraBytes, __functionAddress);
@@ -1848,6 +1845,7 @@ public class ObjCRuntime {
      * @param superclass the class to use as the new class's superclass, or Nil to create a new root class
      * @param name       the string to use as the new class's name. The string will be copied.
      * @param extraBytes the number of bytes to allocate for indexed ivars at the end of the class and metaclass objects. This should usually be 0.
+     *
      * @return the new class, or Nil if the class could not be created (for example, the desired name is already in use)
      */
     @NativeType("Class")
@@ -1871,6 +1869,7 @@ public class ObjCRuntime {
      * @param superclass the class to use as the new class's superclass, or Nil to create a new root class
      * @param name       the string to use as the new class's name. The string will be copied.
      * @param extraBytes the number of bytes to allocate for indexed ivars at the end of the class and metaclass objects. This should usually be 0.
+     *
      * @return the new class, or Nil if the class could not be created (for example, the desired name is already in use)
      */
     @NativeType("Class")
@@ -1926,6 +1925,7 @@ public class ObjCRuntime {
      * <p>To get the method name as a C string, call {@code sel_getName(method_getName(method))}.</p>
      *
      * @param m the method to inspect
+     *
      * @return a pointer of type SEL
      */
     @NativeType("SEL")
@@ -1943,6 +1943,7 @@ public class ObjCRuntime {
      * Returns the implementation of a method.
      *
      * @param m the method to inspect
+     *
      * @return a function pointer of type IMP
      */
     @NativeType("IMP")
@@ -1956,9 +1957,7 @@ public class ObjCRuntime {
 
     // --- [ method_getTypeEncoding ] ---
 
-    /**
-     * Unsafe version of: {@link #method_getTypeEncoding}
-     */
+    /** Unsafe version of: {@link #method_getTypeEncoding} */
     public static long nmethod_getTypeEncoding(long m) {
         long __functionAddress = Functions.method_getTypeEncoding;
         if (CHECKS) {
@@ -1971,6 +1970,7 @@ public class ObjCRuntime {
      * Returns a string describing a method's parameter and return types.
      *
      * @param m the method to inspect
+     *
      * @return a C string. The string may be {@code NULL}
      */
     @Nullable
@@ -1986,6 +1986,7 @@ public class ObjCRuntime {
      * Returns the number of arguments accepted by a method.
      *
      * @param m a pointer to a Method data structure. Pass the method in question.
+     *
      * @return an integer containing the number of arguments accepted by the given method
      */
     @NativeType("unsigned int")
@@ -1999,9 +2000,7 @@ public class ObjCRuntime {
 
     // --- [ method_copyReturnType ] ---
 
-    /**
-     * Unsafe version of: {@link #method_copyReturnType}
-     */
+    /** Unsafe version of: {@link #method_copyReturnType} */
     public static long nmethod_copyReturnType(long m) {
         long __functionAddress = Functions.method_copyReturnType;
         if (CHECKS) {
@@ -2014,6 +2013,7 @@ public class ObjCRuntime {
      * Returns a string describing a method's return type.
      *
      * @param m the method to inspect
+     *
      * @return a C string describing the return type. You must free the string with free().
      */
     @Nullable
@@ -2025,9 +2025,7 @@ public class ObjCRuntime {
 
     // --- [ method_copyArgumentType ] ---
 
-    /**
-     * Unsafe version of: {@link #method_copyArgumentType}
-     */
+    /** Unsafe version of: {@link #method_copyArgumentType} */
     public static long nmethod_copyArgumentType(long m, int index) {
         long __functionAddress = Functions.method_copyArgumentType;
         if (CHECKS) {
@@ -2041,8 +2039,9 @@ public class ObjCRuntime {
      *
      * @param m     the method to inspect
      * @param index the index of the parameter to inspect
+     *
      * @return a C string describing the type of the parameter at index {@code index}, or {@code NULL} if method has no parameter index {@code index}. You must free the
-     * string with free().
+     *         string with free().
      */
     @Nullable
     @NativeType("char *")
@@ -2158,6 +2157,7 @@ public class ObjCRuntime {
      *
      * @param m   the method for which to set an implementation
      * @param imp the implemention to set to this method
+     *
      * @return the previous implementation of the method
      */
     @NativeType("IMP")
@@ -2189,9 +2189,7 @@ public class ObjCRuntime {
 
     // --- [ ivar_getName ] ---
 
-    /**
-     * Unsafe version of: {@link #ivar_getName}
-     */
+    /** Unsafe version of: {@link #ivar_getName} */
     public static long nivar_getName(long v) {
         long __functionAddress = Functions.ivar_getName;
         if (CHECKS) {
@@ -2204,6 +2202,7 @@ public class ObjCRuntime {
      * Returns the name of an instance variable.
      *
      * @param v the instance variable
+     *
      * @return a C string containing the instance variable's name
      */
     @Nullable
@@ -2215,9 +2214,7 @@ public class ObjCRuntime {
 
     // --- [ ivar_getTypeEncoding ] ---
 
-    /**
-     * Unsafe version of: {@link #ivar_getTypeEncoding}
-     */
+    /** Unsafe version of: {@link #ivar_getTypeEncoding} */
     public static long nivar_getTypeEncoding(long v) {
         long __functionAddress = Functions.ivar_getTypeEncoding;
         if (CHECKS) {
@@ -2230,6 +2227,7 @@ public class ObjCRuntime {
      * Returns the type string of an instance variable.
      *
      * @param v the instance variable
+     *
      * @return a C string containing the instance variable's type encoding
      */
     @Nullable
@@ -2248,6 +2246,7 @@ public class ObjCRuntime {
      * the instance variable data directly.</p>
      *
      * @param v the instance variable
+     *
      * @return the offset of {@code v}
      */
     @NativeType("ptrdiff_t")
@@ -2261,9 +2260,7 @@ public class ObjCRuntime {
 
     // --- [ property_getName ] ---
 
-    /**
-     * Unsafe version of: {@link #property_getName}
-     */
+    /** Unsafe version of: {@link #property_getName} */
     public static long nproperty_getName(long property) {
         long __functionAddress = Functions.property_getName;
         if (CHECKS) {
@@ -2276,6 +2273,7 @@ public class ObjCRuntime {
      * Returns the name of a property.
      *
      * @param property the property you want to inquire about
+     *
      * @return a C string containing the property's name
      */
     @Nullable
@@ -2287,9 +2285,7 @@ public class ObjCRuntime {
 
     // --- [ property_getAttributes ] ---
 
-    /**
-     * Unsafe version of: {@link #property_getAttributes}
-     */
+    /** Unsafe version of: {@link #property_getAttributes} */
     public static long nproperty_getAttributes(long property) {
         long __functionAddress = Functions.property_getAttributes;
         if (CHECKS) {
@@ -2302,6 +2298,7 @@ public class ObjCRuntime {
      * Returns the attribute string of a property.
      *
      * @param property a property
+     *
      * @return a C string containing the property's attributes
      */
     @Nullable
@@ -2330,6 +2327,7 @@ public class ObjCRuntime {
      * Returns an array of property attributes for a given property.
      *
      * @param property the property whose attributes you want to copy
+     *
      * @return an array of property attributes. You must free the array with free().
      */
     @Nullable
@@ -2348,9 +2346,7 @@ public class ObjCRuntime {
 
     // --- [ property_copyAttributeValue ] ---
 
-    /**
-     * Unsafe version of: {@link #property_copyAttributeValue}
-     */
+    /** Unsafe version of: {@link #property_copyAttributeValue} */
     public static long nproperty_copyAttributeValue(long property, long attributeName) {
         long __functionAddress = Functions.property_copyAttributeValue;
         if (CHECKS) {
@@ -2364,8 +2360,9 @@ public class ObjCRuntime {
      *
      * @param property      the property whose value you are interested in
      * @param attributeName a C string representing the name of the attribute
+     *
      * @return The value string of the {@code attributeName} attribute, if one exists in {@code property}; otherwise, {@link #nil}. You must free the returned value string
-     * with free().
+     *         with free().
      */
     @Nullable
     @NativeType("char *")
@@ -2382,8 +2379,9 @@ public class ObjCRuntime {
      *
      * @param property      the property whose value you are interested in
      * @param attributeName a C string representing the name of the attribute
+     *
      * @return The value string of the {@code attributeName} attribute, if one exists in {@code property}; otherwise, {@link #nil}. You must free the returned value string
-     * with free().
+     *         with free().
      */
     @Nullable
     @NativeType("char *")
@@ -2402,9 +2400,7 @@ public class ObjCRuntime {
 
     // --- [ objc_getProtocol ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_getProtocol}
-     */
+    /** Unsafe version of: {@link #objc_getProtocol} */
     public static long nobjc_getProtocol(long name) {
         long __functionAddress = Functions.objc_getProtocol;
         return invokePP(name, __functionAddress);
@@ -2416,6 +2412,7 @@ public class ObjCRuntime {
      * <p>This function acquires the runtime lock.</p>
      *
      * @param name the name of a protocol
+     *
      * @return the protocol named {@code name}{, or {@code NULL} if no protocol named name could be found
      */
     @NativeType("Protocol *")
@@ -2432,6 +2429,7 @@ public class ObjCRuntime {
      * <p>This function acquires the runtime lock.</p>
      *
      * @param name the name of a protocol
+     *
      * @return the protocol named {@code name}{, or {@code NULL} if no protocol named name could be found
      */
     @NativeType("Protocol *")
@@ -2463,7 +2461,7 @@ public class ObjCRuntime {
      * Returns an array of all the protocols known to the runtime.
      *
      * @return a C array of all the protocols known to the runtime. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the
-     * list with free().
+     *         list with free().
      */
     @Nullable
     @NativeType("Protocol **")
@@ -2494,6 +2492,7 @@ public class ObjCRuntime {
      *
      * @param proto a protocol
      * @param other a protocol
+     *
      * @return {@link #YES} if {@code proto} conforms to {@code other}, otherwise {@link #NO}
      */
     @NativeType("BOOL")
@@ -2513,6 +2512,7 @@ public class ObjCRuntime {
      *
      * @param proto a protocol
      * @param other a protocol
+     *
      * @return {@link #YES} if proto is the same as other, otherwise {@link #NO}
      */
     @NativeType("BOOL")
@@ -2527,9 +2527,7 @@ public class ObjCRuntime {
 
     // --- [ protocol_getName ] ---
 
-    /**
-     * Unsafe version of: {@link #protocol_getName}
-     */
+    /** Unsafe version of: {@link #protocol_getName} */
     public static long nprotocol_getName(long p) {
         long __functionAddress = Functions.protocol_getName;
         if (CHECKS) {
@@ -2542,6 +2540,7 @@ public class ObjCRuntime {
      * Returns a the name of a protocol.
      *
      * @param p a protocol
+     *
      * @return the name of the protocol {@code p} as a C string
      */
     @Nullable
@@ -2553,14 +2552,10 @@ public class ObjCRuntime {
 
     // --- [ protocol_getMethodDescription ] ---
 
-    /**
-     * Unsafe version of: {@link #protocol_getMethodDescription}
-     */
+    /** Unsafe version of: {@link #protocol_getMethodDescription} */
     public static native void nprotocol_getMethodDescription(long p, long aSel, boolean isRequiredMethod, boolean isInstanceMethod, long __functionAddress, long __result);
 
-    /**
-     * Unsafe version of: {@link #protocol_getMethodDescription}
-     */
+    /** Unsafe version of: {@link #protocol_getMethodDescription} */
     public static void nprotocol_getMethodDescription(long p, long aSel, boolean isRequiredMethod, boolean isInstanceMethod, long __result) {
         long __functionAddress = Functions.protocol_getMethodDescription;
         if (CHECKS) {
@@ -2611,10 +2606,11 @@ public class ObjCRuntime {
      * @param p                a protocol
      * @param isRequiredMethod a Boolean value that indicates whether returned methods should be required methods (pass {@link #YES} to specify required methods)
      * @param isInstanceMethod a Boolean value that indicates whether returned methods should be instance methods (pass {@link #YES} to specify instance methods)
-     * @return a C array of objc_method_description structures containing the names and types of {@code p}'s methods specified by {@code isRequiredMethod} and
-     * {@code isInstanceMethod}. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the list with free().
      *
-     * <p>If the protocol declares no methods that meet the specification, {@code NULL} is returned and {@code *outCount} is 0.</p>
+     * @return a C array of objc_method_description structures containing the names and types of {@code p}'s methods specified by {@code isRequiredMethod} and
+     *         {@code isInstanceMethod}. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the list with free().
+     *
+     *         <p>If the protocol declares no methods that meet the specification, {@code NULL} is returned and {@code *outCount} is 0.</p>
      */
     @Nullable
     @NativeType("struct objc_method_description *")
@@ -2632,9 +2628,7 @@ public class ObjCRuntime {
 
     // --- [ protocol_getProperty ] ---
 
-    /**
-     * Unsafe version of: {@link #protocol_getProperty}
-     */
+    /** Unsafe version of: {@link #protocol_getProperty} */
     public static long nprotocol_getProperty(long proto, long name, boolean isRequiredProperty, boolean isInstanceProperty) {
         long __functionAddress = Functions.protocol_getProperty;
         if (CHECKS) {
@@ -2650,8 +2644,9 @@ public class ObjCRuntime {
      * @param name               the name of a property
      * @param isRequiredProperty a Boolean value that indicates whether {@code name} is a required property
      * @param isInstanceProperty a Boolean value that indicates whether {@code name} is a instance property
+     *
      * @return the property specified by {@code name}, {@code isRequiredProperty}, and {@code isInstanceProperty} for {@code proto}, or {@code NULL} if none of
-     * {@code proto}'s properties meets the specification
+     *         {@code proto}'s properties meets the specification
      */
     @NativeType("objc_property_t")
     public static long protocol_getProperty(@NativeType("Protocol *") long proto, @NativeType("char const *") ByteBuffer name, @NativeType("BOOL") boolean isRequiredProperty, @NativeType("BOOL") boolean isInstanceProperty) {
@@ -2668,8 +2663,9 @@ public class ObjCRuntime {
      * @param name               the name of a property
      * @param isRequiredProperty a Boolean value that indicates whether {@code name} is a required property
      * @param isInstanceProperty a Boolean value that indicates whether {@code name} is a instance property
+     *
      * @return the property specified by {@code name}, {@code isRequiredProperty}, and {@code isInstanceProperty} for {@code proto}, or {@code NULL} if none of
-     * {@code proto}'s properties meets the specification
+     *         {@code proto}'s properties meets the specification
      */
     @NativeType("objc_property_t")
     public static long protocol_getProperty(@NativeType("Protocol *") long proto, @NativeType("char const *") CharSequence name, @NativeType("BOOL") boolean isRequiredProperty, @NativeType("BOOL") boolean isInstanceProperty) {
@@ -2703,10 +2699,11 @@ public class ObjCRuntime {
      * Returns an array of the properties declared by a protocol.
      *
      * @param proto a protocol
-     * @return a C array of pointers of type objc_property_t describing the properties declared by {@code proto}. Any properties declared by other protocols adopted
-     * by this protocol are not included. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array with free().
      *
-     * <p>If the protocol declares no properties, {@code NULL} is returned and {@code *outCount} is 0.</p>
+     * @return a C array of pointers of type objc_property_t describing the properties declared by {@code proto}. Any properties declared by other protocols adopted
+     *         by this protocol are not included. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array with free().
+     *
+     *         <p>If the protocol declares no properties, {@code NULL} is returned and {@code *outCount} is 0.</p>
      */
     @Nullable
     @NativeType("objc_property_t *")
@@ -2741,10 +2738,11 @@ public class ObjCRuntime {
      * eturns an array of the protocols adopted by a protocol.
      *
      * @param proto a protocol
-     * @return a C array of protocols adopted by {@code proto}. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array
-     * with free().
      *
-     * <p>If the protocol declares no properties, {@code NULL} is returned and {@code *outCount} is 0.</p>
+     * @return a C array of protocols adopted by {@code proto}. The array contains {@code *outCount} pointers followed by a {@code NULL} terminator. You must free the array
+     *         with free().
+     *
+     *         <p>If the protocol declares no properties, {@code NULL} is returned and {@code *outCount} is 0.</p>
      */
     @Nullable
     @NativeType("Protocol **")
@@ -2762,9 +2760,7 @@ public class ObjCRuntime {
 
     // --- [ objc_allocateProtocol ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_allocateProtocol}
-     */
+    /** Unsafe version of: {@link #objc_allocateProtocol} */
     public static long nobjc_allocateProtocol(long name) {
         long __functionAddress = Functions.objc_allocateProtocol;
         return invokePP(name, __functionAddress);
@@ -2778,6 +2774,7 @@ public class ObjCRuntime {
      * <p>There is no dispose method associated with this function.</p>
      *
      * @param name the name of the protocol you want to create
+     *
      * @return a new protocol instance or {@link #nil} if a protocol with the same name as {@code name} already exists
      */
     @NativeType("Protocol *")
@@ -2796,6 +2793,7 @@ public class ObjCRuntime {
      * <p>There is no dispose method associated with this function.</p>
      *
      * @param name the name of the protocol you want to create
+     *
      * @return a new protocol instance or {@link #nil} if a protocol with the same name as {@code name} already exists
      */
     @NativeType("Protocol *")
@@ -2831,9 +2829,7 @@ public class ObjCRuntime {
 
     // --- [ protocol_addMethodDescription ] ---
 
-    /**
-     * Unsafe version of: {@link #protocol_addMethodDescription}
-     */
+    /** Unsafe version of: {@link #protocol_addMethodDescription} */
     public static void nprotocol_addMethodDescription(long proto, long name, long types, boolean isRequiredMethod, boolean isInstanceMethod) {
         long __functionAddress = Functions.protocol_addMethodDescription;
         if (CHECKS) {
@@ -3004,9 +3000,7 @@ public class ObjCRuntime {
 
     // --- [ class_getImageName ] ---
 
-    /**
-     * Unsafe version of: {@link #class_getImageName}
-     */
+    /** Unsafe version of: {@link #class_getImageName} */
     public static long nclass_getImageName(long cls) {
         long __functionAddress = Functions.class_getImageName;
         if (CHECKS) {
@@ -3019,6 +3013,7 @@ public class ObjCRuntime {
      * Returns the name of the dynamic library a class originated from.
      *
      * @param cls the class you are inquiring about
+     *
      * @return a C string representing the name of the library containing the {@code cls} class.
      */
     @Nullable
@@ -3044,6 +3039,7 @@ public class ObjCRuntime {
      * Returns the names of all the classes within a specified library or framework.
      *
      * @param image the library or framework you are inquiring about
+     *
      * @return an array of C strings representing all of the class names within the specified library or framework
      */
     @Nullable
@@ -3067,6 +3063,7 @@ public class ObjCRuntime {
      * Returns the names of all the classes within a specified library or framework.
      *
      * @param image the library or framework you are inquiring about
+     *
      * @return an array of C strings representing all of the class names within the specified library or framework
      */
     @Nullable
@@ -3087,9 +3084,7 @@ public class ObjCRuntime {
 
     // --- [ sel_getName ] ---
 
-    /**
-     * Unsafe version of: {@link #sel_getName}
-     */
+    /** Unsafe version of: {@link #sel_getName} */
     public static long nsel_getName(long sel) {
         long __functionAddress = Functions.sel_getName;
         if (CHECKS) {
@@ -3102,6 +3097,7 @@ public class ObjCRuntime {
      * Returns the name of the method specified by a given selector.
      *
      * @param sel a pointer of type SEL. Pass the selector whose name you wish to determine.
+     *
      * @return a C string indicating the name of the selector
      */
     @Nullable
@@ -3113,9 +3109,7 @@ public class ObjCRuntime {
 
     // --- [ sel_getUid ] ---
 
-    /**
-     * Unsafe version of: {@link #sel_getUid}
-     */
+    /** Unsafe version of: {@link #sel_getUid} */
     public static long nsel_getUid(long str) {
         long __functionAddress = Functions.sel_getUid;
         return invokePP(str, __functionAddress);
@@ -3127,6 +3121,7 @@ public class ObjCRuntime {
      * <p>The implementation of this method is identical to the implementation of {@link #sel_registerName}.</p>
      *
      * @param str a pointer to a C string. Pass the name of the method you wish to register
+     *
      * @return a pointer of type SEL specifying the selector for the named method
      */
     @NativeType("SEL")
@@ -3143,6 +3138,7 @@ public class ObjCRuntime {
      * <p>The implementation of this method is identical to the implementation of {@link #sel_registerName}.</p>
      *
      * @param str a pointer to a C string. Pass the name of the method you wish to register
+     *
      * @return a pointer of type SEL specifying the selector for the named method
      */
     @NativeType("SEL")
@@ -3160,9 +3156,7 @@ public class ObjCRuntime {
 
     // --- [ sel_registerName ] ---
 
-    /**
-     * Unsafe version of: {@link #sel_registerName}
-     */
+    /** Unsafe version of: {@link #sel_registerName} */
     public static long nsel_registerName(long str) {
         long __functionAddress = Functions.sel_registerName;
         return invokePP(str, __functionAddress);
@@ -3175,6 +3169,7 @@ public class ObjCRuntime {
      * definition. If the method name has already been registered, this function simply returns the selector.</p>
      *
      * @param str a pointer to a C string. Pass the name of the method you wish to register
+     *
      * @return a pointer of type SEL specifying the selector for the named method
      */
     @NativeType("SEL")
@@ -3192,6 +3187,7 @@ public class ObjCRuntime {
      * definition. If the method name has already been registered, this function simply returns the selector.</p>
      *
      * @param str a pointer to a C string. Pass the name of the method you wish to register
+     *
      * @return a pointer of type SEL specifying the selector for the named method
      */
     @NativeType("SEL")
@@ -3216,6 +3212,7 @@ public class ObjCRuntime {
      *
      * @param lhs the selector to compare with {@code rhs}
      * @param rhs the selector to compare with {@code lhs}
+     *
      * @return {@link #YES} if rhs and rhs are equal, otherwise {@link #NO}
      */
     @NativeType("BOOL")
@@ -3249,9 +3246,7 @@ public class ObjCRuntime {
 
     // --- [ objc_setEnumerationMutationHandler ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_setEnumerationMutationHandler}
-     */
+    /** Unsafe version of: {@link #objc_setEnumerationMutationHandler} */
     public static void nobjc_setEnumerationMutationHandler(long handler) {
         long __functionAddress = Functions.objc_setEnumerationMutationHandler;
         invokePV(handler, __functionAddress);
@@ -3273,6 +3268,7 @@ public class ObjCRuntime {
      *
      * @param block the block that implements this method. The signature of {@code block} should be {@code method_return_type ^(id self, self, method_args …)}. The
      *              selector of the method is not available to {@code block}. {@code block} is copied with {@code Block_copy()}.
+     *
      * @return the IMP that calls {@code block}. You must dispose of the returned IMP using the function.
      */
     @NativeType("IMP")
@@ -3290,6 +3286,7 @@ public class ObjCRuntime {
      * Returns the block associated with an IMP that was created using {@link #imp_implementationWithBlock}.
      *
      * @param anImp the IMP that calls this block
+     *
      * @return the block called by {@code anImp}
      */
     @NativeType("id")
@@ -3307,8 +3304,9 @@ public class ObjCRuntime {
      * Disassociates a block from an IMP that was created using {@link #imp_implementationWithBlock}, and releases the copy of the block that was created.
      *
      * @param anImp an IMP that was created using the {@link #imp_implementationWithBlock} function.
+     *
      * @return {@link #YES} if the block was released successfully; otherwise, {@link #NO} (for example, the function returns {@link #NO} if the block was not used to create {@code anImp}
-     * previously).
+     *         previously).
      */
     @NativeType("BOOL")
     public static boolean imp_removeBlock(@NativeType("IMP") long anImp) {
@@ -3321,9 +3319,7 @@ public class ObjCRuntime {
 
     // --- [ objc_loadWeak ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_loadWeak}
-     */
+    /** Unsafe version of: {@link #objc_loadWeak} */
     public static long nobjc_loadWeak(long location) {
         long __functionAddress = Functions.objc_loadWeak;
         return invokePP(location, __functionAddress);
@@ -3336,6 +3332,7 @@ public class ObjCRuntime {
      * alive long enough for the caller to use it. This function is typically used anywhere a {@code __weak} variable is used in an expression.</p>
      *
      * @param location the address of the weak pointer
+     *
      * @return the object pointed to by location, or {@link #nil} if location is {@link #nil}
      */
     @NativeType("id")
@@ -3348,9 +3345,7 @@ public class ObjCRuntime {
 
     // --- [ objc_storeWeak ] ---
 
-    /**
-     * Unsafe version of: {@link #objc_storeWeak}
-     */
+    /** Unsafe version of: {@link #objc_storeWeak} */
     public static long nobjc_storeWeak(long location, long obj) {
         long __functionAddress = Functions.objc_storeWeak;
         if (CHECKS) {
@@ -3366,6 +3361,7 @@ public class ObjCRuntime {
      *
      * @param location the address of the weak pointer
      * @param obj      the new object you want the weak pointer to now point to
+     *
      * @return the value stored in location (that is, {@code obj})
      */
     @NativeType("id")
@@ -3403,6 +3399,7 @@ public class ObjCRuntime {
      *
      * @param object the source object for the association
      * @param key    the key for the association
+     *
      * @return the value associated with the key {@code key} for {@code object}.
      */
     @NativeType("id")

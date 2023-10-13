@@ -176,9 +176,7 @@ public class GLXStereoNotifyEventEXT extends Struct {
         return wrap(GLXStereoNotifyEventEXT.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static GLXStereoNotifyEventEXT createSafe(long address) {
         return address == NULL ? null : wrap(GLXStereoNotifyEventEXT.class, address);
@@ -271,7 +269,7 @@ public class GLXStereoNotifyEventEXT extends Struct {
 
         /**
          * Creates a new {@code GLXStereoNotifyEventEXT.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link GLXStereoNotifyEventEXT#SIZEOF}, and its mark will be undefined.
@@ -349,17 +347,10 @@ public class GLXStereoNotifyEventEXT extends Struct {
          * Returns the value of the {@code window} field.
          */
         @NativeType("GLXDrawable")
-        public long window() {
-            return GLXStereoNotifyEventEXT.nwindow(address());
-        }
-
-        /**
-         * Returns the value of the {@code stereo_tree} field.
-         */
+        public long window() { return GLXStereoNotifyEventEXT.nwindow(address()); }
+        /** Returns the value of the {@code stereo_tree} field. */
         @NativeType("Bool")
-        public boolean stereo_tree() {
-            return GLXStereoNotifyEventEXT.nstereo_tree(address()) != 0;
-        }
+        public boolean stereo_tree() { return GLXStereoNotifyEventEXT.nstereo_tree(address()) != 0; }
 
     }
 

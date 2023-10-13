@@ -26,14 +26,10 @@ package org.lwjgl.opengl;
  */
 public final class KHRContextFlushControl {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v. */
     public static final int GL_CONTEXT_RELEASE_BEHAVIOR = 0x82FB;
 
-    /**
-     * Returned in {@code data} by GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v when {@code pname} is {@link #GL_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}.
-     */
+    /** Returned in {@code data} by GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v when {@code pname} is {@link #GL_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}. */
     public static final int GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH = 0x82FC;
 
     private KHRContextFlushControl() {

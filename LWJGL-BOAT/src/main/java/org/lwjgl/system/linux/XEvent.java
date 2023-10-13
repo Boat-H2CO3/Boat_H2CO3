@@ -468,16 +468,12 @@ public class XEvent extends Struct implements NativeResource {
         return wrap(XEvent.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code XEvent} instance for the specified memory address.
-     */
+    /** Returns a new {@code XEvent} instance for the specified memory address. */
     public static XEvent create(long address) {
         return wrap(XEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XEvent createSafe(long address) {
         return address == NULL ? null : wrap(XEvent.class, address);
@@ -521,9 +517,7 @@ public class XEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -531,16 +525,12 @@ public class XEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XEvent} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code XEvent} instance allocated on the thread-local {@link MemoryStack}. */
     public static XEvent mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -841,26 +831,21 @@ public class XEvent extends Struct implements NativeResource {
         return XGenericEventCookie.create(struct + XEvent.XCOOKIE);
     }
 
-    public static CLongBuffer npad(long struct) {
-        return memCLongBuffer(struct + XEvent.PAD, 24);
-    }
-
+    public static CLongBuffer npad(long struct) { return memCLongBuffer(struct + XEvent.PAD, 24); }
     public static long npad(long struct, int index) {
         return memGetCLong(struct + XEvent.PAD + check(index, 24) * CLONG_SIZE);
     }
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XEvent} structs.
-     */
+    /** An array of {@link XEvent} structs. */
     public static class Buffer extends StructBuffer<XEvent, Buffer> implements NativeResource {
 
         private static final XEvent ELEMENT_FACTORY = XEvent.create(-1L);
 
         /**
          * Creates a new {@code XEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XEvent#SIZEOF}, and its mark will be undefined.
@@ -1088,44 +1073,17 @@ public class XEvent extends Struct implements NativeResource {
         /**
          * Returns a {@link XClientMessageEvent} view of the {@code xclient} field.
          */
-        public XClientMessageEvent xclient() {
-            return XEvent.nxclient(address());
-        }
-
-        /**
-         * Returns a {@link XMappingEvent} view of the {@code xmapping} field.
-         */
-        public XMappingEvent xmapping() {
-            return XEvent.nxmapping(address());
-        }
-
-        /**
-         * Returns a {@link XErrorEvent} view of the {@code xerror} field.
-         */
-        public XErrorEvent xerror() {
-            return XEvent.nxerror(address());
-        }
-
-        /**
-         * Returns a {@link XKeymapEvent} view of the {@code xkeymap} field.
-         */
-        public XKeymapEvent xkeymap() {
-            return XEvent.nxkeymap(address());
-        }
-
-        /**
-         * Returns a {@link XGenericEvent} view of the {@code xgeneric} field.
-         */
-        public XGenericEvent xgeneric() {
-            return XEvent.nxgeneric(address());
-        }
-
-        /**
-         * Returns a {@link XGenericEventCookie} view of the {@code xcookie} field.
-         */
-        public XGenericEventCookie xcookie() {
-            return XEvent.nxcookie(address());
-        }
+        public XClientMessageEvent xclient() { return XEvent.nxclient(address()); }
+        /** Returns a {@link XMappingEvent} view of the {@code xmapping} field. */
+        public XMappingEvent xmapping() { return XEvent.nxmapping(address()); }
+        /** Returns a {@link XErrorEvent} view of the {@code xerror} field. */
+        public XErrorEvent xerror() { return XEvent.nxerror(address()); }
+        /** Returns a {@link XKeymapEvent} view of the {@code xkeymap} field. */
+        public XKeymapEvent xkeymap() { return XEvent.nxkeymap(address()); }
+        /** Returns a {@link XGenericEvent} view of the {@code xgeneric} field. */
+        public XGenericEvent xgeneric() { return XEvent.nxgeneric(address()); }
+        /** Returns a {@link XGenericEventCookie} view of the {@code xcookie} field. */
+        public XGenericEventCookie xcookie() { return XEvent.nxcookie(address()); }
 
     }
 

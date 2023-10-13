@@ -15,9 +15,7 @@ package org.lwjgl.opengl;
  */
 public final class AMDTransformFeedback4 {
 
-    /**
-     * Accepted by the {@code pname} argument to Enablei. Disablei and IsEnabledi.
-     */
+    /** Accepted by the {@code pname} argument to Enablei. Disablei and IsEnabledi. */
     public static final int GL_STREAM_RASTERIZATION_AMD = 0x91A0;
 
     private AMDTransformFeedback4() {

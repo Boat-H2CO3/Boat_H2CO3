@@ -56,23 +56,16 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTFramebufferMultisample {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT.
-     */
+    /** Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT. */
     public static final int GL_RENDERBUFFER_SAMPLES_EXT = 0x8CAB;
 
-    /**
-     * Returned by CheckFramebufferStatusEXT.
-     */
+    /** Returned by CheckFramebufferStatusEXT. */
     public static final int GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT = 0x8D56;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_MAX_SAMPLES_EXT = 0x8D57;
 
-    static {
-        GL.initialize();
+    static { GL.initialize();
     }
 
     protected EXTFramebufferMultisample() {
@@ -81,7 +74,7 @@ public class EXTFramebufferMultisample {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glRenderbufferStorageMultisampleEXT
+            caps.glRenderbufferStorageMultisampleEXT
         );
     }
 

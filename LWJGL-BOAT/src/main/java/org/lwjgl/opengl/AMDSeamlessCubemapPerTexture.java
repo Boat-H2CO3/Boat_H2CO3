@@ -26,9 +26,7 @@ package org.lwjgl.opengl;
  */
 public final class AMDSeamlessCubemapPerTexture {
 
-    /**
-     * Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.
-     */
+    /** Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv. */
     public static final int GL_TEXTURE_CUBE_MAP_SEAMLESS = 0x884F;
 
     private AMDSeamlessCubemapPerTexture() {

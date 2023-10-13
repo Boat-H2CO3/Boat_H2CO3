@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_image_load_store.txt">ARB_shader_image_load_store</a> extension.
@@ -39,9 +39,7 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBShaderImageLoadStore {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v. */
     public static final int
             GL_MAX_IMAGE_UNITS = 0x8F38,
             GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS = 0x8F39,
@@ -53,9 +51,7 @@ public class ARBShaderImageLoadStore {
             GL_MAX_FRAGMENT_IMAGE_UNIFORMS = 0x90CE,
             GL_MAX_COMBINED_IMAGE_UNIFORMS = 0x90CF;
 
-    /**
-     * Accepted by the {@code target} parameter of GetIntegeri_v and GetBooleani_v.
-     */
+    /** Accepted by the {@code target} parameter of GetIntegeri_v and GetBooleani_v. */
     public static final int
             GL_IMAGE_BINDING_NAME = 0x8F3A,
             GL_IMAGE_BINDING_LEVEL = 0x8F3B,
@@ -64,9 +60,7 @@ public class ARBShaderImageLoadStore {
             GL_IMAGE_BINDING_ACCESS = 0x8F3E,
             GL_IMAGE_BINDING_FORMAT = 0x906E;
 
-    /**
-     * Accepted by the {@code barriers} parameter of MemoryBarrier.
-     */
+    /** Accepted by the {@code barriers} parameter of MemoryBarrier. */
     public static final int
             GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT = 0x1,
             GL_ELEMENT_ARRAY_BARRIER_BIT = 0x2,
@@ -82,9 +76,7 @@ public class ARBShaderImageLoadStore {
             GL_ATOMIC_COUNTER_BARRIER_BIT = 0x1000,
             GL_ALL_BARRIER_BITS = 0xFFFFFFFF;
 
-    /**
-     * Returned by the {@code type} parameter of GetActiveUniform.
-     */
+    /** Returned by the {@code type} parameter of GetActiveUniform. */
     public static final int
             GL_IMAGE_1D = 0x904C,
             GL_IMAGE_2D = 0x904D,
@@ -120,9 +112,7 @@ public class ARBShaderImageLoadStore {
             GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE = 0x906B,
             GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY = 0x906C;
 
-    /**
-     * Accepted by the {@code value} parameter of GetTexParameteriv, GetTexParameterfv, GetTexParameterIiv, and GetTexParameterIuiv.
-     */
+    /** Accepted by the {@code value} parameter of GetTexParameteriv, GetTexParameterfv, GetTexParameterIiv, and GetTexParameterIuiv. */
     public static final int GL_IMAGE_FORMAT_COMPATIBILITY_TYPE = 0x90C7;
 
     /**

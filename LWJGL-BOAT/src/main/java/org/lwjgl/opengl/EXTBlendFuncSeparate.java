@@ -19,9 +19,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTBlendFuncSeparate {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_BLEND_DST_RGB_EXT = 0x80C8,
             GL_BLEND_SRC_RGB_EXT = 0x80C9,

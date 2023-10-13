@@ -1,5 +1,5 @@
 //
-// Created by mio on 2023/7/9.
+// Created by cainiaohh on 2023/10/9.
 //
 
 #include "h2co3_boat_hook.h"
@@ -14,10 +14,11 @@ jint (*orig_ProcessImpl_forkAndExec)(JNIEnv *env, jobject process, jint mode, jb
                                      jbyteArray envBlock, jint envc, jbyteArray dir,
                                      jintArray std_fds, jboolean redirectErrorStream);
 
-jint hooked_ProcessImpl_forkAndExec(JNIEnv *env, jobject process, jint mode, jbyteArray helperpath,
-                                    jbyteArray prog, jbyteArray argBlock, jint argc, jbyteArray envBlock,
-                                    jint envc, jbyteArray dir, jintArray std_fds,
-                                    jboolean redirectErrorStream) {
+jint
+hooked_ProcessImpl_forkAndExec(JNIEnv *env, jobject process, jint mode, jbyteArray helperpath,
+                               jbyteArray prog, jbyteArray argBlock, jint argc, jbyteArray envBlock,
+                               jint envc, jbyteArray dir, jintArray std_fds,
+                               jboolean redirectErrorStream) {
     char *pProg = (char *) ((*env)->GetByteArrayElements(env, prog, NULL));
 
     if (strcmp(basename(pProg), "xdg-open") != 0) {
@@ -33,7 +34,6 @@ jint hooked_ProcessImpl_forkAndExec(JNIEnv *env, jobject process, jint mode, jby
     (*env)->DeleteLocalRef(env, argBlock);
 
     H2CO3_BOAT_INTERNAL_LOG("forkAndExec:%s", cs);
-
     JavaVM *androidVm = h2co3Boat->android_jvm;
     JNIEnv *androidEnv = NULL;
     char detachable = 0;
@@ -42,41 +42,31 @@ jint hooked_ProcessImpl_forkAndExec(JNIEnv *env, jobject process, jint mode, jby
         detachable = 1;
     }
     if (!androidEnv) {
-        H2CO3_BOAT_INTERNAL_LOG("forkAndExec error: androidEnv is null");
+        H2CO3_BOAT_INTERNAL_LOG("forkAndExec error:androidEnv in null");
     }
-
     jmethodID method_OpenLink = (*androidEnv)->GetStaticMethodID(androidEnv, h2co3Boat->class_H2CO3BoatLib, "openLink",
                                                                  "(Ljava/lang/String;)V");
     (*androidEnv)->CallStaticVoidMethod(androidEnv, h2co3Boat->class_H2CO3BoatLib, method_OpenLink,
                                         (*androidEnv)->NewStringUTF(androidEnv, cs));
-
-    if (detachable) {
-        (*androidVm)->DetachCurrentThread(androidVm);
-    }
+    if (detachable) (*androidVm)->DetachCurrentThread(androidVm);
 
     return 0;
 }
 
 void hookExec(JNIEnv *env) {
-    jclass cls = NULL;
+    jclass cls;
     orig_ProcessImpl_forkAndExec = dlsym(RTLD_DEFAULT, "Java_java_lang_UNIXProcess_forkAndExec");
     if (!orig_ProcessImpl_forkAndExec) {
-        orig_ProcessImpl_forkAndExec = dlsym(RTLD_DEFAULT, "Java_java_lang_ProcessImpl_forkAndExec");
+        orig_ProcessImpl_forkAndExec = dlsym(RTLD_DEFAULT,
+                                             "Java_java_lang_ProcessImpl_forkAndExec");
         cls = (*env)->FindClass(env, "java/lang/ProcessImpl");
     } else {
         cls = (*env)->FindClass(env, "java/lang/UNIXProcess");
     }
-    if (!cls) {
-        H2CO3_BOAT_INTERNAL_LOG("Failed to find class");
-        return;
-    }
     JNINativeMethod methods[] = {
             {"forkAndExec", "(I[B[B[BI[BI[B[IZ)I", (void *) &hooked_ProcessImpl_forkAndExec}
     };
-    if ((*env)->RegisterNatives(env, cls, methods, 1) < 0) {
-        H2CO3_BOAT_INTERNAL_LOG("Failed to register natives");
-        return;
-    }
+    (*env)->RegisterNatives(env, cls, methods, 1);
     H2CO3_BOAT_INTERNAL_LOG("Registered forkAndExec");
-    (*env)->DeleteLocalRef(env, cls);
 }
+

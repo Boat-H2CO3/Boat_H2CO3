@@ -26,7 +26,7 @@ public class EXTShaderFramebufferFetchNonCoherent {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glFramebufferFetchBarrierEXT
+            caps.glFramebufferFetchBarrierEXT
         );
     }
 

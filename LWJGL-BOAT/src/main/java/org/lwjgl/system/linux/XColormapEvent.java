@@ -243,7 +243,7 @@ public class XColormapEvent extends Struct implements NativeResource {
             long window,
             long colormap,
             int new$,
-            int state
+        int state
     ) {
         type(type);
         serial(serial);
@@ -261,6 +261,7 @@ public class XColormapEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XColormapEvent set(XColormapEvent src) {
@@ -270,38 +271,28 @@ public class XColormapEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XColormapEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XColormapEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XColormapEvent malloc() {
         return wrap(XColormapEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XColormapEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XColormapEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XColormapEvent calloc() {
         return wrap(XColormapEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XColormapEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XColormapEvent} instance allocated with {@link BufferUtils}. */
     public static XColormapEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XColormapEvent.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code XColormapEvent} instance for the specified memory address.
-     */
+    /** Returns a new {@code XColormapEvent} instance for the specified memory address. */
     public static XColormapEvent create(long address) {
         return wrap(XColormapEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XColormapEvent createSafe(long address) {
         return address == NULL ? null : wrap(XColormapEvent.class, address);
@@ -345,9 +336,7 @@ public class XColormapEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -362,9 +351,7 @@ public class XColormapEvent extends Struct implements NativeResource {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XColormapEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XColormapEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XColormapEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -408,7 +395,7 @@ public class XColormapEvent extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -536,8 +523,7 @@ public class XColormapEvent extends Struct implements NativeResource {
      * Unsafe version of {@link #state(int) state}.
      */
     public static void nstate(long struct, int value) {
-        UNSAFE.putInt(null, struct + XColormapEvent.STATE, value);
-    }
+        UNSAFE.putInt(null, struct + XColormapEvent.STATE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -562,16 +548,14 @@ public class XColormapEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XColormapEvent} structs.
-     */
+    /** An array of {@link XColormapEvent} structs. */
     public static class Buffer extends StructBuffer<XColormapEvent, Buffer> implements NativeResource {
 
         private static final XColormapEvent ELEMENT_FACTORY = XColormapEvent.create(-1L);
 
         /**
          * Creates a new {@code XColormapEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XColormapEvent#SIZEOF}, and its mark will be undefined.
@@ -704,26 +688,11 @@ public class XColormapEvent extends Struct implements NativeResource {
         /**
          * Sets the specified value to the {@code colormap} field.
          */
-        public Buffer colormap(@NativeType("Colormap") long value) {
-            XColormapEvent.ncolormap(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code new} field.
-         */
-        public Buffer new$(int value) {
-            XColormapEvent.nnew$(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code state} field.
-         */
-        public Buffer state(int value) {
-            XColormapEvent.nstate(address(), value);
-            return this;
-        }
+        public Buffer colormap(@NativeType("Colormap") long value) { XColormapEvent.ncolormap(address(), value); return this; }
+        /** Sets the specified value to the {@code new} field. */
+        public Buffer new$(int value) { XColormapEvent.nnew$(address(), value); return this; }
+        /** Sets the specified value to the {@code state} field. */
+        public Buffer state(int value) { XColormapEvent.nstate(address(), value); return this; }
 
     }
 

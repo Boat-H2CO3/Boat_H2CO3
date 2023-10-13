@@ -147,6 +147,7 @@ public class ObjCPropertyAttribute extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public ObjCPropertyAttribute set(ObjCPropertyAttribute src) {
@@ -156,38 +157,28 @@ public class ObjCPropertyAttribute extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code ObjCPropertyAttribute} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code ObjCPropertyAttribute} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static ObjCPropertyAttribute malloc() {
         return wrap(ObjCPropertyAttribute.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code ObjCPropertyAttribute} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code ObjCPropertyAttribute} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static ObjCPropertyAttribute calloc() {
         return wrap(ObjCPropertyAttribute.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code ObjCPropertyAttribute} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code ObjCPropertyAttribute} instance allocated with {@link BufferUtils}. */
     public static ObjCPropertyAttribute create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(ObjCPropertyAttribute.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code ObjCPropertyAttribute} instance for the specified memory address.
-     */
+    /** Returns a new {@code ObjCPropertyAttribute} instance for the specified memory address. */
     public static ObjCPropertyAttribute create(long address) {
         return wrap(ObjCPropertyAttribute.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ObjCPropertyAttribute createSafe(long address) {
         return address == NULL ? null : wrap(ObjCPropertyAttribute.class, address);
@@ -231,9 +222,7 @@ public class ObjCPropertyAttribute extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -241,16 +230,12 @@ public class ObjCPropertyAttribute extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code ObjCPropertyAttribute} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code ObjCPropertyAttribute} instance allocated on the thread-local {@link MemoryStack}. */
     public static ObjCPropertyAttribute mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code ObjCPropertyAttribute} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code ObjCPropertyAttribute} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static ObjCPropertyAttribute callocStack() {
         return callocStack(stackGet());
     }
@@ -294,7 +279,7 @@ public class ObjCPropertyAttribute extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -355,9 +340,7 @@ public class ObjCPropertyAttribute extends Struct implements NativeResource {
      * Unsafe version of {@link #value(ByteBuffer) value}.
      */
     public static void nvalue(long struct, ByteBuffer value) {
-        if (CHECKS) {
-            checkNT1(value);
-        }
+        if (CHECKS) { checkNT1(value); }
         memPutAddress(struct + ObjCPropertyAttribute.VALUE, memAddress(value));
     }
 
@@ -385,16 +368,14 @@ public class ObjCPropertyAttribute extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link ObjCPropertyAttribute} structs.
-     */
+    /** An array of {@link ObjCPropertyAttribute} structs. */
     public static class Buffer extends StructBuffer<ObjCPropertyAttribute, Buffer> implements NativeResource {
 
         private static final ObjCPropertyAttribute ELEMENT_FACTORY = ObjCPropertyAttribute.create(-1L);
 
         /**
          * Creates a new {@code ObjCPropertyAttribute.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link ObjCPropertyAttribute#SIZEOF}, and its mark will be undefined.
@@ -463,13 +444,8 @@ public class ObjCPropertyAttribute extends Struct implements NativeResource {
             return this;
         }
 
-        /**
-         * Sets the address of the specified encoded string to the {@code value} field.
-         */
-        public Buffer value(@NativeType("char *") ByteBuffer value) {
-            ObjCPropertyAttribute.nvalue(address(), value);
-            return this;
-        }
+        /** Sets the address of the specified encoded string to the {@code value} field. */
+        public Buffer value(@NativeType("char *") ByteBuffer value) { ObjCPropertyAttribute.nvalue(address(), value); return this; }
 
     }
 

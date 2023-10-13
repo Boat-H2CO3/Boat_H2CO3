@@ -36,17 +36,13 @@ public abstract class MallocMessageCallback extends Callback implements MallocMe
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static MallocMessageCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code MallocMessageCallback} instance that delegates to the specified {@code MallocMessageCallbackI} instance.
-     */
+    /** Creates a {@code MallocMessageCallback} instance that delegates to the specified {@code MallocMessageCallbackI} instance. */
     public static MallocMessageCallback create(MallocMessageCallbackI instance) {
         return instance instanceof MallocMessageCallback
                 ? (MallocMessageCallback) instance
@@ -67,6 +63,7 @@ public abstract class MallocMessageCallback extends Callback implements MallocMe
      * <p>This method may only be used inside a MallocMessageCallback invocation.</p>
      *
      * @param s the MallocMessageCallback {@code s} argument
+     *
      * @return the message as a String
      */
     public static String getMessage(long s) {

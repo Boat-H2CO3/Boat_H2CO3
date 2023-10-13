@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import javax.annotation.*;
-
 import java.nio.*;
 import java.util.*;
 import java.util.function.*;
@@ -39,6 +38,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * and vice versa.</p>
      *
      * @return the struct at the buffer's current position
+     *
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public T get() {
@@ -49,6 +49,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * Relative <i>get</i> method. Reads the struct data at this buffer's current position into the specified struct, and then increments the position.
      *
      * @return the struct at the buffer's current position
+     *
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public SELF get(T value) {
@@ -63,7 +64,9 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * <p>Writes the specified struct into this buffer at the current position, and then increments the position.</p>
      *
      * @param value the struct to be written
+     *
      * @return This buffer
+     *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
@@ -80,7 +83,9 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * instance and vice versa.</p>
      *
      * @param index the index from which the struct will be read
+     *
      * @return the struct at the specified index
+     *
      * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public T get(int index) {
@@ -91,7 +96,9 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * Absolute <i>get</i> method. Reads the struct data at the specified index into the specified struct.
      *
      * @param index the index from which the struct will be read
+     *
      * @return the struct at the specified index
+     *
      * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public SELF get(int index, T value) {
@@ -107,9 +114,11 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      *
      * @param index the index at which the struct will be written
      * @param value the struct value to be written
+     *
      * @return This buffer
-     * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
-     * @throws ReadOnlyBufferException   If this buffer is read-only
+     *
+     * @throws IndexOutOfBoundsException        If {@code index} is negative or not smaller than the buffer's limit
+     * @throws ReadOnlyBufferException If this buffer is read-only
      */
     public SELF put(int index, T value) {
         int sizeof = getElementFactory().sizeof();
@@ -123,6 +132,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * <p>Passes the struct at the buffer's current position to the specified {@link Consumer}, and then increments the position.</p>
      *
      * @return This buffer
+     *
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public SELF apply(Consumer<T> consumer) {
@@ -136,7 +146,9 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * <p>Passes the struct at the specified position to the specified {@link Consumer}.</p>
      *
      * @param index the index where the {@code consumer} will be applied.
+     *
      * @return This buffer
+     *
      * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public SELF apply(int index, Consumer<T> consumer) {
@@ -285,16 +297,12 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
         }
     }
 
-    /**
-     * Returns a sequential {@code Stream} with this struct buffer as its source.
-     */
+    /** Returns a sequential {@code Stream} with this struct buffer as its source. */
     public Stream<T> stream() {
         return StreamSupport.stream(spliterator(), false);
     }
 
-    /**
-     * Returns a parallel {@code Stream} with this struct buffer as its source.
-     */
+    /** Returns a parallel {@code Stream} with this struct buffer as its source. */
     public Stream<T> parallelStream() {
         return StreamSupport.stream(spliterator(), true);
     }

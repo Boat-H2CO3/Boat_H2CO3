@@ -148,7 +148,7 @@ final class LWJGLMouse extends Mouse {
     }
 
     static final class Axis extends AbstractComponent {
-        Axis(Component.Identifier.Axis axis_id) {
+        Axis(Identifier.Axis axis_id) {
             super(axis_id.getName(), axis_id);
         }
 
@@ -168,7 +168,7 @@ final class LWJGLMouse extends Mouse {
     static final class Button extends AbstractComponent {
         private float value;
 
-        Button(Component.Identifier.Button button_id) {
+        Button(Identifier.Button button_id) {
             super(button_id.getName(), button_id);
         }
 

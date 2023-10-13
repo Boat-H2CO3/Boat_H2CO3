@@ -39,17 +39,13 @@ public abstract class GLFWWindowRefreshCallback extends Callback implements GLFW
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWWindowRefreshCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWWindowRefreshCallback} instance that delegates to the specified {@code GLFWWindowRefreshCallbackI} instance.
-     */
+    /** Creates a {@code GLFWWindowRefreshCallback} instance that delegates to the specified {@code GLFWWindowRefreshCallbackI} instance. */
     public static GLFWWindowRefreshCallback create(GLFWWindowRefreshCallbackI instance) {
         return instance instanceof GLFWWindowRefreshCallback
                 ? (GLFWWindowRefreshCallback) instance
@@ -64,9 +60,7 @@ public abstract class GLFWWindowRefreshCallback extends Callback implements GLFW
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetWindowRefreshCallback SetWindowRefreshCallback}.
-     */
+    /** See {@link GLFW#glfwSetWindowRefreshCallback SetWindowRefreshCallback}. */
     public GLFWWindowRefreshCallback set(long window) {
         glfwSetWindowRefreshCallback(window, this);
         return this;

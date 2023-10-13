@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_vertex_shader_tessellator.txt">AMD_vertex_shader_tessellator</a> extension.
@@ -68,29 +68,21 @@ import org.lwjgl.system.NativeType;
  */
 public class AMDVertexShaderTessellator {
 
-    /**
-     * Returned by the {@code type} parameter of GetActiveUniform.
-     */
+    /** Returned by the {@code type} parameter of GetActiveUniform. */
     public static final int
             GL_SAMPLER_BUFFER_AMD = 0x9001,
             GL_INT_SAMPLER_BUFFER_AMD = 0x9002,
             GL_UNSIGNED_INT_SAMPLER_BUFFER_AMD = 0x9003;
 
-    /**
-     * Accepted by TessellationModeAMD.
-     */
+    /** Accepted by TessellationModeAMD. */
     public static final int
             GL_DISCRETE_AMD = 0x9006,
             GL_CONTINUOUS_AMD = 0x9007;
 
-    /**
-     * Accepted by GetIntegerv.
-     */
+    /** Accepted by GetIntegerv. */
     public static final int GL_TESSELLATION_MODE_AMD = 0x9004;
 
-    /**
-     * Accepted by GetFloatv.
-     */
+    /** Accepted by GetFloatv. */
     public static final int GL_TESSELLATION_FACTOR_AMD = 0x9005;
 
     static {

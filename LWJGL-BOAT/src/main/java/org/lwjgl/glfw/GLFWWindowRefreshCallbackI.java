@@ -35,7 +35,7 @@ public interface GLFWWindowRefreshCallbackI extends CallbackI.V {
     @Override
     default void callback(long args) {
         invoke(
-                dcbArgPointer(args)
+            dcbArgPointer(args)
         );
     }
 

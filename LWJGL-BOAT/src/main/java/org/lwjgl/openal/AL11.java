@@ -5,26 +5,20 @@
  */
 package org.lwjgl.openal;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.invokePV;
-import static org.lwjgl.system.JNI.invokeV;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to AL 1.1 functionality.
  */
 public class AL11 extends AL10 {
 
-    /**
-     * General tokens.
-     */
+    /** General tokens. */
     public static final int
             AL_SEC_OFFSET = 0x1024,
             AL_SAMPLE_OFFSET = 0x1025,
@@ -71,9 +65,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetListeneriv ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetListeneriv GetListeneriv}
-     */
+    /** Unsafe version of: {@link #alGetListeneriv GetListeneriv} */
     public static void nalGetListeneriv(int param, long values) {
         long __functionAddress = AL.getICD().alGetListeneriv;
         if (CHECKS) {
@@ -118,9 +110,7 @@ public class AL11 extends AL10 {
 
     // --- [ alListeneriv ] ---
 
-    /**
-     * Unsafe version of: {@link #alListeneriv Listeneriv}
-     */
+    /** Unsafe version of: {@link #alListeneriv Listeneriv} */
     public static void nalListeneriv(int listener, long value) {
         long __functionAddress = AL.getICD().alListeneriv;
         if (CHECKS) {
@@ -145,9 +135,7 @@ public class AL11 extends AL10 {
 
     // --- [ alSourceiv ] ---
 
-    /**
-     * Unsafe version of: {@link #alSourceiv Sourceiv}
-     */
+    /** Unsafe version of: {@link #alSourceiv Sourceiv} */
     public static void nalSourceiv(int source, int paramName, long value) {
         long __functionAddress = AL.getICD().alSourceiv;
         if (CHECKS) {
@@ -211,9 +199,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBufferfv ] ---
 
-    /**
-     * Unsafe version of: {@link #alBufferfv Bufferfv}
-     */
+    /** Unsafe version of: {@link #alBufferfv Bufferfv} */
     public static void nalBufferfv(int buffer, int paramName, long value) {
         long __functionAddress = AL.getICD().alBufferfv;
         if (CHECKS) {
@@ -277,9 +263,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBufferiv ] ---
 
-    /**
-     * Unsafe version of: {@link #alBufferiv Bufferiv}
-     */
+    /** Unsafe version of: {@link #alBufferiv Bufferiv} */
     public static void nalBufferiv(int buffer, int paramName, long value) {
         long __functionAddress = AL.getICD().alBufferiv;
         if (CHECKS) {
@@ -305,9 +289,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetBufferiv ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetBufferiv GetBufferiv}
-     */
+    /** Unsafe version of: {@link #alGetBufferiv GetBufferiv} */
     public static void nalGetBufferiv(int buffer, int param, long values) {
         long __functionAddress = AL.getICD().alGetBufferiv;
         if (CHECKS) {
@@ -333,9 +315,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetBufferfv ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetBufferfv GetBufferfv}
-     */
+    /** Unsafe version of: {@link #alGetBufferfv GetBufferfv} */
     public static void nalGetBufferfv(int buffer, int param, long values) {
         long __functionAddress = AL.getICD().alGetBufferfv;
         if (CHECKS) {
@@ -375,9 +355,7 @@ public class AL11 extends AL10 {
         invokeV(value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetListeneriv GetListeneriv}
-     */
+    /** Array version of: {@link #alGetListeneriv GetListeneriv} */
     @NativeType("ALvoid")
     public static void alGetListeneriv(@NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
         long __functionAddress = AL.getICD().alGetListeneriv;
@@ -388,9 +366,7 @@ public class AL11 extends AL10 {
         invokePV(param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alListeneriv Listeneriv}
-     */
+    /** Array version of: {@link #alListeneriv Listeneriv} */
     @NativeType("ALvoid")
     public static void alListeneriv(@NativeType("ALenum") int listener, @NativeType("ALint const *") int[] value) {
         long __functionAddress = AL.getICD().alListeneriv;
@@ -401,9 +377,7 @@ public class AL11 extends AL10 {
         invokePV(listener, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alSourceiv Sourceiv}
-     */
+    /** Array version of: {@link #alSourceiv Sourceiv} */
     @NativeType("ALvoid")
     public static void alSourceiv(@NativeType("ALuint") int source, @NativeType("ALenum") int paramName, @NativeType("ALint const *") int[] value) {
         long __functionAddress = AL.getICD().alSourceiv;
@@ -414,9 +388,7 @@ public class AL11 extends AL10 {
         invokePV(source, paramName, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alBufferfv Bufferfv}
-     */
+    /** Array version of: {@link #alBufferfv Bufferfv} */
     @NativeType("ALvoid")
     public static void alBufferfv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALfloat const *") float[] value) {
         long __functionAddress = AL.getICD().alBufferfv;
@@ -427,9 +399,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, paramName, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alBufferiv Bufferiv}
-     */
+    /** Array version of: {@link #alBufferiv Bufferiv} */
     @NativeType("ALvoid")
     public static void alBufferiv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALint const *") int[] value) {
         long __functionAddress = AL.getICD().alBufferiv;
@@ -440,9 +410,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, paramName, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetBufferiv GetBufferiv}
-     */
+    /** Array version of: {@link #alGetBufferiv GetBufferiv} */
     @NativeType("ALvoid")
     public static void alGetBufferiv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
         long __functionAddress = AL.getICD().alGetBufferiv;
@@ -453,9 +421,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetBufferfv GetBufferfv}
-     */
+    /** Array version of: {@link #alGetBufferfv GetBufferfv} */
     @NativeType("ALvoid")
     public static void alGetBufferfv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] values) {
         long __functionAddress = AL.getICD().alGetBufferfv;

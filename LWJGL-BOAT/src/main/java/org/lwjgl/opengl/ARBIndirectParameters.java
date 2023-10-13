@@ -5,16 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPPV;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_indirect_parameters.txt">ARB_indirect_parameters</a> extension.
@@ -40,9 +37,7 @@ public class ARBIndirectParameters {
      */
     public static final int GL_PARAMETER_BUFFER_ARB = 0x80EE;
 
-    /**
-     * Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev. */
     public static final int GL_PARAMETER_BUFFER_BINDING_ARB = 0x80EF;
 
     static {
@@ -61,9 +56,7 @@ public class ARBIndirectParameters {
 
     // --- [ glMultiDrawArraysIndirectCountARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiDrawArraysIndirectCountARB MultiDrawArraysIndirectCountARB}
-     */
+    /** Unsafe version of: {@link #glMultiDrawArraysIndirectCountARB MultiDrawArraysIndirectCountARB} */
     public static native void nglMultiDrawArraysIndirectCountARB(int mode, long indirect, long drawcount, int maxdrawcount, int stride);
 
     /**
@@ -122,9 +115,7 @@ public class ARBIndirectParameters {
 
     // --- [ glMultiDrawElementsIndirectCountARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiDrawElementsIndirectCountARB MultiDrawElementsIndirectCountARB}
-     */
+    /** Unsafe version of: {@link #glMultiDrawElementsIndirectCountARB MultiDrawElementsIndirectCountARB} */
     public static native void nglMultiDrawElementsIndirectCountARB(int mode, int type, long indirect, long drawcount, int maxdrawcount, int stride);
 
     /**
@@ -184,9 +175,7 @@ public class ARBIndirectParameters {
         nglMultiDrawElementsIndirectCountARB(mode, type, memAddress(indirect), drawcount, maxdrawcount, stride);
     }
 
-    /**
-     * Array version of: {@link #glMultiDrawArraysIndirectCountARB MultiDrawArraysIndirectCountARB}
-     */
+    /** Array version of: {@link #glMultiDrawArraysIndirectCountARB MultiDrawArraysIndirectCountARB} */
     public static void glMultiDrawArraysIndirectCountARB(@NativeType("GLenum") int mode, @NativeType("void const *") int[] indirect, @NativeType("GLintptr") long drawcount, @NativeType("GLsizei") int maxdrawcount, @NativeType("GLsizei") int stride) {
         long __functionAddress = GL.getICD().glMultiDrawArraysIndirectCountARB;
         if (CHECKS) {
@@ -196,9 +185,7 @@ public class ARBIndirectParameters {
         callPPV(mode, indirect, drawcount, maxdrawcount, stride, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiDrawElementsIndirectCountARB MultiDrawElementsIndirectCountARB}
-     */
+    /** Array version of: {@link #glMultiDrawElementsIndirectCountARB MultiDrawElementsIndirectCountARB} */
     public static void glMultiDrawElementsIndirectCountARB(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") int[] indirect, @NativeType("GLintptr") long drawcount, @NativeType("GLsizei") int maxdrawcount, @NativeType("GLsizei") int stride) {
         long __functionAddress = GL.getICD().glMultiDrawElementsIndirectCountARB;
         if (CHECKS) {

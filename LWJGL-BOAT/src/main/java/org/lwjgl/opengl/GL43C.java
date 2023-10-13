@@ -536,9 +536,7 @@ public class GL43C extends GL42C {
 
     // --- [ glClearBufferData ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearBufferData ClearBufferData}
-     */
+    /** Unsafe version of: {@link #glClearBufferData ClearBufferData} */
     public static native void nglClearBufferData(int target, int internalformat, int format, int type, long data);
 
     /**
@@ -551,6 +549,7 @@ public class GL43C extends GL42C {
      * @param data           the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
@@ -567,6 +566,7 @@ public class GL43C extends GL42C {
      * @param data           the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
@@ -583,6 +583,7 @@ public class GL43C extends GL42C {
      * @param data           the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
@@ -599,6 +600,7 @@ public class GL43C extends GL42C {
      * @param data           the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
@@ -607,9 +609,7 @@ public class GL43C extends GL42C {
 
     // --- [ glClearBufferSubData ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearBufferSubData ClearBufferSubData}
-     */
+    /** Unsafe version of: {@link #glClearBufferSubData ClearBufferSubData} */
     public static native void nglClearBufferSubData(int target, int internalformat, long offset, long size, int format, int type, long data);
 
     /**
@@ -624,6 +624,7 @@ public class GL43C extends GL42C {
      * @param data           the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ByteBuffer data) {
@@ -642,6 +643,7 @@ public class GL43C extends GL42C {
      * @param data           the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") ShortBuffer data) {
@@ -660,6 +662,7 @@ public class GL43C extends GL42C {
      * @param data           the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") IntBuffer data) {
@@ -678,6 +681,7 @@ public class GL43C extends GL42C {
      * @param data           the buffer containing the data to be used as the source of the constant fill value. The elements of data are converted by the GL into the format
      *                       specified by internalformat, and then used to fill the specified range of the destination buffer. If data is {@code NULL}, then it is ignored and the
      *                       sub-range of the buffer is filled with zeros.
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") FloatBuffer data) {
@@ -692,6 +696,7 @@ public class GL43C extends GL42C {
      * @param num_groups_x the number of work groups to be launched in the X dimension
      * @param num_groups_y the number of work groups to be launched in the Y dimension
      * @param num_groups_z the number of work groups to be launched in the Z dimension
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDispatchCompute">Reference Page</a>
      */
     public static native void glDispatchCompute(@NativeType("GLuint") int num_groups_x, @NativeType("GLuint") int num_groups_y, @NativeType("GLuint") int num_groups_z);
@@ -718,6 +723,7 @@ public class GL43C extends GL42C {
      *
      * @param indirect the offset into the buffer object currently bound to the {@link #GL_DISPATCH_INDIRECT_BUFFER DISPATCH_INDIRECT_BUFFER} buffer target at which the dispatch parameters are
      *                 stored.
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glDispatchComputeIndirect">Reference Page</a>
      */
     public static native void glDispatchComputeIndirect(@NativeType("GLintptr") long indirect);
@@ -742,6 +748,7 @@ public class GL43C extends GL42C {
      * @param srcWidth  the width of the region to be copied
      * @param srcHeight the height of the region to be copied
      * @param srcDepth  the depth of the region to be copied
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glCopyImageSubData">Reference Page</a>
      */
     public static native void glCopyImageSubData(@NativeType("GLuint") int srcName, @NativeType("GLenum") int srcTarget, @NativeType("GLint") int srcLevel, @NativeType("GLint") int srcX, @NativeType("GLint") int srcY, @NativeType("GLint") int srcZ, @NativeType("GLuint") int dstName, @NativeType("GLenum") int dstTarget, @NativeType("GLint") int dstLevel, @NativeType("GLint") int dstX, @NativeType("GLint") int dstY, @NativeType("GLint") int dstZ, @NativeType("GLsizei") int srcWidth, @NativeType("GLsizei") int srcHeight, @NativeType("GLsizei") int srcDepth);
@@ -786,6 +793,7 @@ public class GL43C extends GL42C {
      * @param severity the severity of debug messages to enable or disable. One of:<br><table><tr><td>{@link #GL_DEBUG_SEVERITY_HIGH DEBUG_SEVERITY_HIGH}</td><td>{@link #GL_DEBUG_SEVERITY_MEDIUM DEBUG_SEVERITY_MEDIUM}</td><td>{@link #GL_DEBUG_SEVERITY_LOW DEBUG_SEVERITY_LOW}</td></tr><tr><td>{@link #GL_DEBUG_SEVERITY_NOTIFICATION DEBUG_SEVERITY_NOTIFICATION}</td></tr></table>
      * @param ids      an array of unsigned integers containing the ids of the messages to enable or disable
      * @param enabled  whether the selected messages should be enabled or disabled
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDebugMessageControl">Reference Page</a>
      */
     public static void glDebugMessageControl(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @Nullable @NativeType("GLuint const *") IntBuffer ids, @NativeType("GLboolean") boolean enabled) {
@@ -822,11 +830,11 @@ public class GL43C extends GL42C {
      * @param type     the type of debug messages to enable or disable. One of:<br><table><tr><td>{@link #GL_DEBUG_TYPE_ERROR DEBUG_TYPE_ERROR}</td><td>{@link #GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR DEBUG_TYPE_DEPRECATED_BEHAVIOR}</td><td>{@link #GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR DEBUG_TYPE_UNDEFINED_BEHAVIOR}</td></tr><tr><td>{@link #GL_DEBUG_TYPE_PORTABILITY DEBUG_TYPE_PORTABILITY}</td><td>{@link #GL_DEBUG_TYPE_PERFORMANCE DEBUG_TYPE_PERFORMANCE}</td><td>{@link #GL_DEBUG_TYPE_OTHER DEBUG_TYPE_OTHER}</td></tr><tr><td>{@link #GL_DEBUG_TYPE_MARKER DEBUG_TYPE_MARKER}</td></tr></table>
      * @param severity the severity of debug messages to enable or disable. One of:<br><table><tr><td>{@link #GL_DEBUG_SEVERITY_HIGH DEBUG_SEVERITY_HIGH}</td><td>{@link #GL_DEBUG_SEVERITY_MEDIUM DEBUG_SEVERITY_MEDIUM}</td><td>{@link #GL_DEBUG_SEVERITY_LOW DEBUG_SEVERITY_LOW}</td></tr><tr><td>{@link #GL_DEBUG_SEVERITY_NOTIFICATION DEBUG_SEVERITY_NOTIFICATION}</td></tr></table>
      * @param enabled  whether the selected messages should be enabled or disabled
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDebugMessageControl">Reference Page</a>
      */
     public static void glDebugMessageControl(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @NativeType("GLuint const *") int id, @NativeType("GLboolean") boolean enabled) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer ids = stack.ints(id);
             nglDebugMessageControl(source, type, severity, 1, memAddress(ids), enabled);
@@ -861,6 +869,7 @@ public class GL43C extends GL42C {
      * @param id       the user-supplied identifier of the message to insert. One of:<br><table><tr><td>{@link #GL_DEBUG_SEVERITY_HIGH DEBUG_SEVERITY_HIGH}</td><td>{@link #GL_DEBUG_SEVERITY_MEDIUM DEBUG_SEVERITY_MEDIUM}</td><td>{@link #GL_DEBUG_SEVERITY_LOW DEBUG_SEVERITY_LOW}</td></tr><tr><td>{@link #GL_DEBUG_SEVERITY_NOTIFICATION DEBUG_SEVERITY_NOTIFICATION}</td></tr></table>
      * @param severity the severity of the debug messages to insert
      * @param message  a character array containing the message to insert
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDebugMessageInsert">Reference Page</a>
      */
     public static void glDebugMessageInsert(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLuint") int id, @NativeType("GLenum") int severity, @NativeType("GLchar const *") ByteBuffer message) {
@@ -884,6 +893,7 @@ public class GL43C extends GL42C {
      * @param id       the user-supplied identifier of the message to insert. One of:<br><table><tr><td>{@link #GL_DEBUG_SEVERITY_HIGH DEBUG_SEVERITY_HIGH}</td><td>{@link #GL_DEBUG_SEVERITY_MEDIUM DEBUG_SEVERITY_MEDIUM}</td><td>{@link #GL_DEBUG_SEVERITY_LOW DEBUG_SEVERITY_LOW}</td></tr><tr><td>{@link #GL_DEBUG_SEVERITY_NOTIFICATION DEBUG_SEVERITY_NOTIFICATION}</td></tr></table>
      * @param severity the severity of the debug messages to insert
      * @param message  a character array containing the message to insert
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDebugMessageInsert">Reference Page</a>
      */
     public static void glDebugMessageInsert(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLuint") int id, @NativeType("GLenum") int severity, @NativeType("GLchar const *") CharSequence message) {
@@ -930,11 +940,12 @@ public class GL43C extends GL42C {
      * <p>The behavior of calling any GL or window system function from within the callback function is undefined and may lead to program termination.</p>
      *
      * <p>Care must also be taken in securing debug callbacks for use with asynchronous debug output by multi-threaded GL implementations.</p>
-     *
+     * 
      * <p>If the {@link #GL_DEBUG_OUTPUT DEBUG_OUTPUT} state is disabled then the GL will not call the callback function.</p>
      *
      * @param callback  a callback function that will be called when a debug message is generated
      * @param userParam a user supplied pointer that will be passed on each invocation of {@code callback}
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glDebugMessageCallback">Reference Page</a>
      */
     public static void glDebugMessageCallback(@Nullable @NativeType("GLDEBUGPROC") GLDebugMessageCallbackI callback, @NativeType("void const *") long userParam) {
@@ -982,6 +993,7 @@ public class GL43C extends GL42C {
      * @param severities an array of variables to receive the severites of the retrieved messages
      * @param lengths    an array of variables to receive the lengths of the received messages
      * @param messageLog an array of characters that will receive the messages
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetDebugMessageLog">Reference Page</a>
      */
     @NativeType("GLuint")
@@ -1020,6 +1032,7 @@ public class GL43C extends GL42C {
      * @param source  the source of the debug message. One of:<br><table><tr><td>{@link #GL_DEBUG_SOURCE_APPLICATION DEBUG_SOURCE_APPLICATION}</td><td>{@link #GL_DEBUG_SOURCE_THIRD_PARTY DEBUG_SOURCE_THIRD_PARTY}</td></tr></table>
      * @param id      the identifier of the message
      * @param message a string containing the message to be sent to the debug output stream
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glPushDebugGroup">Reference Page</a>
      */
     public static void glPushDebugGroup(@NativeType("GLenum") int source, @NativeType("GLuint") int id, @NativeType("GLchar const *") ByteBuffer message) {
@@ -1041,6 +1054,7 @@ public class GL43C extends GL42C {
      * @param source  the source of the debug message. One of:<br><table><tr><td>{@link #GL_DEBUG_SOURCE_APPLICATION DEBUG_SOURCE_APPLICATION}</td><td>{@link #GL_DEBUG_SOURCE_THIRD_PARTY DEBUG_SOURCE_THIRD_PARTY}</td></tr></table>
      * @param id      the identifier of the message
      * @param message a string containing the message to be sent to the debug output stream
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glPushDebugGroup">Reference Page</a>
      */
     public static void glPushDebugGroup(@NativeType("GLenum") int source, @NativeType("GLuint") int id, @NativeType("GLchar const *") CharSequence message) {
@@ -1062,10 +1076,10 @@ public class GL43C extends GL42C {
      * {@code message} string, the source {@code source}, and an ID {@code id} submitted to the associated {@link #glPushDebugGroup PushDebugGroup} command. {@link #GL_DEBUG_TYPE_PUSH_GROUP DEBUG_TYPE_PUSH_GROUP}
      * and {@link #GL_DEBUG_TYPE_POP_GROUP DEBUG_TYPE_POP_GROUP} share a single namespace for message {@code id}. {@code severity} has the value {@link #GL_DEBUG_SEVERITY_NOTIFICATION DEBUG_SEVERITY_NOTIFICATION}. The {@code type}
      * has the value {@link #GL_DEBUG_TYPE_POP_GROUP DEBUG_TYPE_POP_GROUP}. Popping a debug group restores the debug output volume control of the parent debug group.
-     *
+     * 
      * <p>Attempting to pop the default debug group off the stack generates a {@link GL11#GL_STACK_UNDERFLOW STACK_UNDERFLOW} error; pushing a debug group onto a stack containing
      * {@link #GL_MAX_DEBUG_GROUP_STACK_DEPTH MAX_DEBUG_GROUP_STACK_DEPTH} minus one elements will generate a {@link GL11#GL_STACK_OVERFLOW STACK_OVERFLOW} error.</p>
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glPopDebugGroup">Reference Page</a>
      */
     public static native void glPopDebugGroup();
@@ -1085,6 +1099,7 @@ public class GL43C extends GL42C {
      * @param identifier the namespace from which the name of the object is allocated. One of:<br><table><tr><td>{@link #GL_BUFFER BUFFER}</td><td>{@link #GL_SHADER SHADER}</td><td>{@link #GL_PROGRAM PROGRAM}</td><td>{@link #GL_QUERY QUERY}</td><td>{@link #GL_PROGRAM_PIPELINE PROGRAM_PIPELINE}</td><td>{@link #GL_SAMPLER SAMPLER}</td><td>{@link GL11#GL_VERTEX_ARRAY VERTEX_ARRAY}</td><td>{@link GL11#GL_TEXTURE TEXTURE}</td></tr><tr><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL40#GL_TRANSFORM_FEEDBACK TRANSFORM_FEEDBACK}</td></tr></table>
      * @param name       the name of the object to label
      * @param label      a string containing the label to assign to the object
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glObjectLabel">Reference Page</a>
      */
     public static void glObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @NativeType("GLchar const *") ByteBuffer label) {
@@ -1097,11 +1112,11 @@ public class GL43C extends GL42C {
      * @param identifier the namespace from which the name of the object is allocated. One of:<br><table><tr><td>{@link #GL_BUFFER BUFFER}</td><td>{@link #GL_SHADER SHADER}</td><td>{@link #GL_PROGRAM PROGRAM}</td><td>{@link #GL_QUERY QUERY}</td><td>{@link #GL_PROGRAM_PIPELINE PROGRAM_PIPELINE}</td><td>{@link #GL_SAMPLER SAMPLER}</td><td>{@link GL11#GL_VERTEX_ARRAY VERTEX_ARRAY}</td><td>{@link GL11#GL_TEXTURE TEXTURE}</td></tr><tr><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL40#GL_TRANSFORM_FEEDBACK TRANSFORM_FEEDBACK}</td></tr></table>
      * @param name       the name of the object to label
      * @param label      a string containing the label to assign to the object
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glObjectLabel">Reference Page</a>
      */
     public static void glObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @NativeType("GLchar const *") CharSequence label) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             int labelEncodedLength = stack.nUTF8(label, false);
             long labelEncoded = stack.getPointerAddress();
@@ -1127,6 +1142,7 @@ public class GL43C extends GL42C {
      * @param name       the name of the object whose label to retrieve
      * @param length     the address of a variable to receive the length of the object label
      * @param label      a string that will receive the object label
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetObjectLabel">Reference Page</a>
      */
     public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer label) {
@@ -1142,6 +1158,7 @@ public class GL43C extends GL42C {
      * @param identifier the namespace from which the name of the object is allocated. One of:<br><table><tr><td>{@link #GL_BUFFER BUFFER}</td><td>{@link #GL_SHADER SHADER}</td><td>{@link #GL_PROGRAM PROGRAM}</td><td>{@link #GL_QUERY QUERY}</td><td>{@link #GL_PROGRAM_PIPELINE PROGRAM_PIPELINE}</td><td>{@link #GL_SAMPLER SAMPLER}</td><td>{@link GL11#GL_VERTEX_ARRAY VERTEX_ARRAY}</td><td>{@link GL11#GL_TEXTURE TEXTURE}</td></tr><tr><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL40#GL_TRANSFORM_FEEDBACK TRANSFORM_FEEDBACK}</td></tr></table>
      * @param name       the name of the object whose label to retrieve
      * @param bufSize    the length of the buffer whose address is in {@code label}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetObjectLabel">Reference Page</a>
      */
     @NativeType("void")
@@ -1163,6 +1180,7 @@ public class GL43C extends GL42C {
      *
      * @param identifier the namespace from which the name of the object is allocated. One of:<br><table><tr><td>{@link #GL_BUFFER BUFFER}</td><td>{@link #GL_SHADER SHADER}</td><td>{@link #GL_PROGRAM PROGRAM}</td><td>{@link #GL_QUERY QUERY}</td><td>{@link #GL_PROGRAM_PIPELINE PROGRAM_PIPELINE}</td><td>{@link #GL_SAMPLER SAMPLER}</td><td>{@link GL11#GL_VERTEX_ARRAY VERTEX_ARRAY}</td><td>{@link GL11#GL_TEXTURE TEXTURE}</td></tr><tr><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL40#GL_TRANSFORM_FEEDBACK TRANSFORM_FEEDBACK}</td></tr></table>
      * @param name       the name of the object whose label to retrieve
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetObjectLabel">Reference Page</a>
      */
     @NativeType("void")
@@ -1184,6 +1202,7 @@ public class GL43C extends GL42C {
      *
      * @param ptr   a pointer identifying a sync object
      * @param label a string containing the label to assign to the object
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glObjectPtrLabel">Reference Page</a>
      */
     public static void glObjectPtrLabel(@NativeType("void *") long ptr, @NativeType("GLchar const *") ByteBuffer label) {
@@ -1204,8 +1223,7 @@ public class GL43C extends GL42C {
         if (CHECKS) {
             check(ptr);
         }
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             int labelEncodedLength = stack.nUTF8(label, false);
             long labelEncoded = stack.getPointerAddress();
@@ -1230,6 +1248,7 @@ public class GL43C extends GL42C {
      * @param ptr    the name of the sync object whose label to retrieve
      * @param length a variable to receive the length of the object label
      * @param label  a string that will receive the object label
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetObjectPtrLabel">Reference Page</a>
      */
     public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer label) {
@@ -1268,6 +1287,7 @@ public class GL43C extends GL42C {
      * Retrieves the label of a sync object identified by a pointer.
      *
      * @param ptr the name of the sync object whose label to retrieve
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetObjectPtrLabel">Reference Page</a>
      */
     @NativeType("void")
@@ -1283,15 +1303,14 @@ public class GL43C extends GL42C {
      * @param target target of the operation. One of:<br><table><tr><td>{@link GL30#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td></tr></table>
      * @param pname  a token indicating the parameter to be modified. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER_DEFAULT_WIDTH FRAMEBUFFER_DEFAULT_WIDTH}</td><td>{@link #GL_FRAMEBUFFER_DEFAULT_HEIGHT FRAMEBUFFER_DEFAULT_HEIGHT}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_DEFAULT_LAYERS FRAMEBUFFER_DEFAULT_LAYERS}</td><td>{@link #GL_FRAMEBUFFER_DEFAULT_SAMPLES FRAMEBUFFER_DEFAULT_SAMPLES}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS}</td></tr></table>
      * @param param  the new value for the parameter named {@code pname}
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glFramebufferParameteri">Reference Page</a>
      */
     public static native void glFramebufferParameteri(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint") int param);
 
     // --- [ glGetFramebufferParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetFramebufferParameteriv GetFramebufferParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetFramebufferParameteriv GetFramebufferParameteriv} */
     public static native void nglGetFramebufferParameteriv(int target, int pname, long params);
 
     /**
@@ -1300,6 +1319,7 @@ public class GL43C extends GL42C {
      * @param target target of the operation. One of:<br><table><tr><td>{@link GL30#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td></tr></table>
      * @param pname  a token indicating the parameter to be retrieved. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER_DEFAULT_WIDTH FRAMEBUFFER_DEFAULT_WIDTH}</td><td>{@link #GL_FRAMEBUFFER_DEFAULT_HEIGHT FRAMEBUFFER_DEFAULT_HEIGHT}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_DEFAULT_LAYERS FRAMEBUFFER_DEFAULT_LAYERS}</td><td>{@link #GL_FRAMEBUFFER_DEFAULT_SAMPLES FRAMEBUFFER_DEFAULT_SAMPLES}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS}</td></tr></table>
      * @param params a variable to receive the value of the parameter named {@code pname}
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetFramebufferParameter">Reference Page</a>
      */
     public static void glGetFramebufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
@@ -1314,12 +1334,12 @@ public class GL43C extends GL42C {
      *
      * @param target target of the operation. One of:<br><table><tr><td>{@link GL30#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td><td>{@link GL30#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td></tr></table>
      * @param pname  a token indicating the parameter to be retrieved. One of:<br><table><tr><td>{@link #GL_FRAMEBUFFER_DEFAULT_WIDTH FRAMEBUFFER_DEFAULT_WIDTH}</td><td>{@link #GL_FRAMEBUFFER_DEFAULT_HEIGHT FRAMEBUFFER_DEFAULT_HEIGHT}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_DEFAULT_LAYERS FRAMEBUFFER_DEFAULT_LAYERS}</td><td>{@link #GL_FRAMEBUFFER_DEFAULT_SAMPLES FRAMEBUFFER_DEFAULT_SAMPLES}</td></tr><tr><td>{@link #GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS}</td></tr></table>
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetFramebufferParameter">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetFramebufferParameteri(@NativeType("GLenum") int target, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer params = stack.callocInt(1);
             nglGetFramebufferParameteriv(target, pname, memAddress(params));
@@ -1345,6 +1365,7 @@ public class GL43C extends GL42C {
      * @param internalformat the internal format about which to retrieve information
      * @param pname          the type of information to query
      * @param params         a variable into which to write the retrieved information
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetInternalformat">Reference Page</a>
      */
     public static void glGetInternalformati64v(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer params) {
@@ -1357,12 +1378,12 @@ public class GL43C extends GL42C {
      * @param target         the usage of the internal format. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_1D TEXTURE_1D}</td><td>{@link GL11#GL_TEXTURE_2D TEXTURE_2D}</td><td>{@link GL30#GL_TEXTURE_1D_ARRAY TEXTURE_1D_ARRAY}</td><td>{@link GL31#GL_TEXTURE_RECTANGLE TEXTURE_RECTANGLE}</td><td>{@link GL13#GL_TEXTURE_CUBE_MAP TEXTURE_CUBE_MAP}</td></tr><tr><td>{@link GL12#GL_TEXTURE_3D TEXTURE_3D}</td><td>{@link GL30#GL_TEXTURE_2D_ARRAY TEXTURE_2D_ARRAY}</td><td>{@link GL40#GL_TEXTURE_CUBE_MAP_ARRAY TEXTURE_CUBE_MAP_ARRAY}</td><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td></tr><tr><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE TEXTURE_2D_MULTISAMPLE}</td><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY TEXTURE_2D_MULTISAMPLE_ARRAY}</td></tr></table>
      * @param internalformat the internal format about which to retrieve information
      * @param pname          the type of information to query
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetInternalformat">Reference Page</a>
      */
     @NativeType("void")
     public static long glGetInternalformati64(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             LongBuffer params = stack.callocLong(1);
             nglGetInternalformati64v(target, internalformat, pname, 1, memAddress(params));
@@ -1385,6 +1406,7 @@ public class GL43C extends GL42C {
      * @param width   the width of the region to be invalidated
      * @param height  the height of the region to be invalidated
      * @param depth   the depth of the region to be invalidated
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glInvalidateTexSubImage">Reference Page</a>
      */
     public static native void glInvalidateTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth);
@@ -1396,6 +1418,7 @@ public class GL43C extends GL42C {
      *
      * @param texture the name of a texture object to invalidate
      * @param level   the level of detail of the texture object to invalidate
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glInvalidateTexImage">Reference Page</a>
      */
     public static native void glInvalidateTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level);
@@ -1408,6 +1431,7 @@ public class GL43C extends GL42C {
      * @param buffer the name of a buffer object, a subrange of whose data store to invalidate
      * @param offset the offset within the buffer's data store of the start of the range to be invalidated
      * @param length the length of the range within the buffer's data store to be invalidated
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glInvalidateBufferSubData">Reference Page</a>
      */
     public static native void glInvalidateBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length);
@@ -1418,6 +1442,7 @@ public class GL43C extends GL42C {
      * Invalidates the content of a buffer object's data store.
      *
      * @param buffer the name of a buffer object whose data store to invalidate
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glInvalidateBufferData">Reference Page</a>
      */
     public static native void glInvalidateBufferData(@NativeType("GLuint") int buffer);
@@ -1436,6 +1461,7 @@ public class GL43C extends GL42C {
      *
      * @param target      the target to which the framebuffer is attached. One of:<br><table><tr><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td><td>{@link GL30#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td></tr></table>
      * @param attachments the address of an array identifying the attachments to be invalidated
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glInvalidateFramebuffer">Reference Page</a>
      */
     public static void glInvalidateFramebuffer(@NativeType("GLenum") int target, @NativeType("GLenum const *") IntBuffer attachments) {
@@ -1446,11 +1472,11 @@ public class GL43C extends GL42C {
      * Invalidate the content some or all of a framebuffer object's attachments.
      *
      * @param target the target to which the framebuffer is attached. One of:<br><table><tr><td>{@link GL30#GL_FRAMEBUFFER FRAMEBUFFER}</td><td>{@link GL30#GL_DRAW_FRAMEBUFFER DRAW_FRAMEBUFFER}</td><td>{@link GL30#GL_READ_FRAMEBUFFER READ_FRAMEBUFFER}</td></tr></table>
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glInvalidateFramebuffer">Reference Page</a>
      */
     public static void glInvalidateFramebuffer(@NativeType("GLenum") int target, @NativeType("GLenum const *") int attachment) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer attachments = stack.ints(attachment);
             nglInvalidateFramebuffer(target, 1, memAddress(attachments));
@@ -1477,6 +1503,7 @@ public class GL43C extends GL42C {
      * @param y           the Y offset of the region to be invalidated
      * @param width       the width of the region to be invalidated
      * @param height      the height of the region to be invalidated
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glInvalidateSubFramebuffer">Reference Page</a>
      */
     public static void glInvalidateSubFramebuffer(@NativeType("GLenum") int target, @NativeType("GLenum const *") IntBuffer attachments, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
@@ -1491,11 +1518,11 @@ public class GL43C extends GL42C {
      * @param y      the Y offset of the region to be invalidated
      * @param width  the width of the region to be invalidated
      * @param height the height of the region to be invalidated
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glInvalidateSubFramebuffer">Reference Page</a>
      */
     public static void glInvalidateSubFramebuffer(@NativeType("GLenum") int target, @NativeType("GLenum const *") int attachment, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer attachments = stack.ints(attachment);
             nglInvalidateSubFramebuffer(target, 1, memAddress(attachments), x, y, width, height);
@@ -1523,9 +1550,9 @@ public class GL43C extends GL42C {
      *     uint first;
      *     uint baseInstance;
      * } DrawArraysIndirectCommand;</code></pre>
-     *
+     * 
      * <p>A single call to {@code glMultiDrawArraysIndirect} is equivalent, assuming no errors are generated to:</p>
-     *
+     * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
      * for ( i = 0; i &lt; drawcount; i++ ) {
@@ -1540,6 +1567,7 @@ public class GL43C extends GL42C {
      * @param indirect  an array of structures containing the draw parameters
      * @param drawcount the number of elements in the array of draw parameter structures
      * @param stride    the distance in basic machine units between elements of the draw parameter array
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirect">Reference Page</a>
      */
     public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
@@ -1561,9 +1589,9 @@ public class GL43C extends GL42C {
      *     uint first;
      *     uint baseInstance;
      * } DrawArraysIndirectCommand;</code></pre>
-     *
+     * 
      * <p>A single call to {@code glMultiDrawArraysIndirect} is equivalent, assuming no errors are generated to:</p>
-     *
+     * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
      * for ( i = 0; i &lt; drawcount; i++ ) {
@@ -1578,6 +1606,7 @@ public class GL43C extends GL42C {
      * @param indirect  an array of structures containing the draw parameters
      * @param drawcount the number of elements in the array of draw parameter structures
      * @param stride    the distance in basic machine units between elements of the draw parameter array
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirect">Reference Page</a>
      */
     public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") long indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
@@ -1596,9 +1625,9 @@ public class GL43C extends GL42C {
      *     uint first;
      *     uint baseInstance;
      * } DrawArraysIndirectCommand;</code></pre>
-     *
+     * 
      * <p>A single call to {@code glMultiDrawArraysIndirect} is equivalent, assuming no errors are generated to:</p>
-     *
+     * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
      * for ( i = 0; i &lt; drawcount; i++ ) {
@@ -1613,6 +1642,7 @@ public class GL43C extends GL42C {
      * @param indirect  an array of structures containing the draw parameters
      * @param drawcount the number of elements in the array of draw parameter structures
      * @param stride    the distance in basic machine units between elements of the draw parameter array
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirect">Reference Page</a>
      */
     public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
@@ -1644,7 +1674,7 @@ public class GL43C extends GL42C {
      * } DrawElementsIndirectCommand;</code></pre>
      *
      * <p>A single call to {@code glMultiDrawElementsIndirect} is equivalent, assuming no errors are generated to:</p>
-     *
+     * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
      * for ( i = 0; i &lt; drawcount; i++ ) {
@@ -1660,6 +1690,7 @@ public class GL43C extends GL42C {
      * @param indirect  a structure containing an array of draw parameters
      * @param drawcount the number of elements in the array addressed by {@code indirect}
      * @param stride    the distance in basic machine units between elements of the draw parameter array
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirect">Reference Page</a>
      */
     public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
@@ -1682,9 +1713,9 @@ public class GL43C extends GL42C {
      *     uint baseVertex;
      *     uint baseInstance;
      * } DrawElementsIndirectCommand;</code></pre>
-     *
+     * 
      * <p>A single call to {@code glMultiDrawElementsIndirect} is equivalent, assuming no errors are generated to:</p>
-     *
+     * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
      * for ( i = 0; i &lt; drawcount; i++ ) {
@@ -1700,6 +1731,7 @@ public class GL43C extends GL42C {
      * @param indirect  a structure containing an array of draw parameters
      * @param drawcount the number of elements in the array addressed by {@code indirect}
      * @param stride    the distance in basic machine units between elements of the draw parameter array
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirect">Reference Page</a>
      */
     public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") long indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
@@ -1719,9 +1751,9 @@ public class GL43C extends GL42C {
      *     uint baseVertex;
      *     uint baseInstance;
      * } DrawElementsIndirectCommand;</code></pre>
-     *
+     * 
      * <p>A single call to {@code glMultiDrawElementsIndirect} is equivalent, assuming no errors are generated to:</p>
-     *
+     * 
      * <pre><code>
      * const ubyte *ptr = (const ubyte *)indirect;
      * for ( i = 0; i &lt; drawcount; i++ ) {
@@ -1737,6 +1769,7 @@ public class GL43C extends GL42C {
      * @param indirect  a structure containing an array of draw parameters
      * @param drawcount the number of elements in the array addressed by {@code indirect}
      * @param stride    the distance in basic machine units between elements of the draw parameter array
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirect">Reference Page</a>
      */
     public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") IntBuffer indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
@@ -1748,9 +1781,7 @@ public class GL43C extends GL42C {
 
     // --- [ glGetProgramInterfaceiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv}
-     */
+    /** Unsafe version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv} */
     public static native void nglGetProgramInterfaceiv(int program, int programInterface, int pname, long params);
 
     /**
@@ -1760,6 +1791,7 @@ public class GL43C extends GL42C {
      * @param programInterface a token identifying the interface within {@code program} to query. One of:<br><table><tr><td>{@link #GL_UNIFORM UNIFORM}</td><td>{@link #GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link #GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link #GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link #GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link #GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link #GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link #GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link #GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link #GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
      * @param pname            the name of the parameter within {@code programInterface} to query. One of:<br><table><tr><td>{@link #GL_ACTIVE_RESOURCES ACTIVE_RESOURCES}</td><td>{@link #GL_MAX_NAME_LENGTH MAX_NAME_LENGTH}</td><td>{@link #GL_MAX_NUM_ACTIVE_VARIABLES MAX_NUM_ACTIVE_VARIABLES}</td></tr><tr><td>{@link #GL_MAX_NUM_COMPATIBLE_SUBROUTINES MAX_NUM_COMPATIBLE_SUBROUTINES}</td></tr></table>
      * @param params           a variable to retrieve the value of {@code pname} for the program interface
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramInterface">Reference Page</a>
      */
     public static void glGetProgramInterfaceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
@@ -1775,12 +1807,12 @@ public class GL43C extends GL42C {
      * @param program          the name of a program object whose interface to query
      * @param programInterface a token identifying the interface within {@code program} to query. One of:<br><table><tr><td>{@link #GL_UNIFORM UNIFORM}</td><td>{@link #GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link #GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link #GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link #GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link #GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link #GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link #GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link #GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link #GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
      * @param pname            the name of the parameter within {@code programInterface} to query. One of:<br><table><tr><td>{@link #GL_ACTIVE_RESOURCES ACTIVE_RESOURCES}</td><td>{@link #GL_MAX_NAME_LENGTH MAX_NAME_LENGTH}</td><td>{@link #GL_MAX_NUM_ACTIVE_VARIABLES MAX_NUM_ACTIVE_VARIABLES}</td></tr><tr><td>{@link #GL_MAX_NUM_COMPATIBLE_SUBROUTINES MAX_NUM_COMPATIBLE_SUBROUTINES}</td></tr></table>
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramInterface">Reference Page</a>
      */
     @NativeType("void")
     public static int glGetProgramInterfacei(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer params = stack.callocInt(1);
             nglGetProgramInterfaceiv(program, programInterface, pname, memAddress(params));
@@ -1803,6 +1835,7 @@ public class GL43C extends GL42C {
      * @param program          the name of a program object whose resources to query
      * @param programInterface a token identifying the interface within {@code program} containing the resource named {Wcode name}. One of:<br><table><tr><td>{@link #GL_UNIFORM UNIFORM}</td><td>{@link #GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link #GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link #GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link #GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link #GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link #GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link #GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link #GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link #GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
      * @param name             the name of the resource to query the index of
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResourceIndex">Reference Page</a>
      */
     @NativeType("GLuint")
@@ -1819,12 +1852,12 @@ public class GL43C extends GL42C {
      * @param program          the name of a program object whose resources to query
      * @param programInterface a token identifying the interface within {@code program} containing the resource named {Wcode name}. One of:<br><table><tr><td>{@link #GL_UNIFORM UNIFORM}</td><td>{@link #GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link #GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link #GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link #GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link #GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link #GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link #GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link #GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link #GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
      * @param name             the name of the resource to query the index of
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResourceIndex">Reference Page</a>
      */
     @NativeType("GLuint")
     public static int glGetProgramResourceIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(name, true);
             long nameEncoded = stack.getPointerAddress();
@@ -1851,6 +1884,7 @@ public class GL43C extends GL42C {
      * @param index            the index of the resource within {@code programInterface} of {@code program}
      * @param length           a variable which will receive the length of the resource name
      * @param name             a character array into which will be written the name of the resource
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResourceName">Reference Page</a>
      */
     public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer name) {
@@ -1867,12 +1901,12 @@ public class GL43C extends GL42C {
      * @param programInterface a token identifying the interface within {@code program} containing the indexed resource. One of:<br><table><tr><td>{@link #GL_UNIFORM UNIFORM}</td><td>{@link #GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link #GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link #GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link #GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link #GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link #GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link #GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link #GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link #GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
      * @param index            the index of the resource within {@code programInterface} of {@code program}
      * @param bufSize          the size of the character array whose address is given by {@code name}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResourceName">Reference Page</a>
      */
     @NativeType("void")
     public static String glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLsizei") int bufSize) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             IntBuffer length = stack.ints(0);
             ByteBuffer name = stack.malloc(bufSize);
@@ -1889,6 +1923,7 @@ public class GL43C extends GL42C {
      * @param program          the name of a program object whose resources to query
      * @param programInterface a token identifying the interface within {@code program} containing the indexed resource. One of:<br><table><tr><td>{@link #GL_UNIFORM UNIFORM}</td><td>{@link #GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link #GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link #GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link #GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link #GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link #GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link #GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link #GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link #GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link #GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link #GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link #GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
      * @param index            the index of the resource within {@code programInterface} of {@code program}
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResourceName">Reference Page</a>
      */
     @NativeType("void")
@@ -1915,6 +1950,7 @@ public class GL43C extends GL42C {
      * @param props            an array that will receive the active resource properties
      * @param length           a variable which will receive the number of values returned
      * @param params           an array that will receive the property values
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResource">Reference Page</a>
      */
     public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") IntBuffer props, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLint *") IntBuffer params) {
@@ -1937,6 +1973,7 @@ public class GL43C extends GL42C {
      * @param program          the name of a program object whose resources to query
      * @param programInterface a token identifying the interface within {@code program} containing the resource named {@code name}
      * @param name             the name of the resource to query the location of
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResourceLocation">Reference Page</a>
      */
     @NativeType("GLint")
@@ -1953,12 +1990,12 @@ public class GL43C extends GL42C {
      * @param program          the name of a program object whose resources to query
      * @param programInterface a token identifying the interface within {@code program} containing the resource named {@code name}
      * @param name             the name of the resource to query the location of
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResourceLocation">Reference Page</a>
      */
     @NativeType("GLint")
     public static int glGetProgramResourceLocation(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(name, true);
             long nameEncoded = stack.getPointerAddress();
@@ -1981,6 +2018,7 @@ public class GL43C extends GL42C {
      * @param program          the name of a program object whose resources to query
      * @param programInterface a token identifying the interface within {@code program} containing the resource named {@code name}. Must be:<br><table><tr><td>{@link #GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td></tr></table>
      * @param name             the name of the resource to query the location of
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResourceLocationIndex">Reference Page</a>
      */
     @NativeType("GLint")
@@ -1997,12 +2035,12 @@ public class GL43C extends GL42C {
      * @param program          the name of a program object whose resources to query
      * @param programInterface a token identifying the interface within {@code program} containing the resource named {@code name}. Must be:<br><table><tr><td>{@link #GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td></tr></table>
      * @param name             the name of the resource to query the location of
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResourceLocationIndex">Reference Page</a>
      */
     @NativeType("GLint")
     public static int glGetProgramResourceLocationIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
-        MemoryStack stack = stackGet();
-        int stackPointer = stack.getPointer();
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nASCII(name, true);
             long nameEncoded = stack.getPointerAddress();
@@ -2020,6 +2058,7 @@ public class GL43C extends GL42C {
      * @param program             the name of the program containing the block whose binding to change
      * @param storageBlockIndex   the index storage block within the program
      * @param storageBlockBinding the index storage block binding to associate with the specified storage block
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glShaderStorageBlockBinding">Reference Page</a>
      */
     public static native void glShaderStorageBlockBinding(@NativeType("GLuint") int program, @NativeType("GLuint") int storageBlockIndex, @NativeType("GLuint") int storageBlockBinding);
@@ -2034,6 +2073,7 @@ public class GL43C extends GL42C {
      * @param buffer         the name of the buffer object whose storage to attach to the active buffer texture
      * @param offset         the offset of the start of the range of the buffer's data store to attach
      * @param size           the size of the range of the buffer's data store to attach
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTexBufferRange">Reference Page</a>
      */
     public static native void glTexBufferRange(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size);
@@ -2050,6 +2090,7 @@ public class GL43C extends GL42C {
      * @param height               the height of the texture, in texels
      * @param fixedsamplelocations whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
      *                             depend on the internal format or size of the image
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTexStorage2DMultisample">Reference Page</a>
      */
     public static native void glTexStorage2DMultisample(@NativeType("GLenum") int target, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLboolean") boolean fixedsamplelocations);
@@ -2067,6 +2108,7 @@ public class GL43C extends GL42C {
      * @param depth                the depth of the texture, in texels
      * @param fixedsamplelocations whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
      *                             depend on the internal format or size of the image
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTexStorage3DMultisample">Reference Page</a>
      */
     public static native void glTexStorage3DMultisample(@NativeType("GLenum") int target, @NativeType("GLsizei") int samples, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLboolean") boolean fixedsamplelocations);
@@ -2084,6 +2126,7 @@ public class GL43C extends GL42C {
      * @param numlevels      the number of levels of detail to include in the view
      * @param minlayer       the index of the first layer to include in the view
      * @param numlayers      the number of layers to include in the view
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTextureView">Reference Page</a>
      */
     public static native void glTextureView(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLuint") int origtexture, @NativeType("GLenum") int internalformat, @NativeType("GLuint") int minlevel, @NativeType("GLuint") int numlevels, @NativeType("GLuint") int minlayer, @NativeType("GLuint") int numlayers);
@@ -2097,6 +2140,7 @@ public class GL43C extends GL42C {
      * @param buffer       the name of an existing buffer to bind to the vertex buffer binding point
      * @param offset       the offset of the first element of the buffer
      * @param stride       the distance between elements within the buffer
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindVertexBuffer">Reference Page</a>
      */
     public static native void glBindVertexBuffer(@NativeType("GLuint") int bindingindex, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizei") int stride);
@@ -2112,6 +2156,7 @@ public class GL43C extends GL42C {
      * @param normalized     if true then integer data is normalized to the range [-1, 1] or [0, 1] if it is signed or unsigned, respectively. If false then integer data is
      *                       directly converted to floating point.
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribFormat">Reference Page</a>
      */
     public static native void glVertexAttribFormat(@NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int relativeoffset);
@@ -2125,6 +2170,7 @@ public class GL43C extends GL42C {
      * @param size           the number of values per vertex that are stored in the array. One of:<br><table><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>{@link GL12#GL_BGRA BGRA}</td></tr></table>
      * @param type           the type of the data stored in the array
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribIFormat">Reference Page</a>
      */
     public static native void glVertexAttribIFormat(@NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLuint") int relativeoffset);
@@ -2138,6 +2184,7 @@ public class GL43C extends GL42C {
      * @param size           the number of values per vertex that are stored in the array. One of:<br><table><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>{@link GL12#GL_BGRA BGRA}</td></tr></table>
      * @param type           the type of the data stored in the array
      * @param relativeoffset the offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribLFormat">Reference Page</a>
      */
     public static native void glVertexAttribLFormat(@NativeType("GLuint") int attribindex, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLuint") int relativeoffset);
@@ -2149,6 +2196,7 @@ public class GL43C extends GL42C {
      *
      * @param attribindex  the index of the attribute to associate with a vertex buffer binding
      * @param bindingindex the index of the vertex buffer binding with which to associate the generic vertex attribute
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribBinding">Reference Page</a>
      */
     public static native void glVertexAttribBinding(@NativeType("GLuint") int attribindex, @NativeType("GLuint") int bindingindex);
@@ -2160,13 +2208,14 @@ public class GL43C extends GL42C {
      *
      * @param bindingindex the index of the generic vertex attribute
      * @param divisor      the number of instances that will pass between updates of the generic attribute at slot {@code index}
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexBindingDivisor">Reference Page</a>
      */
     public static native void glVertexBindingDivisor(@NativeType("GLuint") int bindingindex, @NativeType("GLuint") int divisor);
 
     /**
      * Array version of: {@link #glClearBufferData ClearBufferData}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
@@ -2179,7 +2228,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glClearBufferData ClearBufferData}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
@@ -2192,7 +2241,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glClearBufferData ClearBufferData}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferData">Reference Page</a>
      */
     public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
@@ -2205,7 +2254,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glClearBufferSubData ClearBufferSubData}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
@@ -2218,7 +2267,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glClearBufferSubData ClearBufferSubData}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
@@ -2231,7 +2280,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glClearBufferSubData ClearBufferSubData}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearBufferSubData">Reference Page</a>
      */
     public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
@@ -2244,7 +2293,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glDebugMessageControl DebugMessageControl}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glDebugMessageControl">Reference Page</a>
      */
     public static void glDebugMessageControl(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLenum") int severity, @Nullable @NativeType("GLuint const *") int[] ids, @NativeType("GLboolean") boolean enabled) {
@@ -2257,7 +2306,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glGetDebugMessageLog GetDebugMessageLog}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetDebugMessageLog">Reference Page</a>
      */
     @NativeType("GLuint")
@@ -2276,7 +2325,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glGetObjectLabel GetObjectLabel}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetObjectLabel">Reference Page</a>
      */
     public static void glGetObjectLabel(@NativeType("GLenum") int identifier, @NativeType("GLuint") int name, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer label) {
@@ -2290,7 +2339,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glGetObjectPtrLabel GetObjectPtrLabel}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetObjectPtrLabel">Reference Page</a>
      */
     public static void glGetObjectPtrLabel(@NativeType("void *") long ptr, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer label) {
@@ -2319,7 +2368,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glGetInternalformati64v GetInternalformati64v}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetInternalformat">Reference Page</a>
      */
     public static void glGetInternalformati64v(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
@@ -2345,7 +2394,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glInvalidateSubFramebuffer InvalidateSubFramebuffer}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glInvalidateSubFramebuffer">Reference Page</a>
      */
     public static void glInvalidateSubFramebuffer(@NativeType("GLenum") int target, @NativeType("GLenum const *") int[] attachments, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
@@ -2358,7 +2407,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glMultiDrawArraysIndirect MultiDrawArraysIndirect}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArraysIndirect">Reference Page</a>
      */
     public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") int[] indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
@@ -2372,7 +2421,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glMultiDrawElementsIndirect MultiDrawElementsIndirect}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsIndirect">Reference Page</a>
      */
     public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") int[] indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
@@ -2386,7 +2435,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramInterface">Reference Page</a>
      */
     public static void glGetProgramInterfaceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
@@ -2400,7 +2449,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glGetProgramResourceName GetProgramResourceName}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResourceName">Reference Page</a>
      */
     public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer name) {
@@ -2414,7 +2463,7 @@ public class GL43C extends GL42C {
 
     /**
      * Array version of: {@link #glGetProgramResourceiv GetProgramResourceiv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramResource">Reference Page</a>
      */
     public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] params) {

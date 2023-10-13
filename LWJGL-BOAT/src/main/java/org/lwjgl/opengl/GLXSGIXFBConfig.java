@@ -29,9 +29,7 @@ import org.lwjgl.system.linux.*;
  */
 public class GLXSGIXFBConfig {
 
-    /**
-     * Accepted by the {@code attribute} parameter of {@link #glXGetFBConfigAttribSGIX GetFBConfigAttribSGIX}, and by the {@code attrib_list} parameter of {@link #glXChooseFBConfigSGIX ChooseFBConfigSGIX}.
-     */
+    /** Accepted by the {@code attribute} parameter of {@link #glXGetFBConfigAttribSGIX GetFBConfigAttribSGIX}, and by the {@code attrib_list} parameter of {@link #glXChooseFBConfigSGIX ChooseFBConfigSGIX}. */
     public static final int
             GLX_DRAWABLE_TYPE_SGIX = 0x8010,
             GLX_RENDER_TYPE_SGIX = 0x8011,
@@ -44,9 +42,7 @@ public class GLXSGIXFBConfig {
      */
     public static final int GLX_FBCONFIG_ID_SGIX = 0x8013;
 
-    /**
-     * Accepted by the {@code attribute} parameter of {@link #glXGetFBConfigAttribSGIX GetFBConfigAttribSGIX}.
-     */
+    /** Accepted by the {@code attribute} parameter of {@link #glXGetFBConfigAttribSGIX GetFBConfigAttribSGIX}. */
     public static final int GLX_SCREEN_EXT = 0x800C;
 
     /**
@@ -65,9 +61,7 @@ public class GLXSGIXFBConfig {
             GLX_RGBA_BIT_SGIX = 0x1,
             GLX_COLOR_INDEX_BIT_SGIX = 0x2;
 
-    /**
-     * Accepted by the {@code render_type} parameter of {@link #glXCreateContextWithConfigSGIX CreateContextWithConfigSGIX}.
-     */
+    /** Accepted by the {@code render_type} parameter of {@link #glXCreateContextWithConfigSGIX CreateContextWithConfigSGIX}. */
     public static final int
             GLX_RGBA_TYPE_SGIX = 0x8014,
             GLX_COLOR_INDEX_TYPE_SGIX = 0x8015;
@@ -85,9 +79,7 @@ public class GLXSGIXFBConfig {
 
     // --- [ glXGetFBConfigAttribSGIX ] ---
 
-    /**
-     * Unsafe version of: {@link #glXGetFBConfigAttribSGIX GetFBConfigAttribSGIX}
-     */
+    /** Unsafe version of: {@link #glXGetFBConfigAttribSGIX GetFBConfigAttribSGIX} */
     public static int nglXGetFBConfigAttribSGIX(long display, long config, int attribute, long value) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetFBConfigAttribSGIX;
         if (CHECKS) {
@@ -198,9 +190,7 @@ public class GLXSGIXFBConfig {
 
     // --- [ glXGetVisualFromFBConfigSGIX ] ---
 
-    /**
-     * Unsafe version of: {@link #glXGetVisualFromFBConfigSGIX GetVisualFromFBConfigSGIX}
-     */
+    /** Unsafe version of: {@link #glXGetVisualFromFBConfigSGIX GetVisualFromFBConfigSGIX} */
     public static long nglXGetVisualFromFBConfigSGIX(long display, long config) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetVisualFromFBConfigSGIX;
         if (CHECKS) {
@@ -226,9 +216,7 @@ public class GLXSGIXFBConfig {
 
     // --- [ glXGetFBConfigFromVisualSGIX ] ---
 
-    /**
-     * Unsafe version of: {@link #glXGetFBConfigFromVisualSGIX GetFBConfigFromVisualSGIX}
-     */
+    /** Unsafe version of: {@link #glXGetFBConfigFromVisualSGIX GetFBConfigFromVisualSGIX} */
     public static long nglXGetFBConfigFromVisualSGIX(long display, long vis) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetFBConfigFromVisualSGIX;
         if (CHECKS) {
@@ -250,9 +238,7 @@ public class GLXSGIXFBConfig {
         return nglXGetFBConfigFromVisualSGIX(display, vis.address());
     }
 
-    /**
-     * Array version of: {@link #glXGetFBConfigAttribSGIX GetFBConfigAttribSGIX}
-     */
+    /** Array version of: {@link #glXGetFBConfigAttribSGIX GetFBConfigAttribSGIX} */
     public static int glXGetFBConfigAttribSGIX(@NativeType("Display *") long display, @NativeType("GLXFBConfigSGIX") long config, int attribute, @NativeType("int *") int[] value) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetFBConfigAttribSGIX;
         if (CHECKS) {
@@ -264,9 +250,7 @@ public class GLXSGIXFBConfig {
         return callPPPI(display, config, attribute, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glXChooseFBConfigSGIX ChooseFBConfigSGIX}
-     */
+    /** Array version of: {@link #glXChooseFBConfigSGIX ChooseFBConfigSGIX} */
     @Nullable
     @NativeType("GLXFBConfigSGIX *")
     public static PointerBuffer glXChooseFBConfigSGIX(@NativeType("Display *") long display, int screen, @Nullable @NativeType("int const *") int[] attrib_list) {

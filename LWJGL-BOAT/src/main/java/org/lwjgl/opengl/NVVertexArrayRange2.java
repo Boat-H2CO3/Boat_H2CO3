@@ -19,9 +19,7 @@ package org.lwjgl.opengl;
  */
 public final class NVVertexArrayRange2 {
 
-    /**
-     * Accepted by the {@code cap} parameter of EnableClientState, DisableClientState.
-     */
+    /** Accepted by the {@code cap} parameter of EnableClientState, DisableClientState. */
     public static final int GL_VERTEX_ARRAY_RANGE_WITHOUT_FLUSH_NV = 0x8533;
 
     private NVVertexArrayRange2() {

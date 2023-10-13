@@ -35,7 +35,6 @@ package org.lwjgl.opengl;
  * This is the input implementation interface. Mouse and Keyboard delegates
  * to implementors of this interface. There is one InputImplementation
  * for each supported platform.
- *
  * @author elias_naur
  */
 
@@ -49,10 +48,14 @@ public interface InputImplementation {
      * Mouse methods
      */
 
-    /** Query of wheel support */
+    /**
+     * Query of wheel support
+     */
     boolean hasWheel();
 
-    /** Query of button count */
+    /**
+     * Query of button count
+     */
     int getButtonCount();
 
     /**
@@ -82,16 +85,24 @@ public interface InputImplementation {
      */
     int getNativeCursorCapabilities();
 
-    /** Method to set the native cursor position */
+    /**
+     * Method to set the native cursor position
+     */
     void setCursorPosition(int x, int y);
 
-    /** Method to set the native cursor */
+    /**
+     * Method to set the native cursor
+     */
     void setNativeCursor(Object handle) throws LWJGLException;
 
-    /** Method returning the minimum cursor size */
+    /**
+     * Method returning the minimum cursor size
+     */
     int getMinCursorSize();
 
-    /** Method returning the maximum cursor size */
+    /**
+     * Method returning the maximum cursor size
+     */
     int getMaxCursorSize();
 
     /*
@@ -112,7 +123,7 @@ public interface InputImplementation {
      * Method to poll the keyboard.
      *
      * @param keyDownBuffer the address of a 256-byte buffer to place
-     * key states in.
+     *                      key states in.
      */
     void pollKeyboard(ByteBuffer keyDownBuffer);
 
@@ -123,7 +134,9 @@ public interface InputImplementation {
 
 //	int isStateKeySet(int key);
 
-    /** Native cursor handles */
+    /**
+     * Native cursor handles
+     */
     Object createCursor(int width, int height, int xHotspot, int yHotspot, int numImages, IntBuffer images, IntBuffer delays) throws LWJGLException;
 
     void destroyCursor(Object cursor_handle);

@@ -5,17 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_matrix_palette.txt">ARB_matrix_palette</a> extension.
@@ -201,9 +197,7 @@ public class ARBMatrixPalette {
         nglMatrixIndexPointerARB(size, GL11.GL_UNSIGNED_INT, stride, memAddress(pointer));
     }
 
-    /**
-     * Array version of: {@link #glMatrixIndexuivARB MatrixIndexuivARB}
-     */
+    /** Array version of: {@link #glMatrixIndexuivARB MatrixIndexuivARB} */
     public static void glMatrixIndexuivARB(@NativeType("GLuint *") int[] indices) {
         long __functionAddress = GL.getICD().glMatrixIndexuivARB;
         if (CHECKS) {
@@ -212,9 +206,7 @@ public class ARBMatrixPalette {
         callPV(indices.length, indices, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMatrixIndexusvARB MatrixIndexusvARB}
-     */
+    /** Array version of: {@link #glMatrixIndexusvARB MatrixIndexusvARB} */
     public static void glMatrixIndexusvARB(@NativeType("GLushort *") short[] indices) {
         long __functionAddress = GL.getICD().glMatrixIndexusvARB;
         if (CHECKS) {

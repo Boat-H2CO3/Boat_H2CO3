@@ -51,9 +51,7 @@ public class GLXSGIMakeCurrentRead {
 
     // --- [ glXGetCurrentReadDrawableSGI ] ---
 
-    /**
-     * Returns the name of the {@code GLXDrawable} currently being used as a pixel query source.
-     */
+    /** Returns the name of the {@code GLXDrawable} currently being used as a pixel query source. */
     @NativeType("GLXDrawable")
     public static long glXGetCurrentReadDrawableSGI() {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetCurrentReadDrawableSGI;

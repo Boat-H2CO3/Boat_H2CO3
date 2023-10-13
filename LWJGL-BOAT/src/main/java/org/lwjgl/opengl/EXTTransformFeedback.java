@@ -145,9 +145,9 @@ public class EXTTransformFeedback {
         MemoryStack stack = stackGet();
         int stackPointer = stack.getPointer();
         try {
-            long varyingsAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memASCII, varyings);
+            long varyingsAddress = APIUtil.apiArray(stack, MemoryUtil::memASCII, varyings);
             nglTransformFeedbackVaryingsEXT(program, varyings.length, varyingsAddress, bufferMode);
-            org.lwjgl.system.APIUtil.apiArrayFree(varyingsAddress, varyings.length);
+            APIUtil.apiArrayFree(varyingsAddress, varyings.length);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -157,9 +157,9 @@ public class EXTTransformFeedback {
         MemoryStack stack = stackGet();
         int stackPointer = stack.getPointer();
         try {
-            long varyingsAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memASCII, varying);
+            long varyingsAddress = APIUtil.apiArray(stack, MemoryUtil::memASCII, varying);
             nglTransformFeedbackVaryingsEXT(program, 1, varyingsAddress, bufferMode);
-            org.lwjgl.system.APIUtil.apiArrayFree(varyingsAddress, 1);
+            APIUtil.apiArrayFree(varyingsAddress, 1);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -233,9 +233,7 @@ public class EXTTransformFeedback {
         return EXTDrawBuffers2.glGetBooleanIndexedEXT(target, index);
     }
 
-    /**
-     * Array version of: {@link #glGetTransformFeedbackVaryingEXT GetTransformFeedbackVaryingEXT}
-     */
+    /** Array version of: {@link #glGetTransformFeedbackVaryingEXT GetTransformFeedbackVaryingEXT} */
     public static void glGetTransformFeedbackVaryingEXT(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLsizei *") int[] size, @NativeType("GLenum *") int[] type, @NativeType("GLchar *") ByteBuffer name) {
         long __functionAddress = GL.getICD().glGetTransformFeedbackVaryingEXT;
         if (CHECKS) {
@@ -247,9 +245,7 @@ public class EXTTransformFeedback {
         callPPPPV(program, index, name.remaining(), length, size, type, memAddress(name), __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetIntegerIndexedvEXT GetIntegerIndexedvEXT}
-     */
+    /** Array version of: {@link #glGetIntegerIndexedvEXT GetIntegerIndexedvEXT} */
     public static void glGetIntegerIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") int[] data) {
         EXTDrawBuffers2.glGetIntegerIndexedvEXT(target, index, data);
     }

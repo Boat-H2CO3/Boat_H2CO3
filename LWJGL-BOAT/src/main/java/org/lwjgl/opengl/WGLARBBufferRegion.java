@@ -21,9 +21,7 @@ import static org.lwjgl.system.JNI.*;
  */
 public class WGLARBBufferRegion {
 
-    /**
-     * Accepted by the {@code type} parameter of {@link #wglCreateBufferRegionARB CreateBufferRegionARB}.
-     */
+    /** Accepted by the {@code type} parameter of {@link #wglCreateBufferRegionARB CreateBufferRegionARB}. */
     public static final int
             WGL_FRONT_COLOR_BUFFER_BIT_ARB = 0x1,
             WGL_BACK_COLOR_BUFFER_BIT_ARB = 0x2,

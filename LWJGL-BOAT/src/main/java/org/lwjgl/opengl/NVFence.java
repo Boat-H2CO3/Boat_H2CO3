@@ -35,14 +35,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVFence {
 
-    /**
-     * Accepted by the {@code condition} parameter of SetFenceNV.
-     */
+    /** Accepted by the {@code condition} parameter of SetFenceNV. */
     public static final int GL_ALL_COMPLETED_NV = 0x84F2;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetFenceivNV.
-     */
+    /** Accepted by the {@code pname} parameter of GetFenceivNV. */
     public static final int
             GL_FENCE_STATUS_NV = 0x84F3,
             GL_FENCE_CONDITION_NV = 0x84F4;
@@ -143,9 +139,7 @@ public class NVFence {
 
     public static native void glSetFenceNV(@NativeType("GLuint") int fence, @NativeType("GLenum") int condition);
 
-    /**
-     * Array version of: {@link #glDeleteFencesNV DeleteFencesNV}
-     */
+    /** Array version of: {@link #glDeleteFencesNV DeleteFencesNV} */
     public static void glDeleteFencesNV(@NativeType("GLuint const *") int[] fences) {
         long __functionAddress = GL.getICD().glDeleteFencesNV;
         if (CHECKS) {
@@ -154,9 +148,7 @@ public class NVFence {
         callPV(fences.length, fences, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGenFencesNV GenFencesNV}
-     */
+    /** Array version of: {@link #glGenFencesNV GenFencesNV} */
     public static void glGenFencesNV(@NativeType("GLuint *") int[] fences) {
         long __functionAddress = GL.getICD().glGenFencesNV;
         if (CHECKS) {
@@ -165,9 +157,7 @@ public class NVFence {
         callPV(fences.length, fences, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetFenceivNV GetFenceivNV}
-     */
+    /** Array version of: {@link #glGetFenceivNV GetFenceivNV} */
     public static void glGetFenceivNV(@NativeType("GLuint") int fence, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetFenceivNV;
         if (CHECKS) {

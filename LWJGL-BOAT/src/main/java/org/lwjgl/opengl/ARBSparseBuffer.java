@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_sparse_buffer.txt">ARB_sparse_buffer</a> extension.
@@ -20,14 +20,10 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBSparseBuffer {
 
-    /**
-     * Accepted as part of the {@code flags} parameter to {@link GL44C#glBufferStorage BufferStorage}.
-     */
+    /** Accepted as part of the {@code flags} parameter to {@link GL44C#glBufferStorage BufferStorage}. */
     public static final int GL_SPARSE_STORAGE_BIT_ARB = 0x400;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, GetIntegerv, and GetInteger64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, GetIntegerv, and GetInteger64v. */
     public static final int GL_SPARSE_BUFFER_PAGE_SIZE_ARB = 0x82F8;
 
     static {
@@ -40,7 +36,7 @@ public class ARBSparseBuffer {
 
     static boolean isAvailable(GLCapabilities caps, java.util.Set<String> ext) {
         return checkFunctions(
-                caps.glBufferPageCommitmentARB
+            caps.glBufferPageCommitmentARB
         );
     }
 

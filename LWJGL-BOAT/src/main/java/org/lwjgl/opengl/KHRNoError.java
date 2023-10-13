@@ -17,9 +17,7 @@ package org.lwjgl.opengl;
  */
 public final class KHRNoError {
 
-    /**
-     * If set in {@link GL30#GL_CONTEXT_FLAGS CONTEXT_FLAGS}, then no error behavior is enabled for this context.
-     */
+    /** If set in {@link GL30#GL_CONTEXT_FLAGS CONTEXT_FLAGS}, then no error behavior is enabled for this context. */
     public static final int GL_CONTEXT_FLAG_NO_ERROR_BIT_KHR = 0x8;
 
     private KHRNoError() {

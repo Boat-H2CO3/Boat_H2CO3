@@ -21,16 +21,12 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVMeshShader {
 
-    /**
-     * Accepted by the {@code type} parameter of {@link GL20C#glCreateShader CreateShader} and returned by the {@code params} parameter of {@link GL20C#glGetShaderiv GetShaderiv}.
-     */
+    /** Accepted by the {@code type} parameter of {@link GL20C#glCreateShader CreateShader} and returned by the {@code params} parameter of {@link GL20C#glGetShaderiv GetShaderiv}. */
     public static final int
             GL_MESH_SHADER_NV = 0x9559,
             GL_TASK_SHADER_NV = 0x955A;
 
-    /**
-     * Accepted by the {@code pname} parameter of {@link GL11C#glGetIntegerv GetIntegerv}, {@link GL11C#glGetBooleanv GetBooleanv}, {@link GL11C#glGetFloatv GetFloatv}, {@link GL11C#glGetDoublev GetDoublev} and {@link GL32C#glGetInteger64v GetInteger64v}.
-     */
+    /** Accepted by the {@code pname} parameter of {@link GL11C#glGetIntegerv GetIntegerv}, {@link GL11C#glGetBooleanv GetBooleanv}, {@link GL11C#glGetFloatv GetFloatv}, {@link GL11C#glGetDoublev GetDoublev} and {@link GL32C#glGetInteger64v GetInteger64v}. */
     public static final int
             GL_MAX_MESH_UNIFORM_BLOCKS_NV = 0x8E60,
             GL_MAX_MESH_TEXTURE_IMAGE_UNITS_NV = 0x8E61,
@@ -60,16 +56,12 @@ public class NVMeshShader {
             GL_MESH_OUTPUT_PER_VERTEX_GRANULARITY_NV = 0x92DF,
             GL_MESH_OUTPUT_PER_PRIMITIVE_GRANULARITY_NV = 0x9543;
 
-    /**
-     * Accepted by the {@code pname} parameter of {@link GL30C#glGetIntegeri_v GetIntegeri_v}, {@link GL30C#glGetBooleani_v GetBooleani_v}, {@link GL41C#glGetFloati_v GetFloati_v}, {@link GL41C#glGetDoublei_v GetDoublei_v} and {@link GL32C#glGetInteger64i_v GetInteger64i_v}.
-     */
+    /** Accepted by the {@code pname} parameter of {@link GL30C#glGetIntegeri_v GetIntegeri_v}, {@link GL30C#glGetBooleani_v GetBooleani_v}, {@link GL41C#glGetFloati_v GetFloati_v}, {@link GL41C#glGetDoublei_v GetDoublei_v} and {@link GL32C#glGetInteger64i_v GetInteger64i_v}. */
     public static final int
             GL_MAX_MESH_WORK_GROUP_SIZE_NV = 0x953B,
             GL_MAX_TASK_WORK_GROUP_SIZE_NV = 0x953C;
 
-    /**
-     * Accepted by the {@code pname} parameter of {@link GL20C#glGetProgramiv GetProgramiv}.
-     */
+    /** Accepted by the {@code pname} parameter of {@link GL20C#glGetProgramiv GetProgramiv}. */
     public static final int
             GL_MESH_WORK_GROUP_SIZE_NV = 0x953E,
             GL_TASK_WORK_GROUP_SIZE_NV = 0x953F,
@@ -77,23 +69,17 @@ public class NVMeshShader {
             GL_MESH_PRIMITIVES_OUT_NV = 0x957A,
             GL_MESH_OUTPUT_TYPE_NV = 0x957B;
 
-    /**
-     * Accepted by the {@code pname} parameter of {@link GL31C#glGetActiveUniformBlockiv GetActiveUniformBlockiv}.
-     */
+    /** Accepted by the {@code pname} parameter of {@link GL31C#glGetActiveUniformBlockiv GetActiveUniformBlockiv}. */
     public static final int
             GL_UNIFORM_BLOCK_REFERENCED_BY_MESH_SHADER_NV = 0x959C,
             GL_UNIFORM_BLOCK_REFERENCED_BY_TASK_SHADER_NV = 0x959D;
 
-    /**
-     * Accepted by the {@code pname} parameter of {@link GL42C#glGetActiveAtomicCounterBufferiv GetActiveAtomicCounterBufferiv}.
-     */
+    /** Accepted by the {@code pname} parameter of {@link GL42C#glGetActiveAtomicCounterBufferiv GetActiveAtomicCounterBufferiv}. */
     public static final int
             GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_MESH_SHADER_NV = 0x959E,
             GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TASK_SHADER_NV = 0x959F;
 
-    /**
-     * Accepted in the {@code props} array of {@link GL43C#glGetProgramResourceiv GetProgramResourceiv}.
-     */
+    /** Accepted in the {@code props} array of {@link GL43C#glGetProgramResourceiv GetProgramResourceiv}. */
     public static final int
             GL_REFERENCED_BY_MESH_SHADER_NV = 0x95A0,
             GL_REFERENCED_BY_TASK_SHADER_NV = 0x95A1;
@@ -108,9 +94,7 @@ public class NVMeshShader {
             GL_MESH_SUBROUTINE_UNIFORM_NV = 0x957E,
             GL_TASK_SUBROUTINE_UNIFORM_NV = 0x957F;
 
-    /**
-     * Accepted by the {@code stages} parameter of {@link GL41C#glUseProgramStages UseProgramStages}.
-     */
+    /** Accepted by the {@code stages} parameter of {@link GL41C#glUseProgramStages UseProgramStages}. */
     public static final int
             GL_MESH_SHADER_BIT_NV = 0x40,
             GL_TASK_SHADER_BIT_NV = 0x80;

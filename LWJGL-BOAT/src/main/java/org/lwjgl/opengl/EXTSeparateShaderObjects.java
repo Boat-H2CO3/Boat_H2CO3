@@ -52,13 +52,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTSeparateShaderObjects {
 
-    /**
-     * Accepted by {@code type} parameter to GetIntegerv and GetFloatv.
-     */
+    /** Accepted by {@code type} parameter to GetIntegerv and GetFloatv. */
     public static final int GL_ACTIVE_PROGRAM_EXT = 0x8B8D;
 
-    static {
-        GL.initialize();
+    static { GL.initialize();
     }
 
     protected EXTSeparateShaderObjects() {

@@ -47,9 +47,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTStencilClearTag {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_STENCIL_TAG_BITS_EXT = 0x88F2,
             GL_STENCIL_CLEAR_TAG_VALUE_EXT = 0x88F3;

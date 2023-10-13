@@ -35,7 +35,6 @@ package org.lwjgl.opengl;
  * This is the Display implementation interface. Display delegates
  * to implementors of this interface. There is one DisplayImplementation
  * for each supported platform.
- *
  * @author elias_naur
  */
 
@@ -76,6 +75,7 @@ interface DisplayImplementation extends InputImplementation {
     /**
      * Get the driver adapter string. This is a unique string describing the actual card's hardware, eg. "Geforce2", "PS2",
      * "Radeon9700". If the adapter cannot be determined, this function returns null.
+     *
      * @return a String
      */
     String getAdapter();
@@ -83,6 +83,7 @@ interface DisplayImplementation extends InputImplementation {
     /**
      * Get the driver version. This is a vendor/adapter specific version string. If the version cannot be determined,
      * this function returns null.
+     *
      * @return a String
      */
     String getVersion();
@@ -108,6 +109,7 @@ interface DisplayImplementation extends InputImplementation {
 
     /**
      * Create the native PeerInfo.
+     *
      * @throws LWJGLException
      */
     PeerInfo createPeerInfo(PixelFormat pixel_format, ContextAttribs attribs) throws LWJGLException;
@@ -166,7 +168,7 @@ interface DisplayImplementation extends InputImplementation {
      * Enable or disable the Display window to be resized.
      *
      * @param resizable set to true to make the Display window resizable;
-     * false to disable resizing on the Display window.
+     *                  false to disable resizing on the Display window.
      */
     void setResizable(boolean resizable);
 

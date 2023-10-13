@@ -25,14 +25,10 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTRasterMultisample {
 
-    /**
-     * Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.
-     */
+    /** Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled. */
     public static final int GL_RASTER_MULTISAMPLE_EXT = 0x9327;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int
             GL_RASTER_SAMPLES_EXT = 0x9328,
             GL_MAX_RASTER_SAMPLES_EXT = 0x9329,

@@ -112,9 +112,7 @@ public class XTimeCoord extends Struct {
         return wrap(XTimeCoord.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XTimeCoord createSafe(long address) {
         return address == NULL ? null : wrap(XTimeCoord.class, address);
@@ -172,7 +170,7 @@ public class XTimeCoord extends Struct {
 
         /**
          * Creates a new {@code XTimeCoord.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XTimeCoord#SIZEOF}, and its mark will be undefined.
@@ -213,15 +211,9 @@ public class XTimeCoord extends Struct {
          * Returns the value of the {@code x} field.
          */
         public short x() {
-            return XTimeCoord.nx(address());
-        }
-
-        /**
-         * Returns the value of the {@code y} field.
-         */
-        public short y() {
-            return XTimeCoord.ny(address());
-        }
+            return XTimeCoord.nx(address()); }
+        /** Returns the value of the {@code y} field. */
+        public short y() { return XTimeCoord.ny(address()); }
 
     }
 

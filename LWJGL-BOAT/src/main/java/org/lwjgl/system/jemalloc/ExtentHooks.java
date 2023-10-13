@@ -286,7 +286,7 @@ public class ExtentHooks extends Struct implements NativeResource {
             ExtentPurgeI purge_lazy,
             ExtentPurgeI purge_forced,
             ExtentSplitI split,
-            ExtentMergeI merge
+        ExtentMergeI merge
     ) {
         alloc(alloc);
         dalloc(dalloc);
@@ -305,6 +305,7 @@ public class ExtentHooks extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public ExtentHooks set(ExtentHooks src) {
@@ -314,38 +315,28 @@ public class ExtentHooks extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code ExtentHooks} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code ExtentHooks} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static ExtentHooks malloc() {
         return wrap(ExtentHooks.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code ExtentHooks} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code ExtentHooks} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static ExtentHooks calloc() {
         return wrap(ExtentHooks.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code ExtentHooks} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code ExtentHooks} instance allocated with {@link BufferUtils}. */
     public static ExtentHooks create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(ExtentHooks.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code ExtentHooks} instance for the specified memory address.
-     */
+    /** Returns a new {@code ExtentHooks} instance for the specified memory address. */
     public static ExtentHooks create(long address) {
         return wrap(ExtentHooks.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ExtentHooks createSafe(long address) {
         return address == NULL ? null : wrap(ExtentHooks.class, address);
@@ -353,16 +344,12 @@ public class ExtentHooks extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code ExtentHooks} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code ExtentHooks} instance allocated on the thread-local {@link MemoryStack}. */
     public static ExtentHooks mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code ExtentHooks} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code ExtentHooks} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static ExtentHooks callocStack() {
         return callocStack(stackGet());
     }
@@ -518,8 +505,7 @@ public class ExtentHooks extends Struct implements NativeResource {
      * Unsafe version of {@link #merge(ExtentMergeI) merge}.
      */
     public static void nmerge(long struct, @Nullable ExtentMergeI value) {
-        memPutAddress(struct + ExtentHooks.MERGE, memAddressSafe(value));
-    }
+        memPutAddress(struct + ExtentHooks.MERGE, memAddressSafe(value)); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.

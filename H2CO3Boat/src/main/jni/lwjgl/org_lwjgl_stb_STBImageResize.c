@@ -4,6 +4,7 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
+DISABLE_WARNINGS()
 #include "lwjgl_malloc.h"
 #define STBIR_MALLOC(size,c) org_lwjgl_malloc(size)
 #define STBIR_FREE(ptr,c)    org_lwjgl_free(ptr)
@@ -11,6 +12,7 @@
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
 #define STB_IMAGE_RESIZE_STATIC
 #include "stb_image_resize.h"
+ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 

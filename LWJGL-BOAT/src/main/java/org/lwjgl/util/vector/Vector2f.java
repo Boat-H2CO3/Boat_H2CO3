@@ -35,6 +35,7 @@ import java.io.Serializable;
 import java.nio.FloatBuffer;
 
 /**
+ *
  * Holds a 2-tuple vector.
  *
  * @author cix_foo <cix_foo@users.sourceforge.net>
@@ -256,13 +257,14 @@ public class Vector2f extends Vector implements Serializable, ReadableVector2f, 
      * @see java.lang.Object#toString()
      */
     public String toString() {
+        StringBuilder sb = new StringBuilder(64);
 
-        String sb = "Vector2f[" +
-                x +
-                ", " +
-                y +
-                ']';
-        return sb;
+        sb.append("Vector2f[");
+        sb.append(x);
+        sb.append(", ");
+        sb.append(y);
+        sb.append(']');
+        return sb.toString();
     }
 
     /**
@@ -303,7 +305,9 @@ public class Vector2f extends Vector implements Serializable, ReadableVector2f, 
         if (getClass() != obj.getClass()) return false;
         Vector2f other = (Vector2f) obj;
 
-        return x == other.x && y == other.y;
+        if (x == other.x && y == other.y) return true;
+
+        return false;
     }
 
 }

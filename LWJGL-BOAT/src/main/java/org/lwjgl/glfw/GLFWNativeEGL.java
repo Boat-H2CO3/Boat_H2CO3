@@ -29,9 +29,7 @@ public class GLFWNativeEGL {
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 GetEGLDisplay = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLDisplay"),
                 GetEGLContext = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLContext"),
@@ -47,6 +45,7 @@ public class GLFWNativeEGL {
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
      * @return the {@code EGLDisplay} used by GLFW, or {@link EGL10#EGL_NO_DISPLAY} if an error occured
+     *
      * @since version 3.0
      */
     @NativeType("EGLDisplay")
@@ -63,7 +62,9 @@ public class GLFWNativeEGL {
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
      * @param window a GLFW window
+     *
      * @return the {@code EGLContext} of the specified window, or {@link EGL10#EGL_NO_CONTEXT} if an error occurred
+     *
      * @since version 3.0
      */
     @NativeType("EGLContext")
@@ -83,6 +84,7 @@ public class GLFWNativeEGL {
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
      * @return the {@code EGLSurface} of the specified window, or {@link EGL10#EGL_NO_SURFACE} if an error occurred
+     *
      * @since version 3.0
      */
     @NativeType("EGLSurface")

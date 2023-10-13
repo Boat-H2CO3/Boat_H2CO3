@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_framebuffer_object.txt">ARB_framebuffer_object</a> extension.
@@ -211,18 +211,14 @@ public class ARBFramebufferObject {
      */
     public static final int GL_RENDERBUFFER = 0x8D41;
 
-    /**
-     * Accepted by the {@code internalformat} parameter of RenderbufferStorage.
-     */
+    /** Accepted by the {@code internalformat} parameter of RenderbufferStorage. */
     public static final int
             GL_STENCIL_INDEX1 = 0x8D46,
             GL_STENCIL_INDEX4 = 0x8D47,
             GL_STENCIL_INDEX8 = 0x8D48,
             GL_STENCIL_INDEX16 = 0x8D49;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetRenderbufferParameteriv.
-     */
+    /** Accepted by the {@code pname} parameter of GetRenderbufferParameteriv. */
     public static final int
             GL_RENDERBUFFER_WIDTH = 0x8D42,
             GL_RENDERBUFFER_HEIGHT = 0x8D43,
@@ -235,9 +231,7 @@ public class ARBFramebufferObject {
             GL_RENDERBUFFER_STENCIL_SIZE = 0x8D55,
             GL_RENDERBUFFER_SAMPLES = 0x8CAB;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.
-     */
+    /** Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv. */
     public static final int
             GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE = 0x8CD0,
             GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME = 0x8CD1,
@@ -253,17 +247,13 @@ public class ARBFramebufferObject {
             GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE = 0x8216,
             GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE = 0x8217;
 
-    /**
-     * Returned in {@code params} by GetFramebufferAttachmentParameteriv.
-     */
+    /** Returned in {@code params} by GetFramebufferAttachmentParameteriv. */
     public static final int
             GL_UNSIGNED_NORMALIZED = 0x8C17,
             GL_FRAMEBUFFER_DEFAULT = 0x8218,
             GL_INDEX = 0x8222;
 
-    /**
-     * Accepted by the {@code attachment} parameter of FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and GetFramebufferAttachmentParameteriv.
-     */
+    /** Accepted by the {@code attachment} parameter of FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and GetFramebufferAttachmentParameteriv. */
     public static final int
             GL_COLOR_ATTACHMENT0 = 0x8CE0,
             GL_COLOR_ATTACHMENT1 = 0x8CE1,
@@ -285,14 +275,10 @@ public class ARBFramebufferObject {
             GL_STENCIL_ATTACHMENT = 0x8D20,
             GL_DEPTH_STENCIL_ATTACHMENT = 0x821A;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_MAX_SAMPLES = 0x8D57;
 
-    /**
-     * Returned by CheckFramebufferStatus().
-     */
+    /** Returned by CheckFramebufferStatus(). */
     public static final int
             GL_FRAMEBUFFER_COMPLETE = 0x8CD5,
             GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT = 0x8CD6,
@@ -303,9 +289,7 @@ public class ARBFramebufferObject {
             GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE = 0x8D56,
             GL_FRAMEBUFFER_UNDEFINED = 0x8219;
 
-    /**
-     * Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv,  and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv,  and GetDoublev. */
     public static final int
             GL_FRAMEBUFFER_BINDING = 0x8CA6,
             GL_DRAW_FRAMEBUFFER_BINDING = 0x8CA6,
@@ -314,9 +298,7 @@ public class ARBFramebufferObject {
             GL_MAX_COLOR_ATTACHMENTS = 0x8CDF,
             GL_MAX_RENDERBUFFER_SIZE = 0x84E8;
 
-    /**
-     * Returned by GetError().
-     */
+    /** Returned by GetError(). */
     public static final int GL_INVALID_FRAMEBUFFER_OPERATION = 0x506;
 
     /**
@@ -338,14 +320,10 @@ public class ARBFramebufferObject {
      */
     public static final int GL_DEPTH24_STENCIL8 = 0x88F0;
 
-    /**
-     * Accepted by the {@code value} parameter of GetTexLevelParameter.
-     */
+    /** Accepted by the {@code value} parameter of GetTexLevelParameter. */
     public static final int GL_TEXTURE_STENCIL_SIZE = 0x88F1;
 
-    static {
-        GL.initialize();
-    }
+    static { GL.initialize(); }
 
     protected ARBFramebufferObject() {
         throw new UnsupportedOperationException();
@@ -353,7 +331,7 @@ public class ARBFramebufferObject {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glIsRenderbuffer, caps.glBindRenderbuffer, caps.glDeleteRenderbuffers, caps.glGenRenderbuffers, caps.glRenderbufferStorage,
+            caps.glIsRenderbuffer, caps.glBindRenderbuffer, caps.glDeleteRenderbuffers, caps.glGenRenderbuffers, caps.glRenderbufferStorage,
                 caps.glRenderbufferStorageMultisample, caps.glGetRenderbufferParameteriv, caps.glIsFramebuffer, caps.glBindFramebuffer, caps.glDeleteFramebuffers,
                 caps.glGenFramebuffers, caps.glCheckFramebufferStatus, caps.glFramebufferTexture1D, caps.glFramebufferTexture2D, caps.glFramebufferTexture3D,
                 caps.glFramebufferTextureLayer, caps.glFramebufferRenderbuffer, caps.glGetFramebufferAttachmentParameteriv, caps.glBlitFramebuffer,
@@ -405,9 +383,7 @@ public class ARBFramebufferObject {
         GL30C.glDeleteRenderbuffers(renderbuffers);
     }
 
-    /**
-     * Deletes renderbuffer objects.
-     */
+    /** Deletes renderbuffer objects. */
     public static void glDeleteRenderbuffers(@NativeType("GLuint const *") int renderbuffer) {
         GL30C.glDeleteRenderbuffers(renderbuffer);
     }
@@ -432,9 +408,7 @@ public class ARBFramebufferObject {
         GL30C.glGenRenderbuffers(renderbuffers);
     }
 
-    /**
-     * Generates renderbuffer object names.
-     */
+    /** Generates renderbuffer object names. */
     @NativeType("void")
     public static int glGenRenderbuffers() {
         return GL30C.glGenRenderbuffers();
@@ -473,9 +447,7 @@ public class ARBFramebufferObject {
 
     // --- [ glGetRenderbufferParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetRenderbufferParameteriv GetRenderbufferParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetRenderbufferParameteriv GetRenderbufferParameteriv} */
     public static void nglGetRenderbufferParameteriv(int target, int pname, long params) {
         GL30C.nglGetRenderbufferParameteriv(target, pname, params);
     }
@@ -546,9 +518,7 @@ public class ARBFramebufferObject {
         GL30C.glDeleteFramebuffers(framebuffers);
     }
 
-    /**
-     * Deletes framebuffer objects.
-     */
+    /** Deletes framebuffer objects. */
     public static void glDeleteFramebuffers(@NativeType("GLuint const *") int framebuffer) {
         GL30C.glDeleteFramebuffers(framebuffer);
     }
@@ -573,9 +543,7 @@ public class ARBFramebufferObject {
         GL30C.glGenFramebuffers(framebuffers);
     }
 
-    /**
-     * Generates framebuffer object names.
-     */
+    /** Generates framebuffer object names. */
     @NativeType("void")
     public static int glGenFramebuffers() {
         return GL30C.glGenFramebuffers();
@@ -670,9 +638,7 @@ public class ARBFramebufferObject {
 
     // --- [ glGetFramebufferAttachmentParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv} */
     public static void nglGetFramebufferAttachmentParameteriv(int target, int attachment, int pname, long params) {
         GL30C.nglGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
     }
@@ -732,44 +698,32 @@ public class ARBFramebufferObject {
         GL30C.glGenerateMipmap(target);
     }
 
-    /**
-     * Array version of: {@link #glDeleteRenderbuffers DeleteRenderbuffers}
-     */
+    /** Array version of: {@link #glDeleteRenderbuffers DeleteRenderbuffers} */
     public static void glDeleteRenderbuffers(@NativeType("GLuint const *") int[] renderbuffers) {
         GL30C.glDeleteRenderbuffers(renderbuffers);
     }
 
-    /**
-     * Array version of: {@link #glGenRenderbuffers GenRenderbuffers}
-     */
+    /** Array version of: {@link #glGenRenderbuffers GenRenderbuffers} */
     public static void glGenRenderbuffers(@NativeType("GLuint *") int[] renderbuffers) {
         GL30C.glGenRenderbuffers(renderbuffers);
     }
 
-    /**
-     * Array version of: {@link #glGetRenderbufferParameteriv GetRenderbufferParameteriv}
-     */
+    /** Array version of: {@link #glGetRenderbufferParameteriv GetRenderbufferParameteriv} */
     public static void glGetRenderbufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL30C.glGetRenderbufferParameteriv(target, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glDeleteFramebuffers DeleteFramebuffers}
-     */
+    /** Array version of: {@link #glDeleteFramebuffers DeleteFramebuffers} */
     public static void glDeleteFramebuffers(@NativeType("GLuint const *") int[] framebuffers) {
         GL30C.glDeleteFramebuffers(framebuffers);
     }
 
-    /**
-     * Array version of: {@link #glGenFramebuffers GenFramebuffers}
-     */
+    /** Array version of: {@link #glGenFramebuffers GenFramebuffers} */
     public static void glGenFramebuffers(@NativeType("GLuint *") int[] framebuffers) {
         GL30C.glGenFramebuffers(framebuffers);
     }
 
-    /**
-     * Array version of: {@link #glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv}
-     */
+    /** Array version of: {@link #glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv} */
     public static void glGetFramebufferAttachmentParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL30C.glGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
     }

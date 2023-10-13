@@ -29,9 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class DynCall {
 
-    /**
-     * Supported calling convention modes.
-     */
+    /** Supported calling convention modes. */
     public static final int
             DC_CALL_C_DEFAULT = 0,
             DC_CALL_C_ELLIPSIS = 100,
@@ -69,23 +67,17 @@ public class DynCall {
             DC_CALL_SYS_PPC32 = 210,
             DC_CALL_SYS_PPC64 = 211;
 
-    /**
-     * Error codes.
-     */
+    /** Error codes. */
     public static final int
             DC_ERROR_NONE = 0,
             DC_ERROR_UNSUPPORTED_MODE = -1;
 
-    /**
-     * Boolean values.
-     */
+    /** Boolean values. */
     public static final int
             DC_TRUE = 1,
             DC_FALSE = 0;
 
-    /**
-     * Signatures.
-     */
+    /** Signatures. */
     public static final char
             DC_SIGCHAR_VOID = 'v',
             DC_SIGCHAR_BOOL = 'B',
@@ -128,9 +120,7 @@ public class DynCall {
 
     // --- [ dcFree ] ---
 
-    /**
-     * Unsafe version of: {@link #dcFree Free}
-     */
+    /** Unsafe version of: {@link #dcFree Free} */
     public static native void ndcFree(long vm);
 
     /**
@@ -147,9 +137,7 @@ public class DynCall {
 
     // --- [ dcReset ] ---
 
-    /**
-     * Unsafe version of: {@link #dcReset Reset}
-     */
+    /** Unsafe version of: {@link #dcReset Reset} */
     public static native void ndcReset(long vm);
 
     /**
@@ -170,9 +158,7 @@ public class DynCall {
 
     // --- [ dcMode ] ---
 
-    /**
-     * Unsafe version of: {@link #dcMode Mode}
-     */
+    /** Unsafe version of: {@link #dcMode Mode} */
     public static native void ndcMode(long vm, int mode);
 
     /**
@@ -194,9 +180,7 @@ public class DynCall {
 
     // --- [ dcArgBool ] ---
 
-    /**
-     * Unsafe version of: {@link #dcArgBool ArgBool}
-     */
+    /** Unsafe version of: {@link #dcArgBool ArgBool} */
     public static native void ndcArgBool(long vm, int value);
 
     /**
@@ -214,9 +198,7 @@ public class DynCall {
 
     // --- [ dcArgChar ] ---
 
-    /**
-     * Unsafe version of: {@link #dcArgChar ArgChar}
-     */
+    /** Unsafe version of: {@link #dcArgChar ArgChar} */
     public static native void ndcArgChar(long vm, byte value);
 
     /**
@@ -234,9 +216,7 @@ public class DynCall {
 
     // --- [ dcArgShort ] ---
 
-    /**
-     * Unsafe version of: {@link #dcArgShort ArgShort}
-     */
+    /** Unsafe version of: {@link #dcArgShort ArgShort} */
     public static native void ndcArgShort(long vm, short value);
 
     /**
@@ -254,9 +234,7 @@ public class DynCall {
 
     // --- [ dcArgInt ] ---
 
-    /**
-     * Unsafe version of: {@link #dcArgInt ArgInt}
-     */
+    /** Unsafe version of: {@link #dcArgInt ArgInt} */
     public static native void ndcArgInt(long vm, int value);
 
     /**
@@ -274,9 +252,7 @@ public class DynCall {
 
     // --- [ dcArgLong ] ---
 
-    /**
-     * Unsafe version of: {@link #dcArgLong ArgLong}
-     */
+    /** Unsafe version of: {@link #dcArgLong ArgLong} */
     public static native void ndcArgLong(long vm, long value);
 
     /**
@@ -294,9 +270,7 @@ public class DynCall {
 
     // --- [ dcArgLongLong ] ---
 
-    /**
-     * Unsafe version of: {@link #dcArgLongLong ArgLongLong}
-     */
+    /** Unsafe version of: {@link #dcArgLongLong ArgLongLong} */
     public static native void ndcArgLongLong(long vm, long value);
 
     /**
@@ -314,9 +288,7 @@ public class DynCall {
 
     // --- [ dcArgFloat ] ---
 
-    /**
-     * Unsafe version of: {@link #dcArgFloat ArgFloat}
-     */
+    /** Unsafe version of: {@link #dcArgFloat ArgFloat} */
     public static native void ndcArgFloat(long vm, float value);
 
     /**
@@ -334,9 +306,7 @@ public class DynCall {
 
     // --- [ dcArgDouble ] ---
 
-    /**
-     * Unsafe version of: {@link #dcArgDouble ArgDouble}
-     */
+    /** Unsafe version of: {@link #dcArgDouble ArgDouble} */
     public static native void ndcArgDouble(long vm, double value);
 
     /**
@@ -354,9 +324,7 @@ public class DynCall {
 
     // --- [ dcArgPointer ] ---
 
-    /**
-     * Unsafe version of: {@link #dcArgPointer ArgPointer}
-     */
+    /** Unsafe version of: {@link #dcArgPointer ArgPointer} */
     public static native void ndcArgPointer(long vm, long value);
 
     /**
@@ -374,9 +342,7 @@ public class DynCall {
 
     // --- [ dcArgStruct ] ---
 
-    /**
-     * Unsafe version of: {@link #dcArgStruct ArgStruct}
-     */
+    /** Unsafe version of: {@link #dcArgStruct ArgStruct} */
     public static native void ndcArgStruct(long vm, long s, long value);
 
     /**
@@ -396,9 +362,7 @@ public class DynCall {
 
     // --- [ dcCallVoid ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallVoid CallVoid}
-     */
+    /** Unsafe version of: {@link #dcCallVoid CallVoid} */
     public static native void ndcCallVoid(long vm, long funcptr);
 
     /**
@@ -421,9 +385,7 @@ public class DynCall {
 
     // --- [ dcCallBool ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallBool CallBool}
-     */
+    /** Unsafe version of: {@link #dcCallBool CallBool} */
     public static native int ndcCallBool(long vm, long funcptr);
 
     /**
@@ -446,9 +408,7 @@ public class DynCall {
 
     // --- [ dcCallChar ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallChar CallChar}
-     */
+    /** Unsafe version of: {@link #dcCallChar CallChar} */
     public static native byte ndcCallChar(long vm, long funcptr);
 
     /**
@@ -471,9 +431,7 @@ public class DynCall {
 
     // --- [ dcCallShort ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallShort CallShort}
-     */
+    /** Unsafe version of: {@link #dcCallShort CallShort} */
     public static native short ndcCallShort(long vm, long funcptr);
 
     /**
@@ -496,9 +454,7 @@ public class DynCall {
 
     // --- [ dcCallInt ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallInt CallInt}
-     */
+    /** Unsafe version of: {@link #dcCallInt CallInt} */
     public static native int ndcCallInt(long vm, long funcptr);
 
     /**
@@ -521,9 +477,7 @@ public class DynCall {
 
     // --- [ dcCallLong ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallLong CallLong}
-     */
+    /** Unsafe version of: {@link #dcCallLong CallLong} */
     public static native long ndcCallLong(long vm, long funcptr);
 
     /**
@@ -546,9 +500,7 @@ public class DynCall {
 
     // --- [ dcCallLongLong ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallLongLong CallLongLong}
-     */
+    /** Unsafe version of: {@link #dcCallLongLong CallLongLong} */
     public static native long ndcCallLongLong(long vm, long funcptr);
 
     /**
@@ -571,9 +523,7 @@ public class DynCall {
 
     // --- [ dcCallFloat ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallFloat CallFloat}
-     */
+    /** Unsafe version of: {@link #dcCallFloat CallFloat} */
     public static native float ndcCallFloat(long vm, long funcptr);
 
     /**
@@ -596,9 +546,7 @@ public class DynCall {
 
     // --- [ dcCallDouble ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallDouble CallDouble}
-     */
+    /** Unsafe version of: {@link #dcCallDouble CallDouble} */
     public static native double ndcCallDouble(long vm, long funcptr);
 
     /**
@@ -621,9 +569,7 @@ public class DynCall {
 
     // --- [ dcCallPointer ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallPointer CallPointer}
-     */
+    /** Unsafe version of: {@link #dcCallPointer CallPointer} */
     public static native long ndcCallPointer(long vm, long funcptr);
 
     /**
@@ -646,9 +592,7 @@ public class DynCall {
 
     // --- [ dcCallStruct ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCallStruct CallStruct}
-     */
+    /** Unsafe version of: {@link #dcCallStruct CallStruct} */
     public static native void ndcCallStruct(long vm, long funcptr, long s, long returnValue);
 
     /**
@@ -672,9 +616,7 @@ public class DynCall {
 
     // --- [ dcGetError ] ---
 
-    /**
-     * Unsafe version of: {@link #dcGetError GetError}
-     */
+    /** Unsafe version of: {@link #dcGetError GetError} */
     public static native int ndcGetError(long vm);
 
     /**
@@ -703,9 +645,7 @@ public class DynCall {
 
     // --- [ dcStructField ] ---
 
-    /**
-     * Unsafe version of: {@link #dcStructField StructField}
-     */
+    /** Unsafe version of: {@link #dcStructField StructField} */
     public static native void ndcStructField(long s, int type, int alignment, long arrayLength);
 
     /**
@@ -725,9 +665,7 @@ public class DynCall {
 
     // --- [ dcSubStruct ] ---
 
-    /**
-     * Unsafe version of: {@link #dcSubStruct SubStruct}
-     */
+    /** Unsafe version of: {@link #dcSubStruct SubStruct} */
     public static native void ndcSubStruct(long s, long fieldCount, int alignment, long arrayLength);
 
     /**
@@ -747,9 +685,7 @@ public class DynCall {
 
     // --- [ dcCloseStruct ] ---
 
-    /**
-     * Unsafe version of: {@link #dcCloseStruct CloseStruct}
-     */
+    /** Unsafe version of: {@link #dcCloseStruct CloseStruct} */
     public static native void ndcCloseStruct(long s);
 
     /**
@@ -766,9 +702,7 @@ public class DynCall {
 
     // --- [ dcStructSize ] ---
 
-    /**
-     * Unsafe version of: {@link #dcStructSize StructSize}
-     */
+    /** Unsafe version of: {@link #dcStructSize StructSize} */
     public static native long ndcStructSize(long s);
 
     /**
@@ -786,9 +720,7 @@ public class DynCall {
 
     // --- [ dcStructAlignment ] ---
 
-    /**
-     * Unsafe version of: {@link #dcStructAlignment StructAlignment}
-     */
+    /** Unsafe version of: {@link #dcStructAlignment StructAlignment} */
     public static native long ndcStructAlignment(long s);
 
     /**
@@ -806,9 +738,7 @@ public class DynCall {
 
     // --- [ dcFreeStruct ] ---
 
-    /**
-     * Unsafe version of: {@link #dcFreeStruct FreeStruct}
-     */
+    /** Unsafe version of: {@link #dcFreeStruct FreeStruct} */
     public static native void ndcFreeStruct(long s);
 
     /**
@@ -825,9 +755,7 @@ public class DynCall {
 
     // --- [ dcDefineStruct ] ---
 
-    /**
-     * Unsafe version of: {@link #dcDefineStruct DefineStruct}
-     */
+    /** Unsafe version of: {@link #dcDefineStruct DefineStruct} */
     public static native long ndcDefineStruct(long signature);
 
     /**

@@ -22,9 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GLXEXTImportContext {
 
-    /**
-     * Accepted by the {@code attribute} parameter of {@link #glXQueryContextInfoEXT QueryContextInfoEXT}.
-     */
+    /** Accepted by the {@code attribute} parameter of {@link #glXQueryContextInfoEXT QueryContextInfoEXT}. */
     public static final int
             GLX_SHARE_CONTEXT_EXT = 0x800A,
             GLX_VISUAL_ID_EXT = 0x800B,
@@ -42,9 +40,7 @@ public class GLXEXTImportContext {
 
     // --- [ glXGetCurrentDisplayEXT ] ---
 
-    /**
-     * Returns the display associated with the current context.
-     */
+    /** Returns the display associated with the current context. */
     @NativeType("Display *")
     public static long glXGetCurrentDisplayEXT() {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetCurrentDisplayEXT;
@@ -56,9 +52,7 @@ public class GLXEXTImportContext {
 
     // --- [ glXQueryContextInfoEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glXQueryContextInfoEXT QueryContextInfoEXT}
-     */
+    /** Unsafe version of: {@link #glXQueryContextInfoEXT QueryContextInfoEXT} */
     public static int nglXQueryContextInfoEXT(long display, long context, int attribute, long value) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryContextInfoEXT;
         if (CHECKS) {
@@ -137,9 +131,7 @@ public class GLXEXTImportContext {
         callPPV(display, context, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glXQueryContextInfoEXT QueryContextInfoEXT}
-     */
+    /** Array version of: {@link #glXQueryContextInfoEXT QueryContextInfoEXT} */
     public static int glXQueryContextInfoEXT(@NativeType("Display *") long display, @NativeType("GLXContext") long context, int attribute, @NativeType("int *") int[] value) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryContextInfoEXT;
         if (CHECKS) {

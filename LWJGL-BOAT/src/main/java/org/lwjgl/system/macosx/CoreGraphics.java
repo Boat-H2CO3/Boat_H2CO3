@@ -379,9 +379,7 @@ public class CoreGraphics {
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 EventGetTypeID = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetTypeID"),
                 EventCreate = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreate"),
@@ -420,18 +418,14 @@ public class CoreGraphics {
 
     }
 
-    /**
-     * Returns the CoreGraphics {@link SharedLibrary}.
-     */
+    /** Returns the CoreGraphics {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return COREGRAPHICS;
     }
 
     // --- [ CGEventGetTypeID ] ---
 
-    /**
-     * Returns the type identifier for the opaque type {@code CGEventRef}.
-     */
+    /** Returns the type identifier for the opaque type {@code CGEventRef}. */
     @NativeType("CFTypeID")
     public static long CGEventGetTypeID() {
         long __functionAddress = Functions.EventGetTypeID;
@@ -440,9 +434,7 @@ public class CoreGraphics {
 
     // --- [ CGEventCreate ] ---
 
-    /**
-     * Returns a new event using the event source {@code source}. If {@code source} is {@code NULL}, the default source is used.
-     */
+    /** Returns a new event using the event source {@code source}. If {@code source} is {@code NULL}, the default source is used. */
     @NativeType("CGEventRef")
     public static long CGEventCreate(@NativeType("CGEventSourceRef") long source) {
         long __functionAddress = Functions.EventCreate;
@@ -451,9 +443,7 @@ public class CoreGraphics {
 
     // --- [ CGEventCreateData ] ---
 
-    /**
-     * Return a "flattened" data representation of an event.
-     */
+    /** Return a "flattened" data representation of an event. */
     @NativeType("CFDataRef")
     public static long CGEventCreateData(@NativeType("CFAllocatorRef") long allocator, @NativeType("CGEventRef") long event) {
         long __functionAddress = Functions.EventCreateData;
@@ -462,9 +452,7 @@ public class CoreGraphics {
 
     // --- [ CGEventCreateFromData ] ---
 
-    /**
-     * Returns an event created from a "flattened" data representation of the event.
-     */
+    /** Returns an event created from a "flattened" data representation of the event. */
     @NativeType("CGEventRef")
     public static long CGEventCreateFromData(@NativeType("CFAllocatorRef") long allocator, @NativeType("CFDataRef") long data) {
         long __functionAddress = Functions.EventCreateFromData;
@@ -473,14 +461,10 @@ public class CoreGraphics {
 
     // --- [ CGEventCreateMouseEvent ] ---
 
-    /**
-     * Unsafe version of: {@link #CGEventCreateMouseEvent EventCreateMouseEvent}
-     */
+    /** Unsafe version of: {@link #CGEventCreateMouseEvent EventCreateMouseEvent} */
     public static native long nCGEventCreateMouseEvent(long source, int mouseType, long mouseCursorPosition, int mouseButton, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #CGEventCreateMouseEvent EventCreateMouseEvent}
-     */
+    /** Unsafe version of: {@link #CGEventCreateMouseEvent EventCreateMouseEvent} */
     public static long nCGEventCreateMouseEvent(long source, int mouseType, long mouseCursorPosition, int mouseButton) {
         long __functionAddress = Functions.EventCreateMouseEvent;
         return nCGEventCreateMouseEvent(source, mouseType, mouseCursorPosition, mouseButton, __functionAddress);
@@ -578,9 +562,7 @@ public class CoreGraphics {
 
     // --- [ CGEventCreateCopy ] ---
 
-    /**
-     * Return a copy of {@code event}.
-     */
+    /** Return a copy of {@code event}. */
     @NativeType("CGEventRef")
     public static long CGEventCreateCopy(@NativeType("CGEventRef") long event) {
         long __functionAddress = Functions.EventCreateCopy;
@@ -605,9 +587,7 @@ public class CoreGraphics {
 
     // --- [ CGEventSetSource ] ---
 
-    /**
-     * Set the event source of an event.
-     */
+    /** Set the event source of an event. */
     public static void CGEventSetSource(@NativeType("CGEventRef") long event, @NativeType("CGEventSourceRef") long source) {
         long __functionAddress = Functions.EventSetSource;
         invokePPV(event, source, __functionAddress);
@@ -615,9 +595,7 @@ public class CoreGraphics {
 
     // --- [ CGEventGetType ] ---
 
-    /**
-     * Returns the event type of an event (left mouse down, for example).
-     */
+    /** Returns the event type of an event (left mouse down, for example). */
     @NativeType("CGEventType")
     public static int CGEventGetType(@NativeType("CGEventRef") long event) {
         long __functionAddress = Functions.EventGetType;
@@ -626,9 +604,7 @@ public class CoreGraphics {
 
     // --- [ CGEventSetType ] ---
 
-    /**
-     * Sets the event type of an event.
-     */
+    /** Sets the event type of an event. */
     public static void CGEventSetType(@NativeType("CGEventRef") long event, @NativeType("CGEventType") int type) {
         long __functionAddress = Functions.EventSetType;
         invokePV(event, type, __functionAddress);
@@ -636,9 +612,7 @@ public class CoreGraphics {
 
     // --- [ CGEventGetTimestamp ] ---
 
-    /**
-     * Returns the timestamp of an event.
-     */
+    /** Returns the timestamp of an event. */
     @NativeType("CGEventTimestamp")
     public static long CGEventGetTimestamp(@NativeType("CGEventRef") long event) {
         long __functionAddress = Functions.EventGetTimestamp;
@@ -647,9 +621,7 @@ public class CoreGraphics {
 
     // --- [ CGEventSetTimestamp ] ---
 
-    /**
-     * Sets the timestamp of an event.
-     */
+    /** Sets the timestamp of an event. */
     public static void CGEventSetTimestamp(@NativeType("CGEventRef") long event, @NativeType("CGEventTimestamp") long timestamp) {
         long __functionAddress = Functions.EventSetTimestamp;
         invokePJV(event, timestamp, __functionAddress);
@@ -657,14 +629,10 @@ public class CoreGraphics {
 
     // --- [ CGEventGetLocation ] ---
 
-    /**
-     * Unsafe version of: {@link #CGEventGetLocation EventGetLocation}
-     */
+    /** Unsafe version of: {@link #CGEventGetLocation EventGetLocation} */
     public static native void nCGEventGetLocation(long event, long __functionAddress, long __result);
 
-    /**
-     * Unsafe version of: {@link #CGEventGetLocation EventGetLocation}
-     */
+    /** Unsafe version of: {@link #CGEventGetLocation EventGetLocation} */
     public static void nCGEventGetLocation(long event, long __result) {
         long __functionAddress = Functions.EventGetLocation;
         nCGEventGetLocation(event, __functionAddress, __result);
@@ -682,14 +650,10 @@ public class CoreGraphics {
 
     // --- [ CGEventGetUnflippedLocation ] ---
 
-    /**
-     * Unsafe version of: {@link #CGEventGetUnflippedLocation EventGetUnflippedLocation}
-     */
+    /** Unsafe version of: {@link #CGEventGetUnflippedLocation EventGetUnflippedLocation} */
     public static native void nCGEventGetUnflippedLocation(long event, long __functionAddress, long __result);
 
-    /**
-     * Unsafe version of: {@link #CGEventGetUnflippedLocation EventGetUnflippedLocation}
-     */
+    /** Unsafe version of: {@link #CGEventGetUnflippedLocation EventGetUnflippedLocation} */
     public static void nCGEventGetUnflippedLocation(long event, long __result) {
         long __functionAddress = Functions.EventGetUnflippedLocation;
         nCGEventGetUnflippedLocation(event, __functionAddress, __result);
@@ -707,22 +671,16 @@ public class CoreGraphics {
 
     // --- [ CGEventSetLocation ] ---
 
-    /**
-     * Unsafe version of: {@link #CGEventSetLocation EventSetLocation}
-     */
+    /** Unsafe version of: {@link #CGEventSetLocation EventSetLocation} */
     public static native void nCGEventSetLocation(long event, long location, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #CGEventSetLocation EventSetLocation}
-     */
+    /** Unsafe version of: {@link #CGEventSetLocation EventSetLocation} */
     public static void nCGEventSetLocation(long event, long location) {
         long __functionAddress = Functions.EventSetLocation;
         nCGEventSetLocation(event, location, __functionAddress);
     }
 
-    /**
-     * Sets the location of an event in global display coordinates.
-     */
+    /** Sets the location of an event in global display coordinates. */
     public static void CGEventSetLocation(@NativeType("CGEventRef") long event, CGPoint location) {
         nCGEventSetLocation(event, location.address());
     }
@@ -742,9 +700,7 @@ public class CoreGraphics {
 
     // --- [ CGEventSetFlags ] ---
 
-    /**
-     * Sets the event flags of an event.
-     */
+    /** Sets the event flags of an event. */
     public static void CGEventSetFlags(@NativeType("CGEventRef") long event, @NativeType("CGEventFlags") long flags) {
         long __functionAddress = Functions.EventSetFlags;
         invokePJV(event, flags, __functionAddress);
@@ -752,9 +708,7 @@ public class CoreGraphics {
 
     // --- [ CGEventKeyboardGetUnicodeString ] ---
 
-    /**
-     * Unsafe version of: {@link #CGEventKeyboardGetUnicodeString EventKeyboardGetUnicodeString}
-     */
+    /** Unsafe version of: {@link #CGEventKeyboardGetUnicodeString EventKeyboardGetUnicodeString} */
     public static void nCGEventKeyboardGetUnicodeString(long event, long maxStringLength, long actualStringLength, long unicodeString) {
         long __functionAddress = Functions.EventKeyboardGetUnicodeString;
         invokePNPPV(event, maxStringLength, actualStringLength, unicodeString, __functionAddress);
@@ -775,9 +729,7 @@ public class CoreGraphics {
 
     // --- [ CGEventKeyboardSetUnicodeString ] ---
 
-    /**
-     * Unsafe version of: {@link #CGEventKeyboardSetUnicodeString EventKeyboardSetUnicodeString}
-     */
+    /** Unsafe version of: {@link #CGEventKeyboardSetUnicodeString EventKeyboardSetUnicodeString} */
     public static void nCGEventKeyboardSetUnicodeString(long event, long stringLength, long unicodeString) {
         long __functionAddress = Functions.EventKeyboardSetUnicodeString;
         invokePNPV(event, stringLength, unicodeString, __functionAddress);
@@ -796,9 +748,7 @@ public class CoreGraphics {
 
     // --- [ CGEventGetIntegerValueField ] ---
 
-    /**
-     * Returns the integer value of a field in an event.
-     */
+    /** Returns the integer value of a field in an event. */
     @NativeType("int64_t")
     public static long CGEventGetIntegerValueField(@NativeType("CGEventRef") long event, @NativeType("CGEventField") int field) {
         long __functionAddress = Functions.EventGetIntegerValueField;
@@ -852,9 +802,7 @@ public class CoreGraphics {
 
     // --- [ CGEventTapCreate ] ---
 
-    /**
-     * Unsafe version of: {@link #CGEventTapCreate EventTapCreate}
-     */
+    /** Unsafe version of: {@link #CGEventTapCreate EventTapCreate} */
     public static long nCGEventTapCreate(int tap, int place, int options, long eventsOfInterest, long callback, long userInfo) {
         long __functionAddress = Functions.EventTapCreate;
         return invokeJPPP(tap, place, options, eventsOfInterest, callback, userInfo, __functionAddress);
@@ -895,9 +843,7 @@ public class CoreGraphics {
 
     // --- [ CGEventTapCreateForPid ] ---
 
-    /**
-     * Unsafe version of: {@link #CGEventTapCreateForPid EventTapCreateForPid}
-     */
+    /** Unsafe version of: {@link #CGEventTapCreateForPid EventTapCreateForPid} */
     public static long nCGEventTapCreateForPid(long pid, int place, int options, long eventsOfInterest, long callback, long userInfo) {
         long __functionAddress = Functions.EventTapCreateForPid;
         if (CHECKS) {
@@ -939,9 +885,7 @@ public class CoreGraphics {
 
     // --- [ CGEventTapIsEnabled ] ---
 
-    /**
-     * Return true if {@code tap} is enabled; false otherwise.
-     */
+    /** Return true if {@code tap} is enabled; false otherwise. */
     @NativeType("bool")
     public static boolean CGEventTapIsEnabled(@NativeType("CFMachPortRef") long tap) {
         long __functionAddress = Functions.EventTapIsEnabled;
@@ -1008,9 +952,7 @@ public class CoreGraphics {
 
     // --- [ CGGetEventTapList ] ---
 
-    /**
-     * Unsafe version of: {@link #CGGetEventTapList GetEventTapList}
-     */
+    /** Unsafe version of: {@link #CGGetEventTapList GetEventTapList} */
     public static int nCGGetEventTapList(int maxNumberOfTaps, long tapList, long eventTapCount) {
         long __functionAddress = Functions.GetEventTapList;
         return invokePPI(maxNumberOfTaps, tapList, eventTapCount, __functionAddress);
@@ -1036,28 +978,22 @@ public class CoreGraphics {
         return nCGGetEventTapList(remainingSafe(tapList), memAddressSafe(tapList), memAddressSafe(eventTapCount));
     }
 
-    /**
-     * Array version of: {@link #CGEventKeyboardGetUnicodeString EventKeyboardGetUnicodeString}
-     */
+    /** Array version of: {@link #CGEventKeyboardGetUnicodeString EventKeyboardGetUnicodeString} */
     public static void CGEventKeyboardGetUnicodeString(@NativeType("CGEventRef") long event, @Nullable @NativeType("UniCharCount *") CLongBuffer actualStringLength, @Nullable @NativeType("UniChar *") short[] unicodeString) {
         long __functionAddress = Functions.EventKeyboardGetUnicodeString;
         if (CHECKS) {
             checkSafe(actualStringLength, 1);
         }
-        invokePNPPV(event, (long) lengthSafe(unicodeString), memAddressSafe(actualStringLength), unicodeString, __functionAddress);
+        invokePNPPV(event, (long)lengthSafe(unicodeString), memAddressSafe(actualStringLength), unicodeString, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #CGEventKeyboardSetUnicodeString EventKeyboardSetUnicodeString}
-     */
+    /** Array version of: {@link #CGEventKeyboardSetUnicodeString EventKeyboardSetUnicodeString} */
     public static void CGEventKeyboardSetUnicodeString(@NativeType("CGEventRef") long event, @NativeType("UniChar const *") short[] unicodeString) {
         long __functionAddress = Functions.EventKeyboardSetUnicodeString;
-        invokePNPV(event, (long) unicodeString.length, unicodeString, __functionAddress);
+        invokePNPV(event, (long)unicodeString.length, unicodeString, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #CGGetEventTapList GetEventTapList}
-     */
+    /** Array version of: {@link #CGGetEventTapList GetEventTapList} */
     @NativeType("CGError")
     public static int CGGetEventTapList(@Nullable @NativeType("CGEventTapInformation *") CGEventTapInformation.Buffer tapList, @Nullable @NativeType("uint32_t *") int[] eventTapCount) {
         long __functionAddress = Functions.GetEventTapList;

@@ -436,7 +436,7 @@ public class XCrossingEvent extends Struct implements NativeResource {
             int detail,
             int same_screen,
             int focus,
-            int state
+        int state
     ) {
         type(type);
         serial(serial);
@@ -463,6 +463,7 @@ public class XCrossingEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XCrossingEvent set(XCrossingEvent src) {
@@ -472,38 +473,28 @@ public class XCrossingEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XCrossingEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XCrossingEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XCrossingEvent malloc() {
         return wrap(XCrossingEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XCrossingEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XCrossingEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XCrossingEvent calloc() {
         return wrap(XCrossingEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XCrossingEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XCrossingEvent} instance allocated with {@link BufferUtils}. */
     public static XCrossingEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XCrossingEvent.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code XCrossingEvent} instance for the specified memory address.
-     */
+    /** Returns a new {@code XCrossingEvent} instance for the specified memory address. */
     public static XCrossingEvent create(long address) {
         return wrap(XCrossingEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XCrossingEvent createSafe(long address) {
         return address == NULL ? null : wrap(XCrossingEvent.class, address);
@@ -547,9 +538,7 @@ public class XCrossingEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -557,16 +546,12 @@ public class XCrossingEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XCrossingEvent} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code XCrossingEvent} instance allocated on the thread-local {@link MemoryStack}. */
     public static XCrossingEvent mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XCrossingEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XCrossingEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XCrossingEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -857,15 +842,9 @@ public class XCrossingEvent extends Struct implements NativeResource {
      * Unsafe version of {@link #focus(int) focus}.
      */
     public static void nfocus(long struct, int value) {
-        UNSAFE.putInt(null, struct + XCrossingEvent.FOCUS, value);
-    }
-
-    /**
-     * Unsafe version of {@link #state(int) state}.
-     */
-    public static void nstate(long struct, int value) {
-        UNSAFE.putInt(null, struct + XCrossingEvent.STATE, value);
-    }
+        UNSAFE.putInt(null, struct + XCrossingEvent.FOCUS, value); }
+    /** Unsafe version of {@link #state(int) state}. */
+    public static void nstate(long struct, int value) { UNSAFE.putInt(null, struct + XCrossingEvent.STATE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -890,16 +869,14 @@ public class XCrossingEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XCrossingEvent} structs.
-     */
+    /** An array of {@link XCrossingEvent} structs. */
     public static class Buffer extends StructBuffer<XCrossingEvent, Buffer> implements NativeResource {
 
         private static final XCrossingEvent ELEMENT_FACTORY = XCrossingEvent.create(-1L);
 
         /**
          * Creates a new {@code XCrossingEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XCrossingEvent#SIZEOF}, and its mark will be undefined.
@@ -1151,45 +1128,16 @@ public class XCrossingEvent extends Struct implements NativeResource {
             return this;
         }
 
-        /**
-         * Sets the specified value to the {@code mode} field.
-         */
-        public Buffer mode(int value) {
-            XCrossingEvent.nmode(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code detail} field.
-         */
-        public Buffer detail(int value) {
-            XCrossingEvent.ndetail(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code same_screen} field.
-         */
-        public Buffer same_screen(int value) {
-            XCrossingEvent.nsame_screen(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code focus} field.
-         */
-        public Buffer focus(int value) {
-            XCrossingEvent.nfocus(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code state} field.
-         */
-        public Buffer state(@NativeType("unsigned int") int value) {
-            XCrossingEvent.nstate(address(), value);
-            return this;
-        }
+        /** Sets the specified value to the {@code mode} field. */
+        public Buffer mode(int value) { XCrossingEvent.nmode(address(), value); return this; }
+        /** Sets the specified value to the {@code detail} field. */
+        public Buffer detail(int value) { XCrossingEvent.ndetail(address(), value); return this; }
+        /** Sets the specified value to the {@code same_screen} field. */
+        public Buffer same_screen(int value) { XCrossingEvent.nsame_screen(address(), value); return this; }
+        /** Sets the specified value to the {@code focus} field. */
+        public Buffer focus(int value) { XCrossingEvent.nfocus(address(), value); return this; }
+        /** Sets the specified value to the {@code state} field. */
+        public Buffer state(@NativeType("unsigned int") int value) { XCrossingEvent.nstate(address(), value); return this; }
 
     }
 

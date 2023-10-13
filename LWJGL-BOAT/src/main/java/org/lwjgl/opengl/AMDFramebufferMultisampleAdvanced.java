@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_framebuffer_multisample_advanced.txt">AMD_framebuffer_multisample_advanced</a> extension.
@@ -28,14 +28,10 @@ import org.lwjgl.system.NativeType;
  */
 public class AMDFramebufferMultisampleAdvanced {
 
-    /**
-     * Accepted by the {@code pname} parameter of {@link GL30C#glGetRenderbufferParameteriv GetRenderbufferParameteriv}.
-     */
+    /** Accepted by the {@code pname} parameter of {@link GL30C#glGetRenderbufferParameteriv GetRenderbufferParameteriv}. */
     public static final int GL_RENDERBUFFER_STORAGE_SAMPLES_AMD = 0x91B2;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, GetDoublev. */
     public static final int
             GL_MAX_COLOR_FRAMEBUFFER_SAMPLES_AMD = 0x91B3,
             GL_MAX_COLOR_FRAMEBUFFER_STORAGE_SAMPLES_AMD = 0x91B4,

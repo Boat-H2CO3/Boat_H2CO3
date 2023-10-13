@@ -34,9 +34,7 @@ package org.lwjgl.opengl;
  */
 public final class EXTShaderFramebufferFetch {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_FRAGMENT_SHADER_DISCARDS_SAMPLES_EXT = 0x8A52;
 
     private EXTShaderFramebufferFetch() {

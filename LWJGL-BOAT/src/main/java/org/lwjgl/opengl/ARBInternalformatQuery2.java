@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.LongBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_internalformat_query2.txt">ARB_internalformat_query2</a> extension.
@@ -48,9 +48,7 @@ import java.nio.LongBuffer;
  */
 public class ARBInternalformatQuery2 {
 
-    /**
-     * Accepted by the {@code target} parameter of GetInternalformativ and GetInternalformati64v.
-     */
+    /** Accepted by the {@code target} parameter of GetInternalformativ and GetInternalformati64v. */
     public static final int
             GL_TEXTURE_1D = 0xDE0,
             GL_TEXTURE_1D_ARRAY = 0x8C18,
@@ -65,9 +63,7 @@ public class ARBInternalformatQuery2 {
             GL_TEXTURE_2D_MULTISAMPLE = 0x9100,
             GL_TEXTURE_2D_MULTISAMPLE_ARRAY = 0x9102;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetInternalformativ and GetInternalformati64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetInternalformativ and GetInternalformati64v. */
     public static final int
             GL_SAMPLES = 0x80A9,
             GL_NUM_SAMPLE_COUNTS = 0x9380,
@@ -144,9 +140,7 @@ public class ARBInternalformatQuery2 {
             GL_TEXTURE_VIEW = 0x82B5,
             GL_VIEW_COMPATIBILITY_CLASS = 0x82B6;
 
-    /**
-     * Returned as possible responses for various {@code pname} queries to GetInternalformativ and GetInternalformati64v.
-     */
+    /** Returned as possible responses for various {@code pname} queries to GetInternalformativ and GetInternalformati64v. */
     public static final int
             GL_FULL_SUPPORT = 0x82B7,
             GL_CAVEAT_SUPPORT = 0x82B8,
@@ -227,9 +221,7 @@ public class ARBInternalformatQuery2 {
         return GL43C.glGetInternalformati64(target, internalformat, pname);
     }
 
-    /**
-     * Array version of: {@link #glGetInternalformati64v GetInternalformati64v}
-     */
+    /** Array version of: {@link #glGetInternalformati64v GetInternalformati64v} */
     public static void glGetInternalformati64v(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
         GL43C.glGetInternalformati64v(target, internalformat, pname, params);
     }

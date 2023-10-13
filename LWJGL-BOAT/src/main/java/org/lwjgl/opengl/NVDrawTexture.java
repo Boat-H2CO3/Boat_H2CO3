@@ -33,7 +33,7 @@ public class NVDrawTexture {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glDrawTextureNV
+            caps.glDrawTextureNV
         );
     }
 

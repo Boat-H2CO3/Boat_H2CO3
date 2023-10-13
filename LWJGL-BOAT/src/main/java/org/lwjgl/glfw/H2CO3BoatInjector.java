@@ -3,7 +3,6 @@ package org.lwjgl.glfw;
 import org.lwjgl.system.*;
 
 import javax.annotation.Nullable;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -13,6 +12,7 @@ import static org.lwjgl.system.APIUtil.apiLog;
 
 /**
  * By Tungsten
+ * This class is for Fold Craft Launcher.
  */
 public class H2CO3BoatInjector {
 
@@ -115,58 +115,53 @@ public class H2CO3BoatInjector {
             apiLog("H2CO3Boat Injector not initialized!");
             return;
         }
-
-        if (param0 == null || param1 == null || param2 == null || param3 == null) {
-            return;
-        }
-
-        Object type = null;
-        boolean success = false;
-        try {
-            Class<?> minecraftClass = Class.forName(param0, true, classLoader);
-            Method method = minecraftClass.getDeclaredMethod(param1);
-            method.setAccessible(true);
-            Object minecraft = method.invoke(null);
-            Field targetField = minecraftClass.getDeclaredField(param2);
-            targetField.setAccessible(true);
-            Object target = targetField.get(minecraft);
-            if (target != null) {
-                switch (level) {
-                    case INJECTOR_LEVEL_2:
-                    case INJECTOR_LEVEL_3:
-                        Field typeField = target.getClass().getDeclaredField(param3);
-                        typeField.setAccessible(true);
-                        type = typeField.get(target);
-                        break;
-                    case INJECTOR_LEVEL_4:
-                        Method typeMethod = target.getClass().getDeclaredMethod(param3);
-                        typeMethod.setAccessible(true);
-                        type = typeMethod.invoke(target);
-                        break;
-                    default:
-                        break;
+        if (param0 != null && param1 != null && param2 != null && param3 != null) {
+            Object type = null;
+            boolean success = false;
+            try {
+                Class<?> minecraftClass = Class.forName(param0, true, classLoader);
+                Method method = minecraftClass.getDeclaredMethod(param1);
+                method.setAccessible(true);
+                Object minecraft = method.invoke(null);
+                Field targetField = minecraftClass.getDeclaredField(param2);
+                targetField.setAccessible(true);
+                Object target = targetField.get(minecraft);
+                if (target != null) {
+                    switch (level) {
+                        case INJECTOR_LEVEL_2:
+                        case INJECTOR_LEVEL_3:
+                            Field typeField = target.getClass().getDeclaredField(param3);
+                            typeField.setAccessible(true);
+                            type = typeField.get(target);
+                            break;
+                        case INJECTOR_LEVEL_4:
+                            Method typeMethod = target.getClass().getDeclaredMethod(param3);
+                            typeMethod.setAccessible(true);
+                            type = typeMethod.invoke(target);
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                success = true;
+            } catch (ClassNotFoundException | NoSuchFieldException | NoSuchMethodException |
+                     IllegalAccessException | InvocationTargetException e) {
+                apiLog(e.getMessage());
             }
-            success = true;
-        } catch (ClassNotFoundException | NoSuchFieldException | NoSuchMethodException |
-                 IllegalAccessException | InvocationTargetException e) {
-            apiLog(e.getMessage());
-            return;
-        }
-
-        if (level == INJECTOR_LEVEL_2) {
-            if (success && type == null) {
-                nglfwSetHitResultType(HIT_RESULT_TYPE_MISS);
-            } else if (success && (type.toString().equals(HIT_RESULT_TYPE_BLOCK_OLD) || type.toString().equals(HIT_RESULT_TYPE_ENTITY))) {
-                nglfwSetHitResultType(type.toString());
+            if (level == INJECTOR_LEVEL_2) {
+                if (success && type == null) {
+                    nglfwSetHitResultType(HIT_RESULT_TYPE_MISS);
+                } else if (success && (type.toString().equals(HIT_RESULT_TYPE_BLOCK_OLD) || type.toString().equals(HIT_RESULT_TYPE_ENTITY))) {
+                    nglfwSetHitResultType(type.toString());
+                } else {
+                    nglfwSetHitResultType(HIT_RESULT_TYPE_UNKNOWN);
+                }
             } else {
-                nglfwSetHitResultType(HIT_RESULT_TYPE_UNKNOWN);
-            }
-        } else {
-            if (type != null && (type.toString().equals(HIT_RESULT_TYPE_MISS) || type.toString().equals(HIT_RESULT_TYPE_BLOCK) || type.toString().equals(HIT_RESULT_TYPE_ENTITY))) {
-                nglfwSetHitResultType(type.toString());
-            } else {
-                nglfwSetHitResultType(HIT_RESULT_TYPE_UNKNOWN);
+                if (type != null && (type.toString().equals(HIT_RESULT_TYPE_MISS) || type.toString().equals(HIT_RESULT_TYPE_BLOCK) || type.toString().equals(HIT_RESULT_TYPE_ENTITY))) {
+                    nglfwSetHitResultType(type.toString());
+                } else {
+                    nglfwSetHitResultType(HIT_RESULT_TYPE_UNKNOWN);
+                }
             }
         }
     }

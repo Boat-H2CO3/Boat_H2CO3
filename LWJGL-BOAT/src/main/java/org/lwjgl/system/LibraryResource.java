@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import javax.annotation.*;
-
 import java.net.*;
 import java.nio.channels.*;
 import java.nio.file.*;
@@ -42,7 +41,9 @@ public final class LibraryResource {
      * @param context the class to use to discover the library resource in the classpath
      * @param module  the module to which the resource belongs
      * @param name    the resource name
+     *
      * @return the library resource path
+     *
      * @throws IllegalStateException if the resource could not be found
      */
     @SuppressWarnings("try")
@@ -58,7 +59,9 @@ public final class LibraryResource {
      * @param name             the resource name
      * @param bundledWithLWJGL whether the default LWJGL distribution includes the  resource. If true, LWJGL will also try to find the shared library under the
      *                         {@code <platform>/<arch>/<module>} subfolder.
+     *
      * @return the library resource path
+     *
      * @throws IllegalStateException if the resource could not be found
      */
     @SuppressWarnings("try")
@@ -161,7 +164,9 @@ public final class LibraryResource {
      *
      * @param name         a {@link Configuration} that specifies the resource name
      * @param defaultNames the default resource name(s)
+     *
      * @return the library resource path
+     *
      * @throws IllegalStateException if the resource could not be found
      */
     public static Path load(Class<?> context, String module, Configuration<String> name, String... defaultNames) {
@@ -176,7 +181,9 @@ public final class LibraryResource {
      * @param name         a {@link Configuration} that specifies the resource name
      * @param fallback     fallback to use if everything else fails
      * @param defaultNames the default resource name(s)
+     *
      * @return the library resource path
+     *
      * @throws UnsatisfiedLinkError if the resource could not be found
      */
     public static Path load(Class<?> context, String module, Configuration<String> name, @Nullable Supplier<Path> fallback, String... defaultNames) {

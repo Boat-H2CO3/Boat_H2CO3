@@ -68,9 +68,7 @@ public class NVDrawVulkanImage {
 
     // --- [ glGetVkProcAddrNV ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVkProcAddrNV GetVkProcAddrNV}
-     */
+    /** Unsafe version of: {@link #glGetVkProcAddrNV GetVkProcAddrNV} */
     public static native long nglGetVkProcAddrNV(long name);
 
     /**

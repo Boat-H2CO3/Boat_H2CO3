@@ -21,8 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class LibCStdio {
 
     static {
-        Library.initialize();
-    }
+        Library.initialize(); }
 
     protected LibCStdio() {
         throw new UnsupportedOperationException();
@@ -33,16 +32,12 @@ public class LibCStdio {
     @NativeType("void *")
     private static native long sscanf();
 
-    /**
-     * The address of the {@code sscanf} function.
-     */
+    /** The address of the {@code sscanf} function. */
     public static final long sscanf = sscanf();
 
     // --- [ vsscanf ] ---
 
-    /**
-     * Unsafe version of: {@link #vsscanf}
-     */
+    /** Unsafe version of: {@link #vsscanf} */
     public static native int nvsscanf(long buffer, long format, long vlist);
 
     /**
@@ -52,6 +47,7 @@ public class LibCStdio {
      * @param buffer pointer to a null-terminated character string to read from
      * @param format pointer to a null-terminated character string specifying how to read the input
      * @param vlist  variable argument list containing the receiving arguments
+     *
      * @return the number of receiving arguments successfully assigned, or {@code EOF} if read failure occurs before the first receiving argument was assigned
      */
     public static int vsscanf(@NativeType("char const *") ByteBuffer buffer, @NativeType("char const *") ByteBuffer format, @NativeType("va_list") long vlist) {
@@ -70,6 +66,7 @@ public class LibCStdio {
      * @param buffer pointer to a null-terminated character string to read from
      * @param format pointer to a null-terminated character string specifying how to read the input
      * @param vlist  variable argument list containing the receiving arguments
+     *
      * @return the number of receiving arguments successfully assigned, or {@code EOF} if read failure occurs before the first receiving argument was assigned
      */
     public static int vsscanf(@NativeType("char const *") CharSequence buffer, @NativeType("char const *") CharSequence format, @NativeType("va_list") long vlist) {
@@ -94,9 +91,7 @@ public class LibCStdio {
     @NativeType("void *")
     private static native long sprintf();
 
-    /**
-     * The address of the {@code sprintf} function.
-     */
+    /** The address of the {@code sprintf} function. */
     public static final long sprintf = sprintf();
 
     // --- [ snprintf ] ---
@@ -104,9 +99,7 @@ public class LibCStdio {
     @NativeType("void *")
     private static native long snprintf();
 
-    /**
-     * The address of the {@code snprintf} function.
-     */
+    /** The address of the {@code snprintf} function. */
     public static final long snprintf = snprintf();
 
     // --- [ vsnprintf ] ---
@@ -125,9 +118,10 @@ public class LibCStdio {
      * @param buffer pointer to a character string to write to
      * @param format pointer to a null-terminated character string specifying how to interpret the data
      * @param vlist  variable argument list containing the data to print
+     *
      * @return the number of characters written if successful or negative value if an error occurred. If the resulting string gets truncated due to {@code buf_size}
-     * limit, function returns the total number of characters (not including the terminating null-byte) which would have been written, if the limit was not
-     * imposed.
+     *         limit, function returns the total number of characters (not including the terminating null-byte) which would have been written, if the limit was not
+     *         imposed.
      */
     public static int vsnprintf(@Nullable @NativeType("char *") ByteBuffer buffer, @NativeType("char const *") ByteBuffer format, @NativeType("va_list") long vlist) {
         if (CHECKS) {
@@ -144,9 +138,10 @@ public class LibCStdio {
      * @param buffer pointer to a character string to write to
      * @param format pointer to a null-terminated character string specifying how to interpret the data
      * @param vlist  variable argument list containing the data to print
+     *
      * @return the number of characters written if successful or negative value if an error occurred. If the resulting string gets truncated due to {@code buf_size}
-     * limit, function returns the total number of characters (not including the terminating null-byte) which would have been written, if the limit was not
-     * imposed.
+     *         limit, function returns the total number of characters (not including the terminating null-byte) which would have been written, if the limit was not
+     *         imposed.
      */
     public static int vsnprintf(@Nullable @NativeType("char *") ByteBuffer buffer, @NativeType("char const *") CharSequence format, @NativeType("va_list") long vlist) {
         if (CHECKS) {

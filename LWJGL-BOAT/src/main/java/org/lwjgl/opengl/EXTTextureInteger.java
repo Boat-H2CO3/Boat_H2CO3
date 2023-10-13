@@ -53,14 +53,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTTextureInteger {
 
-    /**
-     * Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_RGBA_INTEGER_MODE_EXT = 0x8D9E;
 
-    /**
-     * Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.
-     */
+    /** Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D. */
     public static final int
             GL_RGBA32UI_EXT = 0x8D70,
             GL_RGB32UI_EXT = 0x8D71,
@@ -99,9 +95,7 @@ public class EXTTextureInteger {
             GL_LUMINANCE8I_EXT = 0x8D92,
             GL_LUMINANCE_ALPHA8I_EXT = 0x8D93;
 
-    /**
-     * Accepted by the {@code format} parameter of TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, DrawPixels and ReadPixels.
-     */
+    /** Accepted by the {@code format} parameter of TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, DrawPixels and ReadPixels. */
     public static final int
             GL_RED_INTEGER_EXT = 0x8D94,
             GL_GREEN_INTEGER_EXT = 0x8D95,
@@ -229,9 +223,7 @@ public class EXTTextureInteger {
         }
     }
 
-    /**
-     * Array version of: {@link #glTexParameterIivEXT TexParameterIivEXT}
-     */
+    /** Array version of: {@link #glTexParameterIivEXT TexParameterIivEXT} */
     public static void glTexParameterIivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glTexParameterIivEXT;
         if (CHECKS) {
@@ -241,9 +233,7 @@ public class EXTTextureInteger {
         callPV(target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTexParameterIuivEXT TexParameterIuivEXT}
-     */
+    /** Array version of: {@link #glTexParameterIuivEXT TexParameterIuivEXT} */
     public static void glTexParameterIuivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glTexParameterIuivEXT;
         if (CHECKS) {
@@ -253,9 +243,7 @@ public class EXTTextureInteger {
         callPV(target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTexParameterIivEXT GetTexParameterIivEXT}
-     */
+    /** Array version of: {@link #glGetTexParameterIivEXT GetTexParameterIivEXT} */
     public static void glGetTexParameterIivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetTexParameterIivEXT;
         if (CHECKS) {
@@ -265,9 +253,7 @@ public class EXTTextureInteger {
         callPV(target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTexParameterIuivEXT GetTexParameterIuivEXT}
-     */
+    /** Array version of: {@link #glGetTexParameterIuivEXT GetTexParameterIuivEXT} */
     public static void glGetTexParameterIuivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glGetTexParameterIuivEXT;
         if (CHECKS) {

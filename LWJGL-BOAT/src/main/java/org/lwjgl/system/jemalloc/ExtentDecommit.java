@@ -40,17 +40,13 @@ public abstract class ExtentDecommit extends Callback implements ExtentDecommitI
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static ExtentDecommit createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code ExtentDecommit} instance that delegates to the specified {@code ExtentDecommitI} instance.
-     */
+    /** Creates a {@code ExtentDecommit} instance that delegates to the specified {@code ExtentDecommitI} instance. */
     public static ExtentDecommit create(ExtentDecommitI instance) {
         return instance instanceof ExtentDecommit
                 ? (ExtentDecommit) instance

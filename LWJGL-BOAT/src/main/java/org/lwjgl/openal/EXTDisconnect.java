@@ -58,9 +58,7 @@ package org.lwjgl.openal;
  */
 public final class EXTDisconnect {
 
-    /**
-     * {@code ALC_EXT_disconnect} tokens.
-     */
+    /** {@code ALC_EXT_disconnect} tokens. */
     public static final int ALC_CONNECTED = 0x313;
 
     private EXTDisconnect() {

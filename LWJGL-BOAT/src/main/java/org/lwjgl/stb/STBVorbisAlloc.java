@@ -111,38 +111,28 @@ public class STBVorbisAlloc extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code STBVorbisAlloc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code STBVorbisAlloc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static STBVorbisAlloc malloc() {
         return wrap(STBVorbisAlloc.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code STBVorbisAlloc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code STBVorbisAlloc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static STBVorbisAlloc calloc() {
         return wrap(STBVorbisAlloc.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code STBVorbisAlloc} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code STBVorbisAlloc} instance allocated with {@link BufferUtils}. */
     public static STBVorbisAlloc create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(STBVorbisAlloc.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code STBVorbisAlloc} instance for the specified memory address.
-     */
+    /** Returns a new {@code STBVorbisAlloc} instance for the specified memory address. */
     public static STBVorbisAlloc create(long address) {
         return wrap(STBVorbisAlloc.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBVorbisAlloc createSafe(long address) {
         return address == NULL ? null : wrap(STBVorbisAlloc.class, address);
@@ -186,9 +176,7 @@ public class STBVorbisAlloc extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -196,16 +184,12 @@ public class STBVorbisAlloc extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code STBVorbisAlloc} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code STBVorbisAlloc} instance allocated on the thread-local {@link MemoryStack}. */
     public static STBVorbisAlloc mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code STBVorbisAlloc} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code STBVorbisAlloc} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static STBVorbisAlloc callocStack() {
         return callocStack(stackGet());
     }
@@ -249,7 +233,7 @@ public class STBVorbisAlloc extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -320,16 +304,14 @@ public class STBVorbisAlloc extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link STBVorbisAlloc} structs.
-     */
+    /** An array of {@link STBVorbisAlloc} structs. */
     public static class Buffer extends StructBuffer<STBVorbisAlloc, Buffer> implements NativeResource {
 
         private static final STBVorbisAlloc ELEMENT_FACTORY = STBVorbisAlloc.create(-1L);
 
         /**
          * Creates a new {@code STBVorbisAlloc.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link STBVorbisAlloc#SIZEOF}, and its mark will be undefined.
@@ -376,10 +358,7 @@ public class STBVorbisAlloc extends Struct implements NativeResource {
         /**
          * Sets the address of the specified {@link ByteBuffer} to the {@code alloc_buffer} field.
          */
-        public Buffer alloc_buffer(@NativeType("char *") ByteBuffer value) {
-            STBVorbisAlloc.nalloc_buffer(address(), value);
-            return this;
-        }
+        public Buffer alloc_buffer(@NativeType("char *") ByteBuffer value) { STBVorbisAlloc.nalloc_buffer(address(), value); return this; }
 
     }
 

@@ -41,7 +41,7 @@ public class SOFTPauseDevice {
      */
     @NativeType("ALCvoid")
     public static void alcDevicePauseSOFT(@NativeType("ALCdevice *") long device) {
-        long __functionAddress = ALC.getICD().alcDevicePauseSOFT;
+		long __functionAddress = ALC.getICD().alcDevicePauseSOFT;
         if (CHECKS) {
             check(__functionAddress);
             check(device);
@@ -64,7 +64,7 @@ public class SOFTPauseDevice {
      */
     @NativeType("ALCvoid")
     public static void alcDeviceResumeSOFT(@NativeType("ALCdevice *") long device) {
-        long __functionAddress = ALC.getICD().alcDeviceResumeSOFT;
+		long __functionAddress = ALC.getICD().alcDeviceResumeSOFT;
         if (CHECKS) {
             check(__functionAddress);
             check(device);

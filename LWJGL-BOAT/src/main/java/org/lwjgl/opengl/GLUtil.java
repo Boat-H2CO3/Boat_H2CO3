@@ -7,7 +7,6 @@ package org.lwjgl.opengl;
 import org.lwjgl.system.*;
 
 import javax.annotation.*;
-
 import java.io.*;
 
 import static org.lwjgl.opengl.AMDDebugOutput.*;

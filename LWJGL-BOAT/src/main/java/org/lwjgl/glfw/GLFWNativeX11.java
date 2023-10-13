@@ -34,9 +34,7 @@ public class GLFWNativeX11 {
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 GetX11Display = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetX11Display"),
                 GetX11Adapter = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetX11Adapter"),
@@ -55,6 +53,7 @@ public class GLFWNativeX11 {
      * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
      *
      * @return The {@code Display} used by GLFW, or {@code NULL} if an error occurred.
+     *
      * @since version 3.0
      */
     @NativeType("Display *")
@@ -71,7 +70,9 @@ public class GLFWNativeX11 {
      * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
      *
      * @param monitor the GLFW monitor
+     *
      * @return The {@code RRCrtc} of the specified monitor, or {@code None} if an error occurred.
+     *
      * @since version 3.1
      */
     @NativeType("RRCrtc")
@@ -91,7 +92,9 @@ public class GLFWNativeX11 {
      * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
      *
      * @param monitor the GLFW monitor
+     *
      * @return The {@code RROutput} of the specified monitor, or {@code None} if an error occurred.
+     *
      * @since version 3.1
      */
     @NativeType("RROutput")
@@ -111,7 +114,9 @@ public class GLFWNativeX11 {
      * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
      *
      * @param window a GLFW window
+     *
      * @return The {@code Window} of the specified window, or {@code None} if an error occurred.
+     *
      * @since version 3.0
      */
     @NativeType("Window")
@@ -125,9 +130,7 @@ public class GLFWNativeX11 {
 
     // --- [ glfwSetX11SelectionString ] ---
 
-    /**
-     * Unsafe version of: {@link #glfwSetX11SelectionString SetX11SelectionString}
-     */
+    /** Unsafe version of: {@link #glfwSetX11SelectionString SetX11SelectionString} */
     public static void nglfwSetX11SelectionString(long string) {
         long __functionAddress = Functions.SetX11SelectionString;
         invokePV(string, __functionAddress);
@@ -139,6 +142,7 @@ public class GLFWNativeX11 {
      * <p>This function must only be called from the main thread.</p>
      *
      * @param string a UTF-8 encoded string. The specified string is copied before this function returns.
+     *
      * @since version 3.3
      */
     public static void glfwSetX11SelectionString(@NativeType("char const *") ByteBuffer string) {
@@ -154,6 +158,7 @@ public class GLFWNativeX11 {
      * <p>This function must only be called from the main thread.</p>
      *
      * @param string a UTF-8 encoded string. The specified string is copied before this function returns.
+     *
      * @since version 3.3
      */
     public static void glfwSetX11SelectionString(@NativeType("char const *") CharSequence string) {
@@ -170,9 +175,7 @@ public class GLFWNativeX11 {
 
     // --- [ glfwGetX11SelectionString ] ---
 
-    /**
-     * Unsafe version of: {@link #glfwGetX11SelectionString GetX11SelectionString}
-     */
+    /** Unsafe version of: {@link #glfwGetX11SelectionString GetX11SelectionString} */
     public static long nglfwGetX11SelectionString() {
         long __functionAddress = Functions.GetX11SelectionString;
         return invokeP(__functionAddress);
@@ -189,6 +192,7 @@ public class GLFWNativeX11 {
      * <p>This function must only be called from the main thread.</p>
      *
      * @return the contents of the selection as a UTF-8 encoded string, or {@code NULL} if an error occurred
+     *
      * @since version 3.3
      */
     @Nullable

@@ -50,9 +50,7 @@ public class WGLARBRenderTexture {
             WGL_BIND_TO_TEXTURE_RGB_ARB = 0x2070,
             WGL_BIND_TO_TEXTURE_RGBA_ARB = 0x2071;
 
-    /**
-     * Accepted by the {@code attribList} parameter of {@link WGLARBPbuffer#wglCreatePbufferARB CreatePbufferARB} and by the {@code attribute} parameter of {@link WGLARBPbuffer#wglQueryPbufferARB QueryPbufferARB}.
-     */
+    /** Accepted by the {@code attribList} parameter of {@link WGLARBPbuffer#wglCreatePbufferARB CreatePbufferARB} and by the {@code attribute} parameter of {@link WGLARBPbuffer#wglQueryPbufferARB QueryPbufferARB}. */
     public static final int
             WGL_TEXTURE_FORMAT_ARB = 0x2072,
             WGL_TEXTURE_TARGET_ARB = 0x2073,
@@ -76,9 +74,7 @@ public class WGLARBRenderTexture {
             WGL_TEXTURE_1D_ARB = 0x2079,
             WGL_TEXTURE_2D_ARB = 0x207A;
 
-    /**
-     * Accepted by the {@code attribList} parameter of {@link #wglSetPbufferAttribARB SetPbufferAttribARB} and by the {@code attribute} parameter of {@link WGLARBPbuffer#wglQueryPbufferARB QueryPbufferARB}.
-     */
+    /** Accepted by the {@code attribList} parameter of {@link #wglSetPbufferAttribARB SetPbufferAttribARB} and by the {@code attribute} parameter of {@link WGLARBPbuffer#wglQueryPbufferARB QueryPbufferARB}. */
     public static final int
             WGL_MIPMAP_LEVEL_ARB = 0x207B,
             WGL_CUBE_MAP_FACE_ARB = 0x207C;
@@ -95,9 +91,7 @@ public class WGLARBRenderTexture {
             WGL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB = 0x2081,
             WGL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB = 0x2082;
 
-    /**
-     * Accepted by the {@code buffer} parameter of {@link #wglBindTexImageARB BindTexImageARB} and {@link #wglReleaseTexImageARB ReleaseTexImageARB}.
-     */
+    /** Accepted by the {@code buffer} parameter of {@link #wglBindTexImageARB BindTexImageARB} and {@link #wglReleaseTexImageARB ReleaseTexImageARB}. */
     public static final int
             WGL_FRONT_LEFT_ARB = 0x2083,
             WGL_FRONT_RIGHT_ARB = 0x2084,
@@ -165,9 +159,7 @@ public class WGLARBRenderTexture {
 
     // --- [ wglSetPbufferAttribARB ] ---
 
-    /**
-     * Unsafe version of: {@link #wglSetPbufferAttribARB SetPbufferAttribARB}
-     */
+    /** Unsafe version of: {@link #wglSetPbufferAttribARB SetPbufferAttribARB} */
     public static int nwglSetPbufferAttribARB(long pbuffer, long attribList) {
         long __functionAddress = GL.getCapabilitiesWGL().wglSetPbufferAttribARB;
         if (CHECKS) {
@@ -191,9 +183,7 @@ public class WGLARBRenderTexture {
         return nwglSetPbufferAttribARB(pbuffer, memAddressSafe(attribList)) != 0;
     }
 
-    /**
-     * Array version of: {@link #wglSetPbufferAttribARB SetPbufferAttribARB}
-     */
+    /** Array version of: {@link #wglSetPbufferAttribARB SetPbufferAttribARB} */
     @NativeType("BOOL")
     public static boolean wglSetPbufferAttribARB(@NativeType("HPBUFFERARB") long pbuffer, @Nullable @NativeType("int const *") int[] attribList) {
         long __functionAddress = GL.getCapabilitiesWGL().wglSetPbufferAttribARB;

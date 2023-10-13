@@ -28,9 +28,7 @@ public class GLFWNativeCocoa {
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 GetCocoaMonitor = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetCocoaMonitor"),
                 GetCocoaWindow = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetCocoaWindow");
@@ -45,7 +43,9 @@ public class GLFWNativeCocoa {
      * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
      *
      * @param monitor the GLFW monitor
+     *
      * @return The {@code CGDirectDisplayID} of the specified monitor, or {@code kCGNullDirectDisplay} if an error occurred.
+     *
      * @since version 3.1
      */
     @NativeType("CGDirectDisplayID")
@@ -65,7 +65,9 @@ public class GLFWNativeCocoa {
      * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
      *
      * @param window the GLFW window
+     *
      * @return The {@code NSWindow} of the specified window, or nil if an error occurred.
+     *
      * @since version 3.0
      */
     @NativeType("id")

@@ -19,13 +19,10 @@ public class LibC {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * Contains the function pointers loaded from {@code LibSystem.getLibrary()}.
-     */
+    /** Contains the function pointers loaded from {@code LibSystem.getLibrary()}. */
     public static final class Functions {
 
-        private Functions() {
-        }
+        private Functions() {}
 
         /**
          * Function address.
@@ -37,9 +34,7 @@ public class LibC {
 
     // --- [ getpid ] ---
 
-    /**
-     * Returns the process ID of the calling process.
-     */
+    /** Returns the process ID of the calling process. */
     @NativeType("pid_t")
     public static long getpid() {
         long __functionAddress = Functions.getpid;

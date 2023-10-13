@@ -39,9 +39,7 @@ public class GLXNVSwapGroup {
 
     // --- [ glXJoinSwapGroupNV ] ---
 
-    /**
-     * @param display the connection to the X server
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXJoinSwapGroupNV(@NativeType("Display *") long display, @NativeType("GLXDrawable") long drawable, @NativeType("GLuint") int group) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXJoinSwapGroupNV;
@@ -55,9 +53,7 @@ public class GLXNVSwapGroup {
 
     // --- [ glXBindSwapBarrierNV ] ---
 
-    /**
-     * @param display the connection to the X server
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXBindSwapBarrierNV(@NativeType("Display *") long display, @NativeType("GLuint") int group, @NativeType("GLuint") int barrier) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXBindSwapBarrierNV;
@@ -70,9 +66,7 @@ public class GLXNVSwapGroup {
 
     // --- [ glXQuerySwapGroupNV ] ---
 
-    /**
-     * Unsafe version of: {@link #glXQuerySwapGroupNV QuerySwapGroupNV}
-     */
+    /** Unsafe version of: {@link #glXQuerySwapGroupNV QuerySwapGroupNV} */
     public static int nglXQuerySwapGroupNV(long display, long drawable, long group, long barrier) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQuerySwapGroupNV;
         if (CHECKS) {
@@ -83,9 +77,7 @@ public class GLXNVSwapGroup {
         return callPPPPI(display, drawable, group, barrier, __functionAddress);
     }
 
-    /**
-     * @param display the connection to the X server
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXQuerySwapGroupNV(@NativeType("Display *") long display, @NativeType("GLXDrawable") long drawable, @NativeType("GLuint *") IntBuffer group, @NativeType("GLuint *") IntBuffer barrier) {
         if (CHECKS) {
@@ -97,9 +89,7 @@ public class GLXNVSwapGroup {
 
     // --- [ glXQueryMaxSwapGroupsNV ] ---
 
-    /**
-     * Unsafe version of: {@link #glXQueryMaxSwapGroupsNV QueryMaxSwapGroupsNV}
-     */
+    /** Unsafe version of: {@link #glXQueryMaxSwapGroupsNV QueryMaxSwapGroupsNV} */
     public static int nglXQueryMaxSwapGroupsNV(long display, int screen, long maxGroups, long maxBarriers) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryMaxSwapGroupsNV;
         if (CHECKS) {
@@ -109,9 +99,7 @@ public class GLXNVSwapGroup {
         return callPPPI(display, screen, maxGroups, maxBarriers, __functionAddress);
     }
 
-    /**
-     * @param display the connection to the X server
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXQueryMaxSwapGroupsNV(@NativeType("Display *") long display, int screen, @NativeType("GLuint *") IntBuffer maxGroups, @NativeType("GLuint *") IntBuffer maxBarriers) {
         if (CHECKS) {
@@ -123,9 +111,7 @@ public class GLXNVSwapGroup {
 
     // --- [ glXQueryFrameCountNV ] ---
 
-    /**
-     * Unsafe version of: {@link #glXQueryFrameCountNV QueryFrameCountNV}
-     */
+    /** Unsafe version of: {@link #glXQueryFrameCountNV QueryFrameCountNV} */
     public static int nglXQueryFrameCountNV(long display, int screen, long count) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryFrameCountNV;
         if (CHECKS) {
@@ -135,9 +121,7 @@ public class GLXNVSwapGroup {
         return callPPI(display, screen, count, __functionAddress);
     }
 
-    /**
-     * @param display the connection to the X server
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXQueryFrameCountNV(@NativeType("Display *") long display, int screen, @NativeType("GLuint *") IntBuffer count) {
         if (CHECKS) {
@@ -148,9 +132,7 @@ public class GLXNVSwapGroup {
 
     // --- [ glXResetFrameCountNV ] ---
 
-    /**
-     * @param display the connection to the X server
-     */
+    /** @param display the connection to the X server */
     @NativeType("Bool")
     public static boolean glXResetFrameCountNV(@NativeType("Display *") long display, int screen) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXResetFrameCountNV;
@@ -161,9 +143,7 @@ public class GLXNVSwapGroup {
         return callPI(display, screen, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #glXQuerySwapGroupNV QuerySwapGroupNV}
-     */
+    /** Array version of: {@link #glXQuerySwapGroupNV QuerySwapGroupNV} */
     @NativeType("Bool")
     public static boolean glXQuerySwapGroupNV(@NativeType("Display *") long display, @NativeType("GLXDrawable") long drawable, @NativeType("GLuint *") int[] group, @NativeType("GLuint *") int[] barrier) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQuerySwapGroupNV;
@@ -177,9 +157,7 @@ public class GLXNVSwapGroup {
         return callPPPPI(display, drawable, group, barrier, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #glXQueryMaxSwapGroupsNV QueryMaxSwapGroupsNV}
-     */
+    /** Array version of: {@link #glXQueryMaxSwapGroupsNV QueryMaxSwapGroupsNV} */
     @NativeType("Bool")
     public static boolean glXQueryMaxSwapGroupsNV(@NativeType("Display *") long display, int screen, @NativeType("GLuint *") int[] maxGroups, @NativeType("GLuint *") int[] maxBarriers) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryMaxSwapGroupsNV;
@@ -192,9 +170,7 @@ public class GLXNVSwapGroup {
         return callPPPI(display, screen, maxGroups, maxBarriers, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #glXQueryFrameCountNV QueryFrameCountNV}
-     */
+    /** Array version of: {@link #glXQueryFrameCountNV QueryFrameCountNV} */
     @NativeType("Bool")
     public static boolean glXQueryFrameCountNV(@NativeType("Display *") long display, int screen, @NativeType("GLuint *") int[] count) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryFrameCountNV;

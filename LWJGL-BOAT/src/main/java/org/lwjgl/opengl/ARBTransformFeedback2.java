@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transform_feedback2.txt">ARB_transform_feedback2</a> extension.
@@ -33,14 +33,10 @@ import java.nio.IntBuffer;
  */
 public class ARBTransformFeedback2 {
 
-    /**
-     * Accepted by the {@code target} parameter of BindTransformFeedback.
-     */
+    /** Accepted by the {@code target} parameter of BindTransformFeedback. */
     public static final int GL_TRANSFORM_FEEDBACK = 0x8E22;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int
             GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED = 0x8E23,
             GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE = 0x8E24,
@@ -93,9 +89,7 @@ public class ARBTransformFeedback2 {
         GL40C.glDeleteTransformFeedbacks(ids);
     }
 
-    /**
-     * Deletes transform feedback objects.
-     */
+    /** Deletes transform feedback objects. */
     public static void glDeleteTransformFeedbacks(@NativeType("GLuint const *") int id) {
         GL40C.glDeleteTransformFeedbacks(id);
     }
@@ -120,9 +114,7 @@ public class ARBTransformFeedback2 {
         GL40C.glGenTransformFeedbacks(ids);
     }
 
-    /**
-     * Reserves transform feedback object names.
-     */
+    /** Reserves transform feedback object names. */
     @NativeType("void")
     public static int glGenTransformFeedbacks() {
         return GL40C.glGenTransformFeedbacks();
@@ -182,16 +174,12 @@ public class ARBTransformFeedback2 {
         GL40C.glDrawTransformFeedback(mode, id);
     }
 
-    /**
-     * Array version of: {@link #glDeleteTransformFeedbacks DeleteTransformFeedbacks}
-     */
+    /** Array version of: {@link #glDeleteTransformFeedbacks DeleteTransformFeedbacks} */
     public static void glDeleteTransformFeedbacks(@NativeType("GLuint const *") int[] ids) {
         GL40C.glDeleteTransformFeedbacks(ids);
     }
 
-    /**
-     * Array version of: {@link #glGenTransformFeedbacks GenTransformFeedbacks}
-     */
+    /** Array version of: {@link #glGenTransformFeedbacks GenTransformFeedbacks} */
     public static void glGenTransformFeedbacks(@NativeType("GLuint *") int[] ids) {
         GL40C.glGenTransformFeedbacks(ids);
     }

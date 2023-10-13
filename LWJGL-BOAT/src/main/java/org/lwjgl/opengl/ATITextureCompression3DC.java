@@ -10,12 +10,9 @@ package org.lwjgl.opengl;
  */
 public final class ATITextureCompression3DC {
 
-    /**
-     * Accepted by the {@code internalformat} parameter of TexImage functions.
-     */
+    /** Accepted by the {@code internalformat} parameter of TexImage functions. */
     public static final int GL_COMPRESSED_LUMINANCE_ALPHA_3DC_ATI = 0x8837;
 
-    private ATITextureCompression3DC() {
-    }
+    private ATITextureCompression3DC() {}
 
 }

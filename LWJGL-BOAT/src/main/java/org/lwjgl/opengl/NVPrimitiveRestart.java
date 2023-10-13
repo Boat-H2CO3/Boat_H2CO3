@@ -34,9 +34,7 @@ public class NVPrimitiveRestart {
      */
     public static final int GL_PRIMITIVE_RESTART_NV = 0x8558;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_PRIMITIVE_RESTART_INDEX_NV = 0x8559;
 
     static {

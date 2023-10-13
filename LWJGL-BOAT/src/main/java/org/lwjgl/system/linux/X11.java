@@ -5,52 +5,31 @@
  */
 package org.lwjgl.system.linux;
 
-import static org.lwjgl.system.APIUtil.apiGetFunctionAddress;
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkNT1Safe;
-import static org.lwjgl.system.JNI.invokePI;
-import static org.lwjgl.system.JNI.invokePN;
-import static org.lwjgl.system.JNI.invokePNI;
-import static org.lwjgl.system.JNI.invokePNNNPP;
-import static org.lwjgl.system.JNI.invokePNNPI;
-import static org.lwjgl.system.JNI.invokePNNPPPI;
-import static org.lwjgl.system.JNI.invokePNPN;
-import static org.lwjgl.system.JNI.invokePNPNPN;
-import static org.lwjgl.system.JNI.invokePP;
-import static org.lwjgl.system.JNI.invokePV;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjgl.system.MemoryUtil.memAddress;
-import static org.lwjgl.system.MemoryUtil.memAddressSafe;
+import javax.annotation.*;
 
-import org.lwjgl.CLongBuffer;
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.Library;
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeType;
-import org.lwjgl.system.SharedLibrary;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.*;
 
-import javax.annotation.Nullable;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to libX11.
  */
 public class X11 {
 
-    /**
-     * Boolean values
-     */
+    /** Boolean values */
     public static final int
             True = 1,
             False = 0;
 
-    /**
-     * RESERVED RESOURCE AND CONSTANT DEFINITIONS
-     */
+    /** RESERVED RESOURCE AND CONSTANT DEFINITIONS */
     public static final int
             None = 0,
             ParentRelative = 1,
@@ -65,9 +44,7 @@ public class X11 {
             CurrentTime = 0,
             NoSymbol = 0;
 
-    /**
-     * ERROR CODES
-     */
+    /** ERROR CODES */
     public static final int
             Success = 0,
             BadRequest = 1,
@@ -90,11 +67,9 @@ public class X11 {
             FirstExtensionError = 128,
             LastExtensionError = 255;
 
-    /**
-     * Window attributes for CreateWindow and ChangeWindowAttributes
-     */
+    /** Window attributes for CreateWindow and ChangeWindowAttributes */
     public static final int
-            CWBackPixmap = 1,
+            CWBackPixmap = 1 << 0,
             CWBackPixel = 1 << 1,
             CWBorderPixmap = 1 << 2,
             CWBorderPixel = 1 << 3,
@@ -110,12 +85,10 @@ public class X11 {
             CWColormap = 1 << 13,
             CWCursor = 1 << 14;
 
-    /**
-     * Input Event Masks. Used as event-mask window attribute and as arguments to Grab requests. Not to be confused with event names.
-     */
+    /** Input Event Masks. Used as event-mask window attribute and as arguments to Grab requests. Not to be confused with event names. */
     public static final int
             NoEventMask = 0,
-            KeyPressMask = 1,
+            KeyPressMask = 1 << 0,
             KeyReleaseMask = 1 << 1,
             ButtonPressMask = 1 << 2,
             ButtonReleaseMask = 1 << 3,
@@ -182,11 +155,9 @@ public class X11 {
             GenericEvent = 35,
             LASTEvent = 36;
 
-    /**
-     * Key masks. Used as modifiers to GrabButton and GrabKey, results of QueryPointer, state in various key-, mouse-, and button-related events.
-     */
+    /** Key masks. Used as modifiers to GrabButton and GrabKey, results of QueryPointer, state in various key-, mouse-, and button-related events. */
     public static final int
-            ShiftMask = 1,
+            ShiftMask = 1 << 0,
             LockMask = 1 << 1,
             ControlMask = 1 << 2,
             Mod1Mask = 1 << 3,
@@ -195,9 +166,7 @@ public class X11 {
             Mod4Mask = 1 << 6,
             Mod5Mask = 1 << 7;
 
-    /**
-     * modifier names. Used to build a SetModifierMapping request or to read a GetModifierMapping request. These correspond to the masks defined above.
-     */
+    /** modifier names. Used to build a SetModifierMapping request or to read a GetModifierMapping request. These correspond to the masks defined above. */
     public static final int
             ShiftMapIndex = 0,
             LockMapIndex = 1,
@@ -208,9 +177,7 @@ public class X11 {
             Mod4MapIndex = 6,
             Mod5MapIndex = 7;
 
-    /**
-     * button masks. Used in same manner as Key masks above. Not to be confused with button names below.
-     */
+    /** button masks. Used in same manner as Key masks above. Not to be confused with button names below. */
     public static final int
             Button1Mask = 1 << 8,
             Button2Mask = 1 << 9,
@@ -230,9 +197,7 @@ public class X11 {
             Button4 = 4,
             Button5 = 5;
 
-    /**
-     * Notify modes
-     */
+    /** Notify modes */
     public static final int
             NotifyNormal = 0,
             NotifyGrab = 1,
@@ -240,9 +205,7 @@ public class X11 {
             NotifyWhileGrabbed = 3,
             NotifyHint = 1;
 
-    /**
-     * Notify detail
-     */
+    /** Notify detail */
     public static final int
             NotifyAncestor = 0,
             NotifyVirtual = 1,
@@ -253,45 +216,33 @@ public class X11 {
             NotifyPointerRoot = 6,
             NotifyDetailNone = 7;
 
-    /**
-     * Visibility notify
-     */
+    /** Visibility notify */
     public static final int
             VisibilityUnobscured = 0,
             VisibilityPartiallyObscured = 1,
             VisibilityFullyObscured = 2;
 
-    /**
-     * Circulation request
-     */
+    /** Circulation request */
     public static final int
             PlaceOnTop = 0,
             PlaceOnBottom = 1;
 
-    /**
-     * Property notification
-     */
+    /** Property notification */
     public static final int
             PropertyNewValue = 0,
             PropertyDelete = 1;
 
-    /**
-     * Color Map notification
-     */
+    /** Color Map notification */
     public static final int
             ColormapUninstalled = 0,
             ColormapInstalled = 1;
 
-    /**
-     * GrabPointer, GrabButton, GrabKeyboard, GrabKey Modes
-     */
+    /** GrabPointer, GrabButton, GrabKeyboard, GrabKey Modes */
     public static final int
             GrabModeSync = 0,
             GrabModeAsync = 1;
 
-    /**
-     * GrabPointer, GrabKeyboard reply status
-     */
+    /** GrabPointer, GrabKeyboard reply status */
     public static final int
             GrabSuccess = 0,
             AlreadyGrabbed = 1,
@@ -299,9 +250,7 @@ public class X11 {
             GrabNotViewable = 3,
             GrabFrozen = 4;
 
-    /**
-     * AllowEvents modes
-     */
+    /** AllowEvents modes */
     public static final int
             AsyncPointer = 0,
             SyncPointer = 1,
@@ -312,31 +261,23 @@ public class X11 {
             AsyncBoth = 6,
             SyncBoth = 7;
 
-    /**
-     * For {@link #XCreateColormap}.
-     */
+    /** For {@link #XCreateColormap}. */
     public static final int
             AllocNone = 0,
             AllocAll = 1;
 
-    /**
-     * Used in XSetInputFocus(), XGetInputFocus().
-     */
+    /** Used in XSetInputFocus(), XGetInputFocus(). */
     public static final int
             RevertToNone = None,
             RevertToPointerRoot = PointerRoot,
             RevertToParent = 2;
 
-    /**
-     * Window classes used by {@link #XCreateWindow}.
-     */
+    /** Window classes used by {@link #XCreateWindow}. */
     public static final int
             InputOutput = 1,
             InputOnly = 2;
 
-    /**
-     * SCREEN SAVER STUFF
-     */
+    /** SCREEN SAVER STUFF */
     public static final int
             DontPreferBlanking = 0,
             PreferBlanking = 1,
@@ -349,17 +290,13 @@ public class X11 {
             ScreenSaverReset = 0,
             ScreenSaverActive = 1;
 
-    /**
-     * Property modes
-     */
+    /** Property modes */
     public static final int
             PropModeReplace = 0,
             PropModePrepend = 1,
             PropModeAppend = 2;
 
-    /**
-     * graphics functions, as in GC.alu
-     */
+    /** graphics functions, as in GC.alu */
     public static final int
             GXclear = 0x0,
             GXand = 0x1,
@@ -378,90 +315,68 @@ public class X11 {
             GXnand = 0xE,
             GXset = 0xF;
 
-    /**
-     * LineStyle
-     */
+    /** LineStyle */
     public static final int
             LineSolid = 0,
             LineOnOffDash = 1,
             LineDoubleDash = 2;
 
-    /**
-     * capStyle
-     */
+    /** capStyle */
     public static final int
             CapNotLast = 0,
             CapButt = 1,
             CapRound = 2,
             CapProjecting = 3;
 
-    /**
-     * joinStyle
-     */
+    /** joinStyle */
     public static final int
             JoinMiter = 0,
             JoinRound = 1,
             JoinBevel = 2;
 
-    /**
-     * fillStyle
-     */
+    /** fillStyle */
     public static final int
             FillSolid = 0,
             FillTiled = 1,
             FillStippled = 2,
             FillOpaqueStippled = 3;
 
-    /**
-     * fillRule
-     */
+    /** fillRule */
     public static final int
             EvenOddRule = 0,
             WindingRule = 1;
 
-    /**
-     * subwindow mode
-     */
+    /** subwindow mode */
     public static final int
             ClipByChildren = 0,
             IncludeInferiors = 1;
 
-    /**
-     * SetClipRectangles ordering
-     */
+    /** SetClipRectangles ordering */
     public static final int
             Unsorted = 0,
             YSorted = 1,
             YXSorted = 2,
             YXBanded = 3;
 
-    /**
-     * CoordinateMode for drawing routines
-     */
+    /** CoordinateMode for drawing routines */
     public static final int
             CoordModeOrigin = 0,
             CoordModePrevious = 1;
 
-    /**
-     * Polygon shapes
-     */
+    /** Polygon shapes */
     public static final int
             Complex = 0,
             Nonconvex = 1,
             Convex = 2;
 
-    /**
-     * Arc modes for PolyFillArc
-     */
+    /** Arc modes for PolyFillArc */
     public static final int
             ArcChord = 0,
             ArcPieSlice = 1;
 
-    /**
-     * GC components: masks used in CreateGC, CopyGC, ChangeGC, OR'ed into GC.stateChanges
-     */
+    /** GC components: masks used in CreateGC, CopyGC, ChangeGC, OR'ed into GC.stateChanges */
     public static final int
-            GCFunction = 1,
+            GCFunction = 1 << 0,
             GCPlaneMask = 1 << 1,
             GCForeground = 1 << 2,
             GCBackground = 1 << 3,
@@ -504,17 +419,13 @@ public class X11 {
 
     private static final SharedLibrary X11 = Library.loadNative(X11.class, "org.lwjgl", null, "libX11.so.6", "libX11.so");
 
-    /**
-     * Contains the function pointers loaded from the X11 {@link SharedLibrary}.
-     */
+    /** Contains the function pointers loaded from the X11 {@link SharedLibrary}. */
     public static final class Functions {
 
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 XOpenDisplay = apiGetFunctionAddress(X11, "XOpenDisplay"),
                 XCloseDisplay = apiGetFunctionAddress(X11, "XCloseDisplay"),
@@ -532,18 +443,14 @@ public class X11 {
 
     }
 
-    /**
-     * Returns the X11 {@link SharedLibrary}.
-     */
+    /** Returns the X11 {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return X11;
     }
 
     // --- [ XOpenDisplay ] ---
 
-    /**
-     * Unsafe version of: {@link #XOpenDisplay}
-     */
+    /** Unsafe version of: {@link #XOpenDisplay} */
     public static long nXOpenDisplay(long display_name) {
         long __functionAddress = Functions.XOpenDisplay;
         return invokePP(display_name, __functionAddress);
@@ -645,9 +552,7 @@ public class X11 {
 
     // --- [ XCreateColormap ] ---
 
-    /**
-     * Unsafe version of: {@link #XCreateColormap}
-     */
+    /** Unsafe version of: {@link #XCreateColormap} */
     public static long nXCreateColormap(long display, long w, long visual, int alloc) {
         long __functionAddress = Functions.XCreateColormap;
         if (CHECKS) {
@@ -691,9 +596,7 @@ public class X11 {
 
     // --- [ XCreateWindow ] ---
 
-    /**
-     * Unsafe version of: {@link #XCreateWindow}
-     */
+    /** Unsafe version of: {@link #XCreateWindow} */
     public static long nXCreateWindow(long display, long parent, int x, int y, int width, int height, int border_width, int depth, int windowClass, long visual, long valuemask, long attributes) {
         long __functionAddress = Functions.XCreateWindow;
         if (CHECKS) {
@@ -756,9 +659,7 @@ public class X11 {
 
     // --- [ XFree ] ---
 
-    /**
-     * Unsafe version of: {@link #XFree}
-     */
+    /** Unsafe version of: {@link #XFree} */
     public static int nXFree(long data) {
         long __functionAddress = Functions.XFree;
         return invokePI(data, __functionAddress);
@@ -784,9 +685,7 @@ public class X11 {
 
     // --- [ XSendEvent ] ---
 
-    /**
-     * Unsafe version of: {@link #XSendEvent}
-     */
+    /** Unsafe version of: {@link #XSendEvent} */
     public static int nXSendEvent(long display, long w, int propagate, long event_mask, long event_send) {
         long __functionAddress = Functions.XSendEvent;
         if (CHECKS) {
@@ -843,9 +742,7 @@ public class X11 {
 
     // --- [ XDisplayMotionBufferSize ] ---
 
-    /**
-     * @param display the connection to the X server
-     */
+    /** @param display the connection to the X server */
     @NativeType("unsigned long")
     public static long XDisplayMotionBufferSize(@NativeType("Display *") long display) {
         long __functionAddress = Functions.XDisplayMotionBufferSize;
@@ -857,9 +754,7 @@ public class X11 {
 
     // --- [ XGetMotionEvents ] ---
 
-    /**
-     * Unsafe version of: {@link #XGetMotionEvents}
-     */
+    /** Unsafe version of: {@link #XGetMotionEvents} */
     public static long nXGetMotionEvents(long display, long w, long start, long stop, long nevents_return) {
         long __functionAddress = Functions.XGetMotionEvents;
         if (CHECKS) {
@@ -894,9 +789,7 @@ public class X11 {
 
     // --- [ XTranslateCoordinates ] ---
 
-    /**
-     * Unsafe version of: {@link #XTranslateCoordinates}
-     */
+    /** Unsafe version of: {@link #XTranslateCoordinates} */
     public static int nXTranslateCoordinates(long display, long src_w, long dest_w, int src_x, int src_y, long dest_x_return, long dest_y_return, long child_return) {
         long __functionAddress = Functions.XTranslateCoordinates;
         if (CHECKS) {
@@ -935,9 +828,7 @@ public class X11 {
         return nXTranslateCoordinates(display, src_w, dest_w, src_x, src_y, memAddress(dest_x_return), memAddress(dest_y_return), memAddress(child_return)) != 0;
     }
 
-    /**
-     * Array version of: {@link #XTranslateCoordinates}
-     */
+    /** Array version of: {@link #XTranslateCoordinates} */
     @NativeType("Bool")
     public static boolean XTranslateCoordinates(@NativeType("Display *") long display, @NativeType("Window") long src_w, @NativeType("Window") long dest_w, int src_x, int src_y, @NativeType("int *") int[] dest_x_return, @NativeType("int *") int[] dest_y_return, @NativeType("Window *") CLongBuffer child_return) {
         long __functionAddress = Functions.XTranslateCoordinates;

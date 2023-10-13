@@ -38,9 +38,7 @@ public class NVBindlessMultiDrawIndirectCount {
 
     // --- [ glMultiDrawArraysIndirectBindlessCountNV ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiDrawArraysIndirectBindlessCountNV MultiDrawArraysIndirectBindlessCountNV}
-     */
+    /** Unsafe version of: {@link #glMultiDrawArraysIndirectBindlessCountNV MultiDrawArraysIndirectBindlessCountNV} */
     public static native void nglMultiDrawArraysIndirectBindlessCountNV(int mode, long indirect, long drawCount, int maxDrawCount, int stride, int vertexBufferCount);
 
     /**
@@ -82,9 +80,7 @@ public class NVBindlessMultiDrawIndirectCount {
 
     // --- [ glMultiDrawElementsIndirectBindlessCountNV ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiDrawElementsIndirectBindlessCountNV MultiDrawElementsIndirectBindlessCountNV}
-     */
+    /** Unsafe version of: {@link #glMultiDrawElementsIndirectBindlessCountNV MultiDrawElementsIndirectBindlessCountNV} */
     public static native void nglMultiDrawElementsIndirectBindlessCountNV(int mode, int type, long indirect, long drawCount, int maxDrawCount, int stride, int vertexBufferCount);
 
     /**

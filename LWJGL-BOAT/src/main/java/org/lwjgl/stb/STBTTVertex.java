@@ -159,31 +159,23 @@ public class STBTTVertex extends Struct implements NativeResource {
         return wrap(STBTTVertex.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code STBTTVertex} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code STBTTVertex} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static STBTTVertex calloc() {
         return wrap(STBTTVertex.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code STBTTVertex} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code STBTTVertex} instance allocated with {@link BufferUtils}. */
     public static STBTTVertex create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(STBTTVertex.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code STBTTVertex} instance for the specified memory address.
-     */
+    /** Returns a new {@code STBTTVertex} instance for the specified memory address. */
     public static STBTTVertex create(long address) {
         return wrap(STBTTVertex.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static STBTTVertex createSafe(long address) {
         return address == NULL ? null : wrap(STBTTVertex.class, address);
@@ -227,9 +219,7 @@ public class STBTTVertex extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -237,16 +227,12 @@ public class STBTTVertex extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code STBTTVertex} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code STBTTVertex} instance allocated on the thread-local {@link MemoryStack}. */
     public static STBTTVertex mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code STBTTVertex} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code STBTTVertex} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static STBTTVertex callocStack() {
         return callocStack(stackGet());
     }
@@ -290,7 +276,7 @@ public class STBTTVertex extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -369,7 +355,7 @@ public class STBTTVertex extends Struct implements NativeResource {
 
         /**
          * Creates a new {@code STBTTVertex.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link STBTTVertex#SIZEOF}, and its mark will be undefined.
@@ -442,17 +428,10 @@ public class STBTTVertex extends Struct implements NativeResource {
          * Returns the value of the {@code cy1} field.
          */
         @NativeType("stbtt_vertex_type")
-        public short cy1() {
-            return STBTTVertex.ncy1(address());
-        }
-
-        /**
-         * Returns the value of the {@code type} field.
-         */
+        public short cy1() { return STBTTVertex.ncy1(address()); }
+        /** Returns the value of the {@code type} field. */
         @NativeType("unsigned char")
-        public byte type() {
-            return STBTTVertex.ntype(address());
-        }
+        public byte type() { return STBTTVertex.ntype(address()); }
 
     }
 

@@ -39,17 +39,13 @@ public abstract class ExtentDestroy extends Callback implements ExtentDestroyI {
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static ExtentDestroy createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code ExtentDestroy} instance that delegates to the specified {@code ExtentDestroyI} instance.
-     */
+    /** Creates a {@code ExtentDestroy} instance that delegates to the specified {@code ExtentDestroyI} instance. */
     public static ExtentDestroy create(ExtentDestroyI instance) {
         return instance instanceof ExtentDestroy
                 ? (ExtentDestroy) instance

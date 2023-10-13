@@ -5,14 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.NativeType;
+import org.lwjgl.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_draw_elements_base_vertex.txt">ARB_draw_elements_base_vertex</a> extension.
@@ -70,8 +69,7 @@ import java.nio.ShortBuffer;
  */
 public class ARBDrawElementsBaseVertex {
 
-    static {
-        GL.initialize();
+    static { GL.initialize();
     }
 
     protected ARBDrawElementsBaseVertex() {
@@ -335,9 +333,7 @@ public class ARBDrawElementsBaseVertex {
         GL32C.glMultiDrawElementsBaseVertex(mode, count, type, indices, basevertex);
     }
 
-    /**
-     * Array version of: {@link #glMultiDrawElementsBaseVertex MultiDrawElementsBaseVertex}
-     */
+    /** Array version of: {@link #glMultiDrawElementsBaseVertex MultiDrawElementsBaseVertex} */
     public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") int[] count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices, @NativeType("GLint *") int[] basevertex) {
         GL32C.glMultiDrawElementsBaseVertex(mode, count, type, indices, basevertex);
     }

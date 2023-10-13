@@ -16,9 +16,7 @@ package org.lwjgl.opengl;
  */
 public final class ARBES3Compatibility {
 
-    /**
-     * Accepted by the {@code internalformat} parameter of CompressedTexImage2D.
-     */
+    /** Accepted by the {@code internalformat} parameter of CompressedTexImage2D. */
     public static final int
             GL_COMPRESSED_RGB8_ETC2 = 0x9274,
             GL_COMPRESSED_SRGB8_ETC2 = 0x9275,
@@ -31,19 +29,13 @@ public final class ARBES3Compatibility {
             GL_COMPRESSED_RG11_EAC = 0x9272,
             GL_COMPRESSED_SIGNED_RG11_EAC = 0x9273;
 
-    /**
-     * Accepted by the {@code target} parameter of Enable and Disable.
-     */
+    /** Accepted by the {@code target} parameter of Enable and Disable. */
     public static final int GL_PRIMITIVE_RESTART_FIXED_INDEX = 0x8D69;
 
-    /**
-     * Accepted by the {@code target} parameter of BeginQuery, EndQuery, GetQueryIndexediv and GetQueryiv.
-     */
+    /** Accepted by the {@code target} parameter of BeginQuery, EndQuery, GetQueryIndexediv and GetQueryiv. */
     public static final int GL_ANY_SAMPLES_PASSED_CONSERVATIVE = 0x8D6A;
 
-    /**
-     * Accepted by the {@code value} parameter of the GetInteger functions.
-     */
+    /** Accepted by the {@code value} parameter of the GetInteger functions. */
     public static final int GL_MAX_ELEMENT_INDEX = 0x8D6B;
 
     private ARBES3Compatibility() {

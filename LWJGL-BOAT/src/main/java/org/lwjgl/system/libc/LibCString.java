@@ -5,20 +5,12 @@
  */
 package org.lwjgl.system.libc;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.CustomBuffer;
-import org.lwjgl.system.Library;
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.LongBuffer;
-import java.nio.ShortBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to string.h.
@@ -26,8 +18,7 @@ import java.nio.ShortBuffer;
 public class LibCString {
 
     static {
-        Library.initialize();
-    }
+        Library.initialize(); }
 
     protected LibCString() {
         throw new UnsupportedOperationException();
@@ -47,6 +38,7 @@ public class LibCString {
      *
      * @param dest pointer to the memory area to fill
      * @param c    byte to set
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -59,6 +51,7 @@ public class LibCString {
      *
      * @param dest pointer to the memory area to fill
      * @param c    byte to set
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -71,6 +64,7 @@ public class LibCString {
      *
      * @param dest pointer to the memory area to fill
      * @param c    byte to set
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -83,6 +77,7 @@ public class LibCString {
      *
      * @param dest pointer to the memory area to fill
      * @param c    byte to set
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -95,6 +90,7 @@ public class LibCString {
      *
      * @param dest pointer to the memory area to fill
      * @param c    byte to set
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -107,6 +103,7 @@ public class LibCString {
      *
      * @param dest pointer to the memory area to fill
      * @param c    byte to set
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -128,6 +125,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -143,6 +141,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -158,6 +157,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -173,6 +173,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -188,6 +189,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -203,6 +205,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -230,6 +233,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -248,6 +252,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -266,6 +271,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -284,6 +290,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -302,6 +309,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -320,6 +328,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -330,108 +339,76 @@ public class LibCString {
         return nmemmove(memAddress(dest), memAddress(src), Integer.toUnsignedLong(src.remaining()) << 3);
     }
 
-    /**
-     * Array version of: {@link #nmemset}
-     */
+    /** Array version of: {@link #nmemset} */
     public static native long nmemset(byte[] dest, int c, long count);
 
-    /**
-     * Array version of: {@link #memset}
-     */
+    /** Array version of: {@link #memset} */
     @NativeType("void *")
     public static long memset(@NativeType("void *") byte[] dest, int c) {
-        return nmemset(dest, c, Integer.toUnsignedLong(dest.length));
+        return nmemset(dest, c, Integer.toUnsignedLong(dest.length) << 0);
     }
 
-    /**
-     * Array version of: {@link #nmemset}
-     */
+    /** Array version of: {@link #nmemset} */
     public static native long nmemset(short[] dest, int c, long count);
 
-    /**
-     * Array version of: {@link #memset}
-     */
+    /** Array version of: {@link #memset} */
     @NativeType("void *")
     public static long memset(@NativeType("void *") short[] dest, int c) {
         return nmemset(dest, c, Integer.toUnsignedLong(dest.length) << 1);
     }
 
-    /**
-     * Array version of: {@link #nmemset}
-     */
+    /** Array version of: {@link #nmemset} */
     public static native long nmemset(int[] dest, int c, long count);
 
-    /**
-     * Array version of: {@link #memset}
-     */
+    /** Array version of: {@link #memset} */
     @NativeType("void *")
     public static long memset(@NativeType("void *") int[] dest, int c) {
         return nmemset(dest, c, Integer.toUnsignedLong(dest.length) << 2);
     }
 
-    /**
-     * Array version of: {@link #nmemset}
-     */
+    /** Array version of: {@link #nmemset} */
     public static native long nmemset(long[] dest, int c, long count);
 
-    /**
-     * Array version of: {@link #memset}
-     */
+    /** Array version of: {@link #memset} */
     @NativeType("void *")
     public static long memset(@NativeType("void *") long[] dest, int c) {
         return nmemset(dest, c, Integer.toUnsignedLong(dest.length) << 3);
     }
 
-    /**
-     * Array version of: {@link #nmemset}
-     */
+    /** Array version of: {@link #nmemset} */
     public static native long nmemset(float[] dest, int c, long count);
 
-    /**
-     * Array version of: {@link #memset}
-     */
+    /** Array version of: {@link #memset} */
     @NativeType("void *")
     public static long memset(@NativeType("void *") float[] dest, int c) {
         return nmemset(dest, c, Integer.toUnsignedLong(dest.length) << 2);
     }
 
-    /**
-     * Array version of: {@link #nmemset}
-     */
+    /** Array version of: {@link #nmemset} */
     public static native long nmemset(double[] dest, int c, long count);
 
-    /**
-     * Array version of: {@link #memset}
-     */
+    /** Array version of: {@link #memset} */
     @NativeType("void *")
     public static long memset(@NativeType("void *") double[] dest, int c) {
         return nmemset(dest, c, Integer.toUnsignedLong(dest.length) << 3);
     }
 
-    /**
-     * Array version of: {@link #nmemcpy}
-     */
+    /** Array version of: {@link #nmemcpy} */
     public static native long nmemcpy(byte[] dest, byte[] src, long count);
 
-    /**
-     * Array version of: {@link #memcpy}
-     */
+    /** Array version of: {@link #memcpy} */
     @NativeType("void *")
     public static long memcpy(@NativeType("void *") byte[] dest, @NativeType("void const *") byte[] src) {
         if (CHECKS) {
             check(dest, src.length);
         }
-        return nmemcpy(dest, src, Integer.toUnsignedLong(src.length));
+        return nmemcpy(dest, src, Integer.toUnsignedLong(src.length) << 0);
     }
 
-    /**
-     * Array version of: {@link #nmemcpy}
-     */
+    /** Array version of: {@link #nmemcpy} */
     public static native long nmemcpy(short[] dest, short[] src, long count);
 
-    /**
-     * Array version of: {@link #memcpy}
-     */
+    /** Array version of: {@link #memcpy} */
     @NativeType("void *")
     public static long memcpy(@NativeType("void *") short[] dest, @NativeType("void const *") short[] src) {
         if (CHECKS) {
@@ -440,14 +417,10 @@ public class LibCString {
         return nmemcpy(dest, src, Integer.toUnsignedLong(src.length) << 1);
     }
 
-    /**
-     * Array version of: {@link #nmemcpy}
-     */
+    /** Array version of: {@link #nmemcpy} */
     public static native long nmemcpy(int[] dest, int[] src, long count);
 
-    /**
-     * Array version of: {@link #memcpy}
-     */
+    /** Array version of: {@link #memcpy} */
     @NativeType("void *")
     public static long memcpy(@NativeType("void *") int[] dest, @NativeType("void const *") int[] src) {
         if (CHECKS) {
@@ -456,14 +429,10 @@ public class LibCString {
         return nmemcpy(dest, src, Integer.toUnsignedLong(src.length) << 2);
     }
 
-    /**
-     * Array version of: {@link #nmemcpy}
-     */
+    /** Array version of: {@link #nmemcpy} */
     public static native long nmemcpy(long[] dest, long[] src, long count);
 
-    /**
-     * Array version of: {@link #memcpy}
-     */
+    /** Array version of: {@link #memcpy} */
     @NativeType("void *")
     public static long memcpy(@NativeType("void *") long[] dest, @NativeType("void const *") long[] src) {
         if (CHECKS) {
@@ -472,14 +441,10 @@ public class LibCString {
         return nmemcpy(dest, src, Integer.toUnsignedLong(src.length) << 3);
     }
 
-    /**
-     * Array version of: {@link #nmemcpy}
-     */
+    /** Array version of: {@link #nmemcpy} */
     public static native long nmemcpy(float[] dest, float[] src, long count);
 
-    /**
-     * Array version of: {@link #memcpy}
-     */
+    /** Array version of: {@link #memcpy} */
     @NativeType("void *")
     public static long memcpy(@NativeType("void *") float[] dest, @NativeType("void const *") float[] src) {
         if (CHECKS) {
@@ -488,14 +453,10 @@ public class LibCString {
         return nmemcpy(dest, src, Integer.toUnsignedLong(src.length) << 2);
     }
 
-    /**
-     * Array version of: {@link #nmemcpy}
-     */
+    /** Array version of: {@link #nmemcpy} */
     public static native long nmemcpy(double[] dest, double[] src, long count);
 
-    /**
-     * Array version of: {@link #memcpy}
-     */
+    /** Array version of: {@link #memcpy} */
     @NativeType("void *")
     public static long memcpy(@NativeType("void *") double[] dest, @NativeType("void const *") double[] src) {
         if (CHECKS) {
@@ -504,30 +465,22 @@ public class LibCString {
         return nmemcpy(dest, src, Integer.toUnsignedLong(src.length) << 3);
     }
 
-    /**
-     * Array version of: {@link #nmemmove}
-     */
+    /** Array version of: {@link #nmemmove} */
     public static native long nmemmove(byte[] dest, byte[] src, long count);
 
-    /**
-     * Array version of: {@link #memmove}
-     */
+    /** Array version of: {@link #memmove} */
     @NativeType("void *")
     public static long memmove(@NativeType("void *") byte[] dest, @NativeType("void const *") byte[] src) {
         if (CHECKS) {
             check(dest, src.length);
         }
-        return nmemmove(dest, src, Integer.toUnsignedLong(src.length));
+        return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 0);
     }
 
-    /**
-     * Array version of: {@link #nmemmove}
-     */
+    /** Array version of: {@link #nmemmove} */
     public static native long nmemmove(short[] dest, short[] src, long count);
 
-    /**
-     * Array version of: {@link #memmove}
-     */
+    /** Array version of: {@link #memmove} */
     @NativeType("void *")
     public static long memmove(@NativeType("void *") short[] dest, @NativeType("void const *") short[] src) {
         if (CHECKS) {
@@ -536,14 +489,10 @@ public class LibCString {
         return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 1);
     }
 
-    /**
-     * Array version of: {@link #nmemmove}
-     */
+    /** Array version of: {@link #nmemmove} */
     public static native long nmemmove(int[] dest, int[] src, long count);
 
-    /**
-     * Array version of: {@link #memmove}
-     */
+    /** Array version of: {@link #memmove} */
     @NativeType("void *")
     public static long memmove(@NativeType("void *") int[] dest, @NativeType("void const *") int[] src) {
         if (CHECKS) {
@@ -552,14 +501,10 @@ public class LibCString {
         return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 2);
     }
 
-    /**
-     * Array version of: {@link #nmemmove}
-     */
+    /** Array version of: {@link #nmemmove} */
     public static native long nmemmove(long[] dest, long[] src, long count);
 
-    /**
-     * Array version of: {@link #memmove}
-     */
+    /** Array version of: {@link #memmove} */
     @NativeType("void *")
     public static long memmove(@NativeType("void *") long[] dest, @NativeType("void const *") long[] src) {
         if (CHECKS) {
@@ -568,14 +513,10 @@ public class LibCString {
         return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 3);
     }
 
-    /**
-     * Array version of: {@link #nmemmove}
-     */
+    /** Array version of: {@link #nmemmove} */
     public static native long nmemmove(float[] dest, float[] src, long count);
 
-    /**
-     * Array version of: {@link #memmove}
-     */
+    /** Array version of: {@link #memmove} */
     @NativeType("void *")
     public static long memmove(@NativeType("void *") float[] dest, @NativeType("void const *") float[] src) {
         if (CHECKS) {
@@ -584,14 +525,10 @@ public class LibCString {
         return nmemmove(dest, src, Integer.toUnsignedLong(src.length) << 2);
     }
 
-    /**
-     * Array version of: {@link #nmemmove}
-     */
+    /** Array version of: {@link #nmemmove} */
     public static native long nmemmove(double[] dest, double[] src, long count);
 
-    /**
-     * Array version of: {@link #memmove}
-     */
+    /** Array version of: {@link #memmove} */
     @NativeType("void *")
     public static long memmove(@NativeType("void *") double[] dest, @NativeType("void const *") double[] src) {
         if (CHECKS) {
@@ -605,6 +542,7 @@ public class LibCString {
      *
      * @param dest pointer to destination
      * @param c    character to set
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -617,6 +555,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")
@@ -635,6 +574,7 @@ public class LibCString {
      *
      * @param dest pointer to the destination memory area
      * @param src  pointer to the source memory area
+     *
      * @return the value of {@code dest}
      */
     @NativeType("void *")

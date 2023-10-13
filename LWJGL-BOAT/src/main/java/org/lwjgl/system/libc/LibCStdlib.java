@@ -21,8 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class LibCStdlib {
 
     static {
-        Library.initialize();
-    }
+        Library.initialize(); }
 
     protected LibCStdlib() {
         throw new UnsupportedOperationException();
@@ -30,9 +29,7 @@ public class LibCStdlib {
 
     // --- [ malloc ] ---
 
-    /**
-     * Unsafe version of: {@link #malloc}
-     */
+    /** Unsafe version of: {@link #malloc} */
     public static native long nmalloc(long size);
 
     /**
@@ -50,9 +47,7 @@ public class LibCStdlib {
 
     // --- [ calloc ] ---
 
-    /**
-     * Unsafe version of: {@link #calloc}
-     */
+    /** Unsafe version of: {@link #calloc} */
     public static native long ncalloc(long nmemb, long size);
 
     /**
@@ -72,9 +67,7 @@ public class LibCStdlib {
 
     // --- [ realloc ] ---
 
-    /**
-     * Unsafe version of: {@link #realloc}
-     */
+    /** Unsafe version of: {@link #realloc} */
     public static native long nrealloc(long ptr, long size);
 
     /**
@@ -96,9 +89,7 @@ public class LibCStdlib {
 
     // --- [ free ] ---
 
-    /**
-     * Unsafe version of: {@link #free}
-     */
+    /** Unsafe version of: {@link #free} */
     public static native void nfree(long ptr);
 
     /**
@@ -173,9 +164,7 @@ public class LibCStdlib {
 
     // --- [ aligned_alloc ] ---
 
-    /**
-     * Unsafe version of: {@link #aligned_alloc}
-     */
+    /** Unsafe version of: {@link #aligned_alloc} */
     public static native long naligned_alloc(long alignment, long size);
 
     /**
@@ -194,9 +183,7 @@ public class LibCStdlib {
 
     // --- [ aligned_free ] ---
 
-    /**
-     * Unsafe version of: {@link #aligned_free}
-     */
+    /** Unsafe version of: {@link #aligned_free} */
     public static native void naligned_free(long ptr);
 
     /**

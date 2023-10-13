@@ -26,25 +26,19 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class WGLARBCreateContext {
 
-    /**
-     * Accepted as an attribute name in {@code attribList}.
-     */
+    /** Accepted as an attribute name in {@code attribList}. */
     public static final int
             WGL_CONTEXT_MAJOR_VERSION_ARB = 0x2091,
             WGL_CONTEXT_MINOR_VERSION_ARB = 0x2092,
             WGL_CONTEXT_LAYER_PLANE_ARB = 0x2093,
             WGL_CONTEXT_FLAGS_ARB = 0x2094;
 
-    /**
-     * Accepted as bits in the attribute value for {@link #WGL_CONTEXT_FLAGS_ARB CONTEXT_FLAGS_ARB} in {@code attribList}.
-     */
+    /** Accepted as bits in the attribute value for {@link #WGL_CONTEXT_FLAGS_ARB CONTEXT_FLAGS_ARB} in {@code attribList}. */
     public static final int
             WGL_CONTEXT_DEBUG_BIT_ARB = 0x1,
             WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB = 0x2;
 
-    /**
-     * New errors returned by {@link org.lwjgl.system.windows.WinBase#GetLastError}.
-     */
+    /** New errors returned by {@link org.lwjgl.system.windows.WinBase#GetLastError}. */
     public static final int ERROR_INVALID_VERSION_ARB = 0x2095;
 
     protected WGLARBCreateContext() {
@@ -53,15 +47,13 @@ public class WGLARBCreateContext {
 
     static boolean isAvailable(WGLCapabilities caps) {
         return checkFunctions(
-                caps.wglCreateContextAttribsARB
+            caps.wglCreateContextAttribsARB
         );
     }
 
     // --- [ wglCreateContextAttribsARB ] ---
 
-    /**
-     * Unsafe version of: {@link #wglCreateContextAttribsARB CreateContextAttribsARB}
-     */
+    /** Unsafe version of: {@link #wglCreateContextAttribsARB CreateContextAttribsARB} */
     public static long nwglCreateContextAttribsARB(long hdc, long shareContext, long attribList) {
         long __functionAddress = GL.getCapabilitiesWGL().wglCreateContextAttribsARB;
         if (CHECKS) {
@@ -89,9 +81,7 @@ public class WGLARBCreateContext {
         return nwglCreateContextAttribsARB(hdc, shareContext, memAddressSafe(attribList));
     }
 
-    /**
-     * Array version of: {@link #wglCreateContextAttribsARB CreateContextAttribsARB}
-     */
+    /** Array version of: {@link #wglCreateContextAttribsARB CreateContextAttribsARB} */
     @NativeType("HGLRC")
     public static long wglCreateContextAttribsARB(@NativeType("HDC") long hdc, @NativeType("HGLRC") long shareContext, @Nullable @NativeType("int const *") int[] attribList) {
         long __functionAddress = GL.getCapabilitiesWGL().wglCreateContextAttribsARB;

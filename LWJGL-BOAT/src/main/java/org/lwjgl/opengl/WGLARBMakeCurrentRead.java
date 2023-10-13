@@ -20,9 +20,7 @@ import static org.lwjgl.system.JNI.*;
  */
 public class WGLARBMakeCurrentRead {
 
-    /**
-     * New errors returned by {@link org.lwjgl.system.windows.WinBase#GetLastError}.
-     */
+    /** New errors returned by {@link org.lwjgl.system.windows.WinBase#GetLastError}. */
     public static final int
             ERROR_INVALID_PIXEL_TYPE_ARB = 0x2043,
             ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB = 0x2054;
@@ -80,9 +78,7 @@ public class WGLARBMakeCurrentRead {
 
     // --- [ wglGetCurrentReadDCARB ] ---
 
-    /**
-     * Returns the "read" device context for the current OpenGL context.
-     */
+    /** Returns the "read" device context for the current OpenGL context. */
     @NativeType("HDC")
     public static long wglGetCurrentReadDCARB() {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetCurrentReadDCARB;

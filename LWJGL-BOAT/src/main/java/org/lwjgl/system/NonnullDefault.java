@@ -6,7 +6,6 @@ package org.lwjgl.system;
 
 import javax.annotation.*;
 import javax.annotation.meta.*;
-
 import java.lang.annotation.*;
 
 @Documented

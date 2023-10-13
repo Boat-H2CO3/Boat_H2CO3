@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.LongBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_timer_query.txt">ARB_timer_query</a> extension.
@@ -30,9 +30,7 @@ import java.nio.LongBuffer;
  */
 public class ARBTimerQuery {
 
-    /**
-     * Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.
-     */
+    /** Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv. */
     public static final int GL_TIME_ELAPSED = 0x88BF;
 
     /**
@@ -69,9 +67,7 @@ public class ARBTimerQuery {
 
     // --- [ glGetQueryObjecti64v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetQueryObjecti64v GetQueryObjecti64v}
-     */
+    /** Unsafe version of: {@link #glGetQueryObjecti64v GetQueryObjecti64v} */
     public static void nglGetQueryObjecti64v(int id, int pname, long params) {
         GL33C.nglGetQueryObjecti64v(id, pname, params);
     }
@@ -100,9 +96,7 @@ public class ARBTimerQuery {
 
     // --- [ glGetQueryObjectui64v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetQueryObjectui64v GetQueryObjectui64v}
-     */
+    /** Unsafe version of: {@link #glGetQueryObjectui64v GetQueryObjectui64v} */
     public static void nglGetQueryObjectui64v(int id, int pname, long params) {
         GL33C.nglGetQueryObjectui64v(id, pname, params);
     }
@@ -129,16 +123,12 @@ public class ARBTimerQuery {
         return GL33C.glGetQueryObjectui64(id, pname);
     }
 
-    /**
-     * Array version of: {@link #glGetQueryObjecti64v GetQueryObjecti64v}
-     */
+    /** Array version of: {@link #glGetQueryObjecti64v GetQueryObjecti64v} */
     public static void glGetQueryObjecti64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
         GL33C.glGetQueryObjecti64v(id, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetQueryObjectui64v GetQueryObjectui64v}
-     */
+    /** Array version of: {@link #glGetQueryObjectui64v GetQueryObjectui64v} */
     public static void glGetQueryObjectui64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint64 *") long[] params) {
         GL33C.glGetQueryObjectui64v(id, pname, params);
     }

@@ -5,15 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_draw_buffers.txt">ARB_draw_buffers</a> extension.
@@ -25,9 +23,7 @@ import java.nio.IntBuffer;
  */
 public class ARBDrawBuffers {
 
-    /**
-     * Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_MAX_DRAW_BUFFERS_ARB = 0x8824,
             GL_DRAW_BUFFER0_ARB = 0x8825,
@@ -79,9 +75,7 @@ public class ARBDrawBuffers {
         nglDrawBuffersARB(bufs.remaining(), memAddress(bufs));
     }
 
-    /**
-     * Array version of: {@link #glDrawBuffersARB DrawBuffersARB}
-     */
+    /** Array version of: {@link #glDrawBuffersARB DrawBuffersARB} */
     public static void glDrawBuffersARB(@NativeType("GLenum const *") int[] bufs) {
         long __functionAddress = GL.getICD().glDrawBuffersARB;
         if (CHECKS) {

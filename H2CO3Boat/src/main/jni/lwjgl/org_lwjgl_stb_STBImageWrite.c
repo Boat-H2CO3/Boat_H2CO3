@@ -4,6 +4,7 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
+DISABLE_WARNINGS()
 #include "lwjgl_malloc.h"
 #define STBIW_MALLOC(sz)    org_lwjgl_malloc(sz)
 #define STBIW_REALLOC(p,sz) org_lwjgl_realloc(p,sz)
@@ -16,6 +17,7 @@
     #define STBI_MSC_SECURE_CRT
 #endif
 #include "stb_image_write.h"
+ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 

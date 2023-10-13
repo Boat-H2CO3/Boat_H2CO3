@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_atomic_counters.txt">ARB_shader_atomic_counters</a> extension.
@@ -42,9 +42,7 @@ import java.nio.IntBuffer;
  */
 public class ARBShaderAtomicCounters {
 
-    /**
-     * Accepted by the {@code target} parameter of BindBufferBase and BindBufferRange.
-     */
+    /** Accepted by the {@code target} parameter of BindBufferBase and BindBufferRange. */
     public static final int GL_ATOMIC_COUNTER_BUFFER = 0x92C0;
 
     /**
@@ -107,9 +105,7 @@ public class ARBShaderAtomicCounters {
      */
     public static final int GL_UNSIGNED_INT_ATOMIC_COUNTER = 0x92DB;
 
-    static {
-        GL.initialize();
-    }
+    static { GL.initialize(); }
 
     protected ARBShaderAtomicCounters() {
         throw new UnsupportedOperationException();
@@ -117,15 +113,13 @@ public class ARBShaderAtomicCounters {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glGetActiveAtomicCounterBufferiv
+            caps.glGetActiveAtomicCounterBufferiv
         );
     }
 
     // --- [ glGetActiveAtomicCounterBufferiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetActiveAtomicCounterBufferiv GetActiveAtomicCounterBufferiv}
-     */
+    /** Unsafe version of: {@link #glGetActiveAtomicCounterBufferiv GetActiveAtomicCounterBufferiv} */
     public static void nglGetActiveAtomicCounterBufferiv(int program, int bufferIndex, int pname, long params) {
         GL42C.nglGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, params);
     }
@@ -154,9 +148,7 @@ public class ARBShaderAtomicCounters {
         return GL42C.glGetActiveAtomicCounterBufferi(program, bufferIndex, pname);
     }
 
-    /**
-     * Array version of: {@link #glGetActiveAtomicCounterBufferiv GetActiveAtomicCounterBufferiv}
-     */
+    /** Array version of: {@link #glGetActiveAtomicCounterBufferiv GetActiveAtomicCounterBufferiv} */
     public static void glGetActiveAtomicCounterBufferiv(@NativeType("GLuint") int program, @NativeType("GLuint") int bufferIndex, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL42C.glGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, params);
     }

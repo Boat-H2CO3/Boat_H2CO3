@@ -8,7 +8,6 @@ import org.lwjgl.*;
 
 import javax.annotation.*;
 import javax.annotation.concurrent.*;
-
 import java.io.*;
 import java.net.*;
 import java.nio.channels.*;
@@ -48,6 +47,7 @@ final class SharedLibraryLoader {
      * @param name     the resource name
      * @param filename the resource filename
      * @param resource the classpath {@link URL} were the resource can be found
+     *
      * @return a {@link FileChannel} that has locked the resource file
      */
     static FileChannel load(String name, String filename, URL resource) {
@@ -93,6 +93,7 @@ final class SharedLibraryLoader {
      * Returns a path to a file that can be written. Tries multiple locations and verifies writing succeeds.
      *
      * @param filename the resource filename
+     *
      * @return the extracted library
      */
     private static Path getExtractPath(String filename, URL resource) {
@@ -165,7 +166,9 @@ final class SharedLibraryLoader {
      *
      * @param resource the resource to extract
      * @param file     the extracted file
+     *
      * @return a {@link FileChannel} that has locked the resource
+     *
      * @throws IOException if an IO error occurs
      */
     private static FileChannel extract(Path file, URL resource) throws IOException {
@@ -230,6 +233,7 @@ final class SharedLibraryLoader {
      * Returns a CRC of the remaining bytes in a stream.
      *
      * @param input the stream
+     *
      * @return the CRC
      */
     private static long crc(InputStream input) throws IOException {
@@ -247,6 +251,7 @@ final class SharedLibraryLoader {
      * Returns true if the parent directories of the file can be created and the file can be written.
      *
      * @param file the file to test
+     *
      * @return true if the file is writable
      */
     private static boolean canWrite(Path root, Path file, URL resource) {

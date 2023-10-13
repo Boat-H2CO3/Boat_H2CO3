@@ -39,17 +39,13 @@ public abstract class STBIReadCallback extends Callback implements STBIReadCallb
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static STBIReadCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code STBIReadCallback} instance that delegates to the specified {@code STBIReadCallbackI} instance.
-     */
+    /** Creates a {@code STBIReadCallback} instance that delegates to the specified {@code STBIReadCallbackI} instance. */
     public static STBIReadCallback create(STBIReadCallbackI instance) {
         return instance instanceof STBIReadCallback
                 ? (STBIReadCallback) instance
@@ -71,6 +67,7 @@ public abstract class STBIReadCallback extends Callback implements STBIReadCallb
      *
      * @param data the STBIReadCallback {@code data} argument
      * @param size the STBIReadCallback {@code size} argument
+     *
      * @return the data as a ByteBuffer
      */
     public static ByteBuffer getData(long data, int size) {

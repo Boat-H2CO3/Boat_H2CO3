@@ -5,25 +5,16 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.Checks.checkSafe;
-import static org.lwjgl.system.Checks.lengthSafe;
-import static org.lwjgl.system.Checks.remainingSafe;
-import static org.lwjgl.system.JNI.callPPPPPI;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.memAddress;
-import static org.lwjgl.system.MemoryUtil.memAddressSafe;
+import javax.annotation.*;
 
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_debug_output.txt">AMD_debug_output</a> extension.
@@ -58,25 +49,19 @@ import javax.annotation.Nullable;
  */
 public class AMDDebugOutput {
 
-    /**
-     * Tokens accepted by GetIntegerv.
-     */
+    /** Tokens accepted by GetIntegerv. */
     public static final int
             GL_MAX_DEBUG_MESSAGE_LENGTH_AMD = 0x9143,
             GL_MAX_DEBUG_LOGGED_MESSAGES_AMD = 0x9144,
             GL_DEBUG_LOGGED_MESSAGES_AMD = 0x9145;
 
-    /**
-     * Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, DebugMessageInsertAMD, and DEBUGPROCAMD callback function for {@code severity}.
-     */
+    /** Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, DebugMessageInsertAMD, and DEBUGPROCAMD callback function for {@code severity}. */
     public static final int
             GL_DEBUG_SEVERITY_HIGH_AMD = 0x9146,
             GL_DEBUG_SEVERITY_MEDIUM_AMD = 0x9147,
             GL_DEBUG_SEVERITY_LOW_AMD = 0x9148;
 
-    /**
-     * Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, and DEBUGPROCAMD callback function for {@code category}.
-     */
+    /** Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, and DEBUGPROCAMD callback function for {@code category}. */
     public static final int
             GL_DEBUG_CATEGORY_API_ERROR_AMD = 0x9149,
             GL_DEBUG_CATEGORY_WINDOW_SYSTEM_AMD = 0x914A,
@@ -253,9 +238,7 @@ public class AMDDebugOutput {
 
     // --- [ glDebugMessageCallbackAMD ] ---
 
-    /**
-     * Unsafe version of: {@link #glDebugMessageCallbackAMD DebugMessageCallbackAMD}
-     */
+    /** Unsafe version of: {@link #glDebugMessageCallbackAMD DebugMessageCallbackAMD} */
     public static native void nglDebugMessageCallbackAMD(long callback, long userParam);
 
     /**
@@ -333,9 +316,7 @@ public class AMDDebugOutput {
         return nglGetDebugMessageLogAMD(count, remainingSafe(messageLog), memAddressSafe(categories), memAddressSafe(severities), memAddressSafe(ids), memAddressSafe(lengths), memAddressSafe(messageLog));
     }
 
-    /**
-     * Array version of: {@link #glDebugMessageEnableAMD DebugMessageEnableAMD}
-     */
+    /** Array version of: {@link #glDebugMessageEnableAMD DebugMessageEnableAMD} */
     public static void glDebugMessageEnableAMD(@NativeType("GLenum") int category, @NativeType("GLenum") int severity, @Nullable @NativeType("GLuint const *") int[] ids, @NativeType("GLboolean") boolean enabled) {
         long __functionAddress = GL.getICD().glDebugMessageEnableAMD;
         if (CHECKS) {
@@ -344,9 +325,7 @@ public class AMDDebugOutput {
         callPV(category, severity, lengthSafe(ids), ids, enabled, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetDebugMessageLogAMD GetDebugMessageLogAMD}
-     */
+    /** Array version of: {@link #glGetDebugMessageLogAMD GetDebugMessageLogAMD} */
     @NativeType("GLuint")
     public static int glGetDebugMessageLogAMD(@NativeType("GLuint") int count, @Nullable @NativeType("GLenum *") int[] categories, @Nullable @NativeType("GLuint *") int[] severities, @Nullable @NativeType("GLuint *") int[] ids, @Nullable @NativeType("GLsizei *") int[] lengths, @Nullable @NativeType("GLchar *") ByteBuffer messageLog) {
         long __functionAddress = GL.getICD().glGetDebugMessageLogAMD;

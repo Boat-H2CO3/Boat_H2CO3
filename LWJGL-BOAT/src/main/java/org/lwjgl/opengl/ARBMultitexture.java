@@ -5,18 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multitexture.txt">ARB_multitexture</a> extension.
@@ -27,9 +22,7 @@ import java.nio.ShortBuffer;
  */
 public class ARBMultitexture {
 
-    /**
-     * Accepted by the {@code texture} parameter of ActiveTexture and MultiTexCoord.
-     */
+    /** Accepted by the {@code texture} parameter of ActiveTexture and MultiTexCoord. */
     public static final int
             GL_TEXTURE0_ARB = 0x84C0,
             GL_TEXTURE1_ARB = 0x84C1,
@@ -64,9 +57,7 @@ public class ARBMultitexture {
             GL_TEXTURE30_ARB = 0x84DE,
             GL_TEXTURE31_ARB = 0x84DF;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int
             GL_ACTIVE_TEXTURE_ARB = 0x84E0,
             GL_CLIENT_ACTIVE_TEXTURE_ARB = 0x84E1,
@@ -154,9 +145,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord1fvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord1fvARB MultiTexCoord1fvARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord1fvARB MultiTexCoord1fvARB} */
     public static native void nglMultiTexCoord1fvARB(int texture, long v);
 
     /**
@@ -174,9 +163,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord1svARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord1svARB MultiTexCoord1svARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord1svARB MultiTexCoord1svARB} */
     public static native void nglMultiTexCoord1svARB(int texture, long v);
 
     /**
@@ -194,9 +181,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord1ivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord1ivARB MultiTexCoord1ivARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord1ivARB MultiTexCoord1ivARB} */
     public static native void nglMultiTexCoord1ivARB(int texture, long v);
 
     /**
@@ -214,9 +199,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord1dvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord1dvARB MultiTexCoord1dvARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord1dvARB MultiTexCoord1dvARB} */
     public static native void nglMultiTexCoord1dvARB(int texture, long v);
 
     /**
@@ -278,9 +261,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord2fvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord2fvARB MultiTexCoord2fvARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord2fvARB MultiTexCoord2fvARB} */
     public static native void nglMultiTexCoord2fvARB(int texture, long v);
 
     /**
@@ -298,9 +279,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord2svARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord2svARB MultiTexCoord2svARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord2svARB MultiTexCoord2svARB} */
     public static native void nglMultiTexCoord2svARB(int texture, long v);
 
     /**
@@ -318,9 +297,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord2ivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord2ivARB MultiTexCoord2ivARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord2ivARB MultiTexCoord2ivARB} */
     public static native void nglMultiTexCoord2ivARB(int texture, long v);
 
     /**
@@ -338,9 +315,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord2dvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord2dvARB MultiTexCoord2dvARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord2dvARB MultiTexCoord2dvARB} */
     public static native void nglMultiTexCoord2dvARB(int texture, long v);
 
     /**
@@ -406,9 +381,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord3fvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord3fvARB MultiTexCoord3fvARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord3fvARB MultiTexCoord3fvARB} */
     public static native void nglMultiTexCoord3fvARB(int texture, long v);
 
     /**
@@ -426,9 +399,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord3svARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord3svARB MultiTexCoord3svARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord3svARB MultiTexCoord3svARB} */
     public static native void nglMultiTexCoord3svARB(int texture, long v);
 
     /**
@@ -446,9 +417,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord3ivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord3ivARB MultiTexCoord3ivARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord3ivARB MultiTexCoord3ivARB} */
     public static native void nglMultiTexCoord3ivARB(int texture, long v);
 
     /**
@@ -466,9 +435,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord3dvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord3dvARB MultiTexCoord3dvARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord3dvARB MultiTexCoord3dvARB} */
     public static native void nglMultiTexCoord3dvARB(int texture, long v);
 
     /**
@@ -538,9 +505,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord4fvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord4fvARB MultiTexCoord4fvARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord4fvARB MultiTexCoord4fvARB} */
     public static native void nglMultiTexCoord4fvARB(int texture, long v);
 
     /**
@@ -558,9 +523,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord4svARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord4svARB MultiTexCoord4svARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord4svARB MultiTexCoord4svARB} */
     public static native void nglMultiTexCoord4svARB(int texture, long v);
 
     /**
@@ -578,9 +541,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord4ivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord4ivARB MultiTexCoord4ivARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord4ivARB MultiTexCoord4ivARB} */
     public static native void nglMultiTexCoord4ivARB(int texture, long v);
 
     /**
@@ -598,9 +559,7 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord4dvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiTexCoord4dvARB MultiTexCoord4dvARB}
-     */
+    /** Unsafe version of: {@link #glMultiTexCoord4dvARB MultiTexCoord4dvARB} */
     public static native void nglMultiTexCoord4dvARB(int texture, long v);
 
     /**
@@ -616,9 +575,7 @@ public class ARBMultitexture {
         nglMultiTexCoord4dvARB(texture, memAddress(v));
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord1fvARB MultiTexCoord1fvARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord1fvARB MultiTexCoord1fvARB} */
     public static void glMultiTexCoord1fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1fvARB;
         if (CHECKS) {
@@ -628,9 +585,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord1svARB MultiTexCoord1svARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord1svARB MultiTexCoord1svARB} */
     public static void glMultiTexCoord1svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1svARB;
         if (CHECKS) {
@@ -640,9 +595,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord1ivARB MultiTexCoord1ivARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord1ivARB MultiTexCoord1ivARB} */
     public static void glMultiTexCoord1ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1ivARB;
         if (CHECKS) {
@@ -652,9 +605,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord1dvARB MultiTexCoord1dvARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord1dvARB MultiTexCoord1dvARB} */
     public static void glMultiTexCoord1dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1dvARB;
         if (CHECKS) {
@@ -664,9 +615,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord2fvARB MultiTexCoord2fvARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord2fvARB MultiTexCoord2fvARB} */
     public static void glMultiTexCoord2fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2fvARB;
         if (CHECKS) {
@@ -676,9 +625,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord2svARB MultiTexCoord2svARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord2svARB MultiTexCoord2svARB} */
     public static void glMultiTexCoord2svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2svARB;
         if (CHECKS) {
@@ -688,9 +635,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord2ivARB MultiTexCoord2ivARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord2ivARB MultiTexCoord2ivARB} */
     public static void glMultiTexCoord2ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2ivARB;
         if (CHECKS) {
@@ -700,9 +645,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord2dvARB MultiTexCoord2dvARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord2dvARB MultiTexCoord2dvARB} */
     public static void glMultiTexCoord2dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2dvARB;
         if (CHECKS) {
@@ -712,9 +655,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord3fvARB MultiTexCoord3fvARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord3fvARB MultiTexCoord3fvARB} */
     public static void glMultiTexCoord3fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3fvARB;
         if (CHECKS) {
@@ -724,9 +665,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord3svARB MultiTexCoord3svARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord3svARB MultiTexCoord3svARB} */
     public static void glMultiTexCoord3svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3svARB;
         if (CHECKS) {
@@ -736,9 +675,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord3ivARB MultiTexCoord3ivARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord3ivARB MultiTexCoord3ivARB} */
     public static void glMultiTexCoord3ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3ivARB;
         if (CHECKS) {
@@ -748,9 +685,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord3dvARB MultiTexCoord3dvARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord3dvARB MultiTexCoord3dvARB} */
     public static void glMultiTexCoord3dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3dvARB;
         if (CHECKS) {
@@ -760,9 +695,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord4fvARB MultiTexCoord4fvARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord4fvARB MultiTexCoord4fvARB} */
     public static void glMultiTexCoord4fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4fvARB;
         if (CHECKS) {
@@ -772,9 +705,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord4svARB MultiTexCoord4svARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord4svARB MultiTexCoord4svARB} */
     public static void glMultiTexCoord4svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4svARB;
         if (CHECKS) {
@@ -784,9 +715,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord4ivARB MultiTexCoord4ivARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord4ivARB MultiTexCoord4ivARB} */
     public static void glMultiTexCoord4ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4ivARB;
         if (CHECKS) {
@@ -796,9 +725,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoord4dvARB MultiTexCoord4dvARB}
-     */
+    /** Array version of: {@link #glMultiTexCoord4dvARB MultiTexCoord4dvARB} */
     public static void glMultiTexCoord4dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4dvARB;
         if (CHECKS) {

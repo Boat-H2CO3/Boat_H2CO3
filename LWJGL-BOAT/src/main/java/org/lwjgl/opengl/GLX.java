@@ -23,9 +23,7 @@ import org.lwjgl.system.linux.*;
  */
 public class GLX {
 
-    /**
-     * Errors.
-     */
+    /** Errors. */
     public static final int
             GLXBadContext = 0,
             GLXBadContextState = 1,
@@ -41,9 +39,7 @@ public class GLX {
             GLXBadCurrentDrawable = 11,
             GLXBadWindow = 12;
 
-    /**
-     * Names for attributes to {@link #glXGetConfig GetConfig}.
-     */
+    /** Names for attributes to {@link #glXGetConfig GetConfig}. */
     public static final int
             GLX_USE_GL = 1,
             GLX_BUFFER_SIZE = 2,
@@ -63,9 +59,7 @@ public class GLX {
             GLX_ACCUM_BLUE_SIZE = 16,
             GLX_ACCUM_ALPHA_SIZE = 17;
 
-    /**
-     * Error return values from {@link #glXGetConfig GetConfig}. Success is indicated by a value of 0.
-     */
+    /** Error return values from {@link #glXGetConfig GetConfig}. Success is indicated by a value of 0. */
     public static final int
             GLX_BAD_SCREEN = 1,
             GLX_BAD_ATTRIBUTE = 2,
@@ -79,17 +73,13 @@ public class GLX {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * Contains the function pointers loaded from {@code GL.getFunctionProvider()}.
-     */
+    /** Contains the function pointers loaded from {@code GL.getFunctionProvider()}. */
     public static final class Functions {
 
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 QueryExtension = apiGetFunctionAddress(GL.getFunctionProvider(), "glXQueryExtension"),
                 QueryVersion = apiGetFunctionAddress(GL.getFunctionProvider(), "glXQueryVersion"),
@@ -113,9 +103,7 @@ public class GLX {
 
     // --- [ glXQueryExtension ] ---
 
-    /**
-     * Unsafe version of: {@link #glXQueryExtension QueryExtension}
-     */
+    /** Unsafe version of: {@link #glXQueryExtension QueryExtension} */
     public static int nglXQueryExtension(long display, long error_base, long event_base) {
         long __functionAddress = Functions.QueryExtension;
         if (CHECKS) {
@@ -142,9 +130,7 @@ public class GLX {
 
     // --- [ glXQueryVersion ] ---
 
-    /**
-     * Unsafe version of: {@link #glXQueryVersion QueryVersion}
-     */
+    /** Unsafe version of: {@link #glXQueryVersion QueryVersion} */
     public static int nglXQueryVersion(long display, long major, long minor) {
         long __functionAddress = Functions.QueryVersion;
         if (CHECKS) {
@@ -171,9 +157,7 @@ public class GLX {
 
     // --- [ glXGetConfig ] ---
 
-    /**
-     * Unsafe version of: {@link #glXGetConfig GetConfig}
-     */
+    /** Unsafe version of: {@link #glXGetConfig GetConfig} */
     public static int nglXGetConfig(long display, long visual, int attribute, long value) {
         long __functionAddress = Functions.GetConfig;
         if (CHECKS) {
@@ -200,9 +184,7 @@ public class GLX {
 
     // --- [ glXChooseVisual ] ---
 
-    /**
-     * Unsafe version of: {@link #glXChooseVisual ChooseVisual}
-     */
+    /** Unsafe version of: {@link #glXChooseVisual ChooseVisual} */
     public static long nglXChooseVisual(long display, int screen, long attrib_list) {
         long __functionAddress = Functions.ChooseVisual;
         if (CHECKS) {
@@ -217,8 +199,9 @@ public class GLX {
      * @param display     the connection to the X server
      * @param screen      the screen number
      * @param attrib_list a list of attributes terminated with {@code None}
+     *
      * @return a pointer to an {@code XVisualInfo} structure describing the visual that best matches the specified attributes. If no matching visual exists, {@code NULL} is
-     * returned.
+     *         returned.
      */
     @Nullable
     @NativeType("XVisualInfo *")
@@ -232,9 +215,7 @@ public class GLX {
 
     // --- [ glXCreateContext ] ---
 
-    /**
-     * Unsafe version of: {@link #glXCreateContext CreateContext}
-     */
+    /** Unsafe version of: {@link #glXCreateContext CreateContext} */
     public static long nglXCreateContext(long display, long visual, long share_list, int direct) {
         long __functionAddress = Functions.CreateContext;
         if (CHECKS) {
@@ -335,9 +316,7 @@ public class GLX {
 
     // --- [ glXGetCurrentContext ] ---
 
-    /**
-     * Returns the GLXContext that is current in the current thread.
-     */
+    /** Returns the GLXContext that is current in the current thread. */
     @NativeType("GLXContext")
     public static long glXGetCurrentContext() {
         long __functionAddress = Functions.GetCurrentContext;
@@ -346,9 +325,7 @@ public class GLX {
 
     // --- [ glXGetCurrentDrawable ] ---
 
-    /**
-     * Returns the XID of the current drawable used for rendering.
-     */
+    /** Returns the XID of the current drawable used for rendering. */
     @NativeType("GLXDrawable")
     public static long glXGetCurrentDrawable() {
         long __functionAddress = Functions.GetCurrentDrawable;
@@ -419,9 +396,7 @@ public class GLX {
 
     // --- [ glXCreateGLXPixmap ] ---
 
-    /**
-     * Unsafe version of: {@link #glXCreateGLXPixmap CreateGLXPixmap}
-     */
+    /** Unsafe version of: {@link #glXCreateGLXPixmap CreateGLXPixmap} */
     public static long nglXCreateGLXPixmap(long display, long visual, long pixmap) {
         long __functionAddress = Functions.CreateGLXPixmap;
         if (CHECKS) {
@@ -460,9 +435,7 @@ public class GLX {
         callPPV(display, pixmap, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glXQueryExtension QueryExtension}
-     */
+    /** Array version of: {@link #glXQueryExtension QueryExtension} */
     @NativeType("Bool")
     public static boolean glXQueryExtension(@NativeType("Display *") long display, @NativeType("int *") int[] error_base, @NativeType("int *") int[] event_base) {
         long __functionAddress = Functions.QueryExtension;
@@ -474,9 +447,7 @@ public class GLX {
         return callPPPI(display, error_base, event_base, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #glXQueryVersion QueryVersion}
-     */
+    /** Array version of: {@link #glXQueryVersion QueryVersion} */
     @NativeType("Bool")
     public static boolean glXQueryVersion(@NativeType("Display *") long display, @NativeType("int *") int[] major, @NativeType("int *") int[] minor) {
         long __functionAddress = Functions.QueryVersion;
@@ -488,9 +459,7 @@ public class GLX {
         return callPPPI(display, major, minor, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #glXGetConfig GetConfig}
-     */
+    /** Array version of: {@link #glXGetConfig GetConfig} */
     public static int glXGetConfig(@NativeType("Display *") long display, @NativeType("XVisualInfo *") XVisualInfo visual, int attribute, @NativeType("int *") int[] value) {
         long __functionAddress = Functions.GetConfig;
         if (CHECKS) {
@@ -501,9 +470,7 @@ public class GLX {
         return callPPPI(display, visual.address(), attribute, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glXChooseVisual ChooseVisual}
-     */
+    /** Array version of: {@link #glXChooseVisual ChooseVisual} */
     @Nullable
     @NativeType("XVisualInfo *")
     public static XVisualInfo glXChooseVisual(@NativeType("Display *") long display, int screen, @Nullable @NativeType("int *") int[] attrib_list) {

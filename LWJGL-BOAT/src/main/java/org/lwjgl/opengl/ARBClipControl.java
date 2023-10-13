@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clip_control.txt">ARB_clip_control</a> extension.
@@ -19,23 +19,17 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBClipControl {
 
-    /**
-     * Accepted by the {@code origin} parameter of {@link #glClipControl ClipControl}.
-     */
+    /** Accepted by the {@code origin} parameter of {@link #glClipControl ClipControl}. */
     public static final int
             GL_LOWER_LEFT = 0x8CA1,
             GL_UPPER_LEFT = 0x8CA2;
 
-    /**
-     * Accepted by the {@code depth} parameter of {@link #glClipControl ClipControl}.
-     */
+    /** Accepted by the {@code depth} parameter of {@link #glClipControl ClipControl}. */
     public static final int
             GL_NEGATIVE_ONE_TO_ONE = 0x935E,
             GL_ZERO_TO_ONE = 0x935F;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_CLIP_ORIGIN = 0x935C,
             GL_CLIP_DEPTH_MODE = 0x935D;

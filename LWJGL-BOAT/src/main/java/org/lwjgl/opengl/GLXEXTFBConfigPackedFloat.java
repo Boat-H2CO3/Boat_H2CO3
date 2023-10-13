@@ -23,9 +23,7 @@ package org.lwjgl.opengl;
  */
 public final class GLXEXTFBConfigPackedFloat {
 
-    /**
-     * Accepted as values of the {@code render_type} arguments in the {@link GLX13#glXCreateNewContext CreateNewContext} and {@link GLX#glXCreateContext CreateContext} functions.
-     */
+    /** Accepted as values of the {@code render_type} arguments in the {@link GLX13#glXCreateNewContext CreateNewContext} and {@link GLX#glXCreateContext CreateContext} functions. */
     public static final int GLX_RGBA_UNSIGNED_FLOAT_TYPE_EXT = 0x20B1;
 
     /**

@@ -32,16 +32,12 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTProvokingVertex {
 
-    /**
-     * Accepted by the {@code mode} parameter of ProvokingVertexEXT.
-     */
+    /** Accepted by the {@code mode} parameter of ProvokingVertexEXT. */
     public static final int
             GL_FIRST_VERTEX_CONVENTION_EXT = 0x8E4D,
             GL_LAST_VERTEX_CONVENTION_EXT = 0x8E4E;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_PROVOKING_VERTEX_EXT = 0x8E4F,
             GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT = 0x8E4C;

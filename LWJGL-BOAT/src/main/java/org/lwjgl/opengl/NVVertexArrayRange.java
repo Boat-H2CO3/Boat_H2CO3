@@ -20,22 +20,16 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVVertexArrayRange {
 
-    /**
-     * Accepted by the {@code cap} parameter of EnableClientState, DisableClientState, and IsEnabled.
-     */
+    /** Accepted by the {@code cap} parameter of EnableClientState, DisableClientState, and IsEnabled. */
     public static final int GL_VERTEX_ARRAY_RANGE_NV = 0x851D;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_VERTEX_ARRAY_RANGE_LENGTH_NV = 0x851E,
             GL_VERTEX_ARRAY_RANGE_VALID_NV = 0x851F,
             GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_NV = 0x8520;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetPointerv.
-     */
+    /** Accepted by the {@code pname} parameter of GetPointerv. */
     public static final int GL_VERTEX_ARRAY_RANGE_POINTER_NV = 0x8521;
 
     static {

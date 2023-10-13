@@ -170,24 +170,16 @@ public final class RenderTexture {
     */
     static final int WGL_DEPTH_COMPONENT_NV = 0x20A7;
 
-    /**
-     * The TEXTURE_1D target.
-     */
+    /** The TEXTURE_1D target. */
     public static final int RENDER_TEXTURE_1D = WGL_TEXTURE_1D_ARB;
 
-    /**
-     * The TEXTURE_2D target.
-     */
+    /** The TEXTURE_2D target. */
     public static final int RENDER_TEXTURE_2D = WGL_TEXTURE_2D_ARB;
 
-    /**
-     * The TEXTURE_RECTANGLE target.
-     */
+    /** The TEXTURE_RECTANGLE target. */
     public static final int RENDER_TEXTURE_RECTANGLE = WGL_TEXTURE_RECTANGLE_NV;
 
-    /**
-     * The TEXTURE_CUBE_MAP target.
-     */
+    /** The TEXTURE_CUBE_MAP target. */
     public static final int RENDER_TEXTURE_CUBE_MAP = WGL_TEXTURE_CUBE_MAP_ARB;
 
     IntBuffer pixelFormatCaps;

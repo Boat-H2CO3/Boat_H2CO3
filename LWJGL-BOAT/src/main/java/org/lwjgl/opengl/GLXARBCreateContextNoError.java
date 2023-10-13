@@ -15,9 +15,7 @@ package org.lwjgl.opengl;
  */
 public final class GLXARBCreateContextNoError {
 
-    /**
-     * Accepted as an attribute name in the {@code *attrib_list} argument to {@link GLXARBCreateContext#glXCreateContextAttribsARB CreateContextAttribsARB}.
-     */
+    /** Accepted as an attribute name in the {@code *attrib_list} argument to {@link GLXARBCreateContext#glXCreateContextAttribsARB CreateContextAttribsARB}. */
     public static final int GLX_CONTEXT_OPENGL_NO_ERROR_ARB = 0x31B3;
 
     private GLXARBCreateContextNoError() {

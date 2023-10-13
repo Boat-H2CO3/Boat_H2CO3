@@ -41,17 +41,13 @@ public abstract class GLFWWindowContentScaleCallback extends Callback implements
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWWindowContentScaleCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWWindowContentScaleCallback} instance that delegates to the specified {@code GLFWWindowContentScaleCallbackI} instance.
-     */
+    /** Creates a {@code GLFWWindowContentScaleCallback} instance that delegates to the specified {@code GLFWWindowContentScaleCallbackI} instance. */
     public static GLFWWindowContentScaleCallback create(GLFWWindowContentScaleCallbackI instance) {
         return instance instanceof GLFWWindowContentScaleCallback
                 ? (GLFWWindowContentScaleCallback) instance
@@ -66,9 +62,7 @@ public abstract class GLFWWindowContentScaleCallback extends Callback implements
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetWindowContentScaleCallback SetWindowContentScaleCallback}.
-     */
+    /** See {@link GLFW#glfwSetWindowContentScaleCallback SetWindowContentScaleCallback}. */
     public GLFWWindowContentScaleCallback set(long window) {
         glfwSetWindowContentScaleCallback(window, this);
         return this;

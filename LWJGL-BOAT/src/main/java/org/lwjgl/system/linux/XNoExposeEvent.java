@@ -221,7 +221,7 @@ public class XNoExposeEvent extends Struct implements NativeResource {
             long display,
             long drawable,
             int major_code,
-            int minor_code
+        int minor_code
     ) {
         type(type);
         serial(serial);
@@ -238,6 +238,7 @@ public class XNoExposeEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XNoExposeEvent set(XNoExposeEvent src) {
@@ -247,23 +248,17 @@ public class XNoExposeEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XNoExposeEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XNoExposeEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XNoExposeEvent malloc() {
         return wrap(XNoExposeEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XNoExposeEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XNoExposeEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XNoExposeEvent calloc() {
         return wrap(XNoExposeEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XNoExposeEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XNoExposeEvent} instance allocated with {@link BufferUtils}. */
     public static XNoExposeEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XNoExposeEvent.class, memAddress(container), container);
@@ -276,9 +271,7 @@ public class XNoExposeEvent extends Struct implements NativeResource {
         return wrap(XNoExposeEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XNoExposeEvent createSafe(long address) {
         return address == NULL ? null : wrap(XNoExposeEvent.class, address);
@@ -322,9 +315,7 @@ public class XNoExposeEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -339,9 +330,7 @@ public class XNoExposeEvent extends Struct implements NativeResource {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XNoExposeEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XNoExposeEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XNoExposeEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -385,7 +374,7 @@ public class XNoExposeEvent extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -525,16 +514,14 @@ public class XNoExposeEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XNoExposeEvent} structs.
-     */
+    /** An array of {@link XNoExposeEvent} structs. */
     public static class Buffer extends StructBuffer<XNoExposeEvent, Buffer> implements NativeResource {
 
         private static final XNoExposeEvent ELEMENT_FACTORY = XNoExposeEvent.create(-1L);
 
         /**
          * Creates a new {@code XNoExposeEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XNoExposeEvent#SIZEOF}, and its mark will be undefined.
@@ -652,25 +639,11 @@ public class XNoExposeEvent extends Struct implements NativeResource {
          * Sets the specified value to the {@code drawable} field.
          */
         public Buffer drawable(@NativeType("Drawable") long value) {
-            XNoExposeEvent.ndrawable(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code major_code} field.
-         */
-        public Buffer major_code(int value) {
-            XNoExposeEvent.nmajor_code(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code minor_code} field.
-         */
-        public Buffer minor_code(int value) {
-            XNoExposeEvent.nminor_code(address(), value);
-            return this;
-        }
+            XNoExposeEvent.ndrawable(address(), value); return this; }
+        /** Sets the specified value to the {@code major_code} field. */
+        public Buffer major_code(int value) { XNoExposeEvent.nmajor_code(address(), value); return this; }
+        /** Sets the specified value to the {@code minor_code} field. */
+        public Buffer minor_code(int value) { XNoExposeEvent.nminor_code(address(), value); return this; }
 
     }
 

@@ -38,17 +38,13 @@ public abstract class CGEventTapCallBack extends Callback implements CGEventTapC
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static CGEventTapCallBack createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code CGEventTapCallBack} instance that delegates to the specified {@code CGEventTapCallBackI} instance.
-     */
+    /** Creates a {@code CGEventTapCallBack} instance that delegates to the specified {@code CGEventTapCallBackI} instance. */
     public static CGEventTapCallBack create(CGEventTapCallBackI instance) {
         return instance instanceof CGEventTapCallBack
                 ? (CGEventTapCallBack) instance

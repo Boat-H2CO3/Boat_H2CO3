@@ -57,7 +57,7 @@ import java.awt.event.HierarchyListener;
  * <p/>
  *
  * @author $Author$
- * $Id$
+ *         $Id$
  * @version $Revision$
  */
 public class AWTGLCanvas extends Canvas implements DrawableLWJGL, ComponentListener, HierarchyListener {

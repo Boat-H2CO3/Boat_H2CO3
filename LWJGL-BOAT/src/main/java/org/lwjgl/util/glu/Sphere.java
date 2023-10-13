@@ -69,11 +69,10 @@ public class Sphere extends Quadric {
      * draws a sphere of the given	radius centered	around the origin.
      * The sphere is subdivided around the z axis into slices and along the z axis
      * into stacks (similar to lines of longitude and latitude).
-     * <p>
+     *
      * If the orientation is set to GLU.OUTSIDE (with glu.quadricOrientation), then
      * any normals generated point away from the center of the sphere. Otherwise,
      * they point toward the center of the sphere.
-     * <p>
      * If texturing is turned on (with glu.quadricTexture), then texture
      * coordinates are generated so that t ranges from 0.0 at z=-radius to 1.0 at
      * z=radius (t increases linearly along longitudinal lines), and s ranges from

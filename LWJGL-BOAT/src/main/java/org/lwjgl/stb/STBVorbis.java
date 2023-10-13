@@ -135,9 +135,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_get_error ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_get_error get_error}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_get_error get_error} */
     public static native int nstb_vorbis_get_error(long f);
 
     /**
@@ -154,9 +152,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_close ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_close close}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_close close} */
     public static native void nstb_vorbis_close(long f);
 
     /**
@@ -173,9 +169,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_get_sample_offset ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_get_sample_offset get_sample_offset}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_get_sample_offset get_sample_offset} */
     public static native int nstb_vorbis_get_sample_offset(long f);
 
     /**
@@ -195,9 +189,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_get_file_offset ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_get_file_offset get_file_offset}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_get_file_offset get_file_offset} */
     public static native int nstb_vorbis_get_file_offset(long f);
 
     /**
@@ -230,10 +222,11 @@ public class STBVorbis {
      * @param datablock_memory_consumed_in_bytes returns the amount of data parsed/consumed, in bytes
      * @param error                              returns the error code
      * @param alloc_buffer                       an {@link STBVorbisAlloc} struct
+     *
      * @return On success, returns an {@code stb_vorbis *}, does not set error, returns the amount of data parsed/consumed on this call in
-     * {@code *datablock_memory_consumed_in_bytes}; On failure, returns {@code NULL} on error and sets {@code *error}, does not change
-     * {@code *datablock_memory_consumed}. If it returns {@code NULL} and {@code *error} is {@link #VORBIS_need_more_data need_more_data}, then the input block was incomplete and you need to pass
-     * in a larger block from the start of the file.
+     *         {@code *datablock_memory_consumed_in_bytes}; On failure, returns {@code NULL} on error and sets {@code *error}, does not change
+     *         {@code *datablock_memory_consumed}. If it returns {@code NULL} and {@code *error} is {@link #VORBIS_need_more_data need_more_data}, then the input block was incomplete and you need to pass
+     *         in a larger block from the start of the file.
      */
     @NativeType("stb_vorbis *")
     public static long stb_vorbis_open_pushdata(@NativeType("unsigned char const *") ByteBuffer datablock, @NativeType("int *") IntBuffer datablock_memory_consumed_in_bytes, @NativeType("int *") IntBuffer error, @Nullable @NativeType("stb_vorbis_alloc const *") STBVorbisAlloc alloc_buffer) {
@@ -241,8 +234,7 @@ public class STBVorbis {
             check(datablock_memory_consumed_in_bytes, 1);
             check(error, 1);
             if (alloc_buffer != null) {
-                STBVorbisAlloc.validate(alloc_buffer.address());
-            }
+                STBVorbisAlloc.validate(alloc_buffer.address()); }
         }
         return nstb_vorbis_open_pushdata(memAddress(datablock), datablock.remaining(), memAddress(datablock_memory_consumed_in_bytes), memAddress(error), memAddressSafe(alloc_buffer));
     }
@@ -271,15 +263,16 @@ public class STBVorbis {
      * @param channels  place to write number of {@code float *} buffers
      * @param output    place to write float ** array of float * buffers
      * @param samples   place to write number of output samples
+     *
      * @return the number of bytes we used from datablock. Possible cases:
      *
-     * <ul>
-     * <li>0 bytes used, 0 samples output (need more data)</li>
-     * <li>N bytes used, 0 samples output (resynching the stream, keep going)</li>
-     * <li>N bytes used, M samples output (one frame of data)</li>
-     * </ul>
+     *         <ul>
+     *         <li>0 bytes used, 0 samples output (need more data)</li>
+     *         <li>N bytes used, 0 samples output (resynching the stream, keep going)</li>
+     *         <li>N bytes used, M samples output (one frame of data)</li>
+     *         </ul>
      *
-     * <p>Note that after opening a file, you will ALWAYS get one N-bytes,0-sample frame, because Vorbis always "discards" the first frame.</p>
+     *         <p>Note that after opening a file, you will ALWAYS get one N-bytes,0-sample frame, because Vorbis always "discards" the first frame.</p>
      */
     public static int stb_vorbis_decode_frame_pushdata(@NativeType("stb_vorbis *") long f, @NativeType("unsigned char const *") ByteBuffer datablock, @Nullable @NativeType("int *") IntBuffer channels, @NativeType("float ***") PointerBuffer output, @NativeType("int *") IntBuffer samples) {
         if (CHECKS) {
@@ -293,9 +286,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_flush_pushdata ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_flush_pushdata flush_pushdata}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_flush_pushdata flush_pushdata} */
     public static native void nstb_vorbis_flush_pushdata(long f);
 
     /**
@@ -317,9 +308,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_decode_filename ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_decode_filename decode_filename}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_decode_filename decode_filename} */
     public static native int nstb_vorbis_decode_filename(long filename, long channels, long sample_rate, long output);
 
     /**
@@ -330,6 +319,7 @@ public class STBVorbis {
      * @param channels    returns the number of channels
      * @param sample_rate returns the sample rate
      * @param output      returns a pointer to the decoded data
+     *
      * @return the number of samples decoded, or -1 if the file could not be opened or was not an ogg vorbis file
      */
     public static int stb_vorbis_decode_filename(@NativeType("char const *") ByteBuffer filename, @NativeType("int *") IntBuffer channels, @NativeType("int *") IntBuffer sample_rate, @NativeType("short **") PointerBuffer output) {
@@ -350,6 +340,7 @@ public class STBVorbis {
      * @param channels    returns the number of channels
      * @param sample_rate returns the sample rate
      * @param output      returns a pointer to the decoded data
+     *
      * @return the number of samples decoded, or -1 if the file could not be opened or was not an ogg vorbis file
      */
     public static int stb_vorbis_decode_filename(@NativeType("char const *") CharSequence filename, @NativeType("int *") IntBuffer channels, @NativeType("int *") IntBuffer sample_rate, @NativeType("short **") PointerBuffer output) {
@@ -376,6 +367,7 @@ public class STBVorbis {
      * @param filename    the file name
      * @param channels    returns the number of channels
      * @param sample_rate returns the sample rate
+     *
      * @return the number of samples decoded, or -1 if the file could not be opened or was not an ogg vorbis file
      */
     @Nullable
@@ -464,6 +456,7 @@ public class STBVorbis {
      * @param mem          the data to decode
      * @param error        returns an error code
      * @param alloc_buffer an {@link STBVorbisAlloc} struct
+     *
      * @return the ogg vorbis decoder. On failure, returns {@code NULL} and sets {@code *error}.
      */
     @NativeType("stb_vorbis *")
@@ -471,17 +464,14 @@ public class STBVorbis {
         if (CHECKS) {
             check(error, 1);
             if (alloc_buffer != null) {
-                STBVorbisAlloc.validate(alloc_buffer.address());
-            }
+                STBVorbisAlloc.validate(alloc_buffer.address()); }
         }
         return nstb_vorbis_open_memory(memAddress(mem), mem.remaining(), memAddress(error), memAddressSafe(alloc_buffer));
     }
 
     // --- [ stb_vorbis_open_filename ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_open_filename open_filename}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_open_filename open_filename} */
     public static native long nstb_vorbis_open_filename(long filename, long error, long alloc_buffer);
 
     /**
@@ -490,6 +480,7 @@ public class STBVorbis {
      * @param filename     the file name
      * @param error        returns an error code
      * @param alloc_buffer an {@link STBVorbisAlloc} struct
+     *
      * @return the ogg vorbis decoder. On failure, returns {@code NULL} and sets {@code *error}.
      */
     @NativeType("stb_vorbis *")
@@ -498,8 +489,7 @@ public class STBVorbis {
             checkNT1(filename);
             check(error, 1);
             if (alloc_buffer != null) {
-                STBVorbisAlloc.validate(alloc_buffer.address());
-            }
+                STBVorbisAlloc.validate(alloc_buffer.address()); }
         }
         return nstb_vorbis_open_filename(memAddress(filename), memAddress(error), memAddressSafe(alloc_buffer));
     }
@@ -510,6 +500,7 @@ public class STBVorbis {
      * @param filename     the file name
      * @param error        returns an error code
      * @param alloc_buffer an {@link STBVorbisAlloc} struct
+     *
      * @return the ogg vorbis decoder. On failure, returns {@code NULL} and sets {@code *error}.
      */
     @NativeType("stb_vorbis *")
@@ -533,9 +524,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_seek_frame ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_seek_frame seek_frame}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_seek_frame seek_frame} */
     public static native int nstb_vorbis_seek_frame(long f, int sample_number);
 
     /**
@@ -555,9 +544,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_seek ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_seek seek}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_seek seek} */
     public static native int nstb_vorbis_seek(long f, int sample_number);
 
     /**
@@ -577,9 +564,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_seek_start ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_seek_start seek_start}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_seek_start seek_start} */
     public static native int nstb_vorbis_seek_start(long f);
 
     /**
@@ -597,9 +582,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_stream_length_in_samples ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_stream_length_in_samples stream_length_in_samples}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_stream_length_in_samples stream_length_in_samples} */
     public static native int nstb_vorbis_stream_length_in_samples(long f);
 
     /**
@@ -617,9 +600,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_stream_length_in_seconds ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_stream_length_in_seconds stream_length_in_seconds}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_stream_length_in_seconds stream_length_in_seconds} */
     public static native float nstb_vorbis_stream_length_in_seconds(long f);
 
     /**
@@ -636,9 +617,7 @@ public class STBVorbis {
 
     // --- [ stb_vorbis_get_frame_float ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_vorbis_get_frame_float get_frame_float}
-     */
+    /** Unsafe version of: {@link #stb_vorbis_get_frame_float get_frame_float} */
     public static native int nstb_vorbis_get_frame_float(long f, long channels, long output);
 
     /**
@@ -650,6 +629,7 @@ public class STBVorbis {
      * @param channels returns the number of channels. Can be {@code NULL} -- it is always the same as the number of channels reported by {@link #stb_vorbis_get_info get_info}.
      * @param output   returns a pointer to an array of float* buffers, one per channel. These outputs will be overwritten on the next call to
      *                 {@code stb_vorbis_get_frame_*}.
+     *
      * @return the number of samples per channel
      */
     public static int stb_vorbis_get_frame_float(@NativeType("stb_vorbis *") long f, @Nullable @NativeType("int *") IntBuffer channels, @NativeType("float ***") PointerBuffer output) {
@@ -695,6 +675,7 @@ public class STBVorbis {
      * @param f           an ogg vorbis file decoder
      * @param buffer      the output buffer, an array of pointers with length {@code num_c}, each pointing to a short array with length {@code num_samples}
      * @param num_samples the number of samples
+     *
      * @return the number of samples per channel
      */
     public static int stb_vorbis_get_frame_short(@NativeType("stb_vorbis *") long f, @NativeType("short **") PointerBuffer buffer, int num_samples) {
@@ -722,6 +703,7 @@ public class STBVorbis {
      * @param f      an ogg vorbis file decoder
      * @param num_c  the number of channels
      * @param buffer the output buffer
+     *
      * @return the number of samples per channel
      */
     public static int stb_vorbis_get_frame_short_interleaved(@NativeType("stb_vorbis *") long f, int num_c, @NativeType("short *") ShortBuffer buffer) {
@@ -747,6 +729,7 @@ public class STBVorbis {
      * @param f           an ogg vorbis file decoder
      * @param buffer      the output buffer, an array of pointers with length {@code channels}, each pointing to a float array with length {@code num_samples}
      * @param num_samples the number of samples to decode
+     *
      * @return the number of samples stored per channel; it may be less than requested at the end of the file. If there are no more samples in the file, returns 0.
      */
     public static int stb_vorbis_get_samples_float(@NativeType("stb_vorbis *") long f, @NativeType("float **") PointerBuffer buffer, int num_samples) {
@@ -771,6 +754,7 @@ public class STBVorbis {
      * @param f        an ogg vorbis file decoder
      * @param channels the number of channels
      * @param buffer   the output buffer
+     *
      * @return the number of samples stored per channel; it may be less than requested at the end of the file. If there are no more samples in the file, returns 0.
      */
     public static int stb_vorbis_get_samples_float_interleaved(@NativeType("stb_vorbis *") long f, int channels, @NativeType("float *") FloatBuffer buffer) {
@@ -796,6 +780,7 @@ public class STBVorbis {
      * @param f           an ogg vorbis file decoder
      * @param buffer      the output buffer, an array of pointers with length {@code channels}, each pointing to a short array with length {@code num_samples}
      * @param num_samples the number of samples
+     *
      * @return the number of samples stored per channel; it may be less than requested at the end of the file. If there are no more samples in the file, returns 0.
      */
     public static int stb_vorbis_get_samples_short(@NativeType("stb_vorbis *") long f, @NativeType("short **") PointerBuffer buffer, int num_samples) {
@@ -820,6 +805,7 @@ public class STBVorbis {
      * @param f        an ogg vorbis file decoder
      * @param channels the number of channels
      * @param buffer   the output buffer
+     *
      * @return the number of samples stored per channel; it may be less than requested at the end of the file. If there are no more samples in the file, returns 0.
      */
     public static int stb_vorbis_get_samples_short_interleaved(@NativeType("stb_vorbis *") long f, int channels, @NativeType("short *") ShortBuffer buffer) {
@@ -829,34 +815,25 @@ public class STBVorbis {
         return nstb_vorbis_get_samples_short_interleaved(f, channels, memAddress(buffer), buffer.remaining());
     }
 
-    /**
-     * Array version of: {@link #nstb_vorbis_open_pushdata}
-     */
+    /** Array version of: {@link #nstb_vorbis_open_pushdata} */
     public static native long nstb_vorbis_open_pushdata(long datablock, int datablock_length_in_bytes, int[] datablock_memory_consumed_in_bytes, int[] error, long alloc_buffer);
 
-    /**
-     * Array version of: {@link #stb_vorbis_open_pushdata open_pushdata}
-     */
+    /** Array version of: {@link #stb_vorbis_open_pushdata open_pushdata} */
     @NativeType("stb_vorbis *")
     public static long stb_vorbis_open_pushdata(@NativeType("unsigned char const *") ByteBuffer datablock, @NativeType("int *") int[] datablock_memory_consumed_in_bytes, @NativeType("int *") int[] error, @Nullable @NativeType("stb_vorbis_alloc const *") STBVorbisAlloc alloc_buffer) {
         if (CHECKS) {
             check(datablock_memory_consumed_in_bytes, 1);
             check(error, 1);
             if (alloc_buffer != null) {
-                STBVorbisAlloc.validate(alloc_buffer.address());
-            }
+                STBVorbisAlloc.validate(alloc_buffer.address()); }
         }
         return nstb_vorbis_open_pushdata(memAddress(datablock), datablock.remaining(), datablock_memory_consumed_in_bytes, error, memAddressSafe(alloc_buffer));
     }
 
-    /**
-     * Array version of: {@link #nstb_vorbis_decode_frame_pushdata}
-     */
+    /** Array version of: {@link #nstb_vorbis_decode_frame_pushdata} */
     public static native int nstb_vorbis_decode_frame_pushdata(long f, long datablock, int datablock_length_in_bytes, int[] channels, long output, int[] samples);
 
-    /**
-     * Array version of: {@link #stb_vorbis_decode_frame_pushdata decode_frame_pushdata}
-     */
+    /** Array version of: {@link #stb_vorbis_decode_frame_pushdata decode_frame_pushdata} */
     public static int stb_vorbis_decode_frame_pushdata(@NativeType("stb_vorbis *") long f, @NativeType("unsigned char const *") ByteBuffer datablock, @Nullable @NativeType("int *") int[] channels, @NativeType("float ***") PointerBuffer output, @NativeType("int *") int[] samples) {
         if (CHECKS) {
             check(f);
@@ -867,14 +844,10 @@ public class STBVorbis {
         return nstb_vorbis_decode_frame_pushdata(f, memAddress(datablock), datablock.remaining(), channels, memAddress(output), samples);
     }
 
-    /**
-     * Array version of: {@link #nstb_vorbis_decode_filename}
-     */
+    /** Array version of: {@link #nstb_vorbis_decode_filename} */
     public static native int nstb_vorbis_decode_filename(long filename, int[] channels, int[] sample_rate, long output);
 
-    /**
-     * Array version of: {@link #stb_vorbis_decode_filename decode_filename}
-     */
+    /** Array version of: {@link #stb_vorbis_decode_filename decode_filename} */
     public static int stb_vorbis_decode_filename(@NativeType("char const *") ByteBuffer filename, @NativeType("int *") int[] channels, @NativeType("int *") int[] sample_rate, @NativeType("short **") PointerBuffer output) {
         if (CHECKS) {
             checkNT1(filename);
@@ -885,9 +858,7 @@ public class STBVorbis {
         return nstb_vorbis_decode_filename(memAddress(filename), channels, sample_rate, memAddress(output));
     }
 
-    /**
-     * Array version of: {@link #stb_vorbis_decode_filename decode_filename}
-     */
+    /** Array version of: {@link #stb_vorbis_decode_filename decode_filename} */
     public static int stb_vorbis_decode_filename(@NativeType("char const *") CharSequence filename, @NativeType("int *") int[] channels, @NativeType("int *") int[] sample_rate, @NativeType("short **") PointerBuffer output) {
         if (CHECKS) {
             check(channels, 1);
@@ -905,14 +876,10 @@ public class STBVorbis {
         }
     }
 
-    /**
-     * Array version of: {@link #nstb_vorbis_decode_memory}
-     */
+    /** Array version of: {@link #nstb_vorbis_decode_memory} */
     public static native int nstb_vorbis_decode_memory(long mem, int len, int[] channels, int[] sample_rate, long output);
 
-    /**
-     * Array version of: {@link #stb_vorbis_decode_memory decode_memory}
-     */
+    /** Array version of: {@link #stb_vorbis_decode_memory decode_memory} */
     public static int stb_vorbis_decode_memory(@NativeType("unsigned char const *") ByteBuffer mem, @NativeType("int *") int[] channels, @NativeType("int *") int[] sample_rate, @NativeType("short **") PointerBuffer output) {
         if (CHECKS) {
             check(channels, 1);
@@ -922,48 +889,36 @@ public class STBVorbis {
         return nstb_vorbis_decode_memory(memAddress(mem), mem.remaining(), channels, sample_rate, memAddress(output));
     }
 
-    /**
-     * Array version of: {@link #nstb_vorbis_open_memory}
-     */
+    /** Array version of: {@link #nstb_vorbis_open_memory} */
     public static native long nstb_vorbis_open_memory(long mem, int len, int[] error, long alloc_buffer);
 
-    /**
-     * Array version of: {@link #stb_vorbis_open_memory open_memory}
-     */
+    /** Array version of: {@link #stb_vorbis_open_memory open_memory} */
     @NativeType("stb_vorbis *")
     public static long stb_vorbis_open_memory(@NativeType("unsigned char const *") ByteBuffer mem, @NativeType("int *") int[] error, @Nullable @NativeType("stb_vorbis_alloc const *") STBVorbisAlloc alloc_buffer) {
         if (CHECKS) {
             check(error, 1);
             if (alloc_buffer != null) {
-                STBVorbisAlloc.validate(alloc_buffer.address());
-            }
+                STBVorbisAlloc.validate(alloc_buffer.address()); }
         }
         return nstb_vorbis_open_memory(memAddress(mem), mem.remaining(), error, memAddressSafe(alloc_buffer));
     }
 
-    /**
-     * Array version of: {@link #nstb_vorbis_open_filename}
-     */
+    /** Array version of: {@link #nstb_vorbis_open_filename} */
     public static native long nstb_vorbis_open_filename(long filename, int[] error, long alloc_buffer);
 
-    /**
-     * Array version of: {@link #stb_vorbis_open_filename open_filename}
-     */
+    /** Array version of: {@link #stb_vorbis_open_filename open_filename} */
     @NativeType("stb_vorbis *")
     public static long stb_vorbis_open_filename(@NativeType("char const *") ByteBuffer filename, @NativeType("int *") int[] error, @Nullable @NativeType("stb_vorbis_alloc const *") STBVorbisAlloc alloc_buffer) {
         if (CHECKS) {
             checkNT1(filename);
             check(error, 1);
             if (alloc_buffer != null) {
-                STBVorbisAlloc.validate(alloc_buffer.address());
-            }
+                STBVorbisAlloc.validate(alloc_buffer.address()); }
         }
         return nstb_vorbis_open_filename(memAddress(filename), error, memAddressSafe(alloc_buffer));
     }
 
-    /**
-     * Array version of: {@link #stb_vorbis_open_filename open_filename}
-     */
+    /** Array version of: {@link #stb_vorbis_open_filename open_filename} */
     @NativeType("stb_vorbis *")
     public static long stb_vorbis_open_filename(@NativeType("char const *") CharSequence filename, @NativeType("int *") int[] error, @Nullable @NativeType("stb_vorbis_alloc const *") STBVorbisAlloc alloc_buffer) {
         if (CHECKS) {
@@ -983,14 +938,10 @@ public class STBVorbis {
         }
     }
 
-    /**
-     * Array version of: {@link #nstb_vorbis_get_frame_float}
-     */
+    /** Array version of: {@link #nstb_vorbis_get_frame_float} */
     public static native int nstb_vorbis_get_frame_float(long f, int[] channels, long output);
 
-    /**
-     * Array version of: {@link #stb_vorbis_get_frame_float get_frame_float}
-     */
+    /** Array version of: {@link #stb_vorbis_get_frame_float get_frame_float} */
     public static int stb_vorbis_get_frame_float(@NativeType("stb_vorbis *") long f, @Nullable @NativeType("int *") int[] channels, @NativeType("float ***") PointerBuffer output) {
         if (CHECKS) {
             check(f);
@@ -1000,14 +951,10 @@ public class STBVorbis {
         return nstb_vorbis_get_frame_float(f, channels, memAddress(output));
     }
 
-    /**
-     * Array version of: {@link #nstb_vorbis_get_frame_short_interleaved}
-     */
+    /** Array version of: {@link #nstb_vorbis_get_frame_short_interleaved} */
     public static native int nstb_vorbis_get_frame_short_interleaved(long f, int num_c, short[] buffer, int num_shorts);
 
-    /**
-     * Array version of: {@link #stb_vorbis_get_frame_short_interleaved get_frame_short_interleaved}
-     */
+    /** Array version of: {@link #stb_vorbis_get_frame_short_interleaved get_frame_short_interleaved} */
     public static int stb_vorbis_get_frame_short_interleaved(@NativeType("stb_vorbis *") long f, int num_c, @NativeType("short *") short[] buffer) {
         if (CHECKS) {
             check(f);
@@ -1015,14 +962,10 @@ public class STBVorbis {
         return nstb_vorbis_get_frame_short_interleaved(f, num_c, buffer, buffer.length);
     }
 
-    /**
-     * Array version of: {@link #nstb_vorbis_get_samples_float_interleaved}
-     */
+    /** Array version of: {@link #nstb_vorbis_get_samples_float_interleaved} */
     public static native int nstb_vorbis_get_samples_float_interleaved(long f, int channels, float[] buffer, int num_floats);
 
-    /**
-     * Array version of: {@link #stb_vorbis_get_samples_float_interleaved get_samples_float_interleaved}
-     */
+    /** Array version of: {@link #stb_vorbis_get_samples_float_interleaved get_samples_float_interleaved} */
     public static int stb_vorbis_get_samples_float_interleaved(@NativeType("stb_vorbis *") long f, int channels, @NativeType("float *") float[] buffer) {
         if (CHECKS) {
             check(f);
@@ -1030,14 +973,10 @@ public class STBVorbis {
         return nstb_vorbis_get_samples_float_interleaved(f, channels, buffer, buffer.length);
     }
 
-    /**
-     * Array version of: {@link #nstb_vorbis_get_samples_short_interleaved}
-     */
+    /** Array version of: {@link #nstb_vorbis_get_samples_short_interleaved} */
     public static native int nstb_vorbis_get_samples_short_interleaved(long f, int channels, short[] buffer, int num_shorts);
 
-    /**
-     * Array version of: {@link #stb_vorbis_get_samples_short_interleaved get_samples_short_interleaved}
-     */
+    /** Array version of: {@link #stb_vorbis_get_samples_short_interleaved get_samples_short_interleaved} */
     public static int stb_vorbis_get_samples_short_interleaved(@NativeType("stb_vorbis *") long f, int channels, @NativeType("short *") short[] buffer) {
         if (CHECKS) {
             check(f);

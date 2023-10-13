@@ -50,32 +50,24 @@ import static org.lwjgl.system.Checks.*;
  */
 public class KHRRobustness {
 
-    /**
-     * Returned by {@link #glGetGraphicsResetStatus GetGraphicsResetStatus}.
-     */
+    /** Returned by {@link #glGetGraphicsResetStatus GetGraphicsResetStatus}. */
     public static final int
             GL_NO_ERROR = 0x0,
             GL_GUILTY_CONTEXT_RESET = 0x8253,
             GL_INNOCENT_CONTEXT_RESET = 0x8254,
             GL_UNKNOWN_CONTEXT_RESET = 0x8255;
 
-    /**
-     * Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, and GetFloatv. */
     public static final int
             GL_CONTEXT_ROBUST_ACCESS = 0x90F3,
             GL_RESET_NOTIFICATION_STRATEGY = 0x8256;
 
-    /**
-     * Returned by GetIntegerv and related simple queries when {@code value} is {@link #GL_RESET_NOTIFICATION_STRATEGY RESET_NOTIFICATION_STRATEGY}.
-     */
+    /** Returned by GetIntegerv and related simple queries when {@code value} is {@link #GL_RESET_NOTIFICATION_STRATEGY RESET_NOTIFICATION_STRATEGY}. */
     public static final int
             GL_LOSE_CONTEXT_ON_RESET = 0x8252,
             GL_NO_RESET_NOTIFICATION = 0x8261;
 
-    /**
-     * Returned by {@link GL11C#glGetError GetError}.
-     */
+    /** Returned by {@link GL11C#glGetError GetError}. */
     public static final int GL_CONTEXT_LOST = 0x507;
 
     static {
@@ -320,44 +312,32 @@ public class KHRRobustness {
         return GL45C.glGetnUniformui(program, location);
     }
 
-    /**
-     * Array version of: {@link #glReadnPixels ReadnPixels}
-     */
+    /** Array version of: {@link #glReadnPixels ReadnPixels} */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glReadnPixels ReadnPixels}
-     */
+    /** Array version of: {@link #glReadnPixels ReadnPixels} */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glReadnPixels ReadnPixels}
-     */
+    /** Array version of: {@link #glReadnPixels ReadnPixels} */
     public static void glReadnPixels(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] pixels) {
         GL45C.glReadnPixels(x, y, width, height, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glGetnUniformfv GetnUniformfv}
-     */
+    /** Array version of: {@link #glGetnUniformfv GetnUniformfv} */
     public static void glGetnUniformfv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat *") float[] params) {
         GL45C.glGetnUniformfv(program, location, params);
     }
 
-    /**
-     * Array version of: {@link #glGetnUniformiv GetnUniformiv}
-     */
+    /** Array version of: {@link #glGetnUniformiv GetnUniformiv} */
     public static void glGetnUniformiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint *") int[] params) {
         GL45C.glGetnUniformiv(program, location, params);
     }
 
-    /**
-     * Array version of: {@link #glGetnUniformuiv GetnUniformuiv}
-     */
+    /** Array version of: {@link #glGetnUniformuiv GetnUniformuiv} */
     public static void glGetnUniformuiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") int[] params) {
         GL45C.glGetnUniformuiv(program, location, params);
     }

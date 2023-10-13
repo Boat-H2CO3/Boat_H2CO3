@@ -24,9 +24,7 @@ public class EXTStencilTwoSide {
      */
     public static final int GL_STENCIL_TEST_TWO_SIDE_EXT = 0x8910;
 
-    /**
-     * Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_ACTIVE_STENCIL_FACE_EXT = 0x8911;
 
     static {
@@ -39,7 +37,7 @@ public class EXTStencilTwoSide {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glActiveStencilFaceEXT
+            caps.glActiveStencilFaceEXT
         );
     }
 

@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_blend_func_extended.txt">ARB_blend_func_extended</a> extension.
@@ -36,9 +36,7 @@ public class ARBBlendFuncExtended {
             GL_ONE_MINUS_SRC1_COLOR = 0x88FA,
             GL_ONE_MINUS_SRC1_ALPHA = 0x88FB;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev. */
     public static final int GL_MAX_DUAL_SOURCE_DRAW_BUFFERS = 0x88FC;
 
     static {
@@ -57,9 +55,7 @@ public class ARBBlendFuncExtended {
 
     // --- [ glBindFragDataLocationIndexed ] ---
 
-    /**
-     * Unsafe version of: {@link #glBindFragDataLocationIndexed BindFragDataLocationIndexed}
-     */
+    /** Unsafe version of: {@link #glBindFragDataLocationIndexed BindFragDataLocationIndexed} */
     public static void nglBindFragDataLocationIndexed(int program, int colorNumber, int index, long name) {
         GL33C.nglBindFragDataLocationIndexed(program, colorNumber, index, name);
     }
@@ -90,9 +86,7 @@ public class ARBBlendFuncExtended {
 
     // --- [ glGetFragDataIndex ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetFragDataIndex GetFragDataIndex}
-     */
+    /** Unsafe version of: {@link #glGetFragDataIndex GetFragDataIndex} */
     public static int nglGetFragDataIndex(int program, long name) {
         return GL33C.nglGetFragDataIndex(program, name);
     }

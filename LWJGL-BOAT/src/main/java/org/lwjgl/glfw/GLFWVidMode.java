@@ -150,9 +150,7 @@ public class GLFWVidMode extends Struct {
         return wrap(GLFWVidMode.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static GLFWVidMode createSafe(long address) {
         return address == NULL ? null : wrap(GLFWVidMode.class, address);
@@ -231,7 +229,7 @@ public class GLFWVidMode extends Struct {
 
         /**
          * Creates a new {@code GLFWVidMode.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link GLFWVidMode#SIZEOF}, and its mark will be undefined.
@@ -291,16 +289,9 @@ public class GLFWVidMode extends Struct {
         /**
          * Returns the value of the {@code blueBits} field.
          */
-        public int blueBits() {
-            return GLFWVidMode.nblueBits(address());
-        }
-
-        /**
-         * Returns the value of the {@code refreshRate} field.
-         */
-        public int refreshRate() {
-            return GLFWVidMode.nrefreshRate(address());
-        }
+        public int blueBits() { return GLFWVidMode.nblueBits(address()); }
+        /** Returns the value of the {@code refreshRate} field. */
+        public int refreshRate() { return GLFWVidMode.nrefreshRate(address()); }
 
     }
 

@@ -37,9 +37,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL41C extends GL40C {
 
-    /**
-     * Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
             GL_SHADER_COMPILER = 0x8DFA,
             GL_SHADER_BINARY_FORMATS = 0x8DF8,
@@ -50,14 +48,10 @@ public class GL41C extends GL40C {
             GL_IMPLEMENTATION_COLOR_READ_TYPE = 0x8B9A,
             GL_IMPLEMENTATION_COLOR_READ_FORMAT = 0x8B9B;
 
-    /**
-     * Accepted by the {@code type} parameter of VertexAttribPointer.
-     */
+    /** Accepted by the {@code type} parameter of VertexAttribPointer. */
     public static final int GL_FIXED = 0x140C;
 
-    /**
-     * Accepted by the {@code precisiontype} parameter of GetShaderPrecisionFormat.
-     */
+    /** Accepted by the {@code precisiontype} parameter of GetShaderPrecisionFormat. */
     public static final int
             GL_LOW_FLOAT = 0x8DF0,
             GL_MEDIUM_FLOAT = 0x8DF1,
@@ -66,31 +60,21 @@ public class GL41C extends GL40C {
             GL_MEDIUM_INT = 0x8DF4,
             GL_HIGH_INT = 0x8DF5;
 
-    /**
-     * Accepted by the {@code format} parameter of most commands taking sized internal formats.
-     */
+    /** Accepted by the {@code format} parameter of most commands taking sized internal formats. */
     public static final int GL_RGB565 = 0x8D62;
 
-    /**
-     * Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv.
-     */
+    /** Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv. */
     public static final int GL_PROGRAM_BINARY_RETRIEVABLE_HINT = 0x8257;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetProgramiv.
-     */
+    /** Accepted by the {@code pname} parameter of GetProgramiv. */
     public static final int GL_PROGRAM_BINARY_LENGTH = 0x8741;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv and GetDoublev. */
     public static final int
             GL_NUM_PROGRAM_BINARY_FORMATS = 0x87FE,
             GL_PROGRAM_BINARY_FORMATS = 0x87FF;
 
-    /**
-     * Accepted by {@code stages} parameter to UseProgramStages.
-     */
+    /** Accepted by {@code stages} parameter to UseProgramStages. */
     public static final int
             GL_VERTEX_SHADER_BIT = 0x1,
             GL_FRAGMENT_SHADER_BIT = 0x2,
@@ -99,24 +83,16 @@ public class GL41C extends GL40C {
             GL_TESS_EVALUATION_SHADER_BIT = 0x10,
             GL_ALL_SHADER_BITS = 0xFFFFFFFF;
 
-    /**
-     * Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv.
-     */
+    /** Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv. */
     public static final int GL_PROGRAM_SEPARABLE = 0x8258;
 
-    /**
-     * Accepted by {@code type} parameter to GetProgramPipelineiv.
-     */
+    /** Accepted by {@code type} parameter to GetProgramPipelineiv. */
     public static final int GL_ACTIVE_PROGRAM = 0x8259;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_PROGRAM_PIPELINE_BINDING = 0x825A;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v. */
     public static final int
             GL_MAX_VIEWPORTS = 0x825B,
             GL_VIEWPORT_SUBPIXEL_BITS = 0x825C,
@@ -124,9 +100,7 @@ public class GL41C extends GL40C {
             GL_LAYER_PROVOKING_VERTEX = 0x825E,
             GL_VIEWPORT_INDEX_PROVOKING_VERTEX = 0x825F;
 
-    /**
-     * Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX or VIEWPORT_INDEX_PROVOKING_VERTEX.
-     */
+    /** Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX or VIEWPORT_INDEX_PROVOKING_VERTEX. */
     public static final int GL_UNDEFINED_VERTEX = 0x8260;
 
     static {
@@ -162,6 +136,7 @@ public class GL41C extends GL40C {
      * @param shaders      an array of shader handles into which to load pre-compiled shader binaries
      * @param binaryformat the format of the shader binaries contained in {@code binary}
      * @param binary       an array of bytes containing pre-compiled binary shader code
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glShaderBinary">Reference Page</a>
      */
     public static void glShaderBinary(@NativeType("GLuint const *") IntBuffer shaders, @NativeType("GLenum") int binaryformat, @NativeType("void const *") ByteBuffer binary) {
@@ -170,9 +145,7 @@ public class GL41C extends GL40C {
 
     // --- [ glGetShaderPrecisionFormat ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetShaderPrecisionFormat GetShaderPrecisionFormat}
-     */
+    /** Unsafe version of: {@link #glGetShaderPrecisionFormat GetShaderPrecisionFormat} */
     public static native void nglGetShaderPrecisionFormat(int shadertype, int precisiontype, long range, long precision);
 
     /**
@@ -182,6 +155,7 @@ public class GL41C extends GL40C {
      * @param precisiontype the numeric format whose precision and range to query
      * @param range         the address of array of two integers into which encodings of the implementation's numeric range are returned
      * @param precision     the address of an integer into which the numeric precision of the implementation is written
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetShaderPrecisionFormat">Reference Page</a>
      */
     public static void glGetShaderPrecisionFormat(@NativeType("GLenum") int shadertype, @NativeType("GLenum") int precisiontype, @NativeType("GLint *") IntBuffer range, @NativeType("GLint *") IntBuffer precision) {
@@ -198,6 +172,7 @@ public class GL41C extends GL40C {
      * @param shadertype    the type of shader whose precision to query. One of:<br><table><tr><td>{@link GL20#GL_VERTEX_SHADER VERTEX_SHADER}</td><td>{@link GL20#GL_FRAGMENT_SHADER FRAGMENT_SHADER}</td></tr></table>
      * @param precisiontype the numeric format whose precision and range to query
      * @param range         the address of array of two integers into which encodings of the implementation's numeric range are returned
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetShaderPrecisionFormat">Reference Page</a>
      */
     @NativeType("void")
@@ -223,6 +198,7 @@ public class GL41C extends GL40C {
      *
      * @param zNear the mapping of the near clipping plane to window coordinates. The initial value is 0.0f.
      * @param zFar  the mapping of the far clipping plane to window coordinates. The initial value is 1.0f.
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDepthRangef">Reference Page</a>
      */
     public static native void glDepthRangef(@NativeType("GLfloat") float zNear, @NativeType("GLfloat") float zFar);
@@ -233,6 +209,7 @@ public class GL41C extends GL40C {
      * Specifies the clear value for the depth buffer
      *
      * @param depth the depth value used when the depth buffer is cleared. The initial value is 1.0f.
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glClearDepthf">Reference Page</a>
      */
     public static native void glClearDepthf(@NativeType("GLfloat") float depth);
@@ -253,6 +230,7 @@ public class GL41C extends GL40C {
      * @param length       the address of a variable to receive the number of bytes written into {@code binary}
      * @param binaryFormat a variable to receive a token indicating the format of the binary data returned by the GL
      * @param binary       an array into which the GL will return {@code program}'s binary representation
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramBinary">Reference Page</a>
      */
     public static void glGetProgramBinary(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLenum *") IntBuffer binaryFormat, @NativeType("void *") ByteBuffer binary) {
@@ -278,6 +256,7 @@ public class GL41C extends GL40C {
      * @param program      the name of a program object into which to load a program binary
      * @param binaryFormat the format of the binary data in binary
      * @param binary       an array containing the binary to be loaded into {@code program}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramBinary">Reference Page</a>
      */
     public static void glProgramBinary(@NativeType("GLuint") int program, @NativeType("GLenum") int binaryFormat, @NativeType("void const *") ByteBuffer binary) {
@@ -292,6 +271,7 @@ public class GL41C extends GL40C {
      * @param program the name of a program object whose parameter to modify
      * @param pname   the name of the parameter to modify. One of:<br><table><tr><td>{@link #GL_PROGRAM_BINARY_RETRIEVABLE_HINT PROGRAM_BINARY_RETRIEVABLE_HINT}</td><td>{@link #GL_PROGRAM_SEPARABLE PROGRAM_SEPARABLE}</td></tr></table>
      * @param value   the new value of the parameter specified by {@code pname} for {@code program}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramParameteri">Reference Page</a>
      */
     public static native void glProgramParameteri(@NativeType("GLuint") int program, @NativeType("GLenum") int pname, @NativeType("GLint") int value);
@@ -304,6 +284,7 @@ public class GL41C extends GL40C {
      * @param pipeline the program pipeline object to which to bind stages from {@code program}
      * @param stages   a set of program stages to bind to the program pipeline object
      * @param program  the program object containing the shader executables to use in {@code pipeline}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glUseProgramStages">Reference Page</a>
      */
     public static native void glUseProgramStages(@NativeType("GLuint") int pipeline, @NativeType("GLbitfield") int stages, @NativeType("GLuint") int program);
@@ -315,6 +296,7 @@ public class GL41C extends GL40C {
      *
      * @param pipeline the program pipeline object to set the active program object for
      * @param program  the program object to set as the active program pipeline object {@code pipeline}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glActiveShaderProgram">Reference Page</a>
      */
     public static native void glActiveShaderProgram(@NativeType("GLuint") int pipeline, @NativeType("GLuint") int program);
@@ -360,6 +342,7 @@ public class GL41C extends GL40C {
      *
      * @param type    the type of shader to create
      * @param strings an array of pointers to source code strings from which to create the program object
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glCreateShaderProgramv">Reference Page</a>
      */
     @NativeType("GLuint")
@@ -399,6 +382,7 @@ public class GL41C extends GL40C {
      *
      * @param type    the type of shader to create
      * @param strings an array of pointers to source code strings from which to create the program object
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glCreateShaderProgramv">Reference Page</a>
      */
     @NativeType("GLuint")
@@ -406,9 +390,9 @@ public class GL41C extends GL40C {
         MemoryStack stack = stackGet();
         int stackPointer = stack.getPointer();
         try {
-            long stringsAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memUTF8, strings);
+            long stringsAddress = APIUtil.apiArray(stack, MemoryUtil::memUTF8, strings);
             int __result = nglCreateShaderProgramv(type, strings.length, stringsAddress);
-            org.lwjgl.system.APIUtil.apiArrayFree(stringsAddress, strings.length);
+            APIUtil.apiArrayFree(stringsAddress, strings.length);
             return __result;
         } finally {
             stack.setPointer(stackPointer);
@@ -446,6 +430,7 @@ public class GL41C extends GL40C {
      * <p>The program object created by glCreateShaderProgram has its GL_PROGRAM_SEPARABLE status set to GL_TRUE.</p>
      *
      * @param type the type of shader to create
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glCreateShaderProgramv">Reference Page</a>
      */
     @NativeType("GLuint")
@@ -453,9 +438,9 @@ public class GL41C extends GL40C {
         MemoryStack stack = stackGet();
         int stackPointer = stack.getPointer();
         try {
-            long stringsAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memUTF8, string);
+            long stringsAddress = APIUtil.apiArray(stack, MemoryUtil::memUTF8, string);
             int __result = nglCreateShaderProgramv(type, 1, stringsAddress);
-            org.lwjgl.system.APIUtil.apiArrayFree(stringsAddress, 1);
+            APIUtil.apiArrayFree(stringsAddress, 1);
             return __result;
         } finally {
             stack.setPointer(stackPointer);
@@ -468,6 +453,7 @@ public class GL41C extends GL40C {
      * Binds a program pipeline to the current context.
      *
      * @param pipeline the name of the pipeline object to bind to the context
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindProgramPipeline">Reference Page</a>
      */
     public static native void glBindProgramPipeline(@NativeType("GLuint") int pipeline);
@@ -485,6 +471,7 @@ public class GL41C extends GL40C {
      * Deletes program pipeline objects.
      *
      * @param pipelines an array of names of program pipeline objects to delete
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteProgramPipelines">Reference Page</a>
      */
     public static void glDeleteProgramPipelines(@NativeType("GLuint const *") IntBuffer pipelines) {
@@ -520,6 +507,7 @@ public class GL41C extends GL40C {
      * Reserves program pipeline object names.
      *
      * @param pipelines an array of into which the reserved names will be written
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGenProgramPipelines">Reference Page</a>
      */
     public static void glGenProgramPipelines(@NativeType("GLuint *") IntBuffer pipelines) {
@@ -550,6 +538,7 @@ public class GL41C extends GL40C {
      * Determines if a name corresponds to a program pipeline object.
      *
      * @param pipeline a value that may be the name of a program pipeline object
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glIsProgramPipeline">Reference Page</a>
      */
     @NativeType("GLboolean")
@@ -557,9 +546,7 @@ public class GL41C extends GL40C {
 
     // --- [ glGetProgramPipelineiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramPipelineiv GetProgramPipelineiv}
-     */
+    /** Unsafe version of: {@link #glGetProgramPipelineiv GetProgramPipelineiv} */
     public static native void nglGetProgramPipelineiv(int pipeline, int pname, long params);
 
     /**
@@ -568,6 +555,7 @@ public class GL41C extends GL40C {
      * @param pipeline the name of a program pipeline object whose parameter retrieve
      * @param pname    the name of the parameter to retrieve. One of:<br><table><tr><td>{@link #GL_ACTIVE_PROGRAM ACTIVE_PROGRAM}</td><td>{@link GL20#GL_INFO_LOG_LENGTH INFO_LOG_LENGTH}</td><td>{@link GL20#GL_VERTEX_SHADER VERTEX_SHADER}</td><td>{@link GL20#GL_FRAGMENT_SHADER FRAGMENT_SHADER}</td><td>{@link GL32#GL_GEOMETRY_SHADER GEOMETRY_SHADER}</td></tr><tr><td>{@link GL40#GL_TESS_CONTROL_SHADER TESS_CONTROL_SHADER}</td><td>{@link GL40#GL_TESS_EVALUATION_SHADER TESS_EVALUATION_SHADER}</td></tr></table>
      * @param params   a variable into which will be written the value or values of {@code pname} for {@code pipeline}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramPipeline">Reference Page</a>
      */
     public static void glGetProgramPipelineiv(@NativeType("GLuint") int pipeline, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
@@ -582,6 +570,7 @@ public class GL41C extends GL40C {
      *
      * @param pipeline the name of a program pipeline object whose parameter retrieve
      * @param pname    the name of the parameter to retrieve. One of:<br><table><tr><td>{@link #GL_ACTIVE_PROGRAM ACTIVE_PROGRAM}</td><td>{@link GL20#GL_INFO_LOG_LENGTH INFO_LOG_LENGTH}</td><td>{@link GL20#GL_VERTEX_SHADER VERTEX_SHADER}</td><td>{@link GL20#GL_FRAGMENT_SHADER FRAGMENT_SHADER}</td><td>{@link GL32#GL_GEOMETRY_SHADER GEOMETRY_SHADER}</td></tr><tr><td>{@link GL40#GL_TESS_CONTROL_SHADER TESS_CONTROL_SHADER}</td><td>{@link GL40#GL_TESS_EVALUATION_SHADER TESS_EVALUATION_SHADER}</td></tr></table>
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramPipeline">Reference Page</a>
      */
     @NativeType("void")
@@ -605,6 +594,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform1i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x);
@@ -618,6 +608,7 @@ public class GL41C extends GL40C {
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
      * @param y        the uniform y value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform2i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x, @NativeType("GLint") int y);
@@ -632,6 +623,7 @@ public class GL41C extends GL40C {
      * @param x        the uniform x value
      * @param y        the uniform y value
      * @param z        the uniform z value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform3i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z);
@@ -647,6 +639,7 @@ public class GL41C extends GL40C {
      * @param y        the uniform y value
      * @param z        the uniform z value
      * @param w        the uniform w value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform4i(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z, @NativeType("GLint") int w);
@@ -659,6 +652,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform1ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x);
@@ -672,6 +666,7 @@ public class GL41C extends GL40C {
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
      * @param y        the uniform y value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform2ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x, @NativeType("GLuint") int y);
@@ -686,6 +681,7 @@ public class GL41C extends GL40C {
      * @param x        the uniform x value
      * @param y        the uniform y value
      * @param z        the uniform z value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform3ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x, @NativeType("GLuint") int y, @NativeType("GLuint") int z);
@@ -701,6 +697,7 @@ public class GL41C extends GL40C {
      * @param y        the uniform y value
      * @param z        the uniform z value
      * @param w        the uniform w value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform4ui(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint") int x, @NativeType("GLuint") int y, @NativeType("GLuint") int z, @NativeType("GLuint") int w);
@@ -713,6 +710,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform1f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x);
@@ -726,6 +724,7 @@ public class GL41C extends GL40C {
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
      * @param y        the uniform y value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform2f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y);
@@ -740,6 +739,7 @@ public class GL41C extends GL40C {
      * @param x        the uniform x value
      * @param y        the uniform y value
      * @param z        the uniform z value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform3f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float z);
@@ -755,6 +755,7 @@ public class GL41C extends GL40C {
      * @param y        the uniform y value
      * @param z        the uniform z value
      * @param w        the uniform w value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform4f(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float z, @NativeType("GLfloat") float w);
@@ -767,6 +768,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform1d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x);
@@ -780,6 +782,7 @@ public class GL41C extends GL40C {
      * @param location the location of the uniform variable to be modified
      * @param x        the uniform x value
      * @param y        the uniform y value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform2d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y);
@@ -794,6 +797,7 @@ public class GL41C extends GL40C {
      * @param x        the uniform x value
      * @param y        the uniform y value
      * @param z        the uniform z value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform3d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z);
@@ -809,6 +813,7 @@ public class GL41C extends GL40C {
      * @param y        the uniform y value
      * @param z        the uniform z value
      * @param w        the uniform w value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static native void glProgramUniform4d(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z, @NativeType("GLdouble") double w);
@@ -828,6 +833,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform1iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
@@ -849,6 +855,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform2iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
@@ -870,6 +877,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform3iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
@@ -891,6 +899,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform4iv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") IntBuffer value) {
@@ -912,6 +921,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform1uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") IntBuffer value) {
@@ -933,6 +943,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform2uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") IntBuffer value) {
@@ -954,6 +965,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform3uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") IntBuffer value) {
@@ -975,6 +987,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform4uiv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") IntBuffer value) {
@@ -996,6 +1009,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform1fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1017,6 +1031,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1038,6 +1053,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1059,6 +1075,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1080,6 +1097,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform1dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1101,6 +1119,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform2dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1122,6 +1141,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform3dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1143,6 +1163,7 @@ public class GL41C extends GL40C {
      * @param program  the handle of the program containing the uniform variable to be modified
      * @param location the location of the uniform variable to be modified
      * @param value    an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniform4dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1165,6 +1186,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1187,6 +1209,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1209,6 +1232,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1231,6 +1255,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix2dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1253,6 +1278,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix3dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1275,6 +1301,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix4dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1297,6 +1324,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix2x3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1319,6 +1347,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix3x2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1341,6 +1370,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix2x4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1363,6 +1393,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix4x2fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1385,6 +1416,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix3x4fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1407,6 +1439,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix4x3fv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -1429,6 +1462,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix2x3dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1451,6 +1485,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix3x2dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1473,6 +1508,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix2x4dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1495,6 +1531,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix4x2dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1517,6 +1554,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix3x4dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1539,6 +1577,7 @@ public class GL41C extends GL40C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     an array of {@code count} values that will be used to update the specified uniform matrix variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glProgramUniform">Reference Page</a>
      */
     public static void glProgramUniformMatrix4x3dv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") DoubleBuffer value) {
@@ -1551,6 +1590,7 @@ public class GL41C extends GL40C {
      * Validates a program pipeline object against current GL state.
      *
      * @param pipeline the name of a program pipeline object to validate
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glValidateProgramPipeline">Reference Page</a>
      */
     public static native void glValidateProgramPipeline(@NativeType("GLuint") int pipeline);
@@ -1570,6 +1610,7 @@ public class GL41C extends GL40C {
      * @param pipeline the name of a program pipeline object from which to retrieve the info log
      * @param length   a variable into which will be written the number of characters written into {@code infoLog}
      * @param infoLog  an array of characters into which will be written the info log for {@code pipeline}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramPipelineInfoLog">Reference Page</a>
      */
     public static void glGetProgramPipelineInfoLog(@NativeType("GLuint") int pipeline, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer infoLog) {
@@ -1584,6 +1625,7 @@ public class GL41C extends GL40C {
      *
      * @param pipeline the name of a program pipeline object from which to retrieve the info log
      * @param bufSize  the maximum number of characters, including the null terminator, that may be written into {@code infoLog}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramPipelineInfoLog">Reference Page</a>
      */
     @NativeType("void")
@@ -1605,6 +1647,7 @@ public class GL41C extends GL40C {
      * Retrieves the info log string from a program pipeline object.
      *
      * @param pipeline the name of a program pipeline object from which to retrieve the info log
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetProgramPipelineInfoLog">Reference Page</a>
      */
     @NativeType("void")
@@ -1619,6 +1662,7 @@ public class GL41C extends GL40C {
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param x     the vertex attribute x component
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttribL1d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x);
@@ -1631,6 +1675,7 @@ public class GL41C extends GL40C {
      * @param index the index of the generic vertex attribute to be modified
      * @param x     the vertex attribute x component
      * @param y     the vertex attribute y component
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttribL2d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y);
@@ -1644,6 +1689,7 @@ public class GL41C extends GL40C {
      * @param x     the vertex attribute x component
      * @param y     the vertex attribute y component
      * @param z     the vertex attribute z component
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttribL3d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z);
@@ -1658,15 +1704,14 @@ public class GL41C extends GL40C {
      * @param y     the vertex attribute y component
      * @param z     the vertex attribute z component
      * @param w     the vertex attribute w component
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttribL4d(@NativeType("GLuint") int index, @NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z, @NativeType("GLdouble") double w);
 
     // --- [ glVertexAttribL1dv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribL1dv VertexAttribL1dv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribL1dv VertexAttribL1dv} */
     public static native void nglVertexAttribL1dv(int index, long v);
 
     /**
@@ -1674,6 +1719,7 @@ public class GL41C extends GL40C {
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribL1dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
@@ -1685,9 +1731,7 @@ public class GL41C extends GL40C {
 
     // --- [ glVertexAttribL2dv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribL2dv VertexAttribL2dv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribL2dv VertexAttribL2dv} */
     public static native void nglVertexAttribL2dv(int index, long v);
 
     /**
@@ -1695,6 +1739,7 @@ public class GL41C extends GL40C {
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribL2dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
@@ -1706,9 +1751,7 @@ public class GL41C extends GL40C {
 
     // --- [ glVertexAttribL3dv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribL3dv VertexAttribL3dv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribL3dv VertexAttribL3dv} */
     public static native void nglVertexAttribL3dv(int index, long v);
 
     /**
@@ -1716,6 +1759,7 @@ public class GL41C extends GL40C {
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribL3dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
@@ -1727,9 +1771,7 @@ public class GL41C extends GL40C {
 
     // --- [ glVertexAttribL4dv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribL4dv VertexAttribL4dv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribL4dv VertexAttribL4dv} */
     public static native void nglVertexAttribL4dv(int index, long v);
 
     /**
@@ -1737,6 +1779,7 @@ public class GL41C extends GL40C {
      *
      * @param index the index of the generic vertex attribute to be modified
      * @param v     the vertex attribute buffer
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribL4dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
@@ -1765,6 +1808,7 @@ public class GL41C extends GL40C {
      *                the array. The initial value is 0.
      * @param pointer the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
      *                currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribLPointer">Reference Page</a>
      */
     public static void glVertexAttribLPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") ByteBuffer pointer) {
@@ -1781,6 +1825,7 @@ public class GL41C extends GL40C {
      *                the array. The initial value is 0.
      * @param pointer the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
      *                currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribLPointer">Reference Page</a>
      */
     public static void glVertexAttribLPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") long pointer) {
@@ -1796,6 +1841,7 @@ public class GL41C extends GL40C {
      *                the array. The initial value is 0.
      * @param pointer the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
      *                currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribLPointer">Reference Page</a>
      */
     public static void glVertexAttribLPointer(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLsizei") int stride, @NativeType("void const *") DoubleBuffer pointer) {
@@ -1804,9 +1850,7 @@ public class GL41C extends GL40C {
 
     // --- [ glGetVertexAttribLdv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexAttribLdv GetVertexAttribLdv}
-     */
+    /** Unsafe version of: {@link #glGetVertexAttribLdv GetVertexAttribLdv} */
     public static native void nglGetVertexAttribLdv(int index, int pname, long params);
 
     /**
@@ -1815,6 +1859,7 @@ public class GL41C extends GL40C {
      * @param index  the generic vertex attribute parameter to be queried
      * @param pname  the symbolic name of the vertex attribute parameter to be queried
      * @param params the requested data
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetVertexAttrib">Reference Page</a>
      */
     public static void glGetVertexAttribLdv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLdouble *") DoubleBuffer params) {
@@ -1838,6 +1883,7 @@ public class GL41C extends GL40C {
      *
      * @param first the first viewport to set
      * @param v     an array containing the viewport parameters
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glViewportArrayv">Reference Page</a>
      */
     public static void glViewportArrayv(@NativeType("GLuint") int first, @NativeType("GLfloat const *") FloatBuffer v) {
@@ -1854,15 +1900,14 @@ public class GL41C extends GL40C {
      * @param y     the bottom viewport coordinate
      * @param w     the viewport width
      * @param h     the viewport height
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glViewportIndexedf">Reference Page</a>
      */
     public static native void glViewportIndexedf(@NativeType("GLuint") int index, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float w, @NativeType("GLfloat") float h);
 
     // --- [ glViewportIndexedfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glViewportIndexedfv ViewportIndexedfv}
-     */
+    /** Unsafe version of: {@link #glViewportIndexedfv ViewportIndexedfv} */
     public static native void nglViewportIndexedfv(int index, long v);
 
     /**
@@ -1870,6 +1915,7 @@ public class GL41C extends GL40C {
      *
      * @param index the viewport to set
      * @param v     the viewport parameters
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glViewportIndexed">Reference Page</a>
      */
     public static void glViewportIndexedfv(@NativeType("GLuint") int index, @NativeType("GLfloat const *") FloatBuffer v) {
@@ -1893,6 +1939,7 @@ public class GL41C extends GL40C {
      *
      * @param first the index of the first viewport whose scissor box to modify
      * @param v     an array containing the left, bottom, width and height of each scissor box, in that order
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glScissorArrayv">Reference Page</a>
      */
     public static void glScissorArrayv(@NativeType("GLuint") int first, @NativeType("GLint const *") IntBuffer v) {
@@ -1909,15 +1956,14 @@ public class GL41C extends GL40C {
      * @param bottom the bottom scissor box coordinate
      * @param width  the scissor box width
      * @param height the scissor box height
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glScissorIndexed">Reference Page</a>
      */
     public static native void glScissorIndexed(@NativeType("GLuint") int index, @NativeType("GLint") int left, @NativeType("GLint") int bottom, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
 
     // --- [ glScissorIndexedv ] ---
 
-    /**
-     * Unsafe version of: {@link #glScissorIndexedv ScissorIndexedv}
-     */
+    /** Unsafe version of: {@link #glScissorIndexedv ScissorIndexedv} */
     public static native void nglScissorIndexedv(int index, long v);
 
     /**
@@ -1925,6 +1971,7 @@ public class GL41C extends GL40C {
      *
      * @param index the index of the viewport whose scissor box to modify
      * @param v     an array containing the left, bottom, width and height of each scissor box, in that order
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glScissorIndexed">Reference Page</a>
      */
     public static void glScissorIndexedv(@NativeType("GLuint") int index, @NativeType("GLint const *") IntBuffer v) {
@@ -1948,6 +1995,7 @@ public class GL41C extends GL40C {
      *
      * @param first the index of the first viewport whose depth range to update
      * @param v     n array containing the near and far values for the depth range of each modified viewport
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDepthRangeArrayv">Reference Page</a>
      */
     public static void glDepthRangeArrayv(@NativeType("GLuint") int first, @NativeType("GLdouble const *") DoubleBuffer v) {
@@ -1962,15 +2010,14 @@ public class GL41C extends GL40C {
      * @param index the index of the viewport whose depth range to update
      * @param zNear the mapping of the near clipping plane to window coordinates. The initial value is 0.
      * @param zFar  the mapping of the far clipping plane to window coordinates. The initial value is 1.
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDepthRangeIndexed">Reference Page</a>
      */
     public static native void glDepthRangeIndexed(@NativeType("GLuint") int index, @NativeType("GLdouble") double zNear, @NativeType("GLdouble") double zFar);
 
     // --- [ glGetFloati_v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetFloati_v GetFloati_v}
-     */
+    /** Unsafe version of: {@link #glGetFloati_v GetFloati_v} */
     public static native void nglGetFloati_v(int target, int index, long data);
 
     /**
@@ -1979,6 +2026,7 @@ public class GL41C extends GL40C {
      * @param target the indexed state to query
      * @param index  the index of the element being queried
      * @param data   a scalar or buffer in which to place the returned data
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetFloati_v">Reference Page</a>
      */
     public static void glGetFloati_v(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat *") FloatBuffer data) {
@@ -1993,6 +2041,7 @@ public class GL41C extends GL40C {
      *
      * @param target the indexed state to query
      * @param index  the index of the element being queried
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetFloati_v">Reference Page</a>
      */
     @NativeType("void")
@@ -2010,9 +2059,7 @@ public class GL41C extends GL40C {
 
     // --- [ glGetDoublei_v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetDoublei_v GetDoublei_v}
-     */
+    /** Unsafe version of: {@link #glGetDoublei_v GetDoublei_v} */
     public static native void nglGetDoublei_v(int target, int index, long data);
 
     /**
@@ -2021,6 +2068,7 @@ public class GL41C extends GL40C {
      * @param target the indexed state to query
      * @param index  the index of the element being queried
      * @param data   a scalar or buffer in which to place the returned data
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetDoublei_v">Reference Page</a>
      */
     public static void glGetDoublei_v(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLdouble *") DoubleBuffer data) {
@@ -2035,6 +2083,7 @@ public class GL41C extends GL40C {
      *
      * @param target the indexed state to query
      * @param index  the index of the element being queried
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetDoublei_v">Reference Page</a>
      */
     @NativeType("void")

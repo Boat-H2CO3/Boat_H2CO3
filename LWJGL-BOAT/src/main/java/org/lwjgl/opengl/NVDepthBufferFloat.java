@@ -43,9 +43,7 @@ public class NVDepthBufferFloat {
      */
     public static final int GL_FLOAT_32_UNSIGNED_INT_24_8_REV_NV = 0x8DAD;
 
-    /**
-     * Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_DEPTH_BUFFER_FLOAT_MODE_NV = 0x8DAF;
 
     static {

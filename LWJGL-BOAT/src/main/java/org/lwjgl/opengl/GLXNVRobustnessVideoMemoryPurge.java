@@ -12,9 +12,7 @@ package org.lwjgl.opengl;
  */
 public final class GLXNVRobustnessVideoMemoryPurge {
 
-    /**
-     * Accepted as an attribute name in the {@code *attrib_list} argument of glXCreateContextAttribsARB.
-     */
+    /** Accepted as an attribute name in the {@code *attrib_list} argument of glXCreateContextAttribsARB. */
     public static final int GLX_GENERATE_RESET_ON_VIDEO_MEMORY_PURGE_NV = 0x20F7;
 
     private GLXNVRobustnessVideoMemoryPurge() {

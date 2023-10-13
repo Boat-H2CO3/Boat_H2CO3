@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_ES3_2_compatibility.txt">ARB_ES3_2_compatibility</a> extension.
@@ -30,9 +30,7 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBES32Compatibility {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v. */
     public static final int
             GL_PRIMITIVE_BOUNDING_BOX_ARB = 0x92BE,
             GL_MULTISAMPLE_LINE_WIDTH_RANGE_ARB = 0x9381,

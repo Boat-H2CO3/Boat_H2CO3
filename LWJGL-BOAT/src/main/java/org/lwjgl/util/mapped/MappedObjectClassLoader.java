@@ -153,7 +153,7 @@ public class MappedObjectClassLoader extends URLClassLoader {
         final StringBuilder msg = new StringBuilder(MappedObjectClassLoader.class.getSimpleName() + ": " + className);
 
         if (MappedObjectTransformer.PRINT_TIMING)
-            msg.append("\n\ttransforming took ").append((t1 - t0) / 1000).append(" micros (total: ").append(total_time_transforming / 1000 / 1000).append("ms)");
+            msg.append("\n\ttransforming took " + (t1 - t0) / 1000 + " micros (total: " + (total_time_transforming / 1000 / 1000) + "ms)");
 
         LWJGLUtil.log(msg);
     }

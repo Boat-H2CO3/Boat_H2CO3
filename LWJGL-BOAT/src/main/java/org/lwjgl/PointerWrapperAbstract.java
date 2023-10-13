@@ -77,7 +77,9 @@ public abstract class PointerWrapperAbstract implements PointerWrapper {
 
         final PointerWrapperAbstract that = (PointerWrapperAbstract) o;
 
-        return pointer == that.pointer;
+        if (pointer != that.pointer) return false;
+
+        return true;
     }
 
     public int hashCode() {

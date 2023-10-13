@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multisample.txt">ARB_multisample</a> extension.
@@ -39,14 +39,10 @@ public class ARBMultisample {
             GL_SAMPLE_ALPHA_TO_ONE_ARB = 0x809F,
             GL_SAMPLE_COVERAGE_ARB = 0x80A0;
 
-    /**
-     * Accepted by the {@code mask} parameter of PushAttrib.
-     */
+    /** Accepted by the {@code mask} parameter of PushAttrib. */
     public static final int GL_MULTISAMPLE_BIT_ARB = 0x20000000;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int
             GL_SAMPLE_BUFFERS_ARB = 0x80A8,
             GL_SAMPLES_ARB = 0x80A9,

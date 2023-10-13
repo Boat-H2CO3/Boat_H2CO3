@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_provoking_vertex.txt">ARB_provoking_vertex</a> extension.
@@ -32,16 +32,12 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBProvokingVertex {
 
-    /**
-     * Accepted by the {@code mode} parameter of ProvokingVertex.
-     */
+    /** Accepted by the {@code mode} parameter of ProvokingVertex. */
     public static final int
             GL_FIRST_VERTEX_CONVENTION = 0x8E4D,
             GL_LAST_VERTEX_CONVENTION = 0x8E4E;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_PROVOKING_VERTEX = 0x8E4F,
             GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION = 0x8E4C;

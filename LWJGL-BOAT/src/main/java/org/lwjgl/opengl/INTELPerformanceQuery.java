@@ -45,24 +45,18 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class INTELPerformanceQuery {
 
-    /**
-     * Returned by the capsMask parameter of GetPerfQueryInfoINTEL.
-     */
+    /** Returned by the capsMask parameter of GetPerfQueryInfoINTEL. */
     public static final int
             GL_PERFQUERY_SINGLE_CONTEXT_INTEL = 0x0,
             GL_PERFQUERY_GLOBAL_CONTEXT_INTEL = 0x1;
 
-    /**
-     * Accepted by the flags parameter of GetPerfQueryDataINTEL.
-     */
+    /** Accepted by the flags parameter of GetPerfQueryDataINTEL. */
     public static final int
             GL_PERFQUERY_WAIT_INTEL = 0x83FB,
             GL_PERFQUERY_FLUSH_INTEL = 0x83FA,
             GL_PERFQUERY_DONOT_FLUSH_INTEL = 0x83F9;
 
-    /**
-     * Returned by GetPerfCounterInfoINTEL function as counter type enumeration in location pointed by counterTypeEnum.
-     */
+    /** Returned by GetPerfCounterInfoINTEL function as counter type enumeration in location pointed by counterTypeEnum. */
     public static final int
             GL_PERFQUERY_COUNTER_EVENT_INTEL = 0x94F0,
             GL_PERFQUERY_COUNTER_DURATION_NORM_INTEL = 0x94F1,
@@ -71,9 +65,7 @@ public class INTELPerformanceQuery {
             GL_PERFQUERY_COUNTER_RAW_INTEL = 0x94F4,
             GL_PERFQUERY_COUNTER_TIMESTAMP_INTEL = 0x94F5;
 
-    /**
-     * Returned by glGetPerfCounterInfoINTEL function as counter data type enumeration in location pointed by counterDataTypeEnum.
-     */
+    /** Returned by glGetPerfCounterInfoINTEL function as counter data type enumeration in location pointed by counterDataTypeEnum. */
     public static final int
             GL_PERFQUERY_COUNTER_DATA_UINT32_INTEL = 0x94F8,
             GL_PERFQUERY_COUNTER_DATA_UINT64_INTEL = 0x94F9,
@@ -81,17 +73,13 @@ public class INTELPerformanceQuery {
             GL_PERFQUERY_COUNTER_DATA_DOUBLE_INTEL = 0x94FB,
             GL_PERFQUERY_COUNTER_DATA_BOOL32_INTEL = 0x94FC;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetIntegerv.
-     */
+    /** Accepted by the {@code pname} parameter of GetIntegerv. */
     public static final int
             GL_PERFQUERY_QUERY_NAME_LENGTH_MAX_INTEL = 0x94FD,
             GL_PERFQUERY_COUNTER_NAME_LENGTH_MAX_INTEL = 0x94FE,
             GL_PERFQUERY_COUNTER_DESC_LENGTH_MAX_INTEL = 0x94FF;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv. */
     public static final int GL_PERFQUERY_GPA_EXTENDED_COUNTERS_INTEL = 0x9500;
 
     static {
@@ -276,9 +264,7 @@ public class INTELPerformanceQuery {
         nglGetPerfQueryInfoINTEL(queryId, queryName.remaining(), memAddress(queryName), memAddress(dataSize), memAddress(noCounters), memAddress(noInstances), memAddress(capsMask));
     }
 
-    /**
-     * Array version of: {@link #glCreatePerfQueryINTEL CreatePerfQueryINTEL}
-     */
+    /** Array version of: {@link #glCreatePerfQueryINTEL CreatePerfQueryINTEL} */
     public static void glCreatePerfQueryINTEL(@NativeType("GLuint") int queryId, @NativeType("GLuint *") int[] queryHandle) {
         long __functionAddress = GL.getICD().glCreatePerfQueryINTEL;
         if (CHECKS) {
@@ -288,9 +274,7 @@ public class INTELPerformanceQuery {
         callPV(queryId, queryHandle, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetFirstPerfQueryIdINTEL GetFirstPerfQueryIdINTEL}
-     */
+    /** Array version of: {@link #glGetFirstPerfQueryIdINTEL GetFirstPerfQueryIdINTEL} */
     public static void glGetFirstPerfQueryIdINTEL(@NativeType("GLuint *") int[] queryId) {
         long __functionAddress = GL.getICD().glGetFirstPerfQueryIdINTEL;
         if (CHECKS) {
@@ -300,9 +284,7 @@ public class INTELPerformanceQuery {
         callPV(queryId, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNextPerfQueryIdINTEL GetNextPerfQueryIdINTEL}
-     */
+    /** Array version of: {@link #glGetNextPerfQueryIdINTEL GetNextPerfQueryIdINTEL} */
     public static void glGetNextPerfQueryIdINTEL(@NativeType("GLuint") int queryId, @NativeType("GLuint *") int[] nextQueryId) {
         long __functionAddress = GL.getICD().glGetNextPerfQueryIdINTEL;
         if (CHECKS) {
@@ -312,9 +294,7 @@ public class INTELPerformanceQuery {
         callPV(queryId, nextQueryId, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetPerfCounterInfoINTEL GetPerfCounterInfoINTEL}
-     */
+    /** Array version of: {@link #glGetPerfCounterInfoINTEL GetPerfCounterInfoINTEL} */
     public static void glGetPerfCounterInfoINTEL(@NativeType("GLuint") int queryId, @NativeType("GLuint") int counterId, @NativeType("GLchar *") ByteBuffer counterName, @NativeType("GLchar *") ByteBuffer counterDesc, @NativeType("GLuint *") int[] counterOffset, @NativeType("GLuint *") int[] counterDataSize, @NativeType("GLuint *") int[] counterTypeEnum, @NativeType("GLuint *") int[] counterDataTypeEnum, @NativeType("GLuint64 *") long[] rawCounterMaxValue) {
         long __functionAddress = GL.getICD().glGetPerfCounterInfoINTEL;
         if (CHECKS) {
@@ -328,9 +308,7 @@ public class INTELPerformanceQuery {
         callPPPPPPPV(queryId, counterId, counterName.remaining(), memAddress(counterName), counterDesc.remaining(), memAddress(counterDesc), counterOffset, counterDataSize, counterTypeEnum, counterDataTypeEnum, rawCounterMaxValue, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetPerfQueryDataINTEL GetPerfQueryDataINTEL}
-     */
+    /** Array version of: {@link #glGetPerfQueryDataINTEL GetPerfQueryDataINTEL} */
     public static void glGetPerfQueryDataINTEL(@NativeType("GLuint") int queryHandle, @NativeType("GLuint") int flags, @NativeType("void *") ByteBuffer data, @NativeType("GLuint *") int[] bytesWritten) {
         long __functionAddress = GL.getICD().glGetPerfQueryDataINTEL;
         if (CHECKS) {
@@ -340,9 +318,7 @@ public class INTELPerformanceQuery {
         callPPV(queryHandle, flags, data.remaining(), memAddress(data), bytesWritten, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetPerfQueryIdByNameINTEL GetPerfQueryIdByNameINTEL}
-     */
+    /** Array version of: {@link #glGetPerfQueryIdByNameINTEL GetPerfQueryIdByNameINTEL} */
     public static void glGetPerfQueryIdByNameINTEL(@NativeType("GLchar *") ByteBuffer queryName, @NativeType("GLuint *") int[] queryId) {
         long __functionAddress = GL.getICD().glGetPerfQueryIdByNameINTEL;
         if (CHECKS) {
@@ -353,9 +329,7 @@ public class INTELPerformanceQuery {
         callPPV(memAddress(queryName), queryId, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetPerfQueryIdByNameINTEL GetPerfQueryIdByNameINTEL}
-     */
+    /** Array version of: {@link #glGetPerfQueryIdByNameINTEL GetPerfQueryIdByNameINTEL} */
     public static void glGetPerfQueryIdByNameINTEL(@NativeType("GLchar *") CharSequence queryName, @NativeType("GLuint *") int[] queryId) {
         long __functionAddress = GL.getICD().glGetPerfQueryIdByNameINTEL;
         if (CHECKS) {
@@ -373,9 +347,7 @@ public class INTELPerformanceQuery {
         }
     }
 
-    /**
-     * Array version of: {@link #glGetPerfQueryInfoINTEL GetPerfQueryInfoINTEL}
-     */
+    /** Array version of: {@link #glGetPerfQueryInfoINTEL GetPerfQueryInfoINTEL} */
     public static void glGetPerfQueryInfoINTEL(@NativeType("GLuint") int queryId, @NativeType("GLchar *") ByteBuffer queryName, @NativeType("GLuint *") int[] dataSize, @NativeType("GLuint *") int[] noCounters, @NativeType("GLuint *") int[] noInstances, @NativeType("GLuint *") int[] capsMask) {
         long __functionAddress = GL.getICD().glGetPerfQueryInfoINTEL;
         if (CHECKS) {

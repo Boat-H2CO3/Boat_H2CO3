@@ -41,17 +41,13 @@ public abstract class GLFWFramebufferSizeCallback extends Callback implements GL
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWFramebufferSizeCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWFramebufferSizeCallback} instance that delegates to the specified {@code GLFWFramebufferSizeCallbackI} instance.
-     */
+    /** Creates a {@code GLFWFramebufferSizeCallback} instance that delegates to the specified {@code GLFWFramebufferSizeCallbackI} instance. */
     public static GLFWFramebufferSizeCallback create(GLFWFramebufferSizeCallbackI instance) {
         return instance instanceof GLFWFramebufferSizeCallback
                 ? (GLFWFramebufferSizeCallback) instance
@@ -66,9 +62,7 @@ public abstract class GLFWFramebufferSizeCallback extends Callback implements GL
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetFramebufferSizeCallback SetFramebufferSizeCallback}.
-     */
+    /** See {@link GLFW#glfwSetFramebufferSizeCallback SetFramebufferSizeCallback}. */
     public GLFWFramebufferSizeCallback set(long window) {
         glfwSetFramebufferSizeCallback(window, this);
         return this;

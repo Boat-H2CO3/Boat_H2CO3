@@ -26,7 +26,7 @@ public class GLXSGIXSwapGroup {
 
     static boolean isAvailable(GLXCapabilities caps) {
         return checkFunctions(
-                caps.glXJoinSwapGroupSGIX
+            caps.glXJoinSwapGroupSGIX
         );
     }
 

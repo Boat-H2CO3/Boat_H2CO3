@@ -4,6 +4,7 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
+DISABLE_WARNINGS()
 #include "lwjgl_malloc.h"
 #define STBTT_malloc(x,u)  ((void)(u),org_lwjgl_malloc(x))
 #define STBTT_free(x,u)    ((void)(u),org_lwjgl_free(x))
@@ -12,6 +13,7 @@
 #define STBTT_STATIC
 #include "stb_rect_pack.h"
 #include "stb_truetype.h"
+ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 

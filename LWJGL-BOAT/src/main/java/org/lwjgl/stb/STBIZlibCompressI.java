@@ -52,6 +52,7 @@ public interface STBIZlibCompressI extends CallbackI.P {
      * @param data_len the data length, in bytes
      * @param out_len  returns the compressed data length, in bytes
      * @param quality  the compression quality to use
+     *
      * @return the compressed data
      */
     @NativeType("unsigned char *")

@@ -27,7 +27,7 @@ public class GLXNVDelayBeforeSwap {
 
     static boolean isAvailable(GLXCapabilities caps) {
         return checkFunctions(
-                caps.glXDelayBeforeSwapNV
+            caps.glXDelayBeforeSwapNV
         );
     }
 

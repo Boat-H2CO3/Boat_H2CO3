@@ -109,11 +109,9 @@ public class SOFTHRTF {
 
     // --- [ alcResetDeviceSOFT ] ---
 
-    /**
-     * Unsafe version of: {@link #alcResetDeviceSOFT ResetDeviceSOFT}
-     */
+    /** Unsafe version of: {@link #alcResetDeviceSOFT ResetDeviceSOFT} */
     public static boolean nalcResetDeviceSOFT(long device, long attrList) {
-        long __functionAddress = ALC.getICD().alcResetDeviceSOFT;
+		long __functionAddress = ALC.getICD().alcResetDeviceSOFT;
         if (CHECKS) {
             check(__functionAddress);
             check(device);
@@ -127,9 +125,10 @@ public class SOFTHRTF {
      * @param device   a handle to a valid playback device as returned by {@link ALC10#alcOpenDevice OpenDevice}, otherwise the call fails and an {@link ALC10#ALC_INVALID_DEVICE INVALID_DEVICE} error is generated
      * @param attrList the same as what could be passed to {@link ALC10#alcCreateContext CreateContext}. The AL is allowed to ignore attributes and attribute value combinations the device
      *                 cannot support, for example if the device doesn't support the requested {@link ALC10#ALC_FREQUENCY FREQUENCY} value, another value it does support may be set.
+     *
      * @return on success the function returns {@link ALC10#ALC_TRUE TRUE}, and on failure the function returns {@link ALC10#ALC_FALSE FALSE}. Note that a return of {@link ALC10#ALC_TRUE TRUE} does not
-     * indicate any attributes were honored, just that the device was successfully reset. If you need to know what the attributes are after a reset, query the
-     * device using {@link ALC10#alcGetIntegerv GetIntegerv} with the relevant attributes.
+     *         indicate any attributes were honored, just that the device was successfully reset. If you need to know what the attributes are after a reset, query the
+     *         device using {@link ALC10#alcGetIntegerv GetIntegerv} with the relevant attributes.
      */
     @NativeType("ALCboolean")
     public static boolean alcResetDeviceSOFT(@NativeType("ALCdevice *") long device, @Nullable @NativeType("ALCint const *") IntBuffer attrList) {
@@ -139,12 +138,10 @@ public class SOFTHRTF {
         return nalcResetDeviceSOFT(device, memAddressSafe(attrList));
     }
 
-    /**
-     * Array version of: {@link #alcResetDeviceSOFT ResetDeviceSOFT}
-     */
+    /** Array version of: {@link #alcResetDeviceSOFT ResetDeviceSOFT} */
     @NativeType("ALCboolean")
     public static boolean alcResetDeviceSOFT(@NativeType("ALCdevice *") long device, @Nullable @NativeType("ALCint const *") int[] attrList) {
-        long __functionAddress = ALC.getICD().alcResetDeviceSOFT;
+		long __functionAddress = ALC.getICD().alcResetDeviceSOFT;
         if (CHECKS) {
             check(__functionAddress);
             check(device);

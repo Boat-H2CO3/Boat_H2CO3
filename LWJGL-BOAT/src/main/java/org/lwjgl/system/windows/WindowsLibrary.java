@@ -18,9 +18,7 @@ import static org.lwjgl.system.windows.WindowsUtil.*;
  */
 public class WindowsLibrary extends SharedLibrary.Default {
 
-    /**
-     * The LWJGL dll handle.
-     */
+    /** The LWJGL dll handle. */
     public static final long HINSTANCE;
 
     static {

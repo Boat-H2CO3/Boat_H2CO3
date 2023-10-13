@@ -31,9 +31,7 @@ public class GLFWNativeWin32 {
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 GetWin32Adapter = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWin32Adapter"),
                 GetWin32Monitor = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWin32Monitor"),
@@ -44,9 +42,7 @@ public class GLFWNativeWin32 {
 
     // --- [ glfwGetWin32Adapter ] ---
 
-    /**
-     * Unsafe version of: {@link #glfwGetWin32Adapter GetWin32Adapter}
-     */
+    /** Unsafe version of: {@link #glfwGetWin32Adapter GetWin32Adapter} */
     public static long nglfwGetWin32Adapter(long monitor) {
         long __functionAddress = Functions.GetWin32Adapter;
         if (CHECKS) {
@@ -61,7 +57,9 @@ public class GLFWNativeWin32 {
      * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
      *
      * @param monitor the GLFW monitor
+     *
      * @return the UTF-8 encoded adapter device name (for example `\\.\DISPLAY1`) of the specified monitor, or {@code NULL} if an error occurred
+     *
      * @since version 3.1
      */
     @Nullable
@@ -73,9 +71,7 @@ public class GLFWNativeWin32 {
 
     // --- [ glfwGetWin32Monitor ] ---
 
-    /**
-     * Unsafe version of: {@link #glfwGetWin32Monitor GetWin32Monitor}
-     */
+    /** Unsafe version of: {@link #glfwGetWin32Monitor GetWin32Monitor} */
     public static long nglfwGetWin32Monitor(long monitor) {
         long __functionAddress = Functions.GetWin32Monitor;
         if (CHECKS) {
@@ -90,7 +86,9 @@ public class GLFWNativeWin32 {
      * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
      *
      * @param monitor the GLFW monitor
+     *
      * @return the UTF-8 encoded display device name (for example `\\.\DISPLAY1\Monitor0`) of the specified monitor, or {@code NULL} if an error occurred
+     *
      * @since version 3.1
      */
     @Nullable
@@ -108,7 +106,9 @@ public class GLFWNativeWin32 {
      * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
      *
      * @param window the GLFW window
+     *
      * @return the {@code HWND} of the specified window, or {@code NULL} if an error occurred
+     *
      * @since version 3.0
      */
     @NativeType("HWND")
@@ -134,7 +134,9 @@ public class GLFWNativeWin32 {
      *
      * @param handle the {@code HWND} to attach to the window object
      * @param share  the window whose context to share resources with, or {@code NULL} to not share resources
+     *
      * @return the handle of the created window, or {@code NULL} if an error occurred
+     *
      * @since version 3.3
      */
     @NativeType("GLFWwindow *")

@@ -102,9 +102,7 @@ public class NVQueryResourceTag {
         }
     }
 
-    /**
-     * Array version of: {@link #glGenQueryResourceTagNV GenQueryResourceTagNV}
-     */
+    /** Array version of: {@link #glGenQueryResourceTagNV GenQueryResourceTagNV} */
     public static void glGenQueryResourceTagNV(@NativeType("GLuint *") int[] tagIds) {
         long __functionAddress = GL.getICD().glGenQueryResourceTagNV;
         if (CHECKS) {
@@ -113,9 +111,7 @@ public class NVQueryResourceTag {
         callPV(tagIds.length, tagIds, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glDeleteQueryResourceTagNV DeleteQueryResourceTagNV}
-     */
+    /** Array version of: {@link #glDeleteQueryResourceTagNV DeleteQueryResourceTagNV} */
     public static void glDeleteQueryResourceTagNV(@NativeType("GLuint const *") int[] tagIds) {
         long __functionAddress = GL.getICD().glDeleteQueryResourceTagNV;
         if (CHECKS) {

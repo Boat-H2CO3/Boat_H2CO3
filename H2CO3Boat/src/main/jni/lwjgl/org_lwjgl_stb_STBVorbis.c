@@ -4,10 +4,13 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
+DISABLE_WARNINGS()
 #ifdef LWJGL_LINUX
     #include <alloca.h>
 #endif
 #include "stb_vorbis.c"
+ENABLE_WARNINGS()
+
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_stb_STBVorbis_nstb_1vorbis_1get_1info(JNIEnv *__env, jclass clazz, jlong fAddress, jlong __result) {

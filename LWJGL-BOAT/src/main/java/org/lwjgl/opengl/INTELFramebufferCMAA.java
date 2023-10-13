@@ -38,7 +38,7 @@ public class INTELFramebufferCMAA {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glApplyFramebufferAttachmentCMAAINTEL
+            caps.glApplyFramebufferAttachmentCMAAINTEL
         );
     }
 

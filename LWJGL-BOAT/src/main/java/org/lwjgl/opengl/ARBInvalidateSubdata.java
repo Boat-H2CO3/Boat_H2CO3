@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_invalidate_subdata.txt">ARB_invalidate_subdata</a> extension.
@@ -183,16 +183,12 @@ public class ARBInvalidateSubdata {
         GL43C.glInvalidateSubFramebuffer(target, attachment, x, y, width, height);
     }
 
-    /**
-     * Array version of: {@link #glInvalidateFramebuffer InvalidateFramebuffer}
-     */
+    /** Array version of: {@link #glInvalidateFramebuffer InvalidateFramebuffer} */
     public static void glInvalidateFramebuffer(@NativeType("GLenum") int target, @NativeType("GLenum const *") int[] attachments) {
         GL43C.glInvalidateFramebuffer(target, attachments);
     }
 
-    /**
-     * Array version of: {@link #glInvalidateSubFramebuffer InvalidateSubFramebuffer}
-     */
+    /** Array version of: {@link #glInvalidateSubFramebuffer InvalidateSubFramebuffer} */
     public static void glInvalidateSubFramebuffer(@NativeType("GLenum") int target, @NativeType("GLenum const *") int[] attachments, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
         GL43C.glInvalidateSubFramebuffer(target, attachments, x, y, width, height);
     }

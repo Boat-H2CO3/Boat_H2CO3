@@ -83,9 +83,7 @@ public class NVXProgressFence {
         nglClientWaitSemaphoreui64NVX(semaphoreArray.remaining(), memAddress(semaphoreArray), memAddress(fenceValueArray));
     }
 
-    /**
-     * Array version of: {@link #glSignalSemaphoreui64NVX SignalSemaphoreui64NVX}
-     */
+    /** Array version of: {@link #glSignalSemaphoreui64NVX SignalSemaphoreui64NVX} */
     public static void glSignalSemaphoreui64NVX(@NativeType("GLuint") int signalGpu, @NativeType("GLuint const *") int[] semaphoreArray, @NativeType("GLuint64 const *") long[] fenceValueArray) {
         long __functionAddress = GL.getICD().glSignalSemaphoreui64NVX;
         if (CHECKS) {
@@ -95,9 +93,7 @@ public class NVXProgressFence {
         callPPV(signalGpu, semaphoreArray.length, semaphoreArray, fenceValueArray, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glWaitSemaphoreui64NVX WaitSemaphoreui64NVX}
-     */
+    /** Array version of: {@link #glWaitSemaphoreui64NVX WaitSemaphoreui64NVX} */
     public static void glWaitSemaphoreui64NVX(@NativeType("GLuint") int waitGpu, @NativeType("GLuint const *") int[] semaphoreArray, @NativeType("GLuint64 const *") long[] fenceValueArray) {
         long __functionAddress = GL.getICD().glWaitSemaphoreui64NVX;
         if (CHECKS) {
@@ -107,9 +103,7 @@ public class NVXProgressFence {
         callPPV(waitGpu, semaphoreArray.length, semaphoreArray, fenceValueArray, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glClientWaitSemaphoreui64NVX ClientWaitSemaphoreui64NVX}
-     */
+    /** Array version of: {@link #glClientWaitSemaphoreui64NVX ClientWaitSemaphoreui64NVX} */
     public static void glClientWaitSemaphoreui64NVX(@NativeType("GLuint const *") int[] semaphoreArray, @NativeType("GLuint64 const *") long[] fenceValueArray) {
         long __functionAddress = GL.getICD().glClientWaitSemaphoreui64NVX;
         if (CHECKS) {

@@ -14,9 +14,7 @@ package org.lwjgl.opengl;
  */
 public final class EXTClipVolumeHint {
 
-    /**
-     * Accepted by the target parameter of Hint and the pname parameter of GetBooleanv, GetDoublev, GetFloatv and GetIntegerv.
-     */
+    /** Accepted by the target parameter of Hint and the pname parameter of GetBooleanv, GetDoublev, GetFloatv and GetIntegerv. */
     public static final int GL_CLIP_VOLUME_CLIPPING_HINT_EXT = 0x80F0;
 
     private EXTClipVolumeHint() {

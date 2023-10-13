@@ -71,12 +71,12 @@ public class Disk extends Quadric {
      * subdivided around the z axis into slices (like pizza slices), and also
      * about the z axis into rings (as specified by slices and loops,
      * respectively).
-     * <p>
+     *
      * With respect to orientation, the +z side of the disk is considered to be
      * "outside" (see glu.quadricOrientation).  This means that if the orientation
      * is set to GLU.OUTSIDE, then any normals generated point along the +z axis.
      * Otherwise, they point along the -z axis.
-     * <p>
+     *
      * If texturing is turned on (with glu.quadricTexture), texture coordinates are
      * generated linearly such that where r=outerRadius, the value at (r, 0, 0) is
      * (1, 0.5), at (0, r, 0) it is (0.5, 1), at (-r, 0, 0) it is (0, 0.5), and at

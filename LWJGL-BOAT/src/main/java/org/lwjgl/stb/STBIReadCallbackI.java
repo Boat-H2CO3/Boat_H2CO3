@@ -47,6 +47,7 @@ public interface STBIReadCallbackI extends CallbackI.I {
      * @param user a pointer to user data
      * @param data the data buffer to fill
      * @param size the number of bytes to read
+     *
      * @return the number of bytes actually read
      */
     int invoke(@NativeType("void *") long user, @NativeType("char *") long data, int size);

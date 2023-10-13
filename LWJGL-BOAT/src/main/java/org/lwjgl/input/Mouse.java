@@ -29,7 +29,7 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.lwjgl.input;
+        package org.lwjgl.input;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
@@ -51,7 +51,7 @@ import java.util.Map;
  * <br>
  * A raw Mouse interface. This can be used to poll the current state of the
  * mouse buttons, and determine the mouse movement delta since the last poll.
- * <p>
+ *
  * n buttons supported, n being a native limit. A scrolly wheel is also
  * supported, if one such is available. Movement is reported as delta from
  * last position or as an absolute position. If the window has been created
@@ -228,7 +228,7 @@ public class Mouse {
      * Binds a native cursor. If the cursor argument is null, any
      * currently bound native cursor is disabled, and the cursor reverts
      * to the default operating system supplied cursor.
-     * <p>
+     *
      * NOTE: The native cursor is not constrained to the window, but
      * relative events will not be generated if the cursor is outside.
      *
@@ -263,9 +263,9 @@ public class Mouse {
      * the native cursor is moved to the new position.
      *
      * @param new_x The x coordinate of the new cursor position in OpenGL coordinates relative
-     *              to the window origin.
+     *			to the window origin.
      * @param new_y The y coordinate of the new cursor position in OpenGL coordinates relative
-     *              to the window origin.
+     *			to the window origin.
      */
     public static void setCursorPosition(int new_x, int new_y) {
         //dummy
@@ -361,12 +361,12 @@ public class Mouse {
      * get<value> methods.
      * By using this method, it is possible to "miss" mouse click events if you don't
      * poll fast enough.
-     * <p>
+     *
      * To use buffered values, you have to call <code>next</code> for each event you
      * want to read. You can query which button caused the event by using
      * <code>getEventButton</code>. To get the state of that button, for that event, use
      * <code>getEventButtonState</code>.
-     * <p>
+     *
      * NOTE: This method does not query the operating system for new events. To do that,
      * Display.processMessages() (or Display.update()) must be called first.
      *
@@ -381,8 +381,7 @@ public class Mouse {
      * @see Mouse#getDWheel()
      */
     public static void poll() {
-        if (!created)
-            throw new IllegalStateException("Mouse must be created before you can poll it");
+        if (!created) throw new IllegalStateException("Mouse must be created before you can poll it");
         implementation.pollMouse(coord_buffer, buttons);
 
         /* If we're grabbed, poll returns mouse deltas, if not it returns absolute coordinates */
@@ -427,8 +426,7 @@ public class Mouse {
      * @return true if the specified button is down
      */
     public static boolean isButtonDown(int button) {
-        if (!created)
-            throw new IllegalStateException("Mouse must be created before you can poll the button state");
+        if (!created) throw new IllegalStateException("Mouse must be created before you can poll the button state");
         if (button >= buttonCount || button < 0)
             return false;
         else
@@ -437,7 +435,6 @@ public class Mouse {
 
     /**
      * Gets a button's name
-     *
      * @param button The button
      * @return a String with the button's human readable name in it or null if the button is unnamed
      */
@@ -450,7 +447,6 @@ public class Mouse {
 
     /**
      * Get's a button's index. If the button is unrecognised then -1 is returned.
-     *
      * @param buttonName The button name
      */
     public static int getButtonIndex(String buttonName) {
@@ -466,10 +462,9 @@ public class Mouse {
      * <code>getEventButton()</code> (if any). To get the state of that key, for that event, use
      * <code>getEventButtonState</code>. To get the current mouse delta values use <code>getEventDX()</code>
      * and <code>getEventDY()</code>.
-     *
-     * @return true if a mouse event was read, false otherwise
      * @see Mouse#getEventButton()
      * @see Mouse#getEventButtonState()
+     * @return true if a mouse event was read, false otherwise
      */
     public static boolean next() {
         if (!created)
@@ -495,7 +490,7 @@ public class Mouse {
                 last_event_raw_x = new_event_x;
                 last_event_raw_y = new_event_y;
             }
-            if (clipMouseCoordinatesToWindow) {
+            if(clipMouseCoordinatesToWindow) {
                 event_x = Math.min(Display.getWidth() - 1, Math.max(0, event_x));
                 event_y = Math.min(Display.getHeight() - 1, Math.max(0, event_y));
             }
@@ -515,7 +510,6 @@ public class Mouse {
 
     /**
      * Get the current events button state.
-     *
      * @return Current events button state.
      */
     public static boolean getEventButtonState() {
@@ -653,7 +647,8 @@ public class Mouse {
                 // store location mouse was grabbed
                 grab_x = x;
                 grab_y = y;
-            } else if (!grab && grabbed) {
+            }
+            else if (!grab && grabbed) {
                 // move mouse back to location it was grabbed before ungrabbing
                 if ((Cursor.getCapabilities() & Cursor.CURSOR_ONE_BIT_TRANSPARENCY) != 0)
                     implementation.setCursorPosition(grab_x, grab_y);
@@ -679,9 +674,7 @@ public class Mouse {
         //dummy
     }
 
-    /**
-     * Gets a boolean property as a privileged action.
-     */
+    /** Gets a boolean property as a privileged action. */
     static boolean getPrivilegedBoolean(final String property_name) {
         return Boolean.parseBoolean(System.getProperty(property_name));
     }
@@ -690,7 +683,6 @@ public class Mouse {
      * Retrieves whether or not the mouse cursor is within the bounds of the window.
      * If the mouse cursor was moved outside the display during a drag, then the result of calling
      * this method will be true until the button is released.
-     *
      * @return true if mouse is inside display, false otherwise.
      */
     public static boolean isInsideWindow() {
@@ -700,13 +692,10 @@ public class Mouse {
     /*
      * Package private methods to get the absolute unclipped X/Y coordiates
      */
-    /*package-private*/
-    static int getAbsoluteX() {
+    /*package-private*/ static int getAbsoluteX() {
         return absolute_x;
     }
-
-    /*package-private*/
-    static int getAbsoluteY() {
+    /*package-private*/ static int getAbsoluteY() {
         return absolute_y;
     }
 

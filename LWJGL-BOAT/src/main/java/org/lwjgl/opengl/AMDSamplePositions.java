@@ -5,15 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.FloatBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_sample_positions.txt">AMD_sample_positions</a> extension.
@@ -27,9 +25,7 @@ import java.nio.FloatBuffer;
  */
 public class AMDSamplePositions {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetFloatv. */
     public static final int GL_SUBSAMPLE_DISTANCE_AMD = 0x883F;
 
     static {
@@ -42,7 +38,7 @@ public class AMDSamplePositions {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glSetMultisamplefvAMD
+            caps.glSetMultisamplefvAMD
         );
     }
 
@@ -57,9 +53,7 @@ public class AMDSamplePositions {
         nglSetMultisamplefvAMD(pname, index, memAddress(val));
     }
 
-    /**
-     * Array version of: {@link #glSetMultisamplefvAMD SetMultisamplefvAMD}
-     */
+    /** Array version of: {@link #glSetMultisamplefvAMD SetMultisamplefvAMD} */
     public static void glSetMultisamplefvAMD(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] val) {
         long __functionAddress = GL.getICD().glSetMultisamplefvAMD;
         if (CHECKS) {

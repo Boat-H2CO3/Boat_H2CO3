@@ -40,17 +40,13 @@ public abstract class GLFWWindowFocusCallback extends Callback implements GLFWWi
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWWindowFocusCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWWindowFocusCallback} instance that delegates to the specified {@code GLFWWindowFocusCallbackI} instance.
-     */
+    /** Creates a {@code GLFWWindowFocusCallback} instance that delegates to the specified {@code GLFWWindowFocusCallbackI} instance. */
     public static GLFWWindowFocusCallback create(GLFWWindowFocusCallbackI instance) {
         return instance instanceof GLFWWindowFocusCallback
                 ? (GLFWWindowFocusCallback) instance
@@ -65,9 +61,7 @@ public abstract class GLFWWindowFocusCallback extends Callback implements GLFWWi
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetWindowFocusCallback SetWindowFocusCallback}.
-     */
+    /** See {@link GLFW#glfwSetWindowFocusCallback SetWindowFocusCallback}. */
     public GLFWWindowFocusCallback set(long window) {
         glfwSetWindowFocusCallback(window, this);
         return this;

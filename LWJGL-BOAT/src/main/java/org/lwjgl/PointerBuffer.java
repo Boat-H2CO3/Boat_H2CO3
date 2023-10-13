@@ -7,7 +7,6 @@ package org.lwjgl;
 import org.lwjgl.system.*;
 
 import javax.annotation.*;
-
 import java.nio.*;
 
 import static org.lwjgl.system.CheckIntrinsics.*;
@@ -40,9 +39,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
         return container;
     }
 
-    /**
-     * Returns true if the underlying architecture is 64bit.
-     */
+    /** Returns true if the underlying architecture is 64bit. */
     public static boolean is64Bit() {
         return POINTER_SIZE == 8;
     }
@@ -161,7 +158,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * <p>The new buffer's position will be zero, its limit will be its capacity, and its mark will be undefined.</p>
      *
      * @param capacity the new buffer's capacity, in pointers
+     *
      * @return the new pointer buffer
+     *
      * @throws IllegalArgumentException If the {@code capacity} is a negative integer
      */
     public static PointerBuffer allocateDirect(int capacity) {
@@ -203,6 +202,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * Relative <i>get</i> method. Reads the pointer at this buffer's current position, and then increments the position.
      *
      * @return the pointer at the buffer's current position
+     *
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public long get() {
@@ -232,7 +232,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * <p>Writes the specified pointer into this buffer at the current position, and then increments the position.</p>
      *
      * @param p the pointer to be written
+     *
      * @return This buffer
+     *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
     public PointerBuffer put(long p) {
@@ -262,7 +264,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * Absolute <i>get</i> method. Reads the pointer at the specified {@code index}.
      *
      * @param index the index from which the pointer will be read
+     *
      * @return the pointer at the specified {@code index}
+     *
      * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public long get(int index) {
@@ -287,7 +291,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *
      * @param index the index at which the pointer will be written
      * @param p     the pointer value to be written
+     *
      * @return This buffer
+     *
      * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public PointerBuffer put(int index, long p) {
@@ -309,17 +315,13 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
 
     // -- PointerWrapper operations --
 
-    /**
-     * Puts the pointer value of the specified {@link Pointer} at the current position and then increments the position.
-     */
+    /** Puts the pointer value of the specified {@link Pointer} at the current position and then increments the position. */
     public PointerBuffer put(Pointer pointer) {
         put(pointer.address());
         return this;
     }
 
-    /**
-     * Puts the pointer value of the specified {@link Pointer} at the specified {@code index}.
-     */
+    /** Puts the pointer value of the specified {@link Pointer} at the specified {@code index}. */
     public PointerBuffer put(int index, Pointer pointer) {
         put(index, pointer.address());
         return this;
@@ -331,7 +333,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
      *
      * @param buffer the pointer to be written
+     *
      * @return this buffer
+     *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
     public PointerBuffer put(ByteBuffer buffer) {
@@ -343,7 +347,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
      *
      * @param buffer the pointer to be written
+     *
      * @return this buffer
+     *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
     public PointerBuffer put(ShortBuffer buffer) {
@@ -355,7 +361,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
      *
      * @param buffer the pointer to be written
+     *
      * @return this buffer
+     *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
     public PointerBuffer put(IntBuffer buffer) {
@@ -367,7 +375,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
      *
      * @param buffer the pointer to be written
+     *
      * @return this buffer
+     *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
     public PointerBuffer put(LongBuffer buffer) {
@@ -379,7 +389,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
      *
      * @param buffer the pointer to be written
+     *
      * @return this buffer
+     *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
     public PointerBuffer put(FloatBuffer buffer) {
@@ -391,7 +403,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
      *
      * @param buffer the pointer to be written
+     *
      * @return this buffer
+     *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
     public PointerBuffer put(DoubleBuffer buffer) {
@@ -403,7 +417,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * <p>Writes the address of the specified {@code buffer} into this buffer at the current position, and then increments the position.</p>
      *
      * @param buffer the pointer to be written
+     *
      * @return this buffer
+     *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
     public PointerBuffer putAddressOf(CustomBuffer<?> buffer) {
@@ -413,57 +429,43 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
 
     // ---
 
-    /**
-     * Puts the address of the specified {@code buffer} at the specified {@code index}.
-     */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, ByteBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /**
-     * Puts the address of the specified {@code buffer} at the specified {@code index}.
-     */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, ShortBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /**
-     * Puts the address of the specified {@code buffer} at the specified {@code index}.
-     */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, IntBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /**
-     * Puts the address of the specified {@code buffer} at the specified {@code index}.
-     */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, LongBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /**
-     * Puts the address of the specified {@code buffer} at the specified {@code index}.
-     */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, FloatBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /**
-     * Puts the address of the specified {@code buffer} at the specified {@code index}.
-     */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer put(int index, DoubleBuffer buffer) {
         put(index, memAddress(buffer));
         return this;
     }
 
-    /**
-     * Puts the address of the specified {@code buffer} at the specified {@code index}.
-     */
+    /** Puts the address of the specified {@code buffer} at the specified {@code index}. */
     public PointerBuffer putAddressOf(int index, CustomBuffer<?> buffer) {
         put(index, memAddress(buffer));
         return this;
@@ -478,8 +480,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public ByteBuffer getByteBuffer(int size) {
-        return memByteBuffer(get(), size);
-    }
+        return memByteBuffer(get(), size); }
 
     /**
      * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link ShortBuffer} instance that
@@ -488,8 +489,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public ShortBuffer getShortBuffer(int size) {
-        return memShortBuffer(get(), size);
-    }
+        return memShortBuffer(get(), size); }
 
     /**
      * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link IntBuffer} instance that
@@ -498,8 +498,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public IntBuffer getIntBuffer(int size) {
-        return memIntBuffer(get(), size);
-    }
+        return memIntBuffer(get(), size); }
 
     /**
      * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link LongBuffer} instance that
@@ -508,8 +507,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public LongBuffer getLongBuffer(int size) {
-        return memLongBuffer(get(), size);
-    }
+        return memLongBuffer(get(), size); }
 
     /**
      * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link FloatBuffer} instance that
@@ -518,8 +516,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public FloatBuffer getFloatBuffer(int size) {
-        return memFloatBuffer(get(), size);
-    }
+        return memFloatBuffer(get(), size); }
 
     /**
      * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@link DoubleBuffer} instance that
@@ -528,8 +525,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public DoubleBuffer getDoubleBuffer(int size) {
-        return memDoubleBuffer(get(), size);
-    }
+        return memDoubleBuffer(get(), size); }
 
     /**
      * Reads the pointer at this buffer's current position, and then increments the position. The pointer is returned as a {@code PointerBuffer} instance that
@@ -538,8 +534,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public PointerBuffer getPointerBuffer(int size) {
-        return memPointerBuffer(get(), size);
-    }
+        return memPointerBuffer(get(), size); }
 
     /**
      * Reads the pointer at this buffer's current position, and then increments the position. The pointer is evaluated as a null-terminated ASCII string, which
@@ -548,8 +543,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public String getStringASCII() {
-        return memASCII(get());
-    }
+        return memASCII(get()); }
 
     /**
      * Reads the pointer at this buffer's current position, and then increments the position. The pointer is evaluated as a null-terminated UTF-8 string, which
@@ -655,6 +649,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *     src.get(a, 0, a.length) </pre>
      *
      * @return This buffer
+     *
      * @throws BufferUnderflowException If there are fewer than {@code length} pointers remaining in this buffer
      */
     public PointerBuffer get(long[] dst) {
@@ -682,7 +677,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @param dst    the array into which pointers are to be written
      * @param offset the offset within the array of the first pointer to be written; must be non-negative and no larger than {@code dst.length}
      * @param length the maximum number of pointers to be written to the specified array; must be non-negative and no larger than {@code dst.length - offset}
+     *
      * @return This buffer
+     *
      * @throws BufferUnderflowException  If there are fewer than {@code length} pointers remaining in this buffer
      * @throws IndexOutOfBoundsException If the preconditions on the {@code offset} and {@code length} parameters do not hold
      */
@@ -717,6 +714,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      *     dst.put(a, 0, a.length) </pre>
      *
      * @return This buffer
+     *
      * @throws BufferOverflowException If there is insufficient space in this buffer
      */
     public PointerBuffer put(long[] src) {
@@ -744,7 +742,9 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * @param src    the array from which pointers are to be read
      * @param offset the offset within the array of the first pointer to be read; must be non-negative and no larger than {@code array.length}
      * @param length the number of pointers to be read from the specified array; must be non-negative and no larger than {@code array.length - offset}
+     *
      * @return This buffer
+     *
      * @throws BufferOverflowException   If there is insufficient space in this buffer
      * @throws IndexOutOfBoundsException If the preconditions on the {@code offset} and {@code length} parameters do not hold
      */
@@ -785,7 +785,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
         int h = 1;
         int p = position();
         for (int i = limit() - 1; i >= p; i--) {
-            h = 31 * h + (int) get(i);
+            h = 31 * h + (int)get(i);
         }
         return h;
     }
@@ -805,6 +805,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
      * <p>A pointer buffer is not equal to any other type of object.</p>
      *
      * @param ob the object to which this buffer is to be compared
+     *
      * @return {@code true} if, and only if, this buffer is equal to the
      * given object
      */
@@ -812,7 +813,7 @@ public class PointerBuffer extends CustomBuffer<PointerBuffer> implements Compar
         if (!(ob instanceof PointerBuffer)) {
             return false;
         }
-        PointerBuffer that = (PointerBuffer) ob;
+        PointerBuffer that = (PointerBuffer)ob;
         if (this.remaining() != that.remaining()) {
             return false;
         }

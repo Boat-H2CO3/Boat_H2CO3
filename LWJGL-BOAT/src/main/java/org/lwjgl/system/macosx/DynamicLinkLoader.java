@@ -20,18 +20,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class DynamicLinkLoader {
 
-    /**
-     * The {@code mode} argument to {@link #dlopen} contains one of the following.
-     */
+    /** The {@code mode} argument to {@link #dlopen} contains one of the following. */
     public static final int
             RTLD_LAZY = 0x1,
             RTLD_NOW = 0x2,
             RTLD_LOCAL = 0x4,
             RTLD_GLOBAL = 0x8;
 
-    /**
-     * Special-handle values for {@link #dlsym}.
-     */
+    /** Special-handle values for {@link #dlsym}. */
     public static final long
             RTLD_NEXT = 0xFFFFFFFFFFFFFFFFL,
             RTLD_DEFAULT = 0xFFFFFFFFFFFFFFFEL,
@@ -48,9 +44,7 @@ public class DynamicLinkLoader {
 
     // --- [ dlopen ] ---
 
-    /**
-     * Unsafe version of: {@link #dlopen}
-     */
+    /** Unsafe version of: {@link #dlopen} */
     public static native long ndlopen(long path, int mode);
 
     /**
@@ -192,9 +186,7 @@ public class DynamicLinkLoader {
 
     // --- [ dlerror ] ---
 
-    /**
-     * Unsafe version of: {@link #dlerror}
-     */
+    /** Unsafe version of: {@link #dlerror} */
     public static native long ndlerror();
 
     /**
@@ -215,9 +207,7 @@ public class DynamicLinkLoader {
 
     // --- [ dlsym ] ---
 
-    /**
-     * Unsafe version of: {@link #dlsym}
-     */
+    /** Unsafe version of: {@link #dlsym} */
     public static native long ndlsym(long handle, long name);
 
     /**
@@ -285,9 +275,7 @@ public class DynamicLinkLoader {
 
     // --- [ dlclose ] ---
 
-    /**
-     * Unsafe version of: {@link #dlclose}
-     */
+    /** Unsafe version of: {@link #dlclose} */
     public static native int ndlclose(long handle);
 
     /**

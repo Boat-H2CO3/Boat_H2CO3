@@ -13,9 +13,7 @@ package org.lwjgl.opengl;
  */
 public final class EXTABGR {
 
-    /**
-     * Accepted by the {@code format} parameter of DrawPixels, GetTexImage, ReadPixels, TexImage1D, and TexImage2D.
-     */
+    /** Accepted by the {@code format} parameter of DrawPixels, GetTexImage, ReadPixels, TexImage1D, and TexImage2D. */
     public static final int GL_ABGR_EXT = 0x8000;
 
     private EXTABGR() {

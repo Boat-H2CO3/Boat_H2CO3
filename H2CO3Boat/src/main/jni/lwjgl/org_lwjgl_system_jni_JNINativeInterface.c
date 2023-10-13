@@ -36,44 +36,31 @@ JNIEXPORT jobject JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nToReflec
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_NewGlobalRef(JNIEnv *__env, jclass clazz, jobject obj) {
     UNUSED_PARAM(clazz)
-    return (jlong) (intptr_t) (*__env)->NewGlobalRef(__env, obj);
+    return (jlong)(intptr_t)(*__env)->NewGlobalRef(__env, obj);
 }
 
-JNIEXPORT void JNICALL
-Java_org_lwjgl_system_jni_JNINativeInterface_nDeleteGlobalRef(JNIEnv *__env, jclass clazz,
-                                                              jlong globalRefAddress) {
-    void *globalRef = (void *) (intptr_t) globalRefAddress;
+JNIEXPORT void JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nDeleteGlobalRef(JNIEnv *__env, jclass clazz, jlong globalRefAddress) {
+    void *globalRef = (void *)(intptr_t)globalRefAddress;
     UNUSED_PARAM(clazz)
     (*__env)->DeleteGlobalRef(__env, globalRef);
 }
 
-JNIEXPORT jlong JNICALL
-Java_org_lwjgl_system_jni_JNINativeInterface_nGetBooleanArrayElements(JNIEnv *__env, jclass clazz,
-                                                                      jbyteArray array,
-                                                                      jlong isCopyAddress) {
-    jboolean *isCopy = (jboolean *) (intptr_t) isCopyAddress;
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nGetBooleanArrayElements(JNIEnv *__env, jclass clazz, jbooleanArray array, jlong isCopyAddress) {
+    jboolean *isCopy = (jboolean *)(intptr_t)isCopyAddress;
     UNUSED_PARAM(clazz)
-    return (jlong) (intptr_t) (*__env)->GetBooleanArrayElements(__env, array, isCopy);
+    return (jlong)(intptr_t)(*__env)->GetBooleanArrayElements(__env, array, isCopy);
 }
 
-JNIEXPORT void JNICALL
-Java_org_lwjgl_system_jni_JNINativeInterface_nReleaseBooleanArrayElements(JNIEnv *__env,
-                                                                          jclass clazz,
-                                                                          jbyteArray array,
-                                                                          jlong elemsAddress,
-                                                                          jint mode) {
-    jboolean *elems = (jboolean *) (intptr_t) elemsAddress;
+JNIEXPORT void JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nReleaseBooleanArrayElements(JNIEnv *__env, jclass clazz, jbooleanArray array, jlong elemsAddress, jint mode) {
+    jboolean *elems = (jboolean *)(intptr_t)elemsAddress;
     UNUSED_PARAM(clazz)
     (*__env)->ReleaseBooleanArrayElements(__env, array, elems, mode);
 }
 
-JNIEXPORT jlong JNICALL
-Java_org_lwjgl_system_jni_JNINativeInterface_nGetByteArrayElements(JNIEnv *__env, jclass clazz,
-                                                                   jbyteArray array,
-                                                                   jlong isCopyAddress) {
-    jboolean *isCopy = (jboolean *) (intptr_t) isCopyAddress;
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nGetByteArrayElements(JNIEnv *__env, jclass clazz, jbyteArray array, jlong isCopyAddress) {
+    jboolean *isCopy = (jboolean *)(intptr_t)isCopyAddress;
     UNUSED_PARAM(clazz)
-    return (jlong) (intptr_t) (*__env)->GetByteArrayElements(__env, array, isCopy);
+    return (jlong)(intptr_t)(*__env)->GetByteArrayElements(__env, array, isCopy);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nReleaseByteArrayElements(JNIEnv *__env, jclass clazz, jbyteArray array, jlong elemsAddress, jint mode) {
@@ -145,45 +132,31 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nReleaseFloa
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nGetDoubleArrayElements(JNIEnv *__env, jclass clazz, jdoubleArray array, jlong isCopyAddress) {
     jboolean *isCopy = (jboolean *)(intptr_t)isCopyAddress;
     UNUSED_PARAM(clazz)
-    return (jlong) (intptr_t) (*__env)->GetDoubleArrayElements(__env, array, isCopy);
+    return (jlong)(intptr_t)(*__env)->GetDoubleArrayElements(__env, array, isCopy);
 }
 
-JNIEXPORT void JNICALL
-Java_org_lwjgl_system_jni_JNINativeInterface_nReleaseDoubleArrayElements(JNIEnv *__env,
-                                                                         jclass clazz,
-                                                                         jdoubleArray array,
-                                                                         jlong elemsAddress,
-                                                                         jint mode) {
-    jdouble *elems = (jdouble *) (intptr_t) elemsAddress;
+JNIEXPORT void JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nReleaseDoubleArrayElements(JNIEnv *__env, jclass clazz, jdoubleArray array, jlong elemsAddress, jint mode) {
+    jdouble *elems = (jdouble *)(intptr_t)elemsAddress;
     UNUSED_PARAM(clazz)
     (*__env)->ReleaseDoubleArrayElements(__env, array, elems, mode);
 }
 
-JNIEXPORT void JNICALL
-Java_org_lwjgl_system_jni_JNINativeInterface_nGetBooleanArrayRegion(JNIEnv *__env, jclass clazz,
-                                                                    jbyteArray array, jint start,
-                                                                    jint len, jlong bufAddress) {
-    jboolean *buf = (jboolean *) (intptr_t) bufAddress;
+JNIEXPORT void JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nGetBooleanArrayRegion(JNIEnv *__env, jclass clazz, jbooleanArray array, jint start, jint len, jlong bufAddress) {
+    jboolean *buf = (jboolean *)(intptr_t)bufAddress;
     UNUSED_PARAM(clazz)
-    (*__env)->GetBooleanArrayRegion(__env, array, (jsize) start, (jsize) len, buf);
+    (*__env)->GetBooleanArrayRegion(__env, array, (jsize)start, (jsize)len, buf);
 }
 
-JNIEXPORT void JNICALL
-Java_org_lwjgl_system_jni_JNINativeInterface_nSetBooleanArrayRegion(JNIEnv *__env, jclass clazz,
-                                                                    jbyteArray array, jint start,
-                                                                    jint len, jlong bufAddress) {
-    jboolean const *buf = (jboolean const *) (intptr_t) bufAddress;
+JNIEXPORT void JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nSetBooleanArrayRegion(JNIEnv *__env, jclass clazz, jbooleanArray array, jint start, jint len, jlong bufAddress) {
+    jboolean const *buf = (jboolean const *)(intptr_t)bufAddress;
     UNUSED_PARAM(clazz)
-    (*__env)->SetBooleanArrayRegion(__env, array, (jsize) start, (jsize) len, buf);
+    (*__env)->SetBooleanArrayRegion(__env, array, (jsize)start, (jsize)len, buf);
 }
 
-JNIEXPORT void JNICALL
-Java_org_lwjgl_system_jni_JNINativeInterface_nGetByteArrayRegion(JNIEnv *__env, jclass clazz,
-                                                                 jbyteArray array, jint start,
-                                                                 jint len, jlong bufAddress) {
-    jbyte *buf = (jbyte *) (intptr_t) bufAddress;
+JNIEXPORT void JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nGetByteArrayRegion(JNIEnv *__env, jclass clazz, jbyteArray array, jint start, jint len, jlong bufAddress) {
+    jbyte *buf = (jbyte *)(intptr_t)bufAddress;
     UNUSED_PARAM(clazz)
-    (*__env)->GetByteArrayRegion(__env, array, (jsize) start, (jsize) len, buf);
+    (*__env)->GetByteArrayRegion(__env, array, (jsize)start, (jsize)len, buf);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_jni_JNINativeInterface_nSetByteArrayRegion(JNIEnv *__env, jclass clazz, jbyteArray array, jint start, jint len, jlong bufAddress) {

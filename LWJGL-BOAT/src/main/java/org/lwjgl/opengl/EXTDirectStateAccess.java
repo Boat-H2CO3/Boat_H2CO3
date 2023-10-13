@@ -169,9 +169,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTDirectStateAccess {
 
-    /**
-     * GetBooleani_v, GetIntegeri_v, GetFloati_vEXT, GetDoublei_vEXT.
-     */
+    /** GetBooleani_v, GetIntegeri_v, GetFloati_vEXT, GetDoublei_vEXT. */
     public static final int
             GL_PROGRAM_MATRIX_EXT = 0x8E2D,
             GL_TRANSPOSE_PROGRAM_MATRIX_EXT = 0x8E2E,
@@ -2738,9 +2736,7 @@ public class EXTDirectStateAccess {
 
     public static native void glFlushMappedNamedBufferRangeEXT(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long length);
 
-    /**
-     * Array version of: {@link #glMatrixLoadfEXT MatrixLoadfEXT}
-     */
+    /** Array version of: {@link #glMatrixLoadfEXT MatrixLoadfEXT} */
     public static void glMatrixLoadfEXT(@NativeType("GLenum") int matrixMode, @NativeType("GLfloat const *") float[] m) {
         long __functionAddress = GL.getICD().glMatrixLoadfEXT;
         if (CHECKS) {
@@ -2750,9 +2746,7 @@ public class EXTDirectStateAccess {
         callPV(matrixMode, m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMatrixLoaddEXT MatrixLoaddEXT}
-     */
+    /** Array version of: {@link #glMatrixLoaddEXT MatrixLoaddEXT} */
     public static void glMatrixLoaddEXT(@NativeType("GLenum") int matrixMode, @NativeType("GLdouble const *") double[] m) {
         long __functionAddress = GL.getICD().glMatrixLoaddEXT;
         if (CHECKS) {
@@ -2762,9 +2756,7 @@ public class EXTDirectStateAccess {
         callPV(matrixMode, m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMatrixMultfEXT MatrixMultfEXT}
-     */
+    /** Array version of: {@link #glMatrixMultfEXT MatrixMultfEXT} */
     public static void glMatrixMultfEXT(@NativeType("GLenum") int matrixMode, @NativeType("GLfloat const *") float[] m) {
         long __functionAddress = GL.getICD().glMatrixMultfEXT;
         if (CHECKS) {
@@ -2774,9 +2766,7 @@ public class EXTDirectStateAccess {
         callPV(matrixMode, m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMatrixMultdEXT MatrixMultdEXT}
-     */
+    /** Array version of: {@link #glMatrixMultdEXT MatrixMultdEXT} */
     public static void glMatrixMultdEXT(@NativeType("GLenum") int matrixMode, @NativeType("GLdouble const *") double[] m) {
         long __functionAddress = GL.getICD().glMatrixMultdEXT;
         if (CHECKS) {
@@ -2786,9 +2776,7 @@ public class EXTDirectStateAccess {
         callPV(matrixMode, m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureParameterivEXT TextureParameterivEXT}
-     */
+    /** Array version of: {@link #glTextureParameterivEXT TextureParameterivEXT} */
     public static void glTextureParameterivEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] param) {
         long __functionAddress = GL.getICD().glTextureParameterivEXT;
         if (CHECKS) {
@@ -2798,9 +2786,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, pname, param, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureParameterfvEXT TextureParameterfvEXT}
-     */
+    /** Array version of: {@link #glTextureParameterfvEXT TextureParameterfvEXT} */
     public static void glTextureParameterfvEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] param) {
         long __functionAddress = GL.getICD().glTextureParameterfvEXT;
         if (CHECKS) {
@@ -2810,9 +2796,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, pname, param, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage1DEXT TextureImage1DEXT}
-     */
+    /** Array version of: {@link #glTextureImage1DEXT TextureImage1DEXT} */
     public static void glTextureImage1DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage1DEXT;
         if (CHECKS) {
@@ -2821,9 +2805,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage1DEXT TextureImage1DEXT}
-     */
+    /** Array version of: {@link #glTextureImage1DEXT TextureImage1DEXT} */
     public static void glTextureImage1DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage1DEXT;
         if (CHECKS) {
@@ -2832,9 +2814,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage1DEXT TextureImage1DEXT}
-     */
+    /** Array version of: {@link #glTextureImage1DEXT TextureImage1DEXT} */
     public static void glTextureImage1DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage1DEXT;
         if (CHECKS) {
@@ -2843,9 +2823,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage1DEXT TextureImage1DEXT}
-     */
+    /** Array version of: {@link #glTextureImage1DEXT TextureImage1DEXT} */
     public static void glTextureImage1DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage1DEXT;
         if (CHECKS) {
@@ -2854,9 +2832,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage2DEXT TextureImage2DEXT}
-     */
+    /** Array version of: {@link #glTextureImage2DEXT TextureImage2DEXT} */
     public static void glTextureImage2DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage2DEXT;
         if (CHECKS) {
@@ -2865,9 +2841,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage2DEXT TextureImage2DEXT}
-     */
+    /** Array version of: {@link #glTextureImage2DEXT TextureImage2DEXT} */
     public static void glTextureImage2DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage2DEXT;
         if (CHECKS) {
@@ -2876,9 +2850,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage2DEXT TextureImage2DEXT}
-     */
+    /** Array version of: {@link #glTextureImage2DEXT TextureImage2DEXT} */
     public static void glTextureImage2DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage2DEXT;
         if (CHECKS) {
@@ -2887,9 +2859,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage2DEXT TextureImage2DEXT}
-     */
+    /** Array version of: {@link #glTextureImage2DEXT TextureImage2DEXT} */
     public static void glTextureImage2DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage2DEXT;
         if (CHECKS) {
@@ -2898,9 +2868,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage1DEXT TextureSubImage1DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage1DEXT TextureSubImage1DEXT} */
     public static void glTextureSubImage1DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage1DEXT;
         if (CHECKS) {
@@ -2909,9 +2877,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage1DEXT TextureSubImage1DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage1DEXT TextureSubImage1DEXT} */
     public static void glTextureSubImage1DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage1DEXT;
         if (CHECKS) {
@@ -2920,9 +2886,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage1DEXT TextureSubImage1DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage1DEXT TextureSubImage1DEXT} */
     public static void glTextureSubImage1DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage1DEXT;
         if (CHECKS) {
@@ -2931,9 +2895,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage1DEXT TextureSubImage1DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage1DEXT TextureSubImage1DEXT} */
     public static void glTextureSubImage1DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage1DEXT;
         if (CHECKS) {
@@ -2942,9 +2904,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage2DEXT TextureSubImage2DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage2DEXT TextureSubImage2DEXT} */
     public static void glTextureSubImage2DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage2DEXT;
         if (CHECKS) {
@@ -2953,9 +2913,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage2DEXT TextureSubImage2DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage2DEXT TextureSubImage2DEXT} */
     public static void glTextureSubImage2DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage2DEXT;
         if (CHECKS) {
@@ -2964,9 +2922,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage2DEXT TextureSubImage2DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage2DEXT TextureSubImage2DEXT} */
     public static void glTextureSubImage2DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage2DEXT;
         if (CHECKS) {
@@ -2975,9 +2931,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage2DEXT TextureSubImage2DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage2DEXT TextureSubImage2DEXT} */
     public static void glTextureSubImage2DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage2DEXT;
         if (CHECKS) {
@@ -2986,9 +2940,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureImageEXT GetTextureImageEXT}
-     */
+    /** Array version of: {@link #glGetTextureImageEXT GetTextureImageEXT} */
     public static void glGetTextureImageEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] pixels) {
         long __functionAddress = GL.getICD().glGetTextureImageEXT;
         if (CHECKS) {
@@ -2997,9 +2949,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureImageEXT GetTextureImageEXT}
-     */
+    /** Array version of: {@link #glGetTextureImageEXT GetTextureImageEXT} */
     public static void glGetTextureImageEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] pixels) {
         long __functionAddress = GL.getICD().glGetTextureImageEXT;
         if (CHECKS) {
@@ -3008,9 +2958,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureImageEXT GetTextureImageEXT}
-     */
+    /** Array version of: {@link #glGetTextureImageEXT GetTextureImageEXT} */
     public static void glGetTextureImageEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] pixels) {
         long __functionAddress = GL.getICD().glGetTextureImageEXT;
         if (CHECKS) {
@@ -3019,9 +2967,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureImageEXT GetTextureImageEXT}
-     */
+    /** Array version of: {@link #glGetTextureImageEXT GetTextureImageEXT} */
     public static void glGetTextureImageEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") double[] pixels) {
         long __functionAddress = GL.getICD().glGetTextureImageEXT;
         if (CHECKS) {
@@ -3030,9 +2976,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureParameterfvEXT GetTextureParameterfvEXT}
-     */
+    /** Array version of: {@link #glGetTextureParameterfvEXT GetTextureParameterfvEXT} */
     public static void glGetTextureParameterfvEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetTextureParameterfvEXT;
         if (CHECKS) {
@@ -3042,9 +2986,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureParameterivEXT GetTextureParameterivEXT}
-     */
+    /** Array version of: {@link #glGetTextureParameterivEXT GetTextureParameterivEXT} */
     public static void glGetTextureParameterivEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetTextureParameterivEXT;
         if (CHECKS) {
@@ -3054,9 +2996,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureLevelParameterfvEXT GetTextureLevelParameterfvEXT}
-     */
+    /** Array version of: {@link #glGetTextureLevelParameterfvEXT GetTextureLevelParameterfvEXT} */
     public static void glGetTextureLevelParameterfvEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetTextureLevelParameterfvEXT;
         if (CHECKS) {
@@ -3066,9 +3006,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureLevelParameterivEXT GetTextureLevelParameterivEXT}
-     */
+    /** Array version of: {@link #glGetTextureLevelParameterivEXT GetTextureLevelParameterivEXT} */
     public static void glGetTextureLevelParameterivEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetTextureLevelParameterivEXT;
         if (CHECKS) {
@@ -3078,9 +3016,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage3DEXT TextureImage3DEXT}
-     */
+    /** Array version of: {@link #glTextureImage3DEXT TextureImage3DEXT} */
     public static void glTextureImage3DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage3DEXT;
         if (CHECKS) {
@@ -3089,9 +3025,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage3DEXT TextureImage3DEXT}
-     */
+    /** Array version of: {@link #glTextureImage3DEXT TextureImage3DEXT} */
     public static void glTextureImage3DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage3DEXT;
         if (CHECKS) {
@@ -3100,9 +3034,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage3DEXT TextureImage3DEXT}
-     */
+    /** Array version of: {@link #glTextureImage3DEXT TextureImage3DEXT} */
     public static void glTextureImage3DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage3DEXT;
         if (CHECKS) {
@@ -3111,9 +3043,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureImage3DEXT TextureImage3DEXT}
-     */
+    /** Array version of: {@link #glTextureImage3DEXT TextureImage3DEXT} */
     public static void glTextureImage3DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glTextureImage3DEXT;
         if (CHECKS) {
@@ -3122,9 +3052,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage3DEXT TextureSubImage3DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage3DEXT TextureSubImage3DEXT} */
     public static void glTextureSubImage3DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage3DEXT;
         if (CHECKS) {
@@ -3133,9 +3061,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage3DEXT TextureSubImage3DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage3DEXT TextureSubImage3DEXT} */
     public static void glTextureSubImage3DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage3DEXT;
         if (CHECKS) {
@@ -3144,9 +3070,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage3DEXT TextureSubImage3DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage3DEXT TextureSubImage3DEXT} */
     public static void glTextureSubImage3DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage3DEXT;
         if (CHECKS) {
@@ -3155,9 +3079,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage3DEXT TextureSubImage3DEXT}
-     */
+    /** Array version of: {@link #glTextureSubImage3DEXT TextureSubImage3DEXT} */
     public static void glTextureSubImage3DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glTextureSubImage3DEXT;
         if (CHECKS) {
@@ -3166,9 +3088,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoordPointerEXT MultiTexCoordPointerEXT}
-     */
+    /** Array version of: {@link #glMultiTexCoordPointerEXT MultiTexCoordPointerEXT} */
     public static void glMultiTexCoordPointerEXT(@NativeType("GLenum") int texunit, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") short[] pointer) {
         long __functionAddress = GL.getICD().glMultiTexCoordPointerEXT;
         if (CHECKS) {
@@ -3177,9 +3097,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, size, type, stride, pointer, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoordPointerEXT MultiTexCoordPointerEXT}
-     */
+    /** Array version of: {@link #glMultiTexCoordPointerEXT MultiTexCoordPointerEXT} */
     public static void glMultiTexCoordPointerEXT(@NativeType("GLenum") int texunit, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") int[] pointer) {
         long __functionAddress = GL.getICD().glMultiTexCoordPointerEXT;
         if (CHECKS) {
@@ -3188,9 +3106,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, size, type, stride, pointer, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexCoordPointerEXT MultiTexCoordPointerEXT}
-     */
+    /** Array version of: {@link #glMultiTexCoordPointerEXT MultiTexCoordPointerEXT} */
     public static void glMultiTexCoordPointerEXT(@NativeType("GLenum") int texunit, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") float[] pointer) {
         long __functionAddress = GL.getICD().glMultiTexCoordPointerEXT;
         if (CHECKS) {
@@ -3199,9 +3115,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, size, type, stride, pointer, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexEnvfvEXT MultiTexEnvfvEXT}
-     */
+    /** Array version of: {@link #glMultiTexEnvfvEXT MultiTexEnvfvEXT} */
     public static void glMultiTexEnvfvEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glMultiTexEnvfvEXT;
         if (CHECKS) {
@@ -3211,9 +3125,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexEnvivEXT MultiTexEnvivEXT}
-     */
+    /** Array version of: {@link #glMultiTexEnvivEXT MultiTexEnvivEXT} */
     public static void glMultiTexEnvivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         long __functionAddress = GL.getICD().glMultiTexEnvivEXT;
         if (CHECKS) {
@@ -3223,9 +3135,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexGendvEXT MultiTexGendvEXT}
-     */
+    /** Array version of: {@link #glMultiTexGendvEXT MultiTexGendvEXT} */
     public static void glMultiTexGendvEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int coord, @NativeType("GLenum") int pname, @NativeType("GLdouble const *") double[] params) {
         long __functionAddress = GL.getICD().glMultiTexGendvEXT;
         if (CHECKS) {
@@ -3235,9 +3145,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, coord, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexGenfvEXT MultiTexGenfvEXT}
-     */
+    /** Array version of: {@link #glMultiTexGenfvEXT MultiTexGenfvEXT} */
     public static void glMultiTexGenfvEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int coord, @NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glMultiTexGenfvEXT;
         if (CHECKS) {
@@ -3247,9 +3155,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, coord, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexGenivEXT MultiTexGenivEXT}
-     */
+    /** Array version of: {@link #glMultiTexGenivEXT MultiTexGenivEXT} */
     public static void glMultiTexGenivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int coord, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         long __functionAddress = GL.getICD().glMultiTexGenivEXT;
         if (CHECKS) {
@@ -3259,9 +3165,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, coord, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexEnvfvEXT GetMultiTexEnvfvEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexEnvfvEXT GetMultiTexEnvfvEXT} */
     public static void glGetMultiTexEnvfvEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexEnvfvEXT;
         if (CHECKS) {
@@ -3271,9 +3175,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexEnvivEXT GetMultiTexEnvivEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexEnvivEXT GetMultiTexEnvivEXT} */
     public static void glGetMultiTexEnvivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexEnvivEXT;
         if (CHECKS) {
@@ -3283,9 +3185,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexGendvEXT GetMultiTexGendvEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexGendvEXT GetMultiTexGendvEXT} */
     public static void glGetMultiTexGendvEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int coord, @NativeType("GLenum") int pname, @NativeType("GLdouble *") double[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexGendvEXT;
         if (CHECKS) {
@@ -3295,9 +3195,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, coord, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexGenfvEXT GetMultiTexGenfvEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexGenfvEXT GetMultiTexGenfvEXT} */
     public static void glGetMultiTexGenfvEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int coord, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexGenfvEXT;
         if (CHECKS) {
@@ -3307,9 +3205,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, coord, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexGenivEXT GetMultiTexGenivEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexGenivEXT GetMultiTexGenivEXT} */
     public static void glGetMultiTexGenivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int coord, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexGenivEXT;
         if (CHECKS) {
@@ -3319,9 +3215,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, coord, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexParameterivEXT MultiTexParameterivEXT}
-     */
+    /** Array version of: {@link #glMultiTexParameterivEXT MultiTexParameterivEXT} */
     public static void glMultiTexParameterivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] param) {
         long __functionAddress = GL.getICD().glMultiTexParameterivEXT;
         if (CHECKS) {
@@ -3331,9 +3225,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, param, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexParameterfvEXT MultiTexParameterfvEXT}
-     */
+    /** Array version of: {@link #glMultiTexParameterfvEXT MultiTexParameterfvEXT} */
     public static void glMultiTexParameterfvEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] param) {
         long __functionAddress = GL.getICD().glMultiTexParameterfvEXT;
         if (CHECKS) {
@@ -3343,9 +3235,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, param, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage1DEXT MultiTexImage1DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage1DEXT MultiTexImage1DEXT} */
     public static void glMultiTexImage1DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage1DEXT;
         if (CHECKS) {
@@ -3354,9 +3244,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage1DEXT MultiTexImage1DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage1DEXT MultiTexImage1DEXT} */
     public static void glMultiTexImage1DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage1DEXT;
         if (CHECKS) {
@@ -3365,9 +3253,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage1DEXT MultiTexImage1DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage1DEXT MultiTexImage1DEXT} */
     public static void glMultiTexImage1DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage1DEXT;
         if (CHECKS) {
@@ -3376,9 +3262,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage1DEXT MultiTexImage1DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage1DEXT MultiTexImage1DEXT} */
     public static void glMultiTexImage1DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage1DEXT;
         if (CHECKS) {
@@ -3387,9 +3271,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage2DEXT MultiTexImage2DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage2DEXT MultiTexImage2DEXT} */
     public static void glMultiTexImage2DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage2DEXT;
         if (CHECKS) {
@@ -3398,9 +3280,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage2DEXT MultiTexImage2DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage2DEXT MultiTexImage2DEXT} */
     public static void glMultiTexImage2DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage2DEXT;
         if (CHECKS) {
@@ -3409,9 +3289,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage2DEXT MultiTexImage2DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage2DEXT MultiTexImage2DEXT} */
     public static void glMultiTexImage2DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage2DEXT;
         if (CHECKS) {
@@ -3420,9 +3298,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage2DEXT MultiTexImage2DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage2DEXT MultiTexImage2DEXT} */
     public static void glMultiTexImage2DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage2DEXT;
         if (CHECKS) {
@@ -3431,9 +3307,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, height, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage1DEXT MultiTexSubImage1DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage1DEXT MultiTexSubImage1DEXT} */
     public static void glMultiTexSubImage1DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage1DEXT;
         if (CHECKS) {
@@ -3442,9 +3316,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage1DEXT MultiTexSubImage1DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage1DEXT MultiTexSubImage1DEXT} */
     public static void glMultiTexSubImage1DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage1DEXT;
         if (CHECKS) {
@@ -3453,9 +3325,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage1DEXT MultiTexSubImage1DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage1DEXT MultiTexSubImage1DEXT} */
     public static void glMultiTexSubImage1DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage1DEXT;
         if (CHECKS) {
@@ -3464,9 +3334,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage1DEXT MultiTexSubImage1DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage1DEXT MultiTexSubImage1DEXT} */
     public static void glMultiTexSubImage1DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage1DEXT;
         if (CHECKS) {
@@ -3475,9 +3343,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, width, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage2DEXT MultiTexSubImage2DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage2DEXT MultiTexSubImage2DEXT} */
     public static void glMultiTexSubImage2DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage2DEXT;
         if (CHECKS) {
@@ -3486,9 +3352,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage2DEXT MultiTexSubImage2DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage2DEXT MultiTexSubImage2DEXT} */
     public static void glMultiTexSubImage2DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage2DEXT;
         if (CHECKS) {
@@ -3497,9 +3361,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage2DEXT MultiTexSubImage2DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage2DEXT MultiTexSubImage2DEXT} */
     public static void glMultiTexSubImage2DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage2DEXT;
         if (CHECKS) {
@@ -3508,9 +3370,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage2DEXT MultiTexSubImage2DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage2DEXT MultiTexSubImage2DEXT} */
     public static void glMultiTexSubImage2DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage2DEXT;
         if (CHECKS) {
@@ -3519,9 +3379,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, yoffset, width, height, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexImageEXT GetMultiTexImageEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexImageEXT GetMultiTexImageEXT} */
     public static void glGetMultiTexImageEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] pixels) {
         long __functionAddress = GL.getICD().glGetMultiTexImageEXT;
         if (CHECKS) {
@@ -3530,9 +3388,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexImageEXT GetMultiTexImageEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexImageEXT GetMultiTexImageEXT} */
     public static void glGetMultiTexImageEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] pixels) {
         long __functionAddress = GL.getICD().glGetMultiTexImageEXT;
         if (CHECKS) {
@@ -3541,9 +3397,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexImageEXT GetMultiTexImageEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexImageEXT GetMultiTexImageEXT} */
     public static void glGetMultiTexImageEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] pixels) {
         long __functionAddress = GL.getICD().glGetMultiTexImageEXT;
         if (CHECKS) {
@@ -3552,9 +3406,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexImageEXT GetMultiTexImageEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexImageEXT GetMultiTexImageEXT} */
     public static void glGetMultiTexImageEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") double[] pixels) {
         long __functionAddress = GL.getICD().glGetMultiTexImageEXT;
         if (CHECKS) {
@@ -3563,9 +3415,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexParameterfvEXT GetMultiTexParameterfvEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexParameterfvEXT GetMultiTexParameterfvEXT} */
     public static void glGetMultiTexParameterfvEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexParameterfvEXT;
         if (CHECKS) {
@@ -3575,9 +3425,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexParameterivEXT GetMultiTexParameterivEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexParameterivEXT GetMultiTexParameterivEXT} */
     public static void glGetMultiTexParameterivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexParameterivEXT;
         if (CHECKS) {
@@ -3587,9 +3435,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexLevelParameterfvEXT GetMultiTexLevelParameterfvEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexLevelParameterfvEXT GetMultiTexLevelParameterfvEXT} */
     public static void glGetMultiTexLevelParameterfvEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexLevelParameterfvEXT;
         if (CHECKS) {
@@ -3599,9 +3445,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexLevelParameterivEXT GetMultiTexLevelParameterivEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexLevelParameterivEXT GetMultiTexLevelParameterivEXT} */
     public static void glGetMultiTexLevelParameterivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexLevelParameterivEXT;
         if (CHECKS) {
@@ -3611,9 +3455,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage3DEXT MultiTexImage3DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage3DEXT MultiTexImage3DEXT} */
     public static void glMultiTexImage3DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage3DEXT;
         if (CHECKS) {
@@ -3622,9 +3464,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage3DEXT MultiTexImage3DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage3DEXT MultiTexImage3DEXT} */
     public static void glMultiTexImage3DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage3DEXT;
         if (CHECKS) {
@@ -3633,9 +3473,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage3DEXT MultiTexImage3DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage3DEXT MultiTexImage3DEXT} */
     public static void glMultiTexImage3DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage3DEXT;
         if (CHECKS) {
@@ -3644,9 +3482,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexImage3DEXT MultiTexImage3DEXT}
-     */
+    /** Array version of: {@link #glMultiTexImage3DEXT MultiTexImage3DEXT} */
     public static void glMultiTexImage3DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint") int border, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexImage3DEXT;
         if (CHECKS) {
@@ -3655,9 +3491,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, internalformat, width, height, depth, border, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage3DEXT MultiTexSubImage3DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage3DEXT MultiTexSubImage3DEXT} */
     public static void glMultiTexSubImage3DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage3DEXT;
         if (CHECKS) {
@@ -3666,9 +3500,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage3DEXT MultiTexSubImage3DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage3DEXT MultiTexSubImage3DEXT} */
     public static void glMultiTexSubImage3DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage3DEXT;
         if (CHECKS) {
@@ -3677,9 +3509,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage3DEXT MultiTexSubImage3DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage3DEXT MultiTexSubImage3DEXT} */
     public static void glMultiTexSubImage3DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage3DEXT;
         if (CHECKS) {
@@ -3688,9 +3518,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexSubImage3DEXT MultiTexSubImage3DEXT}
-     */
+    /** Array version of: {@link #glMultiTexSubImage3DEXT MultiTexSubImage3DEXT} */
     public static void glMultiTexSubImage3DEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         long __functionAddress = GL.getICD().glMultiTexSubImage3DEXT;
         if (CHECKS) {
@@ -3699,9 +3527,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetFloatIndexedvEXT GetFloatIndexedvEXT}
-     */
+    /** Array version of: {@link #glGetFloatIndexedvEXT GetFloatIndexedvEXT} */
     public static void glGetFloatIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetFloatIndexedvEXT;
         if (CHECKS) {
@@ -3711,9 +3537,7 @@ public class EXTDirectStateAccess {
         callPV(target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetDoubleIndexedvEXT GetDoubleIndexedvEXT}
-     */
+    /** Array version of: {@link #glGetDoubleIndexedvEXT GetDoubleIndexedvEXT} */
     public static void glGetDoubleIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLdouble *") double[] params) {
         long __functionAddress = GL.getICD().glGetDoubleIndexedvEXT;
         if (CHECKS) {
@@ -3723,9 +3547,7 @@ public class EXTDirectStateAccess {
         callPV(target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetFloati_vEXT GetFloati_vEXT}
-     */
+    /** Array version of: {@link #glGetFloati_vEXT GetFloati_vEXT} */
     public static void glGetFloati_vEXT(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetFloati_vEXT;
         if (CHECKS) {
@@ -3735,9 +3557,7 @@ public class EXTDirectStateAccess {
         callPV(pname, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetDoublei_vEXT GetDoublei_vEXT}
-     */
+    /** Array version of: {@link #glGetDoublei_vEXT GetDoublei_vEXT} */
     public static void glGetDoublei_vEXT(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLdouble *") double[] params) {
         long __functionAddress = GL.getICD().glGetDoublei_vEXT;
         if (CHECKS) {
@@ -3747,16 +3567,12 @@ public class EXTDirectStateAccess {
         callPV(pname, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetIntegerIndexedvEXT GetIntegerIndexedvEXT}
-     */
+    /** Array version of: {@link #glGetIntegerIndexedvEXT GetIntegerIndexedvEXT} */
     public static void glGetIntegerIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") int[] data) {
         EXTDrawBuffers2.glGetIntegerIndexedvEXT(target, index, data);
     }
 
-    /**
-     * Array version of: {@link #glNamedProgramLocalParameter4dvEXT NamedProgramLocalParameter4dvEXT}
-     */
+    /** Array version of: {@link #glNamedProgramLocalParameter4dvEXT NamedProgramLocalParameter4dvEXT} */
     public static void glNamedProgramLocalParameter4dvEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] params) {
         long __functionAddress = GL.getICD().glNamedProgramLocalParameter4dvEXT;
         if (CHECKS) {
@@ -3766,9 +3582,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedProgramLocalParameter4fvEXT NamedProgramLocalParameter4fvEXT}
-     */
+    /** Array version of: {@link #glNamedProgramLocalParameter4fvEXT NamedProgramLocalParameter4fvEXT} */
     public static void glNamedProgramLocalParameter4fvEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glNamedProgramLocalParameter4fvEXT;
         if (CHECKS) {
@@ -3778,9 +3592,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedProgramLocalParameterdvEXT GetNamedProgramLocalParameterdvEXT}
-     */
+    /** Array version of: {@link #glGetNamedProgramLocalParameterdvEXT GetNamedProgramLocalParameterdvEXT} */
     public static void glGetNamedProgramLocalParameterdvEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLdouble *") double[] params) {
         long __functionAddress = GL.getICD().glGetNamedProgramLocalParameterdvEXT;
         if (CHECKS) {
@@ -3790,9 +3602,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedProgramLocalParameterfvEXT GetNamedProgramLocalParameterfvEXT}
-     */
+    /** Array version of: {@link #glGetNamedProgramLocalParameterfvEXT GetNamedProgramLocalParameterfvEXT} */
     public static void glGetNamedProgramLocalParameterfvEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetNamedProgramLocalParameterfvEXT;
         if (CHECKS) {
@@ -3802,9 +3612,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedProgramivEXT GetNamedProgramivEXT}
-     */
+    /** Array version of: {@link #glGetNamedProgramivEXT GetNamedProgramivEXT} */
     public static void glGetNamedProgramivEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetNamedProgramivEXT;
         if (CHECKS) {
@@ -3814,9 +3622,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMatrixLoadTransposefEXT MatrixLoadTransposefEXT}
-     */
+    /** Array version of: {@link #glMatrixLoadTransposefEXT MatrixLoadTransposefEXT} */
     public static void glMatrixLoadTransposefEXT(@NativeType("GLenum") int matrixMode, @NativeType("GLfloat const *") float[] m) {
         long __functionAddress = GL.getICD().glMatrixLoadTransposefEXT;
         if (CHECKS) {
@@ -3826,9 +3632,7 @@ public class EXTDirectStateAccess {
         callPV(matrixMode, m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMatrixLoadTransposedEXT MatrixLoadTransposedEXT}
-     */
+    /** Array version of: {@link #glMatrixLoadTransposedEXT MatrixLoadTransposedEXT} */
     public static void glMatrixLoadTransposedEXT(@NativeType("GLenum") int matrixMode, @NativeType("GLdouble const *") double[] m) {
         long __functionAddress = GL.getICD().glMatrixLoadTransposedEXT;
         if (CHECKS) {
@@ -3838,9 +3642,7 @@ public class EXTDirectStateAccess {
         callPV(matrixMode, m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMatrixMultTransposefEXT MatrixMultTransposefEXT}
-     */
+    /** Array version of: {@link #glMatrixMultTransposefEXT MatrixMultTransposefEXT} */
     public static void glMatrixMultTransposefEXT(@NativeType("GLenum") int matrixMode, @NativeType("GLfloat const *") float[] m) {
         long __functionAddress = GL.getICD().glMatrixMultTransposefEXT;
         if (CHECKS) {
@@ -3850,9 +3652,7 @@ public class EXTDirectStateAccess {
         callPV(matrixMode, m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMatrixMultTransposedEXT MatrixMultTransposedEXT}
-     */
+    /** Array version of: {@link #glMatrixMultTransposedEXT MatrixMultTransposedEXT} */
     public static void glMatrixMultTransposedEXT(@NativeType("GLenum") int matrixMode, @NativeType("GLdouble const *") double[] m) {
         long __functionAddress = GL.getICD().glMatrixMultTransposedEXT;
         if (CHECKS) {
@@ -3862,9 +3662,7 @@ public class EXTDirectStateAccess {
         callPV(matrixMode, m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferDataEXT NamedBufferDataEXT}
-     */
+    /** Array version of: {@link #glNamedBufferDataEXT NamedBufferDataEXT} */
     public static void glNamedBufferDataEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") short[] data, @NativeType("GLenum") int usage) {
         long __functionAddress = GL.getICD().glNamedBufferDataEXT;
         if (CHECKS) {
@@ -3873,9 +3671,7 @@ public class EXTDirectStateAccess {
         callPPV(buffer, Integer.toUnsignedLong(data.length) << 1, data, usage, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferDataEXT NamedBufferDataEXT}
-     */
+    /** Array version of: {@link #glNamedBufferDataEXT NamedBufferDataEXT} */
     public static void glNamedBufferDataEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") int[] data, @NativeType("GLenum") int usage) {
         long __functionAddress = GL.getICD().glNamedBufferDataEXT;
         if (CHECKS) {
@@ -3884,9 +3680,7 @@ public class EXTDirectStateAccess {
         callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, usage, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferDataEXT NamedBufferDataEXT}
-     */
+    /** Array version of: {@link #glNamedBufferDataEXT NamedBufferDataEXT} */
     public static void glNamedBufferDataEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") float[] data, @NativeType("GLenum") int usage) {
         long __functionAddress = GL.getICD().glNamedBufferDataEXT;
         if (CHECKS) {
@@ -3895,9 +3689,7 @@ public class EXTDirectStateAccess {
         callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, usage, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferDataEXT NamedBufferDataEXT}
-     */
+    /** Array version of: {@link #glNamedBufferDataEXT NamedBufferDataEXT} */
     public static void glNamedBufferDataEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") double[] data, @NativeType("GLenum") int usage) {
         long __functionAddress = GL.getICD().glNamedBufferDataEXT;
         if (CHECKS) {
@@ -3906,9 +3698,7 @@ public class EXTDirectStateAccess {
         callPPV(buffer, Integer.toUnsignedLong(data.length) << 3, data, usage, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferSubDataEXT NamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glNamedBufferSubDataEXT NamedBufferSubDataEXT} */
     public static void glNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") short[] data) {
         long __functionAddress = GL.getICD().glNamedBufferSubDataEXT;
         if (CHECKS) {
@@ -3917,9 +3707,7 @@ public class EXTDirectStateAccess {
         callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 1, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferSubDataEXT NamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glNamedBufferSubDataEXT NamedBufferSubDataEXT} */
     public static void glNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") int[] data) {
         long __functionAddress = GL.getICD().glNamedBufferSubDataEXT;
         if (CHECKS) {
@@ -3928,9 +3716,7 @@ public class EXTDirectStateAccess {
         callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferSubDataEXT NamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glNamedBufferSubDataEXT NamedBufferSubDataEXT} */
     public static void glNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") float[] data) {
         long __functionAddress = GL.getICD().glNamedBufferSubDataEXT;
         if (CHECKS) {
@@ -3939,9 +3725,7 @@ public class EXTDirectStateAccess {
         callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferSubDataEXT NamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glNamedBufferSubDataEXT NamedBufferSubDataEXT} */
     public static void glNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") double[] data) {
         long __functionAddress = GL.getICD().glNamedBufferSubDataEXT;
         if (CHECKS) {
@@ -3950,9 +3734,7 @@ public class EXTDirectStateAccess {
         callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 3, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferParameterivEXT GetNamedBufferParameterivEXT}
-     */
+    /** Array version of: {@link #glGetNamedBufferParameterivEXT GetNamedBufferParameterivEXT} */
     public static void glGetNamedBufferParameterivEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetNamedBufferParameterivEXT;
         if (CHECKS) {
@@ -3962,9 +3744,7 @@ public class EXTDirectStateAccess {
         callPV(buffer, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferSubDataEXT GetNamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glGetNamedBufferSubDataEXT GetNamedBufferSubDataEXT} */
     public static void glGetNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") short[] data) {
         long __functionAddress = GL.getICD().glGetNamedBufferSubDataEXT;
         if (CHECKS) {
@@ -3973,9 +3753,7 @@ public class EXTDirectStateAccess {
         callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 1, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferSubDataEXT GetNamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glGetNamedBufferSubDataEXT GetNamedBufferSubDataEXT} */
     public static void glGetNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") int[] data) {
         long __functionAddress = GL.getICD().glGetNamedBufferSubDataEXT;
         if (CHECKS) {
@@ -3984,9 +3762,7 @@ public class EXTDirectStateAccess {
         callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferSubDataEXT GetNamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glGetNamedBufferSubDataEXT GetNamedBufferSubDataEXT} */
     public static void glGetNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") float[] data) {
         long __functionAddress = GL.getICD().glGetNamedBufferSubDataEXT;
         if (CHECKS) {
@@ -3995,9 +3771,7 @@ public class EXTDirectStateAccess {
         callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferSubDataEXT GetNamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glGetNamedBufferSubDataEXT GetNamedBufferSubDataEXT} */
     public static void glGetNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") double[] data) {
         long __functionAddress = GL.getICD().glGetNamedBufferSubDataEXT;
         if (CHECKS) {
@@ -4006,9 +3780,7 @@ public class EXTDirectStateAccess {
         callPPPV(buffer, offset, Integer.toUnsignedLong(data.length) << 3, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform1fvEXT ProgramUniform1fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniform1fvEXT ProgramUniform1fvEXT} */
     public static void glProgramUniform1fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniform1fvEXT;
         if (CHECKS) {
@@ -4017,9 +3789,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform2fvEXT ProgramUniform2fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniform2fvEXT ProgramUniform2fvEXT} */
     public static void glProgramUniform2fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniform2fvEXT;
         if (CHECKS) {
@@ -4028,9 +3798,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length >> 1, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform3fvEXT ProgramUniform3fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniform3fvEXT ProgramUniform3fvEXT} */
     public static void glProgramUniform3fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniform3fvEXT;
         if (CHECKS) {
@@ -4039,9 +3807,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length / 3, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform4fvEXT ProgramUniform4fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniform4fvEXT ProgramUniform4fvEXT} */
     public static void glProgramUniform4fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniform4fvEXT;
         if (CHECKS) {
@@ -4050,9 +3816,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length >> 2, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform1ivEXT ProgramUniform1ivEXT}
-     */
+    /** Array version of: {@link #glProgramUniform1ivEXT ProgramUniform1ivEXT} */
     public static void glProgramUniform1ivEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glProgramUniform1ivEXT;
         if (CHECKS) {
@@ -4061,9 +3825,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform2ivEXT ProgramUniform2ivEXT}
-     */
+    /** Array version of: {@link #glProgramUniform2ivEXT ProgramUniform2ivEXT} */
     public static void glProgramUniform2ivEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glProgramUniform2ivEXT;
         if (CHECKS) {
@@ -4072,9 +3834,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length >> 1, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform3ivEXT ProgramUniform3ivEXT}
-     */
+    /** Array version of: {@link #glProgramUniform3ivEXT ProgramUniform3ivEXT} */
     public static void glProgramUniform3ivEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glProgramUniform3ivEXT;
         if (CHECKS) {
@@ -4083,9 +3843,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length / 3, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform4ivEXT ProgramUniform4ivEXT}
-     */
+    /** Array version of: {@link #glProgramUniform4ivEXT ProgramUniform4ivEXT} */
     public static void glProgramUniform4ivEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLint const *") int[] value) {
         long __functionAddress = GL.getICD().glProgramUniform4ivEXT;
         if (CHECKS) {
@@ -4094,9 +3852,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length >> 2, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2fvEXT ProgramUniformMatrix2fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2fvEXT ProgramUniformMatrix2fvEXT} */
     public static void glProgramUniformMatrix2fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix2fvEXT;
         if (CHECKS) {
@@ -4105,9 +3861,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length >> 2, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3fvEXT ProgramUniformMatrix3fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3fvEXT ProgramUniformMatrix3fvEXT} */
     public static void glProgramUniformMatrix3fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix3fvEXT;
         if (CHECKS) {
@@ -4116,9 +3870,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length / 9, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4fvEXT ProgramUniformMatrix4fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4fvEXT ProgramUniformMatrix4fvEXT} */
     public static void glProgramUniformMatrix4fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix4fvEXT;
         if (CHECKS) {
@@ -4127,9 +3879,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length >> 4, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2x3fvEXT ProgramUniformMatrix2x3fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2x3fvEXT ProgramUniformMatrix2x3fvEXT} */
     public static void glProgramUniformMatrix2x3fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix2x3fvEXT;
         if (CHECKS) {
@@ -4138,9 +3888,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length / 6, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3x2fvEXT ProgramUniformMatrix3x2fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3x2fvEXT ProgramUniformMatrix3x2fvEXT} */
     public static void glProgramUniformMatrix3x2fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix3x2fvEXT;
         if (CHECKS) {
@@ -4149,9 +3897,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length / 6, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2x4fvEXT ProgramUniformMatrix2x4fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2x4fvEXT ProgramUniformMatrix2x4fvEXT} */
     public static void glProgramUniformMatrix2x4fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix2x4fvEXT;
         if (CHECKS) {
@@ -4160,9 +3906,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length >> 3, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4x2fvEXT ProgramUniformMatrix4x2fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4x2fvEXT ProgramUniformMatrix4x2fvEXT} */
     public static void glProgramUniformMatrix4x2fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix4x2fvEXT;
         if (CHECKS) {
@@ -4171,9 +3915,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length >> 3, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3x4fvEXT ProgramUniformMatrix3x4fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3x4fvEXT ProgramUniformMatrix3x4fvEXT} */
     public static void glProgramUniformMatrix3x4fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix3x4fvEXT;
         if (CHECKS) {
@@ -4182,9 +3924,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length / 12, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4x3fvEXT ProgramUniformMatrix4x3fvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4x3fvEXT ProgramUniformMatrix4x3fvEXT} */
     public static void glProgramUniformMatrix4x3fvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") float[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix4x3fvEXT;
         if (CHECKS) {
@@ -4193,9 +3933,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length / 12, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureParameterIivEXT TextureParameterIivEXT}
-     */
+    /** Array version of: {@link #glTextureParameterIivEXT TextureParameterIivEXT} */
     public static void glTextureParameterIivEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         long __functionAddress = GL.getICD().glTextureParameterIivEXT;
         if (CHECKS) {
@@ -4205,9 +3943,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTextureParameterIuivEXT TextureParameterIuivEXT}
-     */
+    /** Array version of: {@link #glTextureParameterIuivEXT TextureParameterIuivEXT} */
     public static void glTextureParameterIuivEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint const *") int[] params) {
         long __functionAddress = GL.getICD().glTextureParameterIuivEXT;
         if (CHECKS) {
@@ -4217,9 +3953,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureParameterIivEXT GetTextureParameterIivEXT}
-     */
+    /** Array version of: {@link #glGetTextureParameterIivEXT GetTextureParameterIivEXT} */
     public static void glGetTextureParameterIivEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetTextureParameterIivEXT;
         if (CHECKS) {
@@ -4229,9 +3963,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureParameterIuivEXT GetTextureParameterIuivEXT}
-     */
+    /** Array version of: {@link #glGetTextureParameterIuivEXT GetTextureParameterIuivEXT} */
     public static void glGetTextureParameterIuivEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glGetTextureParameterIuivEXT;
         if (CHECKS) {
@@ -4241,9 +3973,7 @@ public class EXTDirectStateAccess {
         callPV(texture, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexParameterIivEXT MultiTexParameterIivEXT}
-     */
+    /** Array version of: {@link #glMultiTexParameterIivEXT MultiTexParameterIivEXT} */
     public static void glMultiTexParameterIivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         long __functionAddress = GL.getICD().glMultiTexParameterIivEXT;
         if (CHECKS) {
@@ -4253,9 +3983,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultiTexParameterIuivEXT MultiTexParameterIuivEXT}
-     */
+    /** Array version of: {@link #glMultiTexParameterIuivEXT MultiTexParameterIuivEXT} */
     public static void glMultiTexParameterIuivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint const *") int[] params) {
         long __functionAddress = GL.getICD().glMultiTexParameterIuivEXT;
         if (CHECKS) {
@@ -4265,9 +3993,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexParameterIivEXT GetMultiTexParameterIivEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexParameterIivEXT GetMultiTexParameterIivEXT} */
     public static void glGetMultiTexParameterIivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexParameterIivEXT;
         if (CHECKS) {
@@ -4277,9 +4003,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMultiTexParameterIuivEXT GetMultiTexParameterIuivEXT}
-     */
+    /** Array version of: {@link #glGetMultiTexParameterIuivEXT GetMultiTexParameterIuivEXT} */
     public static void glGetMultiTexParameterIuivEXT(@NativeType("GLenum") int texunit, @NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glGetMultiTexParameterIuivEXT;
         if (CHECKS) {
@@ -4289,9 +4013,7 @@ public class EXTDirectStateAccess {
         callPV(texunit, target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform1uivEXT ProgramUniform1uivEXT}
-     */
+    /** Array version of: {@link #glProgramUniform1uivEXT ProgramUniform1uivEXT} */
     public static void glProgramUniform1uivEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GL.getICD().glProgramUniform1uivEXT;
         if (CHECKS) {
@@ -4300,9 +4022,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform2uivEXT ProgramUniform2uivEXT}
-     */
+    /** Array version of: {@link #glProgramUniform2uivEXT ProgramUniform2uivEXT} */
     public static void glProgramUniform2uivEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GL.getICD().glProgramUniform2uivEXT;
         if (CHECKS) {
@@ -4311,9 +4031,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length >> 1, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform3uivEXT ProgramUniform3uivEXT}
-     */
+    /** Array version of: {@link #glProgramUniform3uivEXT ProgramUniform3uivEXT} */
     public static void glProgramUniform3uivEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GL.getICD().glProgramUniform3uivEXT;
         if (CHECKS) {
@@ -4322,9 +4040,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length / 3, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform4uivEXT ProgramUniform4uivEXT}
-     */
+    /** Array version of: {@link #glProgramUniform4uivEXT ProgramUniform4uivEXT} */
     public static void glProgramUniform4uivEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GL.getICD().glProgramUniform4uivEXT;
         if (CHECKS) {
@@ -4333,9 +4049,7 @@ public class EXTDirectStateAccess {
         callPV(program, location, value.length >> 2, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedProgramLocalParameters4fvEXT NamedProgramLocalParameters4fvEXT}
-     */
+    /** Array version of: {@link #glNamedProgramLocalParameters4fvEXT NamedProgramLocalParameters4fvEXT} */
     public static void glNamedProgramLocalParameters4fvEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glNamedProgramLocalParameters4fvEXT;
         if (CHECKS) {
@@ -4344,9 +4058,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params.length >> 2, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedProgramLocalParameterI4ivEXT NamedProgramLocalParameterI4ivEXT}
-     */
+    /** Array version of: {@link #glNamedProgramLocalParameterI4ivEXT NamedProgramLocalParameterI4ivEXT} */
     public static void glNamedProgramLocalParameterI4ivEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint const *") int[] params) {
         long __functionAddress = GL.getICD().glNamedProgramLocalParameterI4ivEXT;
         if (CHECKS) {
@@ -4356,9 +4068,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedProgramLocalParametersI4ivEXT NamedProgramLocalParametersI4ivEXT}
-     */
+    /** Array version of: {@link #glNamedProgramLocalParametersI4ivEXT NamedProgramLocalParametersI4ivEXT} */
     public static void glNamedProgramLocalParametersI4ivEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint const *") int[] params) {
         long __functionAddress = GL.getICD().glNamedProgramLocalParametersI4ivEXT;
         if (CHECKS) {
@@ -4367,9 +4077,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params.length >> 2, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedProgramLocalParameterI4uivEXT NamedProgramLocalParameterI4uivEXT}
-     */
+    /** Array version of: {@link #glNamedProgramLocalParameterI4uivEXT NamedProgramLocalParameterI4uivEXT} */
     public static void glNamedProgramLocalParameterI4uivEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLuint const *") int[] params) {
         long __functionAddress = GL.getICD().glNamedProgramLocalParameterI4uivEXT;
         if (CHECKS) {
@@ -4379,9 +4087,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedProgramLocalParametersI4uivEXT NamedProgramLocalParametersI4uivEXT}
-     */
+    /** Array version of: {@link #glNamedProgramLocalParametersI4uivEXT NamedProgramLocalParametersI4uivEXT} */
     public static void glNamedProgramLocalParametersI4uivEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLuint const *") int[] params) {
         long __functionAddress = GL.getICD().glNamedProgramLocalParametersI4uivEXT;
         if (CHECKS) {
@@ -4390,9 +4096,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params.length >> 2, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedProgramLocalParameterIivEXT GetNamedProgramLocalParameterIivEXT}
-     */
+    /** Array version of: {@link #glGetNamedProgramLocalParameterIivEXT GetNamedProgramLocalParameterIivEXT} */
     public static void glGetNamedProgramLocalParameterIivEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetNamedProgramLocalParameterIivEXT;
         if (CHECKS) {
@@ -4402,9 +4106,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedProgramLocalParameterIuivEXT GetNamedProgramLocalParameterIuivEXT}
-     */
+    /** Array version of: {@link #glGetNamedProgramLocalParameterIuivEXT GetNamedProgramLocalParameterIuivEXT} */
     public static void glGetNamedProgramLocalParameterIuivEXT(@NativeType("GLuint") int program, @NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glGetNamedProgramLocalParameterIuivEXT;
         if (CHECKS) {
@@ -4414,9 +4116,7 @@ public class EXTDirectStateAccess {
         callPV(program, target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedRenderbufferParameterivEXT GetNamedRenderbufferParameterivEXT}
-     */
+    /** Array version of: {@link #glGetNamedRenderbufferParameterivEXT GetNamedRenderbufferParameterivEXT} */
     public static void glGetNamedRenderbufferParameterivEXT(@NativeType("GLuint") int renderbuffer, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetNamedRenderbufferParameterivEXT;
         if (CHECKS) {
@@ -4426,9 +4126,7 @@ public class EXTDirectStateAccess {
         callPV(renderbuffer, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedFramebufferAttachmentParameterivEXT GetNamedFramebufferAttachmentParameterivEXT}
-     */
+    /** Array version of: {@link #glGetNamedFramebufferAttachmentParameterivEXT GetNamedFramebufferAttachmentParameterivEXT} */
     public static void glGetNamedFramebufferAttachmentParameterivEXT(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetNamedFramebufferAttachmentParameterivEXT;
         if (CHECKS) {
@@ -4438,9 +4136,7 @@ public class EXTDirectStateAccess {
         callPV(framebuffer, attachment, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glFramebufferDrawBuffersEXT FramebufferDrawBuffersEXT}
-     */
+    /** Array version of: {@link #glFramebufferDrawBuffersEXT FramebufferDrawBuffersEXT} */
     public static void glFramebufferDrawBuffersEXT(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") int[] bufs) {
         long __functionAddress = GL.getICD().glFramebufferDrawBuffersEXT;
         if (CHECKS) {
@@ -4449,9 +4145,7 @@ public class EXTDirectStateAccess {
         callPV(framebuffer, bufs.length, bufs, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetFramebufferParameterivEXT GetFramebufferParameterivEXT}
-     */
+    /** Array version of: {@link #glGetFramebufferParameterivEXT GetFramebufferParameterivEXT} */
     public static void glGetFramebufferParameterivEXT(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] param) {
         long __functionAddress = GL.getICD().glGetFramebufferParameterivEXT;
         if (CHECKS) {
@@ -4461,9 +4155,7 @@ public class EXTDirectStateAccess {
         callPV(framebuffer, pname, param, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexArrayIntegervEXT GetVertexArrayIntegervEXT}
-     */
+    /** Array version of: {@link #glGetVertexArrayIntegervEXT GetVertexArrayIntegervEXT} */
     public static void glGetVertexArrayIntegervEXT(@NativeType("GLuint") int vaobj, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] param) {
         long __functionAddress = GL.getICD().glGetVertexArrayIntegervEXT;
         if (CHECKS) {
@@ -4473,9 +4165,7 @@ public class EXTDirectStateAccess {
         callPV(vaobj, pname, param, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexArrayIntegeri_vEXT GetVertexArrayIntegeri_vEXT}
-     */
+    /** Array version of: {@link #glGetVertexArrayIntegeri_vEXT GetVertexArrayIntegeri_vEXT} */
     public static void glGetVertexArrayIntegeri_vEXT(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] param) {
         long __functionAddress = GL.getICD().glGetVertexArrayIntegeri_vEXT;
         if (CHECKS) {

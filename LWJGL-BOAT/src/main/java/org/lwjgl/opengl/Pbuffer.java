@@ -41,7 +41,7 @@ import java.nio.IntBuffer;
  * <p/>
  * Pbuffer encapsulates an OpenGL pbuffer.
  * <p/>
- * <p>
+ *
  * This class is thread-safe.
  *
  * @author elias_naur <elias_naur@users.sourceforge.net>
@@ -52,7 +52,7 @@ public final class Pbuffer extends DrawableGL {
     /**
      * Indicates that Pbuffers can be created.
      */
-    public static final int PBUFFER_SUPPORTED = 1;
+    public static final int PBUFFER_SUPPORTED = 1 << 0;
 
     /**
      * Indicates that Pbuffers can be used as render-textures.

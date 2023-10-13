@@ -115,7 +115,7 @@ public class Display {
      * The Drawable instance that tracks the current Display context
      */
     private static volatile DrawableLWJGL drawable = null;
-
+    
     private static Canvas parent;
 
     private static GLFWImage.Buffer icons;
@@ -283,7 +283,6 @@ public class Display {
     }
 
     private static boolean isCreated = false;
-
     public static void create() throws LWJGLException {
         if (isCreated) return;
         else isCreated = true;
@@ -829,7 +828,7 @@ public class Display {
     }
 
     public static DisplayMode[] getAvailableDisplayModes() throws LWJGLException {
-        GLFWVidMode.Buffer modes = GLFW.glfwGetVideoModes(org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor());
+        GLFWVidMode.Buffer modes = GLFW.glfwGetVideoModes(GLFW.glfwGetPrimaryMonitor());
 
         DisplayMode[] displayModes = new DisplayMode[modes.capacity()];
 
@@ -997,7 +996,8 @@ public class Display {
      * An accurate sync method that will attempt to run at a constant frame
      * rate. It should be called once every frame.
      *
-     * @param fps - the desired frame rate, in frames per second
+     * @param fps
+     *            - the desired frame rate, in frames per second
      */
     public static void sync(int fps) {
         Sync.sync(fps);
@@ -1005,7 +1005,7 @@ public class Display {
 
     public static Drawable getDrawable() {
         return drawable;
-    }
+	}
 
     static DisplayImplementation getImplementation() {
         return display_impl;

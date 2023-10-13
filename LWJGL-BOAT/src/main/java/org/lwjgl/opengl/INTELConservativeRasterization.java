@@ -23,9 +23,7 @@ package org.lwjgl.opengl;
  */
 public final class INTELConservativeRasterization {
 
-    /**
-     * Accepted by the {@code target} parameter of {@link GL11#glEnable Enable}, {@link GL11#glDisable Disable}, {@link GL11#glIsEnabled IsEnabled}.
-     */
+    /** Accepted by the {@code target} parameter of {@link GL11#glEnable Enable}, {@link GL11#glDisable Disable}, {@link GL11#glIsEnabled IsEnabled}. */
     public static final int GL_CONSERVATIVE_RASTERIZATION_INTEL = 0x83FE;
 
     private INTELConservativeRasterization() {

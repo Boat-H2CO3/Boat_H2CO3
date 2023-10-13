@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_view.txt">ARB_texture_view</a> extension.
@@ -36,9 +36,7 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBTextureView {
 
-    /**
-     * Accepted by the {@code pname} parameters of GetTexParameterfv and GetTexParameteriv.
-     */
+    /** Accepted by the {@code pname} parameters of GetTexParameterfv and GetTexParameteriv. */
     public static final int
             GL_TEXTURE_VIEW_MIN_LEVEL = 0x82DB,
             GL_TEXTURE_VIEW_NUM_LEVELS = 0x82DC,

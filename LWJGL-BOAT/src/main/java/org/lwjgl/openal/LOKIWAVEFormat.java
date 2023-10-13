@@ -10,12 +10,9 @@ package org.lwjgl.openal;
  */
 public final class LOKIWAVEFormat {
 
-    /**
-     * Buffer formats.
-     */
+    /** Buffer formats. */
     public static final int AL_FORMAT_WAVE_EXT = 0x10002;
 
-    private LOKIWAVEFormat() {
-    }
+    private LOKIWAVEFormat() {}
 
 }

@@ -43,16 +43,12 @@ public class NVMemoryAttachment {
      */
     public static final int GL_DETACHED_MEMORY_INCARNATION_NV = 0x95A9;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetMemoryObjectParameterivEXT, GetMemoryObjectDetachedResourcesuivNV and ResetMemoryObjectParameterNV.
-     */
+    /** Accepted by the {@code pname} parameter of GetMemoryObjectParameterivEXT, GetMemoryObjectDetachedResourcesuivNV and ResetMemoryObjectParameterNV. */
     public static final int
             GL_DETACHED_TEXTURES_NV = 0x95AA,
             GL_DETACHED_BUFFERS_NV = 0x95AB;
 
-    /**
-     * Accepted by the {@code pname} parameter of MemoryObjectParameterivEXT, GetMemoryObjectParameterivEXT.
-     */
+    /** Accepted by the {@code pname} parameter of MemoryObjectParameterivEXT, GetMemoryObjectParameterivEXT. */
     public static final int
             GL_MAX_DETACHED_TEXTURES_NV = 0x95AC,
             GL_MAX_DETACHED_BUFFERS_NV = 0x95AD;
@@ -100,9 +96,7 @@ public class NVMemoryAttachment {
 
     public static native void glNamedBufferAttachMemoryNV(@NativeType("GLuint") int buffer, @NativeType("GLuint") int memory, @NativeType("GLuint64") long offset);
 
-    /**
-     * Array version of: {@link #glGetMemoryObjectDetachedResourcesuivNV GetMemoryObjectDetachedResourcesuivNV}
-     */
+    /** Array version of: {@link #glGetMemoryObjectDetachedResourcesuivNV GetMemoryObjectDetachedResourcesuivNV} */
     public static void glGetMemoryObjectDetachedResourcesuivNV(@NativeType("GLuint") int memory, @NativeType("GLenum") int pname, @NativeType("GLint") int first, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glGetMemoryObjectDetachedResourcesuivNV;
         if (CHECKS) {

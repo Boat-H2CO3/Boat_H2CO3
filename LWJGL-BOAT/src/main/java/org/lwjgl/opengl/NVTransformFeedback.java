@@ -262,9 +262,7 @@ public class NVTransformFeedback {
         nglTransformFeedbackStreamAttribsNV(attribs.remaining(), memAddress(attribs), bufstreams.remaining(), memAddress(bufstreams), bufferMode);
     }
 
-    /**
-     * Array version of: {@link #glTransformFeedbackAttribsNV TransformFeedbackAttribsNV}
-     */
+    /** Array version of: {@link #glTransformFeedbackAttribsNV TransformFeedbackAttribsNV} */
     public static void glTransformFeedbackAttribsNV(@NativeType("GLint const *") int[] attribs, @NativeType("GLenum") int bufferMode) {
         long __functionAddress = GL.getICD().glTransformFeedbackAttribsNV;
         if (CHECKS) {
@@ -273,9 +271,7 @@ public class NVTransformFeedback {
         callPV(attribs.length, attribs, bufferMode, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTransformFeedbackVaryingsNV TransformFeedbackVaryingsNV}
-     */
+    /** Array version of: {@link #glTransformFeedbackVaryingsNV TransformFeedbackVaryingsNV} */
     public static void glTransformFeedbackVaryingsNV(@NativeType("GLuint") int program, @NativeType("GLint const *") int[] locations, @NativeType("GLenum") int bufferMode) {
         long __functionAddress = GL.getICD().glTransformFeedbackVaryingsNV;
         if (CHECKS) {
@@ -284,9 +280,7 @@ public class NVTransformFeedback {
         callPV(program, locations.length, locations, bufferMode, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetActiveVaryingNV GetActiveVaryingNV}
-     */
+    /** Array version of: {@link #glGetActiveVaryingNV GetActiveVaryingNV} */
     public static void glGetActiveVaryingNV(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLsizei *") int[] size, @NativeType("GLenum *") int[] type, @NativeType("GLchar *") ByteBuffer name) {
         long __functionAddress = GL.getICD().glGetActiveVaryingNV;
         if (CHECKS) {
@@ -298,9 +292,7 @@ public class NVTransformFeedback {
         callPPPPV(program, index, name.remaining(), length, size, type, memAddress(name), __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetTransformFeedbackVaryingNV GetTransformFeedbackVaryingNV}
-     */
+    /** Array version of: {@link #glGetTransformFeedbackVaryingNV GetTransformFeedbackVaryingNV} */
     public static void glGetTransformFeedbackVaryingNV(@NativeType("GLuint") int program, @NativeType("GLuint") int index, @NativeType("GLint *") int[] location) {
         long __functionAddress = GL.getICD().glGetTransformFeedbackVaryingNV;
         if (CHECKS) {
@@ -310,9 +302,7 @@ public class NVTransformFeedback {
         callPV(program, index, location, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glTransformFeedbackStreamAttribsNV TransformFeedbackStreamAttribsNV}
-     */
+    /** Array version of: {@link #glTransformFeedbackStreamAttribsNV TransformFeedbackStreamAttribsNV} */
     public static void glTransformFeedbackStreamAttribsNV(@NativeType("GLint const *") int[] attribs, @NativeType("GLint const *") int[] bufstreams, @NativeType("GLenum") int bufferMode) {
         long __functionAddress = GL.getICD().glTransformFeedbackStreamAttribsNV;
         if (CHECKS) {

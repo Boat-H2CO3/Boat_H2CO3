@@ -33,21 +33,15 @@ import static org.lwjgl.system.Checks.*;
  */
 public class OVRMultiview {
 
-    /**
-     * Accepted by the {@code pname} parameter of {@link GL30C#glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv}.
-     */
+    /** Accepted by the {@code pname} parameter of {@link GL30C#glGetFramebufferAttachmentParameteriv GetFramebufferAttachmentParameteriv}. */
     public static final int
             GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR = 0x9630,
             GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR = 0x9632;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetIntegerv.
-     */
+    /** Accepted by the {@code pname} parameter of GetIntegerv. */
     public static final int GL_MAX_VIEWS_OVR = 0x9631;
 
-    /**
-     * Returned by {@link GL30C#glCheckFramebufferStatus CheckFramebufferStatus}.
-     */
+    /** Returned by {@link GL30C#glCheckFramebufferStatus CheckFramebufferStatus}. */
     public static final int GL_FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR = 0x9633;
 
     static {

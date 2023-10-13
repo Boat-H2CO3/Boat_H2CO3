@@ -80,9 +80,7 @@ public class NVPointSprite {
         nglPointParameterivNV(pname, memAddress(params));
     }
 
-    /**
-     * Array version of: {@link #glPointParameterivNV PointParameterivNV}
-     */
+    /** Array version of: {@link #glPointParameterivNV PointParameterivNV} */
     public static void glPointParameterivNV(@NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         long __functionAddress = GL.getICD().glPointParameterivNV;
         if (CHECKS) {

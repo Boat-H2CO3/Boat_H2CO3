@@ -33,7 +33,6 @@ package org.lwjgl.input;
 
 /**
  * A java implementation of a LWJGL compatible event queue.
- *
  * @author elias_naur
  */
 
@@ -70,6 +69,7 @@ class EventQueue {
 
     /**
      * Put an event into the queue.
+     *
      * @return true if the event fitted into the queue, false otherwise
      */
     public synchronized boolean putEvent(ByteBuffer event) {

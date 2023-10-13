@@ -507,6 +507,6 @@ public final class MemoryUtil {
         } while (type != null);
 
         throw new NoSuchFieldException(fieldName + " does not exist in " + root.getSimpleName() + " or any of its superclasses.");
-    }
+	}
 
 }

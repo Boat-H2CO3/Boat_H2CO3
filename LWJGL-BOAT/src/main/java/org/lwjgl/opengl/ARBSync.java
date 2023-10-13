@@ -5,14 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import javax.annotation.*;
 
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.IntBuffer;
-import java.nio.LongBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_sync.txt">ARB_sync</a> extension.
@@ -33,50 +32,34 @@ import javax.annotation.Nullable;
  */
 public class ARBSync {
 
-    /**
-     * Accepted as the {@code pname} parameter of GetInteger64v.
-     */
+    /** Accepted as the {@code pname} parameter of GetInteger64v. */
     public static final int GL_MAX_SERVER_WAIT_TIMEOUT = 0x9111;
 
-    /**
-     * Accepted as the {@code pname} parameter of GetSynciv.
-     */
+    /** Accepted as the {@code pname} parameter of GetSynciv. */
     public static final int
             GL_OBJECT_TYPE = 0x9112,
             GL_SYNC_CONDITION = 0x9113,
             GL_SYNC_STATUS = 0x9114,
             GL_SYNC_FLAGS = 0x9115;
 
-    /**
-     * Returned in {@code values} for GetSynciv {@code pname} OBJECT_TYPE.
-     */
+    /** Returned in {@code values} for GetSynciv {@code pname} OBJECT_TYPE. */
     public static final int GL_SYNC_FENCE = 0x9116;
 
-    /**
-     * Returned in {@code values} for GetSynciv {@code pname} SYNC_CONDITION.
-     */
+    /** Returned in {@code values} for GetSynciv {@code pname} SYNC_CONDITION. */
     public static final int GL_SYNC_GPU_COMMANDS_COMPLETE = 0x9117;
 
-    /**
-     * Returned in {@code values} for GetSynciv {@code pname} SYNC_STATUS.
-     */
+    /** Returned in {@code values} for GetSynciv {@code pname} SYNC_STATUS. */
     public static final int
             GL_UNSIGNALED = 0x9118,
             GL_SIGNALED = 0x9119;
 
-    /**
-     * Accepted in the {@code flags} parameter of ClientWaitSync.
-     */
+    /** Accepted in the {@code flags} parameter of ClientWaitSync. */
     public static final int GL_SYNC_FLUSH_COMMANDS_BIT = 0x1;
 
-    /**
-     * Accepted in the {@code timeout} parameter of WaitSync.
-     */
+    /** Accepted in the {@code timeout} parameter of WaitSync. */
     public static final long GL_TIMEOUT_IGNORED = 0xFFFFFFFFFFFFFFFFL;
 
-    /**
-     * Returned by ClientWaitSync.
-     */
+    /** Returned by ClientWaitSync. */
     public static final int
             GL_ALREADY_SIGNALED = 0x911A,
             GL_TIMEOUT_EXPIRED = 0x911B,
@@ -113,9 +96,7 @@ public class ARBSync {
 
     // --- [ glIsSync ] ---
 
-    /**
-     * Unsafe version of: {@link #glIsSync IsSync}
-     */
+    /** Unsafe version of: {@link #glIsSync IsSync} */
     public static boolean nglIsSync(long sync) {
         return GL32C.nglIsSync(sync);
     }
@@ -132,9 +113,7 @@ public class ARBSync {
 
     // --- [ glDeleteSync ] ---
 
-    /**
-     * Unsafe version of: {@link #glDeleteSync DeleteSync}
-     */
+    /** Unsafe version of: {@link #glDeleteSync DeleteSync} */
     public static void nglDeleteSync(long sync) {
         GL32C.nglDeleteSync(sync);
     }
@@ -150,9 +129,7 @@ public class ARBSync {
 
     // --- [ glClientWaitSync ] ---
 
-    /**
-     * Unsafe version of: {@link #glClientWaitSync ClientWaitSync}
-     */
+    /** Unsafe version of: {@link #glClientWaitSync ClientWaitSync} */
     public static int nglClientWaitSync(long sync, int flags, long timeout) {
         return GL32C.nglClientWaitSync(sync, flags, timeout);
     }
@@ -181,9 +158,7 @@ public class ARBSync {
 
     // --- [ glWaitSync ] ---
 
-    /**
-     * Unsafe version of: {@link #glWaitSync WaitSync}
-     */
+    /** Unsafe version of: {@link #glWaitSync WaitSync} */
     public static void nglWaitSync(long sync, int flags, long timeout) {
         GL32C.nglWaitSync(sync, flags, timeout);
     }
@@ -207,9 +182,7 @@ public class ARBSync {
 
     // --- [ glGetInteger64v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetInteger64v GetInteger64v}
-     */
+    /** Unsafe version of: {@link #glGetInteger64v GetInteger64v} */
     public static void nglGetInteger64v(int pname, long params) {
         GL32C.nglGetInteger64v(pname, params);
     }
@@ -269,16 +242,12 @@ public class ARBSync {
         return GL32C.glGetSynci(sync, pname, length);
     }
 
-    /**
-     * Array version of: {@link #glGetInteger64v GetInteger64v}
-     */
+    /** Array version of: {@link #glGetInteger64v GetInteger64v} */
     public static void glGetInteger64v(@NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
         GL32C.glGetInteger64v(pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetSynciv GetSynciv}
-     */
+    /** Array version of: {@link #glGetSynciv GetSynciv} */
     public static void glGetSynciv(@NativeType("GLsync") long sync, @NativeType("GLenum") int pname, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] values) {
         GL32C.glGetSynciv(sync, pname, length, values);
     }

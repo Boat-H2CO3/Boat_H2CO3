@@ -37,7 +37,7 @@ import java.nio.IntBuffer;
 
 /**
  * The ALCcontext class represents a context opened in OpenAL space.
- * <p>
+ *
  * All operations of the AL core API affect a current AL context. Within the scope of AL,
  * the ALC is implied - it is not visible as a handle or function parameter. Only one AL
  * Context per process can be current at a time. Applications maintaining multiple AL

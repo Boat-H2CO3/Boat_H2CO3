@@ -52,7 +52,7 @@ import java.nio.IntBuffer;
  *
  * @author elias_naur <elias_naur@users.sourceforge.net>
  * @version $Revision$
- * $Id$
+ *          $Id$
  */
 final class ContextGL implements Context {
 

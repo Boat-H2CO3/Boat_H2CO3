@@ -27,16 +27,12 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVFramebufferMultisampleCoverage {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT.
-     */
+    /** Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT. */
     public static final int
             GL_RENDERBUFFER_COVERAGE_SAMPLES_NV = 0x8CAB,
             GL_RENDERBUFFER_COLOR_SAMPLES_NV = 0x8E10;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetIntegerv.
-     */
+    /** Accepted by the {@code pname} parameter of GetIntegerv. */
     public static final int
             GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV = 0x8E11,
             GL_MULTISAMPLE_COVERAGE_MODES_NV = 0x8E12;

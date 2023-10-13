@@ -37,7 +37,7 @@ public class GREMEDYFrameTerminator {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glFrameTerminatorGREMEDY
+            caps.glFrameTerminatorGREMEDY
         );
     }
 

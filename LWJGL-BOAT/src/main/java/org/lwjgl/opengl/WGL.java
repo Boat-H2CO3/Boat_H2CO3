@@ -22,16 +22,12 @@ import org.lwjgl.system.windows.*;
  */
 public class WGL {
 
-    /**
-     * UseFontOutlines format.
-     */
+    /** UseFontOutlines format. */
     public static final int
             WGL_FONT_LINES = 0,
             WGL_FONT_POLYGONS = 1;
 
-    /**
-     * SwapLayerBuffers flags.
-     */
+    /** SwapLayerBuffers flags. */
     public static final int
             WGL_SWAP_MAIN_PLANE = 0x1,
             WGL_SWAP_OVERLAY1 = 0x2,
@@ -69,17 +65,13 @@ public class WGL {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * Contains the function pointers loaded from {@code GL.getFunctionProvider()}.
-     */
+    /** Contains the function pointers loaded from {@code GL.getFunctionProvider()}. */
     public static final class Functions {
 
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 CreateContext = apiGetFunctionAddress(GL.getFunctionProvider(), "wglCreateContext"),
                 CreateLayerContext = apiGetFunctionAddress(GL.getFunctionProvider(), "wglCreateLayerContext"),
@@ -169,9 +161,7 @@ public class WGL {
 
     // --- [ wglGetCurrentContext ] ---
 
-    /**
-     * Obtains a handle to the current OpenGL rendering context of the calling thread.
-     */
+    /** Obtains a handle to the current OpenGL rendering context of the calling thread. */
     @NativeType("HGLRC")
     public static long wglGetCurrentContext() {
         long __functionAddress = Functions.GetCurrentContext;
@@ -180,9 +170,7 @@ public class WGL {
 
     // --- [ wglGetCurrentDC ] ---
 
-    /**
-     * Obtains a handle to the device context that is associated with the current OpenGL rendering context of the calling thread.
-     */
+    /** Obtains a handle to the device context that is associated with the current OpenGL rendering context of the calling thread. */
     @NativeType("HDC")
     public static long wglGetCurrentDC() {
         long __functionAddress = Functions.GetCurrentDC;
@@ -191,9 +179,7 @@ public class WGL {
 
     // --- [ wglGetProcAddress ] ---
 
-    /**
-     * Unsafe version of: {@link #wglGetProcAddress GetProcAddress}
-     */
+    /** Unsafe version of: {@link #wglGetProcAddress GetProcAddress} */
     public static long nwglGetProcAddress(long proc) {
         long __functionAddress = Functions.GetProcAddress;
         return callPP(proc, __functionAddress);

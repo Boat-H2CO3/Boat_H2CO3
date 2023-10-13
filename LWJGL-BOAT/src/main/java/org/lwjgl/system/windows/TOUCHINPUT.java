@@ -24,25 +24,25 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code x} &ndash; the x-coordinate (horizontal point) of the touch input. This member is indicated in hundredths of a pixel of physical screen coordinates.</li>
  * <li>{@code y} &ndash; the y-coordinate (vertical point) of the touch input. This member is indicated in hundredths of a pixel of physical screen coordinates.</li>
  * <li>{@code hSource} &ndash; a device handle for the source input device. Each device is given a unique provider at run time by the touch input provider.</li>
- * <li>{@code dwID} &ndash;
+ * <li>{@code dwID} &ndash; 
  * a touch point identifier that distinguishes a particular touch input. This value stays consistent in a touch contact sequence from the point a contact
  * comes down until it comes back up. An ID may be reused later for subsequent contacts.</li>
- * <li>{@code dwFlags} &ndash;
+ * <li>{@code dwFlags} &ndash; 
  * a set of bit flags that specify various aspects of touch point press, release, and motion. The bits in this member can be any reasonable combination of
  * the values in the Remarks section.</li>
- * <li>{@code dwMask} &ndash;
+ * <li>{@code dwMask} &ndash; 
  * a set of bit flags that specify which of the optional fields in the structure contain valid values. The availability of valid information in the
  * optional fields is device-specific. Applications should use an optional field value only when the corresponding bit is set in {@code dwMask}. This
  * field may contain a combination of the {@code dwMask} flags mentioned in the Remarks section.</li>
- * <li>{@code dwTime} &ndash;
+ * <li>{@code dwTime} &ndash; 
  * the time stamp for the event, in milliseconds. The consuming application should note that the system performs no validation on this field; when the
  * {@link User32#TOUCHINPUTMASKF_TIMEFROMSYSTEM} flag is not set, the accuracy and sequencing of values in this field are completely dependent on the touch input
  * provider.</li>
  * <li>{@code dwExtraInfo} &ndash; an additional value associated with the touch event.</li>
- * <li>{@code cxContact} &ndash;
+ * <li>{@code cxContact} &ndash; 
  * the width of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the {@code dwMask} member has
  * the {@link User32#TOUCHINPUTMASKF_CONTACTAREA} flag set.</li>
- * <li>{@code cyContact} &ndash;
+ * <li>{@code cyContact} &ndash; 
  * the height of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the {@code dwMask} member has
  * the {@link User32#TOUCHINPUTMASKF_CONTACTAREA} flag set.</li>
  * </ul>
@@ -223,31 +223,23 @@ public class TOUCHINPUT extends Struct implements NativeResource {
         return wrap(TOUCHINPUT.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code TOUCHINPUT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code TOUCHINPUT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static TOUCHINPUT calloc() {
         return wrap(TOUCHINPUT.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code TOUCHINPUT} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code TOUCHINPUT} instance allocated with {@link BufferUtils}. */
     public static TOUCHINPUT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(TOUCHINPUT.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code TOUCHINPUT} instance for the specified memory address.
-     */
+    /** Returns a new {@code TOUCHINPUT} instance for the specified memory address. */
     public static TOUCHINPUT create(long address) {
         return wrap(TOUCHINPUT.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static TOUCHINPUT createSafe(long address) {
         return address == NULL ? null : wrap(TOUCHINPUT.class, address);
@@ -291,9 +283,7 @@ public class TOUCHINPUT extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -301,16 +291,12 @@ public class TOUCHINPUT extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code TOUCHINPUT} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code TOUCHINPUT} instance allocated on the thread-local {@link MemoryStack}. */
     public static TOUCHINPUT mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code TOUCHINPUT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code TOUCHINPUT} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static TOUCHINPUT callocStack() {
         return callocStack(stackGet());
     }
@@ -354,7 +340,7 @@ public class TOUCHINPUT extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -454,7 +440,7 @@ public class TOUCHINPUT extends Struct implements NativeResource {
 
         /**
          * Creates a new {@code TOUCHINPUT.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link TOUCHINPUT#SIZEOF}, and its mark will be undefined.
@@ -547,21 +533,12 @@ public class TOUCHINPUT extends Struct implements NativeResource {
             return TOUCHINPUT.ndwExtraInfo(address());
         }
 
-        /**
-         * Returns the value of the {@code cxContact} field.
-         */
+        /** Returns the value of the {@code cxContact} field. */
         @NativeType("DWORD")
-        public int cxContact() {
-            return TOUCHINPUT.ncxContact(address());
-        }
-
-        /**
-         * Returns the value of the {@code cyContact} field.
-         */
+        public int cxContact() { return TOUCHINPUT.ncxContact(address()); }
+        /** Returns the value of the {@code cyContact} field. */
         @NativeType("DWORD")
-        public int cyContact() {
-            return TOUCHINPUT.ncyContact(address());
-        }
+        public int cyContact() { return TOUCHINPUT.ncyContact(address()); }
 
     }
 

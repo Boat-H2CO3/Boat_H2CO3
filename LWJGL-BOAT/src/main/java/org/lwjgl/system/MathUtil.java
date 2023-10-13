@@ -21,6 +21,7 @@ public final class MathUtil {
      * number.
      *
      * @param value the value to test
+     *
      * @return true if the value if a power-of-two number.
      */
     public static boolean mathIsPoT(int value) {
@@ -34,6 +35,7 @@ public final class MathUtil {
      *
      * @param value the value to round-up. Must be a number between {@code 1} and
      *              <code>1 &lt;&lt; 30</code>.
+     *
      * @return the power-of-two rounded value
      */
     public static int mathRoundPoT(int value) {
@@ -61,6 +63,7 @@ public final class MathUtil {
      *
      * @param x the first value
      * @param y the second value
+     *
      * @return the result
      */
     public static long mathMultiplyHighU64(long x, long y) {
@@ -79,6 +82,7 @@ public final class MathUtil {
      *
      * @param x the first value
      * @param y the second value
+     *
      * @return the result
      */
     public static long mathMultiplyHighS64(long x, long y) {
@@ -100,6 +104,7 @@ public final class MathUtil {
      *
      * @param dividend the value to be divided
      * @param divisor  the value doing the dividing
+     *
      * @return the unsigned quotient of the first argument divided by the second argument
      */
     public static long mathDivideUnsigned(long dividend, long divisor) {
@@ -120,6 +125,7 @@ public final class MathUtil {
      *
      * @param dividend the value to be divided
      * @param divisor  the value doing the dividing
+     *
      * @return the unsigned remainder of the first argument divided by the second argument
      */
     public static long mathRemainderUnsigned(long dividend, long divisor) {

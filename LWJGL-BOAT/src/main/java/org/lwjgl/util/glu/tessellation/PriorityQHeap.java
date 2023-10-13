@@ -85,6 +85,7 @@
 package org.lwjgl.util.glu.tessellation;
 
 
+
 class PriorityQHeap extends PriorityQ {
     PQnode[] nodes;
     PQhandleElem[] handles;

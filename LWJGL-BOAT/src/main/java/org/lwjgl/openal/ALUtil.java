@@ -4,16 +4,13 @@
  */
 package org.lwjgl.openal;
 
-import static org.lwjgl.openal.ALC10.nalcGetString;
-import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjgl.system.MemoryUtil.memByteBuffer;
-import static org.lwjgl.system.MemoryUtil.memUTF8;
+import javax.annotation.*;
 
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.*;
+import java.util.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * OpenAL utilities.

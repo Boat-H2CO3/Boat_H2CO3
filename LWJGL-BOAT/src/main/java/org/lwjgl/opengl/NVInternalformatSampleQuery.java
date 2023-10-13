@@ -43,9 +43,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVInternalformatSampleQuery {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetInternalformatSampleivNV
-     */
+    /** Accepted by the {@code pname} parameter of GetInternalformatSampleivNV */
     public static final int
             GL_MULTISAMPLES_NV = 0x9371,
             GL_SUPERSAMPLE_SCALE_X_NV = 0x9372,
@@ -74,9 +72,7 @@ public class NVInternalformatSampleQuery {
         nglGetInternalformatSampleivNV(target, internalformat, samples, pname, params.remaining(), memAddress(params));
     }
 
-    /**
-     * Array version of: {@link #glGetInternalformatSampleivNV GetInternalformatSampleivNV}
-     */
+    /** Array version of: {@link #glGetInternalformatSampleivNV GetInternalformatSampleivNV} */
     public static void glGetInternalformatSampleivNV(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int samples, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetInternalformatSampleivNV;
         if (CHECKS) {

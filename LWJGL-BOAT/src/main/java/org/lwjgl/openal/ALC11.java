@@ -5,53 +5,35 @@
  */
 package org.lwjgl.openal;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.Checks.checkNT1Safe;
-import static org.lwjgl.system.JNI.invokePP;
-import static org.lwjgl.system.JNI.invokePPV;
-import static org.lwjgl.system.JNI.invokePV;
-import static org.lwjgl.system.JNI.invokePZ;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjgl.system.MemoryUtil.memAddress;
-import static org.lwjgl.system.MemoryUtil.memAddressSafe;
+import javax.annotation.*;
 
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to ALC 1.1 functionality.
  */
 public class ALC11 extends ALC10 {
 
-    /**
-     * Context creation attributes.
-     */
+    /** Context creation attributes. */
     public static final int
             ALC_MONO_SOURCES = 0x1010,
             ALC_STEREO_SOURCES = 0x1011;
 
-    /**
-     * String queries.
-     */
+    /** String queries. */
     public static final int
             ALC_DEFAULT_ALL_DEVICES_SPECIFIER = 0x1012,
             ALC_ALL_DEVICES_SPECIFIER = 0x1013,
             ALC_CAPTURE_DEVICE_SPECIFIER = 0x310,
             ALC_CAPTURE_DEFAULT_DEVICE_SPECIFIER = 0x311;
 
-    /**
-     * Integer queries.
-     */
+    /** Integer queries. */
     public static final int ALC_CAPTURE_SAMPLES = 0x312;
 
     protected ALC11() {
@@ -66,9 +48,7 @@ public class ALC11 extends ALC10 {
 
     // --- [ alcCaptureOpenDevice ] ---
 
-    /**
-     * Unsafe version of: {@link #alcCaptureOpenDevice CaptureOpenDevice}
-     */
+    /** Unsafe version of: {@link #alcCaptureOpenDevice CaptureOpenDevice} */
     public static long nalcCaptureOpenDevice(long deviceName, int frequency, int format, int samples) {
         long __functionAddress = ALC.getICD().alcCaptureOpenDevice;
         if (CHECKS) {
@@ -180,9 +160,7 @@ public class ALC11 extends ALC10 {
 
     // --- [ alcCaptureSamples ] ---
 
-    /**
-     * Unsafe version of: {@link #alcCaptureSamples CaptureSamples}
-     */
+    /** Unsafe version of: {@link #alcCaptureSamples CaptureSamples} */
     public static void nalcCaptureSamples(long device, long buffer, int samples) {
         long __functionAddress = ALC.getICD().alcCaptureSamples;
         if (CHECKS) {
@@ -248,9 +226,7 @@ public class ALC11 extends ALC10 {
         nalcCaptureSamples(device, memAddress(buffer), samples);
     }
 
-    /**
-     * Array version of: {@link #alcCaptureSamples CaptureSamples}
-     */
+    /** Array version of: {@link #alcCaptureSamples CaptureSamples} */
     @NativeType("ALCvoid")
     public static void alcCaptureSamples(@NativeType("ALCdevice *") long device, @NativeType("ALCvoid *") short[] buffer, @NativeType("ALCsizei") int samples) {
         long __functionAddress = ALC.getICD().alcCaptureSamples;
@@ -261,9 +237,7 @@ public class ALC11 extends ALC10 {
         invokePPV(device, buffer, samples, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alcCaptureSamples CaptureSamples}
-     */
+    /** Array version of: {@link #alcCaptureSamples CaptureSamples} */
     @NativeType("ALCvoid")
     public static void alcCaptureSamples(@NativeType("ALCdevice *") long device, @NativeType("ALCvoid *") int[] buffer, @NativeType("ALCsizei") int samples) {
         long __functionAddress = ALC.getICD().alcCaptureSamples;
@@ -274,9 +248,7 @@ public class ALC11 extends ALC10 {
         invokePPV(device, buffer, samples, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alcCaptureSamples CaptureSamples}
-     */
+    /** Array version of: {@link #alcCaptureSamples CaptureSamples} */
     @NativeType("ALCvoid")
     public static void alcCaptureSamples(@NativeType("ALCdevice *") long device, @NativeType("ALCvoid *") float[] buffer, @NativeType("ALCsizei") int samples) {
         long __functionAddress = ALC.getICD().alcCaptureSamples;

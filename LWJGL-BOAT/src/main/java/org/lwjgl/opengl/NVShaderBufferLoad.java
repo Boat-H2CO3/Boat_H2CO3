@@ -89,23 +89,16 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVShaderBufferLoad {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBufferParameterui64vNV, GetNamedBufferParameterui64vNV.
-     */
+    /** Accepted by the {@code pname} parameter of GetBufferParameterui64vNV, GetNamedBufferParameterui64vNV. */
     public static final int GL_BUFFER_GPU_ADDRESS_NV = 0x8F1D;
 
-    /**
-     * Returned by the {@code type} parameter of GetActiveUniform.
-     */
+    /** Returned by the {@code type} parameter of GetActiveUniform. */
     public static final int GL_GPU_ADDRESS_NV = 0x8F34;
 
-    /**
-     * Accepted by the {@code value} parameter of GetIntegerui64vNV.
-     */
+    /** Accepted by the {@code value} parameter of GetIntegerui64vNV. */
     public static final int GL_MAX_SHADER_BUFFER_ADDRESS_NV = 0x8F35;
 
-    static {
-        GL.initialize();
+    static { GL.initialize();
     }
 
     protected NVShaderBufferLoad() {
@@ -114,7 +107,7 @@ public class NVShaderBufferLoad {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glMakeBufferResidentNV, caps.glMakeBufferNonResidentNV, caps.glIsBufferResidentNV, caps.glMakeNamedBufferResidentNV,
+            caps.glMakeBufferResidentNV, caps.glMakeBufferNonResidentNV, caps.glIsBufferResidentNV, caps.glMakeNamedBufferResidentNV,
                 caps.glMakeNamedBufferNonResidentNV, caps.glIsNamedBufferResidentNV, caps.glGetBufferParameterui64vNV, caps.glGetNamedBufferParameterui64vNV,
                 caps.glGetIntegerui64vNV, caps.glUniformui64NV, caps.glUniformui64vNV, caps.glGetUniformui64vNV, caps.glProgramUniformui64NV,
                 caps.glProgramUniformui64vNV
@@ -267,9 +260,7 @@ public class NVShaderBufferLoad {
         nglProgramUniformui64vNV(program, location, value.remaining(), memAddress(value));
     }
 
-    /**
-     * Array version of: {@link #glGetBufferParameterui64vNV GetBufferParameterui64vNV}
-     */
+    /** Array version of: {@link #glGetBufferParameterui64vNV GetBufferParameterui64vNV} */
     public static void glGetBufferParameterui64vNV(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint64EXT *") long[] params) {
         long __functionAddress = GL.getICD().glGetBufferParameterui64vNV;
         if (CHECKS) {
@@ -279,9 +270,7 @@ public class NVShaderBufferLoad {
         callPV(target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferParameterui64vNV GetNamedBufferParameterui64vNV}
-     */
+    /** Array version of: {@link #glGetNamedBufferParameterui64vNV GetNamedBufferParameterui64vNV} */
     public static void glGetNamedBufferParameterui64vNV(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLuint64EXT *") long[] params) {
         long __functionAddress = GL.getICD().glGetNamedBufferParameterui64vNV;
         if (CHECKS) {
@@ -291,9 +280,7 @@ public class NVShaderBufferLoad {
         callPV(buffer, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetIntegerui64vNV GetIntegerui64vNV}
-     */
+    /** Array version of: {@link #glGetIntegerui64vNV GetIntegerui64vNV} */
     public static void glGetIntegerui64vNV(@NativeType("GLenum") int value, @NativeType("GLuint64EXT *") long[] result) {
         long __functionAddress = GL.getICD().glGetIntegerui64vNV;
         if (CHECKS) {
@@ -303,9 +290,7 @@ public class NVShaderBufferLoad {
         callPV(value, result, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glUniformui64vNV Uniformui64vNV}
-     */
+    /** Array version of: {@link #glUniformui64vNV Uniformui64vNV} */
     public static void glUniformui64vNV(@NativeType("GLint") int location, @NativeType("GLuint64EXT const *") long[] value) {
         long __functionAddress = GL.getICD().glUniformui64vNV;
         if (CHECKS) {
@@ -314,9 +299,7 @@ public class NVShaderBufferLoad {
         callPV(location, value.length, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetUniformui64vNV GetUniformui64vNV}
-     */
+    /** Array version of: {@link #glGetUniformui64vNV GetUniformui64vNV} */
     public static void glGetUniformui64vNV(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint64EXT *") long[] params) {
         long __functionAddress = GL.getICD().glGetUniformui64vNV;
         if (CHECKS) {
@@ -326,9 +309,7 @@ public class NVShaderBufferLoad {
         callPV(program, location, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformui64vNV ProgramUniformui64vNV}
-     */
+    /** Array version of: {@link #glProgramUniformui64vNV ProgramUniformui64vNV} */
     public static void glProgramUniformui64vNV(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint64EXT const *") long[] value) {
         long __functionAddress = GL.getICD().glProgramUniformui64vNV;
         if (CHECKS) {

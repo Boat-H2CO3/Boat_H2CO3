@@ -15,14 +15,10 @@ package org.lwjgl.opengl;
  */
 public final class GLXARBFBConfigFloat {
 
-    /**
-     * Accepted as values of the {@code render_type} arguments in the {@link GLX13#glXCreateNewContext CreateNewContext} and {@link GLX#glXCreateContext CreateContext} functions.
-     */
+    /** Accepted as values of the {@code render_type} arguments in the {@link GLX13#glXCreateNewContext CreateNewContext} and {@link GLX#glXCreateContext CreateContext} functions. */
     public static final int GLX_RGBA_FLOAT_TYPE_ARB = 0x20B9;
 
-    /**
-     * Accepted as a bit set in the GLX_RENDER_TYPE variable.
-     */
+    /** Accepted as a bit set in the GLX_RENDER_TYPE variable. */
     public static final int GLX_RGBA_FLOAT_BIT_ARB = 0x4;
 
     private GLXARBFBConfigFloat() {

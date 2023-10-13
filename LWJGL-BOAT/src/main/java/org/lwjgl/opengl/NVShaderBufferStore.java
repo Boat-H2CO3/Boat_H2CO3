@@ -18,9 +18,7 @@ package org.lwjgl.opengl;
  */
 public final class NVShaderBufferStore {
 
-    /**
-     * Accepted by the {@code barriers} parameter of MemoryBarrierNV.
-     */
+    /** Accepted by the {@code barriers} parameter of MemoryBarrierNV. */
     public static final int GL_SHADER_GLOBAL_ACCESS_BARRIER_BIT_NV = 0x10;
 
     private NVShaderBufferStore() {

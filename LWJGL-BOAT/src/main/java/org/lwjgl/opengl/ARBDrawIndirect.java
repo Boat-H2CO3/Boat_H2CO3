@@ -5,12 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_draw_indirect.txt">ARB_draw_indirect</a> extension.
@@ -37,9 +36,7 @@ public class ARBDrawIndirect {
      */
     public static final int GL_DRAW_INDIRECT_BUFFER = 0x8F3F;
 
-    /**
-     * Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev. */
     public static final int GL_DRAW_INDIRECT_BUFFER_BINDING = 0x8F43;
 
     static {
@@ -58,9 +55,7 @@ public class ARBDrawIndirect {
 
     // --- [ glDrawArraysIndirect ] ---
 
-    /**
-     * Unsafe version of: {@link #glDrawArraysIndirect DrawArraysIndirect}
-     */
+    /** Unsafe version of: {@link #glDrawArraysIndirect DrawArraysIndirect} */
     public static void nglDrawArraysIndirect(int mode, long indirect) {
         GL40C.nglDrawArraysIndirect(mode, indirect);
     }
@@ -145,9 +140,7 @@ public class ARBDrawIndirect {
 
     // --- [ glDrawElementsIndirect ] ---
 
-    /**
-     * Unsafe version of: {@link #glDrawElementsIndirect DrawElementsIndirect}
-     */
+    /** Unsafe version of: {@link #glDrawElementsIndirect DrawElementsIndirect} */
     public static void nglDrawElementsIndirect(int mode, int type, long indirect) {
         GL40C.nglDrawElementsIndirect(mode, type, indirect);
     }
@@ -275,16 +268,12 @@ public class ARBDrawIndirect {
         GL40C.glDrawElementsIndirect(mode, type, indirect);
     }
 
-    /**
-     * Array version of: {@link #glDrawArraysIndirect DrawArraysIndirect}
-     */
+    /** Array version of: {@link #glDrawArraysIndirect DrawArraysIndirect} */
     public static void glDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") int[] indirect) {
         GL40C.glDrawArraysIndirect(mode, indirect);
     }
 
-    /**
-     * Array version of: {@link #glDrawElementsIndirect DrawElementsIndirect}
-     */
+    /** Array version of: {@link #glDrawElementsIndirect DrawElementsIndirect} */
     public static void glDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") int[] indirect) {
         GL40C.glDrawElementsIndirect(mode, type, indirect);
     }

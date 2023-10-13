@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_polygon_offset_clamp.txt">ARB_polygon_offset_clamp</a> extension.
@@ -21,9 +21,7 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBPolygonOffsetClamp {
 
-    /**
-     * Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_POLYGON_OFFSET_CLAMP = 0x8E1B;
 
     static {
@@ -36,7 +34,7 @@ public class ARBPolygonOffsetClamp {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glPolygonOffsetClamp
+            caps.glPolygonOffsetClamp
         );
     }
 

@@ -49,9 +49,7 @@ public abstract class ExtentMerge extends Callback implements ExtentMergeI {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code ExtentMerge} instance that delegates to the specified {@code ExtentMergeI} instance.
-     */
+    /** Creates a {@code ExtentMerge} instance that delegates to the specified {@code ExtentMergeI} instance. */
     public static ExtentMerge create(ExtentMergeI instance) {
         return instance instanceof ExtentMerge
                 ? (ExtentMerge) instance

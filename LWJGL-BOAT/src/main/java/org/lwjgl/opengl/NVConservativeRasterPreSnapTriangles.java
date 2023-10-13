@@ -26,14 +26,10 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVConservativeRasterPreSnapTriangles {
 
-    /**
-     * Accepted by the {@code pname} parameter of ConservativeRasterParameteriNV.
-     */
+    /** Accepted by the {@code pname} parameter of ConservativeRasterParameteriNV. */
     public static final int GL_CONSERVATIVE_RASTER_MODE_NV = 0x954D;
 
-    /**
-     * Accepted by the {@code param} parameter of ConservativeRasterParameteriNV.
-     */
+    /** Accepted by the {@code param} parameter of ConservativeRasterParameteriNV. */
     public static final int
             GL_CONSERVATIVE_RASTER_MODE_POST_SNAP_NV = 0x954E,
             GL_CONSERVATIVE_RASTER_MODE_PRE_SNAP_TRIANGLES_NV = 0x954F;

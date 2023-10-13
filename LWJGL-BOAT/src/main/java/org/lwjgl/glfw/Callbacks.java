@@ -15,8 +15,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public final class Callbacks {
 
-    private Callbacks() {
-    }
+    private Callbacks() {}
 
     /**
      * Resets all callbacks for the specified GLFW window to {@code NULL} and {@link Callback#free frees} all previously set callbacks.

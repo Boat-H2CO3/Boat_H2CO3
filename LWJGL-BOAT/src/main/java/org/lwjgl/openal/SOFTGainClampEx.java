@@ -24,9 +24,7 @@ package org.lwjgl.openal;
  */
 public final class SOFTGainClampEx {
 
-    /**
-     * An implementation-defined maximum per-source gain limit (guaranteed to be at least 1).
-     */
+    /** An implementation-defined maximum per-source gain limit (guaranteed to be at least 1). */
     public static final int AL_GAIN_LIMIT_SOFT = 0x200E;
 
     private SOFTGainClampEx() {

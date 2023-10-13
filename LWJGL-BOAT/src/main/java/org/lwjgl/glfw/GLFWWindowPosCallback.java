@@ -41,17 +41,13 @@ public abstract class GLFWWindowPosCallback extends Callback implements GLFWWind
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWWindowPosCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWWindowPosCallback} instance that delegates to the specified {@code GLFWWindowPosCallbackI} instance.
-     */
+    /** Creates a {@code GLFWWindowPosCallback} instance that delegates to the specified {@code GLFWWindowPosCallbackI} instance. */
     public static GLFWWindowPosCallback create(GLFWWindowPosCallbackI instance) {
         return instance instanceof GLFWWindowPosCallback
                 ? (GLFWWindowPosCallback) instance
@@ -66,9 +62,7 @@ public abstract class GLFWWindowPosCallback extends Callback implements GLFWWind
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetWindowPosCallback SetWindowPosCallback}.
-     */
+    /** See {@link GLFW#glfwSetWindowPosCallback SetWindowPosCallback}. */
     public GLFWWindowPosCallback set(long window) {
         glfwSetWindowPosCallback(window, this);
         return this;

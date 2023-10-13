@@ -32,34 +32,22 @@ import static org.lwjgl.system.Pointer.*;
  */
 public class JEmalloc {
 
-    /**
-     * The major version.
-     */
+    /** The major version. */
     public static final int JEMALLOC_VERSION_MAJOR = 5;
 
-    /**
-     * The minor version.
-     */
+    /** The minor version. */
     public static final int JEMALLOC_VERSION_MINOR = 2;
 
-    /**
-     * The bugfix version.
-     */
+    /** The bugfix version. */
     public static final int JEMALLOC_VERSION_BUGFIX = 0;
 
-    /**
-     * The revision number.
-     */
+    /** The revision number. */
     public static final int JEMALLOC_VERSION_NREV = 0;
 
-    /**
-     * The globally unique identifier (git commit hash).
-     */
+    /** The globally unique identifier (git commit hash). */
     public static final String JEMALLOC_VERSION_GID = "b0b3e49a54ec29e32636f4577d9d5a896d67fd20";
 
-    /**
-     * The version string.
-     */
+    /** The version string. */
     public static final String JEMALLOC_VERSION = JEMALLOC_VERSION_MAJOR + "." + JEMALLOC_VERSION_MINOR + "." + JEMALLOC_VERSION_BUGFIX + "-" + JEMALLOC_VERSION_NREV + "-g" + JEMALLOC_VERSION_GID;
 
     /**
@@ -74,14 +62,10 @@ public class JEmalloc {
      */
     public static final int MALLOCX_TCACHE_NONE = MALLOCX_TCACHE(-1);
 
-    /**
-     * Use as arena index in "arena.&lt;i&gt;.{purge,decay,dss}" and "stats.arenas.&lt;i&gt;.*" mallctl interfaces to select all arenas.
-     */
+    /** Use as arena index in "arena.&lt;i&gt;.{purge,decay,dss}" and "stats.arenas.&lt;i&gt;.*" mallctl interfaces to select all arenas. */
     public static final int MALLCTL_ARENAS_ALL = 0x1000;
 
-    /**
-     * Use as arena index in "stats.arenas.&lt;i&gt;.*" mallctl interfaces to select destroyed arenas.
-     */
+    /** Use as arena index in "stats.arenas.&lt;i&gt;.*" mallctl interfaces to select destroyed arenas. */
     public static final int MALLCTL_ARENAS_DESTROYED = 0x1001;
 
     protected JEmalloc() {
@@ -90,9 +74,7 @@ public class JEmalloc {
 
     private static final SharedLibrary JEMALLOC = Library.loadNative(JEmalloc.class, "org.lwjgl.jemalloc", Configuration.JEMALLOC_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("jemalloc")), true);
 
-    /**
-     * Contains the function pointers loaded from the jemalloc {@link SharedLibrary}.
-     */
+    /** Contains the function pointers loaded from the jemalloc {@link SharedLibrary}. */
     public static final class Functions {
 
         private Functions() {
@@ -124,9 +106,7 @@ public class JEmalloc {
 
     }
 
-    /**
-     * Returns the jemalloc {@link SharedLibrary}.
-     */
+    /** Returns the jemalloc {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return JEMALLOC;
     }
@@ -141,9 +121,7 @@ public class JEmalloc {
 
     // --- [ je_malloc_message ] ---
 
-    /**
-     * Returns the {@code je_malloc_message} variable.
-     */
+    /** Returns the {@code je_malloc_message} variable. */
     @NativeType("void (*) (void *, char const *) *")
     public static PointerBuffer je_malloc_message() {
         long __result = Functions.malloc_message;
@@ -152,9 +130,7 @@ public class JEmalloc {
 
     // --- [ je_malloc ] ---
 
-    /**
-     * Unsafe version of: {@link #je_malloc malloc}
-     */
+    /** Unsafe version of: {@link #je_malloc malloc} */
     public static long nje_malloc(long size) {
         long __functionAddress = Functions.malloc;
         return invokePP(size, __functionAddress);
@@ -170,14 +146,12 @@ public class JEmalloc {
     @NativeType("void *")
     public static ByteBuffer je_malloc(@NativeType("size_t") long size) {
         long __result = nje_malloc(size);
-        return memByteBufferSafe(__result, (int) size);
+        return memByteBufferSafe(__result, (int)size);
     }
 
     // --- [ je_calloc ] ---
 
-    /**
-     * Unsafe version of: {@link #je_calloc calloc}
-     */
+    /** Unsafe version of: {@link #je_calloc calloc} */
     public static long nje_calloc(long num, long size) {
         long __functionAddress = Functions.calloc;
         return invokePPP(num, size, __functionAddress);
@@ -194,14 +168,12 @@ public class JEmalloc {
     @NativeType("void *")
     public static ByteBuffer je_calloc(@NativeType("size_t") long num, @NativeType("size_t") long size) {
         long __result = nje_calloc(num, size);
-        return memByteBufferSafe(__result, (int) num * (int) size);
+        return memByteBufferSafe(__result, (int)num * (int)size);
     }
 
     // --- [ je_posix_memalign ] ---
 
-    /**
-     * Unsafe version of: {@link #je_posix_memalign posix_memalign}
-     */
+    /** Unsafe version of: {@link #je_posix_memalign posix_memalign} */
     public static int nje_posix_memalign(long memptr, long alignment, long size) {
         long __functionAddress = Functions.posix_memalign;
         return invokePPPI(memptr, alignment, size, __functionAddress);
@@ -224,9 +196,7 @@ public class JEmalloc {
 
     // --- [ je_aligned_alloc ] ---
 
-    /**
-     * Unsafe version of: {@link #je_aligned_alloc aligned_alloc}
-     */
+    /** Unsafe version of: {@link #je_aligned_alloc aligned_alloc} */
     public static long nje_aligned_alloc(long alignment, long size) {
         long __functionAddress = Functions.aligned_alloc;
         return invokePPP(alignment, size, __functionAddress);
@@ -243,14 +213,12 @@ public class JEmalloc {
     @NativeType("void *")
     public static ByteBuffer je_aligned_alloc(@NativeType("size_t") long alignment, @NativeType("size_t") long size) {
         long __result = nje_aligned_alloc(alignment, size);
-        return memByteBufferSafe(__result, (int) size);
+        return memByteBufferSafe(__result, (int)size);
     }
 
     // --- [ je_realloc ] ---
 
-    /**
-     * Unsafe version of: {@link #je_realloc realloc}
-     */
+    /** Unsafe version of: {@link #je_realloc realloc} */
     public static long nje_realloc(long ptr, long size) {
         long __functionAddress = Functions.realloc;
         return invokePPP(ptr, size, __functionAddress);
@@ -270,14 +238,12 @@ public class JEmalloc {
     @NativeType("void *")
     public static ByteBuffer je_realloc(@Nullable @NativeType("void *") ByteBuffer ptr, @NativeType("size_t") long size) {
         long __result = nje_realloc(memAddressSafe(ptr), size);
-        return memByteBufferSafe(__result, (int) size);
+        return memByteBufferSafe(__result, (int)size);
     }
 
     // --- [ je_free ] ---
 
-    /**
-     * Unsafe version of: {@link #je_free free}
-     */
+    /** Unsafe version of: {@link #je_free free} */
     public static void nje_free(long ptr) {
         long __functionAddress = Functions.free;
         invokePV(ptr, __functionAddress);
@@ -348,9 +314,7 @@ public class JEmalloc {
 
     // --- [ je_mallocx ] ---
 
-    /**
-     * Unsafe version of: {@link #je_mallocx mallocx}
-     */
+    /** Unsafe version of: {@link #je_mallocx mallocx} */
     public static long nje_mallocx(long size, int flags) {
         long __functionAddress = Functions.mallocx;
         return invokePP(size, flags, __functionAddress);
@@ -367,14 +331,12 @@ public class JEmalloc {
     @NativeType("void *")
     public static ByteBuffer je_mallocx(@NativeType("size_t") long size, int flags) {
         long __result = nje_mallocx(size, flags);
-        return memByteBufferSafe(__result, (int) size);
+        return memByteBufferSafe(__result, (int)size);
     }
 
     // --- [ je_rallocx ] ---
 
-    /**
-     * Unsafe version of: {@link #je_rallocx rallocx}
-     */
+    /** Unsafe version of: {@link #je_rallocx rallocx} */
     public static long nje_rallocx(long ptr, long size, int flags) {
         long __functionAddress = Functions.rallocx;
         return invokePPP(ptr, size, flags, __functionAddress);
@@ -393,14 +355,12 @@ public class JEmalloc {
     @NativeType("void *")
     public static ByteBuffer je_rallocx(@Nullable @NativeType("void *") ByteBuffer ptr, @NativeType("size_t") long size, int flags) {
         long __result = nje_rallocx(memAddressSafe(ptr), size, flags);
-        return memByteBufferSafe(__result, (int) size);
+        return memByteBufferSafe(__result, (int)size);
     }
 
     // --- [ je_xallocx ] ---
 
-    /**
-     * Unsafe version of: {@link #je_xallocx xallocx}
-     */
+    /** Unsafe version of: {@link #je_xallocx xallocx} */
     public static long nje_xallocx(long ptr, long size, long extra, int flags) {
         long __functionAddress = Functions.xallocx;
         return invokePPPP(ptr, size, extra, flags, __functionAddress);
@@ -423,9 +383,7 @@ public class JEmalloc {
 
     // --- [ je_sallocx ] ---
 
-    /**
-     * Unsafe version of: {@link #je_sallocx sallocx}
-     */
+    /** Unsafe version of: {@link #je_sallocx sallocx} */
     public static long nje_sallocx(long ptr, int flags) {
         long __functionAddress = Functions.sallocx;
         return invokePP(ptr, flags, __functionAddress);
@@ -444,9 +402,7 @@ public class JEmalloc {
 
     // --- [ je_dallocx ] ---
 
-    /**
-     * Unsafe version of: {@link #je_dallocx dallocx}
-     */
+    /** Unsafe version of: {@link #je_dallocx dallocx} */
     public static void nje_dallocx(long ptr, int flags) {
         long __functionAddress = Functions.dallocx;
         invokePV(ptr, flags, __functionAddress);
@@ -606,9 +562,7 @@ public class JEmalloc {
 
     // --- [ je_nallocx ] ---
 
-    /**
-     * Unsafe version of: {@link #je_nallocx nallocx}
-     */
+    /** Unsafe version of: {@link #je_nallocx nallocx} */
     public static long nje_nallocx(long size, int flags) {
         long __functionAddress = Functions.nallocx;
         return invokePP(size, flags, __functionAddress);
@@ -626,7 +580,7 @@ public class JEmalloc {
     @NativeType("void *")
     public static ByteBuffer je_nallocx(@NativeType("size_t") long size, int flags) {
         long __result = nje_nallocx(size, flags);
-        return memByteBufferSafe(__result, (int) size);
+        return memByteBufferSafe(__result, (int)size);
     }
 
     // --- [ je_mallctl ] ---
@@ -819,9 +773,7 @@ public class JEmalloc {
 
     // --- [ je_malloc_stats_print ] ---
 
-    /**
-     * Unsafe version of: {@link #je_malloc_stats_print malloc_stats_print}
-     */
+    /** Unsafe version of: {@link #je_malloc_stats_print malloc_stats_print} */
     public static void nje_malloc_stats_print(long write_cb, long cbopaque, long opts) {
         long __functionAddress = Functions.malloc_stats_print;
         invokePPPV(write_cb, cbopaque, opts, __functionAddress);
@@ -874,9 +826,7 @@ public class JEmalloc {
 
     // --- [ je_malloc_usable_size ] ---
 
-    /**
-     * Unsafe version of: {@link #je_malloc_usable_size malloc_usable_size}
-     */
+    /** Unsafe version of: {@link #je_malloc_usable_size malloc_usable_size} */
     public static long nje_malloc_usable_size(long ptr) {
         long __functionAddress = Functions.malloc_usable_size;
         return invokePP(ptr, __functionAddress);

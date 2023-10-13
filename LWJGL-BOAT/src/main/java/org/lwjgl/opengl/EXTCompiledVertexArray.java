@@ -23,9 +23,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTCompiledVertexArray {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_ARRAY_ELEMENT_LOCK_FIRST_EXT = 0x81A8,
             GL_ARRAY_ELEMENT_LOCK_COUNT_EXT = 0x81A9;

@@ -5,14 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import javax.annotation.*;
 
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_get_program_binary.txt">ARB_get_program_binary</a> extension.
@@ -122,9 +121,7 @@ public class ARBGetProgramBinary {
         GL41C.glProgramParameteri(program, pname, value);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramBinary GetProgramBinary}
-     */
+    /** Array version of: {@link #glGetProgramBinary GetProgramBinary} */
     public static void glGetProgramBinary(@NativeType("GLuint") int program, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLenum *") int[] binaryFormat, @NativeType("void *") ByteBuffer binary) {
         GL41C.glGetProgramBinary(program, length, binaryFormat, binary);
     }

@@ -15,9 +15,7 @@ package org.lwjgl.openal;
  */
 public final class EXTDefaultFilterOrder {
 
-    /**
-     * {@code ALC_EXT_DEFAULT_FILTER_ORDER} tokens.
-     */
+    /** {@code ALC_EXT_DEFAULT_FILTER_ORDER} tokens. */
     public static final int ALC_DEFAULT_FILTER_ORDER = 0x1100;
 
     private EXTDefaultFilterOrder() {

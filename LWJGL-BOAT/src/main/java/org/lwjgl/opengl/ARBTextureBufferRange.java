@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_buffer_range.txt">ARB_texture_buffer_range</a> extension.
@@ -21,16 +21,12 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBTextureBufferRange {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetTexLevelParameter.
-     */
+    /** Accepted by the {@code pname} parameter of GetTexLevelParameter. */
     public static final int
             GL_TEXTURE_BUFFER_OFFSET = 0x919D,
             GL_TEXTURE_BUFFER_SIZE = 0x919E;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT = 0x919F;
 
     static {

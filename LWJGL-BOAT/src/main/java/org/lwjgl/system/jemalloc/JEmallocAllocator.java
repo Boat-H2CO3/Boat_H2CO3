@@ -21,33 +21,27 @@ public class JEmallocAllocator implements MemoryAllocator {
 
     @Override
     public long getMalloc() {
-        return Functions.malloc;
-    }
+        return Functions.malloc; }
 
     @Override
     public long getCalloc() {
-        return Functions.calloc;
-    }
+        return Functions.calloc; }
 
     @Override
     public long getRealloc() {
-        return Functions.realloc;
-    }
+        return Functions.realloc; }
 
     @Override
     public long getFree() {
-        return Functions.free;
-    }
+        return Functions.free; }
 
     @Override
     public long getAlignedAlloc() {
-        return Functions.aligned_alloc;
-    }
+        return Functions.aligned_alloc; }
 
     @Override
     public long getAlignedFree() {
-        return Functions.free;
-    }
+        return Functions.free; }
 
     @Override
     public long malloc(long size) {

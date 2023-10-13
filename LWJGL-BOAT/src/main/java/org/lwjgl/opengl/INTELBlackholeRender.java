@@ -20,9 +20,7 @@ package org.lwjgl.opengl;
  */
 public final class INTELBlackholeRender {
 
-    /**
-     * Accepted by the {@code target} parameter of Enable, Disable, IsEnabled.
-     */
+    /** Accepted by the {@code target} parameter of Enable, Disable, IsEnabled. */
     public static final int GL_BLACKHOLE_RENDER_INTEL = 0x83FC;
 
     private INTELBlackholeRender() {

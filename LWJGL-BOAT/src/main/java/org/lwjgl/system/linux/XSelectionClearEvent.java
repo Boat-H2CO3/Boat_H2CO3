@@ -222,7 +222,7 @@ public class XSelectionClearEvent extends Struct implements NativeResource {
             long display,
             long window,
             long selection,
-            long time
+        long time
     ) {
         type(type);
         serial(serial);
@@ -239,6 +239,7 @@ public class XSelectionClearEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XSelectionClearEvent set(XSelectionClearEvent src) {
@@ -248,38 +249,28 @@ public class XSelectionClearEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XSelectionClearEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XSelectionClearEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XSelectionClearEvent malloc() {
         return wrap(XSelectionClearEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XSelectionClearEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XSelectionClearEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XSelectionClearEvent calloc() {
         return wrap(XSelectionClearEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XSelectionClearEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XSelectionClearEvent} instance allocated with {@link BufferUtils}. */
     public static XSelectionClearEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XSelectionClearEvent.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code XSelectionClearEvent} instance for the specified memory address.
-     */
+    /** Returns a new {@code XSelectionClearEvent} instance for the specified memory address. */
     public static XSelectionClearEvent create(long address) {
         return wrap(XSelectionClearEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XSelectionClearEvent createSafe(long address) {
         return address == NULL ? null : wrap(XSelectionClearEvent.class, address);
@@ -323,9 +314,7 @@ public class XSelectionClearEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -340,9 +329,7 @@ public class XSelectionClearEvent extends Struct implements NativeResource {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XSelectionClearEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XSelectionClearEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XSelectionClearEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -386,7 +373,7 @@ public class XSelectionClearEvent extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -526,16 +513,14 @@ public class XSelectionClearEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XSelectionClearEvent} structs.
-     */
+    /** An array of {@link XSelectionClearEvent} structs. */
     public static class Buffer extends StructBuffer<XSelectionClearEvent, Buffer> implements NativeResource {
 
         private static final XSelectionClearEvent ELEMENT_FACTORY = XSelectionClearEvent.create(-1L);
 
         /**
          * Creates a new {@code XSelectionClearEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XSelectionClearEvent#SIZEOF}, and its mark will be undefined.
@@ -659,21 +644,10 @@ public class XSelectionClearEvent extends Struct implements NativeResource {
             return this;
         }
 
-        /**
-         * Sets the specified value to the {@code selection} field.
-         */
-        public Buffer selection(@NativeType("Atom") long value) {
-            XSelectionClearEvent.nselection(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code time} field.
-         */
-        public Buffer time(@NativeType("Time") long value) {
-            XSelectionClearEvent.ntime(address(), value);
-            return this;
-        }
+        /** Sets the specified value to the {@code selection} field. */
+        public Buffer selection(@NativeType("Atom") long value) { XSelectionClearEvent.nselection(address(), value); return this; }
+        /** Sets the specified value to the {@code time} field. */
+        public Buffer time(@NativeType("Time") long value) { XSelectionClearEvent.ntime(address(), value); return this; }
 
     }
 

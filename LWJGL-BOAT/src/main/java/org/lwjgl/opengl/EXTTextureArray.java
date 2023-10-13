@@ -34,16 +34,12 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTTextureArray {
 
-    /**
-     * Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, GenerateMipmapEXT, and BindTexture.
-     */
+    /** Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, GenerateMipmapEXT, and BindTexture. */
     public static final int
             GL_TEXTURE_1D_ARRAY_EXT = 0x8C18,
             GL_TEXTURE_2D_ARRAY_EXT = 0x8C1A;
 
-    /**
-     * Accepted by the {@code target} parameter of TexImage3D, TexSubImage3D, CopyTexSubImage3D, CompressedTexImage3D, and CompressedTexSubImage3D.
-     */
+    /** Accepted by the {@code target} parameter of TexImage3D, TexSubImage3D, CopyTexSubImage3D, CompressedTexImage3D, and CompressedTexSubImage3D. */
     public static final int GL_PROXY_TEXTURE_2D_ARRAY_EXT = 0x8C1B;
 
     /**
@@ -52,9 +48,7 @@ public class EXTTextureArray {
      */
     public static final int GL_PROXY_TEXTURE_1D_ARRAY_EXT = 0x8C19;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv. */
     public static final int
             GL_TEXTURE_BINDING_1D_ARRAY_EXT = 0x8C1C,
             GL_TEXTURE_BINDING_2D_ARRAY_EXT = 0x8C1D,

@@ -16,9 +16,7 @@ package org.lwjgl.opengl;
  */
 public final class NVConservativeRasterPreSnap {
 
-    /**
-     * Accepted by the {@code param} parameter of {@link NVConservativeRasterPreSnapTriangles#glConservativeRasterParameteriNV ConservativeRasterParameteriNV}
-     */
+    /** Accepted by the {@code param} parameter of {@link NVConservativeRasterPreSnapTriangles#glConservativeRasterParameteriNV ConservativeRasterParameteriNV} */
     public static final int GL_CONSERVATIVE_RASTER_MODE_PRE_SNAP_NV = 0x9550;
 
     private NVConservativeRasterPreSnap() {

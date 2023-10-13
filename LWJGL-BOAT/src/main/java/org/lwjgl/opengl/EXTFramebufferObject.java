@@ -347,9 +347,7 @@ public class EXTFramebufferObject {
 
     public static native void glGenerateMipmapEXT(@NativeType("GLenum") int target);
 
-    /**
-     * Array version of: {@link #glDeleteRenderbuffersEXT DeleteRenderbuffersEXT}
-     */
+    /** Array version of: {@link #glDeleteRenderbuffersEXT DeleteRenderbuffersEXT} */
     public static void glDeleteRenderbuffersEXT(@NativeType("GLuint const *") int[] renderbuffers) {
         long __functionAddress = GL.getICD().glDeleteRenderbuffersEXT;
         if (CHECKS) {
@@ -358,9 +356,7 @@ public class EXTFramebufferObject {
         callPV(renderbuffers.length, renderbuffers, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGenRenderbuffersEXT GenRenderbuffersEXT}
-     */
+    /** Array version of: {@link #glGenRenderbuffersEXT GenRenderbuffersEXT} */
     public static void glGenRenderbuffersEXT(@NativeType("GLuint *") int[] renderbuffers) {
         long __functionAddress = GL.getICD().glGenRenderbuffersEXT;
         if (CHECKS) {
@@ -369,9 +365,7 @@ public class EXTFramebufferObject {
         callPV(renderbuffers.length, renderbuffers, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetRenderbufferParameterivEXT GetRenderbufferParameterivEXT}
-     */
+    /** Array version of: {@link #glGetRenderbufferParameterivEXT GetRenderbufferParameterivEXT} */
     public static void glGetRenderbufferParameterivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetRenderbufferParameterivEXT;
         if (CHECKS) {
@@ -381,9 +375,7 @@ public class EXTFramebufferObject {
         callPV(target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glDeleteFramebuffersEXT DeleteFramebuffersEXT}
-     */
+    /** Array version of: {@link #glDeleteFramebuffersEXT DeleteFramebuffersEXT} */
     public static void glDeleteFramebuffersEXT(@NativeType("GLuint const *") int[] framebuffers) {
         long __functionAddress = GL.getICD().glDeleteFramebuffersEXT;
         if (CHECKS) {
@@ -392,9 +384,7 @@ public class EXTFramebufferObject {
         callPV(framebuffers.length, framebuffers, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGenFramebuffersEXT GenFramebuffersEXT}
-     */
+    /** Array version of: {@link #glGenFramebuffersEXT GenFramebuffersEXT} */
     public static void glGenFramebuffersEXT(@NativeType("GLuint *") int[] framebuffers) {
         long __functionAddress = GL.getICD().glGenFramebuffersEXT;
         if (CHECKS) {
@@ -403,9 +393,7 @@ public class EXTFramebufferObject {
         callPV(framebuffers.length, framebuffers, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetFramebufferAttachmentParameterivEXT GetFramebufferAttachmentParameterivEXT}
-     */
+    /** Array version of: {@link #glGetFramebufferAttachmentParameterivEXT GetFramebufferAttachmentParameterivEXT} */
     public static void glGetFramebufferAttachmentParameterivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetFramebufferAttachmentParameterivEXT;
         if (CHECKS) {

@@ -19,9 +19,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTSemaphoreFD {
 
-    /**
-     * Accepted by the {@code handleType} parameter of {@link #glImportSemaphoreFdEXT ImportSemaphoreFdEXT}.
-     */
+    /** Accepted by the {@code handleType} parameter of {@link #glImportSemaphoreFdEXT ImportSemaphoreFdEXT}. */
     public static final int GL_HANDLE_TYPE_OPAQUE_FD_EXT = 0x9586;
 
     static {
@@ -34,7 +32,7 @@ public class EXTSemaphoreFD {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glImportSemaphoreFdEXT
+            caps.glImportSemaphoreFdEXT
         );
     }
 

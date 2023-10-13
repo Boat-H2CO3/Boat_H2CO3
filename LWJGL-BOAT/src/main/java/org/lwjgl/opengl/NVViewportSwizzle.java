@@ -23,9 +23,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVViewportSwizzle {
 
-    /**
-     * Accepted by the {@code swizzlex}, {@code swizzley}, {@code swizzlez}, and {@code swizzlew} parameters of ViewportSwizzleNV.
-     */
+    /** Accepted by the {@code swizzlex}, {@code swizzley}, {@code swizzlez}, and {@code swizzlew} parameters of ViewportSwizzleNV. */
     public static final int
             GL_VIEWPORT_SWIZZLE_POSITIVE_X_NV = 0x9350,
             GL_VIEWPORT_SWIZZLE_NEGATIVE_X_NV = 0x9351,
@@ -36,9 +34,7 @@ public class NVViewportSwizzle {
             GL_VIEWPORT_SWIZZLE_POSITIVE_W_NV = 0x9356,
             GL_VIEWPORT_SWIZZLE_NEGATIVE_W_NV = 0x9357;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleani_v, GetDoublei_v, GetIntegeri_v, GetFloati_v, and GetInteger64i_v.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleani_v, GetDoublei_v, GetIntegeri_v, GetFloati_v, and GetInteger64i_v. */
     public static final int
             GL_VIEWPORT_SWIZZLE_X_NV = 0x9358,
             GL_VIEWPORT_SWIZZLE_Y_NV = 0x9359,

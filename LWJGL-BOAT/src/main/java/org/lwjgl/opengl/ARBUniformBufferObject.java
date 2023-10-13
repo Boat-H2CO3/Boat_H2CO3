@@ -5,15 +5,15 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import javax.annotation.*;
 
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.*;
 
-import javax.annotation.Nullable;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_uniform_buffer_object.txt">ARB_uniform_buffer_object</a> extension.
@@ -301,9 +301,7 @@ public class ARBUniformBufferObject {
 
     // --- [ glGetUniformBlockIndex ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetUniformBlockIndex GetUniformBlockIndex}
-     */
+    /** Unsafe version of: {@link #glGetUniformBlockIndex GetUniformBlockIndex} */
     public static int nglGetUniformBlockIndex(int program, long uniformBlockName) {
         return GL31C.nglGetUniformBlockIndex(program, uniformBlockName);
     }
@@ -332,9 +330,7 @@ public class ARBUniformBufferObject {
 
     // --- [ glGetActiveUniformBlockiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetActiveUniformBlockiv GetActiveUniformBlockiv}
-     */
+    /** Unsafe version of: {@link #glGetActiveUniformBlockiv GetActiveUniformBlockiv} */
     public static void nglGetActiveUniformBlockiv(int program, int uniformBlockIndex, int pname, long params) {
         GL31C.nglGetActiveUniformBlockiv(program, uniformBlockIndex, pname, params);
     }
@@ -439,9 +435,7 @@ public class ARBUniformBufferObject {
 
     // --- [ glGetIntegeri_v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetIntegeri_v GetIntegeri_v}
-     */
+    /** Unsafe version of: {@link #glGetIntegeri_v GetIntegeri_v} */
     public static void nglGetIntegeri_v(int target, int index, long data) {
         GL30C.nglGetIntegeri_v(target, index, data);
     }
@@ -481,44 +475,32 @@ public class ARBUniformBufferObject {
         GL31C.glUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding);
     }
 
-    /**
-     * Array version of: {@link #glGetUniformIndices GetUniformIndices}
-     */
+    /** Array version of: {@link #glGetUniformIndices GetUniformIndices} */
     public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") PointerBuffer uniformNames, @NativeType("GLuint *") int[] uniformIndices) {
         GL31C.glGetUniformIndices(program, uniformNames, uniformIndices);
     }
 
-    /**
-     * Array version of: {@link #glGetActiveUniformsiv GetActiveUniformsiv}
-     */
+    /** Array version of: {@link #glGetActiveUniformsiv GetActiveUniformsiv} */
     public static void glGetActiveUniformsiv(@NativeType("GLuint") int program, @NativeType("GLuint const *") int[] uniformIndices, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL31C.glGetActiveUniformsiv(program, uniformIndices, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetActiveUniformName GetActiveUniformName}
-     */
+    /** Array version of: {@link #glGetActiveUniformName GetActiveUniformName} */
     public static void glGetActiveUniformName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformIndex, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer uniformName) {
         GL31C.glGetActiveUniformName(program, uniformIndex, length, uniformName);
     }
 
-    /**
-     * Array version of: {@link #glGetActiveUniformBlockiv GetActiveUniformBlockiv}
-     */
+    /** Array version of: {@link #glGetActiveUniformBlockiv GetActiveUniformBlockiv} */
     public static void glGetActiveUniformBlockiv(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL31C.glGetActiveUniformBlockiv(program, uniformBlockIndex, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetActiveUniformBlockName GetActiveUniformBlockName}
-     */
+    /** Array version of: {@link #glGetActiveUniformBlockName GetActiveUniformBlockName} */
     public static void glGetActiveUniformBlockName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer uniformBlockName) {
         GL31C.glGetActiveUniformBlockName(program, uniformBlockIndex, length, uniformBlockName);
     }
 
-    /**
-     * Array version of: {@link #glGetIntegeri_v GetIntegeri_v}
-     */
+    /** Array version of: {@link #glGetIntegeri_v GetIntegeri_v} */
     public static void glGetIntegeri_v(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") int[] data) {
         GL30C.glGetIntegeri_v(target, index, data);
     }

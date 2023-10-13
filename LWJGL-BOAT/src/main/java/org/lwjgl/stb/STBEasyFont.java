@@ -63,15 +63,14 @@ public class STBEasyFont {
 
     // --- [ stb_easy_font_width ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_easy_font_width easy_font_width}
-     */
+    /** Unsafe version of: {@link #stb_easy_font_width easy_font_width} */
     public static native int nstb_easy_font_width(long text);
 
     /**
      * Takes a string and returns the horizontal size.
      *
      * @param text an ASCII string
+     *
      * @return the horizontal size, in pixels
      */
     public static int stb_easy_font_width(@NativeType("char *") ByteBuffer text) {
@@ -85,6 +84,7 @@ public class STBEasyFont {
      * Takes a string and returns the horizontal size.
      *
      * @param text an ASCII string
+     *
      * @return the horizontal size, in pixels
      */
     public static int stb_easy_font_width(@NativeType("char *") CharSequence text) {
@@ -101,15 +101,14 @@ public class STBEasyFont {
 
     // --- [ stb_easy_font_height ] ---
 
-    /**
-     * Unsafe version of: {@link #stb_easy_font_height easy_font_height}
-     */
+    /** Unsafe version of: {@link #stb_easy_font_height easy_font_height} */
     public static native int nstb_easy_font_height(long text);
 
     /**
      * Takes a string and returns the vertical size (which can vary if {@code text} has newlines).
      *
      * @param text an ASCII string
+     *
      * @return the vertical size, in pixels
      */
     public static int stb_easy_font_height(@NativeType("char *") ByteBuffer text) {
@@ -123,6 +122,7 @@ public class STBEasyFont {
      * Takes a string and returns the vertical size (which can vary if {@code text} has newlines).
      *
      * @param text an ASCII string
+     *
      * @return the vertical size, in pixels
      */
     public static int stb_easy_font_height(@NativeType("char *") CharSequence text) {
@@ -174,6 +174,7 @@ public class STBEasyFont {
      * @param text          an ASCII string
      * @param color         the text color, in RGBA (4 bytes)
      * @param vertex_buffer a pointer to memory in which to store the vertex data
+     *
      * @return the number of quads
      */
     public static int stb_easy_font_print(float x, float y, @NativeType("char *") ByteBuffer text, @Nullable @NativeType("unsigned char *") ByteBuffer color, @NativeType("void *") ByteBuffer vertex_buffer) {
@@ -212,6 +213,7 @@ public class STBEasyFont {
      * @param text          an ASCII string
      * @param color         the text color, in RGBA (4 bytes)
      * @param vertex_buffer a pointer to memory in which to store the vertex data
+     *
      * @return the number of quads
      */
     public static int stb_easy_font_print(float x, float y, @NativeType("char *") CharSequence text, @Nullable @NativeType("unsigned char *") ByteBuffer color, @NativeType("void *") ByteBuffer vertex_buffer) {

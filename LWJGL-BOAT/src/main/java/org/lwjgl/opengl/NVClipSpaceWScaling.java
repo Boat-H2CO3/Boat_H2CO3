@@ -31,14 +31,10 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVClipSpaceWScaling {
 
-    /**
-     * Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.
-     */
+    /** Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled. */
     public static final int GL_VIEWPORT_POSITION_W_SCALE_NV = 0x937C;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleani_v, GetDoublei_v, GetIntegeri_v, GetFloati_v, and GetInteger64i_v.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleani_v, GetDoublei_v, GetIntegeri_v, GetFloati_v, and GetInteger64i_v. */
     public static final int
             GL_VIEWPORT_POSITION_W_SCALE_X_COEFF = 0x937D,
             GL_VIEWPORT_POSITION_W_SCALE_Y_COEFF = 0x937E;

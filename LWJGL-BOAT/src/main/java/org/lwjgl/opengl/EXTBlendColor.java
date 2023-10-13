@@ -19,18 +19,14 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTBlendColor {
 
-    /**
-     * Accepted by the {@code sfactor} and {@code dfactor} parameters of BlendFunc.
-     */
+    /** Accepted by the {@code sfactor} and {@code dfactor} parameters of BlendFunc. */
     public static final int
             GL_CONSTANT_COLOR_EXT = 0x8001,
             GL_ONE_MINUS_CONSTANT_COLOR_EXT = 0x8002,
             GL_CONSTANT_ALPHA_EXT = 0x8003,
             GL_ONE_MINUS_CONSTANT_ALPHA_EXT = 0x8004;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_BLEND_COLOR_EXT = 0x8005;
 
     static {
@@ -43,7 +39,7 @@ public class EXTBlendColor {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glBlendColorEXT
+            caps.glBlendColorEXT
         );
     }
 

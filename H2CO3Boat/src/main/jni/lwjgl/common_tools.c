@@ -3,9 +3,8 @@
  * License terms: https://www.lwjgl.org/license
  */
 #ifdef LWJGL_WINDOWS
-__pragma(warning(disable : 4710))
+    __pragma(warning(disable : 4710))
 #endif
-
 #include "common_tools.h"
 #include <stdlib.h>
 #include <errno.h>
@@ -21,7 +20,7 @@ inline JNIEnv *getThreadEnv(void) {
 
 inline JNIEnv *attachCurrentThreadAsDaemon(void) {
     JNIEnv *env;
-    (*jvm)->AttachCurrentThreadAsDaemon(jvm, (JNIEnv **) (void **) &env, NULL);
+    (*jvm)->AttachCurrentThreadAsDaemon(jvm, (void **) &env, NULL);
     if (env == NULL) {
         fprintf(stderr, "[LWJGL] Failed to attach native thread to the JVM.");
         fflush(stderr);
@@ -181,7 +180,6 @@ inline void saveErrno(void) {
     jint errnum = (jint) errno;
     getEnvData()->errnum = errnum;
 }
-
 inline jint getErrno(void) { return getEnvData()->errnum; }
 
 EXTERN_C_ENTER

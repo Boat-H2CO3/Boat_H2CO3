@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_parallel_shader_compile.txt">ARB_parallel_shader_compile</a> extension.
@@ -20,14 +20,10 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBParallelShaderCompile {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_MAX_SHADER_COMPILER_THREADS_ARB = 0x91B0;
 
-    /**
-     * Accepted as part of the {@code pname} parameter to GetShaderiv() and accepted as part of the {@code pname} parameter to GetProgramiv().
-     */
+    /** Accepted as part of the {@code pname} parameter to GetShaderiv() and accepted as part of the {@code pname} parameter to GetProgramiv(). */
     public static final int GL_COMPLETION_STATUS_ARB = 0x91B1;
 
     static {
@@ -40,7 +36,7 @@ public class ARBParallelShaderCompile {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glMaxShaderCompilerThreadsARB
+            caps.glMaxShaderCompilerThreadsARB
         );
     }
 

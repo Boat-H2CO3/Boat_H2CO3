@@ -14,14 +14,10 @@ package org.lwjgl.openal;
  */
 public final class SOFTSourceSpatialize {
 
-    /**
-     * Accepted as the {@code param} parameter of {@link AL10#alSourcei Sourcei}, {@link AL11#alSourceiv Sourceiv}, {@link AL10#alGetSourcei GetSourcei}, and {@link AL10#alGetSourceiv GetSourceiv}.
-     */
+    /** Accepted as the {@code param} parameter of {@link AL10#alSourcei Sourcei}, {@link AL11#alSourceiv Sourceiv}, {@link AL10#alGetSourcei GetSourcei}, and {@link AL10#alGetSourceiv GetSourceiv}. */
     public static final int AL_SOURCE_SPATIALIZE_SOFT = 0x1214;
 
-    /**
-     * Accepted as the {@code value} of the {@link #AL_SOURCE_SPATIALIZE_SOFT SOURCE_SPATIALIZE_SOFT} property.
-     */
+    /** Accepted as the {@code value} of the {@link #AL_SOURCE_SPATIALIZE_SOFT SOURCE_SPATIALIZE_SOFT} property. */
     public static final int AL_AUTO_SOFT = 0x2;
 
     private SOFTSourceSpatialize() {

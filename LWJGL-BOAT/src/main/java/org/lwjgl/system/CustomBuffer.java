@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import javax.annotation.*;
-
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -35,29 +34,21 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
         this.capacity = capacity;
     }
 
-    /**
-     * Returns the {@code sizeof} a single element in the buffer.
-     */
+    /** Returns the {@code sizeof} a single element in the buffer. */
     public abstract int sizeof();
 
-    /**
-     * Returns the buffer's base address. [INTERNAL USE ONLY]
-     */
+    /** Returns the buffer's base address. [INTERNAL USE ONLY] */
     public long address0() {
         return address;
     }
 
-    /**
-     * Returns the memory address at the current buffer position.
-     */
+    /** Returns the memory address at the current buffer position. */
     @Override
     public long address() {
         return address + Integer.toUnsignedLong(position) * sizeof();
     }
 
-    /**
-     * Returns the memory address at the specified buffer position.
-     */
+    /** Returns the memory address at the specified buffer position. */
     public long address(int position) {
         return address + Integer.toUnsignedLong(position) * sizeof();
     }
@@ -93,7 +84,9 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
      * Sets this buffer's position. If the mark is defined and larger than the new position then it is discarded.
      *
      * @param position the new position value; must be non-negative and no larger than the current limit
+     *
      * @return This buffer
+     *
      * @throws IllegalArgumentException If the preconditions on {@code newPosition} do not hold
      */
     public SELF position(int position) {
@@ -121,7 +114,9 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
      * limit then it is discarded.
      *
      * @param limit the new limit value; must be non-negative and no larger than this buffer's capacity
+     *
      * @return This buffer
+     *
      * @throws IllegalArgumentException If the preconditions on {@code newLimit} do not hold
      */
     public SELF limit(int limit) {
@@ -154,6 +149,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
      * <p>Invoking this method neither changes nor discards the mark's value.</p>
      *
      * @return This buffer
+     *
      * @throws InvalidMarkException If the mark has not been set
      */
     public SELF reset() {
@@ -282,6 +278,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
      *
      * @param offset   the slice offset, it must be &le; {@code this.remaining()}
      * @param capacity the slice length, it must be &le; {@code this.capacity() - (this.position() + offset)}
+     *
      * @return the sliced buffer
      */
     @SuppressWarnings("unchecked")
@@ -361,10 +358,12 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
      * <p>except that it first checks that there is sufficient space in this buffer and it is potentially much more efficient. </p>
      *
      * @param src the source buffer from which elements are to be read; must not be this buffer
+     *
      * @return This buffer
-     * @throws BufferOverflowException  If there is insufficient space in this buffer for the remaining elements in the source buffer
-     * @throws IllegalArgumentException If the source buffer is this buffer
-     * @throws ReadOnlyBufferException  If this buffer is read-only
+     *
+     * @throws BufferOverflowException If there is insufficient space in this buffer for the remaining elements in the source buffer
+     * @throws IllegalArgumentException         If the source buffer is this buffer
+     * @throws ReadOnlyBufferException If this buffer is read-only
      */
     public SELF put(SELF src) {
         if (src == this) {
@@ -394,6 +393,7 @@ public abstract class CustomBuffer<SELF extends CustomBuffer<SELF>> extends Poin
      * immediately by an invocation of another relative <i>put</i> method.</p>
      *
      * @return This buffer
+     *
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
     public SELF compact() {

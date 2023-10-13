@@ -49,9 +49,7 @@ public abstract class ExtentAlloc extends Callback implements ExtentAllocI {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code ExtentAlloc} instance that delegates to the specified {@code ExtentAllocI} instance.
-     */
+    /** Creates a {@code ExtentAlloc} instance that delegates to the specified {@code ExtentAllocI} instance. */
     public static ExtentAlloc create(ExtentAllocI instance) {
         return instance instanceof ExtentAlloc
                 ? (ExtentAlloc) instance

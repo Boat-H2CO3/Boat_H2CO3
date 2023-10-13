@@ -245,7 +245,7 @@ public class XPropertyEvent extends Struct implements NativeResource {
             long window,
             long atom,
             long time,
-            int state
+        int state
     ) {
         type(type);
         serial(serial);
@@ -263,6 +263,7 @@ public class XPropertyEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XPropertyEvent set(XPropertyEvent src) {
@@ -272,38 +273,28 @@ public class XPropertyEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XPropertyEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XPropertyEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XPropertyEvent malloc() {
         return wrap(XPropertyEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XPropertyEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XPropertyEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XPropertyEvent calloc() {
         return wrap(XPropertyEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XPropertyEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XPropertyEvent} instance allocated with {@link BufferUtils}. */
     public static XPropertyEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XPropertyEvent.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code XPropertyEvent} instance for the specified memory address.
-     */
+    /** Returns a new {@code XPropertyEvent} instance for the specified memory address. */
     public static XPropertyEvent create(long address) {
         return wrap(XPropertyEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XPropertyEvent createSafe(long address) {
         return address == NULL ? null : wrap(XPropertyEvent.class, address);
@@ -347,9 +338,7 @@ public class XPropertyEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -364,9 +353,7 @@ public class XPropertyEvent extends Struct implements NativeResource {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XPropertyEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XPropertyEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XPropertyEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -410,7 +397,7 @@ public class XPropertyEvent extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -538,8 +525,7 @@ public class XPropertyEvent extends Struct implements NativeResource {
      * Unsafe version of {@link #state(int) state}.
      */
     public static void nstate(long struct, int value) {
-        UNSAFE.putInt(null, struct + XPropertyEvent.STATE, value);
-    }
+        UNSAFE.putInt(null, struct + XPropertyEvent.STATE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -564,16 +550,14 @@ public class XPropertyEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XPropertyEvent} structs.
-     */
+    /** An array of {@link XPropertyEvent} structs. */
     public static class Buffer extends StructBuffer<XPropertyEvent, Buffer> implements NativeResource {
 
         private static final XPropertyEvent ELEMENT_FACTORY = XPropertyEvent.create(-1L);
 
         /**
          * Creates a new {@code XPropertyEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XPropertyEvent#SIZEOF}, and its mark will be undefined.
@@ -707,26 +691,11 @@ public class XPropertyEvent extends Struct implements NativeResource {
         /**
          * Sets the specified value to the {@code atom} field.
          */
-        public Buffer atom(@NativeType("Atom") long value) {
-            XPropertyEvent.natom(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code time} field.
-         */
-        public Buffer time(@NativeType("Time") long value) {
-            XPropertyEvent.ntime(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code state} field.
-         */
-        public Buffer state(int value) {
-            XPropertyEvent.nstate(address(), value);
-            return this;
-        }
+        public Buffer atom(@NativeType("Atom") long value) { XPropertyEvent.natom(address(), value); return this; }
+        /** Sets the specified value to the {@code time} field. */
+        public Buffer time(@NativeType("Time") long value) { XPropertyEvent.ntime(address(), value); return this; }
+        /** Sets the specified value to the {@code state} field. */
+        public Buffer state(int value) { XPropertyEvent.nstate(address(), value); return this; }
 
     }
 

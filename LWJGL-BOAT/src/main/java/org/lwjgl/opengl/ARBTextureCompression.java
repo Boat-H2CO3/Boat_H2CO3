@@ -5,15 +5,12 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.DEBUG;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_compression.txt">ARB_texture_compression</a> extension.
@@ -42,9 +39,7 @@ import java.nio.ByteBuffer;
  */
 public class ARBTextureCompression {
 
-    /**
-     * Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, and CopyTexImage2D.
-     */
+    /** Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, and CopyTexImage2D. */
     public static final int
             GL_COMPRESSED_ALPHA_ARB = 0x84E9,
             GL_COMPRESSED_LUMINANCE_ARB = 0x84EA,
@@ -53,21 +48,15 @@ public class ARBTextureCompression {
             GL_COMPRESSED_RGB_ARB = 0x84ED,
             GL_COMPRESSED_RGBA_ARB = 0x84EE;
 
-    /**
-     * Accepted by the {@code target} parameter of Hint and the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code target} parameter of Hint and the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev. */
     public static final int GL_TEXTURE_COMPRESSION_HINT_ARB = 0x84EF;
 
-    /**
-     * Accepted by the {@code value} parameter of GetTexLevelParameter.
-     */
+    /** Accepted by the {@code value} parameter of GetTexLevelParameter. */
     public static final int
             GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB = 0x86A0,
             GL_TEXTURE_COMPRESSED_ARB = 0x86A1;
 
-    /**
-     * Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev. */
     public static final int
             GL_NUM_COMPRESSED_TEXTURE_FORMATS_ARB = 0x86A2,
             GL_COMPRESSED_TEXTURE_FORMATS_ARB = 0x86A3;
@@ -332,9 +321,7 @@ public class ARBTextureCompression {
 
     // --- [ glGetCompressedTexImageARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetCompressedTexImageARB GetCompressedTexImageARB}
-     */
+    /** Unsafe version of: {@link #glGetCompressedTexImageARB GetCompressedTexImageARB} */
     public static native void nglGetCompressedTexImageARB(int target, int level, long pixels);
 
     /**

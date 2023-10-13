@@ -21,22 +21,16 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTEfx {
 
-    /**
-     * ALC tokens.
-     */
+    /** ALC tokens. */
     public static final int
             ALC_EFX_MAJOR_VERSION = 0x20001,
             ALC_EFX_MINOR_VERSION = 0x20002,
             ALC_MAX_AUXILIARY_SENDS = 0x20003;
 
-    /**
-     * Listener properties.
-     */
+    /** Listener properties. */
     public static final int AL_METERS_PER_UNIT = 0x20004;
 
-    /**
-     * Source properties.
-     */
+    /** Source properties. */
     public static final int
             AL_DIRECT_FILTER = 0x20005,
             AL_AUXILIARY_SEND_FILTER = 0x20006,
@@ -47,18 +41,14 @@ public class EXTEfx {
             AL_AUXILIARY_SEND_FILTER_GAIN_AUTO = 0x2000B,
             AL_AUXILIARY_SEND_FILTER_GAINHF_AUTO = 0x2000C;
 
-    /**
-     * Auxiliary effect slot properties.
-     */
+    /** Auxiliary effect slot properties. */
     public static final int
             AL_EFFECTSLOT_NULL = 0x0,
             AL_EFFECTSLOT_EFFECT = 0x1,
             AL_EFFECTSLOT_GAIN = 0x2,
             AL_EFFECTSLOT_AUXILIARY_SEND_AUTO = 0x3;
 
-    /**
-     * Reverb effect parameters.
-     */
+    /** Reverb effect parameters. */
     public static final int
             AL_REVERB_DENSITY = 0x1,
             AL_REVERB_DIFFUSION = 0x2,
@@ -74,9 +64,7 @@ public class EXTEfx {
             AL_REVERB_ROOM_ROLLOFF_FACTOR = 0xC,
             AL_REVERB_DECAY_HFLIMIT = 0xD;
 
-    /**
-     * EAX Reverb effect parameters.
-     */
+    /** EAX Reverb effect parameters. */
     public static final int
             AL_EAXREVERB_DENSITY = 0x1,
             AL_EAXREVERB_DIFFUSION = 0x2,
@@ -102,9 +90,7 @@ public class EXTEfx {
             AL_EAXREVERB_ROOM_ROLLOFF_FACTOR = 0x16,
             AL_EAXREVERB_DECAY_HFLIMIT = 0x17;
 
-    /**
-     * Chorus effect parameters.
-     */
+    /** Chorus effect parameters. */
     public static final int
             AL_CHORUS_WAVEFORM = 0x1,
             AL_CHORUS_PHASE = 0x2,
@@ -113,9 +99,7 @@ public class EXTEfx {
             AL_CHORUS_FEEDBACK = 0x5,
             AL_CHORUS_DELAY = 0x6;
 
-    /**
-     * Distortion effect parameters.
-     */
+    /** Distortion effect parameters. */
     public static final int
             AL_DISTORTION_EDGE = 0x1,
             AL_DISTORTION_GAIN = 0x2,
@@ -123,9 +107,7 @@ public class EXTEfx {
             AL_DISTORTION_EQCENTER = 0x4,
             AL_DISTORTION_EQBANDWIDTH = 0x5;
 
-    /**
-     * Echo effect parameters.
-     */
+    /** Echo effect parameters. */
     public static final int
             AL_ECHO_DELAY = 0x1,
             AL_ECHO_LRDELAY = 0x2,
@@ -133,9 +115,7 @@ public class EXTEfx {
             AL_ECHO_FEEDBACK = 0x4,
             AL_ECHO_SPREAD = 0x5;
 
-    /**
-     * Flanger effect parameters.
-     */
+    /** Flanger effect parameters. */
     public static final int
             AL_FLANGER_WAVEFORM = 0x1,
             AL_FLANGER_PHASE = 0x2,
@@ -144,17 +124,13 @@ public class EXTEfx {
             AL_FLANGER_FEEDBACK = 0x5,
             AL_FLANGER_DELAY = 0x6;
 
-    /**
-     * Frequency shifter effect parameters.
-     */
+    /** Frequency shifter effect parameters. */
     public static final int
             AL_FREQUENCY_SHIFTER_FREQUENCY = 0x1,
             AL_FREQUENCY_SHIFTER_LEFT_DIRECTION = 0x2,
             AL_FREQUENCY_SHIFTER_RIGHT_DIRECTION = 0x3;
 
-    /**
-     * Vocal morpher effect parameters.
-     */
+    /** Vocal morpher effect parameters. */
     public static final int
             AL_VOCMORPHER_PHONEMEA = 0x1,
             AL_VOCMORPHER_PHONEMEA_COARSE_TUNING = 0x2,
@@ -163,38 +139,28 @@ public class EXTEfx {
             AL_VOCMORPHER_WAVEFORM = 0x5,
             AL_VOCMORPHER_RATE = 0x6;
 
-    /**
-     * Pitch shifter effect parameters.
-     */
+    /** Pitch shifter effect parameters. */
     public static final int
             AL_PITCH_SHIFTER_COARSE_TUNE = 0x1,
             AL_PITCH_SHIFTER_FINE_TUNE = 0x2;
 
-    /**
-     * Ring modulator effect parameters.
-     */
+    /** Ring modulator effect parameters. */
     public static final int
             AL_RING_MODULATOR_FREQUENCY = 0x1,
             AL_RING_MODULATOR_HIGHPASS_CUTOFF = 0x2,
             AL_RING_MODULATOR_WAVEFORM = 0x3;
 
-    /**
-     * Autowah effect parameters.
-     */
+    /** Autowah effect parameters. */
     public static final int
             AL_AUTOWAH_ATTACK_TIME = 0x1,
             AL_AUTOWAH_RELEASE_TIME = 0x2,
             AL_AUTOWAH_RESONANCE = 0x3,
             AL_AUTOWAH_PEAK_GAIN = 0x4;
 
-    /**
-     * Compressor effect parameters.
-     */
+    /** Compressor effect parameters. */
     public static final int AL_COMPRESSOR_ONOFF = 0x1;
 
-    /**
-     * Equalizer effect parameters.
-     */
+    /** Equalizer effect parameters. */
     public static final int
             AL_EQUALIZER_LOW_GAIN = 0x1,
             AL_EQUALIZER_LOW_CUTOFF = 0x2,
@@ -207,17 +173,13 @@ public class EXTEfx {
             AL_EQUALIZER_HIGH_GAIN = 0x9,
             AL_EQUALIZER_HIGH_CUTOFF = 0xA;
 
-    /**
-     * Effect type effect parameters.
-     */
+    /** Effect type effect parameters. */
     public static final int
             AL_EFFECT_FIRST_PARAMETER = 0x0,
             AL_EFFECT_LAST_PARAMETER = 0x8000,
             AL_EFFECT_TYPE = 0x8001;
 
-    /**
-     * Effect types
-     */
+    /** Effect types */
     public static final int
             AL_EFFECT_NULL = 0x0,
             AL_EFFECT_REVERB = 0x1,
@@ -234,48 +196,36 @@ public class EXTEfx {
             AL_EFFECT_EQUALIZER = 0xC,
             AL_EFFECT_EAXREVERB = 0x8000;
 
-    /**
-     * Lowpass filter properties
-     */
+    /** Lowpass filter properties */
     public static final int
             AL_LOWPASS_GAIN = 0x1,
             AL_LOWPASS_GAINHF = 0x2;
 
-    /**
-     * Highpass filter properties
-     */
+    /** Highpass filter properties */
     public static final int
             AL_HIGHPASS_GAIN = 0x1,
             AL_HIGHPASS_GAINLF = 0x2;
 
-    /**
-     * Bandpass filter properties
-     */
+    /** Bandpass filter properties */
     public static final int
             AL_BANDPASS_GAIN = 0x1,
             AL_BANDPASS_GAINLF = 0x2,
             AL_BANDPASS_GAINHF = 0x3;
 
-    /**
-     * Filter type
-     */
+    /** Filter type */
     public static final int
             AL_FILTER_FIRST_PARAMETER = 0x0,
             AL_FILTER_LAST_PARAMETER = 0x8000,
             AL_FILTER_TYPE = 0x8001;
 
-    /**
-     * Filter types.
-     */
+    /** Filter types. */
     public static final int
             AL_FILTER_NULL = 0x0,
             AL_FILTER_LOWPASS = 0x1,
             AL_FILTER_HIGHPASS = 0x2,
             AL_FILTER_BANDPASS = 0x3;
 
-    /**
-     * Source property value ranges and defaults
-     */
+    /** Source property value ranges and defaults */
     public static final float
             AL_MIN_AIR_ABSORPTION_FACTOR = 0.0f,
             AL_MAX_AIR_ABSORPTION_FACTOR = 10.0f,
@@ -287,9 +237,7 @@ public class EXTEfx {
             AL_MAX_CONE_OUTER_GAINHF = 1.0f,
             AL_DEFAULT_CONE_OUTER_GAINHF = 1.0f;
 
-    /**
-     * Source property value ranges and defaults
-     */
+    /** Source property value ranges and defaults */
     public static final int
             AL_MIN_DIRECT_FILTER_GAINHF_AUTO = 0x0,
             AL_MAX_DIRECT_FILTER_GAINHF_AUTO = 0x1,
@@ -301,17 +249,13 @@ public class EXTEfx {
             AL_MAX_AUXILIARY_SEND_FILTER_GAINHF_AUTO = 0x1,
             AL_DEFAULT_AUXILIARY_SEND_FILTER_GAINHF_AUTO = 0x1;
 
-    /**
-     * Listener property value ranges and defaults.
-     */
+    /** Listener property value ranges and defaults. */
     public static final float
             AL_MIN_METERS_PER_UNIT = 0x0.000002P-126f,
             AL_MAX_METERS_PER_UNIT = 0x1.fffffeP+127f,
             AL_DEFAULT_METERS_PER_UNIT = 1.0f;
 
-    /**
-     * Reverb effect parameter ranges and defaults
-     */
+    /** Reverb effect parameter ranges and defaults */
     public static final float
             AL_REVERB_MIN_DENSITY = 0.0f,
             AL_REVERB_MAX_DENSITY = 1.0f,
@@ -350,17 +294,13 @@ public class EXTEfx {
             AL_REVERB_MAX_ROOM_ROLLOFF_FACTOR = 10.0f,
             AL_REVERB_DEFAULT_ROOM_ROLLOFF_FACTOR = 0.0f;
 
-    /**
-     * Reverb effect parameter ranges and defaults
-     */
+    /** Reverb effect parameter ranges and defaults */
     public static final int
             AL_REVERB_MIN_DECAY_HFLIMIT = 0x0,
             AL_REVERB_MAX_DECAY_HFLIMIT = 0x1,
             AL_REVERB_DEFAULT_DECAY_HFLIMIT = 0x1;
 
-    /**
-     * EAX reverb effect parameter ranges and defaults
-     */
+    /** EAX reverb effect parameter ranges and defaults */
     public static final float
             AL_EAXREVERB_MIN_DENSITY = 0.0f,
             AL_EAXREVERB_MAX_DENSITY = 1.0f,
@@ -425,17 +365,13 @@ public class EXTEfx {
             AL_EAXREVERB_MAX_ROOM_ROLLOFF_FACTOR = 10.0f,
             AL_EAXREVERB_DEFAULT_ROOM_ROLLOFF_FACTOR = 0.0f;
 
-    /**
-     * EAX reverb effect parameter ranges and defaults
-     */
+    /** EAX reverb effect parameter ranges and defaults */
     public static final int
             AL_EAXREVERB_MIN_DECAY_HFLIMIT = 0x0,
             AL_EAXREVERB_MAX_DECAY_HFLIMIT = 0x1,
             AL_EAXREVERB_DEFAULT_DECAY_HFLIMIT = 0x1;
 
-    /**
-     * Chorus effect parameter ranges and defaults
-     */
+    /** Chorus effect parameter ranges and defaults */
     public static final int
             AL_CHORUS_WAVEFORM_SINUSOID = 0,
             AL_CHORUS_WAVEFORM_TRIANGLE = 1,
@@ -446,9 +382,7 @@ public class EXTEfx {
             AL_CHORUS_MAX_PHASE = 180,
             AL_CHORUS_DEFAULT_PHASE = 90;
 
-    /**
-     * Chorus effect parameter ranges and defaults
-     */
+    /** Chorus effect parameter ranges and defaults */
     public static final float
             AL_CHORUS_MIN_RATE = 0.0f,
             AL_CHORUS_MAX_RATE = 10.0f,
@@ -463,9 +397,7 @@ public class EXTEfx {
             AL_CHORUS_MAX_DELAY = 0.016f,
             AL_CHORUS_DEFAULT_DELAY = 0.016f;
 
-    /**
-     * Distortion effect parameter ranges and defaults
-     */
+    /** Distortion effect parameter ranges and defaults */
     public static final float
             AL_DISTORTION_MIN_EDGE = 0.0f,
             AL_DISTORTION_MAX_EDGE = 1.0f,
@@ -483,9 +415,7 @@ public class EXTEfx {
             AL_DISTORTION_MAX_EQBANDWIDTH = 24000.0f,
             AL_DISTORTION_DEFAULT_EQBANDWIDTH = 3600.0f;
 
-    /**
-     * Echo effect parameter ranges and defaults
-     */
+    /** Echo effect parameter ranges and defaults */
     public static final float
             AL_ECHO_MIN_DELAY = 0.0f,
             AL_ECHO_MAX_DELAY = 0.207f,
@@ -503,9 +433,7 @@ public class EXTEfx {
             AL_ECHO_MAX_SPREAD = 1.0f,
             AL_ECHO_DEFAULT_SPREAD = -1.0f;
 
-    /**
-     * Flanger effect parameter ranges and defaults
-     */
+    /** Flanger effect parameter ranges and defaults */
     public static final int
             AL_FLANGER_WAVEFORM_SINUSOID = 0,
             AL_FLANGER_WAVEFORM_TRIANGLE = 1,
@@ -516,9 +444,7 @@ public class EXTEfx {
             AL_FLANGER_MAX_PHASE = 180,
             AL_FLANGER_DEFAULT_PHASE = 0;
 
-    /**
-     * Flanger effect parameter ranges and defaults
-     */
+    /** Flanger effect parameter ranges and defaults */
     public static final float
             AL_FLANGER_MIN_RATE = 0.0f,
             AL_FLANGER_MAX_RATE = 10.0f,
@@ -533,17 +459,13 @@ public class EXTEfx {
             AL_FLANGER_MAX_DELAY = 0.004f,
             AL_FLANGER_DEFAULT_DELAY = 0.002f;
 
-    /**
-     * Frequency shifter effect parameter ranges and defaults
-     */
+    /** Frequency shifter effect parameter ranges and defaults */
     public static final float
             AL_FREQUENCY_SHIFTER_MIN_FREQUENCY = 0.0f,
             AL_FREQUENCY_SHIFTER_MAX_FREQUENCY = 24000.0f,
             AL_FREQUENCY_SHIFTER_DEFAULT_FREQUENCY = 0.0f;
 
-    /**
-     * Frequency shifter effect parameter ranges and defaults
-     */
+    /** Frequency shifter effect parameter ranges and defaults */
     public static final int
             AL_FREQUENCY_SHIFTER_MIN_LEFT_DIRECTION = 0,
             AL_FREQUENCY_SHIFTER_MAX_LEFT_DIRECTION = 2,
@@ -555,9 +477,7 @@ public class EXTEfx {
             AL_FREQUENCY_SHIFTER_MAX_RIGHT_DIRECTION = 2,
             AL_FREQUENCY_SHIFTER_DEFAULT_RIGHT_DIRECTION = 0;
 
-    /**
-     * Vocal morpher effect parameter ranges and defaults
-     */
+    /** Vocal morpher effect parameter ranges and defaults */
     public static final int
             AL_VOCAL_MORPHER_MIN_PHONEMEA = 0,
             AL_VOCAL_MORPHER_MAX_PHONEMEA = 29,
@@ -608,17 +528,13 @@ public class EXTEfx {
             AL_VOCAL_MORPHER_MAX_WAVEFORM = 2,
             AL_VOCAL_MORPHER_DEFAULT_WAVEFORM = 0;
 
-    /**
-     * Vocal morpher effect parameter ranges and defaults
-     */
+    /** Vocal morpher effect parameter ranges and defaults */
     public static final float
             AL_VOCAL_MORPHER_MIN_RATE = 0.0f,
             AL_VOCAL_MORPHER_MAX_RATE = 10.0f,
             AL_VOCAL_MORPHER_DEFAULT_RATE = 1.41f;
 
-    /**
-     * Pitch shifter effect parameter ranges and defaults
-     */
+    /** Pitch shifter effect parameter ranges and defaults */
     public static final int
             AL_PITCH_SHIFTER_MIN_COARSE_TUNE = -12,
             AL_PITCH_SHIFTER_MAX_COARSE_TUNE = 12,
@@ -627,9 +543,7 @@ public class EXTEfx {
             AL_PITCH_SHIFTER_MAX_FINE_TUNE = 50,
             AL_PITCH_SHIFTER_DEFAULT_FINE_TUNE = 0;
 
-    /**
-     * Ring modulator effect parameter ranges and defaults
-     */
+    /** Ring modulator effect parameter ranges and defaults */
     public static final float
             AL_RING_MODULATOR_MIN_FREQUENCY = 0.0f,
             AL_RING_MODULATOR_MAX_FREQUENCY = 8000.0f,
@@ -638,9 +552,7 @@ public class EXTEfx {
             AL_RING_MODULATOR_MAX_HIGHPASS_CUTOFF = 24000.0f,
             AL_RING_MODULATOR_DEFAULT_HIGHPASS_CUTOFF = 800.0f;
 
-    /**
-     * Ring modulator effect parameter ranges and defaults
-     */
+    /** Ring modulator effect parameter ranges and defaults */
     public static final int
             AL_RING_MODULATOR_SINUSOID = 0,
             AL_RING_MODULATOR_SAWTOOTH = 1,
@@ -649,9 +561,7 @@ public class EXTEfx {
             AL_RING_MODULATOR_MAX_WAVEFORM = 2,
             AL_RING_MODULATOR_DEFAULT_WAVEFORM = 0;
 
-    /**
-     * Autowah effect parameter ranges and defaults
-     */
+    /** Autowah effect parameter ranges and defaults */
     public static final float
             AL_AUTOWAH_MIN_ATTACK_TIME = 1.0E-4f,
             AL_AUTOWAH_MAX_ATTACK_TIME = 1.0f,
@@ -666,17 +576,13 @@ public class EXTEfx {
             AL_AUTOWAH_MAX_PEAK_GAIN = 31621.0f,
             AL_AUTOWAH_DEFAULT_PEAK_GAIN = 11.22f;
 
-    /**
-     * Compressor effect parameter ranges and defaults
-     */
+    /** Compressor effect parameter ranges and defaults */
     public static final int
             AL_COMPRESSOR_MIN_ONOFF = 0,
             AL_COMPRESSOR_MAX_ONOFF = 1,
             AL_COMPRESSOR_DEFAULT_ONOFF = 1;
 
-    /**
-     * Equalizer effect parameter ranges and defaults
-     */
+    /** Equalizer effect parameter ranges and defaults */
     public static final float
             AL_EQUALIZER_MIN_LOW_GAIN = 0.126f,
             AL_EQUALIZER_MAX_LOW_GAIN = 7.943f,
@@ -709,9 +615,7 @@ public class EXTEfx {
             AL_EQUALIZER_MAX_HIGH_CUTOFF = 16000.0f,
             AL_EQUALIZER_DEFAULT_HIGH_CUTOFF = 6000.0f;
 
-    /**
-     * Lowpass filter parameter ranges and defaults
-     */
+    /** Lowpass filter parameter ranges and defaults */
     public static final float
             AL_LOWPASS_MIN_GAIN = 0.0f,
             AL_LOWPASS_MAX_GAIN = 1.0f,
@@ -720,9 +624,7 @@ public class EXTEfx {
             AL_LOWPASS_MAX_GAINHF = 1.0f,
             AL_LOWPASS_DEFAULT_GAINHF = 1.0f;
 
-    /**
-     * Highpass filter parameter ranges and defaults
-     */
+    /** Highpass filter parameter ranges and defaults */
     public static final float
             AL_HIGHPASS_MIN_GAIN = 0.0f,
             AL_HIGHPASS_MAX_GAIN = 1.0f,
@@ -731,9 +633,7 @@ public class EXTEfx {
             AL_HIGHPASS_MAX_GAINLF = 1.0f,
             AL_HIGHPASS_DEFAULT_GAINLF = 1.0f;
 
-    /**
-     * Bandpass filter parameter ranges and defaults
-     */
+    /** Bandpass filter parameter ranges and defaults */
     public static final float
             AL_BANDPASS_MIN_GAIN = 0.0f,
             AL_BANDPASS_MAX_GAIN = 1.0f,
@@ -785,9 +685,7 @@ public class EXTEfx {
         nalGenEffects(effects.remaining(), memAddress(effects));
     }
 
-    /**
-     * Requests a number of effects.
-     */
+    /** Requests a number of effects. */
     @NativeType("ALvoid")
     public static int alGenEffects() {
         MemoryStack stack = stackGet();
@@ -826,9 +724,7 @@ public class EXTEfx {
         nalDeleteEffects(effects.remaining(), memAddress(effects));
     }
 
-    /**
-     * Deletes a number of effects.
-     */
+    /** Deletes a number of effects. */
     @NativeType("ALvoid")
     public static void alDeleteEffects(@NativeType("ALuint *") int effect) {
         MemoryStack stack = stackGet();
@@ -877,9 +773,7 @@ public class EXTEfx {
 
     // --- [ alEffectiv ] ---
 
-    /**
-     * Unsafe version of: {@link #alEffectiv Effectiv}
-     */
+    /** Unsafe version of: {@link #alEffectiv Effectiv} */
     public static void nalEffectiv(int effect, int param, long values) {
         long __functionAddress = AL.getICD().alEffectiv;
         if (CHECKS) {
@@ -923,9 +817,7 @@ public class EXTEfx {
 
     // --- [ alEffectfv ] ---
 
-    /**
-     * Unsafe version of: {@link #alEffectfv Effectfv}
-     */
+    /** Unsafe version of: {@link #alEffectfv Effectfv} */
     public static void nalEffectfv(int effect, int param, long values) {
         long __functionAddress = AL.getICD().alEffectfv;
         if (CHECKS) {
@@ -951,9 +843,7 @@ public class EXTEfx {
 
     // --- [ alGetEffecti ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetEffecti GetEffecti}
-     */
+    /** Unsafe version of: {@link #alGetEffecti GetEffecti} */
     public static void nalGetEffecti(int effect, int param, long value) {
         long __functionAddress = AL.getICD().alGetEffecti;
         if (CHECKS) {
@@ -998,9 +888,7 @@ public class EXTEfx {
 
     // --- [ alGetEffectiv ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetEffectiv GetEffectiv}
-     */
+    /** Unsafe version of: {@link #alGetEffectiv GetEffectiv} */
     public static void nalGetEffectiv(int effect, int param, long values) {
         long __functionAddress = AL.getICD().alGetEffectiv;
         if (CHECKS) {
@@ -1026,9 +914,7 @@ public class EXTEfx {
 
     // --- [ alGetEffectf ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetEffectf GetEffectf}
-     */
+    /** Unsafe version of: {@link #alGetEffectf GetEffectf} */
     public static void nalGetEffectf(int effect, int param, long value) {
         long __functionAddress = AL.getICD().alGetEffectf;
         if (CHECKS) {
@@ -1073,9 +959,7 @@ public class EXTEfx {
 
     // --- [ alGetEffectfv ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetEffectfv GetEffectfv}
-     */
+    /** Unsafe version of: {@link #alGetEffectfv GetEffectfv} */
     public static void nalGetEffectfv(int effect, int param, long values) {
         long __functionAddress = AL.getICD().alGetEffectfv;
         if (CHECKS) {
@@ -1124,9 +1008,7 @@ public class EXTEfx {
         nalGenFilters(filters.remaining(), memAddress(filters));
     }
 
-    /**
-     * Requests a number of filters.
-     */
+    /** Requests a number of filters. */
     @NativeType("ALvoid")
     public static int alGenFilters() {
         MemoryStack stack = stackGet();
@@ -1165,9 +1047,7 @@ public class EXTEfx {
         nalDeleteFilters(filters.remaining(), memAddress(filters));
     }
 
-    /**
-     * Deletes a number of filters.
-     */
+    /** Deletes a number of filters. */
     @NativeType("ALvoid")
     public static void alDeleteFilters(@NativeType("ALuint *") int filter) {
         MemoryStack stack = stackGet();
@@ -1216,9 +1096,7 @@ public class EXTEfx {
 
     // --- [ alFilteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #alFilteriv Filteriv}
-     */
+    /** Unsafe version of: {@link #alFilteriv Filteriv} */
     public static void nalFilteriv(int filter, int param, long values) {
         long __functionAddress = AL.getICD().alFilteriv;
         if (CHECKS) {
@@ -1262,9 +1140,7 @@ public class EXTEfx {
 
     // --- [ alFilterfv ] ---
 
-    /**
-     * Unsafe version of: {@link #alFilterfv Filterfv}
-     */
+    /** Unsafe version of: {@link #alFilterfv Filterfv} */
     public static void nalFilterfv(int filter, int param, long values) {
         long __functionAddress = AL.getICD().alFilterfv;
         if (CHECKS) {
@@ -1290,9 +1166,7 @@ public class EXTEfx {
 
     // --- [ alGetFilteri ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetFilteri GetFilteri}
-     */
+    /** Unsafe version of: {@link #alGetFilteri GetFilteri} */
     public static void nalGetFilteri(int filter, int param, long value) {
         long __functionAddress = AL.getICD().alGetFilteri;
         if (CHECKS) {
@@ -1337,9 +1211,7 @@ public class EXTEfx {
 
     // --- [ alGetFilteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetFilteriv GetFilteriv}
-     */
+    /** Unsafe version of: {@link #alGetFilteriv GetFilteriv} */
     public static void nalGetFilteriv(int filter, int param, long values) {
         long __functionAddress = AL.getICD().alGetFilteriv;
         if (CHECKS) {
@@ -1365,9 +1237,7 @@ public class EXTEfx {
 
     // --- [ alGetFilterf ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetFilterf GetFilterf}
-     */
+    /** Unsafe version of: {@link #alGetFilterf GetFilterf} */
     public static void nalGetFilterf(int filter, int param, long value) {
         long __functionAddress = AL.getICD().alGetFilterf;
         if (CHECKS) {
@@ -1412,9 +1282,7 @@ public class EXTEfx {
 
     // --- [ alGetFilterfv ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetFilterfv GetFilterfv}
-     */
+    /** Unsafe version of: {@link #alGetFilterfv GetFilterfv} */
     public static void nalGetFilterfv(int filter, int param, long values) {
         long __functionAddress = AL.getICD().alGetFilterfv;
         if (CHECKS) {
@@ -1463,9 +1331,7 @@ public class EXTEfx {
         nalGenAuxiliaryEffectSlots(effectSlots.remaining(), memAddress(effectSlots));
     }
 
-    /**
-     * Requests a number of effect slots.
-     */
+    /** Requests a number of effect slots. */
     @NativeType("ALvoid")
     public static int alGenAuxiliaryEffectSlots() {
         MemoryStack stack = stackGet();
@@ -1504,9 +1370,7 @@ public class EXTEfx {
         nalDeleteAuxiliaryEffectSlots(effectSlots.remaining(), memAddress(effectSlots));
     }
 
-    /**
-     * Deletes a number of effect slots.
-     */
+    /** Deletes a number of effect slots. */
     @NativeType("ALvoid")
     public static void alDeleteAuxiliaryEffectSlots(@NativeType("ALuint *") int effectSlot) {
         MemoryStack stack = stackGet();
@@ -1555,9 +1419,7 @@ public class EXTEfx {
 
     // --- [ alAuxiliaryEffectSlotiv ] ---
 
-    /**
-     * Unsafe version of: {@link #alAuxiliaryEffectSlotiv AuxiliaryEffectSlotiv}
-     */
+    /** Unsafe version of: {@link #alAuxiliaryEffectSlotiv AuxiliaryEffectSlotiv} */
     public static void nalAuxiliaryEffectSlotiv(int effectSlot, int param, long values) {
         long __functionAddress = AL.getICD().alAuxiliaryEffectSlotiv;
         if (CHECKS) {
@@ -1601,9 +1463,7 @@ public class EXTEfx {
 
     // --- [ alAuxiliaryEffectSlotfv ] ---
 
-    /**
-     * Unsafe version of: {@link #alAuxiliaryEffectSlotfv AuxiliaryEffectSlotfv}
-     */
+    /** Unsafe version of: {@link #alAuxiliaryEffectSlotfv AuxiliaryEffectSlotfv} */
     public static void nalAuxiliaryEffectSlotfv(int effectSlot, int param, long values) {
         long __functionAddress = AL.getICD().alAuxiliaryEffectSlotfv;
         if (CHECKS) {
@@ -1629,9 +1489,7 @@ public class EXTEfx {
 
     // --- [ alGetAuxiliaryEffectSloti ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetAuxiliaryEffectSloti GetAuxiliaryEffectSloti}
-     */
+    /** Unsafe version of: {@link #alGetAuxiliaryEffectSloti GetAuxiliaryEffectSloti} */
     public static void nalGetAuxiliaryEffectSloti(int effectSlot, int param, long value) {
         long __functionAddress = AL.getICD().alGetAuxiliaryEffectSloti;
         if (CHECKS) {
@@ -1676,9 +1534,7 @@ public class EXTEfx {
 
     // --- [ alGetAuxiliaryEffectSlotiv ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetAuxiliaryEffectSlotiv GetAuxiliaryEffectSlotiv}
-     */
+    /** Unsafe version of: {@link #alGetAuxiliaryEffectSlotiv GetAuxiliaryEffectSlotiv} */
     public static void nalGetAuxiliaryEffectSlotiv(int effectSlot, int param, long values) {
         long __functionAddress = AL.getICD().alGetAuxiliaryEffectSlotiv;
         if (CHECKS) {
@@ -1704,9 +1560,7 @@ public class EXTEfx {
 
     // --- [ alGetAuxiliaryEffectSlotf ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetAuxiliaryEffectSlotf GetAuxiliaryEffectSlotf}
-     */
+    /** Unsafe version of: {@link #alGetAuxiliaryEffectSlotf GetAuxiliaryEffectSlotf} */
     public static void nalGetAuxiliaryEffectSlotf(int effectSlot, int param, long value) {
         long __functionAddress = AL.getICD().alGetAuxiliaryEffectSlotf;
         if (CHECKS) {
@@ -1751,9 +1605,7 @@ public class EXTEfx {
 
     // --- [ alGetAuxiliaryEffectSlotfv ] ---
 
-    /**
-     * Unsafe version of: {@link #alGetAuxiliaryEffectSlotfv GetAuxiliaryEffectSlotfv}
-     */
+    /** Unsafe version of: {@link #alGetAuxiliaryEffectSlotfv GetAuxiliaryEffectSlotfv} */
     public static void nalGetAuxiliaryEffectSlotfv(int effectSlot, int param, long values) {
         long __functionAddress = AL.getICD().alGetAuxiliaryEffectSlotfv;
         if (CHECKS) {
@@ -1777,9 +1629,7 @@ public class EXTEfx {
         nalGetAuxiliaryEffectSlotfv(effectSlot, param, memAddress(values));
     }
 
-    /**
-     * Array version of: {@link #alGenEffects GenEffects}
-     */
+    /** Array version of: {@link #alGenEffects GenEffects} */
     @NativeType("ALvoid")
     public static void alGenEffects(@NativeType("ALuint *") int[] effects) {
         long __functionAddress = AL.getICD().alGenEffects;
@@ -1789,9 +1639,7 @@ public class EXTEfx {
         invokePV(effects.length, effects, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alDeleteEffects DeleteEffects}
-     */
+    /** Array version of: {@link #alDeleteEffects DeleteEffects} */
     @NativeType("ALvoid")
     public static void alDeleteEffects(@NativeType("ALuint *") int[] effects) {
         long __functionAddress = AL.getICD().alDeleteEffects;
@@ -1801,9 +1649,7 @@ public class EXTEfx {
         invokePV(effects.length, effects, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alEffectiv Effectiv}
-     */
+    /** Array version of: {@link #alEffectiv Effectiv} */
     @NativeType("ALvoid")
     public static void alEffectiv(@NativeType("ALuint") int effect, @NativeType("ALenum") int param, @NativeType("ALint const *") int[] values) {
         long __functionAddress = AL.getICD().alEffectiv;
@@ -1814,9 +1660,7 @@ public class EXTEfx {
         invokePV(effect, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alEffectfv Effectfv}
-     */
+    /** Array version of: {@link #alEffectfv Effectfv} */
     @NativeType("ALvoid")
     public static void alEffectfv(@NativeType("ALuint") int effect, @NativeType("ALenum") int param, @NativeType("ALfloat const *") float[] values) {
         long __functionAddress = AL.getICD().alEffectfv;
@@ -1827,9 +1671,7 @@ public class EXTEfx {
         invokePV(effect, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetEffecti GetEffecti}
-     */
+    /** Array version of: {@link #alGetEffecti GetEffecti} */
     @NativeType("ALvoid")
     public static void alGetEffecti(@NativeType("ALuint") int effect, @NativeType("ALenum") int param, @NativeType("ALint *") int[] value) {
         long __functionAddress = AL.getICD().alGetEffecti;
@@ -1840,9 +1682,7 @@ public class EXTEfx {
         invokePV(effect, param, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetEffectiv GetEffectiv}
-     */
+    /** Array version of: {@link #alGetEffectiv GetEffectiv} */
     @NativeType("ALvoid")
     public static void alGetEffectiv(@NativeType("ALuint") int effect, @NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
         long __functionAddress = AL.getICD().alGetEffectiv;
@@ -1853,9 +1693,7 @@ public class EXTEfx {
         invokePV(effect, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetEffectf GetEffectf}
-     */
+    /** Array version of: {@link #alGetEffectf GetEffectf} */
     @NativeType("ALvoid")
     public static void alGetEffectf(@NativeType("ALuint") int effect, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] value) {
         long __functionAddress = AL.getICD().alGetEffectf;
@@ -1866,9 +1704,7 @@ public class EXTEfx {
         invokePV(effect, param, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetEffectfv GetEffectfv}
-     */
+    /** Array version of: {@link #alGetEffectfv GetEffectfv} */
     @NativeType("ALvoid")
     public static void alGetEffectfv(@NativeType("ALuint") int effect, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] values) {
         long __functionAddress = AL.getICD().alGetEffectfv;
@@ -1879,9 +1715,7 @@ public class EXTEfx {
         invokePV(effect, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGenFilters GenFilters}
-     */
+    /** Array version of: {@link #alGenFilters GenFilters} */
     @NativeType("ALvoid")
     public static void alGenFilters(@NativeType("ALuint *") int[] filters) {
         long __functionAddress = AL.getICD().alGenFilters;
@@ -1891,9 +1725,7 @@ public class EXTEfx {
         invokePV(filters.length, filters, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alDeleteFilters DeleteFilters}
-     */
+    /** Array version of: {@link #alDeleteFilters DeleteFilters} */
     @NativeType("ALvoid")
     public static void alDeleteFilters(@NativeType("ALuint *") int[] filters) {
         long __functionAddress = AL.getICD().alDeleteFilters;
@@ -1903,9 +1735,7 @@ public class EXTEfx {
         invokePV(filters.length, filters, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alFilteriv Filteriv}
-     */
+    /** Array version of: {@link #alFilteriv Filteriv} */
     @NativeType("ALvoid")
     public static void alFilteriv(@NativeType("ALuint") int filter, @NativeType("ALenum") int param, @NativeType("ALint const *") int[] values) {
         long __functionAddress = AL.getICD().alFilteriv;
@@ -1916,9 +1746,7 @@ public class EXTEfx {
         invokePV(filter, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alFilterfv Filterfv}
-     */
+    /** Array version of: {@link #alFilterfv Filterfv} */
     @NativeType("ALvoid")
     public static void alFilterfv(@NativeType("ALuint") int filter, @NativeType("ALenum") int param, @NativeType("ALfloat const *") float[] values) {
         long __functionAddress = AL.getICD().alFilterfv;
@@ -1929,9 +1757,7 @@ public class EXTEfx {
         invokePV(filter, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetFilteri GetFilteri}
-     */
+    /** Array version of: {@link #alGetFilteri GetFilteri} */
     @NativeType("ALvoid")
     public static void alGetFilteri(@NativeType("ALuint") int filter, @NativeType("ALenum") int param, @NativeType("ALint *") int[] value) {
         long __functionAddress = AL.getICD().alGetFilteri;
@@ -1942,9 +1768,7 @@ public class EXTEfx {
         invokePV(filter, param, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetFilteriv GetFilteriv}
-     */
+    /** Array version of: {@link #alGetFilteriv GetFilteriv} */
     @NativeType("ALvoid")
     public static void alGetFilteriv(@NativeType("ALuint") int filter, @NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
         long __functionAddress = AL.getICD().alGetFilteriv;
@@ -1955,9 +1779,7 @@ public class EXTEfx {
         invokePV(filter, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetFilterf GetFilterf}
-     */
+    /** Array version of: {@link #alGetFilterf GetFilterf} */
     @NativeType("ALvoid")
     public static void alGetFilterf(@NativeType("ALuint") int filter, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] value) {
         long __functionAddress = AL.getICD().alGetFilterf;
@@ -1968,9 +1790,7 @@ public class EXTEfx {
         invokePV(filter, param, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetFilterfv GetFilterfv}
-     */
+    /** Array version of: {@link #alGetFilterfv GetFilterfv} */
     @NativeType("ALvoid")
     public static void alGetFilterfv(@NativeType("ALuint") int filter, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] values) {
         long __functionAddress = AL.getICD().alGetFilterfv;
@@ -1981,9 +1801,7 @@ public class EXTEfx {
         invokePV(filter, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGenAuxiliaryEffectSlots GenAuxiliaryEffectSlots}
-     */
+    /** Array version of: {@link #alGenAuxiliaryEffectSlots GenAuxiliaryEffectSlots} */
     @NativeType("ALvoid")
     public static void alGenAuxiliaryEffectSlots(@NativeType("ALuint *") int[] effectSlots) {
         long __functionAddress = AL.getICD().alGenAuxiliaryEffectSlots;
@@ -1993,9 +1811,7 @@ public class EXTEfx {
         invokePV(effectSlots.length, effectSlots, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alDeleteAuxiliaryEffectSlots DeleteAuxiliaryEffectSlots}
-     */
+    /** Array version of: {@link #alDeleteAuxiliaryEffectSlots DeleteAuxiliaryEffectSlots} */
     @NativeType("ALvoid")
     public static void alDeleteAuxiliaryEffectSlots(@NativeType("ALuint *") int[] effectSlots) {
         long __functionAddress = AL.getICD().alDeleteAuxiliaryEffectSlots;
@@ -2005,9 +1821,7 @@ public class EXTEfx {
         invokePV(effectSlots.length, effectSlots, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alAuxiliaryEffectSlotiv AuxiliaryEffectSlotiv}
-     */
+    /** Array version of: {@link #alAuxiliaryEffectSlotiv AuxiliaryEffectSlotiv} */
     @NativeType("ALvoid")
     public static void alAuxiliaryEffectSlotiv(@NativeType("ALuint") int effectSlot, @NativeType("ALenum") int param, @NativeType("ALint const *") int[] values) {
         long __functionAddress = AL.getICD().alAuxiliaryEffectSlotiv;
@@ -2018,9 +1832,7 @@ public class EXTEfx {
         invokePV(effectSlot, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alAuxiliaryEffectSlotfv AuxiliaryEffectSlotfv}
-     */
+    /** Array version of: {@link #alAuxiliaryEffectSlotfv AuxiliaryEffectSlotfv} */
     @NativeType("ALvoid")
     public static void alAuxiliaryEffectSlotfv(@NativeType("ALuint") int effectSlot, @NativeType("ALenum") int param, @NativeType("ALfloat const *") float[] values) {
         long __functionAddress = AL.getICD().alAuxiliaryEffectSlotfv;
@@ -2031,9 +1843,7 @@ public class EXTEfx {
         invokePV(effectSlot, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetAuxiliaryEffectSloti GetAuxiliaryEffectSloti}
-     */
+    /** Array version of: {@link #alGetAuxiliaryEffectSloti GetAuxiliaryEffectSloti} */
     @NativeType("ALvoid")
     public static void alGetAuxiliaryEffectSloti(@NativeType("ALuint") int effectSlot, @NativeType("ALenum") int param, @NativeType("ALint *") int[] value) {
         long __functionAddress = AL.getICD().alGetAuxiliaryEffectSloti;
@@ -2044,9 +1854,7 @@ public class EXTEfx {
         invokePV(effectSlot, param, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetAuxiliaryEffectSlotiv GetAuxiliaryEffectSlotiv}
-     */
+    /** Array version of: {@link #alGetAuxiliaryEffectSlotiv GetAuxiliaryEffectSlotiv} */
     @NativeType("ALvoid")
     public static void alGetAuxiliaryEffectSlotiv(@NativeType("ALuint") int effectSlot, @NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
         long __functionAddress = AL.getICD().alGetAuxiliaryEffectSlotiv;
@@ -2057,9 +1865,7 @@ public class EXTEfx {
         invokePV(effectSlot, param, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetAuxiliaryEffectSlotf GetAuxiliaryEffectSlotf}
-     */
+    /** Array version of: {@link #alGetAuxiliaryEffectSlotf GetAuxiliaryEffectSlotf} */
     @NativeType("ALvoid")
     public static void alGetAuxiliaryEffectSlotf(@NativeType("ALuint") int effectSlot, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] value) {
         long __functionAddress = AL.getICD().alGetAuxiliaryEffectSlotf;
@@ -2070,9 +1876,7 @@ public class EXTEfx {
         invokePV(effectSlot, param, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alGetAuxiliaryEffectSlotfv GetAuxiliaryEffectSlotfv}
-     */
+    /** Array version of: {@link #alGetAuxiliaryEffectSlotfv GetAuxiliaryEffectSlotfv} */
     @NativeType("ALvoid")
     public static void alGetAuxiliaryEffectSlotfv(@NativeType("ALuint") int effectSlot, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] values) {
         long __functionAddress = AL.getICD().alGetAuxiliaryEffectSlotfv;

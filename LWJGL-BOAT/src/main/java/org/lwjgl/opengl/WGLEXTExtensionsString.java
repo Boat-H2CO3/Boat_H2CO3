@@ -30,9 +30,7 @@ public class WGLEXTExtensionsString {
 
     // --- [ wglGetExtensionsStringEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #wglGetExtensionsStringEXT GetExtensionsStringEXT}
-     */
+    /** Unsafe version of: {@link #wglGetExtensionsStringEXT GetExtensionsStringEXT} */
     public static long nwglGetExtensionsStringEXT() {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetExtensionsStringEXT;
         if (CHECKS) {

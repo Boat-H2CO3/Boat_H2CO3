@@ -48,9 +48,7 @@ package org.lwjgl.opengl;
  */
 public final class ARBVertexArrayBGRA {
 
-    /**
-     * Accepted by the {@code size} parameter of ColorPointer, SecondaryColorPointer, and VertexAttribPointer.
-     */
+    /** Accepted by the {@code size} parameter of ColorPointer, SecondaryColorPointer, and VertexAttribPointer. */
     public static final int GL_BGRA = 0x80E1;
 
     private ARBVertexArrayBGRA() {

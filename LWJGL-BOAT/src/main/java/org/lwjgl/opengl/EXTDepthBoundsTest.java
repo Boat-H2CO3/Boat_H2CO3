@@ -43,9 +43,7 @@ public class EXTDepthBoundsTest {
      */
     public static final int GL_DEPTH_BOUNDS_TEST_EXT = 0x8890;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_DEPTH_BOUNDS_EXT = 0x8891;
 
     static {
@@ -58,7 +56,7 @@ public class EXTDepthBoundsTest {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glDepthBoundsEXT
+            caps.glDepthBoundsEXT
         );
     }
 

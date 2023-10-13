@@ -31,9 +31,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTX11SyncObject {
 
-    /**
-     * Accepted by the {@code external_sync_type} parameter of ImportSyncEXT.
-     */
+    /** Accepted by the {@code external_sync_type} parameter of ImportSyncEXT. */
     public static final int GL_SYNC_X11_FENCE_EXT = 0x90E1;
 
     static {
@@ -46,7 +44,7 @@ public class EXTX11SyncObject {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glImportSyncEXT
+            caps.glImportSyncEXT
         );
     }
 

@@ -32,9 +32,7 @@ import java.lang.reflect.*;
  */
 public class JNINativeInterface {
 
-    /**
-     * JNI versions.
-     */
+    /** JNI versions. */
     public static final int
             JNI_VERSION_1_1 = 0x10001,
             JNI_VERSION_1_2 = 0x10002,
@@ -62,9 +60,7 @@ public class JNINativeInterface {
             JNIGlobalRefType = 2,
             JNIWeakGlobalRefType = 3;
 
-    /**
-     * jboolean constants.
-     */
+    /** jboolean constants. */
     public static final int
             JNI_FALSE = 0,
             JNI_TRUE = 1;
@@ -93,9 +89,7 @@ public class JNINativeInterface {
             JNI_EEXIST = (-5),
             JNI_EINVAL = (-6);
 
-    /**
-     * Used in {@code ReleaseScalarArrayElements}.
-     */
+    /** Used in {@code ReleaseScalarArrayElements}. */
     public static final int
             JNI_COMMIT = 1,
             JNI_ABORT = 2;
@@ -120,25 +114,19 @@ public class JNINativeInterface {
 
     // --- [ FromReflectedMethod ] ---
 
-    /**
-     * Converts a {@link Method} or {@link Constructor} object to a method ID.
-     */
+    /** Converts a {@link Method} or {@link Constructor} object to a method ID. */
     @NativeType("jmethodID")
     public static native long FromReflectedMethod(@NativeType("jobject") Method method);
 
     // --- [ FromReflectedField ] ---
 
-    /**
-     * Converts a {@link Field} to a field ID.
-     */
+    /** Converts a {@link Field} to a field ID. */
     @NativeType("jfieldID")
     public static native long FromReflectedField(@NativeType("jobject") Field field);
 
     // --- [ ToReflectedMethod ] ---
 
-    /**
-     * Unsafe version of: {@link #ToReflectedMethod}
-     */
+    /** Unsafe version of: {@link #ToReflectedMethod} */
     @Nullable
     public static native Method nToReflectedMethod(Class<?> cls, long methodID, boolean isStatic);
 
@@ -158,9 +146,7 @@ public class JNINativeInterface {
 
     // --- [ ToReflectedField ] ---
 
-    /**
-     * Unsafe version of: {@link #ToReflectedField}
-     */
+    /** Unsafe version of: {@link #ToReflectedField} */
     @Nullable
     public static native Field nToReflectedField(Class<?> cls, long fieldID, boolean isStatic);
 
@@ -185,6 +171,7 @@ public class JNINativeInterface {
      * Global references must be explicitly disposed of by calling {@link #DeleteGlobalRef}.
      *
      * @param obj a global or local reference
+     *
      * @return a global reference, or {@code NULL} if the system runs out of memory
      */
     @NativeType("void *")
@@ -192,9 +179,7 @@ public class JNINativeInterface {
 
     // --- [ DeleteGlobalRef ] ---
 
-    /**
-     * Unsafe version of: {@link #DeleteGlobalRef}
-     */
+    /** Unsafe version of: {@link #DeleteGlobalRef} */
     public static native void nDeleteGlobalRef(long globalRef);
 
     /**
@@ -211,9 +196,7 @@ public class JNINativeInterface {
 
     // --- [ GetBooleanArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #GetBooleanArrayElements}
-     */
+    /** Unsafe version of: {@link #GetBooleanArrayElements} */
     public static native long nGetBooleanArrayElements(byte[] array, long isCopy);
 
     /**
@@ -225,6 +208,7 @@ public class JNINativeInterface {
      *
      * @param array  the primitive array
      * @param isCopy a pointer to a boolean
+     *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
     @Nullable
@@ -239,9 +223,7 @@ public class JNINativeInterface {
 
     // --- [ ReleaseBooleanArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #ReleaseBooleanArrayElements}
-     */
+    /** Unsafe version of: {@link #ReleaseBooleanArrayElements} */
     public static native void nReleaseBooleanArrayElements(byte[] array, long elems, int mode);
 
     /**
@@ -271,9 +253,7 @@ public class JNINativeInterface {
 
     // --- [ GetByteArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #GetByteArrayElements}
-     */
+    /** Unsafe version of: {@link #GetByteArrayElements} */
     public static native long nGetByteArrayElements(byte[] array, long isCopy);
 
     /**
@@ -285,6 +265,7 @@ public class JNINativeInterface {
      *
      * @param array  the primitive array
      * @param isCopy a pointer to a boolean
+     *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
     @Nullable
@@ -299,9 +280,7 @@ public class JNINativeInterface {
 
     // --- [ ReleaseByteArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #ReleaseByteArrayElements}
-     */
+    /** Unsafe version of: {@link #ReleaseByteArrayElements} */
     public static native void nReleaseByteArrayElements(byte[] array, long elems, int mode);
 
     /**
@@ -331,9 +310,7 @@ public class JNINativeInterface {
 
     // --- [ GetCharArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #GetCharArrayElements}
-     */
+    /** Unsafe version of: {@link #GetCharArrayElements} */
     public static native long nGetCharArrayElements(char[] array, long isCopy);
 
     /**
@@ -345,6 +322,7 @@ public class JNINativeInterface {
      *
      * @param array  the primitive array
      * @param isCopy a pointer to a boolean
+     *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
     @Nullable
@@ -359,9 +337,7 @@ public class JNINativeInterface {
 
     // --- [ ReleaseCharArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #ReleaseCharArrayElements}
-     */
+    /** Unsafe version of: {@link #ReleaseCharArrayElements} */
     public static native void nReleaseCharArrayElements(char[] array, long elems, int mode);
 
     /**
@@ -391,9 +367,7 @@ public class JNINativeInterface {
 
     // --- [ GetShortArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #GetShortArrayElements}
-     */
+    /** Unsafe version of: {@link #GetShortArrayElements} */
     public static native long nGetShortArrayElements(short[] array, long isCopy);
 
     /**
@@ -405,6 +379,7 @@ public class JNINativeInterface {
      *
      * @param array  the primitive array
      * @param isCopy a pointer to a boolean
+     *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
     @Nullable
@@ -419,9 +394,7 @@ public class JNINativeInterface {
 
     // --- [ ReleaseShortArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #ReleaseShortArrayElements}
-     */
+    /** Unsafe version of: {@link #ReleaseShortArrayElements} */
     public static native void nReleaseShortArrayElements(short[] array, long elems, int mode);
 
     /**
@@ -451,9 +424,7 @@ public class JNINativeInterface {
 
     // --- [ GetIntArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #GetIntArrayElements}
-     */
+    /** Unsafe version of: {@link #GetIntArrayElements} */
     public static native long nGetIntArrayElements(int[] array, long isCopy);
 
     /**
@@ -465,6 +436,7 @@ public class JNINativeInterface {
      *
      * @param array  the primitive array
      * @param isCopy a pointer to a boolean
+     *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
     @Nullable
@@ -479,9 +451,7 @@ public class JNINativeInterface {
 
     // --- [ ReleaseIntArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #ReleaseIntArrayElements}
-     */
+    /** Unsafe version of: {@link #ReleaseIntArrayElements} */
     public static native void nReleaseIntArrayElements(int[] array, long elems, int mode);
 
     /**
@@ -511,9 +481,7 @@ public class JNINativeInterface {
 
     // --- [ GetLongArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #GetLongArrayElements}
-     */
+    /** Unsafe version of: {@link #GetLongArrayElements} */
     public static native long nGetLongArrayElements(long[] array, long isCopy);
 
     /**
@@ -525,6 +493,7 @@ public class JNINativeInterface {
      *
      * @param array  the primitive array
      * @param isCopy a pointer to a boolean
+     *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
     @Nullable
@@ -539,9 +508,7 @@ public class JNINativeInterface {
 
     // --- [ ReleaseLongArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #ReleaseLongArrayElements}
-     */
+    /** Unsafe version of: {@link #ReleaseLongArrayElements} */
     public static native void nReleaseLongArrayElements(long[] array, long elems, int mode);
 
     /**
@@ -571,9 +538,7 @@ public class JNINativeInterface {
 
     // --- [ GetFloatArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #GetFloatArrayElements}
-     */
+    /** Unsafe version of: {@link #GetFloatArrayElements} */
     public static native long nGetFloatArrayElements(float[] array, long isCopy);
 
     /**
@@ -585,6 +550,7 @@ public class JNINativeInterface {
      *
      * @param array  the primitive array
      * @param isCopy a pointer to a boolean
+     *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
     @Nullable
@@ -599,9 +565,7 @@ public class JNINativeInterface {
 
     // --- [ ReleaseFloatArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #ReleaseFloatArrayElements}
-     */
+    /** Unsafe version of: {@link #ReleaseFloatArrayElements} */
     public static native void nReleaseFloatArrayElements(float[] array, long elems, int mode);
 
     /**
@@ -631,9 +595,7 @@ public class JNINativeInterface {
 
     // --- [ GetDoubleArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #GetDoubleArrayElements}
-     */
+    /** Unsafe version of: {@link #GetDoubleArrayElements} */
     public static native long nGetDoubleArrayElements(double[] array, long isCopy);
 
     /**
@@ -645,6 +607,7 @@ public class JNINativeInterface {
      *
      * @param array  the primitive array
      * @param isCopy a pointer to a boolean
+     *
      * @return a pointer to the array elements, or {@code NULL} if the operation fails
      */
     @Nullable
@@ -659,9 +622,7 @@ public class JNINativeInterface {
 
     // --- [ ReleaseDoubleArrayElements ] ---
 
-    /**
-     * Unsafe version of: {@link #ReleaseDoubleArrayElements}
-     */
+    /** Unsafe version of: {@link #ReleaseDoubleArrayElements} */
     public static native void nReleaseDoubleArrayElements(double[] array, long elems, int mode);
 
     /**
@@ -1024,6 +985,7 @@ public class JNINativeInterface {
      * structure are pointers to modified UTF-8 strings. The {@code nMethods} parameter specifies the number of native methods in the array.
      *
      * @param methods the native methods in the class
+     *
      * @return “0” on success; returns a negative value on failure
      */
     @NativeType("jint")
@@ -1042,6 +1004,7 @@ public class JNINativeInterface {
      * <p>This function should not be used in normal native code. Instead, it provides special programs a way to reload and relink native libraries.</p>
      *
      * @param targetClass a Java class object
+     *
      * @return “0” on success; returns a negative value on failure
      */
     @NativeType("jint")
@@ -1049,9 +1012,7 @@ public class JNINativeInterface {
 
     // --- [ GetJavaVM ] ---
 
-    /**
-     * Unsafe version of: {@link #GetJavaVM}
-     */
+    /** Unsafe version of: {@link #GetJavaVM} */
     public static native int nGetJavaVM(long vm);
 
     /**
@@ -1070,23 +1031,17 @@ public class JNINativeInterface {
 
     // --- [ GetStringRegion ] ---
 
-    /**
-     * Unsafe version of: {@link #GetStringRegion}
-     */
+    /** Unsafe version of: {@link #GetStringRegion} */
     public static native void nGetStringRegion(String str, int start, int len, long buf);
 
-    /**
-     * Copies {@code len} number of Unicode characters beginning at offset {@code start} to the given buffer {@code buf}.
-     */
+    /** Copies {@code len} number of Unicode characters beginning at offset {@code start} to the given buffer {@code buf}. */
     public static void GetStringRegion(@NativeType("jstring") String str, @NativeType("jsize") int start, @NativeType("jchar *") ByteBuffer buf) {
         nGetStringRegion(str, start, buf.remaining() >> 1, memAddress(buf));
     }
 
     // --- [ GetStringUTFRegion ] ---
 
-    /**
-     * Unsafe version of: {@link #GetStringUTFRegion}
-     */
+    /** Unsafe version of: {@link #GetStringUTFRegion} */
     public static native void nGetStringUTFRegion(String str, int start, int len, long buf);
 
     /**
@@ -1111,14 +1066,10 @@ public class JNINativeInterface {
 
     // --- [ DeleteWeakGlobalRef ] ---
 
-    /**
-     * Unsafe version of: {@link #DeleteWeakGlobalRef}
-     */
+    /** Unsafe version of: {@link #DeleteWeakGlobalRef} */
     public static native void nDeleteWeakGlobalRef(long weakGlobalRef);
 
-    /**
-     * Delete the VM resources needed for the given weak global reference.
-     */
+    /** Delete the VM resources needed for the given weak global reference. */
     public static void DeleteWeakGlobalRef(@NativeType("void *") long weakGlobalRef) {
         if (CHECKS) {
             check(weakGlobalRef);
@@ -1128,9 +1079,7 @@ public class JNINativeInterface {
 
     // --- [ NewDirectByteBuffer ] ---
 
-    /**
-     * Unsafe version of: {@link #NewDirectByteBuffer}
-     */
+    /** Unsafe version of: {@link #NewDirectByteBuffer} */
     @Nullable
     public static native ByteBuffer nNewDirectByteBuffer(long address, long capacity);
 
@@ -1144,8 +1093,9 @@ public class JNINativeInterface {
      *
      * @param address  the starting address of the memory region (must not be {@code NULL})
      * @param capacity the size in bytes of the memory region (must be positive)
+     *
      * @return a local reference to the newly-instantiated {@code java.nio.ByteBuffer} object. Returns {@code NULL} if an exception occurs, or if JNI access to direct
-     * buffers is not supported by this virtual machine.
+     *         buffers is not supported by this virtual machine.
      */
     @Nullable
     @NativeType("jobject")
@@ -1164,8 +1114,9 @@ public class JNINativeInterface {
      * <p>This function allows native code to access the same memory region that is accessible to Java code via the buffer object.</p>
      *
      * @param buf a direct {@code java.nio.Buffer} object (must not be {@code NULL})
+     *
      * @return the starting address of the memory region referenced by the buffer. Returns {@code NULL} if the memory region is undefined, if the given object is not a
-     * direct {@code java.nio.Buffer}, or if JNI access to direct buffers is not supported by this virtual machine.
+     *         direct {@code java.nio.Buffer}, or if JNI access to direct buffers is not supported by this virtual machine.
      */
     @NativeType("void *")
     public static native long GetDirectBufferAddress(@NativeType("jobject") Buffer buf);

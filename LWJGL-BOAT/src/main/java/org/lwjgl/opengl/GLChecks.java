@@ -17,6 +17,7 @@ final class GLChecks {
      * Returns the number of bytes required to store the specified OpenGL type.
      *
      * @param type the OpenGL type to translate
+     *
      * @return the number of bytes
      */
     static int typeToBytes(int type) {
@@ -50,6 +51,7 @@ final class GLChecks {
      * Returns the power-of-two of the number of bytes required to store the specified OpenGL type.
      *
      * @param type the OpenGL type to translate
+     *
      * @return the number of bytes PoT value
      */
     static int typeToByteShift(int type) {
@@ -85,6 +87,7 @@ final class GLChecks {
      * @param target  the texture target
      * @param level   the texture level
      * @param pname   the parameter to query
+     *
      * @return the parameter value
      */
     static int getTexLevelParameteri(int texture, int target, int level, int pname) {

@@ -43,9 +43,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTVertexAttrib64bit {
 
-    /**
-     * Returned in the {@code type} parameter of GetActiveAttrib.
-     */
+    /** Returned in the {@code type} parameter of GetActiveAttrib. */
     public static final int
             GL_DOUBLE_VEC2_EXT = 0x8FFC,
             GL_DOUBLE_VEC3_EXT = 0x8FFD,
@@ -181,9 +179,7 @@ public class EXTVertexAttrib64bit {
         ARBVertexAttrib64Bit.glVertexArrayVertexAttribLOffsetEXT(vaobj, buffer, index, size, type, stride, offset);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribL1dvEXT VertexAttribL1dvEXT}
-     */
+    /** Array version of: {@link #glVertexAttribL1dvEXT VertexAttribL1dvEXT} */
     public static void glVertexAttribL1dvEXT(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttribL1dvEXT;
         if (CHECKS) {
@@ -193,9 +189,7 @@ public class EXTVertexAttrib64bit {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribL2dvEXT VertexAttribL2dvEXT}
-     */
+    /** Array version of: {@link #glVertexAttribL2dvEXT VertexAttribL2dvEXT} */
     public static void glVertexAttribL2dvEXT(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttribL2dvEXT;
         if (CHECKS) {
@@ -205,9 +199,7 @@ public class EXTVertexAttrib64bit {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribL3dvEXT VertexAttribL3dvEXT}
-     */
+    /** Array version of: {@link #glVertexAttribL3dvEXT VertexAttribL3dvEXT} */
     public static void glVertexAttribL3dvEXT(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttribL3dvEXT;
         if (CHECKS) {
@@ -217,9 +209,7 @@ public class EXTVertexAttrib64bit {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribL4dvEXT VertexAttribL4dvEXT}
-     */
+    /** Array version of: {@link #glVertexAttribL4dvEXT VertexAttribL4dvEXT} */
     public static void glVertexAttribL4dvEXT(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttribL4dvEXT;
         if (CHECKS) {
@@ -229,9 +219,7 @@ public class EXTVertexAttrib64bit {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexAttribLdvEXT GetVertexAttribLdvEXT}
-     */
+    /** Array version of: {@link #glGetVertexAttribLdvEXT GetVertexAttribLdvEXT} */
     public static void glGetVertexAttribLdvEXT(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLdouble *") double[] params) {
         long __functionAddress = GL.getICD().glGetVertexAttribLdvEXT;
         if (CHECKS) {

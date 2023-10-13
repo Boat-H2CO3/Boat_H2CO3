@@ -43,17 +43,13 @@ public abstract class GLFWErrorCallback extends Callback implements GLFWErrorCal
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWErrorCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWErrorCallback} instance that delegates to the specified {@code GLFWErrorCallbackI} instance.
-     */
+    /** Creates a {@code GLFWErrorCallback} instance that delegates to the specified {@code GLFWErrorCallbackI} instance. */
     public static GLFWErrorCallback create(GLFWErrorCallbackI instance) {
         return instance instanceof GLFWErrorCallback
                 ? (GLFWErrorCallback) instance
@@ -74,6 +70,7 @@ public abstract class GLFWErrorCallback extends Callback implements GLFWErrorCal
      * <p>This method may only be used inside a GLFWErrorCallback invocation.</p>
      *
      * @param description pointer to the UTF-8 encoded description string
+     *
      * @return the description as a String
      */
     public static String getDescription(long description) {
@@ -93,6 +90,7 @@ public abstract class GLFWErrorCallback extends Callback implements GLFWErrorCal
      * Returns a {@link GLFWErrorCallback} instance that prints the error in the specified {@link PrintStream}.
      *
      * @param stream the PrintStream to use
+     *
      * @return the GLFWerrorCallback
      */
     public static GLFWErrorCallback createPrint(PrintStream stream) {
@@ -129,9 +127,7 @@ public abstract class GLFWErrorCallback extends Callback implements GLFWErrorCal
         };
     }
 
-    /**
-     * See {@link GLFW#glfwSetErrorCallback SetErrorCallback}.
-     */
+    /** See {@link GLFW#glfwSetErrorCallback SetErrorCallback}. */
     public GLFWErrorCallback set() {
         glfwSetErrorCallback(this);
         return this;

@@ -67,25 +67,25 @@ public class Cylinder extends Quadric {
      * cylinder is placed at z = 0, and the top at z=height. Like a sphere, a
      * cylinder is subdivided around the z axis into slices, and along the z axis
      * into stacks.
-     * <p>
+     *
      * Note that if topRadius is set to zero, then this routine will generate a
      * cone.
-     * <p>
+     *
      * If the orientation is set to GLU.OUTSIDE (with glu.quadricOrientation), then
      * any generated normals point away from the z axis. Otherwise, they point
      * toward the z axis.
-     * <p>
+     *
      * If texturing is turned on (with glu.quadricTexture), then texture
      * coordinates are generated so that t ranges linearly from 0.0 at z = 0 to
      * 1.0 at z = height, and s ranges from 0.0 at the +y axis, to 0.25 at the +x
      * axis, to 0.5 at the -y axis, to 0.75 at the -x axis, and back to 1.0 at the
      * +y axis.
      *
-     * @param baseRadius Specifies the radius of the cylinder at z = 0.
-     * @param topRadius  Specifies the radius of the cylinder at z = height.
-     * @param height     Specifies the height of the cylinder.
-     * @param slices     Specifies the number of subdivisions around the z axis.
-     * @param stacks     Specifies the number of subdivisions along the z axis.
+     * @param baseRadius  Specifies the radius of the cylinder at z = 0.
+     * @param topRadius   Specifies the radius of the cylinder at z = height.
+     * @param height      Specifies the height of the cylinder.
+     * @param slices      Specifies the number of subdivisions around the z axis.
+     * @param stacks      Specifies the number of subdivisions along the z axis.
      */
     public void draw(float baseRadius, float topRadius, float height, int slices, int stacks) {
 
@@ -186,12 +186,21 @@ public class Cylinder extends Quadric {
                         x = sin((i * da));
                         y = cos((i * da));
                     }
-                    normal3f((x * nsign), (y * nsign), (nz * nsign));
-                    TXTR_COORD(s, t);
-                    glVertex3f((x * r), (y * r), z);
-                    normal3f((x * nsign), (y * nsign), (nz * nsign));
-                    TXTR_COORD(s, t + dt);
-                    glVertex3f((x * (r + dr)), (y * (r + dr)), (z + dz));
+                    if (nsign == 1.0f) {
+                        normal3f((x * nsign), (y * nsign), (nz * nsign));
+                        TXTR_COORD(s, t);
+                        glVertex3f((x * r), (y * r), z);
+                        normal3f((x * nsign), (y * nsign), (nz * nsign));
+                        TXTR_COORD(s, t + dt);
+                        glVertex3f((x * (r + dr)), (y * (r + dr)), (z + dz));
+                    } else {
+                        normal3f(x * nsign, y * nsign, nz * nsign);
+                        TXTR_COORD(s, t);
+                        glVertex3f((x * r), (y * r), z);
+                        normal3f(x * nsign, y * nsign, nz * nsign);
+                        TXTR_COORD(s, t + dt);
+                        glVertex3f((x * (r + dr)), (y * (r + dr)), (z + dz));
+                    }
                     s += ds;
                 } // for slices
                 glEnd();

@@ -76,9 +76,7 @@ public final class EXTPackedDepthStencil {
      */
     public static final int GL_DEPTH24_STENCIL8_EXT = 0x88F0;
 
-    /**
-     * Accepted by the {@code value} parameter of GetTexLevelParameter.
-     */
+    /** Accepted by the {@code value} parameter of GetTexLevelParameter. */
     public static final int GL_TEXTURE_STENCIL_SIZE_EXT = 0x88F1;
 
     private EXTPackedDepthStencil() {

@@ -13,8 +13,7 @@ import static org.lwjgl.system.Checks.*;
 final class MemoryAccessJNI {
 
     static {
-        Library.initialize();
-    }
+        Library.initialize(); }
 
     private MemoryAccessJNI() {
         throw new UnsupportedOperationException();
@@ -22,9 +21,7 @@ final class MemoryAccessJNI {
 
     // --- [ getPointerSize ] ---
 
-    /**
-     * Returns the {@code sizeof(void *)}.
-     */
+    /** Returns the {@code sizeof(void *)}. */
     static native int getPointerSize();
 
     // --- [ malloc ] ---
@@ -32,9 +29,7 @@ final class MemoryAccessJNI {
     @NativeType("void * (*) (size_t)")
     private static native long malloc();
 
-    /**
-     * Returns the address of the stdlib {@code malloc} function.
-     */
+    /** Returns the address of the stdlib {@code malloc} function. */
     static final long malloc = malloc();
 
     // --- [ calloc ] ---
@@ -42,9 +37,7 @@ final class MemoryAccessJNI {
     @NativeType("void * (*) (size_t, size_t)")
     private static native long calloc();
 
-    /**
-     * Returns the address of the stdlib {@code calloc} function.
-     */
+    /** Returns the address of the stdlib {@code calloc} function. */
     static final long calloc = calloc();
 
     // --- [ realloc ] ---
@@ -52,9 +45,7 @@ final class MemoryAccessJNI {
     @NativeType("void * (*) (void *, size_t)")
     private static native long realloc();
 
-    /**
-     * Returns the address of the stdlib {@code realloc} function.
-     */
+    /** Returns the address of the stdlib {@code realloc} function. */
     static final long realloc = realloc();
 
     // --- [ free ] ---
@@ -62,9 +53,7 @@ final class MemoryAccessJNI {
     @NativeType("void (*) (void *)")
     private static native long free();
 
-    /**
-     * Returns the address of the stdlib {@code free} function.
-     */
+    /** Returns the address of the stdlib {@code free} function. */
     static final long free = free();
 
     // --- [ aligned_alloc ] ---
@@ -72,9 +61,7 @@ final class MemoryAccessJNI {
     @NativeType("void * (*) (size_t, size_t)")
     private static native long aligned_alloc();
 
-    /**
-     * Returns the address of the stdlib {@code aligned_alloc} function.
-     */
+    /** Returns the address of the stdlib {@code aligned_alloc} function. */
     static final long aligned_alloc = aligned_alloc();
 
     // --- [ aligned_free ] ---
@@ -82,16 +69,12 @@ final class MemoryAccessJNI {
     @NativeType("void (*) (void *)")
     private static native long aligned_free();
 
-    /**
-     * Returns the address of the stdlib {@code aligned_free} function.
-     */
+    /** Returns the address of the stdlib {@code aligned_free} function. */
     static final long aligned_free = aligned_free();
 
     // --- [ getByte ] ---
 
-    /**
-     * Unsafe version of: {@link #getByte}
-     */
+    /** Unsafe version of: {@link #getByte} */
     static native byte ngetByte(long ptr);
 
     /**
@@ -109,9 +92,7 @@ final class MemoryAccessJNI {
 
     // --- [ getShort ] ---
 
-    /**
-     * Unsafe version of: {@link #getShort}
-     */
+    /** Unsafe version of: {@link #getShort} */
     static native short ngetShort(long ptr);
 
     /**
@@ -129,9 +110,7 @@ final class MemoryAccessJNI {
 
     // --- [ getInt ] ---
 
-    /**
-     * Unsafe version of: {@link #getInt}
-     */
+    /** Unsafe version of: {@link #getInt} */
     static native int ngetInt(long ptr);
 
     /**
@@ -149,9 +128,7 @@ final class MemoryAccessJNI {
 
     // --- [ getLong ] ---
 
-    /**
-     * Unsafe version of: {@link #getLong}
-     */
+    /** Unsafe version of: {@link #getLong} */
     static native long ngetLong(long ptr);
 
     /**
@@ -169,9 +146,7 @@ final class MemoryAccessJNI {
 
     // --- [ getFloat ] ---
 
-    /**
-     * Unsafe version of: {@link #getFloat}
-     */
+    /** Unsafe version of: {@link #getFloat} */
     static native float ngetFloat(long ptr);
 
     /**
@@ -188,9 +163,7 @@ final class MemoryAccessJNI {
 
     // --- [ getDouble ] ---
 
-    /**
-     * Unsafe version of: {@link #getDouble}
-     */
+    /** Unsafe version of: {@link #getDouble} */
     static native double ngetDouble(long ptr);
 
     /**
@@ -207,9 +180,7 @@ final class MemoryAccessJNI {
 
     // --- [ getAddress ] ---
 
-    /**
-     * Unsafe version of: {@link #getAddress}
-     */
+    /** Unsafe version of: {@link #getAddress} */
     static native long ngetAddress(long ptr);
 
     /**
@@ -227,9 +198,7 @@ final class MemoryAccessJNI {
 
     // --- [ putByte ] ---
 
-    /**
-     * Unsafe version of: {@link #putByte}
-     */
+    /** Unsafe version of: {@link #putByte} */
     static native void nputByte(long ptr, byte value);
 
     /**
@@ -247,9 +216,7 @@ final class MemoryAccessJNI {
 
     // --- [ putShort ] ---
 
-    /**
-     * Unsafe version of: {@link #putShort}
-     */
+    /** Unsafe version of: {@link #putShort} */
     static native void nputShort(long ptr, short value);
 
     /**
@@ -267,9 +234,7 @@ final class MemoryAccessJNI {
 
     // --- [ putInt ] ---
 
-    /**
-     * Unsafe version of: {@link #putInt}
-     */
+    /** Unsafe version of: {@link #putInt} */
     static native void nputInt(long ptr, int value);
 
     /**
@@ -287,9 +252,7 @@ final class MemoryAccessJNI {
 
     // --- [ putLong ] ---
 
-    /**
-     * Unsafe version of: {@link #putLong}
-     */
+    /** Unsafe version of: {@link #putLong} */
     static native void nputLong(long ptr, long value);
 
     /**
@@ -307,9 +270,7 @@ final class MemoryAccessJNI {
 
     // --- [ putFloat ] ---
 
-    /**
-     * Unsafe version of: {@link #putFloat}
-     */
+    /** Unsafe version of: {@link #putFloat} */
     static native void nputFloat(long ptr, float value);
 
     /**
@@ -327,9 +288,7 @@ final class MemoryAccessJNI {
 
     // --- [ putDouble ] ---
 
-    /**
-     * Unsafe version of: {@link #putDouble}
-     */
+    /** Unsafe version of: {@link #putDouble} */
     static native void nputDouble(long ptr, double value);
 
     /**
@@ -347,9 +306,7 @@ final class MemoryAccessJNI {
 
     // --- [ putAddress ] ---
 
-    /**
-     * Unsafe version of: {@link #putAddress}
-     */
+    /** Unsafe version of: {@link #putAddress} */
     static native void nputAddress(long ptr, long value);
 
     /**

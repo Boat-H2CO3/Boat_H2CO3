@@ -221,7 +221,7 @@ public class XCirculateEvent extends Struct implements NativeResource {
             long display,
             long event,
             long window,
-            int place
+        int place
     ) {
         type(type);
         serial(serial);
@@ -238,6 +238,7 @@ public class XCirculateEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XCirculateEvent set(XCirculateEvent src) {
@@ -247,23 +248,17 @@ public class XCirculateEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XCirculateEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XCirculateEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XCirculateEvent malloc() {
         return wrap(XCirculateEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XCirculateEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XCirculateEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XCirculateEvent calloc() {
         return wrap(XCirculateEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XCirculateEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XCirculateEvent} instance allocated with {@link BufferUtils}. */
     public static XCirculateEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XCirculateEvent.class, memAddress(container), container);
@@ -276,9 +271,7 @@ public class XCirculateEvent extends Struct implements NativeResource {
         return wrap(XCirculateEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XCirculateEvent createSafe(long address) {
         return address == NULL ? null : wrap(XCirculateEvent.class, address);
@@ -322,9 +315,7 @@ public class XCirculateEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -339,9 +330,7 @@ public class XCirculateEvent extends Struct implements NativeResource {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XCirculateEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XCirculateEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XCirculateEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -385,7 +374,7 @@ public class XCirculateEvent extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -525,16 +514,14 @@ public class XCirculateEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XCirculateEvent} structs.
-     */
+    /** An array of {@link XCirculateEvent} structs. */
     public static class Buffer extends StructBuffer<XCirculateEvent, Buffer> implements NativeResource {
 
         private static final XCirculateEvent ELEMENT_FACTORY = XCirculateEvent.create(-1L);
 
         /**
          * Creates a new {@code XCirculateEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XCirculateEvent#SIZEOF}, and its mark will be undefined.
@@ -653,25 +640,11 @@ public class XCirculateEvent extends Struct implements NativeResource {
          * Sets the specified value to the {@code event} field.
          */
         public Buffer event(@NativeType("Window") long value) {
-            XCirculateEvent.nevent(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code window} field.
-         */
-        public Buffer window(@NativeType("Window") long value) {
-            XCirculateEvent.nwindow(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code place} field.
-         */
-        public Buffer place(int value) {
-            XCirculateEvent.nplace(address(), value);
-            return this;
-        }
+            XCirculateEvent.nevent(address(), value); return this; }
+        /** Sets the specified value to the {@code window} field. */
+        public Buffer window(@NativeType("Window") long value) { XCirculateEvent.nwindow(address(), value); return this; }
+        /** Sets the specified value to the {@code place} field. */
+        public Buffer place(int value) { XCirculateEvent.nplace(address(), value); return this; }
 
     }
 

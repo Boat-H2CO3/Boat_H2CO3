@@ -257,9 +257,7 @@ public class EXTMemoryObject {
 
     public static native void glTextureStorageMem1DEXT(@NativeType("GLuint") int texture, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalFormat, @NativeType("GLsizei") int width, @NativeType("GLuint") int memory, @NativeType("GLuint64") long offset);
 
-    /**
-     * Array version of: {@link #glDeleteMemoryObjectsEXT DeleteMemoryObjectsEXT}
-     */
+    /** Array version of: {@link #glDeleteMemoryObjectsEXT DeleteMemoryObjectsEXT} */
     public static void glDeleteMemoryObjectsEXT(@NativeType("GLuint const *") int[] memoryObjects) {
         long __functionAddress = GL.getICD().glDeleteMemoryObjectsEXT;
         if (CHECKS) {
@@ -268,9 +266,7 @@ public class EXTMemoryObject {
         callPV(memoryObjects.length, memoryObjects, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glCreateMemoryObjectsEXT CreateMemoryObjectsEXT}
-     */
+    /** Array version of: {@link #glCreateMemoryObjectsEXT CreateMemoryObjectsEXT} */
     public static void glCreateMemoryObjectsEXT(@NativeType("GLuint *") int[] memoryObjects) {
         long __functionAddress = GL.getICD().glCreateMemoryObjectsEXT;
         if (CHECKS) {
@@ -279,9 +275,7 @@ public class EXTMemoryObject {
         callPV(memoryObjects.length, memoryObjects, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMemoryObjectParameterivEXT MemoryObjectParameterivEXT}
-     */
+    /** Array version of: {@link #glMemoryObjectParameterivEXT MemoryObjectParameterivEXT} */
     public static void glMemoryObjectParameterivEXT(@NativeType("GLuint") int memoryObject, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         long __functionAddress = GL.getICD().glMemoryObjectParameterivEXT;
         if (CHECKS) {
@@ -291,9 +285,7 @@ public class EXTMemoryObject {
         callPV(memoryObject, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetMemoryObjectParameterivEXT GetMemoryObjectParameterivEXT}
-     */
+    /** Array version of: {@link #glGetMemoryObjectParameterivEXT GetMemoryObjectParameterivEXT} */
     public static void glGetMemoryObjectParameterivEXT(@NativeType("GLuint") int memoryObject, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetMemoryObjectParameterivEXT;
         if (CHECKS) {

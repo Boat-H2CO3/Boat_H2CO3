@@ -39,17 +39,13 @@ public abstract class GLFWWindowCloseCallback extends Callback implements GLFWWi
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWWindowCloseCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWWindowCloseCallback} instance that delegates to the specified {@code GLFWWindowCloseCallbackI} instance.
-     */
+    /** Creates a {@code GLFWWindowCloseCallback} instance that delegates to the specified {@code GLFWWindowCloseCallbackI} instance. */
     public static GLFWWindowCloseCallback create(GLFWWindowCloseCallbackI instance) {
         return instance instanceof GLFWWindowCloseCallback
                 ? (GLFWWindowCloseCallback) instance
@@ -64,9 +60,7 @@ public abstract class GLFWWindowCloseCallback extends Callback implements GLFWWi
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetWindowCloseCallback SetWindowCloseCallback}.
-     */
+    /** See {@link GLFW#glfwSetWindowCloseCallback SetWindowCloseCallback}. */
     public GLFWWindowCloseCallback set(long window) {
         glfwSetWindowCloseCallback(window, this);
         return this;

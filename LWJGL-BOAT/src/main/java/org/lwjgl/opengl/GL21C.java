@@ -27,9 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL21C extends GL20C {
 
-    /**
-     * Returned by the {@code type} parameter of GetActiveUniform.
-     */
+    /** Returned by the {@code type} parameter of GetActiveUniform. */
     public static final int
             GL_FLOAT_MAT2x3 = 0x8B65,
             GL_FLOAT_MAT2x4 = 0x8B66,
@@ -46,16 +44,12 @@ public class GL21C extends GL20C {
             GL_PIXEL_PACK_BUFFER = 0x88EB,
             GL_PIXEL_UNPACK_BUFFER = 0x88EC;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_PIXEL_PACK_BUFFER_BINDING = 0x88ED,
             GL_PIXEL_UNPACK_BUFFER_BINDING = 0x88EF;
 
-    /**
-     * Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D.
-     */
+    /** Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D. */
     public static final int
             GL_SRGB = 0x8C40,
             GL_SRGB8 = 0x8C41,
@@ -87,6 +81,7 @@ public class GL21C extends GL20C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2x3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -108,6 +103,7 @@ public class GL21C extends GL20C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3x2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -129,6 +125,7 @@ public class GL21C extends GL20C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix2x4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -150,6 +147,7 @@ public class GL21C extends GL20C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4x2fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -171,6 +169,7 @@ public class GL21C extends GL20C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix3x4fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {
@@ -192,6 +191,7 @@ public class GL21C extends GL20C {
      * @param location  the location of the uniform variable to be modified
      * @param transpose whether to transpose the matrix as the values are loaded into the uniform variable
      * @param value     a pointer to an array of {@code count} values that will be used to update the specified uniform variable
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniform">Reference Page</a>
      */
     public static void glUniformMatrix4x3fv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLfloat const *") FloatBuffer value) {

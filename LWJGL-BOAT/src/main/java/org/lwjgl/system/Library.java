@@ -7,7 +7,6 @@ package org.lwjgl.system;
 import org.lwjgl.*;
 
 import javax.annotation.*;
-
 import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
@@ -57,16 +56,12 @@ public final class Library {
     private Library() {
     }
 
-    /**
-     * Ensures that the LWJGL shared library has been loaded.
-     */
+    /** Ensures that the LWJGL shared library has been loaded. */
     public static void initialize() {
         // intentionally empty to trigger static initializer
     }
 
-    /**
-     * Calls {@link #loadSystem(Consumer, Consumer, Class, String, String)} using {@code Library.class} as the context parameter.
-     */
+    /** Calls {@link #loadSystem(Consumer, Consumer, Class, String, String)} using {@code Library.class} as the context parameter. */
     public static void loadSystem(String module, String name) throws UnsatisfiedLinkError {
         loadSystem(System::load, System::loadLibrary, Library.class, module, name);
     }
@@ -81,6 +76,7 @@ public final class Library {
      * @param module      the module to which the shared library belongs
      * @param name        the library name. If not an absolute path, it must be the plain library name, without an OS specific prefix or file extension (e.g.
      *                    GL, not libGL.so)
+     *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
     @SuppressWarnings("try")
@@ -188,9 +184,7 @@ public final class Library {
         return true;
     }
 
-    /**
-     * Calls {@link #loadNative(Class, String, String)} using {@code Library.class} as the context parameter.
-     */
+    /** Calls {@link #loadNative(Class, String, String)} using {@code Library.class} as the context parameter. */
     public static SharedLibrary loadNative(String module, String name) {
         return loadNative(Library.class, module, name);
     }
@@ -203,7 +197,9 @@ public final class Library {
      * @param module  the module to which the shared library belongs
      * @param name    the library name. OS-specific prefixes and file extensions are optional (e.g. both {@code "GL"} and {@code "libGL.so.1"} are
      *                valid on Linux)
+     *
      * @return the shared library
+     *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
     @SuppressWarnings("try")
@@ -221,7 +217,9 @@ public final class Library {
      *                         valid on Linux)
      * @param bundledWithLWJGL whether the default LWJGL distribution includes the shared library. If true, LWJGL will also try to find the shared library under
      *                         the {@code <platform>/<arch>/<module>} subfolder.
+     *
      * @return the shared library
+     *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
     public static SharedLibrary loadNative(Class<?> context, String module, String name, boolean bundledWithLWJGL) {
@@ -375,7 +373,9 @@ public final class Library {
      *
      * @param name         a {@link Configuration} that specifies the library name
      * @param defaultNames the default library name(s)
+     *
      * @return the shared library
+     *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
     public static SharedLibrary loadNative(Class<?> context, String module, @Nullable Configuration<String> name, String... defaultNames) {
@@ -390,7 +390,9 @@ public final class Library {
      * @param name         a {@link Configuration} that specifies the library name
      * @param fallback     fallback to use if everything else fails
      * @param defaultNames the default library name(s)
+     *
      * @return the shared library
+     *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
     public static SharedLibrary loadNative(Class<?> context, String module, @Nullable Configuration<String> name, @Nullable Supplier<SharedLibrary> fallback, String... defaultNames) {

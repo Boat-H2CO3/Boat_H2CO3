@@ -28,16 +28,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVFramebufferMixedSamples {
 
-    /**
-     * Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.
-     */
+    /** Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled. */
     public static final int
             GL_RASTER_MULTISAMPLE_EXT = 0x9327,
             GL_COVERAGE_MODULATION_TABLE_NV = 0x9331;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int
             GL_RASTER_SAMPLES_EXT = 0x9328,
             GL_MAX_RASTER_SAMPLES_EXT = 0x9329,
@@ -128,9 +124,7 @@ public class NVFramebufferMixedSamples {
 
     public static native void glCoverageModulationNV(@NativeType("GLenum") int components);
 
-    /**
-     * Array version of: {@link #glCoverageModulationTableNV CoverageModulationTableNV}
-     */
+    /** Array version of: {@link #glCoverageModulationTableNV CoverageModulationTableNV} */
     public static void glCoverageModulationTableNV(@NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glCoverageModulationTableNV;
         if (CHECKS) {
@@ -139,9 +133,7 @@ public class NVFramebufferMixedSamples {
         callPV(v.length, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetCoverageModulationTableNV GetCoverageModulationTableNV}
-     */
+    /** Array version of: {@link #glGetCoverageModulationTableNV GetCoverageModulationTableNV} */
     public static void glGetCoverageModulationTableNV(@NativeType("GLfloat *") float[] v) {
         long __functionAddress = GL.getICD().glGetCoverageModulationTableNV;
         if (CHECKS) {

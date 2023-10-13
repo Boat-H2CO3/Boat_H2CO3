@@ -14,9 +14,7 @@ package org.lwjgl.opengl;
  */
 public final class WGLEXTCreateContextESProfile {
 
-    /**
-     * Accepted as a bit in the attribute value for {@link WGLARBCreateContextProfile#WGL_CONTEXT_PROFILE_MASK_ARB CONTEXT_PROFILE_MASK_ARB} in {@code attribList}.
-     */
+    /** Accepted as a bit in the attribute value for {@link WGLARBCreateContextProfile#WGL_CONTEXT_PROFILE_MASK_ARB CONTEXT_PROFILE_MASK_ARB} in {@code attribList}. */
     public static final int WGL_CONTEXT_ES_PROFILE_BIT_EXT = 0x4;
 
     private WGLEXTCreateContextESProfile() {

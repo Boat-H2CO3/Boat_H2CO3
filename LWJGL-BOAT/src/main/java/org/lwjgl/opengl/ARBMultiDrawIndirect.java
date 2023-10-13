@@ -5,12 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multi_draw_indirect.txt">ARB_multi_draw_indirect</a> extension.
@@ -43,9 +42,7 @@ public class ARBMultiDrawIndirect {
 
     // --- [ glMultiDrawArraysIndirect ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiDrawArraysIndirect MultiDrawArraysIndirect}
-     */
+    /** Unsafe version of: {@link #glMultiDrawArraysIndirect MultiDrawArraysIndirect} */
     public static void nglMultiDrawArraysIndirect(int mode, long indirect, int drawcount, int stride) {
         GL43C.nglMultiDrawArraysIndirect(mode, indirect, drawcount, stride);
     }
@@ -154,9 +151,7 @@ public class ARBMultiDrawIndirect {
 
     // --- [ glMultiDrawElementsIndirect ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultiDrawElementsIndirect MultiDrawElementsIndirect}
-     */
+    /** Unsafe version of: {@link #glMultiDrawElementsIndirect MultiDrawElementsIndirect} */
     public static void nglMultiDrawElementsIndirect(int mode, int type, long indirect, int drawcount, int stride) {
         GL43C.nglMultiDrawElementsIndirect(mode, type, indirect, drawcount, stride);
     }
@@ -269,16 +264,12 @@ public class ARBMultiDrawIndirect {
         GL43C.glMultiDrawElementsIndirect(mode, type, indirect, drawcount, stride);
     }
 
-    /**
-     * Array version of: {@link #glMultiDrawArraysIndirect MultiDrawArraysIndirect}
-     */
+    /** Array version of: {@link #glMultiDrawArraysIndirect MultiDrawArraysIndirect} */
     public static void glMultiDrawArraysIndirect(@NativeType("GLenum") int mode, @NativeType("void const *") int[] indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
         GL43C.glMultiDrawArraysIndirect(mode, indirect, drawcount, stride);
     }
 
-    /**
-     * Array version of: {@link #glMultiDrawElementsIndirect MultiDrawElementsIndirect}
-     */
+    /** Array version of: {@link #glMultiDrawElementsIndirect MultiDrawElementsIndirect} */
     public static void glMultiDrawElementsIndirect(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") int[] indirect, @NativeType("GLsizei") int drawcount, @NativeType("GLsizei") int stride) {
         GL43C.glMultiDrawElementsIndirect(mode, type, indirect, drawcount, stride);
     }

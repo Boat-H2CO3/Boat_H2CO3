@@ -17,17 +17,13 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVAlphaToCoverageDitherControl {
 
-    /**
-     * Accepted by the {@code param} parameter of {@link #glAlphaToCoverageDitherControlNV AlphaToCoverageDitherControlNV}.
-     */
+    /** Accepted by the {@code param} parameter of {@link #glAlphaToCoverageDitherControlNV AlphaToCoverageDitherControlNV}. */
     public static final int
             GL_ALPHA_TO_COVERAGE_DITHER_DEFAULT_NV = 0x934D,
             GL_ALPHA_TO_COVERAGE_DITHER_ENABLE_NV = 0x934E,
             GL_ALPHA_TO_COVERAGE_DITHER_DISABLE_NV = 0x934F;
 
-    /**
-     * Accepted by the {@code param} of {@link GL11C#glGetIntegerv GetIntegerv}.
-     */
+    /** Accepted by the {@code param} of {@link GL11C#glGetIntegerv GetIntegerv}. */
     public static final int GL_ALPHA_TO_COVERAGE_DITHER_MODE_NV = 0x92BF;
 
     static {
@@ -40,7 +36,7 @@ public class NVAlphaToCoverageDitherControl {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glAlphaToCoverageDitherControlNV
+            caps.glAlphaToCoverageDitherControlNV
         );
     }
 

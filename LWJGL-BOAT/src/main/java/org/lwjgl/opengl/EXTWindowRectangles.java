@@ -37,9 +37,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTWindowRectangles {
 
-    /**
-     * Accepted by the {@code mode} parameter of {@link #glWindowRectanglesEXT WindowRectanglesEXT}.
-     */
+    /** Accepted by the {@code mode} parameter of {@link #glWindowRectanglesEXT WindowRectanglesEXT}. */
     public static final int
             GL_INCLUSIVE_EXT = 0x8F10,
             GL_EXCLUSIVE_EXT = 0x8F11;
@@ -50,9 +48,7 @@ public class EXTWindowRectangles {
      */
     public static final int GL_WINDOW_RECTANGLE_EXT = 0x8F12;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
             GL_WINDOW_RECTANGLE_MODE_EXT = 0x8F13,
             GL_MAX_WINDOW_RECTANGLES_EXT = 0x8F14,
@@ -116,9 +112,7 @@ public class EXTWindowRectangles {
         nglWindowRectanglesEXT(mode, remainingSafe(box) >> 2, memAddressSafe(box));
     }
 
-    /**
-     * Array version of: {@link #glWindowRectanglesEXT WindowRectanglesEXT}
-     */
+    /** Array version of: {@link #glWindowRectanglesEXT WindowRectanglesEXT} */
     public static void glWindowRectanglesEXT(@NativeType("GLenum") int mode, @Nullable @NativeType("GLint const *") int[] box) {
         long __functionAddress = GL.getICD().glWindowRectanglesEXT;
         if (CHECKS) {

@@ -31,9 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVExplicitMultisample {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetMultisamplefvNV.
-     */
+    /** Accepted by the {@code pname} parameter of GetMultisamplefvNV. */
     public static final int GL_SAMPLE_POSITION_NV = 0x8E50;
 
     /**
@@ -101,9 +99,7 @@ public class NVExplicitMultisample {
 
     public static native void glTexRenderbufferNV(@NativeType("GLenum") int target, @NativeType("GLuint") int renderbuffer);
 
-    /**
-     * Array version of: {@link #glGetMultisamplefvNV GetMultisamplefvNV}
-     */
+    /** Array version of: {@link #glGetMultisamplefvNV GetMultisamplefvNV} */
     public static void glGetMultisamplefvNV(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] val) {
         long __functionAddress = GL.getICD().glGetMultisamplefvNV;
         if (CHECKS) {

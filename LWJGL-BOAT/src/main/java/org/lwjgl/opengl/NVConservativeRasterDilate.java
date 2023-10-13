@@ -23,9 +23,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVConservativeRasterDilate {
 
-    /**
-     * Accepted by the {@code pname} parameter of ConservativeRasterParameterfNV, GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of ConservativeRasterParameterfNV, GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
             GL_CONSERVATIVE_RASTER_DILATE_NV = 0x9379,
             GL_CONSERVATIVE_RASTER_DILATE_RANGE_NV = 0x937A,

@@ -21,9 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class DynCallback {
 
-    /**
-     * Callback signatures.
-     */
+    /** Callback signatures. */
     public static final char
             DCB_SIGCHAR_CC_PREFIX = '_',
             DCB_SIGCHAR_CC_ELLIPSIS = 'e',
@@ -42,9 +40,7 @@ public class DynCallback {
 
     // --- [ dcbNewCallback ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbNewCallback NewCallback}
-     */
+    /** Unsafe version of: {@link #dcbNewCallback NewCallback} */
     public static native long ndcbNewCallback(long signature, long funcptr, long userdata);
 
     /**
@@ -94,9 +90,7 @@ public class DynCallback {
 
     // --- [ dcbInitCallback ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbInitCallback InitCallback}
-     */
+    /** Unsafe version of: {@link #dcbInitCallback InitCallback} */
     public static native void ndcbInitCallback(long pcb, long signature, long handler, long userdata);
 
     /**
@@ -144,9 +138,7 @@ public class DynCallback {
 
     // --- [ dcbFreeCallback ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbFreeCallback FreeCallback}
-     */
+    /** Unsafe version of: {@link #dcbFreeCallback FreeCallback} */
     public static native void ndcbFreeCallback(long pcb);
 
     /**
@@ -163,9 +155,7 @@ public class DynCallback {
 
     // --- [ dcbGetUserData ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbGetUserData GetUserData}
-     */
+    /** Unsafe version of: {@link #dcbGetUserData GetUserData} */
     public static native long ndcbGetUserData(long pcb);
 
     /**
@@ -183,9 +173,7 @@ public class DynCallback {
 
     // --- [ dcbArgBool ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgBool ArgBool}
-     */
+    /** Unsafe version of: {@link #dcbArgBool ArgBool} */
     public static native int ndcbArgBool(long args);
 
     /**
@@ -203,9 +191,7 @@ public class DynCallback {
 
     // --- [ dcbArgChar ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgChar ArgChar}
-     */
+    /** Unsafe version of: {@link #dcbArgChar ArgChar} */
     public static native byte ndcbArgChar(long args);
 
     /**
@@ -223,9 +209,7 @@ public class DynCallback {
 
     // --- [ dcbArgShort ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgShort ArgShort}
-     */
+    /** Unsafe version of: {@link #dcbArgShort ArgShort} */
     public static native short ndcbArgShort(long args);
 
     /**
@@ -243,9 +227,7 @@ public class DynCallback {
 
     // --- [ dcbArgInt ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgInt ArgInt}
-     */
+    /** Unsafe version of: {@link #dcbArgInt ArgInt} */
     public static native int ndcbArgInt(long args);
 
     /**
@@ -263,9 +245,7 @@ public class DynCallback {
 
     // --- [ dcbArgLong ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgLong ArgLong}
-     */
+    /** Unsafe version of: {@link #dcbArgLong ArgLong} */
     public static native long ndcbArgLong(long args);
 
     /**
@@ -283,9 +263,7 @@ public class DynCallback {
 
     // --- [ dcbArgLongLong ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgLongLong ArgLongLong}
-     */
+    /** Unsafe version of: {@link #dcbArgLongLong ArgLongLong} */
     public static native long ndcbArgLongLong(long args);
 
     /**
@@ -303,9 +281,7 @@ public class DynCallback {
 
     // --- [ dcbArgUChar ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgUChar ArgUChar}
-     */
+    /** Unsafe version of: {@link #dcbArgUChar ArgUChar} */
     public static native byte ndcbArgUChar(long args);
 
     /**
@@ -323,9 +299,7 @@ public class DynCallback {
 
     // --- [ dcbArgUShort ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgUShort ArgUShort}
-     */
+    /** Unsafe version of: {@link #dcbArgUShort ArgUShort} */
     public static native short ndcbArgUShort(long args);
 
     /**
@@ -343,9 +317,7 @@ public class DynCallback {
 
     // --- [ dcbArgUInt ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgUInt ArgUInt}
-     */
+    /** Unsafe version of: {@link #dcbArgUInt ArgUInt} */
     public static native int ndcbArgUInt(long args);
 
     /**
@@ -363,9 +335,7 @@ public class DynCallback {
 
     // --- [ dcbArgULong ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgULong ArgULong}
-     */
+    /** Unsafe version of: {@link #dcbArgULong ArgULong} */
     public static native long ndcbArgULong(long args);
 
     /**
@@ -383,9 +353,7 @@ public class DynCallback {
 
     // --- [ dcbArgULongLong ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgULongLong ArgULongLong}
-     */
+    /** Unsafe version of: {@link #dcbArgULongLong ArgULongLong} */
     public static native long ndcbArgULongLong(long args);
 
     /**
@@ -403,9 +371,7 @@ public class DynCallback {
 
     // --- [ dcbArgFloat ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgFloat ArgFloat}
-     */
+    /** Unsafe version of: {@link #dcbArgFloat ArgFloat} */
     public static native float ndcbArgFloat(long args);
 
     /**
@@ -423,9 +389,7 @@ public class DynCallback {
 
     // --- [ dcbArgDouble ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgDouble ArgDouble}
-     */
+    /** Unsafe version of: {@link #dcbArgDouble ArgDouble} */
     public static native double ndcbArgDouble(long args);
 
     /**
@@ -443,9 +407,7 @@ public class DynCallback {
 
     // --- [ dcbArgPointer ] ---
 
-    /**
-     * Unsafe version of: {@link #dcbArgPointer ArgPointer}
-     */
+    /** Unsafe version of: {@link #dcbArgPointer ArgPointer} */
     public static native long ndcbArgPointer(long args);
 
     /**

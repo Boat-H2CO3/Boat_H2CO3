@@ -40,17 +40,13 @@ public abstract class GLFWMouseButtonCallback extends Callback implements GLFWMo
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWMouseButtonCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWMouseButtonCallback} instance that delegates to the specified {@code GLFWMouseButtonCallbackI} instance.
-     */
+    /** Creates a {@code GLFWMouseButtonCallback} instance that delegates to the specified {@code GLFWMouseButtonCallbackI} instance. */
     public static GLFWMouseButtonCallback create(GLFWMouseButtonCallbackI instance) {
         return instance instanceof GLFWMouseButtonCallback
                 ? (GLFWMouseButtonCallback) instance
@@ -65,9 +61,7 @@ public abstract class GLFWMouseButtonCallback extends Callback implements GLFWMo
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetMouseButtonCallback SetMouseButtonCallback}.
-     */
+    /** See {@link GLFW#glfwSetMouseButtonCallback SetMouseButtonCallback}. */
     public GLFWMouseButtonCallback set(long window) {
         glfwSetMouseButtonCallback(window, this);
         return this;

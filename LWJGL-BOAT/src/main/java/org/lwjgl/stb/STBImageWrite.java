@@ -68,8 +68,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class STBImageWrite {
 
-    static {
-        LibSTB.initialize();
+    static { LibSTB.initialize();
     }
 
     protected STBImageWrite() {
@@ -78,9 +77,7 @@ public class STBImageWrite {
 
     // --- [ stbi_write_png ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_write_png write_png}
-     */
+    /** Unsafe version of: {@link #stbi_write_png write_png} */
     public static native int nstbi_write_png(long filename, int w, int h, int comp, long data, int stride_in_bytes);
 
     /**
@@ -100,6 +97,7 @@ public class STBImageWrite {
      * @param comp            the number of channels in each pixel
      * @param data            the image data
      * @param stride_in_bytes the distance in bytes from the first byte of a row of pixels to the first byte of the next row of pixels
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -128,6 +126,7 @@ public class STBImageWrite {
      * @param comp            the number of channels in each pixel
      * @param data            the image data
      * @param stride_in_bytes the distance in bytes from the first byte of a row of pixels to the first byte of the next row of pixels
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -156,9 +155,7 @@ public class STBImageWrite {
         return memIntBuffer(__result, 1);
     }
 
-    /**
-     * Returns the address of the global variable {@code stbi_write_png_compression_level}.
-     */
+    /** Returns the address of the global variable {@code stbi_write_png_compression_level}. */
     public static final IntBuffer stbi_write_png_compression_level = stbi_write_png_compression_level();
 
     // --- [ stbi_write_force_png_filter ] ---
@@ -171,9 +168,7 @@ public class STBImageWrite {
         return memIntBuffer(__result, 1);
     }
 
-    /**
-     * Returns the address of the global variable {@code stbi_write_force_png_filter}.
-     */
+    /** Returns the address of the global variable {@code stbi_write_force_png_filter}. */
     public static final IntBuffer stbi_write_force_png_filter = stbi_write_force_png_filter();
 
     // --- [ stbi_zlib_compress ] ---
@@ -195,9 +190,7 @@ public class STBImageWrite {
 
     // --- [ stbi_write_bmp ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_write_bmp write_bmp}
-     */
+    /** Unsafe version of: {@link #stbi_write_bmp write_bmp} */
     public static native int nstbi_write_bmp(long filename, int w, int h, int comp, long data);
 
     /**
@@ -210,6 +203,7 @@ public class STBImageWrite {
      * @param h        the image height, in pixels
      * @param comp     the number of channels in each pixel
      * @param data     the image data
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -231,6 +225,7 @@ public class STBImageWrite {
      * @param h        the image height, in pixels
      * @param comp     the number of channels in each pixel
      * @param data     the image data
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -251,9 +246,7 @@ public class STBImageWrite {
 
     // --- [ stbi_write_tga ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_write_tga write_tga}
-     */
+    /** Unsafe version of: {@link #stbi_write_tga write_tga} */
     public static native int nstbi_write_tga(long filename, int w, int h, int comp, long data);
 
     /**
@@ -267,6 +260,7 @@ public class STBImageWrite {
      * @param h        the image height, in pixels
      * @param comp     the number of channels in each pixel
      * @param data     the image data
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -289,6 +283,7 @@ public class STBImageWrite {
      * @param h        the image height, in pixels
      * @param comp     the number of channels in each pixel
      * @param data     the image data
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -317,16 +312,12 @@ public class STBImageWrite {
         return memIntBuffer(__result, 1);
     }
 
-    /**
-     * Returns the address of the global variable {@code stbi_write_tga_with_rle}.
-     */
+    /** Returns the address of the global variable {@code stbi_write_tga_with_rle}. */
     public static final IntBuffer stbi_write_tga_with_rle = stbi_write_tga_with_rle();
 
     // --- [ stbi_write_hdr ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_write_hdr write_hdr}
-     */
+    /** Unsafe version of: {@link #stbi_write_hdr write_hdr} */
     public static native int nstbi_write_hdr(long filename, int w, int h, int comp, long data);
 
     /**
@@ -340,6 +331,7 @@ public class STBImageWrite {
      * @param h        the image height, in pixels
      * @param comp     the number of channels in each pixel
      * @param data     the image data
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -362,6 +354,7 @@ public class STBImageWrite {
      * @param h        the image height, in pixels
      * @param comp     the number of channels in each pixel
      * @param data     the image data
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -382,9 +375,7 @@ public class STBImageWrite {
 
     // --- [ stbi_write_jpg ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_write_jpg write_jpg}
-     */
+    /** Unsafe version of: {@link #stbi_write_jpg write_jpg} */
     public static native int nstbi_write_jpg(long filename, int w, int h, int comp, long data, int quality);
 
     /**
@@ -399,6 +390,7 @@ public class STBImageWrite {
      * @param comp     the number of channels in each pixel
      * @param data     the image data
      * @param quality  the compression quality
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -422,6 +414,7 @@ public class STBImageWrite {
      * @param comp     the number of channels in each pixel
      * @param data     the image data
      * @param quality  the compression quality
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -442,9 +435,7 @@ public class STBImageWrite {
 
     // --- [ stbi_write_png_to_func ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_write_png_to_func write_png_to_func}
-     */
+    /** Unsafe version of: {@link #stbi_write_png_to_func write_png_to_func} */
     public static native int nstbi_write_png_to_func(long func, long context, int w, int h, int comp, long data, int stride_in_bytes);
 
     /**
@@ -457,6 +448,7 @@ public class STBImageWrite {
      * @param comp            the number of channels in each pixel
      * @param data            the image data
      * @param stride_in_bytes the distance in bytes from the first byte of a row of pixels to the first byte of the next row of pixels
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -469,9 +461,7 @@ public class STBImageWrite {
 
     // --- [ stbi_write_bmp_to_func ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_write_bmp_to_func write_bmp_to_func}
-     */
+    /** Unsafe version of: {@link #stbi_write_bmp_to_func write_bmp_to_func} */
     public static native int nstbi_write_bmp_to_func(long func, long context, int w, int h, int comp, long data);
 
     /**
@@ -483,6 +473,7 @@ public class STBImageWrite {
      * @param h       the image height, in pixels
      * @param comp    the number of channels in each pixel
      * @param data    the image data
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -495,9 +486,7 @@ public class STBImageWrite {
 
     // --- [ stbi_write_tga_to_func ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_write_tga_to_func write_tga_to_func}
-     */
+    /** Unsafe version of: {@link #stbi_write_tga_to_func write_tga_to_func} */
     public static native int nstbi_write_tga_to_func(long func, long context, int w, int h, int comp, long data);
 
     /**
@@ -509,6 +498,7 @@ public class STBImageWrite {
      * @param h       the image height, in pixels
      * @param comp    the number of channels in each pixel
      * @param data    the image data
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -521,9 +511,7 @@ public class STBImageWrite {
 
     // --- [ stbi_write_hdr_to_func ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_write_hdr_to_func write_hdr_to_func}
-     */
+    /** Unsafe version of: {@link #stbi_write_hdr_to_func write_hdr_to_func} */
     public static native int nstbi_write_hdr_to_func(long func, long context, int w, int h, int comp, long data);
 
     /**
@@ -535,6 +523,7 @@ public class STBImageWrite {
      * @param h       the image height, in pixels
      * @param comp    the number of channels in each pixel
      * @param data    the image data
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -547,9 +536,7 @@ public class STBImageWrite {
 
     // --- [ stbi_write_jpg_to_func ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_write_jpg_to_func write_jpg_to_func}
-     */
+    /** Unsafe version of: {@link #stbi_write_jpg_to_func write_jpg_to_func} */
     public static native int nstbi_write_jpg_to_func(long func, long context, int w, int h, int comp, long data, int quality);
 
     /**
@@ -562,6 +549,7 @@ public class STBImageWrite {
      * @param comp    the number of channels in each pixel
      * @param data    the image data
      * @param quality the compression quality
+     *
      * @return 1 on success, 0 on failure
      */
     public static int stbi_write_jpg_to_func(@NativeType("stbi_write_func *") STBIWriteCallbackI func, @NativeType("void *") long context, int w, int h, int comp, @NativeType("void const *") ByteBuffer data, int quality) {
@@ -573,9 +561,7 @@ public class STBImageWrite {
 
     // --- [ stbi_flip_vertically_on_write ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_flip_vertically_on_write flip_vertically_on_write}
-     */
+    /** Unsafe version of: {@link #stbi_flip_vertically_on_write flip_vertically_on_write} */
     public static native void nstbi_flip_vertically_on_write(int flip_boolean);
 
     /**
@@ -587,14 +573,10 @@ public class STBImageWrite {
         nstbi_flip_vertically_on_write(flip_boolean ? 1 : 0);
     }
 
-    /**
-     * Array version of: {@link #nstbi_write_hdr}
-     */
+    /** Array version of: {@link #nstbi_write_hdr} */
     public static native int nstbi_write_hdr(long filename, int w, int h, int comp, float[] data);
 
-    /**
-     * Array version of: {@link #stbi_write_hdr write_hdr}
-     */
+    /** Array version of: {@link #stbi_write_hdr write_hdr} */
     @NativeType("int")
     public static boolean stbi_write_hdr(@NativeType("char const *") ByteBuffer filename, int w, int h, int comp, @NativeType("float const *") float[] data) {
         if (CHECKS) {
@@ -604,9 +586,7 @@ public class STBImageWrite {
         return nstbi_write_hdr(memAddress(filename), w, h, comp, data) != 0;
     }
 
-    /**
-     * Array version of: {@link #stbi_write_hdr write_hdr}
-     */
+    /** Array version of: {@link #stbi_write_hdr write_hdr} */
     @NativeType("int")
     public static boolean stbi_write_hdr(@NativeType("char const *") CharSequence filename, int w, int h, int comp, @NativeType("float const *") float[] data) {
         if (CHECKS) {
@@ -623,14 +603,10 @@ public class STBImageWrite {
         }
     }
 
-    /**
-     * Array version of: {@link #nstbi_write_hdr_to_func}
-     */
+    /** Array version of: {@link #nstbi_write_hdr_to_func} */
     public static native int nstbi_write_hdr_to_func(long func, long context, int w, int h, int comp, float[] data);
 
-    /**
-     * Array version of: {@link #stbi_write_hdr_to_func write_hdr_to_func}
-     */
+    /** Array version of: {@link #stbi_write_hdr_to_func write_hdr_to_func} */
     @NativeType("int")
     public static boolean stbi_write_hdr_to_func(@NativeType("stbi_write_func *") STBIWriteCallbackI func, @NativeType("void *") long context, int w, int h, int comp, @NativeType("float const *") float[] data) {
         if (CHECKS) {

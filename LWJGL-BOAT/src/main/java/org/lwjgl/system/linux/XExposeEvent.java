@@ -281,7 +281,7 @@ public class XExposeEvent extends Struct implements NativeResource {
             int y,
             int width,
             int height,
-            int count
+        int count
     ) {
         type(type);
         serial(serial);
@@ -301,6 +301,7 @@ public class XExposeEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XExposeEvent set(XExposeEvent src) {
@@ -310,38 +311,28 @@ public class XExposeEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XExposeEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XExposeEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XExposeEvent malloc() {
         return wrap(XExposeEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XExposeEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XExposeEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XExposeEvent calloc() {
         return wrap(XExposeEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XExposeEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XExposeEvent} instance allocated with {@link BufferUtils}. */
     public static XExposeEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XExposeEvent.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code XExposeEvent} instance for the specified memory address.
-     */
+    /** Returns a new {@code XExposeEvent} instance for the specified memory address. */
     public static XExposeEvent create(long address) {
         return wrap(XExposeEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XExposeEvent createSafe(long address) {
         return address == NULL ? null : wrap(XExposeEvent.class, address);
@@ -385,9 +376,7 @@ public class XExposeEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -395,16 +384,12 @@ public class XExposeEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XExposeEvent} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code XExposeEvent} instance allocated on the thread-local {@link MemoryStack}. */
     public static XExposeEvent mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XExposeEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XExposeEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XExposeEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -448,7 +433,7 @@ public class XExposeEvent extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -604,8 +589,7 @@ public class XExposeEvent extends Struct implements NativeResource {
      * Unsafe version of {@link #count(int) count}.
      */
     public static void ncount(long struct, int value) {
-        UNSAFE.putInt(null, struct + XExposeEvent.COUNT, value);
-    }
+        UNSAFE.putInt(null, struct + XExposeEvent.COUNT, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -630,16 +614,14 @@ public class XExposeEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XExposeEvent} structs.
-     */
+    /** An array of {@link XExposeEvent} structs. */
     public static class Buffer extends StructBuffer<XExposeEvent, Buffer> implements NativeResource {
 
         private static final XExposeEvent ELEMENT_FACTORY = XExposeEvent.create(-1L);
 
         /**
          * Creates a new {@code XExposeEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XExposeEvent#SIZEOF}, and its mark will be undefined.
@@ -794,33 +776,13 @@ public class XExposeEvent extends Struct implements NativeResource {
          * Sets the specified value to the {@code y} field.
          */
         public Buffer y(int value) {
-            XExposeEvent.ny(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code width} field.
-         */
-        public Buffer width(int value) {
-            XExposeEvent.nwidth(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code height} field.
-         */
-        public Buffer height(int value) {
-            XExposeEvent.nheight(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code count} field.
-         */
-        public Buffer count(int value) {
-            XExposeEvent.ncount(address(), value);
-            return this;
-        }
+            XExposeEvent.ny(address(), value); return this; }
+        /** Sets the specified value to the {@code width} field. */
+        public Buffer width(int value) { XExposeEvent.nwidth(address(), value); return this; }
+        /** Sets the specified value to the {@code height} field. */
+        public Buffer height(int value) { XExposeEvent.nheight(address(), value); return this; }
+        /** Sets the specified value to the {@code count} field. */
+        public Buffer count(int value) { XExposeEvent.ncount(address(), value); return this; }
 
     }
 

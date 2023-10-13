@@ -35,6 +35,7 @@ import java.io.Serializable;
 import java.nio.FloatBuffer;
 
 /**
+ *
  * Holds a 3x3 matrix.
  *
  * @author cix_foo <cix_foo@users.sourceforge.net>

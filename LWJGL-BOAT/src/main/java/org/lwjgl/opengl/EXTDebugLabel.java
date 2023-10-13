@@ -28,9 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTDebugLabel {
 
-    /**
-     * Accepted by the {@code type} parameter of LabelObjectEXT and GetObjectLabelEXT.
-     */
+    /** Accepted by the {@code type} parameter of LabelObjectEXT and GetObjectLabelEXT. */
     public static final int
             GL_BUFFER_OBJECT_EXT = 0x9151,
             GL_SHADER_OBJECT_EXT = 0x8B48,
@@ -98,9 +96,7 @@ public class EXTDebugLabel {
         }
     }
 
-    /**
-     * Array version of: {@link #glGetObjectLabelEXT GetObjectLabelEXT}
-     */
+    /** Array version of: {@link #glGetObjectLabelEXT GetObjectLabelEXT} */
     public static void glGetObjectLabelEXT(@NativeType("GLenum") int type, @NativeType("GLuint") int object, @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer label) {
         long __functionAddress = GL.getICD().glGetObjectLabelEXT;
         if (CHECKS) {

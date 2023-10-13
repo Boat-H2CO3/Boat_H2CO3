@@ -25,7 +25,7 @@ public class GLXNVCopyImage {
 
     static boolean isAvailable(GLXCapabilities caps) {
         return checkFunctions(
-                caps.glXCopyImageSubDataNV
+            caps.glXCopyImageSubDataNV
         );
     }
 

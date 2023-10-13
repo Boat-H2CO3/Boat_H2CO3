@@ -27,9 +27,7 @@ package org.lwjgl.opengl;
  */
 public final class ARBTextureCubeMapArray {
 
-    /**
-     * Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, BindTexture, and GenerateMipmap.
-     */
+    /** Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, BindTexture, and GenerateMipmap. */
     public static final int GL_TEXTURE_CUBE_MAP_ARRAY_ARB = 0x9009;
 
     /**

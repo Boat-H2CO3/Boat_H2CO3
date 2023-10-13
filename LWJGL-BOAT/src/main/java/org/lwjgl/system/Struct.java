@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import javax.annotation.*;
-
 import java.nio.*;
 import java.util.*;
 
@@ -43,14 +42,10 @@ public abstract class Struct extends Pointer.Default {
         this.container = container;
     }
 
-    /**
-     * Returns {@code sizeof(struct)}.
-     */
+    /** Returns {@code sizeof(struct)}. */
     public abstract int sizeof();
 
-    /**
-     * Zeroes-out the struct data.
-     */
+    /** Zeroes-out the struct data. */
     public void clear() {
         memSet(address(), 0, sizeof());
     }
@@ -70,6 +65,7 @@ public abstract class Struct extends Pointer.Default {
      * <p>This is useful to verify that not nullable members of an untrusted struct instance are indeed not {@code NULL}.</p>
      *
      * @param memberOffset the byte offset of the member to query
+     *
      * @return true if the member is {@code NULL}
      */
     public boolean isNull(int memberOffset) {
@@ -220,11 +216,9 @@ public abstract class Struct extends Pointer.Default {
     protected static Member __array(int size, int length) {
         return __array(size, size, length);
     }
-
     protected static Member __array(int size, int alignment, int length) {
         return new Member(size * length, alignment, false);
     }
-
     protected static Member __array(int size, int alignment, boolean forceAlignment, int length) {
         return new Member(size * length, alignment, forceAlignment);
     }

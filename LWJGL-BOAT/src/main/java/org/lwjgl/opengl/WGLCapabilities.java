@@ -6,7 +6,6 @@
 package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
-
 import java.util.Set;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -72,69 +71,37 @@ public final class WGLCapabilities {
             wglAllocateMemoryNV,
             wglFreeMemoryNV;
 
-    /**
-     * When true, {@link WGLAMDGPUAssociation} is supported.
-     */
+    /** When true, {@link WGLAMDGPUAssociation} is supported. */
     public final boolean WGL_AMD_gpu_association;
-    /**
-     * When true, {@link WGLARBBufferRegion} is supported.
-     */
+    /** When true, {@link WGLARBBufferRegion} is supported. */
     public final boolean WGL_ARB_buffer_region;
-    /**
-     * When true, {@link WGLARBContextFlushControl} is supported.
-     */
+    /** When true, {@link WGLARBContextFlushControl} is supported. */
     public final boolean WGL_ARB_context_flush_control;
-    /**
-     * When true, {@link WGLARBCreateContext} is supported.
-     */
+    /** When true, {@link WGLARBCreateContext} is supported. */
     public final boolean WGL_ARB_create_context;
-    /**
-     * When true, {@link WGLARBCreateContextNoError} is supported.
-     */
+    /** When true, {@link WGLARBCreateContextNoError} is supported. */
     public final boolean WGL_ARB_create_context_no_error;
-    /**
-     * When true, {@link WGLARBCreateContextProfile} is supported.
-     */
+    /** When true, {@link WGLARBCreateContextProfile} is supported. */
     public final boolean WGL_ARB_create_context_profile;
-    /**
-     * When true, {@link WGLARBCreateContextRobustness} is supported.
-     */
+    /** When true, {@link WGLARBCreateContextRobustness} is supported. */
     public final boolean WGL_ARB_create_context_robustness;
-    /**
-     * When true, {@link WGLARBExtensionsString} is supported.
-     */
+    /** When true, {@link WGLARBExtensionsString} is supported. */
     public final boolean WGL_ARB_extensions_string;
-    /**
-     * When true, {@link WGLARBFramebufferSRGB} is supported.
-     */
+    /** When true, {@link WGLARBFramebufferSRGB} is supported. */
     public final boolean WGL_ARB_framebuffer_sRGB;
-    /**
-     * When true, {@link WGLARBMakeCurrentRead} is supported.
-     */
+    /** When true, {@link WGLARBMakeCurrentRead} is supported. */
     public final boolean WGL_ARB_make_current_read;
-    /**
-     * When true, {@link WGLARBMultisample} is supported.
-     */
+    /** When true, {@link WGLARBMultisample} is supported. */
     public final boolean WGL_ARB_multisample;
-    /**
-     * When true, {@link WGLARBPbuffer} is supported.
-     */
+    /** When true, {@link WGLARBPbuffer} is supported. */
     public final boolean WGL_ARB_pbuffer;
-    /**
-     * When true, {@link WGLARBPixelFormat} is supported.
-     */
+    /** When true, {@link WGLARBPixelFormat} is supported. */
     public final boolean WGL_ARB_pixel_format;
-    /**
-     * When true, {@link WGLARBPixelFormatFloat} is supported.
-     */
+    /** When true, {@link WGLARBPixelFormatFloat} is supported. */
     public final boolean WGL_ARB_pixel_format_float;
-    /**
-     * When true, {@link WGLARBRenderTexture} is supported.
-     */
+    /** When true, {@link WGLARBRenderTexture} is supported. */
     public final boolean WGL_ARB_render_texture;
-    /**
-     * When true, {@link WGLARBRobustnessApplicationIsolation} is supported.
-     */
+    /** When true, {@link WGLARBRobustnessApplicationIsolation} is supported. */
     public final boolean WGL_ARB_robustness_application_isolation;
     /**
      * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/WGL_ARB_robustness_application_isolation.txt">WGL_ARB_robustness_share_group_isolation</a> extension.
@@ -155,45 +122,25 @@ public final class WGLCapabilities {
      * <p>Requires {@link WGLARBExtensionsString WGL_ARB_extensions_string} and {@link WGLARBCreateContextRobustness WGL_ARB_create_context_robustness}.</p>
      */
     public final boolean WGL_ARB_robustness_share_group_isolation;
-    /**
-     * When true, {@link WGLATIPixelFormatFloat} is supported.
-     */
+    /** When true, {@link WGLATIPixelFormatFloat} is supported. */
     public final boolean WGL_ATI_pixel_format_float;
-    /**
-     * When true, {@link WGLATIRenderTextureRectangle} is supported.
-     */
+    /** When true, {@link WGLATIRenderTextureRectangle} is supported. */
     public final boolean WGL_ATI_render_texture_rectangle;
-    /**
-     * When true, {@link WGLEXTColorspace} is supported.
-     */
+    /** When true, {@link WGLEXTColorspace} is supported. */
     public final boolean WGL_EXT_colorspace;
-    /**
-     * When true, {@link WGLEXTCreateContextES2Profile} is supported.
-     */
+    /** When true, {@link WGLEXTCreateContextES2Profile} is supported. */
     public final boolean WGL_EXT_create_context_es2_profile;
-    /**
-     * When true, {@link WGLEXTCreateContextESProfile} is supported.
-     */
+    /** When true, {@link WGLEXTCreateContextESProfile} is supported. */
     public final boolean WGL_EXT_create_context_es_profile;
-    /**
-     * When true, {@link WGLEXTDepthFloat} is supported.
-     */
+    /** When true, {@link WGLEXTDepthFloat} is supported. */
     public final boolean WGL_EXT_depth_float;
-    /**
-     * When true, {@link WGLEXTExtensionsString} is supported.
-     */
+    /** When true, {@link WGLEXTExtensionsString} is supported. */
     public final boolean WGL_EXT_extensions_string;
-    /**
-     * When true, {@link WGLEXTFramebufferSRGB} is supported.
-     */
+    /** When true, {@link WGLEXTFramebufferSRGB} is supported. */
     public final boolean WGL_EXT_framebuffer_sRGB;
-    /**
-     * When true, {@link WGLEXTPixelFormatPackedFloat} is supported.
-     */
+    /** When true, {@link WGLEXTPixelFormatPackedFloat} is supported. */
     public final boolean WGL_EXT_pixel_format_packed_float;
-    /**
-     * When true, {@link WGLEXTSwapControl} is supported.
-     */
+    /** When true, {@link WGLEXTSwapControl} is supported. */
     public final boolean WGL_EXT_swap_control;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/WGL_EXT_swap_control_tear.txt">WGL_EXT_swap_control_tear</a> extension is supported.
@@ -203,17 +150,11 @@ public final class WGLCapabilities {
      * reduces the visual stutter on late frames and reduces the stall on subsequent frames.</p>
      */
     public final boolean WGL_EXT_swap_control_tear;
-    /**
-     * When true, {@link WGLNVCopyImage} is supported.
-     */
+    /** When true, {@link WGLNVCopyImage} is supported. */
     public final boolean WGL_NV_copy_image;
-    /**
-     * When true, {@link WGLNVDelayBeforeSwap} is supported.
-     */
+    /** When true, {@link WGLNVDelayBeforeSwap} is supported. */
     public final boolean WGL_NV_delay_before_swap;
-    /**
-     * When true, {@link WGLNVDXInterop} is supported.
-     */
+    /** When true, {@link WGLNVDXInterop} is supported. */
     public final boolean WGL_NV_DX_interop;
     /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/NV/WGL_NV_DX_interop2.txt">WGL_NV_DX_interop2</a> extension is supported.
@@ -223,37 +164,21 @@ public final class WGLCapabilities {
      * <p>Requires {@link GL20 OpenGL 2.0} and {@link WGLNVDXInterop WGL_NV_DX_interop}.</p>
      */
     public final boolean WGL_NV_DX_interop2;
-    /**
-     * When true, {@link WGLNVFloatBuffer} is supported.
-     */
+    /** When true, {@link WGLNVFloatBuffer} is supported. */
     public final boolean WGL_NV_float_buffer;
-    /**
-     * When true, {@link WGLNVGPUAffinity} is supported.
-     */
+    /** When true, {@link WGLNVGPUAffinity} is supported. */
     public final boolean WGL_NV_gpu_affinity;
-    /**
-     * When true, {@link WGLNVMultigpuContext} is supported.
-     */
+    /** When true, {@link WGLNVMultigpuContext} is supported. */
     public final boolean WGL_NV_multigpu_context;
-    /**
-     * When true, {@link WGLNVMultisampleCoverage} is supported.
-     */
+    /** When true, {@link WGLNVMultisampleCoverage} is supported. */
     public final boolean WGL_NV_multisample_coverage;
-    /**
-     * When true, {@link WGLNVRenderDepthTexture} is supported.
-     */
+    /** When true, {@link WGLNVRenderDepthTexture} is supported. */
     public final boolean WGL_NV_render_depth_texture;
-    /**
-     * When true, {@link WGLNVRenderTextureRectangle} is supported.
-     */
+    /** When true, {@link WGLNVRenderTextureRectangle} is supported. */
     public final boolean WGL_NV_render_texture_rectangle;
-    /**
-     * When true, {@link WGLNVSwapGroup} is supported.
-     */
+    /** When true, {@link WGLNVSwapGroup} is supported. */
     public final boolean WGL_NV_swap_group;
-    /**
-     * When true, {@code WGL_NV_vertex_array_range} is supported.
-     */
+    /** When true, {@code WGL_NV_vertex_array_range} is supported. */
     public final boolean WGL_NV_vertex_array_range;
 
     WGLCapabilities(FunctionProvider provider, Set<String> ext) {

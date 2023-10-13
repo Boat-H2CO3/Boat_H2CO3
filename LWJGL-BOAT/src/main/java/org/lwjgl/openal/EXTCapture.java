@@ -21,16 +21,12 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTCapture {
 
-    /**
-     * String queries.
-     */
+    /** String queries. */
     public static final int
             ALC_CAPTURE_DEVICE_SPECIFIER = 0x310,
             ALC_CAPTURE_DEFAULT_DEVICE_SPECIFIER = 0x311;
 
-    /**
-     * Integer queries.
-     */
+    /** Integer queries. */
     public static final int ALC_CAPTURE_SAMPLES = 0x312;
 
     protected EXTCapture() {
@@ -45,9 +41,7 @@ public class EXTCapture {
 
     // --- [ alcCaptureOpenDevice ] ---
 
-    /**
-     * Unsafe version of: {@link #alcCaptureOpenDevice CaptureOpenDevice}
-     */
+    /** Unsafe version of: {@link #alcCaptureOpenDevice CaptureOpenDevice} */
     public static long nalcCaptureOpenDevice(long deviceName, int frequency, int format, int samples) {
         return ALC11.nalcCaptureOpenDevice(deviceName, frequency, format, samples);
     }
@@ -129,9 +123,7 @@ public class EXTCapture {
 
     // --- [ alcCaptureSamples ] ---
 
-    /**
-     * Unsafe version of: {@link #alcCaptureSamples CaptureSamples}
-     */
+    /** Unsafe version of: {@link #alcCaptureSamples CaptureSamples} */
     public static void nalcCaptureSamples(long device, long buffer, int samples) {
         ALC11.nalcCaptureSamples(device, buffer, samples);
     }
@@ -192,25 +184,19 @@ public class EXTCapture {
         ALC11.alcCaptureSamples(device, buffer, samples);
     }
 
-    /**
-     * Array version of: {@link #alcCaptureSamples CaptureSamples}
-     */
+    /** Array version of: {@link #alcCaptureSamples CaptureSamples} */
     @NativeType("ALCvoid")
     public static void alcCaptureSamples(@NativeType("ALCdevice *") long device, @NativeType("ALCvoid *") short[] buffer, @NativeType("ALCsizei") int samples) {
         ALC11.alcCaptureSamples(device, buffer, samples);
     }
 
-    /**
-     * Array version of: {@link #alcCaptureSamples CaptureSamples}
-     */
+    /** Array version of: {@link #alcCaptureSamples CaptureSamples} */
     @NativeType("ALCvoid")
     public static void alcCaptureSamples(@NativeType("ALCdevice *") long device, @NativeType("ALCvoid *") int[] buffer, @NativeType("ALCsizei") int samples) {
         ALC11.alcCaptureSamples(device, buffer, samples);
     }
 
-    /**
-     * Array version of: {@link #alcCaptureSamples CaptureSamples}
-     */
+    /** Array version of: {@link #alcCaptureSamples CaptureSamples} */
     @NativeType("ALCvoid")
     public static void alcCaptureSamples(@NativeType("ALCdevice *") long device, @NativeType("ALCvoid *") float[] buffer, @NativeType("ALCsizei") int samples) {
         ALC11.alcCaptureSamples(device, buffer, samples);

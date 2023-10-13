@@ -23,7 +23,7 @@ public class GLXSGISwapControl {
 
     static boolean isAvailable(GLXCapabilities caps) {
         return checkFunctions(
-                caps.glXSwapIntervalSGI
+            caps.glXSwapIntervalSGI
         );
     }
 

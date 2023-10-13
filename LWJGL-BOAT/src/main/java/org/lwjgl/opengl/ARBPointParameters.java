@@ -5,15 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.FloatBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_point_parameters.txt">ARB_point_parameters</a> extension.
@@ -36,9 +34,7 @@ import java.nio.FloatBuffer;
  */
 public class ARBPointParameters {
 
-    /**
-     * Accepted by the {@code pname} parameter of PointParameterfvARB, and the {@code pname} of Get.
-     */
+    /** Accepted by the {@code pname} parameter of PointParameterfvARB, and the {@code pname} of Get. */
     public static final int
             GL_POINT_SIZE_MIN_ARB = 0x8126,
             GL_POINT_SIZE_MAX_ARB = 0x8127,
@@ -71,9 +67,7 @@ public class ARBPointParameters {
 
     // --- [ glPointParameterfvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glPointParameterfvARB PointParameterfvARB}
-     */
+    /** Unsafe version of: {@link #glPointParameterfvARB PointParameterfvARB} */
     public static native void nglPointParameterfvARB(int pname, long params);
 
     /**
@@ -89,9 +83,7 @@ public class ARBPointParameters {
         nglPointParameterfvARB(pname, memAddress(params));
     }
 
-    /**
-     * Array version of: {@link #glPointParameterfvARB PointParameterfvARB}
-     */
+    /** Array version of: {@link #glPointParameterfvARB PointParameterfvARB} */
     public static void glPointParameterfvARB(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glPointParameterfvARB;
         if (CHECKS) {

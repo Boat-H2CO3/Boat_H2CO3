@@ -7,7 +7,6 @@ package org.lwjgl;
 import org.lwjgl.system.*;
 
 import javax.annotation.*;
-
 import java.nio.*;
 
 import static org.lwjgl.system.CheckIntrinsics.*;
@@ -32,7 +31,9 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      * <p>The new buffer's position will be zero, its limit will be its capacity, and its mark will be undefined.</p>
      *
      * @param capacity the new buffer's capacity, in longs
+     *
      * @return the new long buffer
+     *
      * @throws IllegalArgumentException If the {@code capacity} is a negative integer
      */
     public static CLongBuffer allocateDirect(int capacity) {
@@ -74,6 +75,7 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      * Relative <i>get</i> method. Reads the long at this buffer's current position, and then increments the position.
      *
      * @return the long at the buffer's current position
+     *
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public long get() {
@@ -103,7 +105,9 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      * <p>Writes the specified long into this buffer at the current position, and then increments the position.</p>
      *
      * @param p the long to be written
+     *
      * @return This buffer
+     *
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      */
     public CLongBuffer put(long p) {
@@ -133,7 +137,9 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      * Absolute <i>get</i> method. Reads the long at the specified {@code index}.
      *
      * @param index the index from which the long will be read
+     *
      * @return the long at the specified {@code index}
+     *
      * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public long get(int index) {
@@ -158,7 +164,9 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      *
      * @param index the index at which the long will be written
      * @param p     the long value to be written
+     *
      * @return This buffer
+     *
      * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public CLongBuffer put(int index, long p) {
@@ -190,6 +198,7 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      *     src.get(a, 0, a.length) </pre>
      *
      * @return This buffer
+     *
      * @throws BufferUnderflowException If there are fewer than {@code length} longs remaining in this buffer
      */
     public CLongBuffer get(long[] dst) {
@@ -217,7 +226,9 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      * @param dst    the array into which longs are to be written
      * @param offset the offset within the array of the first long to be written; must be non-negative and no larger than {@code dst.length}
      * @param length the maximum number of longs to be written to the specified array; must be non-negative and no larger than {@code dst.length - offset}
+     *
      * @return This buffer
+     *
      * @throws BufferUnderflowException  If there are fewer than {@code length} longs remaining in this buffer
      * @throws IndexOutOfBoundsException If the preconditions on the {@code offset} and {@code length} parameters do not hold
      */
@@ -252,6 +263,7 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      *     dst.put(a, 0, a.length) </pre>
      *
      * @return This buffer
+     *
      * @throws BufferOverflowException If there is insufficient space in this buffer
      */
     public CLongBuffer put(long[] src) {
@@ -279,7 +291,9 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      * @param src    the array from which longs are to be read
      * @param offset the offset within the array of the first long to be read; must be non-negative and no larger than {@code array.length}
      * @param length the number of longs to be read from the specified array; must be non-negative and no larger than {@code array.length - offset}
+     *
      * @return This buffer
+     *
      * @throws BufferOverflowException   If there is insufficient space in this buffer
      * @throws IndexOutOfBoundsException If the preconditions on the {@code offset} and {@code length} parameters do not hold
      */
@@ -340,6 +354,7 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      * <p>A long buffer is not equal to any other type of object.</p>
      *
      * @param ob the object to which this buffer is to be compared
+     *
      * @return {@code true} if, and only if, this buffer is equal to the
      * given object
      */

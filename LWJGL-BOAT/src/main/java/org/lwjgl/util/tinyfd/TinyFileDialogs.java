@@ -52,9 +52,7 @@ public class TinyFileDialogs {
         return memASCII(__result);
     }
 
-    /**
-     * Contains tinyfd current version number.
-     */
+    /** Contains tinyfd current version number. */
     public static final String tinyfd_version = tinyfd_version();
 
     // --- [ tinyfd_needs ] ---
@@ -67,9 +65,7 @@ public class TinyFileDialogs {
         return memASCII(__result);
     }
 
-    /**
-     * Contains info about requirements.
-     */
+    /** Contains info about requirements. */
     public static final String tinyfd_needs = tinyfd_needs();
 
     // --- [ tinyfd_verbose ] ---
@@ -82,9 +78,7 @@ public class TinyFileDialogs {
         return memIntBuffer(__result, 1);
     }
 
-    /**
-     * 0 (default) or 1 : on unix, prints the command line calls.
-     */
+    /** 0 (default) or 1 : on unix, prints the command line calls. */
     public static final IntBuffer tinyfd_verbose = tinyfd_verbose();
 
     // --- [ tinyfd_silent ] ---
@@ -97,9 +91,7 @@ public class TinyFileDialogs {
         return memIntBuffer(__result, 1);
     }
 
-    /**
-     * 1 (default) or 0 : on unix, hide errors and warnings from called dialog.
-     */
+    /** 1 (default) or 0 : on unix, hide errors and warnings from called dialog. */
     public static final IntBuffer tinyfd_silent = tinyfd_silent();
 
     // --- [ tinyfd_winUtf8 ] ---
@@ -135,9 +127,7 @@ public class TinyFileDialogs {
 
     // --- [ tinyfd_response ] ---
 
-    /**
-     * Unsafe version of: {@link #tinyfd_response response}
-     */
+    /** Unsafe version of: {@link #tinyfd_response response} */
     public static native long ntinyfd_response();
 
     /**
@@ -161,9 +151,7 @@ public class TinyFileDialogs {
 
     // --- [ tinyfd_notifyPopup ] ---
 
-    /**
-     * Unsafe version of: {@link #tinyfd_notifyPopup notifyPopup}
-     */
+    /** Unsafe version of: {@link #tinyfd_notifyPopup notifyPopup} */
     public static native int ntinyfd_notifyPopup(long aTitle, long aMessage, long aIconType);
 
     /**
@@ -207,9 +195,7 @@ public class TinyFileDialogs {
 
     // --- [ tinyfd_messageBox ] ---
 
-    /**
-     * Unsafe version of: {@link #tinyfd_messageBox messageBox}
-     */
+    /** Unsafe version of: {@link #tinyfd_messageBox messageBox} */
     public static native int ntinyfd_messageBox(long aTitle, long aMessage, long aDialogType, long aIconType, int aDefaultButton);
 
     /**
@@ -220,6 +206,7 @@ public class TinyFileDialogs {
      * @param aDialogType    the dialog type. One of:<br><table><tr><td>"ok"</td><td>"okcancel"</td><td>"yesno"</td><td>"yesnocancel"</td></tr></table>
      * @param aIconType      the icon type. One of:<br><table><tr><td>"info"</td><td>"warning"</td><td>"error"</td><td>"question"</td></tr></table>
      * @param aDefaultButton 0 for cancel/no, 1 for ok/yes
+     *
      * @return 0 for cancel/no, 1 for ok/yes, 2 for no in yesnocancel
      */
     @NativeType("int")
@@ -241,6 +228,7 @@ public class TinyFileDialogs {
      * @param aDialogType    the dialog type. One of:<br><table><tr><td>"ok"</td><td>"okcancel"</td><td>"yesno"</td><td>"yesnocancel"</td></tr></table>
      * @param aIconType      the icon type. One of:<br><table><tr><td>"info"</td><td>"warning"</td><td>"error"</td><td>"question"</td></tr></table>
      * @param aDefaultButton 0 for cancel/no, 1 for ok/yes
+     *
      * @return 0 for cancel/no, 1 for ok/yes, 2 for no in yesnocancel
      */
     @NativeType("int")
@@ -264,9 +252,7 @@ public class TinyFileDialogs {
 
     // --- [ tinyfd_inputBox ] ---
 
-    /**
-     * Unsafe version of: {@link #tinyfd_inputBox inputBox}
-     */
+    /** Unsafe version of: {@link #tinyfd_inputBox inputBox} */
     public static native long ntinyfd_inputBox(long aTitle, long aMessage, long aDefaultInput);
 
     /**
@@ -275,6 +261,7 @@ public class TinyFileDialogs {
      * @param aTitle        the dialog title or {@code NULL}
      * @param aMessage      the message or {@code NULL}. May NOT contain \n and \t characters on Windows.
      * @param aDefaultInput if {@code NULL} it's a password box
+     *
      * @return the input value or {@code NULL} on cancel
      */
     @Nullable
@@ -295,6 +282,7 @@ public class TinyFileDialogs {
      * @param aTitle        the dialog title or {@code NULL}
      * @param aMessage      the message or {@code NULL}. May NOT contain \n and \t characters on Windows.
      * @param aDefaultInput if {@code NULL} it's a password box
+     *
      * @return the input value or {@code NULL} on cancel
      */
     @Nullable
@@ -332,6 +320,7 @@ public class TinyFileDialogs {
      * @param aDefaultPathAndFile      the default path and/or file or {@code NULL}
      * @param aFilterPatterns          an array of file type patterns ({@code NULL} or {"*.jpg","*.png"}
      * @param aSingleFilterDescription {@code NULL} or "image files"
+     *
      * @return the selected file path or {@code NULL} on cancel
      */
     @Nullable
@@ -353,6 +342,7 @@ public class TinyFileDialogs {
      * @param aDefaultPathAndFile      the default path and/or file or {@code NULL}
      * @param aFilterPatterns          an array of file type patterns ({@code NULL} or {"*.jpg","*.png"}
      * @param aSingleFilterDescription {@code NULL} or "image files"
+     *
      * @return the selected file path or {@code NULL} on cancel
      */
     @Nullable
@@ -391,6 +381,7 @@ public class TinyFileDialogs {
      * @param aFilterPatterns          an array of file type patterns ({@code NULL} or {"*.jpg","*.png"}
      * @param aSingleFilterDescription {@code NULL} or "image files"
      * @param aAllowMultipleSelects    if true, multiple selections are allowed
+     *
      * @return the file(s) selected or {@code NULL} on cancel. In case of multiple files, the separator is '|'.
      */
     @Nullable
@@ -413,6 +404,7 @@ public class TinyFileDialogs {
      * @param aFilterPatterns          an array of file type patterns ({@code NULL} or {"*.jpg","*.png"}
      * @param aSingleFilterDescription {@code NULL} or "image files"
      * @param aAllowMultipleSelects    if true, multiple selections are allowed
+     *
      * @return the file(s) selected or {@code NULL} on cancel. In case of multiple files, the separator is '|'.
      */
     @Nullable
@@ -436,9 +428,7 @@ public class TinyFileDialogs {
 
     // --- [ tinyfd_selectFolderDialog ] ---
 
-    /**
-     * Unsafe version of: {@link #tinyfd_selectFolderDialog selectFolderDialog}
-     */
+    /** Unsafe version of: {@link #tinyfd_selectFolderDialog selectFolderDialog} */
     public static native long ntinyfd_selectFolderDialog(long aTitle, long aDefaultPath);
 
     /**
@@ -483,9 +473,7 @@ public class TinyFileDialogs {
 
     // --- [ tinyfd_colorChooser ] ---
 
-    /**
-     * Unsafe version of: {@link #tinyfd_colorChooser colorChooser}
-     */
+    /** Unsafe version of: {@link #tinyfd_colorChooser colorChooser} */
     public static native long ntinyfd_colorChooser(long aTitle, long aDefaultHexRGB, long aDefaultRGB, long aoResultRGB);
 
     /**
@@ -495,6 +483,7 @@ public class TinyFileDialogs {
      * @param aDefaultHexRGB {@code NULL} or "#FF0000"
      * @param aDefaultRGB    { 0 , 255 , 255 }. Used only if {@code aDefaultHexRGB} is {@code NULL}.
      * @param aoResultRGB    returns the selected color. {@code aDefaultRGB} and {@code aoResultRGB} can be the same array.
+     *
      * @return the selected hexcolor as a string "#FF0000" or {@code NULL} on cancel
      */
     @Nullable
@@ -517,6 +506,7 @@ public class TinyFileDialogs {
      * @param aDefaultHexRGB {@code NULL} or "#FF0000"
      * @param aDefaultRGB    { 0 , 255 , 255 }. Used only if {@code aDefaultHexRGB} is {@code NULL}.
      * @param aoResultRGB    returns the selected color. {@code aDefaultRGB} and {@code aoResultRGB} can be the same array.
+     *
      * @return the selected hexcolor as a string "#FF0000" or {@code NULL} on cancel
      */
     @Nullable

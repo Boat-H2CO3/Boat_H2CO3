@@ -178,7 +178,7 @@ public class GLUtessellatorImpl implements GLUtessellator {
 
     private static final double GLU_TESS_DEFAULT_TOLERANCE = 0.0;
     //    private static final int GLU_TESS_MESH = 100112;	/* void (*)(GLUmesh *mesh)	    */
-    private static final GLUtessellatorCallback NULL_CB = new GLUtessellatorCallbackAdapter();
+    private static GLUtessellatorCallback NULL_CB = new GLUtessellatorCallbackAdapter();
 
 //    #define MAX_FAST_ALLOC	(MAX(sizeof(EdgePair), \
 //                 MAX(sizeof(GLUvertex),sizeof(GLUface))))
@@ -318,7 +318,7 @@ public class GLUtessellatorImpl implements GLUtessellator {
                 value[value_offset] = windingRule;
                 break;
             case GLU_TESS_BOUNDARY_ONLY:
-                assert (boundaryOnly || !boundaryOnly);
+                assert (boundaryOnly == true || boundaryOnly == false);
                 value[value_offset] = boundaryOnly ? 1 : 0;
                 break;
             default:
@@ -385,6 +385,7 @@ public class GLUtessellatorImpl implements GLUtessellator {
 //                return;
             default:
                 callErrorOrErrorData(GLU_INVALID_ENUM);
+                return;
         }
     }
 

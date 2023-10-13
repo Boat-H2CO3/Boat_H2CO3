@@ -32,9 +32,7 @@ public class DynLoad {
 
     // --- [ dlLoadLibrary ] ---
 
-    /**
-     * Unsafe version of: {@link #dlLoadLibrary LoadLibrary}
-     */
+    /** Unsafe version of: {@link #dlLoadLibrary LoadLibrary} */
     public static native long ndlLoadLibrary(long libpath);
 
     /**
@@ -70,9 +68,7 @@ public class DynLoad {
 
     // --- [ dlFreeLibrary ] ---
 
-    /**
-     * Unsafe version of: {@link #dlFreeLibrary FreeLibrary}
-     */
+    /** Unsafe version of: {@link #dlFreeLibrary FreeLibrary} */
     public static native void ndlFreeLibrary(long pLib);
 
     /**
@@ -89,9 +85,7 @@ public class DynLoad {
 
     // --- [ dlFindSymbol ] ---
 
-    /**
-     * Unsafe version of: {@link #dlFindSymbol FindSymbol}
-     */
+    /** Unsafe version of: {@link #dlFindSymbol FindSymbol} */
     public static native long ndlFindSymbol(long pLib, long pSymbolName);
 
     /**
@@ -189,9 +183,7 @@ public class DynLoad {
 
     // --- [ dlSymsInit ] ---
 
-    /**
-     * Unsafe version of: {@link #dlSymsInit SymsInit}
-     */
+    /** Unsafe version of: {@link #dlSymsInit SymsInit} */
     public static native long ndlSymsInit(long libPath);
 
     /**
@@ -227,9 +219,7 @@ public class DynLoad {
 
     // --- [ dlSymsCleanup ] ---
 
-    /**
-     * Unsafe version of: {@link #dlSymsCleanup SymsCleanup}
-     */
+    /** Unsafe version of: {@link #dlSymsCleanup SymsCleanup} */
     public static native void ndlSymsCleanup(long pSyms);
 
     /**
@@ -246,9 +236,7 @@ public class DynLoad {
 
     // --- [ dlSymsCount ] ---
 
-    /**
-     * Unsafe version of: {@link #dlSymsCount SymsCount}
-     */
+    /** Unsafe version of: {@link #dlSymsCount SymsCount} */
     public static native int ndlSymsCount(long pSyms);
 
     /**
@@ -265,9 +253,7 @@ public class DynLoad {
 
     // --- [ dlSymsName ] ---
 
-    /**
-     * Unsafe version of: {@link #dlSymsName SymsName}
-     */
+    /** Unsafe version of: {@link #dlSymsName SymsName} */
     public static native long ndlSymsName(long pSyms, int index);
 
     /**
@@ -287,9 +273,7 @@ public class DynLoad {
 
     // --- [ dlSymsNameFromValue ] ---
 
-    /**
-     * Unsafe version of: {@link #dlSymsNameFromValue SymsNameFromValue}
-     */
+    /** Unsafe version of: {@link #dlSymsNameFromValue SymsNameFromValue} */
     public static native long ndlSymsNameFromValue(long pSyms, long value);
 
     /**

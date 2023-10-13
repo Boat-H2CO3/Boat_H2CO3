@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_attrib_binding.txt">ARB_vertex_attrib_binding</a> extension.
@@ -43,25 +43,19 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBVertexAttribBinding {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetVertexAttrib*v.
-     */
+    /** Accepted by the {@code pname} parameter of GetVertexAttrib*v. */
     public static final int
             GL_VERTEX_ATTRIB_BINDING = 0x82D4,
             GL_VERTEX_ATTRIB_RELATIVE_OFFSET = 0x82D5;
 
-    /**
-     * Accepted by the {@code target} parameter of GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, and GetInteger64i_v.
-     */
+    /** Accepted by the {@code target} parameter of GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, and GetInteger64i_v. */
     public static final int
             GL_VERTEX_BINDING_DIVISOR = 0x82D6,
             GL_VERTEX_BINDING_OFFSET = 0x82D7,
             GL_VERTEX_BINDING_STRIDE = 0x82D8,
             GL_VERTEX_BINDING_BUFFER = 0x8F4F;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetIntegerv, ....
-     */
+    /** Accepted by the {@code pname} parameter of GetIntegerv, .... */
     public static final int
             GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = 0x82D9,
             GL_MAX_VERTEX_ATTRIB_BINDINGS = 0x82DA;

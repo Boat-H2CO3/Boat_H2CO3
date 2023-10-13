@@ -32,6 +32,7 @@
 package org.lwjgl.opengl;
 
 /**
+ *
  * This class encapsulates the properties for a given display mode.
  * This class is not instantiable, and is aquired from the <code>Display.
  * getAvailableDisplayModes()</code> method.

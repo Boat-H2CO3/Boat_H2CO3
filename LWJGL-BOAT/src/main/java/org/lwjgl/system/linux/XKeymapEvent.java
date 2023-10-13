@@ -235,6 +235,7 @@ public class XKeymapEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XKeymapEvent set(XKeymapEvent src) {
@@ -244,23 +245,17 @@ public class XKeymapEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XKeymapEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XKeymapEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XKeymapEvent malloc() {
         return wrap(XKeymapEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XKeymapEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XKeymapEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XKeymapEvent calloc() {
         return wrap(XKeymapEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XKeymapEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XKeymapEvent} instance allocated with {@link BufferUtils}. */
     public static XKeymapEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XKeymapEvent.class, memAddress(container), container);
@@ -273,9 +268,7 @@ public class XKeymapEvent extends Struct implements NativeResource {
         return wrap(XKeymapEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XKeymapEvent createSafe(long address) {
         return address == NULL ? null : wrap(XKeymapEvent.class, address);
@@ -319,9 +312,7 @@ public class XKeymapEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -336,9 +327,7 @@ public class XKeymapEvent extends Struct implements NativeResource {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XKeymapEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XKeymapEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XKeymapEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -382,7 +371,7 @@ public class XKeymapEvent extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -495,9 +484,7 @@ public class XKeymapEvent extends Struct implements NativeResource {
         memCopy(memAddress(value), struct + XKeymapEvent.KEY_VECTOR, value.remaining() * 1);
     }
 
-    /**
-     * Unsafe version of {@link #key_vector(int, byte) key_vector}.
-     */
+    /** Unsafe version of {@link #key_vector(int, byte) key_vector}. */
     public static void nkey_vector(long struct, int index, byte value) {
         UNSAFE.putByte(null, struct + XKeymapEvent.KEY_VECTOR + check(index, 32) * 1, value);
     }
@@ -525,16 +512,14 @@ public class XKeymapEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XKeymapEvent} structs.
-     */
+    /** An array of {@link XKeymapEvent} structs. */
     public static class Buffer extends StructBuffer<XKeymapEvent, Buffer> implements NativeResource {
 
         private static final XKeymapEvent ELEMENT_FACTORY = XKeymapEvent.create(-1L);
 
         /**
          * Creates a new {@code XKeymapEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XKeymapEvent#SIZEOF}, and its mark will be undefined.
@@ -658,21 +643,10 @@ public class XKeymapEvent extends Struct implements NativeResource {
             return this;
         }
 
-        /**
-         * Copies the specified {@link ByteBuffer} to the {@code key_vector} field.
-         */
-        public Buffer key_vector(@NativeType("char[32]") ByteBuffer value) {
-            XKeymapEvent.nkey_vector(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value at the specified index of the {@code key_vector} field.
-         */
-        public Buffer key_vector(int index, @NativeType("char") byte value) {
-            XKeymapEvent.nkey_vector(address(), index, value);
-            return this;
-        }
+        /** Copies the specified {@link ByteBuffer} to the {@code key_vector} field. */
+        public Buffer key_vector(@NativeType("char[32]") ByteBuffer value) { XKeymapEvent.nkey_vector(address(), value); return this; }
+        /** Sets the specified value at the specified index of the {@code key_vector} field. */
+        public Buffer key_vector(int index, @NativeType("char") byte value) { XKeymapEvent.nkey_vector(address(), index, value); return this; }
 
     }
 

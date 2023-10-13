@@ -40,17 +40,13 @@ public abstract class GLFWCharCallback extends Callback implements GLFWCharCallb
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWCharCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWCharCallback} instance that delegates to the specified {@code GLFWCharCallbackI} instance.
-     */
+    /** Creates a {@code GLFWCharCallback} instance that delegates to the specified {@code GLFWCharCallbackI} instance. */
     public static GLFWCharCallback create(GLFWCharCallbackI instance) {
         return instance instanceof GLFWCharCallback
                 ? (GLFWCharCallback) instance
@@ -65,9 +61,7 @@ public abstract class GLFWCharCallback extends Callback implements GLFWCharCallb
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetCharCallback SetCharCallback}.
-     */
+    /** See {@link GLFW#glfwSetCharCallback SetCharCallback}. */
     public GLFWCharCallback set(long window) {
         glfwSetCharCallback(window, this);
         return this;

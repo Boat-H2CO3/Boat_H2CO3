@@ -20,9 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class WinBase {
 
-    /**
-     * BOOL return values.
-     */
+    /** BOOL return values. */
     public static final int
             FALSE = 0,
             TRUE = 1;
@@ -61,9 +59,7 @@ public class WinBase {
 
     // --- [ GetModuleHandle ] ---
 
-    /**
-     * Unsafe version of: {@link #GetModuleHandle}
-     */
+    /** Unsafe version of: {@link #GetModuleHandle} */
     public static native long nGetModuleHandle(long moduleName);
 
     /**
@@ -109,9 +105,7 @@ public class WinBase {
 
     // --- [ LoadLibrary ] ---
 
-    /**
-     * Unsafe version of: {@link #LoadLibrary}
-     */
+    /** Unsafe version of: {@link #LoadLibrary} */
     public static native long nLoadLibrary(long name);
 
     /**
@@ -171,9 +165,7 @@ public class WinBase {
 
     // --- [ GetProcAddress ] ---
 
-    /**
-     * Unsafe version of: {@link #GetProcAddress}
-     */
+    /** Unsafe version of: {@link #GetProcAddress} */
     public static native long nGetProcAddress(long handle, long name);
 
     /**
@@ -217,9 +209,7 @@ public class WinBase {
 
     // --- [ FreeLibrary ] ---
 
-    /**
-     * Unsafe version of: {@link #FreeLibrary}
-     */
+    /** Unsafe version of: {@link #FreeLibrary} */
     public static native int nFreeLibrary(long handle);
 
     /**

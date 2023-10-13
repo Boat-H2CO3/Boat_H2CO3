@@ -42,7 +42,6 @@ import java.util.Comparator;
 /**
  * Display initialization utility, that can be used to find display modes and pick
  * one for you based on your criteria.
- *
  * @author $Author$
  * @version $Revision$
  * $Id$

@@ -194,9 +194,7 @@ public class GL14 extends GL13 {
      */
     public static final int GL_TEXTURE_LOD_BIAS = 0x8501;
 
-    /**
-     * Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_MAX_TEXTURE_LOD_BIAS = 0x84FD;
 
     /**
@@ -223,8 +221,8 @@ public class GL14 extends GL13 {
                 caps.glWindowPos2dv, caps.glWindowPos3i, caps.glWindowPos3s, caps.glWindowPos3f, caps.glWindowPos3d, caps.glWindowPos3iv, caps.glWindowPos3sv,
                 caps.glWindowPos3fv, caps.glWindowPos3dv
         )) && checkFunctions(
-                caps.glBlendColor, caps.glBlendEquation, caps.glMultiDrawArrays, caps.glMultiDrawElements, caps.glPointParameterf, caps.glPointParameteri,
-                caps.glPointParameterfv, caps.glPointParameteriv, caps.glBlendFuncSeparate
+            caps.glBlendColor, caps.glBlendEquation, caps.glMultiDrawArrays, caps.glMultiDrawElements, caps.glPointParameterf, caps.glPointParameteri, 
+            caps.glPointParameterfv, caps.glPointParameteriv, caps.glBlendFuncSeparate
         );
     }
 
@@ -237,6 +235,7 @@ public class GL14 extends GL13 {
      * @param green the green color component
      * @param blue  the blue color component
      * @param alpha the alpha color component
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBlendColor">Reference Page</a>
      */
     public static void glBlendColor(@NativeType("GLfloat") float red, @NativeType("GLfloat") float green, @NativeType("GLfloat") float blue, @NativeType("GLfloat") float alpha) {
@@ -249,6 +248,7 @@ public class GL14 extends GL13 {
      * Controls the blend equations used for per-fragment blending.
      *
      * @param mode the blend equation. One of:<br><table><tr><td>{@link GL14C#GL_FUNC_ADD FUNC_ADD}</td><td>{@link GL14C#GL_FUNC_SUBTRACT FUNC_SUBTRACT}</td><td>{@link GL14C#GL_FUNC_REVERSE_SUBTRACT FUNC_REVERSE_SUBTRACT}</td><td>{@link GL14C#GL_MIN MIN}</td><td>{@link GL14C#GL_MAX MAX}</td></tr></table>
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBlendEquation">Reference Page</a>
      */
     public static void glBlendEquation(@NativeType("GLenum") int mode) {
@@ -261,6 +261,7 @@ public class GL14 extends GL13 {
      * Sets the current fog coordinate.
      *
      * @param coord the fog coordinate value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glFogCoordf">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glFogCoordf(@NativeType("GLfloat") float coord);
@@ -271,6 +272,7 @@ public class GL14 extends GL13 {
      * Double version of {@link #glFogCoordf FogCoordf}.
      *
      * @param coord the fog coordinate value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glFogCoordd">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glFogCoordd(@NativeType("GLdouble") double coord);
@@ -286,6 +288,7 @@ public class GL14 extends GL13 {
      * Pointer version of {@link #glFogCoordf FogCoordf}.
      *
      * @param coord the fog coordinate value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glFogCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glFogCoordfv(@NativeType("GLfloat const *") FloatBuffer coord) {
@@ -306,6 +309,7 @@ public class GL14 extends GL13 {
      * Pointer version of {@link #glFogCoordd FogCoordd}.
      *
      * @param coord the fog coordinate value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glFogCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glFogCoorddv(@NativeType("GLdouble const *") DoubleBuffer coord) {
@@ -317,9 +321,7 @@ public class GL14 extends GL13 {
 
     // --- [ glFogCoordPointer ] ---
 
-    /**
-     * Unsafe version of: {@link #glFogCoordPointer FogCoordPointer}
-     */
+    /** Unsafe version of: {@link #glFogCoordPointer FogCoordPointer} */
     public static native void nglFogCoordPointer(int type, int stride, long pointer);
 
     /**
@@ -328,6 +330,7 @@ public class GL14 extends GL13 {
      * @param type    the data type of the values stored in the array. One of:<br><table><tr><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td><td>{@link GL11#GL_DOUBLE DOUBLE}</td></tr></table>
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the fog coordinate array data
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glFogCoordPointer">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glFogCoordPointer(@NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") ByteBuffer pointer) {
@@ -340,6 +343,7 @@ public class GL14 extends GL13 {
      * @param type    the data type of the values stored in the array. One of:<br><table><tr><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td><td>{@link GL11#GL_DOUBLE DOUBLE}</td></tr></table>
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the fog coordinate array data
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glFogCoordPointer">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glFogCoordPointer(@NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") long pointer) {
@@ -352,6 +356,7 @@ public class GL14 extends GL13 {
      * @param type    the data type of the values stored in the array. One of:<br><table><tr><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td><td>{@link GL11#GL_DOUBLE DOUBLE}</td></tr></table>
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the fog coordinate array data
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glFogCoordPointer">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glFogCoordPointer(@NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") ShortBuffer pointer) {
@@ -364,6 +369,7 @@ public class GL14 extends GL13 {
      * @param type    the data type of the values stored in the array. One of:<br><table><tr><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td><td>{@link GL11#GL_DOUBLE DOUBLE}</td></tr></table>
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the fog coordinate array data
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glFogCoordPointer">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glFogCoordPointer(@NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") FloatBuffer pointer) {
@@ -387,6 +393,7 @@ public class GL14 extends GL13 {
      * @param mode  the kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param first an array of starting indices in the enabled arrays
      * @param count an array of the number of indices to be rendered
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArrays">Reference Page</a>
      */
     public static void glMultiDrawArrays(@NativeType("GLenum") int mode, @NativeType("GLint const *") IntBuffer first, @NativeType("GLsizei const *") IntBuffer count) {
@@ -413,6 +420,7 @@ public class GL14 extends GL13 {
      * @param count   an array of the elements counts
      * @param type    the type of the values in indices. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      * @param indices a pointer to the location where the indices are stored
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElements">Reference Page</a>
      */
     public static void glMultiDrawElements(@NativeType("GLenum") int mode, @NativeType("GLsizei *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices) {
@@ -426,6 +434,7 @@ public class GL14 extends GL13 {
      *
      * @param pname the parameter to set. Must be:<br><table><tr><td>{@link GL14C#GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
      * @param param the parameter value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameterf">Reference Page</a>
      */
     public static void glPointParameterf(@NativeType("GLenum") int pname, @NativeType("GLfloat") float param) {
@@ -439,6 +448,7 @@ public class GL14 extends GL13 {
      *
      * @param pname the parameter to set. Must be:<br><table><tr><td>{@link GL14C#GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
      * @param param the parameter value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameteri">Reference Page</a>
      */
     public static void glPointParameteri(@NativeType("GLenum") int pname, @NativeType("GLint") int param) {
@@ -447,9 +457,7 @@ public class GL14 extends GL13 {
 
     // --- [ glPointParameterfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glPointParameterfv PointParameterfv}
-     */
+    /** Unsafe version of: {@link #glPointParameterfv PointParameterfv} */
     public static void nglPointParameterfv(int pname, long params) {
         GL14C.nglPointParameterfv(pname, params);
     }
@@ -459,6 +467,7 @@ public class GL14 extends GL13 {
      *
      * @param pname  the parameter to set
      * @param params the parameter value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") FloatBuffer params) {
@@ -467,9 +476,7 @@ public class GL14 extends GL13 {
 
     // --- [ glPointParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glPointParameteriv PointParameteriv}
-     */
+    /** Unsafe version of: {@link #glPointParameteriv PointParameteriv} */
     public static void nglPointParameteriv(int pname, long params) {
         GL14C.nglPointParameteriv(pname, params);
     }
@@ -479,6 +486,7 @@ public class GL14 extends GL13 {
      *
      * @param pname  the parameter to set
      * @param params the parameter value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameteriv(@NativeType("GLenum") int pname, @NativeType("GLint const *") IntBuffer params) {
@@ -493,6 +501,7 @@ public class GL14 extends GL13 {
      * @param red   the red component of the current secondary color
      * @param green the green component of the current secondary color
      * @param blue  the blue component of the current secondary color
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glSecondaryColor3b(@NativeType("GLbyte") byte red, @NativeType("GLbyte") byte green, @NativeType("GLbyte") byte blue);
@@ -505,6 +514,7 @@ public class GL14 extends GL13 {
      * @param red   the red component of the current secondary color
      * @param green the green component of the current secondary color
      * @param blue  the blue component of the current secondary color
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glSecondaryColor3s(@NativeType("GLshort") short red, @NativeType("GLshort") short green, @NativeType("GLshort") short blue);
@@ -517,6 +527,7 @@ public class GL14 extends GL13 {
      * @param red   the red component of the current secondary color
      * @param green the green component of the current secondary color
      * @param blue  the blue component of the current secondary color
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glSecondaryColor3i(@NativeType("GLint") int red, @NativeType("GLint") int green, @NativeType("GLint") int blue);
@@ -529,6 +540,7 @@ public class GL14 extends GL13 {
      * @param red   the red component of the current secondary color
      * @param green the green component of the current secondary color
      * @param blue  the blue component of the current secondary color
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glSecondaryColor3f(@NativeType("GLfloat") float red, @NativeType("GLfloat") float green, @NativeType("GLfloat") float blue);
@@ -541,6 +553,7 @@ public class GL14 extends GL13 {
      * @param red   the red component of the current secondary color
      * @param green the green component of the current secondary color
      * @param blue  the blue component of the current secondary color
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glSecondaryColor3d(@NativeType("GLdouble") double red, @NativeType("GLdouble") double green, @NativeType("GLdouble") double blue);
@@ -553,6 +566,7 @@ public class GL14 extends GL13 {
      * @param red   the red component of the current secondary color
      * @param green the green component of the current secondary color
      * @param blue  the blue component of the current secondary color
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glSecondaryColor3ub(@NativeType("GLubyte") byte red, @NativeType("GLubyte") byte green, @NativeType("GLubyte") byte blue);
@@ -565,6 +579,7 @@ public class GL14 extends GL13 {
      * @param red   the red component of the current secondary color
      * @param green the green component of the current secondary color
      * @param blue  the blue component of the current secondary color
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glSecondaryColor3us(@NativeType("GLushort") short red, @NativeType("GLushort") short green, @NativeType("GLushort") short blue);
@@ -577,6 +592,7 @@ public class GL14 extends GL13 {
      * @param red   the red component of the current secondary color
      * @param green the green component of the current secondary color
      * @param blue  the blue component of the current secondary color
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glSecondaryColor3ui(@NativeType("GLint") int red, @NativeType("GLint") int green, @NativeType("GLint") int blue);
@@ -592,6 +608,7 @@ public class GL14 extends GL13 {
      * Byte pointer version of {@link #glSecondaryColor3b SecondaryColor3b}.
      *
      * @param v the secondary color buffer
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3bv(@NativeType("GLbyte const *") ByteBuffer v) {
@@ -612,6 +629,7 @@ public class GL14 extends GL13 {
      * Pointer version of {@link #glSecondaryColor3s SecondaryColor3s}.
      *
      * @param v the secondary color buffer
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3sv(@NativeType("GLshort const *") ShortBuffer v) {
@@ -632,6 +650,7 @@ public class GL14 extends GL13 {
      * Pointer version of {@link #glSecondaryColor3i SecondaryColor3i}.
      *
      * @param v the secondary color buffer
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3iv(@NativeType("GLint const *") IntBuffer v) {
@@ -652,6 +671,7 @@ public class GL14 extends GL13 {
      * Pointer version of {@link #glSecondaryColor3f SecondaryColor3f}.
      *
      * @param v the secondary color buffer
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3fv(@NativeType("GLfloat const *") FloatBuffer v) {
@@ -672,6 +692,7 @@ public class GL14 extends GL13 {
      * Pointer version of {@link #glSecondaryColor3d SecondaryColor3d}.
      *
      * @param v the secondary color buffer
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3dv(@NativeType("GLdouble const *") DoubleBuffer v) {
@@ -692,6 +713,7 @@ public class GL14 extends GL13 {
      * Pointer version of {@link #glSecondaryColor3ub SecondaryColor3ub}.
      *
      * @param v the secondary color buffer
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3ubv(@NativeType("GLubyte const *") ByteBuffer v) {
@@ -712,6 +734,7 @@ public class GL14 extends GL13 {
      * Pointer version of {@link #glSecondaryColor3us SecondaryColor3us}.
      *
      * @param v the secondary color buffer
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3usv(@NativeType("GLushort const *") ShortBuffer v) {
@@ -732,6 +755,7 @@ public class GL14 extends GL13 {
      * Pointer version of {@link #glSecondaryColor3ui SecondaryColor3ui}.
      *
      * @param v the secondary color buffer
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3uiv(@NativeType("GLuint const *") IntBuffer v) {
@@ -743,9 +767,7 @@ public class GL14 extends GL13 {
 
     // --- [ glSecondaryColorPointer ] ---
 
-    /**
-     * Unsafe version of: {@link #glSecondaryColorPointer SecondaryColorPointer}
-     */
+    /** Unsafe version of: {@link #glSecondaryColorPointer SecondaryColorPointer} */
     public static native void nglSecondaryColorPointer(int size, int type, int stride, long pointer);
 
     /**
@@ -755,6 +777,7 @@ public class GL14 extends GL13 {
      * @param type    the data type of the values stored in the array. One of:<br><table><tr><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_SHORT SHORT}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td></tr><tr><td>{@link GL11#GL_FLOAT FLOAT}</td><td>{@link GL11#GL_DOUBLE DOUBLE}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td></tr></table>
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the secondary color array data
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColorPointer">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColorPointer(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") ByteBuffer pointer) {
@@ -768,6 +791,7 @@ public class GL14 extends GL13 {
      * @param type    the data type of the values stored in the array. One of:<br><table><tr><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_SHORT SHORT}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td></tr><tr><td>{@link GL11#GL_FLOAT FLOAT}</td><td>{@link GL11#GL_DOUBLE DOUBLE}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td></tr></table>
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the secondary color array data
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColorPointer">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColorPointer(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") long pointer) {
@@ -781,6 +805,7 @@ public class GL14 extends GL13 {
      * @param type    the data type of the values stored in the array. One of:<br><table><tr><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_SHORT SHORT}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td></tr><tr><td>{@link GL11#GL_FLOAT FLOAT}</td><td>{@link GL11#GL_DOUBLE DOUBLE}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td></tr></table>
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the secondary color array data
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColorPointer">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColorPointer(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") ShortBuffer pointer) {
@@ -794,6 +819,7 @@ public class GL14 extends GL13 {
      * @param type    the data type of the values stored in the array. One of:<br><table><tr><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_SHORT SHORT}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td></tr><tr><td>{@link GL11#GL_FLOAT FLOAT}</td><td>{@link GL11#GL_DOUBLE DOUBLE}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td></tr></table>
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the secondary color array data
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColorPointer">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColorPointer(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") IntBuffer pointer) {
@@ -807,6 +833,7 @@ public class GL14 extends GL13 {
      * @param type    the data type of the values stored in the array. One of:<br><table><tr><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_SHORT SHORT}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td></tr><tr><td>{@link GL11#GL_FLOAT FLOAT}</td><td>{@link GL11#GL_DOUBLE DOUBLE}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td></tr></table>
      * @param stride  the vertex stride in bytes. If specified as zero, then array elements are stored sequentially
      * @param pointer the secondary color array data
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColorPointer">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColorPointer(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") FloatBuffer pointer) {
@@ -822,6 +849,7 @@ public class GL14 extends GL13 {
      * @param dfactorRGB   how the red, green, and blue destination blending factors are computed. The initial value is GL_ZERO.
      * @param sfactorAlpha how the alpha source blending factor is computed. The initial value is GL_ONE.
      * @param dfactorAlpha how the alpha destination blending factor is computed. The initial value is GL_ZERO.
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glBlendFuncSeparate">Reference Page</a>
      */
     public static void glBlendFuncSeparate(@NativeType("GLenum") int sfactorRGB, @NativeType("GLenum") int dfactorRGB, @NativeType("GLenum") int sfactorAlpha, @NativeType("GLenum") int dfactorAlpha) {
@@ -835,6 +863,7 @@ public class GL14 extends GL13 {
      *
      * @param x the x value
      * @param y the y value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glWindowPos2i(@NativeType("GLint") int x, @NativeType("GLint") int y);
@@ -846,6 +875,7 @@ public class GL14 extends GL13 {
      *
      * @param x the x value
      * @param y the y value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glWindowPos2s(@NativeType("GLshort") short x, @NativeType("GLshort") short y);
@@ -857,6 +887,7 @@ public class GL14 extends GL13 {
      *
      * @param x the x value
      * @param y the y value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glWindowPos2f(@NativeType("GLfloat") float x, @NativeType("GLfloat") float y);
@@ -868,21 +899,21 @@ public class GL14 extends GL13 {
      *
      * @param x the x value
      * @param y the y value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glWindowPos2d(@NativeType("GLdouble") double x, @NativeType("GLdouble") double y);
 
     // --- [ glWindowPos2iv ] ---
 
-    /**
-     * Unsafe version of: {@link #glWindowPos2iv WindowPos2iv}
-     */
+    /** Unsafe version of: {@link #glWindowPos2iv WindowPos2iv} */
     public static native void nglWindowPos2iv(long p);
 
     /**
      * Pointer version of {@link #glWindowPos2i WindowPos2i}.
      *
      * @param p the position value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos2iv(@NativeType("GLint const *") IntBuffer p) {
@@ -894,15 +925,14 @@ public class GL14 extends GL13 {
 
     // --- [ glWindowPos2sv ] ---
 
-    /**
-     * Unsafe version of: {@link #glWindowPos2sv WindowPos2sv}
-     */
+    /** Unsafe version of: {@link #glWindowPos2sv WindowPos2sv} */
     public static native void nglWindowPos2sv(long p);
 
     /**
      * Pointer version of {@link #glWindowPos2s WindowPos2s}.
      *
      * @param p the position value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos2sv(@NativeType("GLshort const *") ShortBuffer p) {
@@ -914,15 +944,14 @@ public class GL14 extends GL13 {
 
     // --- [ glWindowPos2fv ] ---
 
-    /**
-     * Unsafe version of: {@link #glWindowPos2fv WindowPos2fv}
-     */
+    /** Unsafe version of: {@link #glWindowPos2fv WindowPos2fv} */
     public static native void nglWindowPos2fv(long p);
 
     /**
      * Pointer version of {@link #glWindowPos2f WindowPos2f}.
      *
      * @param p the position value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos2fv(@NativeType("GLfloat const *") FloatBuffer p) {
@@ -934,15 +963,14 @@ public class GL14 extends GL13 {
 
     // --- [ glWindowPos2dv ] ---
 
-    /**
-     * Unsafe version of: {@link #glWindowPos2dv WindowPos2dv}
-     */
+    /** Unsafe version of: {@link #glWindowPos2dv WindowPos2dv} */
     public static native void nglWindowPos2dv(long p);
 
     /**
      * Pointer version of {@link #glWindowPos2d WindowPos2d}.
      *
      * @param p the position value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos2dv(@NativeType("GLdouble const *") DoubleBuffer p) {
@@ -960,6 +988,7 @@ public class GL14 extends GL13 {
      * @param x the x value
      * @param y the y value
      * @param z the z value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glWindowPos3i(@NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLint") int z);
@@ -972,6 +1001,7 @@ public class GL14 extends GL13 {
      * @param x the x value
      * @param y the y value
      * @param z the z value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glWindowPos3s(@NativeType("GLshort") short x, @NativeType("GLshort") short y, @NativeType("GLshort") short z);
@@ -984,6 +1014,7 @@ public class GL14 extends GL13 {
      * @param x the x value
      * @param y the y value
      * @param z the z value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glWindowPos3f(@NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float z);
@@ -996,21 +1027,21 @@ public class GL14 extends GL13 {
      * @param x the x value
      * @param y the y value
      * @param z the z value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static native void glWindowPos3d(@NativeType("GLdouble") double x, @NativeType("GLdouble") double y, @NativeType("GLdouble") double z);
 
     // --- [ glWindowPos3iv ] ---
 
-    /**
-     * Unsafe version of: {@link #glWindowPos3iv WindowPos3iv}
-     */
+    /** Unsafe version of: {@link #glWindowPos3iv WindowPos3iv} */
     public static native void nglWindowPos3iv(long p);
 
     /**
      * Pointer version of {@link #glWindowPos3i WindowPos3i}.
      *
      * @param p the position value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos3iv(@NativeType("GLint const *") IntBuffer p) {
@@ -1022,15 +1053,14 @@ public class GL14 extends GL13 {
 
     // --- [ glWindowPos3sv ] ---
 
-    /**
-     * Unsafe version of: {@link #glWindowPos3sv WindowPos3sv}
-     */
+    /** Unsafe version of: {@link #glWindowPos3sv WindowPos3sv} */
     public static native void nglWindowPos3sv(long p);
 
     /**
      * Pointer version of {@link #glWindowPos3s WindowPos3s}.
      *
      * @param p the position value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos3sv(@NativeType("GLshort const *") ShortBuffer p) {
@@ -1042,15 +1072,14 @@ public class GL14 extends GL13 {
 
     // --- [ glWindowPos3fv ] ---
 
-    /**
-     * Unsafe version of: {@link #glWindowPos3fv WindowPos3fv}
-     */
+    /** Unsafe version of: {@link #glWindowPos3fv WindowPos3fv} */
     public static native void nglWindowPos3fv(long p);
 
     /**
      * Pointer version of {@link #glWindowPos3f WindowPos3f}.
      *
      * @param p the position value
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos3fv(@NativeType("GLfloat const *") FloatBuffer p) {
@@ -1062,15 +1091,14 @@ public class GL14 extends GL13 {
 
     // --- [ glWindowPos3dv ] ---
 
-    /**
-     * Unsafe version of: {@link #glWindowPos3dv WindowPos3dv}
-     */
+    /** Unsafe version of: {@link #glWindowPos3dv WindowPos3dv} */
     public static native void nglWindowPos3dv(long p);
 
     /**
      * Pointer version of {@link #glWindowPos3d WindowPos3d}.
      *
      * @param p the position value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos3dv(@NativeType("GLdouble const *") DoubleBuffer p) {
@@ -1082,7 +1110,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glFogCoordfv FogCoordfv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glFogCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glFogCoordfv(@NativeType("GLfloat const *") float[] coord) {
@@ -1096,7 +1124,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glFogCoorddv FogCoorddv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glFogCoord">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glFogCoorddv(@NativeType("GLdouble const *") double[] coord) {
@@ -1146,7 +1174,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glSecondaryColor3sv SecondaryColor3sv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3sv(@NativeType("GLshort const *") short[] v) {
@@ -1160,7 +1188,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glSecondaryColor3iv SecondaryColor3iv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3iv(@NativeType("GLint const *") int[] v) {
@@ -1174,7 +1202,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glSecondaryColor3fv SecondaryColor3fv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3fv(@NativeType("GLfloat const *") float[] v) {
@@ -1188,7 +1216,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glSecondaryColor3dv SecondaryColor3dv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3dv(@NativeType("GLdouble const *") double[] v) {
@@ -1202,7 +1230,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glSecondaryColor3usv SecondaryColor3usv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3usv(@NativeType("GLushort const *") short[] v) {
@@ -1216,7 +1244,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glSecondaryColor3uiv SecondaryColor3uiv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glSecondaryColor">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glSecondaryColor3uiv(@NativeType("GLuint const *") int[] v) {
@@ -1230,7 +1258,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glWindowPos2iv WindowPos2iv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos2iv(@NativeType("GLint const *") int[] p) {
@@ -1244,7 +1272,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glWindowPos2sv WindowPos2sv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos2sv(@NativeType("GLshort const *") short[] p) {
@@ -1258,7 +1286,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glWindowPos2fv WindowPos2fv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos2fv(@NativeType("GLfloat const *") float[] p) {
@@ -1272,7 +1300,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glWindowPos2dv WindowPos2dv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos2dv(@NativeType("GLdouble const *") double[] p) {
@@ -1286,7 +1314,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glWindowPos3iv WindowPos3iv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos3iv(@NativeType("GLint const *") int[] p) {
@@ -1300,7 +1328,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glWindowPos3sv WindowPos3sv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos3sv(@NativeType("GLshort const *") short[] p) {
@@ -1314,7 +1342,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glWindowPos3fv WindowPos3fv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos3fv(@NativeType("GLfloat const *") float[] p) {
@@ -1328,7 +1356,7 @@ public class GL14 extends GL13 {
 
     /**
      * Array version of: {@link #glWindowPos3dv WindowPos3dv}
-     *
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl3/glWindowPos">Reference Page</a> - <em>This function is deprecated and unavailable in the Core profile</em>
      */
     public static void glWindowPos3dv(@NativeType("GLdouble const *") double[] p) {

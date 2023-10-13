@@ -5,15 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.DoubleBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_gpu_shader_fp64.txt">ARB_gpu_shader_fp64</a> extension.
@@ -56,9 +54,7 @@ import java.nio.DoubleBuffer;
  */
 public class ARBGPUShaderFP64 {
 
-    /**
-     * Returned in the {@code type} parameter of GetActiveUniform, and GetTransformFeedbackVarying.
-     */
+    /** Returned in the {@code type} parameter of GetActiveUniform, and GetTransformFeedbackVarying. */
     public static final int
             GL_DOUBLE_VEC2 = 0x8FFC,
             GL_DOUBLE_VEC3 = 0x8FFD,
@@ -427,9 +423,7 @@ public class ARBGPUShaderFP64 {
 
     // --- [ glGetUniformdv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetUniformdv GetUniformdv}
-     */
+    /** Unsafe version of: {@link #glGetUniformdv GetUniformdv} */
     public static void nglGetUniformdv(int program, int location, long params) {
         GL40C.nglGetUniformdv(program, location, params);
     }
@@ -775,107 +769,77 @@ public class ARBGPUShaderFP64 {
         nglProgramUniformMatrix4x3dvEXT(program, location, value.remaining() / 12, transpose, memAddress(value));
     }
 
-    /**
-     * Array version of: {@link #glUniform1dv Uniform1dv}
-     */
+    /** Array version of: {@link #glUniform1dv Uniform1dv} */
     public static void glUniform1dv(@NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniform1dv(location, value);
     }
 
-    /**
-     * Array version of: {@link #glUniform2dv Uniform2dv}
-     */
+    /** Array version of: {@link #glUniform2dv Uniform2dv} */
     public static void glUniform2dv(@NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniform2dv(location, value);
     }
 
-    /**
-     * Array version of: {@link #glUniform3dv Uniform3dv}
-     */
+    /** Array version of: {@link #glUniform3dv Uniform3dv} */
     public static void glUniform3dv(@NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniform3dv(location, value);
     }
 
-    /**
-     * Array version of: {@link #glUniform4dv Uniform4dv}
-     */
+    /** Array version of: {@link #glUniform4dv Uniform4dv} */
     public static void glUniform4dv(@NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniform4dv(location, value);
     }
 
-    /**
-     * Array version of: {@link #glUniformMatrix2dv UniformMatrix2dv}
-     */
+    /** Array version of: {@link #glUniformMatrix2dv UniformMatrix2dv} */
     public static void glUniformMatrix2dv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniformMatrix2dv(location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glUniformMatrix3dv UniformMatrix3dv}
-     */
+    /** Array version of: {@link #glUniformMatrix3dv UniformMatrix3dv} */
     public static void glUniformMatrix3dv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniformMatrix3dv(location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glUniformMatrix4dv UniformMatrix4dv}
-     */
+    /** Array version of: {@link #glUniformMatrix4dv UniformMatrix4dv} */
     public static void glUniformMatrix4dv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniformMatrix4dv(location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glUniformMatrix2x3dv UniformMatrix2x3dv}
-     */
+    /** Array version of: {@link #glUniformMatrix2x3dv UniformMatrix2x3dv} */
     public static void glUniformMatrix2x3dv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniformMatrix2x3dv(location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glUniformMatrix2x4dv UniformMatrix2x4dv}
-     */
+    /** Array version of: {@link #glUniformMatrix2x4dv UniformMatrix2x4dv} */
     public static void glUniformMatrix2x4dv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniformMatrix2x4dv(location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glUniformMatrix3x2dv UniformMatrix3x2dv}
-     */
+    /** Array version of: {@link #glUniformMatrix3x2dv UniformMatrix3x2dv} */
     public static void glUniformMatrix3x2dv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniformMatrix3x2dv(location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glUniformMatrix3x4dv UniformMatrix3x4dv}
-     */
+    /** Array version of: {@link #glUniformMatrix3x4dv UniformMatrix3x4dv} */
     public static void glUniformMatrix3x4dv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniformMatrix3x4dv(location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glUniformMatrix4x2dv UniformMatrix4x2dv}
-     */
+    /** Array version of: {@link #glUniformMatrix4x2dv UniformMatrix4x2dv} */
     public static void glUniformMatrix4x2dv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniformMatrix4x2dv(location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glUniformMatrix4x3dv UniformMatrix4x3dv}
-     */
+    /** Array version of: {@link #glUniformMatrix4x3dv UniformMatrix4x3dv} */
     public static void glUniformMatrix4x3dv(@NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         GL40C.glUniformMatrix4x3dv(location, transpose, value);
     }
 
-    /**
-     * Array version of: {@link #glGetUniformdv GetUniformdv}
-     */
+    /** Array version of: {@link #glGetUniformdv GetUniformdv} */
     public static void glGetUniformdv(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble *") double[] params) {
         GL40C.glGetUniformdv(program, location, params);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform1dvEXT ProgramUniform1dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniform1dvEXT ProgramUniform1dvEXT} */
     public static void glProgramUniform1dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniform1dvEXT;
         if (CHECKS) {
@@ -884,9 +848,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform2dvEXT ProgramUniform2dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniform2dvEXT ProgramUniform2dvEXT} */
     public static void glProgramUniform2dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniform2dvEXT;
         if (CHECKS) {
@@ -895,9 +857,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length >> 1, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform3dvEXT ProgramUniform3dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniform3dvEXT ProgramUniform3dvEXT} */
     public static void glProgramUniform3dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniform3dvEXT;
         if (CHECKS) {
@@ -906,9 +866,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length / 3, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniform4dvEXT ProgramUniform4dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniform4dvEXT ProgramUniform4dvEXT} */
     public static void glProgramUniform4dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniform4dvEXT;
         if (CHECKS) {
@@ -917,9 +875,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length >> 2, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2dvEXT ProgramUniformMatrix2dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2dvEXT ProgramUniformMatrix2dvEXT} */
     public static void glProgramUniformMatrix2dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix2dvEXT;
         if (CHECKS) {
@@ -928,9 +884,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length >> 2, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3dvEXT ProgramUniformMatrix3dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3dvEXT ProgramUniformMatrix3dvEXT} */
     public static void glProgramUniformMatrix3dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix3dvEXT;
         if (CHECKS) {
@@ -939,9 +893,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length / 9, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4dvEXT ProgramUniformMatrix4dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4dvEXT ProgramUniformMatrix4dvEXT} */
     public static void glProgramUniformMatrix4dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix4dvEXT;
         if (CHECKS) {
@@ -950,9 +902,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length >> 4, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2x3dvEXT ProgramUniformMatrix2x3dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2x3dvEXT ProgramUniformMatrix2x3dvEXT} */
     public static void glProgramUniformMatrix2x3dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix2x3dvEXT;
         if (CHECKS) {
@@ -961,9 +911,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length / 6, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix2x4dvEXT ProgramUniformMatrix2x4dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix2x4dvEXT ProgramUniformMatrix2x4dvEXT} */
     public static void glProgramUniformMatrix2x4dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix2x4dvEXT;
         if (CHECKS) {
@@ -972,9 +920,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length >> 3, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3x2dvEXT ProgramUniformMatrix3x2dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3x2dvEXT ProgramUniformMatrix3x2dvEXT} */
     public static void glProgramUniformMatrix3x2dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix3x2dvEXT;
         if (CHECKS) {
@@ -983,9 +929,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length / 6, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix3x4dvEXT ProgramUniformMatrix3x4dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix3x4dvEXT ProgramUniformMatrix3x4dvEXT} */
     public static void glProgramUniformMatrix3x4dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix3x4dvEXT;
         if (CHECKS) {
@@ -994,9 +938,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length / 12, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4x2dvEXT ProgramUniformMatrix4x2dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4x2dvEXT ProgramUniformMatrix4x2dvEXT} */
     public static void glProgramUniformMatrix4x2dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix4x2dvEXT;
         if (CHECKS) {
@@ -1005,9 +947,7 @@ public class ARBGPUShaderFP64 {
         callPV(program, location, value.length >> 3, transpose, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformMatrix4x3dvEXT ProgramUniformMatrix4x3dvEXT}
-     */
+    /** Array version of: {@link #glProgramUniformMatrix4x3dvEXT ProgramUniformMatrix4x3dvEXT} */
     public static void glProgramUniformMatrix4x3dvEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLboolean") boolean transpose, @NativeType("GLdouble const *") double[] value) {
         long __functionAddress = GL.getICD().glProgramUniformMatrix4x3dvEXT;
         if (CHECKS) {

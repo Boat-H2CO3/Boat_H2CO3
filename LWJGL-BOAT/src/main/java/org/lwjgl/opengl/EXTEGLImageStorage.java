@@ -70,9 +70,7 @@ public class EXTEGLImageStorage {
         nglEGLImageTargetTextureStorageEXT(texture, image, memAddressSafe(attrib_list));
     }
 
-    /**
-     * Array version of: {@link #glEGLImageTargetTexStorageEXT EGLImageTargetTexStorageEXT}
-     */
+    /** Array version of: {@link #glEGLImageTargetTexStorageEXT EGLImageTargetTexStorageEXT} */
     public static void glEGLImageTargetTexStorageEXT(@NativeType("GLenum") int target, @NativeType("GLeglImageOES") long image, @Nullable @NativeType("int const *") int[] attrib_list) {
         long __functionAddress = GL.getICD().glEGLImageTargetTexStorageEXT;
         if (CHECKS) {
@@ -83,9 +81,7 @@ public class EXTEGLImageStorage {
         callPPV(target, image, attrib_list, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glEGLImageTargetTextureStorageEXT EGLImageTargetTextureStorageEXT}
-     */
+    /** Array version of: {@link #glEGLImageTargetTextureStorageEXT EGLImageTargetTextureStorageEXT} */
     public static void glEGLImageTargetTextureStorageEXT(@NativeType("GLuint") int texture, @NativeType("GLeglImageOES") long image, @Nullable @NativeType("int const *") int[] attrib_list) {
         long __functionAddress = GL.getICD().glEGLImageTargetTextureStorageEXT;
         if (CHECKS) {

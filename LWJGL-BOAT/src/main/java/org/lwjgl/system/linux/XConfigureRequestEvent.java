@@ -363,7 +363,7 @@ public class XConfigureRequestEvent extends Struct implements NativeResource {
             int border_width,
             long above,
             int detail,
-            long value_mask
+        long value_mask
     ) {
         type(type);
         serial(serial);
@@ -387,6 +387,7 @@ public class XConfigureRequestEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XConfigureRequestEvent set(XConfigureRequestEvent src) {
@@ -396,38 +397,28 @@ public class XConfigureRequestEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XConfigureRequestEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XConfigureRequestEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XConfigureRequestEvent malloc() {
         return wrap(XConfigureRequestEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XConfigureRequestEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XConfigureRequestEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XConfigureRequestEvent calloc() {
         return wrap(XConfigureRequestEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XConfigureRequestEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XConfigureRequestEvent} instance allocated with {@link BufferUtils}. */
     public static XConfigureRequestEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XConfigureRequestEvent.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code XConfigureRequestEvent} instance for the specified memory address.
-     */
+    /** Returns a new {@code XConfigureRequestEvent} instance for the specified memory address. */
     public static XConfigureRequestEvent create(long address) {
         return wrap(XConfigureRequestEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XConfigureRequestEvent createSafe(long address) {
         return address == NULL ? null : wrap(XConfigureRequestEvent.class, address);
@@ -471,9 +462,7 @@ public class XConfigureRequestEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -481,16 +470,12 @@ public class XConfigureRequestEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XConfigureRequestEvent} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code XConfigureRequestEvent} instance allocated on the thread-local {@link MemoryStack}. */
     public static XConfigureRequestEvent mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XConfigureRequestEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XConfigureRequestEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XConfigureRequestEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -745,8 +730,7 @@ public class XConfigureRequestEvent extends Struct implements NativeResource {
     /**
      * Unsafe version of {@link #value_mask(long) value_mask}.
      */
-    public static void nvalue_mask(long struct, long value) {
-        memPutCLong(struct + XConfigureRequestEvent.VALUE_MASK, value);
+    public static void nvalue_mask(long struct, long value) { memPutCLong(struct + XConfigureRequestEvent.VALUE_MASK, value);
     }
 
     /**
@@ -772,16 +756,14 @@ public class XConfigureRequestEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XConfigureRequestEvent} structs.
-     */
+    /** An array of {@link XConfigureRequestEvent} structs. */
     public static class Buffer extends StructBuffer<XConfigureRequestEvent, Buffer> implements NativeResource {
 
         private static final XConfigureRequestEvent ELEMENT_FACTORY = XConfigureRequestEvent.create(-1L);
 
         /**
          * Creates a new {@code XConfigureRequestEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XConfigureRequestEvent#SIZEOF}, and its mark will be undefined.
@@ -995,37 +977,14 @@ public class XConfigureRequestEvent extends Struct implements NativeResource {
             return this;
         }
 
-        /**
-         * Sets the specified value to the {@code border_width} field.
-         */
-        public Buffer border_width(int value) {
-            XConfigureRequestEvent.nborder_width(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code above} field.
-         */
-        public Buffer above(@NativeType("Window") long value) {
-            XConfigureRequestEvent.nabove(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code detail} field.
-         */
-        public Buffer detail(int value) {
-            XConfigureRequestEvent.ndetail(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code value_mask} field.
-         */
-        public Buffer value_mask(@NativeType("unsigned long") long value) {
-            XConfigureRequestEvent.nvalue_mask(address(), value);
-            return this;
-        }
+        /** Sets the specified value to the {@code border_width} field. */
+        public Buffer border_width(int value) { XConfigureRequestEvent.nborder_width(address(), value); return this; }
+        /** Sets the specified value to the {@code above} field. */
+        public Buffer above(@NativeType("Window") long value) { XConfigureRequestEvent.nabove(address(), value); return this; }
+        /** Sets the specified value to the {@code detail} field. */
+        public Buffer detail(int value) { XConfigureRequestEvent.ndetail(address(), value); return this; }
+        /** Sets the specified value to the {@code value_mask} field. */
+        public Buffer value_mask(@NativeType("unsigned long") long value) { XConfigureRequestEvent.nvalue_mask(address(), value); return this; }
 
     }
 

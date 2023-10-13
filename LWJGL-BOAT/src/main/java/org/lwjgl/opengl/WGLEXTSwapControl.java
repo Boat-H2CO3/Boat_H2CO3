@@ -57,9 +57,7 @@ public class WGLEXTSwapControl {
 
     // --- [ wglGetSwapIntervalEXT ] ---
 
-    /**
-     * Returns the current swap interval for the window associated with the current context.
-     */
+    /** Returns the current swap interval for the window associated with the current context. */
     public static int wglGetSwapIntervalEXT() {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetSwapIntervalEXT;
         if (CHECKS) {

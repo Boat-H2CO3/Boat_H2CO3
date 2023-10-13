@@ -19,9 +19,7 @@ package org.lwjgl.opengl;
  */
 public final class NVPathRenderingSharedEdge {
 
-    /**
-     * Allowed to be added to command tokens in elements of the {@code commands} array parameter of PathCommandsNV and PathSubCommandsNV.
-     */
+    /** Allowed to be added to command tokens in elements of the {@code commands} array parameter of PathCommandsNV and PathSubCommandsNV. */
     public static final int GL_SHARED_EDGE_NV = 0xC0;
 
     private NVPathRenderingSharedEdge() {

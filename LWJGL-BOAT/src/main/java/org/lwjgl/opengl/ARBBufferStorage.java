@@ -5,20 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPPV;
-import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_buffer_storage.txt">ARB_buffer_storage</a> extension.
@@ -39,25 +32,19 @@ import java.nio.ShortBuffer;
  */
 public class ARBBufferStorage {
 
-    /**
-     * Accepted in the {@code flags} parameter of {@link #glBufferStorage BufferStorage} and {@link #glNamedBufferStorageEXT NamedBufferStorageEXT}.
-     */
+    /** Accepted in the {@code flags} parameter of {@link #glBufferStorage BufferStorage} and {@link #glNamedBufferStorageEXT NamedBufferStorageEXT}. */
     public static final int
             GL_MAP_PERSISTENT_BIT = 0x40,
             GL_MAP_COHERENT_BIT = 0x80,
             GL_DYNAMIC_STORAGE_BIT = 0x100,
             GL_CLIENT_STORAGE_BIT = 0x200;
 
-    /**
-     * Accepted by the {@code pname} parameter of {@code GetBufferParameter&#123;i|i64&#125;v}.
-     */
+    /** Accepted by the {@code pname} parameter of {@code GetBufferParameter&#123;i|i64&#125;v}. */
     public static final int
             GL_BUFFER_IMMUTABLE_STORAGE = 0x821F,
             GL_BUFFER_STORAGE_FLAGS = 0x8220;
 
-    /**
-     * Accepted by the {@code barriers} parameter of {@link GL42C#glMemoryBarrier MemoryBarrier}.
-     */
+    /** Accepted by the {@code barriers} parameter of {@link GL42C#glMemoryBarrier MemoryBarrier}. */
     public static final int GL_CLIENT_MAPPED_BUFFER_BARRIER_BIT = 0x4000;
 
     static {
@@ -704,37 +691,27 @@ public class ARBBufferStorage {
         nglNamedBufferStorageEXT(buffer, Integer.toUnsignedLong(data.remaining()) << 3, memAddress(data), flags);
     }
 
-    /**
-     * Array version of: {@link #glBufferStorage BufferStorage}
-     */
+    /** Array version of: {@link #glBufferStorage BufferStorage} */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") short[] data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
     }
 
-    /**
-     * Array version of: {@link #glBufferStorage BufferStorage}
-     */
+    /** Array version of: {@link #glBufferStorage BufferStorage} */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") int[] data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
     }
 
-    /**
-     * Array version of: {@link #glBufferStorage BufferStorage}
-     */
+    /** Array version of: {@link #glBufferStorage BufferStorage} */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") float[] data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
     }
 
-    /**
-     * Array version of: {@link #glBufferStorage BufferStorage}
-     */
+    /** Array version of: {@link #glBufferStorage BufferStorage} */
     public static void glBufferStorage(@NativeType("GLenum") int target, @NativeType("void const *") double[] data, @NativeType("GLbitfield") int flags) {
         GL44C.glBufferStorage(target, data, flags);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT}
-     */
+    /** Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT} */
     public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") short[] data, @NativeType("GLbitfield") int flags) {
         long __functionAddress = GL.getICD().glNamedBufferStorageEXT;
         if (CHECKS) {
@@ -743,9 +720,7 @@ public class ARBBufferStorage {
         callPPV(buffer, Integer.toUnsignedLong(data.length) << 1, data, flags, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT}
-     */
+    /** Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT} */
     public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") int[] data, @NativeType("GLbitfield") int flags) {
         long __functionAddress = GL.getICD().glNamedBufferStorageEXT;
         if (CHECKS) {
@@ -754,9 +729,7 @@ public class ARBBufferStorage {
         callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT}
-     */
+    /** Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT} */
     public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") float[] data, @NativeType("GLbitfield") int flags) {
         long __functionAddress = GL.getICD().glNamedBufferStorageEXT;
         if (CHECKS) {
@@ -765,9 +738,7 @@ public class ARBBufferStorage {
         callPPV(buffer, Integer.toUnsignedLong(data.length) << 2, data, flags, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT}
-     */
+    /** Array version of: {@link #glNamedBufferStorageEXT NamedBufferStorageEXT} */
     public static void glNamedBufferStorageEXT(@NativeType("GLuint") int buffer, @NativeType("void const *") double[] data, @NativeType("GLbitfield") int flags) {
         long __functionAddress = GL.getICD().glNamedBufferStorageEXT;
         if (CHECKS) {

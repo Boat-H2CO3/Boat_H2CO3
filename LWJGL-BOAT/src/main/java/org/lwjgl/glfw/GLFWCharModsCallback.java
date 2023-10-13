@@ -43,17 +43,13 @@ public abstract class GLFWCharModsCallback extends Callback implements GLFWCharM
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWCharModsCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWCharModsCallback} instance that delegates to the specified {@code GLFWCharModsCallbackI} instance.
-     */
+    /** Creates a {@code GLFWCharModsCallback} instance that delegates to the specified {@code GLFWCharModsCallbackI} instance. */
     public static GLFWCharModsCallback create(GLFWCharModsCallbackI instance) {
         return instance instanceof GLFWCharModsCallback
                 ? (GLFWCharModsCallback) instance
@@ -68,9 +64,7 @@ public abstract class GLFWCharModsCallback extends Callback implements GLFWCharM
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetCharModsCallback SetCharModsCallback}.
-     */
+    /** See {@link GLFW#glfwSetCharModsCallback SetCharModsCallback}. */
     public GLFWCharModsCallback set(long window) {
         glfwSetCharModsCallback(window, this);
         return this;

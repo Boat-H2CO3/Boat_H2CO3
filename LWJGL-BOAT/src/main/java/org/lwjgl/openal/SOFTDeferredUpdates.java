@@ -20,9 +20,7 @@ import static org.lwjgl.system.JNI.*;
  */
 public class SOFTDeferredUpdates {
 
-    /**
-     * Accepted by the {@code paramName} parameter of {@link AL10#alGetBoolean GetBoolean}, {@link AL10#alGetBooleanv GetBooleanv} (as well as the Integer, Float, and Double variants).
-     */
+    /** Accepted by the {@code paramName} parameter of {@link AL10#alGetBoolean GetBoolean}, {@link AL10#alGetBooleanv GetBooleanv} (as well as the Integer, Float, and Double variants). */
     public static final int AL_DEFERRED_UPDATES_SOFT = 0xC002;
 
     protected SOFTDeferredUpdates() {

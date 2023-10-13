@@ -1339,6 +1339,6 @@ public class MappedObjectTransformer {
         String dump = sw.toString();
 
         LWJGLUtil.log(dump);
-    }
+	}
 
 }

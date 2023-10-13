@@ -5,17 +5,14 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.LongBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_bindless_texture.txt">ARB_bindless_texture</a> extension.
@@ -48,9 +45,7 @@ import java.nio.LongBuffer;
  */
 public class ARBBindlessTexture {
 
-    /**
-     * Accepted by the {@code type} parameter of VertexAttribLPointer.
-     */
+    /** Accepted by the {@code type} parameter of VertexAttribLPointer. */
     public static final int GL_UNSIGNED_INT64_ARB = 0x140F;
 
     static {
@@ -311,9 +306,7 @@ public class ARBBindlessTexture {
 
     // --- [ glVertexAttribL1ui64vARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribL1ui64vARB VertexAttribL1ui64vARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttribL1ui64vARB VertexAttribL1ui64vARB} */
     public static native void nglVertexAttribL1ui64vARB(int index, long v);
 
     /**
@@ -331,9 +324,7 @@ public class ARBBindlessTexture {
 
     // --- [ glGetVertexAttribLui64vARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexAttribLui64vARB GetVertexAttribLui64vARB}
-     */
+    /** Unsafe version of: {@link #glGetVertexAttribLui64vARB GetVertexAttribLui64vARB} */
     public static native void nglGetVertexAttribLui64vARB(int index, int pname, long params);
 
     /**
@@ -369,9 +360,7 @@ public class ARBBindlessTexture {
         }
     }
 
-    /**
-     * Array version of: {@link #glUniformHandleui64vARB UniformHandleui64vARB}
-     */
+    /** Array version of: {@link #glUniformHandleui64vARB UniformHandleui64vARB} */
     public static void glUniformHandleui64vARB(@NativeType("GLint") int location, @NativeType("GLuint64 const *") long[] values) {
         long __functionAddress = GL.getICD().glUniformHandleui64vARB;
         if (CHECKS) {
@@ -380,9 +369,7 @@ public class ARBBindlessTexture {
         callPV(location, values.length, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformHandleui64vARB ProgramUniformHandleui64vARB}
-     */
+    /** Array version of: {@link #glProgramUniformHandleui64vARB ProgramUniformHandleui64vARB} */
     public static void glProgramUniformHandleui64vARB(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint64 const *") long[] values) {
         long __functionAddress = GL.getICD().glProgramUniformHandleui64vARB;
         if (CHECKS) {
@@ -391,9 +378,7 @@ public class ARBBindlessTexture {
         callPV(program, location, values.length, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribL1ui64vARB VertexAttribL1ui64vARB}
-     */
+    /** Array version of: {@link #glVertexAttribL1ui64vARB VertexAttribL1ui64vARB} */
     public static void glVertexAttribL1ui64vARB(@NativeType("GLuint") int index, @NativeType("GLuint64 const *") long[] v) {
         long __functionAddress = GL.getICD().glVertexAttribL1ui64vARB;
         if (CHECKS) {
@@ -403,9 +388,7 @@ public class ARBBindlessTexture {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexAttribLui64vARB GetVertexAttribLui64vARB}
-     */
+    /** Array version of: {@link #glGetVertexAttribLui64vARB GetVertexAttribLui64vARB} */
     public static void glGetVertexAttribLui64vARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLuint64 *") long[] params) {
         long __functionAddress = GL.getICD().glGetVertexAttribLui64vARB;
         if (CHECKS) {

@@ -42,24 +42,16 @@ import org.lwjgl.Sys;
  */
 class Sync {
 
-    /**
-     * number of nano seconds in a second
-     */
+    /** number of nano seconds in a second */
     private static final long NANOS_IN_SECOND = 1000L * 1000L * 1000L;
 
-    /**
-     * The time to sleep/yield until the next frame
-     */
+    /** The time to sleep/yield until the next frame */
     private static long nextFrame = 0;
 
-    /**
-     * whether the initialisation code has run
-     */
+    /** whether the initialisation code has run */
     private static boolean initialised = false;
 
-    /**
-     * for calculating the averages the previous sleep/yield times are stored
-     */
+    /** for calculating the averages the previous sleep/yield times are stored */
     private static RunningAvg sleepDurations = new RunningAvg(10);
     private static RunningAvg yieldDurations = new RunningAvg(10);
 
@@ -100,7 +92,7 @@ class Sync {
     /**
      * This method will initialise the sync method by setting initial
      * values for sleepDurations/yieldDurations and nextFrame.
-     * <p>
+     *
      * If running on windows it will start the sleep timer fix.
      */
     private static void initialise() {

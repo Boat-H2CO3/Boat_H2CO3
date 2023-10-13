@@ -27,17 +27,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GLXARBCreateContext {
 
-    /**
-     * Accepted as an attribute name in {@code attrib_list}.
-     */
+    /** Accepted as an attribute name in {@code attrib_list}. */
     public static final int
             GLX_CONTEXT_MAJOR_VERSION_ARB = 0x2091,
             GLX_CONTEXT_MINOR_VERSION_ARB = 0x2092,
             GLX_CONTEXT_FLAGS_ARB = 0x2094;
 
-    /**
-     * Accepted as bits in the attribute value for {@link #GLX_CONTEXT_FLAGS_ARB CONTEXT_FLAGS_ARB} in {@code attrib_list}.
-     */
+    /** Accepted as bits in the attribute value for {@link #GLX_CONTEXT_FLAGS_ARB CONTEXT_FLAGS_ARB} in {@code attrib_list}. */
     public static final int
             GLX_CONTEXT_DEBUG_BIT_ARB = 0x1,
             GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB = 0x2;
@@ -54,9 +50,7 @@ public class GLXARBCreateContext {
 
     // --- [ glXCreateContextAttribsARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glXCreateContextAttribsARB CreateContextAttribsARB}
-     */
+    /** Unsafe version of: {@link #glXCreateContextAttribsARB CreateContextAttribsARB} */
     public static long nglXCreateContextAttribsARB(long display, long config, long share_context, int direct, long attrib_list) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXCreateContextAttribsARB;
         if (CHECKS) {
@@ -103,9 +97,7 @@ public class GLXARBCreateContext {
         return nglXCreateContextAttribsARB(display, config, share_context, direct ? 1 : 0, memAddressSafe(attrib_list));
     }
 
-    /**
-     * Array version of: {@link #glXCreateContextAttribsARB CreateContextAttribsARB}
-     */
+    /** Array version of: {@link #glXCreateContextAttribsARB CreateContextAttribsARB} */
     @NativeType("GLXContext")
     public static long glXCreateContextAttribsARB(@NativeType("Display *") long display, @NativeType("GLXFBConfig") long config, @NativeType("GLXContext") long share_context, @NativeType("Bool") boolean direct, @Nullable @NativeType("int const *") int[] attrib_list) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXCreateContextAttribsARB;

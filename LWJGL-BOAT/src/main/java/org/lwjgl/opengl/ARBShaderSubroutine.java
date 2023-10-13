@@ -5,14 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import javax.annotation.*;
 
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_subroutine.txt">ARB_shader_subroutine</a> extension.
@@ -25,9 +24,7 @@ import javax.annotation.Nullable;
  */
 public class ARBShaderSubroutine {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetProgramStageiv.
-     */
+    /** Accepted by the {@code pname} parameter of GetProgramStageiv. */
     public static final int
             GL_ACTIVE_SUBROUTINES = 0x8DE5,
             GL_ACTIVE_SUBROUTINE_UNIFORMS = 0x8DE6,
@@ -35,16 +32,12 @@ public class ARBShaderSubroutine {
             GL_ACTIVE_SUBROUTINE_MAX_LENGTH = 0x8E48,
             GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH = 0x8E49;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v. */
     public static final int
             GL_MAX_SUBROUTINES = 0x8DE7,
             GL_MAX_SUBROUTINE_UNIFORM_LOCATIONS = 0x8DE8;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetActiveSubroutineUniformiv.
-     */
+    /** Accepted by the {@code pname} parameter of GetActiveSubroutineUniformiv. */
     public static final int
             GL_NUM_COMPATIBLE_SUBROUTINES = 0x8E4A,
             GL_COMPATIBLE_SUBROUTINES = 0x8E4B;
@@ -66,9 +59,7 @@ public class ARBShaderSubroutine {
 
     // --- [ glGetSubroutineUniformLocation ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetSubroutineUniformLocation GetSubroutineUniformLocation}
-     */
+    /** Unsafe version of: {@link #glGetSubroutineUniformLocation GetSubroutineUniformLocation} */
     public static int nglGetSubroutineUniformLocation(int program, int shadertype, long name) {
         return GL40C.nglGetSubroutineUniformLocation(program, shadertype, name);
     }
@@ -99,9 +90,7 @@ public class ARBShaderSubroutine {
 
     // --- [ glGetSubroutineIndex ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetSubroutineIndex GetSubroutineIndex}
-     */
+    /** Unsafe version of: {@link #glGetSubroutineIndex GetSubroutineIndex} */
     public static int nglGetSubroutineIndex(int program, int shadertype, long name) {
         return GL40C.nglGetSubroutineIndex(program, shadertype, name);
     }
@@ -132,9 +121,7 @@ public class ARBShaderSubroutine {
 
     // --- [ glGetActiveSubroutineUniformiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetActiveSubroutineUniformiv GetActiveSubroutineUniformiv}
-     */
+    /** Unsafe version of: {@link #glGetActiveSubroutineUniformiv GetActiveSubroutineUniformiv} */
     public static void nglGetActiveSubroutineUniformiv(int program, int shadertype, int index, int pname, long values) {
         GL40C.nglGetActiveSubroutineUniformiv(program, shadertype, index, pname, values);
     }
@@ -295,9 +282,7 @@ public class ARBShaderSubroutine {
 
     // --- [ glGetUniformSubroutineuiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetUniformSubroutineuiv GetUniformSubroutineuiv}
-     */
+    /** Unsafe version of: {@link #glGetUniformSubroutineuiv GetUniformSubroutineuiv} */
     public static void nglGetUniformSubroutineuiv(int shadertype, int location, long params) {
         GL40C.nglGetUniformSubroutineuiv(shadertype, location, params);
     }
@@ -326,9 +311,7 @@ public class ARBShaderSubroutine {
 
     // --- [ glGetProgramStageiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramStageiv GetProgramStageiv}
-     */
+    /** Unsafe version of: {@link #glGetProgramStageiv GetProgramStageiv} */
     public static void nglGetProgramStageiv(int program, int shadertype, int pname, long values) {
         GL40C.nglGetProgramStageiv(program, shadertype, pname, values);
     }
@@ -357,44 +340,32 @@ public class ARBShaderSubroutine {
         return GL40C.glGetProgramStagei(program, shadertype, pname);
     }
 
-    /**
-     * Array version of: {@link #glGetActiveSubroutineUniformiv GetActiveSubroutineUniformiv}
-     */
+    /** Array version of: {@link #glGetActiveSubroutineUniformiv GetActiveSubroutineUniformiv} */
     public static void glGetActiveSubroutineUniformiv(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] values) {
         GL40C.glGetActiveSubroutineUniformiv(program, shadertype, index, pname, values);
     }
 
-    /**
-     * Array version of: {@link #glGetActiveSubroutineUniformName GetActiveSubroutineUniformName}
-     */
+    /** Array version of: {@link #glGetActiveSubroutineUniformName GetActiveSubroutineUniformName} */
     public static void glGetActiveSubroutineUniformName(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer name) {
         GL40C.glGetActiveSubroutineUniformName(program, shadertype, index, length, name);
     }
 
-    /**
-     * Array version of: {@link #glGetActiveSubroutineName GetActiveSubroutineName}
-     */
+    /** Array version of: {@link #glGetActiveSubroutineName GetActiveSubroutineName} */
     public static void glGetActiveSubroutineName(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer name) {
         GL40C.glGetActiveSubroutineName(program, shadertype, index, length, name);
     }
 
-    /**
-     * Array version of: {@link #glUniformSubroutinesuiv UniformSubroutinesuiv}
-     */
+    /** Array version of: {@link #glUniformSubroutinesuiv UniformSubroutinesuiv} */
     public static void glUniformSubroutinesuiv(@NativeType("GLenum") int shadertype, @NativeType("GLuint const *") int[] indices) {
         GL40C.glUniformSubroutinesuiv(shadertype, indices);
     }
 
-    /**
-     * Array version of: {@link #glGetUniformSubroutineuiv GetUniformSubroutineuiv}
-     */
+    /** Array version of: {@link #glGetUniformSubroutineuiv GetUniformSubroutineuiv} */
     public static void glGetUniformSubroutineuiv(@NativeType("GLenum") int shadertype, @NativeType("GLint") int location, @NativeType("GLuint *") int[] params) {
         GL40C.glGetUniformSubroutineuiv(shadertype, location, params);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramStageiv GetProgramStageiv}
-     */
+    /** Array version of: {@link #glGetProgramStageiv GetProgramStageiv} */
     public static void glGetProgramStageiv(@NativeType("GLuint") int program, @NativeType("GLenum") int shadertype, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] values) {
         GL40C.glGetProgramStageiv(program, shadertype, pname, values);
     }

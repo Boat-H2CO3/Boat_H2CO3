@@ -7,8 +7,10 @@
 #ifdef LWJGL_WINDOWS
 #include "WindowsConfig.h"
 #endif
-#ifdef LWJGL_H2CO3_BOAT
+#ifdef LWJGL_H2CO3_Boat
+
 #include "H2CO3BoatConfig.h"
+
 #endif
 #ifdef LWJGL_LINUX
 #include "LinuxConfig.h"
@@ -17,11 +19,11 @@
 #include "macOSConfig.h"
 #endif
 
-int DISABLE_WARNINGS();
+DISABLE_WARNINGS()
 
 #include <jni.h>
 
-int ENABLE_WARNINGS();
+ENABLE_WARNINGS()
 
 #include <stdio.h>
 

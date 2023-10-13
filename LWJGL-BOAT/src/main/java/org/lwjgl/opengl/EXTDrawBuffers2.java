@@ -107,9 +107,7 @@ public class EXTDrawBuffers2 {
     @NativeType("GLboolean")
     public static native boolean glIsEnabledIndexedEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
 
-    /**
-     * Array version of: {@link #glGetIntegerIndexedvEXT GetIntegerIndexedvEXT}
-     */
+    /** Array version of: {@link #glGetIntegerIndexedvEXT GetIntegerIndexedvEXT} */
     public static void glGetIntegerIndexedvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLint *") int[] data) {
         long __functionAddress = GL.getICD().glGetIntegerIndexedvEXT;
         if (CHECKS) {

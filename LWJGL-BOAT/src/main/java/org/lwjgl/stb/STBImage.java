@@ -267,9 +267,7 @@ public class STBImage {
 
     // --- [ stbi_load_from_callbacks ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_load_from_callbacks load_from_callbacks}
-     */
+    /** Unsafe version of: {@link #stbi_load_from_callbacks load_from_callbacks} */
     public static native long nstbi_load_from_callbacks(long clbk, long user, long x, long y, long channels_in_file, int desired_channels);
 
     /**
@@ -337,9 +335,7 @@ public class STBImage {
 
     // --- [ stbi_load_16 ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_load_16 load_16}
-     */
+    /** Unsafe version of: {@link #stbi_load_16 load_16} */
     public static native long nstbi_load_16(long filename, long x, long y, long channels_in_file, int desired_channels);
 
     /**
@@ -425,9 +421,7 @@ public class STBImage {
 
     // --- [ stbi_load_16_from_callbacks ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_load_16_from_callbacks load_16_from_callbacks}
-     */
+    /** Unsafe version of: {@link #stbi_load_16_from_callbacks load_16_from_callbacks} */
     public static native long nstbi_load_16_from_callbacks(long clbk, long user, long x, long y, long channels_in_file, int desired_channels);
 
     /**
@@ -455,9 +449,7 @@ public class STBImage {
 
     // --- [ stbi_loadf ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_loadf loadf}
-     */
+    /** Unsafe version of: {@link #stbi_loadf loadf} */
     public static native long nstbi_loadf(long filename, long x, long y, long channels_in_file, int desired_channels);
 
     /**
@@ -543,9 +535,7 @@ public class STBImage {
 
     // --- [ stbi_loadf_from_callbacks ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_loadf_from_callbacks loadf_from_callbacks}
-     */
+    /** Unsafe version of: {@link #stbi_loadf_from_callbacks loadf_from_callbacks} */
     public static native long nstbi_loadf_from_callbacks(long clbk, long user, long x, long y, long channels_in_file, int desired_channels);
 
     /**
@@ -609,15 +599,14 @@ public class STBImage {
 
     // --- [ stbi_is_hdr ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_is_hdr is_hdr}
-     */
+    /** Unsafe version of: {@link #stbi_is_hdr is_hdr} */
     public static native int nstbi_is_hdr(long filename);
 
     /**
      * Checks if the specified file contains an HDR image.
      *
      * @param filename the file name
+     *
      * @return 1 if the image is HDR, 0 otherwise
      */
     @NativeType("int")
@@ -632,6 +621,7 @@ public class STBImage {
      * Checks if the specified file contains an HDR image.
      *
      * @param filename the file name
+     *
      * @return 1 if the image is HDR, 0 otherwise
      */
     @NativeType("int")
@@ -668,9 +658,7 @@ public class STBImage {
 
     // --- [ stbi_is_hdr_from_callbacks ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_is_hdr_from_callbacks is_hdr_from_callbacks}
-     */
+    /** Unsafe version of: {@link #stbi_is_hdr_from_callbacks is_hdr_from_callbacks} */
     public static native int nstbi_is_hdr_from_callbacks(long clbk, long user);
 
     /**
@@ -689,14 +677,10 @@ public class STBImage {
 
     // --- [ stbi_failure_reason ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_failure_reason failure_reason}
-     */
+    /** Unsafe version of: {@link #stbi_failure_reason failure_reason} */
     public static native long nstbi_failure_reason();
 
-    /**
-     * Returns a brief reason for failure.
-     */
+    /** Returns a brief reason for failure. */
     @Nullable
     @NativeType("char const *")
     public static String stbi_failure_reason() {
@@ -706,9 +690,7 @@ public class STBImage {
 
     // --- [ stbi_image_free ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_image_free image_free}
-     */
+    /** Unsafe version of: {@link #stbi_image_free image_free} */
     public static native void nstbi_image_free(long retval_from_stbi_load);
 
     /**
@@ -740,9 +722,7 @@ public class STBImage {
 
     // --- [ stbi_info ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_info info}
-     */
+    /** Unsafe version of: {@link #stbi_info info} */
     public static native int nstbi_info(long filename, long x, long y, long comp);
 
     /**
@@ -752,6 +732,7 @@ public class STBImage {
      * @param x        outputs the image width in pixels
      * @param y        outputs the image height in pixels
      * @param comp     outputs number of components in image
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -772,6 +753,7 @@ public class STBImage {
      * @param x        outputs the image width in pixels
      * @param y        outputs the image height in pixels
      * @param comp     outputs number of components in image
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -821,9 +803,7 @@ public class STBImage {
 
     // --- [ stbi_info_from_callbacks ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_info_from_callbacks info_from_callbacks}
-     */
+    /** Unsafe version of: {@link #stbi_info_from_callbacks info_from_callbacks} */
     public static native int nstbi_info_from_callbacks(long clbk, long user, long x, long y, long comp);
 
     /**
@@ -848,9 +828,7 @@ public class STBImage {
 
     // --- [ stbi_is_16_bit ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_is_16_bit is_16_bit}
-     */
+    /** Unsafe version of: {@link #stbi_is_16_bit is_16_bit} */
     public static native int nstbi_is_16_bit(long filename);
 
     /**
@@ -905,9 +883,7 @@ public class STBImage {
 
     // --- [ stbi_is_16_bit_from_callbacks ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_is_16_bit_from_callbacks is_16_bit_from_callbacks}
-     */
+    /** Unsafe version of: {@link #stbi_is_16_bit_from_callbacks is_16_bit_from_callbacks} */
     public static native int nstbi_is_16_bit_from_callbacks(long clbk, long user);
 
     /**
@@ -926,9 +902,7 @@ public class STBImage {
 
     // --- [ stbi_set_unpremultiply_on_load ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_set_unpremultiply_on_load set_unpremultiply_on_load}
-     */
+    /** Unsafe version of: {@link #stbi_set_unpremultiply_on_load set_unpremultiply_on_load} */
     public static native void nstbi_set_unpremultiply_on_load(int flag_true_if_should_unpremultiply);
 
     /**
@@ -943,9 +917,7 @@ public class STBImage {
 
     // --- [ stbi_convert_iphone_png_to_rgb ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_convert_iphone_png_to_rgb convert_iphone_png_to_rgb}
-     */
+    /** Unsafe version of: {@link #stbi_convert_iphone_png_to_rgb convert_iphone_png_to_rgb} */
     public static native void nstbi_convert_iphone_png_to_rgb(int flag_true_if_should_convert);
 
     /**
@@ -959,9 +931,7 @@ public class STBImage {
 
     // --- [ stbi_set_flip_vertically_on_load ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_set_flip_vertically_on_load set_flip_vertically_on_load}
-     */
+    /** Unsafe version of: {@link #stbi_set_flip_vertically_on_load set_flip_vertically_on_load} */
     public static native void nstbi_set_flip_vertically_on_load(int flag_true_if_should_flip);
 
     /**
@@ -975,14 +945,10 @@ public class STBImage {
 
     // --- [ stbi_zlib_decode_malloc_guesssize ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_zlib_decode_malloc_guesssize zlib_decode_malloc_guesssize}
-     */
+    /** Unsafe version of: {@link #stbi_zlib_decode_malloc_guesssize zlib_decode_malloc_guesssize} */
     public static native long nstbi_zlib_decode_malloc_guesssize(long buffer, int len, int initial_size, long outlen);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     @Nullable
     @NativeType("char *")
     public static ByteBuffer stbi_zlib_decode_malloc_guesssize(@NativeType("char const *") ByteBuffer buffer, int initial_size) {
@@ -999,14 +965,10 @@ public class STBImage {
 
     // --- [ stbi_zlib_decode_malloc_guesssize_headerflag ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_zlib_decode_malloc_guesssize_headerflag zlib_decode_malloc_guesssize_headerflag}
-     */
+    /** Unsafe version of: {@link #stbi_zlib_decode_malloc_guesssize_headerflag zlib_decode_malloc_guesssize_headerflag} */
     public static native long nstbi_zlib_decode_malloc_guesssize_headerflag(long buffer, int len, int initial_size, long outlen, int parse_header);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     @Nullable
     @NativeType("char *")
     public static ByteBuffer stbi_zlib_decode_malloc_guesssize_headerflag(@NativeType("char const *") ByteBuffer buffer, int initial_size, @NativeType("int") boolean parse_header) {
@@ -1023,14 +985,10 @@ public class STBImage {
 
     // --- [ stbi_zlib_decode_malloc ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_zlib_decode_malloc zlib_decode_malloc}
-     */
+    /** Unsafe version of: {@link #stbi_zlib_decode_malloc zlib_decode_malloc} */
     public static native long nstbi_zlib_decode_malloc(long buffer, int len, long outlen);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     @Nullable
     @NativeType("char *")
     public static ByteBuffer stbi_zlib_decode_malloc(@NativeType("char const *") ByteBuffer buffer) {
@@ -1047,28 +1005,20 @@ public class STBImage {
 
     // --- [ stbi_zlib_decode_buffer ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_zlib_decode_buffer zlib_decode_buffer}
-     */
+    /** Unsafe version of: {@link #stbi_zlib_decode_buffer zlib_decode_buffer} */
     public static native int nstbi_zlib_decode_buffer(long obuffer, int olen, long ibuffer, int ilen);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     public static int stbi_zlib_decode_buffer(@NativeType("char *") ByteBuffer obuffer, @NativeType("char const *") ByteBuffer ibuffer) {
         return nstbi_zlib_decode_buffer(memAddress(obuffer), obuffer.remaining(), memAddress(ibuffer), ibuffer.remaining());
     }
 
     // --- [ stbi_zlib_decode_noheader_malloc ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_zlib_decode_noheader_malloc zlib_decode_noheader_malloc}
-     */
+    /** Unsafe version of: {@link #stbi_zlib_decode_noheader_malloc zlib_decode_noheader_malloc} */
     public static native long nstbi_zlib_decode_noheader_malloc(long buffer, int len, long outlen);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     @Nullable
     @NativeType("char *")
     public static ByteBuffer stbi_zlib_decode_noheader_malloc(@NativeType("char const *") ByteBuffer buffer) {
@@ -1085,26 +1035,18 @@ public class STBImage {
 
     // --- [ stbi_zlib_decode_noheader_buffer ] ---
 
-    /**
-     * Unsafe version of: {@link #stbi_zlib_decode_noheader_buffer zlib_decode_noheader_buffer}
-     */
+    /** Unsafe version of: {@link #stbi_zlib_decode_noheader_buffer zlib_decode_noheader_buffer} */
     public static native int nstbi_zlib_decode_noheader_buffer(long obuffer, int olen, long ibuffer, int ilen);
 
-    /**
-     * ZLIB client - used by PNG, available for other purposes
-     */
+    /** ZLIB client - used by PNG, available for other purposes */
     public static int stbi_zlib_decode_noheader_buffer(@NativeType("char *") ByteBuffer obuffer, @NativeType("char const *") ByteBuffer ibuffer) {
         return nstbi_zlib_decode_noheader_buffer(memAddress(obuffer), obuffer.remaining(), memAddress(ibuffer), ibuffer.remaining());
     }
 
-    /**
-     * Array version of: {@link #nstbi_load}
-     */
+    /** Array version of: {@link #nstbi_load} */
     public static native long nstbi_load(long filename, int[] x, int[] y, int[] channels_in_file, int desired_channels);
 
-    /**
-     * Array version of: {@link #stbi_load load}
-     */
+    /** Array version of: {@link #stbi_load load} */
     @Nullable
     @NativeType("stbi_uc *")
     public static ByteBuffer stbi_load(@NativeType("char const *") ByteBuffer filename, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1118,9 +1060,7 @@ public class STBImage {
         return memByteBufferSafe(__result, x[0] * y[0] * (desired_channels != 0 ? desired_channels : channels_in_file[0]));
     }
 
-    /**
-     * Array version of: {@link #stbi_load load}
-     */
+    /** Array version of: {@link #stbi_load load} */
     @Nullable
     @NativeType("stbi_uc *")
     public static ByteBuffer stbi_load(@NativeType("char const *") CharSequence filename, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1141,14 +1081,10 @@ public class STBImage {
         }
     }
 
-    /**
-     * Array version of: {@link #nstbi_load_from_memory}
-     */
+    /** Array version of: {@link #nstbi_load_from_memory} */
     public static native long nstbi_load_from_memory(long buffer, int len, int[] x, int[] y, int[] channels_in_file, int desired_channels);
 
-    /**
-     * Array version of: {@link #stbi_load_from_memory load_from_memory}
-     */
+    /** Array version of: {@link #stbi_load_from_memory load_from_memory} */
     @Nullable
     @NativeType("stbi_uc *")
     public static ByteBuffer stbi_load_from_memory(@NativeType("stbi_uc const *") ByteBuffer buffer, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1161,14 +1097,10 @@ public class STBImage {
         return memByteBufferSafe(__result, x[0] * y[0] * (desired_channels != 0 ? desired_channels : channels_in_file[0]));
     }
 
-    /**
-     * Array version of: {@link #nstbi_load_from_callbacks}
-     */
+    /** Array version of: {@link #nstbi_load_from_callbacks} */
     public static native long nstbi_load_from_callbacks(long clbk, long user, int[] x, int[] y, int[] channels_in_file, int desired_channels);
 
-    /**
-     * Array version of: {@link #stbi_load_from_callbacks load_from_callbacks}
-     */
+    /** Array version of: {@link #stbi_load_from_callbacks load_from_callbacks} */
     @Nullable
     @NativeType("stbi_uc *")
     public static ByteBuffer stbi_load_from_callbacks(@NativeType("stbi_io_callbacks const *") STBIIOCallbacks clbk, @NativeType("void *") long user, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1182,14 +1114,10 @@ public class STBImage {
         return memByteBufferSafe(__result, x[0] * y[0] * (desired_channels != 0 ? desired_channels : channels_in_file[0]));
     }
 
-    /**
-     * Array version of: {@link #nstbi_load_gif_from_memory}
-     */
+    /** Array version of: {@link #nstbi_load_gif_from_memory} */
     public static native long nstbi_load_gif_from_memory(long buffer, int len, long delays, int[] x, int[] y, int[] z, int[] channels_in_file, int desired_channels);
 
-    /**
-     * Array version of: {@link #stbi_load_gif_from_memory load_gif_from_memory}
-     */
+    /** Array version of: {@link #stbi_load_gif_from_memory load_gif_from_memory} */
     @Nullable
     @NativeType("stbi_uc *")
     public static ByteBuffer stbi_load_gif_from_memory(@NativeType("stbi_uc const *") ByteBuffer buffer, @NativeType("int **") PointerBuffer delays, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] z, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1204,14 +1132,10 @@ public class STBImage {
         return memByteBufferSafe(__result, x[0] * y[0] * z[0] * (desired_channels != 0 ? desired_channels : channels_in_file[0]));
     }
 
-    /**
-     * Array version of: {@link #nstbi_load_16}
-     */
+    /** Array version of: {@link #nstbi_load_16} */
     public static native long nstbi_load_16(long filename, int[] x, int[] y, int[] channels_in_file, int desired_channels);
 
-    /**
-     * Array version of: {@link #stbi_load_16 load_16}
-     */
+    /** Array version of: {@link #stbi_load_16 load_16} */
     @Nullable
     @NativeType("stbi_us *")
     public static ShortBuffer stbi_load_16(@NativeType("char const *") ByteBuffer filename, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1225,9 +1149,7 @@ public class STBImage {
         return memShortBufferSafe(__result, x[0] * y[0] * (desired_channels != 0 ? desired_channels : channels_in_file[0]));
     }
 
-    /**
-     * Array version of: {@link #stbi_load_16 load_16}
-     */
+    /** Array version of: {@link #stbi_load_16 load_16} */
     @Nullable
     @NativeType("stbi_us *")
     public static ShortBuffer stbi_load_16(@NativeType("char const *") CharSequence filename, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1248,14 +1170,10 @@ public class STBImage {
         }
     }
 
-    /**
-     * Array version of: {@link #nstbi_load_16_from_memory}
-     */
+    /** Array version of: {@link #nstbi_load_16_from_memory} */
     public static native long nstbi_load_16_from_memory(long buffer, int len, int[] x, int[] y, int[] channels_in_file, int desired_channels);
 
-    /**
-     * Array version of: {@link #stbi_load_16_from_memory load_16_from_memory}
-     */
+    /** Array version of: {@link #stbi_load_16_from_memory load_16_from_memory} */
     @Nullable
     @NativeType("stbi_us *")
     public static ShortBuffer stbi_load_16_from_memory(@NativeType("stbi_uc const *") ByteBuffer buffer, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1268,14 +1186,10 @@ public class STBImage {
         return memShortBufferSafe(__result, x[0] * y[0] * (desired_channels != 0 ? desired_channels : channels_in_file[0]));
     }
 
-    /**
-     * Array version of: {@link #nstbi_load_16_from_callbacks}
-     */
+    /** Array version of: {@link #nstbi_load_16_from_callbacks} */
     public static native long nstbi_load_16_from_callbacks(long clbk, long user, int[] x, int[] y, int[] channels_in_file, int desired_channels);
 
-    /**
-     * Array version of: {@link #stbi_load_16_from_callbacks load_16_from_callbacks}
-     */
+    /** Array version of: {@link #stbi_load_16_from_callbacks load_16_from_callbacks} */
     @Nullable
     @NativeType("stbi_us *")
     public static ShortBuffer stbi_load_16_from_callbacks(@NativeType("stbi_io_callbacks const *") STBIIOCallbacks clbk, @NativeType("void *") long user, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1289,14 +1203,10 @@ public class STBImage {
         return memShortBufferSafe(__result, x[0] * y[0] * (desired_channels != 0 ? desired_channels : channels_in_file[0]));
     }
 
-    /**
-     * Array version of: {@link #nstbi_loadf}
-     */
+    /** Array version of: {@link #nstbi_loadf} */
     public static native long nstbi_loadf(long filename, int[] x, int[] y, int[] channels_in_file, int desired_channels);
 
-    /**
-     * Array version of: {@link #stbi_loadf loadf}
-     */
+    /** Array version of: {@link #stbi_loadf loadf} */
     @Nullable
     @NativeType("float *")
     public static FloatBuffer stbi_loadf(@NativeType("char const *") ByteBuffer filename, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1310,9 +1220,7 @@ public class STBImage {
         return memFloatBufferSafe(__result, x[0] * y[0] * (desired_channels != 0 ? desired_channels : channels_in_file[0]));
     }
 
-    /**
-     * Array version of: {@link #stbi_loadf loadf}
-     */
+    /** Array version of: {@link #stbi_loadf loadf} */
     @Nullable
     @NativeType("float *")
     public static FloatBuffer stbi_loadf(@NativeType("char const *") CharSequence filename, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1333,14 +1241,10 @@ public class STBImage {
         }
     }
 
-    /**
-     * Array version of: {@link #nstbi_loadf_from_memory}
-     */
+    /** Array version of: {@link #nstbi_loadf_from_memory} */
     public static native long nstbi_loadf_from_memory(long buffer, int len, int[] x, int[] y, int[] channels_in_file, int desired_channels);
 
-    /**
-     * Array version of: {@link #stbi_loadf_from_memory loadf_from_memory}
-     */
+    /** Array version of: {@link #stbi_loadf_from_memory loadf_from_memory} */
     @Nullable
     @NativeType("float *")
     public static FloatBuffer stbi_loadf_from_memory(@NativeType("stbi_uc const *") ByteBuffer buffer, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1353,14 +1257,10 @@ public class STBImage {
         return memFloatBufferSafe(__result, x[0] * y[0] * (desired_channels != 0 ? desired_channels : channels_in_file[0]));
     }
 
-    /**
-     * Array version of: {@link #nstbi_loadf_from_callbacks}
-     */
+    /** Array version of: {@link #nstbi_loadf_from_callbacks} */
     public static native long nstbi_loadf_from_callbacks(long clbk, long user, int[] x, int[] y, int[] channels_in_file, int desired_channels);
 
-    /**
-     * Array version of: {@link #stbi_loadf_from_callbacks loadf_from_callbacks}
-     */
+    /** Array version of: {@link #stbi_loadf_from_callbacks loadf_from_callbacks} */
     @Nullable
     @NativeType("float *")
     public static FloatBuffer stbi_loadf_from_callbacks(@NativeType("stbi_io_callbacks const *") STBIIOCallbacks clbk, @NativeType("void *") long user, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] channels_in_file, int desired_channels) {
@@ -1374,14 +1274,10 @@ public class STBImage {
         return memFloatBufferSafe(__result, x[0] * y[0] * (desired_channels != 0 ? desired_channels : channels_in_file[0]));
     }
 
-    /**
-     * Array version of: {@link #nstbi_info}
-     */
+    /** Array version of: {@link #nstbi_info} */
     public static native int nstbi_info(long filename, int[] x, int[] y, int[] comp);
 
-    /**
-     * Array version of: {@link #stbi_info info}
-     */
+    /** Array version of: {@link #stbi_info info} */
     @NativeType("int")
     public static boolean stbi_info(@NativeType("char const *") ByteBuffer filename, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] comp) {
         if (CHECKS) {
@@ -1393,9 +1289,7 @@ public class STBImage {
         return nstbi_info(memAddress(filename), x, y, comp) != 0;
     }
 
-    /**
-     * Array version of: {@link #stbi_info info}
-     */
+    /** Array version of: {@link #stbi_info info} */
     @NativeType("int")
     public static boolean stbi_info(@NativeType("char const *") CharSequence filename, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] comp) {
         if (CHECKS) {
@@ -1414,14 +1308,10 @@ public class STBImage {
         }
     }
 
-    /**
-     * Array version of: {@link #nstbi_info_from_memory}
-     */
+    /** Array version of: {@link #nstbi_info_from_memory} */
     public static native int nstbi_info_from_memory(long buffer, int len, int[] x, int[] y, int[] comp);
 
-    /**
-     * Array version of: {@link #stbi_info_from_memory info_from_memory}
-     */
+    /** Array version of: {@link #stbi_info_from_memory info_from_memory} */
     @NativeType("int")
     public static boolean stbi_info_from_memory(@NativeType("stbi_uc const *") ByteBuffer buffer, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] comp) {
         if (CHECKS) {
@@ -1432,14 +1322,10 @@ public class STBImage {
         return nstbi_info_from_memory(memAddress(buffer), buffer.remaining(), x, y, comp) != 0;
     }
 
-    /**
-     * Array version of: {@link #nstbi_info_from_callbacks}
-     */
+    /** Array version of: {@link #nstbi_info_from_callbacks} */
     public static native int nstbi_info_from_callbacks(long clbk, long user, int[] x, int[] y, int[] comp);
 
-    /**
-     * Array version of: {@link #stbi_info_from_callbacks info_from_callbacks}
-     */
+    /** Array version of: {@link #stbi_info_from_callbacks info_from_callbacks} */
     @NativeType("int")
     public static boolean stbi_info_from_callbacks(@NativeType("stbi_io_callbacks const *") STBIIOCallbacks clbk, @NativeType("void *") long user, @NativeType("int *") int[] x, @NativeType("int *") int[] y, @NativeType("int *") int[] comp) {
         if (CHECKS) {

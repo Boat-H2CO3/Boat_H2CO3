@@ -84,7 +84,6 @@ public final class BufferUtils {
     /**
      * A helper function which is used to get the byte offset in an arbitrary buffer
      * based on its position
-     *
      * @return the position of the buffer, in BYTES
      */
     public static int getOffset(Buffer buffer) {
@@ -106,6 +105,7 @@ public final class BufferUtils {
      * Allocates a direct native-ordered {@code ByteBuffer} with the specified capacity.
      *
      * @param capacity the capacity, in bytes
+     *
      * @return a {@code ByteBuffer}
      */
     public static ByteBuffer createByteBuffer(int capacity) {
@@ -121,6 +121,7 @@ public final class BufferUtils {
      * Allocates a direct native-order {@code ShortBuffer} with the specified number of elements.
      *
      * @param capacity the capacity, in shorts
+     *
      * @return a {@code ShortBuffer}
      */
     public static ShortBuffer createShortBuffer(int capacity) {
@@ -131,6 +132,7 @@ public final class BufferUtils {
      * Allocates a direct native-order {@code CharBuffer} with the specified number of elements.
      *
      * @param capacity the capacity, in chars
+     *
      * @return a {@code CharBuffer}
      */
     public static CharBuffer createCharBuffer(int capacity) {
@@ -141,6 +143,7 @@ public final class BufferUtils {
      * Allocates a direct native-order {@code IntBuffer} with the specified number of elements.
      *
      * @param capacity the capacity, in ints
+     *
      * @return an {@code IntBuffer}
      */
     public static IntBuffer createIntBuffer(int capacity) {
@@ -151,6 +154,7 @@ public final class BufferUtils {
      * Allocates a direct native-order {@code LongBuffer} with the specified number of elements.
      *
      * @param capacity the capacity, in longs
+     *
      * @return a {@code LongBuffer}
      */
     public static LongBuffer createLongBuffer(int capacity) {
@@ -161,6 +165,7 @@ public final class BufferUtils {
      * Allocates a {@code CLongBuffer} with the specified number of elements.
      *
      * @param capacity the capacity, in memory addresses
+     *
      * @return a {@code CLongBuffer}
      */
     public static CLongBuffer createCLongBuffer(int capacity) {
@@ -171,6 +176,7 @@ public final class BufferUtils {
      * Allocates a direct native-order {@code FloatBuffer} with the specified number of elements.
      *
      * @param capacity the capacity, in floats
+     *
      * @return a FloatBuffer
      */
     public static FloatBuffer createFloatBuffer(int capacity) {
@@ -181,6 +187,7 @@ public final class BufferUtils {
      * Allocates a direct native-order {@code DoubleBuffer} with the specified number of elements.
      *
      * @param capacity the capacity, in doubles
+     *
      * @return a {@code DoubleBuffer}
      */
     public static DoubleBuffer createDoubleBuffer(int capacity) {
@@ -191,6 +198,7 @@ public final class BufferUtils {
      * Allocates a {@code PointerBuffer} with the specified number of elements.
      *
      * @param capacity the capacity, in memory addresses
+     *
      * @return a {@code PointerBuffer}
      */
     public static PointerBuffer createPointerBuffer(int capacity) {

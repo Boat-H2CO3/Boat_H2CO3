@@ -87,9 +87,7 @@ public class NVXGpuMulticast2 {
 
     public static native void glMulticastViewportPositionWScaleNVX(@NativeType("GLuint") int gpu, @NativeType("GLuint") int index, @NativeType("GLfloat") float xcoeff, @NativeType("GLfloat") float ycoeff);
 
-    /**
-     * Array version of: {@link #glAsyncCopyImageSubDataNVX AsyncCopyImageSubDataNVX}
-     */
+    /** Array version of: {@link #glAsyncCopyImageSubDataNVX AsyncCopyImageSubDataNVX} */
     @NativeType("GLuint")
     public static int glAsyncCopyImageSubDataNVX(@NativeType("GLuint const *") int[] waitSemaphoreArray, @NativeType("GLuint64 const *") long[] waitValueArray, @NativeType("GLuint") int srcGpu, @NativeType("GLbitfield") int dstGpuMask, @NativeType("GLuint") int srcName, @NativeType("GLenum") int srcTarget, @NativeType("GLint") int srcLevel, @NativeType("GLint") int srcX, @NativeType("GLint") int srcY, @NativeType("GLint") int srcZ, @NativeType("GLuint") int dstName, @NativeType("GLenum") int dstTarget, @NativeType("GLint") int dstLevel, @NativeType("GLint") int dstX, @NativeType("GLint") int dstY, @NativeType("GLint") int dstZ, @NativeType("GLsizei") int srcWidth, @NativeType("GLsizei") int srcHeight, @NativeType("GLsizei") int srcDepth, @NativeType("GLuint const *") int[] signalSemaphoreArray, @NativeType("GLuint64 const *") long[] signalValueArray) {
         long __functionAddress = GL.getICD().glAsyncCopyImageSubDataNVX;
@@ -101,9 +99,7 @@ public class NVXGpuMulticast2 {
         return callPPPPI(waitSemaphoreArray.length, waitSemaphoreArray, waitValueArray, srcGpu, dstGpuMask, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth, signalSemaphoreArray.length, signalSemaphoreArray, signalValueArray, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glAsyncCopyBufferSubDataNVX AsyncCopyBufferSubDataNVX}
-     */
+    /** Array version of: {@link #glAsyncCopyBufferSubDataNVX AsyncCopyBufferSubDataNVX} */
     @NativeType("GLsync")
     public static long glAsyncCopyBufferSubDataNVX(@NativeType("GLuint const *") int[] waitSemaphoreArray, @NativeType("GLuint64 const *") long[] fenceValueArray, @NativeType("GLuint") int readGpu, @NativeType("GLbitfield") int writeGpuMask, @NativeType("GLuint") int readBuffer, @NativeType("GLuint") int writeBuffer, @NativeType("GLintptr") long readOffset, @NativeType("GLintptr") long writeOffset, @NativeType("GLsizeiptr") long size, @NativeType("GLuint const *") int[] signalSemaphoreArray, @NativeType("GLuint64 const *") long[] signalValueArray) {
         long __functionAddress = GL.getICD().glAsyncCopyBufferSubDataNVX;
@@ -115,9 +111,7 @@ public class NVXGpuMulticast2 {
         return callPPPPPPPP(waitSemaphoreArray.length, waitSemaphoreArray, fenceValueArray, readGpu, writeGpuMask, readBuffer, writeBuffer, readOffset, writeOffset, size, signalSemaphoreArray.length, signalSemaphoreArray, signalValueArray, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMulticastViewportArrayvNVX MulticastViewportArrayvNVX}
-     */
+    /** Array version of: {@link #glMulticastViewportArrayvNVX MulticastViewportArrayvNVX} */
     public static void glMulticastViewportArrayvNVX(@NativeType("GLuint") int gpu, @NativeType("GLuint") int first, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMulticastViewportArrayvNVX;
         if (CHECKS) {
@@ -126,9 +120,7 @@ public class NVXGpuMulticast2 {
         callPV(gpu, first, v.length >> 2, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMulticastScissorArrayvNVX MulticastScissorArrayvNVX}
-     */
+    /** Array version of: {@link #glMulticastScissorArrayvNVX MulticastScissorArrayvNVX} */
     public static void glMulticastScissorArrayvNVX(@NativeType("GLuint") int gpu, @NativeType("GLuint") int first, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMulticastScissorArrayvNVX;
         if (CHECKS) {

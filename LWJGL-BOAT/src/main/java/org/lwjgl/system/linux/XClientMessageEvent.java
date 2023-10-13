@@ -344,7 +344,7 @@ public class XClientMessageEvent extends Struct implements NativeResource {
             int format,
             ByteBuffer data_b,
             ShortBuffer data_s,
-            CLongBuffer data_l
+        CLongBuffer data_l
     ) {
         type(type);
         serial(serial);
@@ -364,6 +364,7 @@ public class XClientMessageEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XClientMessageEvent set(XClientMessageEvent src) {
@@ -373,38 +374,28 @@ public class XClientMessageEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XClientMessageEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XClientMessageEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XClientMessageEvent malloc() {
         return wrap(XClientMessageEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XClientMessageEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XClientMessageEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XClientMessageEvent calloc() {
         return wrap(XClientMessageEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XClientMessageEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XClientMessageEvent} instance allocated with {@link BufferUtils}. */
     public static XClientMessageEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XClientMessageEvent.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code XClientMessageEvent} instance for the specified memory address.
-     */
+    /** Returns a new {@code XClientMessageEvent} instance for the specified memory address. */
     public static XClientMessageEvent create(long address) {
         return wrap(XClientMessageEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XClientMessageEvent createSafe(long address) {
         return address == NULL ? null : wrap(XClientMessageEvent.class, address);
@@ -448,9 +439,7 @@ public class XClientMessageEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -458,16 +447,12 @@ public class XClientMessageEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XClientMessageEvent} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code XClientMessageEvent} instance allocated on the thread-local {@link MemoryStack}. */
     public static XClientMessageEvent mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XClientMessageEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XClientMessageEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XClientMessageEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -511,7 +496,7 @@ public class XClientMessageEvent extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -680,43 +665,25 @@ public class XClientMessageEvent extends Struct implements NativeResource {
         memCopy(memAddress(value), struct + XClientMessageEvent.DATA_B, value.remaining() * 1);
     }
 
-    /**
-     * Unsafe version of {@link #data_b(int, byte) data_b}.
-     */
+    /** Unsafe version of {@link #data_b(int, byte) data_b}. */
     public static void ndata_b(long struct, int index, byte value) {
         UNSAFE.putByte(null, struct + XClientMessageEvent.DATA_B + check(index, 20) * 1, value);
     }
-
-    /**
-     * Unsafe version of {@link #data_s(ShortBuffer) data_s}.
-     */
+    /** Unsafe version of {@link #data_s(ShortBuffer) data_s}. */
     public static void ndata_s(long struct, ShortBuffer value) {
-        if (CHECKS) {
-            checkGT(value, 10);
-        }
+        if (CHECKS) { checkGT(value, 10); }
         memCopy(memAddress(value), struct + XClientMessageEvent.DATA_S, value.remaining() * 2);
     }
-
-    /**
-     * Unsafe version of {@link #data_s(int, short) data_s}.
-     */
+    /** Unsafe version of {@link #data_s(int, short) data_s}. */
     public static void ndata_s(long struct, int index, short value) {
         UNSAFE.putShort(null, struct + XClientMessageEvent.DATA_S + check(index, 10) * 2, value);
     }
-
-    /**
-     * Unsafe version of {@link #data_l(CLongBuffer) data_l}.
-     */
+    /** Unsafe version of {@link #data_l(CLongBuffer) data_l}. */
     public static void ndata_l(long struct, CLongBuffer value) {
-        if (CHECKS) {
-            checkGT(value, 5);
-        }
+        if (CHECKS) { checkGT(value, 5); }
         memCopy(memAddress(value), struct + XClientMessageEvent.DATA_L, value.remaining() * CLONG_SIZE);
     }
-
-    /**
-     * Unsafe version of {@link #data_l(int, long) data_l}.
-     */
+    /** Unsafe version of {@link #data_l(int, long) data_l}. */
     public static void ndata_l(long struct, int index, long value) {
         memPutCLong(struct + XClientMessageEvent.DATA_L + check(index, 5) * CLONG_SIZE, value);
     }
@@ -744,16 +711,14 @@ public class XClientMessageEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XClientMessageEvent} structs.
-     */
+    /** An array of {@link XClientMessageEvent} structs. */
     public static class Buffer extends StructBuffer<XClientMessageEvent, Buffer> implements NativeResource {
 
         private static final XClientMessageEvent ELEMENT_FACTORY = XClientMessageEvent.create(-1L);
 
         /**
          * Creates a new {@code XClientMessageEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XClientMessageEvent#SIZEOF}, and its mark will be undefined.
@@ -962,29 +927,12 @@ public class XClientMessageEvent extends Struct implements NativeResource {
             return this;
         }
 
-        /**
-         * Sets the specified value at the specified index of the {@code data.s} field.
-         */
-        public Buffer data_s(int index, short value) {
-            XClientMessageEvent.ndata_s(address(), index, value);
-            return this;
-        }
-
-        /**
-         * Copies the specified {@link CLongBuffer} to the {@code data.l} field.
-         */
-        public Buffer data_l(@NativeType("long[5]") CLongBuffer value) {
-            XClientMessageEvent.ndata_l(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value at the specified index of the {@code data.l} field.
-         */
-        public Buffer data_l(int index, long value) {
-            XClientMessageEvent.ndata_l(address(), index, value);
-            return this;
-        }
+        /** Sets the specified value at the specified index of the {@code data.s} field. */
+        public Buffer data_s(int index, short value) { XClientMessageEvent.ndata_s(address(), index, value); return this; }
+        /** Copies the specified {@link CLongBuffer} to the {@code data.l} field. */
+        public Buffer data_l(@NativeType("long[5]") CLongBuffer value) { XClientMessageEvent.ndata_l(address(), value); return this; }
+        /** Sets the specified value at the specified index of the {@code data.l} field. */
+        public Buffer data_l(int index, long value) { XClientMessageEvent.ndata_l(address(), index, value); return this; }
 
     }
 

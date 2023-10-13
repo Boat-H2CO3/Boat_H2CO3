@@ -31,9 +31,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class ARBViewportArray {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v. */
     public static final int
             GL_MAX_VIEWPORTS = 0x825B,
             GL_VIEWPORT_SUBPIXEL_BITS = 0x825C,
@@ -41,9 +39,7 @@ public class ARBViewportArray {
             GL_LAYER_PROVOKING_VERTEX = 0x825E,
             GL_VIEWPORT_INDEX_PROVOKING_VERTEX = 0x825F;
 
-    /**
-     * Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX or VIEWPORT_INDEX_PROVOKING_VERTEX.
-     */
+    /** Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX or VIEWPORT_INDEX_PROVOKING_VERTEX. */
     public static final int GL_UNDEFINED_VERTEX = 0x8260;
 
     static {
@@ -99,9 +95,7 @@ public class ARBViewportArray {
 
     // --- [ glViewportIndexedfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glViewportIndexedfv ViewportIndexedfv}
-     */
+    /** Unsafe version of: {@link #glViewportIndexedfv ViewportIndexedfv} */
     public static void nglViewportIndexedfv(int index, long v) {
         GL41C.nglViewportIndexedfv(index, v);
     }
@@ -154,9 +148,7 @@ public class ARBViewportArray {
 
     // --- [ glScissorIndexedv ] ---
 
-    /**
-     * Unsafe version of: {@link #glScissorIndexedv ScissorIndexedv}
-     */
+    /** Unsafe version of: {@link #glScissorIndexedv ScissorIndexedv} */
     public static void nglScissorIndexedv(int index, long v) {
         GL41C.nglScissorIndexedv(index, v);
     }
@@ -207,9 +199,7 @@ public class ARBViewportArray {
 
     // --- [ glGetFloati_v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetFloati_v GetFloati_v}
-     */
+    /** Unsafe version of: {@link #glGetFloati_v GetFloati_v} */
     public static void nglGetFloati_v(int target, int index, long data) {
         GL41C.nglGetFloati_v(target, index, data);
     }
@@ -238,9 +228,7 @@ public class ARBViewportArray {
 
     // --- [ glGetDoublei_v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetDoublei_v GetDoublei_v}
-     */
+    /** Unsafe version of: {@link #glGetDoublei_v GetDoublei_v} */
     public static void nglGetDoublei_v(int target, int index, long data) {
         GL41C.nglGetDoublei_v(target, index, data);
     }
@@ -267,51 +255,37 @@ public class ARBViewportArray {
         return GL41C.glGetDoublei(target, index);
     }
 
-    /**
-     * Array version of: {@link #glViewportArrayv ViewportArrayv}
-     */
+    /** Array version of: {@link #glViewportArrayv ViewportArrayv} */
     public static void glViewportArrayv(@NativeType("GLuint") int first, @NativeType("GLfloat const *") float[] v) {
         GL41C.glViewportArrayv(first, v);
     }
 
-    /**
-     * Array version of: {@link #glViewportIndexedfv ViewportIndexedfv}
-     */
+    /** Array version of: {@link #glViewportIndexedfv ViewportIndexedfv} */
     public static void glViewportIndexedfv(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         GL41C.glViewportIndexedfv(index, v);
     }
 
-    /**
-     * Array version of: {@link #glScissorArrayv ScissorArrayv}
-     */
+    /** Array version of: {@link #glScissorArrayv ScissorArrayv} */
     public static void glScissorArrayv(@NativeType("GLuint") int first, @NativeType("GLint const *") int[] v) {
         GL41C.glScissorArrayv(first, v);
     }
 
-    /**
-     * Array version of: {@link #glScissorIndexedv ScissorIndexedv}
-     */
+    /** Array version of: {@link #glScissorIndexedv ScissorIndexedv} */
     public static void glScissorIndexedv(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         GL41C.glScissorIndexedv(index, v);
     }
 
-    /**
-     * Array version of: {@link #glDepthRangeArrayv DepthRangeArrayv}
-     */
+    /** Array version of: {@link #glDepthRangeArrayv DepthRangeArrayv} */
     public static void glDepthRangeArrayv(@NativeType("GLuint") int first, @NativeType("GLdouble const *") double[] v) {
         GL41C.glDepthRangeArrayv(first, v);
     }
 
-    /**
-     * Array version of: {@link #glGetFloati_v GetFloati_v}
-     */
+    /** Array version of: {@link #glGetFloati_v GetFloati_v} */
     public static void glGetFloati_v(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] data) {
         GL41C.glGetFloati_v(target, index, data);
     }
 
-    /**
-     * Array version of: {@link #glGetDoublei_v GetDoublei_v}
-     */
+    /** Array version of: {@link #glGetDoublei_v GetDoublei_v} */
     public static void glGetDoublei_v(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLdouble *") double[] data) {
         GL41C.glGetDoublei_v(target, index, data);
     }

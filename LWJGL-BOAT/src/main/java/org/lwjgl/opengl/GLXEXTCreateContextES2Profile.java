@@ -14,9 +14,7 @@ package org.lwjgl.opengl;
  */
 public final class GLXEXTCreateContextES2Profile {
 
-    /**
-     * Accepted as a bit in the attribute value for {@link GLXARBCreateContextProfile#GLX_CONTEXT_PROFILE_MASK_ARB CONTEXT_PROFILE_MASK_ARB} in {@code attrib_list}.
-     */
+    /** Accepted as a bit in the attribute value for {@link GLXARBCreateContextProfile#GLX_CONTEXT_PROFILE_MASK_ARB CONTEXT_PROFILE_MASK_ARB} in {@code attrib_list}. */
     public static final int GLX_CONTEXT_ES2_PROFILE_BIT_EXT = 0x4;
 
     private GLXEXTCreateContextES2Profile() {

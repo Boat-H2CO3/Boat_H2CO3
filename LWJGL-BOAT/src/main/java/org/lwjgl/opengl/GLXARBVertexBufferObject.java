@@ -19,9 +19,7 @@ package org.lwjgl.opengl;
  */
 public final class GLXARBVertexBufferObject {
 
-    /**
-     * Accepted as an attribute name in the {@code attrib_list} parameter of {@link GLXARBCreateContext#glXCreateContextAttribsARB CreateContextAttribsARB}.
-     */
+    /** Accepted as an attribute name in the {@code attrib_list} parameter of {@link GLXARBCreateContext#glXCreateContextAttribsARB CreateContextAttribsARB}. */
     public static final int GLX_CONTEXT_ALLOW_BUFFER_BYTE_ORDER_MISMATCH_ARB = 0x2095;
 
     private GLXARBVertexBufferObject() {

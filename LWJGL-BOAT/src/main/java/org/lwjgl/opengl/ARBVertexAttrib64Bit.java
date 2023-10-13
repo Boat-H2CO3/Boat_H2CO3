@@ -5,12 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_attrib_64bit.txt">ARB_vertex_attrib_64bit</a> extension.
@@ -42,9 +41,7 @@ import java.nio.DoubleBuffer;
  */
 public class ARBVertexAttrib64Bit {
 
-    /**
-     * Returned in the {@code type} parameter of GetActiveAttrib.
-     */
+    /** Returned in the {@code type} parameter of GetActiveAttrib. */
     public static final int
             GL_DOUBLE_VEC2 = 0x8FFC,
             GL_DOUBLE_VEC3 = 0x8FFD,
@@ -131,9 +128,7 @@ public class ARBVertexAttrib64Bit {
 
     // --- [ glVertexAttribL1dv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribL1dv VertexAttribL1dv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribL1dv VertexAttribL1dv} */
     public static void nglVertexAttribL1dv(int index, long v) {
         GL41C.nglVertexAttribL1dv(index, v);
     }
@@ -150,9 +145,7 @@ public class ARBVertexAttrib64Bit {
 
     // --- [ glVertexAttribL2dv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribL2dv VertexAttribL2dv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribL2dv VertexAttribL2dv} */
     public static void nglVertexAttribL2dv(int index, long v) {
         GL41C.nglVertexAttribL2dv(index, v);
     }
@@ -169,9 +162,7 @@ public class ARBVertexAttrib64Bit {
 
     // --- [ glVertexAttribL3dv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribL3dv VertexAttribL3dv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribL3dv VertexAttribL3dv} */
     public static void nglVertexAttribL3dv(int index, long v) {
         GL41C.nglVertexAttribL3dv(index, v);
     }
@@ -188,9 +179,7 @@ public class ARBVertexAttrib64Bit {
 
     // --- [ glVertexAttribL4dv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribL4dv VertexAttribL4dv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribL4dv VertexAttribL4dv} */
     public static void nglVertexAttribL4dv(int index, long v) {
         GL41C.nglVertexAttribL4dv(index, v);
     }
@@ -262,9 +251,7 @@ public class ARBVertexAttrib64Bit {
 
     // --- [ glGetVertexAttribLdv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexAttribLdv GetVertexAttribLdv}
-     */
+    /** Unsafe version of: {@link #glGetVertexAttribLdv GetVertexAttribLdv} */
     public static void nglGetVertexAttribLdv(int index, int pname, long params) {
         GL41C.nglGetVertexAttribLdv(index, pname, params);
     }
@@ -296,37 +283,27 @@ public class ARBVertexAttrib64Bit {
      */
     public static native void glVertexArrayVertexAttribLOffsetEXT(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int buffer, @NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("GLintptr") long offset);
 
-    /**
-     * Array version of: {@link #glVertexAttribL1dv VertexAttribL1dv}
-     */
+    /** Array version of: {@link #glVertexAttribL1dv VertexAttribL1dv} */
     public static void glVertexAttribL1dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         GL41C.glVertexAttribL1dv(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribL2dv VertexAttribL2dv}
-     */
+    /** Array version of: {@link #glVertexAttribL2dv VertexAttribL2dv} */
     public static void glVertexAttribL2dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         GL41C.glVertexAttribL2dv(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribL3dv VertexAttribL3dv}
-     */
+    /** Array version of: {@link #glVertexAttribL3dv VertexAttribL3dv} */
     public static void glVertexAttribL3dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         GL41C.glVertexAttribL3dv(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribL4dv VertexAttribL4dv}
-     */
+    /** Array version of: {@link #glVertexAttribL4dv VertexAttribL4dv} */
     public static void glVertexAttribL4dv(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         GL41C.glVertexAttribL4dv(index, v);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexAttribLdv GetVertexAttribLdv}
-     */
+    /** Array version of: {@link #glGetVertexAttribLdv GetVertexAttribLdv} */
     public static void glGetVertexAttribLdv(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLdouble *") double[] params) {
         GL41C.glGetVertexAttribLdv(index, pname, params);
     }

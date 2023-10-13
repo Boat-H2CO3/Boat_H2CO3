@@ -46,118 +46,109 @@ public interface CallbackI extends Pointer {
         void callback(long args);
     }
 
-    /**
-     * A {@code Callback} that returns a boolean value.
-     */
+    /** A {@code Callback} that returns a boolean value. */
     interface Z extends CallbackI {
         /**
          * Will be called by native code.
          *
          * @param args pointer to a {@code DCArgs} iterator
+         *
          * @return the value to store to the result {@code DCValue}
          */
         boolean callback(long args);
     }
 
-    /**
-     * A {@code Callback} that returns a byte value.
-     */
+    /** A {@code Callback} that returns a byte value. */
     interface B extends CallbackI {
         /**
          * Will be called by native code.
          *
          * @param args pointer to a {@code DCArgs} iterator
+         *
          * @return the value to store to the result {@code DCValue}
          */
         byte callback(long args);
     }
 
-    /**
-     * A {@code Callback} that returns a short value.
-     */
+    /** A {@code Callback} that returns a short value. */
     interface S extends CallbackI {
         /**
          * Will be called by native code.
          *
          * @param args pointer to a {@code DCArgs} iterator
+         *
          * @return the value to store to the result {@code DCValue}
          */
         short callback(long args);
     }
 
-    /**
-     * A {@code Callback} that returns an int value.
-     */
+    /** A {@code Callback} that returns an int value. */
     interface I extends CallbackI {
         /**
          * Will be called by native code.
          *
          * @param args pointer to a {@code DCArgs} iterator
+         *
          * @return the value to store to the result {@code DCValue}
          */
         int callback(long args);
     }
 
-    /**
-     * A {@code Callback} that returns a long value.
-     */
+    /** A {@code Callback} that returns a long value. */
     interface J extends CallbackI {
         /**
          * Will be called by native code.
          *
          * @param args pointer to a {@code DCArgs} iterator
+         *
          * @return the value to store to the result {@code DCValue}
          */
         long callback(long args);
     }
 
-    /**
-     * A {@code Callback} that returns a C long value.
-     */
+    /** A {@code Callback} that returns a C long value. */
     interface N extends CallbackI {
         /**
          * Will be called by native code.
          *
          * @param args pointer to a {@code DCArgs} iterator
+         *
          * @return the value to store to the result {@code DCValue}
          */
         long callback(long args);
     }
 
-    /**
-     * A {@code Callback} that returns a float value.
-     */
+    /** A {@code Callback} that returns a float value. */
     interface F extends CallbackI {
         /**
          * Will be called by native code.
          *
          * @param args pointer to a {@code DCArgs} iterator
+         *
          * @return the value to store to the result {@code DCValue}
          */
         float callback(long args);
     }
 
-    /**
-     * A {@code Callback} that returns a double value.
-     */
+    /** A {@code Callback} that returns a double value. */
     interface D extends CallbackI {
         /**
          * Will be called by native code.
          *
          * @param args pointer to a {@code DCArgs} iterator
+         *
          * @return the value to store to the result {@code DCValue}
          */
         double callback(long args);
     }
 
-    /**
-     * A {@code Callback} that returns a pointer value.
-     */
+    /** A {@code Callback} that returns a pointer value. */
     interface P extends CallbackI {
         /**
          * Will be called by native code.
          *
          * @param args pointer to a {@code DCArgs} iterator
+         *
          * @return the value to store to the result {@code DCValue}
          */
         long callback(long args);

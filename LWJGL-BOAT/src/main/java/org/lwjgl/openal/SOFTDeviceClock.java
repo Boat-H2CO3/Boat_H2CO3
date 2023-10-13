@@ -28,9 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class SOFTDeviceClock {
 
-    /**
-     * Accepted as the {@code pname} parameter of {@link #alcGetInteger64vSOFT GetInteger64vSOFT}.
-     */
+    /** Accepted as the {@code pname} parameter of {@link #alcGetInteger64vSOFT GetInteger64vSOFT}. */
     public static final int
             ALC_DEVICE_CLOCK_SOFT = 0x1600,
             ALC_DEVICE_LATENCY_SOFT = 0x1601,
@@ -130,9 +128,7 @@ public class SOFTDeviceClock {
         }
     }
 
-    /**
-     * Array version of: {@link #alcGetInteger64vSOFT GetInteger64vSOFT}
-     */
+    /** Array version of: {@link #alcGetInteger64vSOFT GetInteger64vSOFT} */
     @NativeType("ALCvoid")
     public static void alcGetInteger64vSOFT(@NativeType("ALCdevice *") long device, @NativeType("ALCenum") int pname, @NativeType("ALCint64SOFT *") long[] values) {
         long __functionAddress = ALC.getICD().alcGetInteger64vSOFT;

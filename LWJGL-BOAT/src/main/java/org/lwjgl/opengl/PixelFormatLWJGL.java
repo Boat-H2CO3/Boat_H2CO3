@@ -37,5 +37,5 @@ package org.lwjgl.opengl;
  * @author Spasi
  */
 public interface PixelFormatLWJGL {
-    // Marker interface
+	// Marker interface
 }

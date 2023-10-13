@@ -13,9 +13,7 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public interface FunctionProviderLocal extends FunctionProvider {
 
-    /**
-     * {@link CharSequence} version of {@link #getFunctionAddress(long, ByteBuffer)}.
-     */
+    /** {@link CharSequence} version of {@link #getFunctionAddress(long, ByteBuffer)}. */
     default long getFunctionAddress(long handle, CharSequence functionName) {
         try (MemoryStack stack = stackPush()) {
             return getFunctionAddress(handle, stack.ASCII(functionName));
@@ -27,6 +25,7 @@ public interface FunctionProviderLocal extends FunctionProvider {
      *
      * @param handle       the handle to a platform/device/context
      * @param functionName the encoded name of the function to query
+     *
      * @return the function address or 0L if the function is not supported
      */
     long getFunctionAddress(long handle, ByteBuffer functionName);

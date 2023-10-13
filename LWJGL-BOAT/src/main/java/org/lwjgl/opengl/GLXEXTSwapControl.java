@@ -18,9 +18,7 @@ import static org.lwjgl.system.JNI.*;
  */
 public class GLXEXTSwapControl {
 
-    /**
-     * The current swap interval and implementation-dependent max swap interval for a particular drawable.
-     */
+    /** The current swap interval and implementation-dependent max swap interval for a particular drawable. */
     public static final int
             GLX_SWAP_INTERVAL_EXT = 0x20F1,
             GLX_MAX_SWAP_INTERVAL_EXT = 0x20F2;

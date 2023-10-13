@@ -383,9 +383,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib1svARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib1svARB VertexAttrib1svARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib1svARB VertexAttrib1svARB} */
     public static void nglVertexAttrib1svARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib1svARB(index, v);
     }
@@ -402,9 +400,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib1fvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib1fvARB VertexAttrib1fvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib1fvARB VertexAttrib1fvARB} */
     public static void nglVertexAttrib1fvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib1fvARB(index, v);
     }
@@ -421,9 +417,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib1dvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib1dvARB VertexAttrib1dvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib1dvARB VertexAttrib1dvARB} */
     public static void nglVertexAttrib1dvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib1dvARB(index, v);
     }
@@ -440,9 +434,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib2svARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib2svARB VertexAttrib2svARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib2svARB VertexAttrib2svARB} */
     public static void nglVertexAttrib2svARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib2svARB(index, v);
     }
@@ -459,9 +451,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib2fvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib2fvARB VertexAttrib2fvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib2fvARB VertexAttrib2fvARB} */
     public static void nglVertexAttrib2fvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib2fvARB(index, v);
     }
@@ -478,9 +468,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib2dvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib2dvARB VertexAttrib2dvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib2dvARB VertexAttrib2dvARB} */
     public static void nglVertexAttrib2dvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib2dvARB(index, v);
     }
@@ -497,9 +485,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib3svARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib3svARB VertexAttrib3svARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib3svARB VertexAttrib3svARB} */
     public static void nglVertexAttrib3svARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib3svARB(index, v);
     }
@@ -516,9 +502,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib3fvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib3fvARB VertexAttrib3fvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib3fvARB VertexAttrib3fvARB} */
     public static void nglVertexAttrib3fvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib3fvARB(index, v);
     }
@@ -535,9 +519,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib3dvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib3dvARB VertexAttrib3dvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib3dvARB VertexAttrib3dvARB} */
     public static void nglVertexAttrib3dvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib3dvARB(index, v);
     }
@@ -554,9 +536,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4fvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4fvARB VertexAttrib4fvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4fvARB VertexAttrib4fvARB} */
     public static void nglVertexAttrib4fvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4fvARB(index, v);
     }
@@ -573,9 +553,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4bvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4bvARB VertexAttrib4bvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4bvARB VertexAttrib4bvARB} */
     public static void nglVertexAttrib4bvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4bvARB(index, v);
     }
@@ -592,9 +570,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4svARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4svARB VertexAttrib4svARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4svARB VertexAttrib4svARB} */
     public static void nglVertexAttrib4svARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4svARB(index, v);
     }
@@ -611,9 +587,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4ivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4ivARB VertexAttrib4ivARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4ivARB VertexAttrib4ivARB} */
     public static void nglVertexAttrib4ivARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4ivARB(index, v);
     }
@@ -630,9 +604,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4ubvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4ubvARB VertexAttrib4ubvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4ubvARB VertexAttrib4ubvARB} */
     public static void nglVertexAttrib4ubvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4ubvARB(index, v);
     }
@@ -649,9 +621,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4usvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4usvARB VertexAttrib4usvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4usvARB VertexAttrib4usvARB} */
     public static void nglVertexAttrib4usvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4usvARB(index, v);
     }
@@ -668,9 +638,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4uivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4uivARB VertexAttrib4uivARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4uivARB VertexAttrib4uivARB} */
     public static void nglVertexAttrib4uivARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4uivARB(index, v);
     }
@@ -687,9 +655,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4dvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4dvARB VertexAttrib4dvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4dvARB VertexAttrib4dvARB} */
     public static void nglVertexAttrib4dvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4dvARB(index, v);
     }
@@ -706,9 +672,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4NbvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4NbvARB VertexAttrib4NbvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4NbvARB VertexAttrib4NbvARB} */
     public static void nglVertexAttrib4NbvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4NbvARB(index, v);
     }
@@ -725,9 +689,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4NsvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4NsvARB VertexAttrib4NsvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4NsvARB VertexAttrib4NsvARB} */
     public static void nglVertexAttrib4NsvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4NsvARB(index, v);
     }
@@ -744,9 +706,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4NivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4NivARB VertexAttrib4NivARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4NivARB VertexAttrib4NivARB} */
     public static void nglVertexAttrib4NivARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4NivARB(index, v);
     }
@@ -763,9 +723,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4NubvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4NubvARB VertexAttrib4NubvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4NubvARB VertexAttrib4NubvARB} */
     public static void nglVertexAttrib4NubvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4NubvARB(index, v);
     }
@@ -782,9 +740,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4NusvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4NusvARB VertexAttrib4NusvARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4NusvARB VertexAttrib4NusvARB} */
     public static void nglVertexAttrib4NusvARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4NusvARB(index, v);
     }
@@ -801,9 +757,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttrib4NuivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttrib4NuivARB VertexAttrib4NuivARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttrib4NuivARB VertexAttrib4NuivARB} */
     public static void nglVertexAttrib4NuivARB(int index, long v) {
         ARBVertexShader.nglVertexAttrib4NuivARB(index, v);
     }
@@ -820,9 +774,7 @@ public class ARBVertexProgram {
 
     // --- [ glVertexAttribPointerARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB}
-     */
+    /** Unsafe version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB} */
     public static void nglVertexAttribPointerARB(int index, int size, int type, boolean normalized, int stride, long pointer) {
         ARBVertexShader.nglVertexAttribPointerARB(index, size, type, normalized, stride, pointer);
     }
@@ -1042,9 +994,7 @@ public class ARBVertexProgram {
 
     // --- [ glProgramEnvParameter4dvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glProgramEnvParameter4dvARB ProgramEnvParameter4dvARB}
-     */
+    /** Unsafe version of: {@link #glProgramEnvParameter4dvARB ProgramEnvParameter4dvARB} */
     public static native void nglProgramEnvParameter4dvARB(int target, int index, long params);
 
     /**
@@ -1077,9 +1027,7 @@ public class ARBVertexProgram {
 
     // --- [ glProgramEnvParameter4fvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glProgramEnvParameter4fvARB ProgramEnvParameter4fvARB}
-     */
+    /** Unsafe version of: {@link #glProgramEnvParameter4fvARB ProgramEnvParameter4fvARB} */
     public static native void nglProgramEnvParameter4fvARB(int target, int index, long params);
 
     /**
@@ -1112,9 +1060,7 @@ public class ARBVertexProgram {
 
     // --- [ glProgramLocalParameter4dvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glProgramLocalParameter4dvARB ProgramLocalParameter4dvARB}
-     */
+    /** Unsafe version of: {@link #glProgramLocalParameter4dvARB ProgramLocalParameter4dvARB} */
     public static native void nglProgramLocalParameter4dvARB(int target, int index, long params);
 
     /**
@@ -1147,9 +1093,7 @@ public class ARBVertexProgram {
 
     // --- [ glProgramLocalParameter4fvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glProgramLocalParameter4fvARB ProgramLocalParameter4fvARB}
-     */
+    /** Unsafe version of: {@link #glProgramLocalParameter4fvARB ProgramLocalParameter4fvARB} */
     public static native void nglProgramLocalParameter4fvARB(int target, int index, long params);
 
     /**
@@ -1168,9 +1112,7 @@ public class ARBVertexProgram {
 
     // --- [ glGetProgramEnvParameterfvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramEnvParameterfvARB GetProgramEnvParameterfvARB}
-     */
+    /** Unsafe version of: {@link #glGetProgramEnvParameterfvARB GetProgramEnvParameterfvARB} */
     public static native void nglGetProgramEnvParameterfvARB(int target, int index, long params);
 
     /**
@@ -1190,9 +1132,7 @@ public class ARBVertexProgram {
 
     // --- [ glGetProgramEnvParameterdvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramEnvParameterdvARB GetProgramEnvParameterdvARB}
-     */
+    /** Unsafe version of: {@link #glGetProgramEnvParameterdvARB GetProgramEnvParameterdvARB} */
     public static native void nglGetProgramEnvParameterdvARB(int target, int index, long params);
 
     /**
@@ -1211,9 +1151,7 @@ public class ARBVertexProgram {
 
     // --- [ glGetProgramLocalParameterfvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramLocalParameterfvARB GetProgramLocalParameterfvARB}
-     */
+    /** Unsafe version of: {@link #glGetProgramLocalParameterfvARB GetProgramLocalParameterfvARB} */
     public static native void nglGetProgramLocalParameterfvARB(int target, int index, long params);
 
     /**
@@ -1233,9 +1171,7 @@ public class ARBVertexProgram {
 
     // --- [ glGetProgramLocalParameterdvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramLocalParameterdvARB GetProgramLocalParameterdvARB}
-     */
+    /** Unsafe version of: {@link #glGetProgramLocalParameterdvARB GetProgramLocalParameterdvARB} */
     public static native void nglGetProgramLocalParameterdvARB(int target, int index, long params);
 
     /**
@@ -1254,9 +1190,7 @@ public class ARBVertexProgram {
 
     // --- [ glGetProgramivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramivARB GetProgramivARB}
-     */
+    /** Unsafe version of: {@link #glGetProgramivARB GetProgramivARB} */
     public static native void nglGetProgramivARB(int target, int pname, long params);
 
     /**
@@ -1296,9 +1230,7 @@ public class ARBVertexProgram {
 
     // --- [ glGetProgramStringARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramStringARB GetProgramStringARB}
-     */
+    /** Unsafe version of: {@link #glGetProgramStringARB GetProgramStringARB} */
     public static native void nglGetProgramStringARB(int target, int pname, long string);
 
     /**
@@ -1322,9 +1254,7 @@ public class ARBVertexProgram {
 
     // --- [ glGetVertexAttribfvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexAttribfvARB GetVertexAttribfvARB}
-     */
+    /** Unsafe version of: {@link #glGetVertexAttribfvARB GetVertexAttribfvARB} */
     public static void nglGetVertexAttribfvARB(int index, int pname, long params) {
         ARBVertexShader.nglGetVertexAttribfvARB(index, pname, params);
     }
@@ -1342,9 +1272,7 @@ public class ARBVertexProgram {
 
     // --- [ glGetVertexAttribdvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexAttribdvARB GetVertexAttribdvARB}
-     */
+    /** Unsafe version of: {@link #glGetVertexAttribdvARB GetVertexAttribdvARB} */
     public static void nglGetVertexAttribdvARB(int index, int pname, long params) {
         ARBVertexShader.nglGetVertexAttribdvARB(index, pname, params);
     }
@@ -1362,9 +1290,7 @@ public class ARBVertexProgram {
 
     // --- [ glGetVertexAttribivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexAttribivARB GetVertexAttribivARB}
-     */
+    /** Unsafe version of: {@link #glGetVertexAttribivARB GetVertexAttribivARB} */
     public static void nglGetVertexAttribivARB(int index, int pname, long params) {
         ARBVertexShader.nglGetVertexAttribivARB(index, pname, params);
     }
@@ -1393,9 +1319,7 @@ public class ARBVertexProgram {
 
     // --- [ glGetVertexAttribPointervARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexAttribPointervARB GetVertexAttribPointervARB}
-     */
+    /** Unsafe version of: {@link #glGetVertexAttribPointervARB GetVertexAttribPointervARB} */
     public static void nglGetVertexAttribPointervARB(int index, int pname, long pointer) {
         ARBVertexShader.nglGetVertexAttribPointervARB(index, pname, pointer);
     }
@@ -1434,163 +1358,117 @@ public class ARBVertexProgram {
     @NativeType("GLboolean")
     public static native boolean glIsProgramARB(@NativeType("GLuint") int program);
 
-    /**
-     * Array version of: {@link #glVertexAttrib1svARB VertexAttrib1svARB}
-     */
+    /** Array version of: {@link #glVertexAttrib1svARB VertexAttrib1svARB} */
     public static void glVertexAttrib1svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         ARBVertexShader.glVertexAttrib1svARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib1fvARB VertexAttrib1fvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib1fvARB VertexAttrib1fvARB} */
     public static void glVertexAttrib1fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         ARBVertexShader.glVertexAttrib1fvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib1dvARB VertexAttrib1dvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib1dvARB VertexAttrib1dvARB} */
     public static void glVertexAttrib1dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         ARBVertexShader.glVertexAttrib1dvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib2svARB VertexAttrib2svARB}
-     */
+    /** Array version of: {@link #glVertexAttrib2svARB VertexAttrib2svARB} */
     public static void glVertexAttrib2svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         ARBVertexShader.glVertexAttrib2svARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib2fvARB VertexAttrib2fvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib2fvARB VertexAttrib2fvARB} */
     public static void glVertexAttrib2fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         ARBVertexShader.glVertexAttrib2fvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib2dvARB VertexAttrib2dvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib2dvARB VertexAttrib2dvARB} */
     public static void glVertexAttrib2dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         ARBVertexShader.glVertexAttrib2dvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib3svARB VertexAttrib3svARB}
-     */
+    /** Array version of: {@link #glVertexAttrib3svARB VertexAttrib3svARB} */
     public static void glVertexAttrib3svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         ARBVertexShader.glVertexAttrib3svARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib3fvARB VertexAttrib3fvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib3fvARB VertexAttrib3fvARB} */
     public static void glVertexAttrib3fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         ARBVertexShader.glVertexAttrib3fvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib3dvARB VertexAttrib3dvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib3dvARB VertexAttrib3dvARB} */
     public static void glVertexAttrib3dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         ARBVertexShader.glVertexAttrib3dvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib4fvARB VertexAttrib4fvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib4fvARB VertexAttrib4fvARB} */
     public static void glVertexAttrib4fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         ARBVertexShader.glVertexAttrib4fvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib4svARB VertexAttrib4svARB}
-     */
+    /** Array version of: {@link #glVertexAttrib4svARB VertexAttrib4svARB} */
     public static void glVertexAttrib4svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         ARBVertexShader.glVertexAttrib4svARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib4ivARB VertexAttrib4ivARB}
-     */
+    /** Array version of: {@link #glVertexAttrib4ivARB VertexAttrib4ivARB} */
     public static void glVertexAttrib4ivARB(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         ARBVertexShader.glVertexAttrib4ivARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib4usvARB VertexAttrib4usvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib4usvARB VertexAttrib4usvARB} */
     public static void glVertexAttrib4usvARB(@NativeType("GLuint") int index, @NativeType("GLushort const *") short[] v) {
         ARBVertexShader.glVertexAttrib4usvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib4uivARB VertexAttrib4uivARB}
-     */
+    /** Array version of: {@link #glVertexAttrib4uivARB VertexAttrib4uivARB} */
     public static void glVertexAttrib4uivARB(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
         ARBVertexShader.glVertexAttrib4uivARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib4dvARB VertexAttrib4dvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib4dvARB VertexAttrib4dvARB} */
     public static void glVertexAttrib4dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         ARBVertexShader.glVertexAttrib4dvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib4NsvARB VertexAttrib4NsvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib4NsvARB VertexAttrib4NsvARB} */
     public static void glVertexAttrib4NsvARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         ARBVertexShader.glVertexAttrib4NsvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib4NivARB VertexAttrib4NivARB}
-     */
+    /** Array version of: {@link #glVertexAttrib4NivARB VertexAttrib4NivARB} */
     public static void glVertexAttrib4NivARB(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         ARBVertexShader.glVertexAttrib4NivARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib4NusvARB VertexAttrib4NusvARB}
-     */
+    /** Array version of: {@link #glVertexAttrib4NusvARB VertexAttrib4NusvARB} */
     public static void glVertexAttrib4NusvARB(@NativeType("GLuint") int index, @NativeType("GLushort const *") short[] v) {
         ARBVertexShader.glVertexAttrib4NusvARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttrib4NuivARB VertexAttrib4NuivARB}
-     */
+    /** Array version of: {@link #glVertexAttrib4NuivARB VertexAttrib4NuivARB} */
     public static void glVertexAttrib4NuivARB(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
         ARBVertexShader.glVertexAttrib4NuivARB(index, v);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB}
-     */
+    /** Array version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") short[] pointer) {
         ARBVertexShader.glVertexAttribPointerARB(index, size, type, normalized, stride, pointer);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB}
-     */
+    /** Array version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") int[] pointer) {
         ARBVertexShader.glVertexAttribPointerARB(index, size, type, normalized, stride, pointer);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB}
-     */
+    /** Array version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") float[] pointer) {
         ARBVertexShader.glVertexAttribPointerARB(index, size, type, normalized, stride, pointer);
     }
 
-    /**
-     * Array version of: {@link #glDeleteProgramsARB DeleteProgramsARB}
-     */
+    /** Array version of: {@link #glDeleteProgramsARB DeleteProgramsARB} */
     public static void glDeleteProgramsARB(@NativeType("GLuint const *") int[] programs) {
         long __functionAddress = GL.getICD().glDeleteProgramsARB;
         if (CHECKS) {
@@ -1599,9 +1477,7 @@ public class ARBVertexProgram {
         callPV(programs.length, programs, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGenProgramsARB GenProgramsARB}
-     */
+    /** Array version of: {@link #glGenProgramsARB GenProgramsARB} */
     public static void glGenProgramsARB(@NativeType("GLuint *") int[] programs) {
         long __functionAddress = GL.getICD().glGenProgramsARB;
         if (CHECKS) {
@@ -1610,9 +1486,7 @@ public class ARBVertexProgram {
         callPV(programs.length, programs, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramEnvParameter4dvARB ProgramEnvParameter4dvARB}
-     */
+    /** Array version of: {@link #glProgramEnvParameter4dvARB ProgramEnvParameter4dvARB} */
     public static void glProgramEnvParameter4dvARB(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] params) {
         long __functionAddress = GL.getICD().glProgramEnvParameter4dvARB;
         if (CHECKS) {
@@ -1622,9 +1496,7 @@ public class ARBVertexProgram {
         callPV(target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramEnvParameter4fvARB ProgramEnvParameter4fvARB}
-     */
+    /** Array version of: {@link #glProgramEnvParameter4fvARB ProgramEnvParameter4fvARB} */
     public static void glProgramEnvParameter4fvARB(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glProgramEnvParameter4fvARB;
         if (CHECKS) {
@@ -1634,9 +1506,7 @@ public class ARBVertexProgram {
         callPV(target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramLocalParameter4dvARB ProgramLocalParameter4dvARB}
-     */
+    /** Array version of: {@link #glProgramLocalParameter4dvARB ProgramLocalParameter4dvARB} */
     public static void glProgramLocalParameter4dvARB(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] params) {
         long __functionAddress = GL.getICD().glProgramLocalParameter4dvARB;
         if (CHECKS) {
@@ -1646,9 +1516,7 @@ public class ARBVertexProgram {
         callPV(target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramLocalParameter4fvARB ProgramLocalParameter4fvARB}
-     */
+    /** Array version of: {@link #glProgramLocalParameter4fvARB ProgramLocalParameter4fvARB} */
     public static void glProgramLocalParameter4fvARB(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glProgramLocalParameter4fvARB;
         if (CHECKS) {
@@ -1658,9 +1526,7 @@ public class ARBVertexProgram {
         callPV(target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramEnvParameterfvARB GetProgramEnvParameterfvARB}
-     */
+    /** Array version of: {@link #glGetProgramEnvParameterfvARB GetProgramEnvParameterfvARB} */
     public static void glGetProgramEnvParameterfvARB(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetProgramEnvParameterfvARB;
         if (CHECKS) {
@@ -1670,9 +1536,7 @@ public class ARBVertexProgram {
         callPV(target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramEnvParameterdvARB GetProgramEnvParameterdvARB}
-     */
+    /** Array version of: {@link #glGetProgramEnvParameterdvARB GetProgramEnvParameterdvARB} */
     public static void glGetProgramEnvParameterdvARB(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLdouble *") double[] params) {
         long __functionAddress = GL.getICD().glGetProgramEnvParameterdvARB;
         if (CHECKS) {
@@ -1682,9 +1546,7 @@ public class ARBVertexProgram {
         callPV(target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramLocalParameterfvARB GetProgramLocalParameterfvARB}
-     */
+    /** Array version of: {@link #glGetProgramLocalParameterfvARB GetProgramLocalParameterfvARB} */
     public static void glGetProgramLocalParameterfvARB(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetProgramLocalParameterfvARB;
         if (CHECKS) {
@@ -1694,9 +1556,7 @@ public class ARBVertexProgram {
         callPV(target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramLocalParameterdvARB GetProgramLocalParameterdvARB}
-     */
+    /** Array version of: {@link #glGetProgramLocalParameterdvARB GetProgramLocalParameterdvARB} */
     public static void glGetProgramLocalParameterdvARB(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLdouble *") double[] params) {
         long __functionAddress = GL.getICD().glGetProgramLocalParameterdvARB;
         if (CHECKS) {
@@ -1706,9 +1566,7 @@ public class ARBVertexProgram {
         callPV(target, index, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramivARB GetProgramivARB}
-     */
+    /** Array version of: {@link #glGetProgramivARB GetProgramivARB} */
     public static void glGetProgramivARB(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetProgramivARB;
         if (CHECKS) {
@@ -1718,23 +1576,17 @@ public class ARBVertexProgram {
         callPV(target, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexAttribfvARB GetVertexAttribfvARB}
-     */
+    /** Array version of: {@link #glGetVertexAttribfvARB GetVertexAttribfvARB} */
     public static void glGetVertexAttribfvARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         ARBVertexShader.glGetVertexAttribfvARB(index, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexAttribdvARB GetVertexAttribdvARB}
-     */
+    /** Array version of: {@link #glGetVertexAttribdvARB GetVertexAttribdvARB} */
     public static void glGetVertexAttribdvARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLdouble *") double[] params) {
         ARBVertexShader.glGetVertexAttribdvARB(index, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexAttribivARB GetVertexAttribivARB}
-     */
+    /** Array version of: {@link #glGetVertexAttribivARB GetVertexAttribivARB} */
     public static void glGetVertexAttribivARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         ARBVertexShader.glGetVertexAttribivARB(index, pname, params);
     }

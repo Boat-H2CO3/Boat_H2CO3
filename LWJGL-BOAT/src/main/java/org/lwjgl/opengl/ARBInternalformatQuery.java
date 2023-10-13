@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_internalformat_query.txt">ARB_internalformat_query</a> extension.
@@ -24,9 +24,7 @@ import java.nio.IntBuffer;
  */
 public class ARBInternalformatQuery {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetInternalformativ.
-     */
+    /** Accepted by the {@code pname} parameter of GetInternalformativ. */
     public static final int GL_NUM_SAMPLE_COUNTS = 0x9380;
 
     static {
@@ -39,7 +37,7 @@ public class ARBInternalformatQuery {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glGetInternalformativ
+            caps.glGetInternalformativ
         );
     }
 
@@ -78,9 +76,7 @@ public class ARBInternalformatQuery {
         return GL42C.glGetInternalformati(target, internalformat, pname);
     }
 
-    /**
-     * Array version of: {@link #glGetInternalformativ GetInternalformativ}
-     */
+    /** Array version of: {@link #glGetInternalformativ GetInternalformativ} */
     public static void glGetInternalformativ(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL42C.glGetInternalformativ(target, internalformat, pname, params);
     }

@@ -13,9 +13,7 @@ package org.lwjgl.openal;
  */
 public final class SOFTOutputLimiter {
 
-    /**
-     * Accepted as part of the {@code attrList} parameter of {@link ALC10#alcCreateContext CreateContext} and {@link SOFTHRTF#alcResetDeviceSOFT ResetDeviceSOFT}, and as the {@code paramName} parameter of {@link AL10#alGetIntegerv GetIntegerv}.
-     */
+    /** Accepted as part of the {@code attrList} parameter of {@link ALC10#alcCreateContext CreateContext} and {@link SOFTHRTF#alcResetDeviceSOFT ResetDeviceSOFT}, and as the {@code paramName} parameter of {@link AL10#alGetIntegerv GetIntegerv}. */
     public static final int ALC_OUTPUT_LIMITER_SOFT = 0x199A;
 
     private SOFTOutputLimiter() {

@@ -21,9 +21,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTPolygonOffsetClamp {
 
-    /**
-     * Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_POLYGON_OFFSET_CLAMP_EXT = 0x8E1B;
 
     static {
@@ -36,7 +34,7 @@ public class EXTPolygonOffsetClamp {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glPolygonOffsetClampEXT
+            caps.glPolygonOffsetClampEXT
         );
     }
 

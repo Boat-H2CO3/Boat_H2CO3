@@ -40,17 +40,13 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTShaderImageLoadStore {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_MAX_IMAGE_UNITS_EXT = 0x8F38,
             GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS_EXT = 0x8F39,
             GL_MAX_IMAGE_SAMPLES_EXT = 0x906D;
 
-    /**
-     * Accepted by the {@code target} parameter of GetIntegeri_v and GetBooleani_v.
-     */
+    /** Accepted by the {@code target} parameter of GetIntegeri_v and GetBooleani_v. */
     public static final int
             GL_IMAGE_BINDING_NAME_EXT = 0x8F3A,
             GL_IMAGE_BINDING_LEVEL_EXT = 0x8F3B,
@@ -59,9 +55,7 @@ public class EXTShaderImageLoadStore {
             GL_IMAGE_BINDING_ACCESS_EXT = 0x8F3E,
             GL_IMAGE_BINDING_FORMAT_EXT = 0x906E;
 
-    /**
-     * Accepted by the {@code barriers} parameter of MemoryBarrierEXT.
-     */
+    /** Accepted by the {@code barriers} parameter of MemoryBarrierEXT. */
     public static final int
             GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT_EXT = 0x1,
             GL_ELEMENT_ARRAY_BARRIER_BIT_EXT = 0x2,
@@ -77,9 +71,7 @@ public class EXTShaderImageLoadStore {
             GL_ATOMIC_COUNTER_BARRIER_BIT_EXT = 0x1000,
             GL_ALL_BARRIER_BITS_EXT = 0xFFFFFFFF;
 
-    /**
-     * Returned by the {@code type} parameter of GetActiveUniform.
-     */
+    /** Returned by the {@code type} parameter of GetActiveUniform. */
     public static final int
             GL_IMAGE_1D_EXT = 0x904C,
             GL_IMAGE_2D_EXT = 0x904D,

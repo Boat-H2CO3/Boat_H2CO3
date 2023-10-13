@@ -48,14 +48,10 @@ public class EXTSemaphore {
             GL_DEVICE_UUID_EXT = 0x9597,
             GL_DRIVER_UUID_EXT = 0x9598;
 
-    /**
-     * Constant values.
-     */
+    /** Constant values. */
     public static final int GL_UUID_SIZE_EXT = 16;
 
-    /**
-     * Accepted by the {@code dstLayouts} parameter of {@link #glSignalSemaphoreEXT SignalSemaphoreEXT} and the {@code srcLayouts} parameter of {@link #glWaitSemaphoreEXT WaitSemaphoreEXT}.
-     */
+    /** Accepted by the {@code dstLayouts} parameter of {@link #glSignalSemaphoreEXT SignalSemaphoreEXT} and the {@code srcLayouts} parameter of {@link #glWaitSemaphoreEXT WaitSemaphoreEXT}. */
     public static final int
             GL_LAYOUT_GENERAL_EXT = 0x958D,
             GL_LAYOUT_COLOR_ATTACHMENT_EXT = 0x958E,
@@ -215,9 +211,7 @@ public class EXTSemaphore {
         nglSignalSemaphoreEXT(semaphore, buffers.remaining(), memAddress(buffers), textures.remaining(), memAddress(textures), memAddress(dstLayouts));
     }
 
-    /**
-     * Array version of: {@link #glGenSemaphoresEXT GenSemaphoresEXT}
-     */
+    /** Array version of: {@link #glGenSemaphoresEXT GenSemaphoresEXT} */
     public static void glGenSemaphoresEXT(@NativeType("GLuint *") int[] semaphores) {
         long __functionAddress = GL.getICD().glGenSemaphoresEXT;
         if (CHECKS) {
@@ -226,9 +220,7 @@ public class EXTSemaphore {
         callPV(semaphores.length, semaphores, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glDeleteSemaphoresEXT DeleteSemaphoresEXT}
-     */
+    /** Array version of: {@link #glDeleteSemaphoresEXT DeleteSemaphoresEXT} */
     public static void glDeleteSemaphoresEXT(@NativeType("GLuint const *") int[] semaphores) {
         long __functionAddress = GL.getICD().glDeleteSemaphoresEXT;
         if (CHECKS) {
@@ -237,9 +229,7 @@ public class EXTSemaphore {
         callPV(semaphores.length, semaphores, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSemaphoreParameterui64vEXT SemaphoreParameterui64vEXT}
-     */
+    /** Array version of: {@link #glSemaphoreParameterui64vEXT SemaphoreParameterui64vEXT} */
     public static void glSemaphoreParameterui64vEXT(@NativeType("GLuint") int semaphore, @NativeType("GLenum") int pname, @NativeType("GLuint64 const *") long[] params) {
         long __functionAddress = GL.getICD().glSemaphoreParameterui64vEXT;
         if (CHECKS) {
@@ -249,9 +239,7 @@ public class EXTSemaphore {
         callPV(semaphore, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetSemaphoreParameterui64vEXT GetSemaphoreParameterui64vEXT}
-     */
+    /** Array version of: {@link #glGetSemaphoreParameterui64vEXT GetSemaphoreParameterui64vEXT} */
     public static void glGetSemaphoreParameterui64vEXT(@NativeType("GLuint") int semaphore, @NativeType("GLenum") int pname, @NativeType("GLuint64 *") long[] params) {
         long __functionAddress = GL.getICD().glGetSemaphoreParameterui64vEXT;
         if (CHECKS) {
@@ -261,9 +249,7 @@ public class EXTSemaphore {
         callPV(semaphore, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glWaitSemaphoreEXT WaitSemaphoreEXT}
-     */
+    /** Array version of: {@link #glWaitSemaphoreEXT WaitSemaphoreEXT} */
     public static void glWaitSemaphoreEXT(@NativeType("GLuint") int semaphore, @NativeType("GLuint const *") int[] buffers, @NativeType("GLuint const *") int[] textures, @NativeType("GLenum const *") int[] srcLayouts) {
         long __functionAddress = GL.getICD().glWaitSemaphoreEXT;
         if (CHECKS) {
@@ -273,9 +259,7 @@ public class EXTSemaphore {
         callPPPV(semaphore, buffers.length, buffers, textures.length, textures, srcLayouts, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSignalSemaphoreEXT SignalSemaphoreEXT}
-     */
+    /** Array version of: {@link #glSignalSemaphoreEXT SignalSemaphoreEXT} */
     public static void glSignalSemaphoreEXT(@NativeType("GLuint") int semaphore, @NativeType("GLuint const *") int[] buffers, @NativeType("GLuint const *") int[] textures, @NativeType("GLenum const *") int[] dstLayouts) {
         long __functionAddress = GL.getICD().glSignalSemaphoreEXT;
         if (CHECKS) {

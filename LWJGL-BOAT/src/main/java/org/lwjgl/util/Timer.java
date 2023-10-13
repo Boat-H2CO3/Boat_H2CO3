@@ -34,6 +34,7 @@ package org.lwjgl.util;
 import org.lwjgl.Sys;
 
 /**
+ *
  * A hires timer. This measures time in seconds as floating point values.
  * All Timers created are updated simultaneously by calling the static method
  * tick(). This ensures that within a single iteration of a game loop that

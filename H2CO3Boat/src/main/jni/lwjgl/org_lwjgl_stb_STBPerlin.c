@@ -4,8 +4,10 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
+DISABLE_WARNINGS()
 #define STB_PERLIN_IMPLEMENTATION
 #include "stb_perlin.h"
+ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 

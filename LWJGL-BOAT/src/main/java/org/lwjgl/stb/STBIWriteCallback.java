@@ -39,17 +39,13 @@ public abstract class STBIWriteCallback extends Callback implements STBIWriteCal
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static STBIWriteCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code STBIWriteCallback} instance that delegates to the specified {@code STBIWriteCallbackI} instance.
-     */
+    /** Creates a {@code STBIWriteCallback} instance that delegates to the specified {@code STBIWriteCallbackI} instance. */
     public static STBIWriteCallback create(STBIWriteCallbackI instance) {
         return instance instanceof STBIWriteCallback
                 ? (STBIWriteCallback) instance
@@ -71,6 +67,7 @@ public abstract class STBIWriteCallback extends Callback implements STBIWriteCal
      *
      * @param data the STBIWriteCallback {@code data} argument
      * @param size the STBIWriteCallback {@code size} argument
+     *
      * @return the data as a ByteBuffer
      */
     public static ByteBuffer getData(long data, int size) {

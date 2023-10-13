@@ -54,9 +54,7 @@ public class GLXSGIXSwapBarrier {
 
     // --- [ glXQueryMaxSwapBarriersSGIX ] ---
 
-    /**
-     * Unsafe version of: {@link #glXQueryMaxSwapBarriersSGIX QueryMaxSwapBarriersSGIX}
-     */
+    /** Unsafe version of: {@link #glXQueryMaxSwapBarriersSGIX QueryMaxSwapBarriersSGIX} */
     public static int nglXQueryMaxSwapBarriersSGIX(long display, int screen, long max) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryMaxSwapBarriersSGIX;
         if (CHECKS) {
@@ -81,9 +79,7 @@ public class GLXSGIXSwapBarrier {
         return nglXQueryMaxSwapBarriersSGIX(display, screen, memAddress(max)) != 0;
     }
 
-    /**
-     * Array version of: {@link #glXQueryMaxSwapBarriersSGIX QueryMaxSwapBarriersSGIX}
-     */
+    /** Array version of: {@link #glXQueryMaxSwapBarriersSGIX QueryMaxSwapBarriersSGIX} */
     @NativeType("Bool")
     public static boolean glXQueryMaxSwapBarriersSGIX(@NativeType("Display *") long display, int screen, @NativeType("int *") int[] max) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryMaxSwapBarriersSGIX;

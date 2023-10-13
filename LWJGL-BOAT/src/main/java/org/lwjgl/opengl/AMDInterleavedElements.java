@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_interleaved_elements.txt">AMD_interleaved_elements</a> extension.
@@ -31,14 +31,10 @@ import org.lwjgl.system.NativeType;
  */
 public class AMDInterleavedElements {
 
-    /**
-     * Accepted by the {@code pname} parameter of VertexAttribParameteriAMD and GetVertexAttrib{iv|dv|fv|Iiv|Iuiv|Ldv}.
-     */
+    /** Accepted by the {@code pname} parameter of VertexAttribParameteriAMD and GetVertexAttrib{iv|dv|fv|Iiv|Iuiv|Ldv}. */
     public static final int GL_VERTEX_ELEMENT_SWIZZLE_AMD = 0x91A4;
 
-    /**
-     * Selected by the {@code pname} parameter of ProgramParameteri and GetProgramiv.
-     */
+    /** Selected by the {@code pname} parameter of ProgramParameteri and GetProgramiv. */
     public static final int GL_VERTEX_ID_SWIZZLE_AMD = 0x91A5;
 
     static {
@@ -51,7 +47,7 @@ public class AMDInterleavedElements {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glVertexAttribParameteriAMD
+            caps.glVertexAttribParameteriAMD
         );
     }
 

@@ -35,67 +35,49 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL14C extends GL13C {
 
-    /**
-     * Accepted by the {@code sfactor} and {@code dfactor} parameters of BlendFunc.
-     */
+    /** Accepted by the {@code sfactor} and {@code dfactor} parameters of BlendFunc. */
     public static final int
             GL_CONSTANT_COLOR = 0x8001,
             GL_ONE_MINUS_CONSTANT_COLOR = 0x8002,
             GL_CONSTANT_ALPHA = 0x8003,
             GL_ONE_MINUS_CONSTANT_ALPHA = 0x8004;
 
-    /**
-     * Accepted by the {@code mode} parameter of BlendEquation.
-     */
+    /** Accepted by the {@code mode} parameter of BlendEquation. */
     public static final int
             GL_FUNC_ADD = 0x8006,
             GL_MIN = 0x8007,
             GL_MAX = 0x8008;
 
-    /**
-     * Accepted by the {@code mode} parameter of BlendEquation.
-     */
+    /** Accepted by the {@code mode} parameter of BlendEquation. */
     public static final int
             GL_FUNC_SUBTRACT = 0x800A,
             GL_FUNC_REVERSE_SUBTRACT = 0x800B;
 
-    /**
-     * Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, CopyTexImage1D and CopyTexImage2D.
-     */
+    /** Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, CopyTexImage1D and CopyTexImage2D. */
     public static final int
             GL_DEPTH_COMPONENT16 = 0x81A5,
             GL_DEPTH_COMPONENT24 = 0x81A6,
             GL_DEPTH_COMPONENT32 = 0x81A7;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.
-     */
+    /** Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv. */
     public static final int GL_TEXTURE_DEPTH_SIZE = 0x884A;
 
-    /**
-     * Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.
-     */
+    /** Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv. */
     public static final int
             GL_TEXTURE_COMPARE_MODE = 0x884C,
             GL_TEXTURE_COMPARE_FUNC = 0x884D;
 
-    /**
-     * Accepted by the {@code pname} parameter of PointParameterfARB, and the {@code pname} of Get.
-     */
+    /** Accepted by the {@code pname} parameter of PointParameterfARB, and the {@code pname} of Get. */
     public static final int GL_POINT_FADE_THRESHOLD_SIZE = 0x8128;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_BLEND_DST_RGB = 0x80C8,
             GL_BLEND_SRC_RGB = 0x80C9,
             GL_BLEND_DST_ALPHA = 0x80CA,
             GL_BLEND_SRC_ALPHA = 0x80CB;
 
-    /**
-     * Accepted by the {@code sfail}, {@code dpfail}, and {@code dppass} parameter of StencilOp.
-     */
+    /** Accepted by the {@code sfail}, {@code dpfail}, and {@code dppass} parameter of StencilOp. */
     public static final int
             GL_INCR_WRAP = 0x8507,
             GL_DECR_WRAP = 0x8508;
@@ -106,9 +88,7 @@ public class GL14C extends GL13C {
      */
     public static final int GL_TEXTURE_LOD_BIAS = 0x8501;
 
-    /**
-     * Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_MAX_TEXTURE_LOD_BIAS = 0x84FD;
 
     /**
@@ -134,6 +114,7 @@ public class GL14C extends GL13C {
      * @param green the green color component
      * @param blue  the blue color component
      * @param alpha the alpha color component
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glBlendColor">Reference Page</a>
      */
     public static native void glBlendColor(@NativeType("GLfloat") float red, @NativeType("GLfloat") float green, @NativeType("GLfloat") float blue, @NativeType("GLfloat") float alpha);
@@ -144,6 +125,7 @@ public class GL14C extends GL13C {
      * Controls the blend equations used for per-fragment blending.
      *
      * @param mode the blend equation. One of:<br><table><tr><td>{@link #GL_FUNC_ADD FUNC_ADD}</td><td>{@link #GL_FUNC_SUBTRACT FUNC_SUBTRACT}</td><td>{@link #GL_FUNC_REVERSE_SUBTRACT FUNC_REVERSE_SUBTRACT}</td><td>{@link #GL_MIN MIN}</td><td>{@link #GL_MAX MAX}</td></tr></table>
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glBlendEquation">Reference Page</a>
      */
     public static native void glBlendEquation(@NativeType("GLenum") int mode);
@@ -163,6 +145,7 @@ public class GL14C extends GL13C {
      * @param mode  the kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param first an array of starting indices in the enabled arrays
      * @param count an array of the number of indices to be rendered
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawArrays">Reference Page</a>
      */
     public static void glMultiDrawArrays(@NativeType("GLenum") int mode, @NativeType("GLint const *") IntBuffer first, @NativeType("GLsizei const *") IntBuffer count) {
@@ -190,6 +173,7 @@ public class GL14C extends GL13C {
      * @param count   an array of the elements counts
      * @param type    the type of the values in indices. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      * @param indices a pointer to the location where the indices are stored
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElements">Reference Page</a>
      */
     public static void glMultiDrawElements(@NativeType("GLenum") int mode, @NativeType("GLsizei *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices) {
@@ -206,6 +190,7 @@ public class GL14C extends GL13C {
      *
      * @param pname the parameter to set. Must be:<br><table><tr><td>{@link #GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
      * @param param the parameter value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameterf">Reference Page</a>
      */
     public static native void glPointParameterf(@NativeType("GLenum") int pname, @NativeType("GLfloat") float param);
@@ -217,15 +202,14 @@ public class GL14C extends GL13C {
      *
      * @param pname the parameter to set. Must be:<br><table><tr><td>{@link #GL_POINT_FADE_THRESHOLD_SIZE POINT_FADE_THRESHOLD_SIZE}</td></tr></table>
      * @param param the parameter value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameteri">Reference Page</a>
      */
     public static native void glPointParameteri(@NativeType("GLenum") int pname, @NativeType("GLint") int param);
 
     // --- [ glPointParameterfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glPointParameterfv PointParameterfv}
-     */
+    /** Unsafe version of: {@link #glPointParameterfv PointParameterfv} */
     public static native void nglPointParameterfv(int pname, long params);
 
     /**
@@ -233,6 +217,7 @@ public class GL14C extends GL13C {
      *
      * @param pname  the parameter to set
      * @param params the parameter value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") FloatBuffer params) {
@@ -244,9 +229,7 @@ public class GL14C extends GL13C {
 
     // --- [ glPointParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glPointParameteriv PointParameteriv}
-     */
+    /** Unsafe version of: {@link #glPointParameteriv PointParameteriv} */
     public static native void nglPointParameteriv(int pname, long params);
 
     /**
@@ -254,6 +237,7 @@ public class GL14C extends GL13C {
      *
      * @param pname  the parameter to set
      * @param params the parameter value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glPointParameter">Reference Page</a>
      */
     public static void glPointParameteriv(@NativeType("GLenum") int pname, @NativeType("GLint const *") IntBuffer params) {
@@ -272,6 +256,7 @@ public class GL14C extends GL13C {
      * @param dfactorRGB   how the red, green, and blue destination blending factors are computed. The initial value is GL_ZERO.
      * @param sfactorAlpha how the alpha source blending factor is computed. The initial value is GL_ONE.
      * @param dfactorAlpha how the alpha destination blending factor is computed. The initial value is GL_ZERO.
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glBlendFuncSeparate">Reference Page</a>
      */
     public static native void glBlendFuncSeparate(@NativeType("GLenum") int sfactorRGB, @NativeType("GLenum") int dfactorRGB, @NativeType("GLenum") int sfactorAlpha, @NativeType("GLenum") int dfactorAlpha);

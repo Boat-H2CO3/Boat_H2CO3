@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_compute_variable_group_size.txt">ARB_compute_variable_group_size</a> extension.
@@ -25,16 +25,12 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBComputeVariableGroupSize {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev and GetInteger64v.
-     */
+    /** Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev and GetInteger64v. */
     public static final int
             GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB = 0x9344,
             GL_MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB = 0x90EB;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetFloati_v, GetDoublei_v and GetInteger64i_v.
-     */
+    /** Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetFloati_v, GetDoublei_v and GetInteger64i_v. */
     public static final int
             GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB = 0x9345,
             GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB = 0x91BF;

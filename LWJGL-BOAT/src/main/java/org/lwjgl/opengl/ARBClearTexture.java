@@ -5,17 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import javax.annotation.*;
 
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clear_texture.txt">ARB_clear_texture</a> extension.
@@ -39,9 +35,7 @@ import javax.annotation.Nullable;
  */
 public class ARBClearTexture {
 
-    /**
-     * Accepted by the {@code pname} parameter for {@link GL42C#glGetInternalformativ GetInternalformativ} and {@link GL43C#glGetInternalformati64v GetInternalformati64v}.
-     */
+    /** Accepted by the {@code pname} parameter for {@link GL42C#glGetInternalformativ GetInternalformativ} and {@link GL43C#glGetInternalformati64v GetInternalformati64v}. */
     public static final int GL_CLEAR_TEXTURE = 0x9365;
 
     static {
@@ -60,9 +54,7 @@ public class ARBClearTexture {
 
     // --- [ glClearTexSubImage ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearTexSubImage ClearTexSubImage}
-     */
+    /** Unsafe version of: {@link #glClearTexSubImage ClearTexSubImage} */
     public static void nglClearTexSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, long data) {
         GL44C.nglClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
     }
@@ -229,9 +221,7 @@ public class ARBClearTexture {
 
     // --- [ glClearTexImage ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearTexImage ClearTexImage}
-     */
+    /** Unsafe version of: {@link #glClearTexImage ClearTexImage} */
     public static void nglClearTexImage(int texture, int level, int format, int type, long data) {
         GL44C.nglClearTexImage(texture, level, format, type, data);
     }
@@ -321,58 +311,42 @@ public class ARBClearTexture {
         GL44C.glClearTexImage(texture, level, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
-     */
+    /** Array version of: {@link #glClearTexSubImage ClearTexSubImage} */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
-     */
+    /** Array version of: {@link #glClearTexSubImage ClearTexSubImage} */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
-     */
+    /** Array version of: {@link #glClearTexSubImage ClearTexSubImage} */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearTexSubImage ClearTexSubImage}
-     */
+    /** Array version of: {@link #glClearTexSubImage ClearTexSubImage} */
     public static void glClearTexSubImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] data) {
         GL44C.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearTexImage ClearTexImage}
-     */
+    /** Array version of: {@link #glClearTexImage ClearTexImage} */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearTexImage ClearTexImage}
-     */
+    /** Array version of: {@link #glClearTexImage ClearTexImage} */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearTexImage ClearTexImage}
-     */
+    /** Array version of: {@link #glClearTexImage ClearTexImage} */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearTexImage ClearTexImage}
-     */
+    /** Array version of: {@link #glClearTexImage ClearTexImage} */
     public static void glClearTexImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") double[] data) {
         GL44C.glClearTexImage(texture, level, format, type, data);
     }

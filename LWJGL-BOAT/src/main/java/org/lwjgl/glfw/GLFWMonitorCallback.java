@@ -40,17 +40,13 @@ public abstract class GLFWMonitorCallback extends Callback implements GLFWMonito
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWMonitorCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWMonitorCallback} instance that delegates to the specified {@code GLFWMonitorCallbackI} instance.
-     */
+    /** Creates a {@code GLFWMonitorCallback} instance that delegates to the specified {@code GLFWMonitorCallbackI} instance. */
     public static GLFWMonitorCallback create(GLFWMonitorCallbackI instance) {
         return instance instanceof GLFWMonitorCallback
                 ? (GLFWMonitorCallback) instance
@@ -65,9 +61,7 @@ public abstract class GLFWMonitorCallback extends Callback implements GLFWMonito
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetMonitorCallback SetMonitorCallback}.
-     */
+    /** See {@link GLFW#glfwSetMonitorCallback SetMonitorCallback}. */
     public GLFWMonitorCallback set() {
         glfwSetMonitorCallback(this);
         return this;

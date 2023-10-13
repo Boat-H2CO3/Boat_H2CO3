@@ -79,9 +79,7 @@ public class WGLARBPbuffer {
 
     // --- [ wglCreatePbufferARB ] ---
 
-    /**
-     * Unsafe version of: {@link #wglCreatePbufferARB CreatePbufferARB}
-     */
+    /** Unsafe version of: {@link #wglCreatePbufferARB CreatePbufferARB} */
     public static long nwglCreatePbufferARB(long hdc, int pixelFormat, int width, int height, long attribList) {
         long __functionAddress = GL.getCapabilitiesWGL().wglCreatePbufferARB;
         if (CHECKS) {
@@ -168,9 +166,7 @@ public class WGLARBPbuffer {
 
     // --- [ wglQueryPbufferARB ] ---
 
-    /**
-     * Unsafe version of: {@link #wglQueryPbufferARB QueryPbufferARB}
-     */
+    /** Unsafe version of: {@link #wglQueryPbufferARB QueryPbufferARB} */
     public static int nwglQueryPbufferARB(long pbuffer, int attribute, long value) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQueryPbufferARB;
         if (CHECKS) {
@@ -195,9 +191,7 @@ public class WGLARBPbuffer {
         return nwglQueryPbufferARB(pbuffer, attribute, memAddress(value)) != 0;
     }
 
-    /**
-     * Array version of: {@link #wglCreatePbufferARB CreatePbufferARB}
-     */
+    /** Array version of: {@link #wglCreatePbufferARB CreatePbufferARB} */
     @NativeType("HPBUFFERARB")
     public static long wglCreatePbufferARB(@NativeType("HDC") long hdc, int pixelFormat, int width, int height, @Nullable @NativeType("int const *") int[] attribList) {
         long __functionAddress = GL.getCapabilitiesWGL().wglCreatePbufferARB;
@@ -209,9 +203,7 @@ public class WGLARBPbuffer {
         return callPPP(hdc, pixelFormat, width, height, attribList, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #wglQueryPbufferARB QueryPbufferARB}
-     */
+    /** Array version of: {@link #wglQueryPbufferARB QueryPbufferARB} */
     @NativeType("BOOL")
     public static boolean wglQueryPbufferARB(@NativeType("HPBUFFERARB") long pbuffer, int attribute, @NativeType("int *") int[] value) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQueryPbufferARB;

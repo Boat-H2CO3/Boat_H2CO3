@@ -19,9 +19,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVTextureMultisample {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetTexLevelParameter.
-     */
+    /** Accepted by the {@code pname} parameter of GetTexLevelParameter. */
     public static final int
             GL_TEXTURE_COVERAGE_SAMPLES_NV = 0x9045,
             GL_TEXTURE_COLOR_SAMPLES_NV = 0x9046;

@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.FloatBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_tessellation_shader.txt">ARB_tessellation_shader</a> extension.
@@ -156,9 +156,7 @@ public class ARBTessellationShader {
 
     // --- [ glPatchParameterfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glPatchParameterfv PatchParameterfv}
-     */
+    /** Unsafe version of: {@link #glPatchParameterfv PatchParameterfv} */
     public static void nglPatchParameterfv(int pname, long values) {
         GL40C.nglPatchParameterfv(pname, values);
     }
@@ -173,9 +171,7 @@ public class ARBTessellationShader {
         GL40C.glPatchParameterfv(pname, values);
     }
 
-    /**
-     * Array version of: {@link #glPatchParameterfv PatchParameterfv}
-     */
+    /** Array version of: {@link #glPatchParameterfv PatchParameterfv} */
     public static void glPatchParameterfv(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] values) {
         GL40C.glPatchParameterfv(pname, values);
     }

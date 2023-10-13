@@ -5,14 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import javax.annotation.*;
 
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_program_interface_query.txt">ARB_program_interface_query</a> extension.
@@ -65,18 +64,14 @@ public class ARBProgramInterfaceQuery {
             GL_COMPUTE_SUBROUTINE_UNIFORM = 0x92F3,
             GL_TRANSFORM_FEEDBACK_VARYING = 0x92F4;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetProgramInterfaceiv.
-     */
+    /** Accepted by the {@code pname} parameter of GetProgramInterfaceiv. */
     public static final int
             GL_ACTIVE_RESOURCES = 0x92F5,
             GL_MAX_NAME_LENGTH = 0x92F6,
             GL_MAX_NUM_ACTIVE_VARIABLES = 0x92F7,
             GL_MAX_NUM_COMPATIBLE_SUBROUTINES = 0x92F8;
 
-    /**
-     * Accepted in the {@code props} array of GetProgramResourceiv.
-     */
+    /** Accepted in the {@code props} array of GetProgramResourceiv. */
     public static final int
             GL_NAME_LENGTH = 0x92F9,
             GL_TYPE = 0x92FA,
@@ -120,9 +115,7 @@ public class ARBProgramInterfaceQuery {
 
     // --- [ glGetProgramInterfaceiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv}
-     */
+    /** Unsafe version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv} */
     public static void nglGetProgramInterfaceiv(int program, int programInterface, int pname, long params) {
         GL43C.nglGetProgramInterfaceiv(program, programInterface, pname, params);
     }
@@ -153,9 +146,7 @@ public class ARBProgramInterfaceQuery {
 
     // --- [ glGetProgramResourceIndex ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramResourceIndex GetProgramResourceIndex}
-     */
+    /** Unsafe version of: {@link #glGetProgramResourceIndex GetProgramResourceIndex} */
     public static int nglGetProgramResourceIndex(int program, int programInterface, long name) {
         return GL43C.nglGetProgramResourceIndex(program, programInterface, name);
     }
@@ -261,9 +252,7 @@ public class ARBProgramInterfaceQuery {
 
     // --- [ glGetProgramResourceLocation ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramResourceLocation GetProgramResourceLocation}
-     */
+    /** Unsafe version of: {@link #glGetProgramResourceLocation GetProgramResourceLocation} */
     public static int nglGetProgramResourceLocation(int program, int programInterface, long name) {
         return GL43C.nglGetProgramResourceLocation(program, programInterface, name);
     }
@@ -294,9 +283,7 @@ public class ARBProgramInterfaceQuery {
 
     // --- [ glGetProgramResourceLocationIndex ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramResourceLocationIndex GetProgramResourceLocationIndex}
-     */
+    /** Unsafe version of: {@link #glGetProgramResourceLocationIndex GetProgramResourceLocationIndex} */
     public static int nglGetProgramResourceLocationIndex(int program, int programInterface, long name) {
         return GL43C.nglGetProgramResourceLocationIndex(program, programInterface, name);
     }
@@ -325,23 +312,17 @@ public class ARBProgramInterfaceQuery {
         return GL43C.glGetProgramResourceLocationIndex(program, programInterface, name);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv}
-     */
+    /** Array version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv} */
     public static void glGetProgramInterfaceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL43C.glGetProgramInterfaceiv(program, programInterface, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramResourceName GetProgramResourceName}
-     */
+    /** Array version of: {@link #glGetProgramResourceName GetProgramResourceName} */
     public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer name) {
         GL43C.glGetProgramResourceName(program, programInterface, index, length, name);
     }
 
-    /**
-     * Array version of: {@link #glGetProgramResourceiv GetProgramResourceiv}
-     */
+    /** Array version of: {@link #glGetProgramResourceiv GetProgramResourceiv} */
     public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @Nullable @NativeType("GLsizei *") int[] length, @NativeType("GLint *") int[] params) {
         GL43C.glGetProgramResourceiv(program, programInterface, index, props, length, params);
     }

@@ -245,9 +245,7 @@ public class WGLARBPixelFormat {
         return nwglChoosePixelFormatARB(hdc, memAddressSafe(attribIList), memAddressSafe(attribFList), formats.remaining(), memAddress(formats), memAddress(numFormats)) != 0;
     }
 
-    /**
-     * Array version of: {@link #wglGetPixelFormatAttribivARB GetPixelFormatAttribivARB}
-     */
+    /** Array version of: {@link #wglGetPixelFormatAttribivARB GetPixelFormatAttribivARB} */
     @NativeType("BOOL")
     public static boolean wglGetPixelFormatAttribivARB(@NativeType("HDC") long hdc, int pixelFormat, int layerPlane, @NativeType("int const *") int[] attributes, @NativeType("int *") int[] values) {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetPixelFormatAttribivARB;
@@ -259,9 +257,7 @@ public class WGLARBPixelFormat {
         return callPPPI(hdc, pixelFormat, layerPlane, attributes.length, attributes, values, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #wglGetPixelFormatAttribfvARB GetPixelFormatAttribfvARB}
-     */
+    /** Array version of: {@link #wglGetPixelFormatAttribfvARB GetPixelFormatAttribfvARB} */
     @NativeType("BOOL")
     public static boolean wglGetPixelFormatAttribfvARB(@NativeType("HDC") long hdc, int pixelFormat, int layerPlane, @NativeType("int const *") int[] attributes, @NativeType("FLOAT *") float[] values) {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetPixelFormatAttribfvARB;
@@ -273,9 +269,7 @@ public class WGLARBPixelFormat {
         return callPPPI(hdc, pixelFormat, layerPlane, attributes.length, attributes, values, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #wglChoosePixelFormatARB ChoosePixelFormatARB}
-     */
+    /** Array version of: {@link #wglChoosePixelFormatARB ChoosePixelFormatARB} */
     @NativeType("BOOL")
     public static boolean wglChoosePixelFormatARB(@NativeType("HDC") long hdc, @Nullable @NativeType("int const *") int[] attribIList, @Nullable @NativeType("FLOAT const *") float[] attribFList, @NativeType("int *") int[] formats, @NativeType("UINT *") int[] numFormats) {
         long __functionAddress = GL.getCapabilitiesWGL().wglChoosePixelFormatARB;

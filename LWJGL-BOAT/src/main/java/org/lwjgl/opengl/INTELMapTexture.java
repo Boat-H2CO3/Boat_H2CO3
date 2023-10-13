@@ -33,14 +33,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class INTELMapTexture {
 
-    /**
-     * Accepted by the {@code pname} parameter of TexParameteri, for target TEXTURE_2D.
-     */
+    /** Accepted by the {@code pname} parameter of TexParameteri, for target TEXTURE_2D. */
     public static final int GL_TEXTURE_MEMORY_LAYOUT_INTEL = 0x83FF;
 
-    /**
-     * Accepted by the {@code params} when {@code pname} is set to {@code TEXTURE_MEMORY_LAYOUT_INTEL}.
-     */
+    /** Accepted by the {@code params} when {@code pname} is set to {@code TEXTURE_MEMORY_LAYOUT_INTEL}. */
     public static final int
             GL_LAYOUT_DEFAULT_INTEL = 0,
             GL_LAYOUT_LINEAR_INTEL = 1,
@@ -88,9 +84,7 @@ public class INTELMapTexture {
 
     // --- [ glMapTexture2DINTEL ] ---
 
-    /**
-     * Unsafe version of: {@link #glMapTexture2DINTEL MapTexture2DINTEL}
-     */
+    /** Unsafe version of: {@link #glMapTexture2DINTEL MapTexture2DINTEL} */
     public static native long nglMapTexture2DINTEL(int texture, int level, int access, long stride, long layout);
 
     /**
@@ -163,9 +157,7 @@ public class INTELMapTexture {
         return apiGetMappedBuffer(old_buffer, __result, (int) length);
     }
 
-    /**
-     * Array version of: {@link #glMapTexture2DINTEL MapTexture2DINTEL}
-     */
+    /** Array version of: {@link #glMapTexture2DINTEL MapTexture2DINTEL} */
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapTexture2DINTEL(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLbitfield") int access, @NativeType("GLint *") int[] stride, @NativeType("GLenum *") int[] layout) {
@@ -179,9 +171,7 @@ public class INTELMapTexture {
         return memByteBufferSafe(__result, getStride(stride) * GLChecks.getTexLevelParameteri(texture, GL11.GL_TEXTURE_2D, level, GL11.GL_TEXTURE_HEIGHT));
     }
 
-    /**
-     * Array version of: {@link #glMapTexture2DINTEL MapTexture2DINTEL}
-     */
+    /** Array version of: {@link #glMapTexture2DINTEL MapTexture2DINTEL} */
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapTexture2DINTEL(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLbitfield") int access, @NativeType("GLint *") int[] stride, @NativeType("GLenum *") int[] layout, @Nullable ByteBuffer old_buffer) {
@@ -196,9 +186,7 @@ public class INTELMapTexture {
         return apiGetMappedBuffer(old_buffer, __result, length);
     }
 
-    /**
-     * Array version of: {@link #glMapTexture2DINTEL MapTexture2DINTEL}
-     */
+    /** Array version of: {@link #glMapTexture2DINTEL MapTexture2DINTEL} */
     @Nullable
     @NativeType("void *")
     public static ByteBuffer glMapTexture2DINTEL(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLbitfield") int access, @NativeType("GLint *") int[] stride, @NativeType("GLenum *") int[] layout, long length, @Nullable ByteBuffer old_buffer) {

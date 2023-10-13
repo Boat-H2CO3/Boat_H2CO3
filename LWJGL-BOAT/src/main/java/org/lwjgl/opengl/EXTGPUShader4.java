@@ -225,9 +225,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI1ivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI1ivEXT VertexAttribI1ivEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI1ivEXT VertexAttribI1ivEXT} */
     public static native void nglVertexAttribI1ivEXT(int index, long v);
 
     /**
@@ -245,9 +243,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI2ivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI2ivEXT VertexAttribI2ivEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI2ivEXT VertexAttribI2ivEXT} */
     public static native void nglVertexAttribI2ivEXT(int index, long v);
 
     /**
@@ -265,9 +261,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI3ivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI3ivEXT VertexAttribI3ivEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI3ivEXT VertexAttribI3ivEXT} */
     public static native void nglVertexAttribI3ivEXT(int index, long v);
 
     /**
@@ -285,9 +279,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI4ivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI4ivEXT VertexAttribI4ivEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI4ivEXT VertexAttribI4ivEXT} */
     public static native void nglVertexAttribI4ivEXT(int index, long v);
 
     /**
@@ -305,9 +297,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI1uivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI1uivEXT VertexAttribI1uivEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI1uivEXT VertexAttribI1uivEXT} */
     public static native void nglVertexAttribI1uivEXT(int index, long v);
 
     /**
@@ -325,9 +315,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI2uivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI2uivEXT VertexAttribI2uivEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI2uivEXT VertexAttribI2uivEXT} */
     public static native void nglVertexAttribI2uivEXT(int index, long v);
 
     /**
@@ -345,9 +333,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI3uivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI3uivEXT VertexAttribI3uivEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI3uivEXT VertexAttribI3uivEXT} */
     public static native void nglVertexAttribI3uivEXT(int index, long v);
 
     /**
@@ -365,9 +351,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI4uivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI4uivEXT VertexAttribI4uivEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI4uivEXT VertexAttribI4uivEXT} */
     public static native void nglVertexAttribI4uivEXT(int index, long v);
 
     /**
@@ -385,9 +369,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI4bvEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI4bvEXT VertexAttribI4bvEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI4bvEXT VertexAttribI4bvEXT} */
     public static native void nglVertexAttribI4bvEXT(int index, long v);
 
     /**
@@ -405,9 +387,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI4svEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI4svEXT VertexAttribI4svEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI4svEXT VertexAttribI4svEXT} */
     public static native void nglVertexAttribI4svEXT(int index, long v);
 
     /**
@@ -425,9 +405,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI4ubvEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI4ubvEXT VertexAttribI4ubvEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI4ubvEXT VertexAttribI4ubvEXT} */
     public static native void nglVertexAttribI4ubvEXT(int index, long v);
 
     /**
@@ -445,9 +423,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribI4usvEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribI4usvEXT VertexAttribI4usvEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribI4usvEXT VertexAttribI4usvEXT} */
     public static native void nglVertexAttribI4usvEXT(int index, long v);
 
     /**
@@ -465,9 +441,7 @@ public class EXTGPUShader4 {
 
     // --- [ glVertexAttribIPointerEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribIPointerEXT VertexAttribIPointerEXT}
-     */
+    /** Unsafe version of: {@link #glVertexAttribIPointerEXT VertexAttribIPointerEXT} */
     public static native void nglVertexAttribIPointerEXT(int index, int size, int type, int stride, long pointer);
 
     /**
@@ -532,9 +506,7 @@ public class EXTGPUShader4 {
 
     // --- [ glGetVertexAttribIivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexAttribIivEXT GetVertexAttribIivEXT}
-     */
+    /** Unsafe version of: {@link #glGetVertexAttribIivEXT GetVertexAttribIivEXT} */
     public static native void nglGetVertexAttribIivEXT(int index, int pname, long params);
 
     /**
@@ -572,9 +544,7 @@ public class EXTGPUShader4 {
 
     // --- [ glGetVertexAttribIuivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexAttribIuivEXT GetVertexAttribIuivEXT}
-     */
+    /** Unsafe version of: {@link #glGetVertexAttribIuivEXT GetVertexAttribIuivEXT} */
     public static native void nglGetVertexAttribIuivEXT(int index, int pname, long params);
 
     /**
@@ -730,9 +700,7 @@ public class EXTGPUShader4 {
         nglUniform4uivEXT(location, value.remaining() >> 2, memAddress(value));
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribI1ivEXT VertexAttribI1ivEXT}
-     */
+    /** Array version of: {@link #glVertexAttribI1ivEXT VertexAttribI1ivEXT} */
     public static void glVertexAttribI1ivEXT(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttribI1ivEXT;
         if (CHECKS) {
@@ -742,9 +710,7 @@ public class EXTGPUShader4 {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribI2ivEXT VertexAttribI2ivEXT}
-     */
+    /** Array version of: {@link #glVertexAttribI2ivEXT VertexAttribI2ivEXT} */
     public static void glVertexAttribI2ivEXT(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttribI2ivEXT;
         if (CHECKS) {
@@ -754,9 +720,7 @@ public class EXTGPUShader4 {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribI3ivEXT VertexAttribI3ivEXT}
-     */
+    /** Array version of: {@link #glVertexAttribI3ivEXT VertexAttribI3ivEXT} */
     public static void glVertexAttribI3ivEXT(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttribI3ivEXT;
         if (CHECKS) {
@@ -766,9 +730,7 @@ public class EXTGPUShader4 {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribI4ivEXT VertexAttribI4ivEXT}
-     */
+    /** Array version of: {@link #glVertexAttribI4ivEXT VertexAttribI4ivEXT} */
     public static void glVertexAttribI4ivEXT(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttribI4ivEXT;
         if (CHECKS) {
@@ -778,9 +740,7 @@ public class EXTGPUShader4 {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribI1uivEXT VertexAttribI1uivEXT}
-     */
+    /** Array version of: {@link #glVertexAttribI1uivEXT VertexAttribI1uivEXT} */
     public static void glVertexAttribI1uivEXT(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttribI1uivEXT;
         if (CHECKS) {
@@ -790,9 +750,7 @@ public class EXTGPUShader4 {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribI2uivEXT VertexAttribI2uivEXT}
-     */
+    /** Array version of: {@link #glVertexAttribI2uivEXT VertexAttribI2uivEXT} */
     public static void glVertexAttribI2uivEXT(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttribI2uivEXT;
         if (CHECKS) {
@@ -802,9 +760,7 @@ public class EXTGPUShader4 {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribI3uivEXT VertexAttribI3uivEXT}
-     */
+    /** Array version of: {@link #glVertexAttribI3uivEXT VertexAttribI3uivEXT} */
     public static void glVertexAttribI3uivEXT(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttribI3uivEXT;
         if (CHECKS) {
@@ -814,9 +770,7 @@ public class EXTGPUShader4 {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribI4uivEXT VertexAttribI4uivEXT}
-     */
+    /** Array version of: {@link #glVertexAttribI4uivEXT VertexAttribI4uivEXT} */
     public static void glVertexAttribI4uivEXT(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttribI4uivEXT;
         if (CHECKS) {
@@ -826,9 +780,7 @@ public class EXTGPUShader4 {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribI4svEXT VertexAttribI4svEXT}
-     */
+    /** Array version of: {@link #glVertexAttribI4svEXT VertexAttribI4svEXT} */
     public static void glVertexAttribI4svEXT(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttribI4svEXT;
         if (CHECKS) {
@@ -838,9 +790,7 @@ public class EXTGPUShader4 {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribI4usvEXT VertexAttribI4usvEXT}
-     */
+    /** Array version of: {@link #glVertexAttribI4usvEXT VertexAttribI4usvEXT} */
     public static void glVertexAttribI4usvEXT(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttribI4usvEXT;
         if (CHECKS) {
@@ -850,9 +800,7 @@ public class EXTGPUShader4 {
         callPV(index, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribIPointerEXT VertexAttribIPointerEXT}
-     */
+    /** Array version of: {@link #glVertexAttribIPointerEXT VertexAttribIPointerEXT} */
     public static void glVertexAttribIPointerEXT(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") short[] pointer) {
         long __functionAddress = GL.getICD().glVertexAttribIPointerEXT;
         if (CHECKS) {
@@ -861,9 +809,7 @@ public class EXTGPUShader4 {
         callPV(index, size, type, stride, pointer, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glVertexAttribIPointerEXT VertexAttribIPointerEXT}
-     */
+    /** Array version of: {@link #glVertexAttribIPointerEXT VertexAttribIPointerEXT} */
     public static void glVertexAttribIPointerEXT(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") int[] pointer) {
         long __functionAddress = GL.getICD().glVertexAttribIPointerEXT;
         if (CHECKS) {
@@ -872,9 +818,7 @@ public class EXTGPUShader4 {
         callPV(index, size, type, stride, pointer, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexAttribIivEXT GetVertexAttribIivEXT}
-     */
+    /** Array version of: {@link #glGetVertexAttribIivEXT GetVertexAttribIivEXT} */
     public static void glGetVertexAttribIivEXT(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetVertexAttribIivEXT;
         if (CHECKS) {
@@ -884,9 +828,7 @@ public class EXTGPUShader4 {
         callPV(index, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexAttribIuivEXT GetVertexAttribIuivEXT}
-     */
+    /** Array version of: {@link #glGetVertexAttribIuivEXT GetVertexAttribIuivEXT} */
     public static void glGetVertexAttribIuivEXT(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glGetVertexAttribIuivEXT;
         if (CHECKS) {
@@ -896,9 +838,7 @@ public class EXTGPUShader4 {
         callPV(index, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetUniformuivEXT GetUniformuivEXT}
-     */
+    /** Array version of: {@link #glGetUniformuivEXT GetUniformuivEXT} */
     public static void glGetUniformuivEXT(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glGetUniformuivEXT;
         if (CHECKS) {
@@ -908,9 +848,7 @@ public class EXTGPUShader4 {
         callPV(program, location, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glUniform1uivEXT Uniform1uivEXT}
-     */
+    /** Array version of: {@link #glUniform1uivEXT Uniform1uivEXT} */
     public static void glUniform1uivEXT(@NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GL.getICD().glUniform1uivEXT;
         if (CHECKS) {
@@ -919,9 +857,7 @@ public class EXTGPUShader4 {
         callPV(location, value.length, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glUniform2uivEXT Uniform2uivEXT}
-     */
+    /** Array version of: {@link #glUniform2uivEXT Uniform2uivEXT} */
     public static void glUniform2uivEXT(@NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GL.getICD().glUniform2uivEXT;
         if (CHECKS) {
@@ -930,9 +866,7 @@ public class EXTGPUShader4 {
         callPV(location, value.length >> 1, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glUniform3uivEXT Uniform3uivEXT}
-     */
+    /** Array version of: {@link #glUniform3uivEXT Uniform3uivEXT} */
     public static void glUniform3uivEXT(@NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GL.getICD().glUniform3uivEXT;
         if (CHECKS) {
@@ -941,9 +875,7 @@ public class EXTGPUShader4 {
         callPV(location, value.length / 3, value, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glUniform4uivEXT Uniform4uivEXT}
-     */
+    /** Array version of: {@link #glUniform4uivEXT Uniform4uivEXT} */
     public static void glUniform4uivEXT(@NativeType("GLint") int location, @NativeType("GLuint const *") int[] value) {
         long __functionAddress = GL.getICD().glUniform4uivEXT;
         if (CHECKS) {

@@ -131,9 +131,7 @@ public class WGLNVSwapGroup {
         return callPI(hDC, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #wglQuerySwapGroupNV QuerySwapGroupNV}
-     */
+    /** Array version of: {@link #wglQuerySwapGroupNV QuerySwapGroupNV} */
     @NativeType("BOOL")
     public static boolean wglQuerySwapGroupNV(@NativeType("HDC") long hDC, @NativeType("GLuint *") int[] group, @NativeType("GLuint *") int[] barrier) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQuerySwapGroupNV;
@@ -146,9 +144,7 @@ public class WGLNVSwapGroup {
         return callPPPI(hDC, group, barrier, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #wglQueryMaxSwapGroupsNV QueryMaxSwapGroupsNV}
-     */
+    /** Array version of: {@link #wglQueryMaxSwapGroupsNV QueryMaxSwapGroupsNV} */
     @NativeType("BOOL")
     public static boolean wglQueryMaxSwapGroupsNV(@NativeType("HDC") long hDC, @NativeType("GLuint *") int[] maxGroups, @NativeType("GLuint *") int[] maxBarriers) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQueryMaxSwapGroupsNV;
@@ -161,9 +157,7 @@ public class WGLNVSwapGroup {
         return callPPPI(hDC, maxGroups, maxBarriers, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #wglQueryFrameCountNV QueryFrameCountNV}
-     */
+    /** Array version of: {@link #wglQueryFrameCountNV QueryFrameCountNV} */
     @NativeType("BOOL")
     public static boolean wglQueryFrameCountNV(@NativeType("HDC") long hDC, @NativeType("GLuint *") int[] count) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQueryFrameCountNV;

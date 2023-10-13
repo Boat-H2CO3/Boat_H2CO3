@@ -7,7 +7,6 @@ package org.lwjgl.system;
 import org.lwjgl.*;
 
 import javax.annotation.*;
-
 import java.nio.*;
 
 import static org.lwjgl.system.Checks.*;
@@ -62,9 +61,7 @@ public interface Pointer {
      */
     long address();
 
-    /**
-     * Default {@link Pointer} implementation.
-     */
+    /** Default {@link Pointer} implementation. */
     abstract class Default implements Pointer {
 
         protected static final sun.misc.Unsafe UNSAFE;
@@ -118,13 +115,13 @@ public interface Pointer {
                 return false;
             }
 
-            Pointer that = (Pointer) o;
+            Pointer that = (Pointer)o;
 
             return address == that.address();
         }
 
         public int hashCode() {
-            return (int) (address ^ (address >>> 32));
+            return (int)(address ^ (address >>> 32));
         }
 
         @Override
@@ -136,7 +133,7 @@ public interface Pointer {
         protected static <T extends CustomBuffer<?>> T wrap(Class<? extends T> clazz, long address, int capacity) {
             T buffer;
             try {
-                buffer = (T) UNSAFE.allocateInstance(clazz);
+                buffer = (T)UNSAFE.allocateInstance(clazz);
             } catch (InstantiationException e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -153,7 +150,7 @@ public interface Pointer {
         protected static <T extends CustomBuffer<?>> T wrap(Class<? extends T> clazz, long address, int capacity, ByteBuffer container) {
             T buffer;
             try {
-                buffer = (T) UNSAFE.allocateInstance(clazz);
+                buffer = (T)UNSAFE.allocateInstance(clazz);
             } catch (InstantiationException e) {
                 throw new UnsupportedOperationException(e);
             }

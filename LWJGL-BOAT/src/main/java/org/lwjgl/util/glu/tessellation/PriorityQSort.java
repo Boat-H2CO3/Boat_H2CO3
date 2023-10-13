@@ -80,6 +80,7 @@
 package org.lwjgl.util.glu.tessellation;
 
 
+
 class PriorityQSort extends PriorityQ {
     PriorityQHeap heap;
     Object[] keys;

@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_color_buffer_float.txt">ARB_color_buffer_float</a> extension.
@@ -33,22 +33,16 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBColorBufferFloat {
 
-    /**
-     * Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_RGBA_FLOAT_MODE_ARB = 0x8820;
 
-    /**
-     * Accepted by the {@code target} parameter of ClampColorARB and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code target} parameter of ClampColorARB and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_CLAMP_VERTEX_COLOR_ARB = 0x891A,
             GL_CLAMP_FRAGMENT_COLOR_ARB = 0x891B,
             GL_CLAMP_READ_COLOR_ARB = 0x891C;
 
-    /**
-     * Accepted by the {@code clamp} parameter of ClampColorARB.
-     */
+    /** Accepted by the {@code clamp} parameter of ClampColorARB. */
     public static final int GL_FIXED_ONLY_ARB = 0x891D;
 
     static {
@@ -61,7 +55,7 @@ public class ARBColorBufferFloat {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glClampColorARB
+            caps.glClampColorARB
         );
     }
 

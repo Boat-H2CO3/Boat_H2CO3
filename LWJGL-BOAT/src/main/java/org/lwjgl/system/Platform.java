@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import javax.annotation.*;
-
 import java.util.function.*;
 import java.util.regex.*;
 
@@ -16,7 +15,7 @@ import static org.lwjgl.system.APIUtil.*;
  */
 public enum Platform {
 
-    H2CO3Boat("Boat_H2CO3", "h2co3_boat") {
+    H2CO3Boat("H2CO3Boat", "h2co3_boat") {
         private final Pattern SO = Pattern.compile("(?:^|/)lib\\w+[.]so(?:[.]\\d+)*$");
 
         @Override
@@ -64,9 +63,7 @@ public enum Platform {
         }
     };
 
-    /**
-     * The architectures supported by LWJGL.
-     */
+    /** The architectures supported by LWJGL. */
     public enum Architecture {
         X64(true),
         X86(false),
@@ -133,25 +130,19 @@ public enum Platform {
         this.nativePath = nativePath;
     }
 
-    /**
-     * Returns the platform name.
-     */
+    /** Returns the platform name. */
     public String getName() {
         return name;
     }
 
     abstract String mapLibraryName(String name);
 
-    /**
-     * Returns the platform on which the library is running.
-     */
+    /** Returns the platform on which the library is running. */
     public static Platform get() {
         return current;
     }
 
-    /**
-     * Returns the architecture on which the library is running.
-     */
+    /** Returns the architecture on which the library is running. */
     public static Architecture getArchitecture() {
         return Architecture.current;
     }

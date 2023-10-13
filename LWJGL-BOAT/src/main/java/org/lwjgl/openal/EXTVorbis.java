@@ -10,12 +10,9 @@ package org.lwjgl.openal;
  */
 public final class EXTVorbis {
 
-    /**
-     * {@code AL_EXT_vorbis} tokens.
-     */
+    /** {@code AL_EXT_vorbis} tokens. */
     public static final int AL_FORMAT_VORBIS_EXT = 0x10003;
 
-    private EXTVorbis() {
-    }
+    private EXTVorbis() {}
 
 }

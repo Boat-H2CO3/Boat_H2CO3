@@ -39,17 +39,13 @@ public abstract class GLFWWindowSizeCallback extends Callback implements GLFWWin
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWWindowSizeCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWWindowSizeCallback} instance that delegates to the specified {@code GLFWWindowSizeCallbackI} instance.
-     */
+    /** Creates a {@code GLFWWindowSizeCallback} instance that delegates to the specified {@code GLFWWindowSizeCallbackI} instance. */
     public static GLFWWindowSizeCallback create(GLFWWindowSizeCallbackI instance) {
         return instance instanceof GLFWWindowSizeCallback
                 ? (GLFWWindowSizeCallback) instance
@@ -64,9 +60,7 @@ public abstract class GLFWWindowSizeCallback extends Callback implements GLFWWin
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetWindowSizeCallback SetWindowSizeCallback}.
-     */
+    /** See {@link GLFW#glfwSetWindowSizeCallback SetWindowSizeCallback}. */
     public GLFWWindowSizeCallback set(long window) {
         glfwSetWindowSizeCallback(window, this);
         return this;

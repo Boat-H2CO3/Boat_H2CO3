@@ -7,7 +7,6 @@ package org.lwjgl.system.macosx;
 import org.lwjgl.system.*;
 
 import javax.annotation.*;
-
 import java.nio.*;
 
 import static org.lwjgl.system.Checks.*;

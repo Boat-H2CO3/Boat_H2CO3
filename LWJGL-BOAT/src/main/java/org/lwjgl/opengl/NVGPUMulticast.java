@@ -45,14 +45,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVGPUMulticast {
 
-    /**
-     * Accepted in the {@code flags} parameter of BufferStorage and NamedBufferStorageEXT.
-     */
+    /** Accepted in the {@code flags} parameter of BufferStorage and NamedBufferStorageEXT. */
     public static final int GL_PER_GPU_STORAGE_BIT_NV = 0x800;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
             GL_MULTICAST_GPUS_NV = 0x92BA,
             GL_RENDER_GPU_MASK_NV = 0x9558;
@@ -64,9 +60,7 @@ public class NVGPUMulticast {
      */
     public static final int GL_PER_GPU_STORAGE_NV = 0x9548;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetMultisamplefv.
-     */
+    /** Accepted by the {@code pname} parameter of GetMultisamplefv. */
     public static final int GL_MULTICAST_PROGRAMMABLE_SAMPLE_LOCATION_NV = 0x9549;
 
     static {
@@ -88,9 +82,7 @@ public class NVGPUMulticast {
 
     // --- [ glRenderGpuMaskNV ] ---
 
-    /**
-     * Restricts render commands to a specific set of GPUs.
-     */
+    /** Restricts render commands to a specific set of GPUs. */
     public static native void glRenderGpuMaskNV(@NativeType("GLbitfield") int mask);
 
     // --- [ glMulticastBufferSubDataNV ] ---
@@ -241,9 +233,7 @@ public class NVGPUMulticast {
         }
     }
 
-    /**
-     * Array version of: {@link #glMulticastBufferSubDataNV MulticastBufferSubDataNV}
-     */
+    /** Array version of: {@link #glMulticastBufferSubDataNV MulticastBufferSubDataNV} */
     public static void glMulticastBufferSubDataNV(@NativeType("GLbitfield") int gpuMask, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") short[] data) {
         long __functionAddress = GL.getICD().glMulticastBufferSubDataNV;
         if (CHECKS) {
@@ -252,9 +242,7 @@ public class NVGPUMulticast {
         callPPPV(gpuMask, buffer, offset, Integer.toUnsignedLong(data.length) << 1, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMulticastBufferSubDataNV MulticastBufferSubDataNV}
-     */
+    /** Array version of: {@link #glMulticastBufferSubDataNV MulticastBufferSubDataNV} */
     public static void glMulticastBufferSubDataNV(@NativeType("GLbitfield") int gpuMask, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") int[] data) {
         long __functionAddress = GL.getICD().glMulticastBufferSubDataNV;
         if (CHECKS) {
@@ -263,9 +251,7 @@ public class NVGPUMulticast {
         callPPPV(gpuMask, buffer, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMulticastBufferSubDataNV MulticastBufferSubDataNV}
-     */
+    /** Array version of: {@link #glMulticastBufferSubDataNV MulticastBufferSubDataNV} */
     public static void glMulticastBufferSubDataNV(@NativeType("GLbitfield") int gpuMask, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") float[] data) {
         long __functionAddress = GL.getICD().glMulticastBufferSubDataNV;
         if (CHECKS) {
@@ -274,9 +260,7 @@ public class NVGPUMulticast {
         callPPPV(gpuMask, buffer, offset, Integer.toUnsignedLong(data.length) << 2, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMulticastBufferSubDataNV MulticastBufferSubDataNV}
-     */
+    /** Array version of: {@link #glMulticastBufferSubDataNV MulticastBufferSubDataNV} */
     public static void glMulticastBufferSubDataNV(@NativeType("GLbitfield") int gpuMask, @NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") double[] data) {
         long __functionAddress = GL.getICD().glMulticastBufferSubDataNV;
         if (CHECKS) {
@@ -285,9 +269,7 @@ public class NVGPUMulticast {
         callPPPV(gpuMask, buffer, offset, Integer.toUnsignedLong(data.length) << 3, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMulticastFramebufferSampleLocationsfvNV MulticastFramebufferSampleLocationsfvNV}
-     */
+    /** Array version of: {@link #glMulticastFramebufferSampleLocationsfvNV MulticastFramebufferSampleLocationsfvNV} */
     public static void glMulticastFramebufferSampleLocationsfvNV(@NativeType("GLuint") int gpu, @NativeType("GLuint") int framebuffer, @NativeType("GLuint") int start, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMulticastFramebufferSampleLocationsfvNV;
         if (CHECKS) {
@@ -296,9 +278,7 @@ public class NVGPUMulticast {
         callPV(gpu, framebuffer, start, v.length >> 1, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMulticastGetQueryObjectivNV MulticastGetQueryObjectivNV}
-     */
+    /** Array version of: {@link #glMulticastGetQueryObjectivNV MulticastGetQueryObjectivNV} */
     public static void glMulticastGetQueryObjectivNV(@NativeType("GLuint") int gpu, @NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glMulticastGetQueryObjectivNV;
         if (CHECKS) {
@@ -308,9 +288,7 @@ public class NVGPUMulticast {
         callPV(gpu, id, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMulticastGetQueryObjectuivNV MulticastGetQueryObjectuivNV}
-     */
+    /** Array version of: {@link #glMulticastGetQueryObjectuivNV MulticastGetQueryObjectuivNV} */
     public static void glMulticastGetQueryObjectuivNV(@NativeType("GLuint") int gpu, @NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glMulticastGetQueryObjectuivNV;
         if (CHECKS) {
@@ -320,9 +298,7 @@ public class NVGPUMulticast {
         callPV(gpu, id, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMulticastGetQueryObjecti64vNV MulticastGetQueryObjecti64vNV}
-     */
+    /** Array version of: {@link #glMulticastGetQueryObjecti64vNV MulticastGetQueryObjecti64vNV} */
     public static void glMulticastGetQueryObjecti64vNV(@NativeType("GLuint") int gpu, @NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
         long __functionAddress = GL.getICD().glMulticastGetQueryObjecti64vNV;
         if (CHECKS) {
@@ -332,9 +308,7 @@ public class NVGPUMulticast {
         callPV(gpu, id, pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMulticastGetQueryObjectui64vNV MulticastGetQueryObjectui64vNV}
-     */
+    /** Array version of: {@link #glMulticastGetQueryObjectui64vNV MulticastGetQueryObjectui64vNV} */
     public static void glMulticastGetQueryObjectui64vNV(@NativeType("GLuint") int gpu, @NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint64 *") long[] params) {
         long __functionAddress = GL.getICD().glMulticastGetQueryObjectui64vNV;
         if (CHECKS) {

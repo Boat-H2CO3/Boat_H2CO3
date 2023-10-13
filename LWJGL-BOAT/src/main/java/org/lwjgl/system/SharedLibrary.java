@@ -13,9 +13,7 @@ import static org.lwjgl.system.dyncall.DynLoad.*;
  */
 public interface SharedLibrary extends FunctionProvider, NativeResource, Pointer {
 
-    /**
-     * Returns the library name.
-     */
+    /** Returns the library name. */
     String getName();
 
     /**

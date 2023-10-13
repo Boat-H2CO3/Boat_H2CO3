@@ -5,13 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import javax.annotation.*;
 
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_map_buffer_range.txt">ARB_map_buffer_range</a> extension.
@@ -33,9 +33,7 @@ import javax.annotation.Nullable;
  */
 public class ARBMapBufferRange {
 
-    /**
-     * Accepted by the {@code access} parameter of MapBufferRange.
-     */
+    /** Accepted by the {@code access} parameter of MapBufferRange. */
     public static final int
             GL_MAP_READ_BIT = 0x1,
             GL_MAP_WRITE_BIT = 0x2,
@@ -60,9 +58,7 @@ public class ARBMapBufferRange {
 
     // --- [ glMapBufferRange ] ---
 
-    /**
-     * Unsafe version of: {@link #glMapBufferRange MapBufferRange}
-     */
+    /** Unsafe version of: {@link #glMapBufferRange MapBufferRange} */
     public static long nglMapBufferRange(int target, long offset, long length, int access) {
         return GL30C.nglMapBufferRange(target, offset, length, access);
     }

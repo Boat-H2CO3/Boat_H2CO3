@@ -35,6 +35,7 @@ import java.io.Serializable;
 import java.nio.FloatBuffer;
 
 /**
+ *
  * Base class for matrices. When a matrix is constructed it will be the identity
  * matrix unless otherwise stated.
  *

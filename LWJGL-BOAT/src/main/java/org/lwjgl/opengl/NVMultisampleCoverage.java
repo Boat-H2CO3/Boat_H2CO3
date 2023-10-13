@@ -25,9 +25,7 @@ package org.lwjgl.opengl;
  */
 public final class NVMultisampleCoverage {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int GL_COLOR_SAMPLES_NV = 0x8E20;
 
     private NVMultisampleCoverage() {

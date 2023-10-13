@@ -37,9 +37,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GL31C extends GL30C {
 
-    /**
-     * Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.
-     */
+    /** Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D. */
     public static final int
             GL_R8_SNORM = 0x8F94,
             GL_RG8_SNORM = 0x8F95,
@@ -50,14 +48,10 @@ public class GL31C extends GL30C {
             GL_RGB16_SNORM = 0x8F9A,
             GL_RGBA16_SNORM = 0x8F9B;
 
-    /**
-     * Returned by GetTexLevelParameter and GetFramebufferAttachmentParameter.
-     */
+    /** Returned by GetTexLevelParameter and GetFramebufferAttachmentParameter. */
     public static final int GL_SIGNED_NORMALIZED = 0x8F9C;
 
-    /**
-     * Returned by the {@code type} parameter of GetActiveUniform.
-     */
+    /** Returned by the {@code type} parameter of GetActiveUniform. */
     public static final int
             GL_SAMPLER_BUFFER = 0x8DC2,
             GL_INT_SAMPLER_2D_RECT = 0x8DCD,
@@ -73,14 +67,10 @@ public class GL31C extends GL30C {
             GL_COPY_READ_BUFFER = 0x8F36,
             GL_COPY_WRITE_BUFFER = 0x8F37;
 
-    /**
-     * Accepted by the {@code cap} parameter of Enable, Disable and IsEnabled.
-     */
+    /** Accepted by the {@code cap} parameter of Enable, Disable and IsEnabled. */
     public static final int GL_PRIMITIVE_RESTART = 0x8F9D;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_PRIMITIVE_RESTART_INDEX = 0x8F9E;
 
     /**
@@ -90,9 +80,7 @@ public class GL31C extends GL30C {
      */
     public static final int GL_TEXTURE_BUFFER = 0x8C2A;
 
-    /**
-     * Accepted by the {@code pname} parameters of GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv.
-     */
+    /** Accepted by the {@code pname} parameters of GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv. */
     public static final int
             GL_MAX_TEXTURE_BUFFER_SIZE = 0x8C2B,
             GL_TEXTURE_BINDING_BUFFER = 0x8C2C,
@@ -105,24 +93,16 @@ public class GL31C extends GL30C {
      */
     public static final int GL_TEXTURE_RECTANGLE = 0x84F5;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev. */
     public static final int GL_TEXTURE_BINDING_RECTANGLE = 0x84F6;
 
-    /**
-     * Accepted by the {@code target} parameter of GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv and TexImage2D.
-     */
+    /** Accepted by the {@code target} parameter of GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv and TexImage2D. */
     public static final int GL_PROXY_TEXTURE_RECTANGLE = 0x84F7;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv. */
     public static final int GL_MAX_RECTANGLE_TEXTURE_SIZE = 0x84F8;
 
-    /**
-     * Returned by {@code type} parameter of GetActiveUniform when the location {@code index} for program object {@code program} is of type sampler2DRect.
-     */
+    /** Returned by {@code type} parameter of GetActiveUniform when the location {@code index} for program object {@code program} is of type sampler2DRect. */
     public static final int GL_SAMPLER_2D_RECT = 0x8B63;
 
     /**
@@ -218,6 +198,7 @@ public class GL31C extends GL30C {
      * @param first     the index of the first vertex to be rendered
      * @param count     the number of vertices to be rendered
      * @param primcount the number of instances of the specified range of vertices to be rendered
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDrawArraysInstanced">Reference Page</a>
      */
     public static native void glDrawArraysInstanced(@NativeType("GLenum") int mode, @NativeType("GLint") int first, @NativeType("GLsizei") int count, @NativeType("GLsizei") int primcount);
@@ -240,6 +221,7 @@ public class GL31C extends GL30C {
      * @param type      the type of the values in {@code indices}. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      * @param indices   the ByteBuffer containing the indices to be rendered
      * @param primcount the number of instances of the specified range of indices to be rendered
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstanced">Reference Page</a>
      */
     public static void glDrawElementsInstanced(@NativeType("GLenum") int mode, @NativeType("GLsizei") int count, @NativeType("GLenum") int type, @NativeType("void const *") long indices, @NativeType("GLsizei") int primcount) {
@@ -253,6 +235,7 @@ public class GL31C extends GL30C {
      * @param type      the type of the values in {@code indices}. One of:<br><table><tr><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td></tr></table>
      * @param indices   the ByteBuffer containing the indices to be rendered
      * @param primcount the number of instances of the specified range of indices to be rendered
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstanced">Reference Page</a>
      */
     public static void glDrawElementsInstanced(@NativeType("GLenum") int mode, @NativeType("GLenum") int type, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount) {
@@ -265,6 +248,7 @@ public class GL31C extends GL30C {
      * @param mode      the kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param indices   the ByteBuffer containing the indices to be rendered
      * @param primcount the number of instances of the specified range of indices to be rendered
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstanced">Reference Page</a>
      */
     public static void glDrawElementsInstanced(@NativeType("GLenum") int mode, @NativeType("void const *") ByteBuffer indices, @NativeType("GLsizei") int primcount) {
@@ -277,6 +261,7 @@ public class GL31C extends GL30C {
      * @param mode      the kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param indices   the ByteBuffer containing the indices to be rendered
      * @param primcount the number of instances of the specified range of indices to be rendered
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstanced">Reference Page</a>
      */
     public static void glDrawElementsInstanced(@NativeType("GLenum") int mode, @NativeType("void const *") ShortBuffer indices, @NativeType("GLsizei") int primcount) {
@@ -289,6 +274,7 @@ public class GL31C extends GL30C {
      * @param mode      the kind of primitives to render. One of:<br><table><tr><td>{@link GL11#GL_POINTS POINTS}</td><td>{@link GL11#GL_LINE_STRIP LINE_STRIP}</td><td>{@link GL11#GL_LINE_LOOP LINE_LOOP}</td><td>{@link GL11#GL_LINES LINES}</td><td>{@link GL11#GL_TRIANGLE_STRIP TRIANGLE_STRIP}</td><td>{@link GL11#GL_TRIANGLE_FAN TRIANGLE_FAN}</td></tr><tr><td>{@link GL11#GL_TRIANGLES TRIANGLES}</td><td>{@link GL32#GL_LINES_ADJACENCY LINES_ADJACENCY}</td><td>{@link GL32#GL_LINE_STRIP_ADJACENCY LINE_STRIP_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLES_ADJACENCY TRIANGLES_ADJACENCY}</td><td>{@link GL32#GL_TRIANGLE_STRIP_ADJACENCY TRIANGLE_STRIP_ADJACENCY}</td><td>{@link GL40#GL_PATCHES PATCHES}</td></tr></table>
      * @param indices   the ByteBuffer containing the indices to be rendered
      * @param primcount the number of instances of the specified range of indices to be rendered
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDrawElementsInstanced">Reference Page</a>
      */
     public static void glDrawElementsInstanced(@NativeType("GLenum") int mode, @NativeType("void const *") IntBuffer indices, @NativeType("GLsizei") int primcount) {
@@ -315,6 +301,7 @@ public class GL31C extends GL30C {
      * @param readOffset  the source buffer object offset, in bytes
      * @param writeOffset the destination buffer object offset, in bytes
      * @param size        the number of bytes to copy
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glCopyBufferSubData">Reference Page</a>
      */
     public static native void glCopyBufferSubData(@NativeType("GLenum") int readTarget, @NativeType("GLenum") int writeTarget, @NativeType("GLintptr") long readOffset, @NativeType("GLintptr") long writeOffset, @NativeType("GLsizeiptr") long size);
@@ -325,6 +312,7 @@ public class GL31C extends GL30C {
      * Specifies the primitive restart index.
      *
      * @param index the value to be interpreted as the primitive restart index
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glPrimitiveRestartIndex">Reference Page</a>
      */
     public static native void glPrimitiveRestartIndex(@NativeType("GLuint") int index);
@@ -357,6 +345,7 @@ public class GL31C extends GL30C {
      * @param target         the target of the operation. Must be:<br><table><tr><td>{@link #GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td></tr></table>
      * @param internalformat the sized internal format of the data in the store belonging to {@code buffer}
      * @param buffer         the name of the buffer object whose storage to attach to the active buffer texture
+     * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTexBuffer">Reference Page</a>
      */
     public static native void glTexBuffer(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLuint") int buffer);
@@ -376,6 +365,7 @@ public class GL31C extends GL30C {
      * @param program        the name of a program containing uniforms whose indices to query
      * @param uniformNames   an array of pointers to buffers containing the names of the queried uniforms
      * @param uniformIndices an array that will receive the indices of the uniforms
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
     public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") PointerBuffer uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
@@ -391,6 +381,7 @@ public class GL31C extends GL30C {
      * @param program        the name of a program containing uniforms whose indices to query
      * @param uniformNames   an array of pointers to buffers containing the names of the queried uniforms
      * @param uniformIndices an array that will receive the indices of the uniforms
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
     public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence[] uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
@@ -400,9 +391,9 @@ public class GL31C extends GL30C {
         MemoryStack stack = stackGet();
         int stackPointer = stack.getPointer();
         try {
-            long uniformNamesAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memASCII, uniformNames);
+            long uniformNamesAddress = APIUtil.apiArray(stack, MemoryUtil::memASCII, uniformNames);
             nglGetUniformIndices(program, uniformNames.length, uniformNamesAddress, memAddress(uniformIndices));
-            org.lwjgl.system.APIUtil.apiArrayFree(uniformNamesAddress, uniformNames.length);
+            APIUtil.apiArrayFree(uniformNamesAddress, uniformNames.length);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -412,6 +403,7 @@ public class GL31C extends GL30C {
      * Retrieves the indices of a number of uniforms within a program object
      *
      * @param program the name of a program containing uniforms whose indices to query
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
     @NativeType("void")
@@ -419,10 +411,10 @@ public class GL31C extends GL30C {
         MemoryStack stack = stackGet();
         int stackPointer = stack.getPointer();
         try {
-            long uniformNamesAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memASCII, uniformName);
+            long uniformNamesAddress = APIUtil.apiArray(stack, MemoryUtil::memASCII, uniformName);
             IntBuffer uniformIndices = stack.callocInt(1);
             nglGetUniformIndices(program, 1, uniformNamesAddress, memAddress(uniformIndices));
-            org.lwjgl.system.APIUtil.apiArrayFree(uniformNamesAddress, 1);
+            APIUtil.apiArrayFree(uniformNamesAddress, 1);
             return uniformIndices.get(0);
         } finally {
             stack.setPointer(stackPointer);
@@ -445,6 +437,7 @@ public class GL31C extends GL30C {
      * @param uniformIndices an array of {@code uniformCount} integers containing the indices of uniforms within {@code program}
      * @param pname          the property of the each uniform in {@code uniformIndices} that should be written into the corresponding element of {@code params}
      * @param params         an array of {@code uniformCount} integers which are to receive the value of {@code pname} for each uniform in {@code uniformIndices}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniforms">Reference Page</a>
      */
     public static void glGetActiveUniformsiv(@NativeType("GLuint") int program, @NativeType("GLuint const *") IntBuffer uniformIndices, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
@@ -459,6 +452,7 @@ public class GL31C extends GL30C {
      *
      * @param program the program object to be queried
      * @param pname   the property of the each uniform in {@code uniformIndices} that should be written into the corresponding element of {@code params}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniforms">Reference Page</a>
      */
     @NativeType("void")
@@ -491,6 +485,7 @@ public class GL31C extends GL30C {
      * @param uniformIndex the index of the active uniform whose name to query
      * @param length       the address of a variable that will receive the number of characters that were or would have been written to the buffer addressed by {@code uniformName}
      * @param uniformName  the address of a buffer into which the GL will place the name of the active uniform at {@code uniformIndex} within {@code program}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniformName">Reference Page</a>
      */
     public static void glGetActiveUniformName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformIndex, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer uniformName) {
@@ -506,6 +501,7 @@ public class GL31C extends GL30C {
      * @param program      the program containing the active uniform index {@code uniformIndex}
      * @param uniformIndex the index of the active uniform whose name to query
      * @param bufSize      the size of the buffer, in units of {@code GLchar}, of the buffer whose address is specified in {@code uniformName}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniformName">Reference Page</a>
      */
     @NativeType("void")
@@ -527,6 +523,7 @@ public class GL31C extends GL30C {
      *
      * @param program      the program containing the active uniform index {@code uniformIndex}
      * @param uniformIndex the index of the active uniform whose name to query
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniformName">Reference Page</a>
      */
     @NativeType("void")
@@ -536,9 +533,7 @@ public class GL31C extends GL30C {
 
     // --- [ glGetUniformBlockIndex ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetUniformBlockIndex GetUniformBlockIndex}
-     */
+    /** Unsafe version of: {@link #glGetUniformBlockIndex GetUniformBlockIndex} */
     public static native int nglGetUniformBlockIndex(int program, long uniformBlockName);
 
     /**
@@ -546,6 +541,7 @@ public class GL31C extends GL30C {
      *
      * @param program          the name of a program containing the uniform block
      * @param uniformBlockName an array of characters to containing the name of the uniform block whose index to retrieve
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformBlockIndex">Reference Page</a>
      */
     @NativeType("GLuint")
@@ -561,6 +557,7 @@ public class GL31C extends GL30C {
      *
      * @param program          the name of a program containing the uniform block
      * @param uniformBlockName an array of characters to containing the name of the uniform block whose index to retrieve
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformBlockIndex">Reference Page</a>
      */
     @NativeType("GLuint")
@@ -578,9 +575,7 @@ public class GL31C extends GL30C {
 
     // --- [ glGetActiveUniformBlockiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetActiveUniformBlockiv GetActiveUniformBlockiv}
-     */
+    /** Unsafe version of: {@link #glGetActiveUniformBlockiv GetActiveUniformBlockiv} */
     public static native void nglGetActiveUniformBlockiv(int program, int uniformBlockIndex, int pname, long params);
 
     /**
@@ -590,6 +585,7 @@ public class GL31C extends GL30C {
      * @param uniformBlockIndex the index of the uniform block within {@code program}
      * @param pname             the name of the parameter to query. One of:<br><table><tr><td>{@link #GL_UNIFORM_BLOCK_BINDING UNIFORM_BLOCK_BINDING}</td><td>{@link #GL_UNIFORM_BLOCK_DATA_SIZE UNIFORM_BLOCK_DATA_SIZE}</td></tr><tr><td>{@link #GL_UNIFORM_BLOCK_NAME_LENGTH UNIFORM_BLOCK_NAME_LENGTH}</td><td>{@link #GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS UNIFORM_BLOCK_ACTIVE_UNIFORMS}</td></tr><tr><td>{@link #GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES}</td><td>{@link #GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER}</td></tr><tr><td>{@link #GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER}</td><td>{@link #GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER}</td></tr></table>
      * @param params            the address of a variable to receive the result of the query
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniformBlock">Reference Page</a>
      */
     public static void glGetActiveUniformBlockiv(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
@@ -605,6 +601,7 @@ public class GL31C extends GL30C {
      * @param program           the name of a program containing the uniform block
      * @param uniformBlockIndex the index of the uniform block within {@code program}
      * @param pname             the name of the parameter to query. One of:<br><table><tr><td>{@link #GL_UNIFORM_BLOCK_BINDING UNIFORM_BLOCK_BINDING}</td><td>{@link #GL_UNIFORM_BLOCK_DATA_SIZE UNIFORM_BLOCK_DATA_SIZE}</td></tr><tr><td>{@link #GL_UNIFORM_BLOCK_NAME_LENGTH UNIFORM_BLOCK_NAME_LENGTH}</td><td>{@link #GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS UNIFORM_BLOCK_ACTIVE_UNIFORMS}</td></tr><tr><td>{@link #GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES}</td><td>{@link #GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER}</td></tr><tr><td>{@link #GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER}</td><td>{@link #GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER}</td></tr></table>
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniformBlock">Reference Page</a>
      */
     @NativeType("void")
@@ -636,6 +633,7 @@ public class GL31C extends GL30C {
      * @param uniformBlockIndex the index of the uniform block within {@code program}
      * @param length            the address of a variable to receive the number of characters that were written to {@code uniformBlockName}
      * @param uniformBlockName  an array of characters to receive the name of the uniform block at {@code uniformBlockIndex}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniformBlockName">Reference Page</a>
      */
     public static void glGetActiveUniformBlockName(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @Nullable @NativeType("GLsizei *") IntBuffer length, @NativeType("GLchar *") ByteBuffer uniformBlockName) {
@@ -651,6 +649,7 @@ public class GL31C extends GL30C {
      * @param program           the name of a program containing the uniform block
      * @param uniformBlockIndex the index of the uniform block within {@code program}
      * @param bufSize           the size of the buffer addressed by {@code uniformBlockName}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniformBlockName">Reference Page</a>
      */
     @NativeType("void")
@@ -672,6 +671,7 @@ public class GL31C extends GL30C {
      *
      * @param program           the name of a program containing the uniform block
      * @param uniformBlockIndex the index of the uniform block within {@code program}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetActiveUniformBlockName">Reference Page</a>
      */
     @NativeType("void")
@@ -687,6 +687,7 @@ public class GL31C extends GL30C {
      * @param program             the name of a program object containing the active uniform block whose binding to assign
      * @param uniformBlockIndex   the index of the active uniform block within {@code program} whose binding to assign
      * @param uniformBlockBinding the binding point to which to bind the uniform block with index {@code uniformBlockIndex} within {@code program}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glUniformBlockBinding">Reference Page</a>
      */
     public static native void glUniformBlockBinding(@NativeType("GLuint") int program, @NativeType("GLuint") int uniformBlockIndex, @NativeType("GLuint") int uniformBlockBinding);

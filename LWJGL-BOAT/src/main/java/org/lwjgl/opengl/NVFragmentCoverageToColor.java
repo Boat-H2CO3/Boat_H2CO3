@@ -23,14 +23,10 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVFragmentCoverageToColor {
 
-    /**
-     * Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.
-     */
+    /** Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled. */
     public static final int GL_FRAGMENT_COVERAGE_TO_COLOR_NV = 0x92DD;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int GL_FRAGMENT_COVERAGE_COLOR_NV = 0x92DE;
 
     static {
@@ -43,15 +39,13 @@ public class NVFragmentCoverageToColor {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glFragmentCoverageColorNV
+            caps.glFragmentCoverageColorNV
         );
     }
 
     // --- [ glFragmentCoverageColorNV ] ---
 
-    /**
-     * @param color the draw buffer index that the coverage value will be written to. Must be between 0 and the value of MAX_DRAW_BUFFERS minus one, inclusive.
-     */
+    /** @param color the draw buffer index that the coverage value will be written to. Must be between 0 and the value of MAX_DRAW_BUFFERS minus one, inclusive. */
     public static native void glFragmentCoverageColorNV(@NativeType("GLuint") int color);
 
 }

@@ -18,9 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GLX11 extends GLX {
 
-    /**
-     * Names for attributes to {@link #glXGetClientString GetClientString}.
-     */
+    /** Names for attributes to {@link #glXGetClientString GetClientString}. */
     public static final int
             GLX_VENDOR = 0x1,
             GLX_VERSION = 0x2,
@@ -38,9 +36,7 @@ public class GLX11 extends GLX {
 
     // --- [ glXQueryExtensionsString ] ---
 
-    /**
-     * Unsafe version of: {@link #glXQueryExtensionsString QueryExtensionsString}
-     */
+    /** Unsafe version of: {@link #glXQueryExtensionsString QueryExtensionsString} */
     public static long nglXQueryExtensionsString(long display, int screen) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryExtensionsString;
         if (CHECKS) {
@@ -65,9 +61,7 @@ public class GLX11 extends GLX {
 
     // --- [ glXGetClientString ] ---
 
-    /**
-     * Unsafe version of: {@link #glXGetClientString GetClientString}
-     */
+    /** Unsafe version of: {@link #glXGetClientString GetClientString} */
     public static long nglXGetClientString(long display, int name) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetClientString;
         if (CHECKS) {
@@ -92,9 +86,7 @@ public class GLX11 extends GLX {
 
     // --- [ glXQueryServerString ] ---
 
-    /**
-     * Unsafe version of: {@link #glXQueryServerString QueryServerString}
-     */
+    /** Unsafe version of: {@link #glXQueryServerString QueryServerString} */
     public static long nglXQueryServerString(long display, int screen, int name) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryServerString;
         if (CHECKS) {

@@ -22,9 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class User32 {
 
-    /**
-     * Window Styles
-     */
+    /** Window Styles */
     public static final int
             WS_OVERLAPPED = 0x0,
             WS_POPUP = 0x80000000,
@@ -54,9 +52,7 @@ public class User32 {
             WS_SIZEBOX = WS_THICKFRAME,
             WS_TILEDWINDOW = WS_OVERLAPPEDWINDOW;
 
-    /**
-     * Extended Window Styles
-     */
+    /** Extended Window Styles */
     public static final int
             WS_EX_DLGMODALFRAME = 0x1,
             WS_EX_NOPARENTNOTIFY = 0x4,
@@ -85,14 +81,10 @@ public class User32 {
             WS_EX_COMPOSITED = 0x2000000,
             WS_EX_NOACTIVATE = 0x8000000;
 
-    /**
-     * May be used in {@link #CreateWindowEx} for the x, y, width, height parameters.
-     */
+    /** May be used in {@link #CreateWindowEx} for the x, y, width, height parameters. */
     public static final int CW_USEDEFAULT = 0x80000000;
 
-    /**
-     * Class styles
-     */
+    /** Class styles */
     public static final int
             CS_VREDRAW = 0x1,
             CS_HREDRAW = 0x2,
@@ -108,9 +100,7 @@ public class User32 {
             CS_IME = 0x10000,
             CS_DROPSHADOW = 0x20000;
 
-    /**
-     * Windows messages.
-     */
+    /** Windows messages. */
     public static final int
             WM_NULL = 0x0,
             WM_CREATE = 0x1,
@@ -346,17 +336,13 @@ public class User32 {
             WM_APP = 0x8000,
             WM_USER = 0x400;
 
-    /**
-     * {@link #WM_ACTIVATE} message {@code wParam} values.
-     */
+    /** {@link #WM_ACTIVATE} message {@code wParam} values. */
     public static final int
             WA_ACTIVE = 1,
             WA_CLICKACTIVE = 2,
             WA_INACTIVE = 0;
 
-    /**
-     * {@link #WM_SIZE} message {@code wParam} values.
-     */
+    /** {@link #WM_SIZE} message {@code wParam} values. */
     public static final int
             SIZE_RESTORED = 0,
             SIZE_MINIMIZED = 1,
@@ -364,9 +350,7 @@ public class User32 {
             SIZE_MAXSHOW = 3,
             SIZE_MAXHIDE = 4;
 
-    /**
-     * {@link #WM_DEVICECHANGE} message {@code wParam} params.
-     */
+    /** {@link #WM_DEVICECHANGE} message {@code wParam} params. */
     public static final int
             DBT_APPYBEGIN = 0x0,
             DBT_APPYEND = 0x1,
@@ -376,9 +360,7 @@ public class User32 {
             DBT_CONFIGCHANGECANCELED = 0x19,
             DBT_MONITORCHANGE = 0x1B;
 
-    /**
-     * System menu command values.
-     */
+    /** System menu command values. */
     public static final int
             SC_SIZE = 0xF000,
             SC_MOVE = 0xF010,
@@ -401,9 +383,7 @@ public class User32 {
             SC_CONTEXTHELP = 0xF180,
             SC_SEPARATOR = 0xF00F;
 
-    /**
-     * Key state masks for mouse messages.
-     */
+    /** Key state masks for mouse messages. */
     public static final int
             MK_LBUTTON = 0x1,
             MK_RBUTTON = 0x2,
@@ -413,9 +393,7 @@ public class User32 {
             MK_XBUTTON1 = 0x20,
             MK_XBUTTON2 = 0x40;
 
-    /**
-     * Mouse position codes.
-     */
+    /** Mouse position codes. */
     public static final int
             HTERROR = -2,
             HTTRANSPARENT = -1,
@@ -447,9 +425,7 @@ public class User32 {
             HTCLOSE = 20,
             HTHELP = 21;
 
-    /**
-     * Window field offsets for {@link #GetWindowLongPtr}.
-     */
+    /** Window field offsets for {@link #GetWindowLongPtr}. */
     public static final int
             GWL_WNDPROC = -4,
             GWL_HINSTANCE = -6,
@@ -459,9 +435,7 @@ public class User32 {
             GWL_USERDATA = -21,
             GWL_ID = -12;
 
-    /**
-     * {@link #ShowWindow} commands.
-     */
+    /** {@link #ShowWindow} commands. */
     public static final int
             SW_HIDE = 0,
             SW_SHOWNORMAL = 1,
@@ -479,9 +453,7 @@ public class User32 {
             SW_FORCEMINIMIZE = 11,
             SW_MAX = 11;
 
-    /**
-     * Virtual window handles used by the {@link #SetWindowPos} insertAfter argument.
-     */
+    /** Virtual window handles used by the {@link #SetWindowPos} insertAfter argument. */
     public static final long
             HWND_TOP = 0x0L,
             HWND_BOTTOM = 0x1L,
@@ -494,9 +466,7 @@ public class User32 {
      */
     public static final long HWND_BROADCAST = 0xFFFFL;
 
-    /**
-     * Window sizing and positiong flags used by the {@link #SetWindowPos} flags argument.
-     */
+    /** Window sizing and positiong flags used by the {@link #SetWindowPos} flags argument. */
     public static final int
             SWP_NOSIZE = 0x1,
             SWP_NOMOVE = 0x2,
@@ -514,9 +484,7 @@ public class User32 {
             SWP_DEFERERASE = 0x2000,
             SWP_ASYNCWINDOWPOS = 0x4000;
 
-    /**
-     * Standard Icon IDs. Use with {@link #LoadIcon}.
-     */
+    /** Standard Icon IDs. Use with {@link #LoadIcon}. */
     public static final int
             IDI_APPLICATION = 32512,
             IDI_HAND = 32513,
@@ -529,9 +497,7 @@ public class User32 {
             IDI_ERROR = IDI_HAND,
             IDI_INFORMATION = IDI_ASTERISK;
 
-    /**
-     * Standard Cursor IDs. Use with {@link #LoadCursor}.
-     */
+    /** Standard Cursor IDs. Use with {@link #LoadCursor}. */
     public static final int
             IDC_ARROW = 32512,
             IDC_IBEAM = 32513,
@@ -550,9 +516,7 @@ public class User32 {
             IDC_APPSTARTING = 32650,
             IDC_HELP = 32651;
 
-    /**
-     * Class field offsets for {@link #GetClassLongPtr}.
-     */
+    /** Class field offsets for {@link #GetClassLongPtr}. */
     public static final int
             GCL_MENUNAME = -8,
             GCL_HBRBACKGROUND = -10,
@@ -566,9 +530,7 @@ public class User32 {
             GCW_ATOM = -32,
             GCL_HICONSM = -34;
 
-    /**
-     * Queue status flags for {@code GetQueueStatus} and {@code MsgWaitForMultipleObjects}
-     */
+    /** Queue status flags for {@code GetQueueStatus} and {@code MsgWaitForMultipleObjects} */
     public static final int
             QS_KEY = 0x1,
             QS_MOUSEMOVE = 0x2,
@@ -585,9 +547,7 @@ public class User32 {
             QS_ALLEVENTS = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY,
             QS_ALLINPUT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE;
 
-    /**
-     * Remove message flags for {@link #PeekMessage}.
-     */
+    /** Remove message flags for {@link #PeekMessage}. */
     public static final int
             PM_NOREMOVE = 0x0,
             PM_REMOVE = 0x1,
@@ -597,9 +557,7 @@ public class User32 {
             PM_QS_PAINT = QS_PAINT << 16,
             PM_QS_SENDMESSAGE = QS_SENDMESSAGE << 16;
 
-    /**
-     * Virtual Keys.
-     */
+    /** Virtual Keys. */
     public static final int
             VK_LBUTTON = 0x1,
             VK_RBUTTON = 0x2,
@@ -762,16 +720,12 @@ public class User32 {
             VK_PA1 = 0xFD,
             VK_OEM_CLEAR = 0xFE;
 
-    /**
-     * XButton values.
-     */
+    /** XButton values. */
     public static final int
             XBUTTON1 = 0x1,
             XBUTTON2 = 0x2;
 
-    /**
-     * Value for rolling one detent.
-     */
+    /** Value for rolling one detent. */
     public static final int WHEEL_DELTA = 120;
 
     /**
@@ -780,25 +734,25 @@ public class User32 {
      * <h5>Enum values:</h5>
      *
      * <ul>
-     * <li>{@link #DPI_AWARENESS_INVALID DPI_AWARENESS_INVALID} -
+     * <li>{@link #DPI_AWARENESS_INVALID DPI_AWARENESS_INVALID} - 
      * Invalid DPI awareness.
      *
      * <p>This is an invalid DPI awareness value.</p>
      * </li>
-     * <li>{@link #DPI_AWARENESS_UNAWARE DPI_AWARENESS_UNAWARE} -
+     * <li>{@link #DPI_AWARENESS_UNAWARE DPI_AWARENESS_UNAWARE} - 
      * DPI unaware.
      *
      * <p>This process does not scale for DPI changes and is always assumed to have a scale factor of 100% (96 DPI). It will be automatically scaled by the
      * system on any other DPI setting.</p>
      * </li>
-     * <li>{@link #DPI_AWARENESS_SYSTEM_AWARE DPI_AWARENESS_SYSTEM_AWARE} -
+     * <li>{@link #DPI_AWARENESS_SYSTEM_AWARE DPI_AWARENESS_SYSTEM_AWARE} - 
      * System DPI aware.
      *
      * <p>This process does not scale for DPI changes. It will query for the DPI once and use that value for the lifetime of the process. If the DPI changes,
      * the process will not adjust to the new DPI value. It will be automatically scaled up or down by the system when the DPI changes from the system
      * value.</p>
      * </li>
-     * <li>{@link #DPI_AWARENESS_PER_MONITOR_AWARE DPI_AWARENESS_PER_MONITOR_AWARE} -
+     * <li>{@link #DPI_AWARENESS_PER_MONITOR_AWARE DPI_AWARENESS_PER_MONITOR_AWARE} - 
      * Per monitor DPI aware.
      *
      * <p>This process checks for the DPI when it is created and adjusts the scale factor whenever the DPI changes. These processes are not automatically
@@ -1116,9 +1070,7 @@ public class User32 {
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 RegisterClassEx = apiGetFunctionAddress(USER32, "RegisterClassExW"),
                 UnregisterClass = apiGetFunctionAddress(USER32, "UnregisterClassW"),
@@ -1185,23 +1137,17 @@ public class User32 {
 
     }
 
-    /**
-     * Returns the user32 {@link SharedLibrary}.
-     */
+    /** Returns the user32 {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return USER32;
     }
 
     // --- [ RegisterClassEx ] ---
 
-    /**
-     * Unsafe version of: {@link #RegisterClassEx}
-     */
+    /** Unsafe version of: {@link #RegisterClassEx} */
     public static native short nRegisterClassEx(long lpwcx, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #RegisterClassEx}
-     */
+    /** Unsafe version of: {@link #RegisterClassEx} */
     public static short nRegisterClassEx(long lpwcx) {
         long __functionAddress = Functions.RegisterClassEx;
         if (CHECKS) {
@@ -1222,14 +1168,10 @@ public class User32 {
 
     // --- [ UnregisterClass ] ---
 
-    /**
-     * Unsafe version of: {@link #UnregisterClass}
-     */
+    /** Unsafe version of: {@link #UnregisterClass} */
     public static native int nUnregisterClass(long lpClassName, long hInstance, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #UnregisterClass}
-     */
+    /** Unsafe version of: {@link #UnregisterClass} */
     public static int nUnregisterClass(long lpClassName, long hInstance) {
         long __functionAddress = Functions.UnregisterClass;
         return nUnregisterClass(lpClassName, hInstance, __functionAddress);
@@ -1276,14 +1218,10 @@ public class User32 {
 
     // --- [ CreateWindowEx ] ---
 
-    /**
-     * Unsafe version of: {@link #CreateWindowEx}
-     */
+    /** Unsafe version of: {@link #CreateWindowEx} */
     public static native long nCreateWindowEx(int dwExStyle, long lpClassName, long lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, long hWndParent, long hMenu, long hInstance, long lpParam, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #CreateWindowEx}
-     */
+    /** Unsafe version of: {@link #CreateWindowEx} */
     public static long nCreateWindowEx(int dwExStyle, long lpClassName, long lpWindowName, int dwStyle, int x, int y, int nWidth, int nHeight, long hWndParent, long hMenu, long hInstance, long lpParam) {
         long __functionAddress = Functions.CreateWindowEx;
         return nCreateWindowEx(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam, __functionAddress);
@@ -1395,9 +1333,7 @@ public class User32 {
 
     // --- [ CallWindowProc ] ---
 
-    /**
-     * Unsafe version of: {@link #CallWindowProc}
-     */
+    /** Unsafe version of: {@link #CallWindowProc} */
     public static long nCallWindowProc(long lpPrevWndFunc, long hWnd, int Msg, long wParam, long lParam) {
         long __functionAddress = Functions.CallWindowProc;
         if (CHECKS) {
@@ -1462,9 +1398,7 @@ public class User32 {
 
     // --- [ SetWindowPos ] ---
 
-    /**
-     * Unsafe version of: {@link #SetWindowPos}
-     */
+    /** Unsafe version of: {@link #SetWindowPos} */
     public static native int nSetWindowPos(long hWnd, long hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags, long __functionAddress);
 
     /**
@@ -1490,14 +1424,10 @@ public class User32 {
 
     // --- [ SetWindowText ] ---
 
-    /**
-     * Unsafe version of: {@link #SetWindowText}
-     */
+    /** Unsafe version of: {@link #SetWindowText} */
     public static native int nSetWindowText(long hWnd, long lpString, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #SetWindowText}
-     */
+    /** Unsafe version of: {@link #SetWindowText} */
     public static int nSetWindowText(long hWnd, long lpString) {
         long __functionAddress = Functions.SetWindowText;
         if (CHECKS) {
@@ -1543,14 +1473,10 @@ public class User32 {
 
     // --- [ GetMessage ] ---
 
-    /**
-     * Unsafe version of: {@link #GetMessage}
-     */
+    /** Unsafe version of: {@link #GetMessage} */
     public static native int nGetMessage(long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #GetMessage}
-     */
+    /** Unsafe version of: {@link #GetMessage} */
     public static int nGetMessage(long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax) {
         long __functionAddress = Functions.GetMessage;
         return nGetMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, __functionAddress);
@@ -1579,9 +1505,7 @@ public class User32 {
 
     // --- [ PeekMessage ] ---
 
-    /**
-     * Unsafe version of: {@link #PeekMessage}
-     */
+    /** Unsafe version of: {@link #PeekMessage} */
     public static int nPeekMessage(long lpMsg, long hWnd, int wMsgFilterMin, int wMsgFilterMax, int wRemoveMsg) {
         long __functionAddress = Functions.PeekMessage;
         return callPPI(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg, __functionAddress);
@@ -1610,9 +1534,7 @@ public class User32 {
 
     // --- [ TranslateMessage ] ---
 
-    /**
-     * Unsafe version of: {@link #TranslateMessage}
-     */
+    /** Unsafe version of: {@link #TranslateMessage} */
     public static int nTranslateMessage(long lpMsg) {
         long __functionAddress = Functions.TranslateMessage;
         return callPI(lpMsg, __functionAddress);
@@ -1632,9 +1554,7 @@ public class User32 {
 
     // --- [ WaitMessage ] ---
 
-    /**
-     * Unsafe version of: {@link #WaitMessage}
-     */
+    /** Unsafe version of: {@link #WaitMessage} */
     public static native int nWaitMessage(long __functionAddress);
 
     /**
@@ -1649,9 +1569,7 @@ public class User32 {
 
     // --- [ DispatchMessage ] ---
 
-    /**
-     * Unsafe version of: {@link #DispatchMessage}
-     */
+    /** Unsafe version of: {@link #DispatchMessage} */
     public static long nDispatchMessage(long lpmsg) {
         long __functionAddress = Functions.DispatchMessage;
         return callPP(lpmsg, __functionAddress);
@@ -1669,9 +1587,7 @@ public class User32 {
 
     // --- [ PostMessage ] ---
 
-    /**
-     * Unsafe version of: {@link #PostMessage}
-     */
+    /** Unsafe version of: {@link #PostMessage} */
     public static native int nPostMessage(long hWnd, int Msg, long wParam, long lParam, long __functionAddress);
 
     /**
@@ -1697,9 +1613,7 @@ public class User32 {
 
     // --- [ SendMessage ] ---
 
-    /**
-     * Unsafe version of: {@link #SendMessage}
-     */
+    /** Unsafe version of: {@link #SendMessage} */
     public static native int nSendMessage(long hWnd, int Msg, long wParam, long lParam, long __functionAddress);
 
     /**
@@ -1727,14 +1641,10 @@ public class User32 {
 
     // --- [ AdjustWindowRectEx ] ---
 
-    /**
-     * Unsafe version of: {@link #AdjustWindowRectEx}
-     */
+    /** Unsafe version of: {@link #AdjustWindowRectEx} */
     public static native int nAdjustWindowRectEx(long lpRect, int dwStyle, int bMenu, int dwExStyle, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #AdjustWindowRectEx}
-     */
+    /** Unsafe version of: {@link #AdjustWindowRectEx} */
     public static int nAdjustWindowRectEx(long lpRect, int dwStyle, int bMenu, int dwExStyle) {
         long __functionAddress = Functions.AdjustWindowRectEx;
         return nAdjustWindowRectEx(lpRect, dwStyle, bMenu, dwExStyle, __functionAddress);
@@ -1758,14 +1668,10 @@ public class User32 {
 
     // --- [ GetWindowRect ] ---
 
-    /**
-     * Unsafe version of: {@link #GetWindowRect}
-     */
+    /** Unsafe version of: {@link #GetWindowRect} */
     public static native int nGetWindowRect(long hWnd, long lpRect, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #GetWindowRect}
-     */
+    /** Unsafe version of: {@link #GetWindowRect} */
     public static int nGetWindowRect(long hWnd, long lpRect) {
         long __functionAddress = Functions.GetWindowRect;
         if (CHECKS) {
@@ -1788,9 +1694,7 @@ public class User32 {
 
     // --- [ MoveWindow ] ---
 
-    /**
-     * Unsafe version of: {@link #MoveWindow}
-     */
+    /** Unsafe version of: {@link #MoveWindow} */
     public static native int nMoveWindow(long hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint, long __functionAddress);
 
     /**
@@ -1817,14 +1721,10 @@ public class User32 {
 
     // --- [ GetWindowPlacement ] ---
 
-    /**
-     * Unsafe version of: {@link #GetWindowPlacement}
-     */
+    /** Unsafe version of: {@link #GetWindowPlacement} */
     public static native int nGetWindowPlacement(long hWnd, long lpwndpl, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #GetWindowPlacement}
-     */
+    /** Unsafe version of: {@link #GetWindowPlacement} */
     public static int nGetWindowPlacement(long hWnd, long lpwndpl) {
         long __functionAddress = Functions.GetWindowPlacement;
         if (CHECKS) {
@@ -1849,14 +1749,10 @@ public class User32 {
 
     // --- [ SetWindowPlacement ] ---
 
-    /**
-     * Unsafe version of: {@link #SetWindowPlacement}
-     */
+    /** Unsafe version of: {@link #SetWindowPlacement} */
     public static native int nSetWindowPlacement(long hWnd, long lpwndpl, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #SetWindowPlacement}
-     */
+    /** Unsafe version of: {@link #SetWindowPlacement} */
     public static int nSetWindowPlacement(long hWnd, long lpwndpl) {
         long __functionAddress = Functions.SetWindowPlacement;
         if (CHECKS) {
@@ -1946,9 +1842,7 @@ public class User32 {
 
     // --- [ SetWindowLongPtr ] ---
 
-    /**
-     * Unsafe version of: {@link #SetWindowLongPtr}
-     */
+    /** Unsafe version of: {@link #SetWindowLongPtr} */
     public static native long nSetWindowLongPtr(long hWnd, int nIndex, long dwNewLong, long __functionAddress);
 
     /**
@@ -1958,6 +1852,7 @@ public class User32 {
      * @param nIndex    the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
      *                  of an integer. To set any other value, specify one of:<br><table><tr><td>{@link #GWL_WNDPROC}</td><td>{@link #GWL_HINSTANCE}</td><td>{@link #GWL_HWNDPARENT}</td><td>{@link #GWL_STYLE}</td><td>{@link #GWL_EXSTYLE}</td><td>{@link #GWL_USERDATA}</td><td>{@link #GWL_ID}</td></tr></table>
      * @param dwNewLong the replacement value
+     *
      * @return the previous value at the given {@code index}
      */
     @NativeType("LONG_PTR")
@@ -1971,9 +1866,7 @@ public class User32 {
 
     // --- [ GetWindowLongPtr ] ---
 
-    /**
-     * Unsafe version of: {@link #GetWindowLongPtr}
-     */
+    /** Unsafe version of: {@link #GetWindowLongPtr} */
     public static native long nGetWindowLongPtr(long hWnd, int nIndex, long __functionAddress);
 
     /**
@@ -1994,9 +1887,7 @@ public class User32 {
 
     // --- [ SetClassLongPtr ] ---
 
-    /**
-     * Unsafe version of: {@link #SetClassLongPtr}
-     */
+    /** Unsafe version of: {@link #SetClassLongPtr} */
     public static native long nSetClassLongPtr(long hWnd, int nIndex, long dwNewLong, long __functionAddress);
 
     /**
@@ -2008,9 +1899,10 @@ public class User32 {
      *                  values are in the range zero through the number of bytes of extra class memory, minus eight; for example, if you specified 24 or more bytes of
      *                  extra class memory, a value of 16 would be an index to the third integer. To set a value other than the {@link WNDCLASSEX} structure, specify one of:<br><table><tr><td>{@link #GCL_MENUNAME}</td><td>{@link #GCL_HBRBACKGROUND}</td><td>{@link #GCL_HCURSOR}</td><td>{@link #GCL_HICON}</td><td>{@link #GCL_HMODULE}</td><td>{@link #GCL_CBWNDEXTRA}</td></tr><tr><td>{@link #GCL_CBCLSEXTRA}</td><td>{@link #GCL_WNDPROC}</td><td>{@link #GCL_STYLE}</td><td>{@link #GCW_ATOM}</td><td>{@link #GCL_HICONSM}</td></tr></table>
      * @param dwNewLong the replacement value
-     * @return if the function succeeds, the return value is the previous value of the specified offset. If this was not previously set, the return value is zero.
      *
-     * <p>If the function fails, the return value is zero. To get extended error information, call {@link WinBase#getLastError}.</p>
+     * @return if the function succeeds, the return value is the previous value of the specified offset. If this was not previously set, the return value is zero.
+     *         
+     *         <p>If the function fails, the return value is zero. To get extended error information, call {@link WinBase#getLastError}.</p>
      */
     @NativeType("LONG_PTR")
     public static long SetClassLongPtr(@NativeType("HWND") long hWnd, int nIndex, @NativeType("LONG_PTR") long dwNewLong) {
@@ -2023,9 +1915,7 @@ public class User32 {
 
     // --- [ GetClassLongPtr ] ---
 
-    /**
-     * Unsafe version of: {@link #GetClassLongPtr}
-     */
+    /** Unsafe version of: {@link #GetClassLongPtr} */
     public static native long nGetClassLongPtr(long hWnd, int nIndex, long __functionAddress);
 
     /**
@@ -2048,9 +1938,7 @@ public class User32 {
 
     // --- [ SetLayeredWindowAttributes ] ---
 
-    /**
-     * Unsafe version of: {@link #SetLayeredWindowAttributes}
-     */
+    /** Unsafe version of: {@link #SetLayeredWindowAttributes} */
     public static native int nSetLayeredWindowAttributes(long hwnd, int crKey, byte bAlpha, int dwFlags, long __functionAddress);
 
     /**
@@ -2073,14 +1961,10 @@ public class User32 {
 
     // --- [ LoadIcon ] ---
 
-    /**
-     * Unsafe version of: {@link #LoadIcon}
-     */
+    /** Unsafe version of: {@link #LoadIcon} */
     public static native long nLoadIcon(long instance, long iconName, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #LoadIcon}
-     */
+    /** Unsafe version of: {@link #LoadIcon} */
     public static long nLoadIcon(long instance, long iconName) {
         long __functionAddress = Functions.LoadIcon;
         return nLoadIcon(instance, iconName, __functionAddress);
@@ -2123,14 +2007,10 @@ public class User32 {
 
     // --- [ LoadCursor ] ---
 
-    /**
-     * Unsafe version of: {@link #LoadCursor}
-     */
+    /** Unsafe version of: {@link #LoadCursor} */
     public static native long nLoadCursor(long instance, long cursorName, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #LoadCursor}
-     */
+    /** Unsafe version of: {@link #LoadCursor} */
     public static long nLoadCursor(long instance, long cursorName) {
         long __functionAddress = Functions.LoadCursor;
         return nLoadCursor(instance, cursorName, __functionAddress);
@@ -2232,6 +2112,7 @@ public class User32 {
      * @param hWnd    the handle of the window being registered. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified
      *                window.
      * @param ulFlags a set of bit flags that specify optional modifications. This field may contain 0 or one or more of:<br><table><tr><td>{@link #TWF_FINETOUCH}</td><td>{@link #TWF_WANTPALM}</td></tr></table>
+     *
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
@@ -2246,15 +2127,14 @@ public class User32 {
 
     // --- [ UnregisterTouchWindow ] ---
 
-    /**
-     * Unsafe version of: {@link #UnregisterTouchWindow}
-     */
+    /** Unsafe version of: {@link #UnregisterTouchWindow} */
     public static native int nUnregisterTouchWindow(long hWnd, long __functionAddress);
 
     /**
      * Registers a window as no longer being touch-capable.
      *
      * @param hWnd the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified window.
+     *
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
@@ -2269,9 +2149,7 @@ public class User32 {
 
     // --- [ IsTouchWindow ] ---
 
-    /**
-     * Unsafe version of: {@link #IsTouchWindow}
-     */
+    /** Unsafe version of: {@link #IsTouchWindow} */
     public static int nIsTouchWindow(long hWnd, long pulFlags) {
         long __functionAddress = Functions.IsTouchWindow;
         if (CHECKS) {
@@ -2287,6 +2165,7 @@ public class User32 {
      * @param hWnd     the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread is not on the same desktop as the specified
      *                 window.
      * @param pulFlags an optional address of the {@code ULONG} variable to receive the modifier flags for the specified window's touch capability.
+     *
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
@@ -2333,6 +2212,7 @@ public class User32 {
      * @param pInputs     a pointer to an array of {@link TOUCHINPUT} structures to receive information about the touch points associated with the specified touch input handle
      * @param cbSize      the size, in bytes, of a single {@link TOUCHINPUT} structure. If {@code cbSize} is not the size of a single {@code TOUCHINPUT} structure, the function
      *                    fails with {@code ERROR_INVALID_PARAMETER}.
+     *
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
@@ -2342,9 +2222,7 @@ public class User32 {
 
     // --- [ CloseTouchInputHandle ] ---
 
-    /**
-     * Unsafe version of: {@link #CloseTouchInputHandle}
-     */
+    /** Unsafe version of: {@link #CloseTouchInputHandle} */
     public static native int nCloseTouchInputHandle(long hTouchInput, long __functionAddress);
 
     /**
@@ -2353,6 +2231,7 @@ public class User32 {
      * @param hTouchInput the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
      *                    not valid. Note that the handle is not valid after it has been used in a successful call to {@link #CloseTouchInputHandle} or after it has been passed to
      *                    {@link #DefWindowProc}, {@link #PostMessage}, {@link #SendMessage} or one of their variants.
+     *
      * @since Windows 7 (desktop apps only)
      */
     @NativeType("BOOL")
@@ -2384,9 +2263,7 @@ public class User32 {
 
     // --- [ GetMonitorInfo ] ---
 
-    /**
-     * Unsafe version of: {@link #GetMonitorInfo}
-     */
+    /** Unsafe version of: {@link #GetMonitorInfo} */
     public static int nGetMonitorInfo(long hMonitor, long lpmi) {
         long __functionAddress = Functions.GetMonitorInfo;
         if (CHECKS) {
@@ -2411,9 +2288,7 @@ public class User32 {
 
     // --- [ EnumDisplayDevices ] ---
 
-    /**
-     * Unsafe version of: {@link #EnumDisplayDevices}
-     */
+    /** Unsafe version of: {@link #EnumDisplayDevices} */
     public static int nEnumDisplayDevices(long lpDevice, int iDevNum, long lpDisplayDevice, int dwFlags) {
         long __functionAddress = Functions.EnumDisplayDevices;
         return callPPI(lpDevice, iDevNum, lpDisplayDevice, dwFlags, __functionAddress);
@@ -2476,9 +2351,7 @@ public class User32 {
 
     // --- [ EnumDisplaySettingsEx ] ---
 
-    /**
-     * Unsafe version of: {@link #EnumDisplaySettingsEx}
-     */
+    /** Unsafe version of: {@link #EnumDisplaySettingsEx} */
     public static int nEnumDisplaySettingsEx(long lpszDeviceName, int iModeNum, long lpDevMode, int dwFlags) {
         long __functionAddress = Functions.EnumDisplaySettingsEx;
         return callPPI(lpszDeviceName, iModeNum, lpDevMode, dwFlags, __functionAddress);
@@ -2561,9 +2434,7 @@ public class User32 {
 
     // --- [ ChangeDisplaySettingsEx ] ---
 
-    /**
-     * Unsafe version of: {@link #ChangeDisplaySettingsEx}
-     */
+    /** Unsafe version of: {@link #ChangeDisplaySettingsEx} */
     public static int nChangeDisplaySettingsEx(long lpszDeviceName, long lpDevMode, long hwnd, int dwflags, long lParam) {
         long __functionAddress = Functions.ChangeDisplaySettingsEx;
         return callPPPPI(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam, __functionAddress);
@@ -2586,6 +2457,7 @@ public class User32 {
      * @param hwnd           reserved; must be {@code NULL}
      * @param dwflags        indicates how the graphics mode should be changed. One of:<br><table><tr><td>{@link #CDS_UPDATEREGISTRY}</td><td>{@link #CDS_TEST}</td><td>{@link #CDS_FULLSCREEN}</td><td>{@link #CDS_GLOBAL}</td><td>{@link #CDS_SET_PRIMARY}</td></tr><tr><td>{@link #CDS_VIDEOPARAMETERS}</td><td>{@link #CDS_ENABLE_UNSAFE_MODES}</td><td>{@link #CDS_DISABLE_UNSAFE_MODES}</td><td>{@link #CDS_RESET}</td><td>{@link #CDS_RESET_EX}</td></tr><tr><td>{@link #CDS_NORESET}</td></tr></table>
      * @param lParam         if {@code flags} is {@link #CDS_VIDEOPARAMETERS}, {@code lParam} is a pointer to a {@code VIDEOPARAMETERS} structure. Otherwise {@code lParam} must be {@code NULL}.
+     *
      * @return one of the following values: {@link #DISP_CHANGE_SUCCESSFUL} {@link #DISP_CHANGE_RESTART} {@link #DISP_CHANGE_FAILED} {@link #DISP_CHANGE_BADMODE} {@link #DISP_CHANGE_NOTUPDATED} {@link #DISP_CHANGE_BADFLAGS} {@link #DISP_CHANGE_BADPARAM} {@link #DISP_CHANGE_BADDUALVIEW}
      */
     @NativeType("LONG")
@@ -2613,6 +2485,7 @@ public class User32 {
      * @param hwnd           reserved; must be {@code NULL}
      * @param dwflags        indicates how the graphics mode should be changed. One of:<br><table><tr><td>{@link #CDS_UPDATEREGISTRY}</td><td>{@link #CDS_TEST}</td><td>{@link #CDS_FULLSCREEN}</td><td>{@link #CDS_GLOBAL}</td><td>{@link #CDS_SET_PRIMARY}</td></tr><tr><td>{@link #CDS_VIDEOPARAMETERS}</td><td>{@link #CDS_ENABLE_UNSAFE_MODES}</td><td>{@link #CDS_DISABLE_UNSAFE_MODES}</td><td>{@link #CDS_RESET}</td><td>{@link #CDS_RESET_EX}</td></tr><tr><td>{@link #CDS_NORESET}</td></tr></table>
      * @param lParam         if {@code flags} is {@link #CDS_VIDEOPARAMETERS}, {@code lParam} is a pointer to a {@code VIDEOPARAMETERS} structure. Otherwise {@code lParam} must be {@code NULL}.
+     *
      * @return one of the following values: {@link #DISP_CHANGE_SUCCESSFUL} {@link #DISP_CHANGE_RESTART} {@link #DISP_CHANGE_FAILED} {@link #DISP_CHANGE_BADMODE} {@link #DISP_CHANGE_NOTUPDATED} {@link #DISP_CHANGE_BADFLAGS} {@link #DISP_CHANGE_BADPARAM} {@link #DISP_CHANGE_BADDUALVIEW}
      */
     @NativeType("LONG")
@@ -2630,9 +2503,7 @@ public class User32 {
 
     // --- [ GetCursorPos ] ---
 
-    /**
-     * Unsafe version of: {@link #GetCursorPos}
-     */
+    /** Unsafe version of: {@link #GetCursorPos} */
     public static int nGetCursorPos(long point) {
         long __functionAddress = Functions.GetCursorPos;
         return callPI(point, __functionAddress);
@@ -2665,9 +2536,7 @@ public class User32 {
 
     // --- [ ClipCursor ] ---
 
-    /**
-     * Unsafe version of: {@link #ClipCursor}
-     */
+    /** Unsafe version of: {@link #ClipCursor} */
     public static int nClipCursor(long rect) {
         long __functionAddress = Functions.ClipCursor;
         return callPI(rect, __functionAddress);
@@ -2694,6 +2563,7 @@ public class User32 {
      * count is greater than or equal to 0. If a mouse is installed, the initial display count is 0. If no mouse is installed, the display count is –1.</p>
      *
      * @param show If {@code show} is {@link WinBase#TRUE}, the display count is incremented by one. If {@code show} is {@link WinBase#FALSE}, the display count is decremented by one.
+     *
      * @return the new display counter
      */
     public static int ShowCursor(@NativeType("BOOL") boolean show) {
@@ -2720,6 +2590,7 @@ public class User32 {
      *
      * @param hCursor a handle to the cursor. The cursor must have been created by the {@code CreateCursor} function or loaded by the {@link #LoadCursor} or {@code LoadImage}
      *                function. If this parameter is {@code NULL}, the cursor is removed from the screen.
+     *
      * @return the handle to the previous cursor, if there was one
      */
     @NativeType("HCURSOR")
@@ -2730,9 +2601,7 @@ public class User32 {
 
     // --- [ ClientToScreen ] ---
 
-    /**
-     * Unsafe version of: {@link #ClientToScreen}
-     */
+    /** Unsafe version of: {@link #ClientToScreen} */
     public static int nClientToScreen(long hWnd, long lpPoint) {
         long __functionAddress = Functions.ClientToScreen;
         if (CHECKS) {
@@ -2780,16 +2649,17 @@ public class User32 {
      * SHIFT, CTRL, or ALT keys without distinguishing between left and right.</p>
      *
      * @param vKey the virtual-key code. You can use left- and right-distinguishing constants to specify certain keys.
+     *
      * @return if the function succeeds, the return value specifies whether the key was pressed since the last call to {@code GetAsyncKeyState}, and whether the key
-     * is currently up or down. If the most significant bit is set, the key is down, and if the least significant bit is set, the key was pressed after the
-     * previous call to {@code GetAsyncKeyState}. However, you should not rely on this last behavior; for more information, see the Remarks.
+     *         is currently up or down. If the most significant bit is set, the key is down, and if the least significant bit is set, the key was pressed after the
+     *         previous call to {@code GetAsyncKeyState}. However, you should not rely on this last behavior; for more information, see the Remarks.
      *
-     * <p>The return value is zero for the following cases:</p>
+     *         <p>The return value is zero for the following cases:</p>
      *
-     * <ul>
-     * <li>The current desktop is not the active desktop</li>
-     * <li>The foreground thread belongs to another process and the desktop does not allow the hook or the journal record.</li>
-     * </ul>
+     *         <ul>
+     *         <li>The current desktop is not the active desktop</li>
+     *         <li>The foreground thread belongs to another process and the desktop does not allow the hook or the journal record.</li>
+     *         </ul>
      */
     @NativeType("SHORT")
     public static short GetAsyncKeyState(int vKey) {
@@ -2844,11 +2714,12 @@ public class User32 {
      *
      * @param pInputs an array of {@code INPUT} structures. Each structure represents an event to be inserted into the keyboard or mouse input stream.
      * @param cbSize  the size, in bytes, of an {@code INPUT} structure. If {@code cbSiz}e is not the size of an {@code INPUT} structure, the function fails.
-     * @return the number of events that it successfully inserted into the keyboard or mouse input stream. If the function returns zero, the input was already blocked
-     * by another thread. To get extended error information, call {@link WinBase#GetLastError}.
      *
-     * <p>This function fails when it is blocked by UIPI. Note that neither GetLastError nor the return value will indicate the failure was caused by UIPI
-     * blocking.</p>
+     * @return the number of events that it successfully inserted into the keyboard or mouse input stream. If the function returns zero, the input was already blocked
+     *         by another thread. To get extended error information, call {@link WinBase#GetLastError}.
+     *         
+     *         <p>This function fails when it is blocked by UIPI. Note that neither GetLastError nor the return value will indicate the failure was caused by UIPI
+     *         blocking.</p>
      */
     @NativeType("UINT")
     public static int SendInput(@NativeType("PINPUT") INPUT.Buffer pInputs, int cbSize) {
@@ -2863,10 +2734,11 @@ public class User32 {
      * <p>The return value will be dependent based upon the calling context. If the current thread has a {@code DPI_AWARENESS} value of {@link #DPI_AWARENESS_UNAWARE},
      * the return value will be 96. That is because the current context always assumes a DPI of 96. For any other {@code DPI_AWARENESS} value, the return
      * value will be the actual system DPI.</p>
-     *
+     * 
      * <p>You should not cache the system DPI, but should use {@code GetDpiForSystem} whenever you need the system DPI value.</p>
      *
      * @return the system DPI value
+     *
      * @since Windows 10
      */
     @NativeType("UINT")
@@ -2884,7 +2756,9 @@ public class User32 {
      * Returns the dots per inch (dpi) value for the associated window.
      *
      * @param hwnd the window you want to get information about
+     *
      * @return the DPI for the window which depends on the {@code DPI_AWARENESS} of the window. An invalid {@code hwnd} value will result in a return value of 0.
+     *
      * @since Windows 10
      */
     @NativeType("UINT")
@@ -2903,7 +2777,9 @@ public class User32 {
      * Retrieves the {@code DPI_AWARENESS} value from a {@code DPI_AWARENESS_CONTEXT}.
      *
      * @param value the {@code DPI_AWARENESS_CONTEXT} you want to examine
+     *
      * @return the {@code DPI_AWARENESS}. If the provided value is null or invalid, this method will return {@link #DPI_AWARENESS_INVALID}.
+     *
      * @since Windows 10
      */
     @NativeType("DPI_AWARENESS")
@@ -2925,6 +2801,7 @@ public class User32 {
      * process.</p>
      *
      * @return the current {@code DPI_AWARENESS_CONTEXT} for the thread.
+     *
      * @since Windows 10
      */
     @NativeType("DPI_AWARENESS_CONTEXT")
@@ -2942,7 +2819,9 @@ public class User32 {
      * Returns the {@code DPI_AWARENESS_CONTEXT}  associated with a window.
      *
      * @param hwnd the window to query
+     *
      * @return the {@code DPI_AWARENESS_CONTEXT} for the provided window. If the window is not valid, the return value is {@code NULL}.
+     *
      * @since Windows 10
      */
     @NativeType("DPI_AWARENESS_CONTEXT")
@@ -2961,7 +2840,9 @@ public class User32 {
      * Determines if a specified {@code DPI_AWARENESS_CONTEXT} is valid and supported by the current system.
      *
      * @param value the context that you want to determine if it is supported
+     *
      * @return {@link WinBase#TRUE} if the provided context is supported, otherwise {@link WinBase#FALSE}
+     *
      * @since Windows 10
      */
     @NativeType("BOOL")
@@ -2979,8 +2860,10 @@ public class User32 {
      * Set the DPI awareness for the current thread to the provided value.
      *
      * @param dpiContext the DPI awareness value to set
+     *
      * @return The old {@code DPI_AWARENESS_CONTEXT} for the thread. If the {@code dpiContext} is invalid, the thread will not be updated and the return value will be
-     * {@code NULL}. You can use this value to restore the old {@code DPI_AWARENESS_CONTEXT} after overriding it with a predefined value.
+     *         {@code NULL}. You can use this value to restore the old {@code DPI_AWARENESS_CONTEXT} after overriding it with a predefined value.
+     *
      * @since Windows 10
      */
     @NativeType("DPI_AWARENESS_CONTEXT")
@@ -2993,9 +2876,7 @@ public class User32 {
         return callPP(dpiContext, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #IsTouchWindow}
-     */
+    /** Array version of: {@link #IsTouchWindow} */
     @NativeType("BOOL")
     public static boolean IsTouchWindow(@NativeType("HWND") long hWnd, @Nullable @NativeType("PULONG") int[] pulFlags) {
         long __functionAddress = Functions.IsTouchWindow;

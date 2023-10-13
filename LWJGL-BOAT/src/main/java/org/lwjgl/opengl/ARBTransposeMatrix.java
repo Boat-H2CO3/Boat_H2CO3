@@ -5,16 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transpose_matrix.txt">ARB_transpose_matrix</a> extension.
@@ -31,9 +28,7 @@ import java.nio.FloatBuffer;
  */
 public class ARBTransposeMatrix {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_TRANSPOSE_MODELVIEW_MATRIX_ARB = 0x84E3,
             GL_TRANSPOSE_PROJECTION_MATRIX_ARB = 0x84E4,
@@ -56,9 +51,7 @@ public class ARBTransposeMatrix {
 
     // --- [ glLoadTransposeMatrixfARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glLoadTransposeMatrixfARB LoadTransposeMatrixfARB}
-     */
+    /** Unsafe version of: {@link #glLoadTransposeMatrixfARB LoadTransposeMatrixfARB} */
     public static native void nglLoadTransposeMatrixfARB(long m);
 
     /**
@@ -84,9 +77,7 @@ public class ARBTransposeMatrix {
 
     // --- [ glLoadTransposeMatrixdARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glLoadTransposeMatrixdARB LoadTransposeMatrixdARB}
-     */
+    /** Unsafe version of: {@link #glLoadTransposeMatrixdARB LoadTransposeMatrixdARB} */
     public static native void nglLoadTransposeMatrixdARB(long m);
 
     /**
@@ -103,9 +94,7 @@ public class ARBTransposeMatrix {
 
     // --- [ glMultTransposeMatrixfARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultTransposeMatrixfARB MultTransposeMatrixfARB}
-     */
+    /** Unsafe version of: {@link #glMultTransposeMatrixfARB MultTransposeMatrixfARB} */
     public static native void nglMultTransposeMatrixfARB(long m);
 
     /**
@@ -122,9 +111,7 @@ public class ARBTransposeMatrix {
 
     // --- [ glMultTransposeMatrixdARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glMultTransposeMatrixdARB MultTransposeMatrixdARB}
-     */
+    /** Unsafe version of: {@link #glMultTransposeMatrixdARB MultTransposeMatrixdARB} */
     public static native void nglMultTransposeMatrixdARB(long m);
 
     /**
@@ -139,9 +126,7 @@ public class ARBTransposeMatrix {
         nglMultTransposeMatrixdARB(memAddress(m));
     }
 
-    /**
-     * Array version of: {@link #glLoadTransposeMatrixfARB LoadTransposeMatrixfARB}
-     */
+    /** Array version of: {@link #glLoadTransposeMatrixfARB LoadTransposeMatrixfARB} */
     public static void glLoadTransposeMatrixfARB(@NativeType("GLfloat const *") float[] m) {
         long __functionAddress = GL.getICD().glLoadTransposeMatrixfARB;
         if (CHECKS) {
@@ -151,9 +136,7 @@ public class ARBTransposeMatrix {
         callPV(m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glLoadTransposeMatrixdARB LoadTransposeMatrixdARB}
-     */
+    /** Array version of: {@link #glLoadTransposeMatrixdARB LoadTransposeMatrixdARB} */
     public static void glLoadTransposeMatrixdARB(@NativeType("GLdouble const *") double[] m) {
         long __functionAddress = GL.getICD().glLoadTransposeMatrixdARB;
         if (CHECKS) {
@@ -163,9 +146,7 @@ public class ARBTransposeMatrix {
         callPV(m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultTransposeMatrixfARB MultTransposeMatrixfARB}
-     */
+    /** Array version of: {@link #glMultTransposeMatrixfARB MultTransposeMatrixfARB} */
     public static void glMultTransposeMatrixfARB(@NativeType("GLfloat const *") float[] m) {
         long __functionAddress = GL.getICD().glMultTransposeMatrixfARB;
         if (CHECKS) {
@@ -175,9 +156,7 @@ public class ARBTransposeMatrix {
         callPV(m, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glMultTransposeMatrixdARB MultTransposeMatrixdARB}
-     */
+    /** Array version of: {@link #glMultTransposeMatrixdARB MultTransposeMatrixdARB} */
     public static void glMultTransposeMatrixdARB(@NativeType("GLdouble const *") double[] m) {
         long __functionAddress = GL.getICD().glMultTransposeMatrixdARB;
         if (CHECKS) {

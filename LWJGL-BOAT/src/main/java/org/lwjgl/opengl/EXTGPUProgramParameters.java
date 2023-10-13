@@ -55,9 +55,7 @@ public class EXTGPUProgramParameters {
         nglProgramLocalParameters4fvEXT(target, index, params.remaining() >> 2, memAddress(params));
     }
 
-    /**
-     * Array version of: {@link #glProgramEnvParameters4fvEXT ProgramEnvParameters4fvEXT}
-     */
+    /** Array version of: {@link #glProgramEnvParameters4fvEXT ProgramEnvParameters4fvEXT} */
     public static void glProgramEnvParameters4fvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glProgramEnvParameters4fvEXT;
         if (CHECKS) {
@@ -66,9 +64,7 @@ public class EXTGPUProgramParameters {
         callPV(target, index, params.length >> 2, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramLocalParameters4fvEXT ProgramLocalParameters4fvEXT}
-     */
+    /** Array version of: {@link #glProgramLocalParameters4fvEXT ProgramLocalParameters4fvEXT} */
     public static void glProgramLocalParameters4fvEXT(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glProgramLocalParameters4fvEXT;
         if (CHECKS) {

@@ -15,13 +15,13 @@ import static org.lwjgl.system.boat.DynamicLinkLoader.*;
 /**
  * Implements a {@link SharedLibrary} on the Linux OS.
  */
-public class BoatLibrary extends SharedLibrary.Default {
+public class H2CO3BoatLibrary extends SharedLibrary.Default {
 
-    public BoatLibrary(String name) {
+    public H2CO3BoatLibrary(String name) {
         this(name, loadLibrary(name));
     }
 
-    public BoatLibrary(String name, long handle) {
+    public H2CO3BoatLibrary(String name, long handle) {
         super(name, handle);
     }
 

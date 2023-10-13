@@ -91,9 +91,7 @@ public class GL33C extends GL32C {
      */
     public static final int GL_TIMESTAMP = 0x8E28;
 
-    /**
-     * Accepted by the {@code pname} parameters of GetVertexAttribdv, GetVertexAttribfv, and GetVertexAttribiv.
-     */
+    /** Accepted by the {@code pname} parameters of GetVertexAttribdv, GetVertexAttribfv, and GetVertexAttribiv. */
     public static final int GL_VERTEX_ATTRIB_ARRAY_DIVISOR = 0x88FE;
 
     /**
@@ -102,9 +100,7 @@ public class GL33C extends GL32C {
      */
     public static final int GL_INT_2_10_10_10_REV = 0x8D9F;
 
-    static {
-        GL.initialize();
-    }
+    static { GL.initialize(); }
 
     protected GL33C() {
         throw new UnsupportedOperationException();
@@ -112,9 +108,7 @@ public class GL33C extends GL32C {
 
     // --- [ glBindFragDataLocationIndexed ] ---
 
-    /**
-     * Unsafe version of: {@link #glBindFragDataLocationIndexed BindFragDataLocationIndexed}
-     */
+    /** Unsafe version of: {@link #glBindFragDataLocationIndexed BindFragDataLocationIndexed} */
     public static native void nglBindFragDataLocationIndexed(int program, int colorNumber, int index, long name);
 
     /**
@@ -124,6 +118,7 @@ public class GL33C extends GL32C {
      * @param colorNumber the color number to bind the user-defined varying out variable to
      * @param index       the index of the color input to bind the user-defined varying out variable to
      * @param name        the name of the user-defined varying out variable whose binding to modify
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindFragDataLocationIndexed">Reference Page</a>
      */
     public static void glBindFragDataLocationIndexed(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLuint") int index, @NativeType("GLchar const *") ByteBuffer name) {
@@ -140,6 +135,7 @@ public class GL33C extends GL32C {
      * @param colorNumber the color number to bind the user-defined varying out variable to
      * @param index       the index of the color input to bind the user-defined varying out variable to
      * @param name        the name of the user-defined varying out variable whose binding to modify
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindFragDataLocationIndexed">Reference Page</a>
      */
     public static void glBindFragDataLocationIndexed(@NativeType("GLuint") int program, @NativeType("GLuint") int colorNumber, @NativeType("GLuint") int index, @NativeType("GLchar const *") CharSequence name) {
@@ -156,9 +152,7 @@ public class GL33C extends GL32C {
 
     // --- [ glGetFragDataIndex ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetFragDataIndex GetFragDataIndex}
-     */
+    /** Unsafe version of: {@link #glGetFragDataIndex GetFragDataIndex} */
     public static native int nglGetFragDataIndex(int program, long name);
 
     /**
@@ -166,6 +160,7 @@ public class GL33C extends GL32C {
      *
      * @param program the name of the program containing varying out variable whose binding to query
      * @param name    the name of the user-defined varying out variable whose index to query
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetFragDataIndex">Reference Page</a>
      */
     @NativeType("GLint")
@@ -181,6 +176,7 @@ public class GL33C extends GL32C {
      *
      * @param program the name of the program containing varying out variable whose binding to query
      * @param name    the name of the user-defined varying out variable whose index to query
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetFragDataIndex">Reference Page</a>
      */
     @NativeType("GLint")
@@ -209,6 +205,7 @@ public class GL33C extends GL32C {
      * Generates sampler object names.
      *
      * @param samplers a buffer in which the generated sampler object names are stored
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGenSamplers">Reference Page</a>
      */
     public static void glGenSamplers(@NativeType("GLuint *") IntBuffer samplers) {
@@ -246,6 +243,7 @@ public class GL33C extends GL32C {
      * Deletes named sampler objects.
      *
      * @param samplers an array of sampler objects to be deleted
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glDeleteSamplers">Reference Page</a>
      */
     public static void glDeleteSamplers(@NativeType("GLuint const *") IntBuffer samplers) {
@@ -274,6 +272,7 @@ public class GL33C extends GL32C {
      * Determines if a name corresponds to a sampler object.
      *
      * @param sampler a value that may be the name of a sampler object
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glIsSampler">Reference Page</a>
      */
     @NativeType("GLboolean")
@@ -286,6 +285,7 @@ public class GL33C extends GL32C {
      *
      * @param unit    the index of the texture unit to which the sampler is bound
      * @param sampler the name of a sampler
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glBindSampler">Reference Page</a>
      */
     public static native void glBindSampler(@NativeType("GLuint") int unit, @NativeType("GLuint") int sampler);
@@ -298,6 +298,7 @@ public class GL33C extends GL32C {
      * @param sampler the sampler object whose parameter to modify
      * @param pname   the symbolic name of a single-valued sampler parameter. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_WRAP_S TEXTURE_WRAP_S}</td><td>{@link GL11#GL_TEXTURE_WRAP_T TEXTURE_WRAP_T}</td><td>{@link GL12#GL_TEXTURE_WRAP_R TEXTURE_WRAP_R}</td><td>{@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER}</td><td>{@link GL11#GL_TEXTURE_MAG_FILTER TEXTURE_MAG_FILTER}</td></tr><tr><td>{@link GL12#GL_TEXTURE_MIN_LOD TEXTURE_MIN_LOD}</td><td>{@link GL12#GL_TEXTURE_MAX_LOD TEXTURE_MAX_LOD}</td><td>{@link GL14#GL_TEXTURE_LOD_BIAS TEXTURE_LOD_BIAS}</td><td>{@link GL14#GL_TEXTURE_COMPARE_MODE TEXTURE_COMPARE_MODE}</td><td>{@link GL14#GL_TEXTURE_COMPARE_FUNC TEXTURE_COMPARE_FUNC}</td></tr></table>
      * @param param   the value of {@code pname}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glSamplerParameteri">Reference Page</a>
      */
     public static native void glSamplerParameteri(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLint") int param);
@@ -310,15 +311,14 @@ public class GL33C extends GL32C {
      * @param sampler the sampler object whose parameter to modify
      * @param pname   the symbolic name of a single-valued sampler parameter
      * @param param   the value of {@code pname}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glSamplerParameterf">Reference Page</a>
      */
     public static native void glSamplerParameterf(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLfloat") float param);
 
     // --- [ glSamplerParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glSamplerParameteriv SamplerParameteriv}
-     */
+    /** Unsafe version of: {@link #glSamplerParameteriv SamplerParameteriv} */
     public static native void nglSamplerParameteriv(int sampler, int pname, long params);
 
     /**
@@ -327,6 +327,7 @@ public class GL33C extends GL32C {
      * @param sampler the sampler object whose parameter to modify
      * @param pname   the symbolic name of a sampler parameter. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_BORDER_COLOR TEXTURE_BORDER_COLOR}</td><td>{@link GL11#GL_TEXTURE_WRAP_S TEXTURE_WRAP_S}</td><td>{@link GL11#GL_TEXTURE_WRAP_T TEXTURE_WRAP_T}</td><td>{@link GL12#GL_TEXTURE_WRAP_R TEXTURE_WRAP_R}</td></tr><tr><td>{@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER}</td><td>{@link GL11#GL_TEXTURE_MAG_FILTER TEXTURE_MAG_FILTER}</td><td>{@link GL12#GL_TEXTURE_MIN_LOD TEXTURE_MIN_LOD}</td><td>{@link GL12#GL_TEXTURE_MAX_LOD TEXTURE_MAX_LOD}</td></tr><tr><td>{@link GL14#GL_TEXTURE_LOD_BIAS TEXTURE_LOD_BIAS}</td><td>{@link GL14#GL_TEXTURE_COMPARE_MODE TEXTURE_COMPARE_MODE}</td><td>{@link GL14#GL_TEXTURE_COMPARE_FUNC TEXTURE_COMPARE_FUNC}</td></tr></table>
      * @param params  an array where the value or values of {@code pname} are stored
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glSamplerParameter">Reference Page</a>
      */
     public static void glSamplerParameteriv(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLint const *") IntBuffer params) {
@@ -338,9 +339,7 @@ public class GL33C extends GL32C {
 
     // --- [ glSamplerParameterfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glSamplerParameterfv SamplerParameterfv}
-     */
+    /** Unsafe version of: {@link #glSamplerParameterfv SamplerParameterfv} */
     public static native void nglSamplerParameterfv(int sampler, int pname, long params);
 
     /**
@@ -349,6 +348,7 @@ public class GL33C extends GL32C {
      * @param sampler the sampler object whose parameter to modify
      * @param pname   the symbolic name of a sampler parameter
      * @param params  an array where the value or values of {@code pname} are stored
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glSamplerParameter">Reference Page</a>
      */
     public static void glSamplerParameterfv(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLfloat const *") FloatBuffer params) {
@@ -360,9 +360,7 @@ public class GL33C extends GL32C {
 
     // --- [ glSamplerParameterIiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glSamplerParameterIiv SamplerParameterIiv}
-     */
+    /** Unsafe version of: {@link #glSamplerParameterIiv SamplerParameterIiv} */
     public static native void nglSamplerParameterIiv(int sampler, int pname, long params);
 
     /**
@@ -371,6 +369,7 @@ public class GL33C extends GL32C {
      * @param sampler the sampler object whose parameter to modify
      * @param pname   the symbolic name of a sampler parameter
      * @param params  an array where the value or values of {@code pname} are stored
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glSamplerParameter">Reference Page</a>
      */
     public static void glSamplerParameterIiv(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLint const *") IntBuffer params) {
@@ -382,9 +381,7 @@ public class GL33C extends GL32C {
 
     // --- [ glSamplerParameterIuiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glSamplerParameterIuiv SamplerParameterIuiv}
-     */
+    /** Unsafe version of: {@link #glSamplerParameterIuiv SamplerParameterIuiv} */
     public static native void nglSamplerParameterIuiv(int sampler, int pname, long params);
 
     /**
@@ -393,6 +390,7 @@ public class GL33C extends GL32C {
      * @param sampler the sampler object whose parameter to modify
      * @param pname   the symbolic name of a sampler parameter
      * @param params  an array where the value or values of {@code pname} are stored
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glSamplerParameter">Reference Page</a>
      */
     public static void glSamplerParameterIuiv(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLuint const *") IntBuffer params) {
@@ -404,9 +402,7 @@ public class GL33C extends GL32C {
 
     // --- [ glGetSamplerParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetSamplerParameteriv GetSamplerParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetSamplerParameteriv GetSamplerParameteriv} */
     public static native void nglGetSamplerParameteriv(int sampler, int pname, long params);
 
     /**
@@ -415,6 +411,7 @@ public class GL33C extends GL32C {
      * @param sampler the name of the sampler object from which to retrieve parameters
      * @param pname   the symbolic name of a sampler parameter. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_WRAP_S TEXTURE_WRAP_S}</td><td>{@link GL11#GL_TEXTURE_WRAP_T TEXTURE_WRAP_T}</td><td>{@link GL12#GL_TEXTURE_WRAP_R TEXTURE_WRAP_R}</td><td>{@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER}</td><td>{@link GL11#GL_TEXTURE_MAG_FILTER TEXTURE_MAG_FILTER}</td></tr><tr><td>{@link GL12#GL_TEXTURE_MIN_LOD TEXTURE_MIN_LOD}</td><td>{@link GL12#GL_TEXTURE_MAX_LOD TEXTURE_MAX_LOD}</td><td>{@link GL14#GL_TEXTURE_LOD_BIAS TEXTURE_LOD_BIAS}</td><td>{@link GL14#GL_TEXTURE_COMPARE_MODE TEXTURE_COMPARE_MODE}</td><td>{@link GL14#GL_TEXTURE_COMPARE_FUNC TEXTURE_COMPARE_FUNC}</td></tr><tr><td>,</td><td>{@link GL11#GL_TEXTURE_BORDER_COLOR TEXTURE_BORDER_COLOR}</td></tr></table>
      * @param params  the sampler parameters
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetSamplerParameter">Reference Page</a>
      */
     public static void glGetSamplerParameteriv(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
@@ -429,6 +426,7 @@ public class GL33C extends GL32C {
      *
      * @param sampler the name of the sampler object from which to retrieve parameters
      * @param pname   the symbolic name of a sampler parameter. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_WRAP_S TEXTURE_WRAP_S}</td><td>{@link GL11#GL_TEXTURE_WRAP_T TEXTURE_WRAP_T}</td><td>{@link GL12#GL_TEXTURE_WRAP_R TEXTURE_WRAP_R}</td><td>{@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER}</td><td>{@link GL11#GL_TEXTURE_MAG_FILTER TEXTURE_MAG_FILTER}</td></tr><tr><td>{@link GL12#GL_TEXTURE_MIN_LOD TEXTURE_MIN_LOD}</td><td>{@link GL12#GL_TEXTURE_MAX_LOD TEXTURE_MAX_LOD}</td><td>{@link GL14#GL_TEXTURE_LOD_BIAS TEXTURE_LOD_BIAS}</td><td>{@link GL14#GL_TEXTURE_COMPARE_MODE TEXTURE_COMPARE_MODE}</td><td>{@link GL14#GL_TEXTURE_COMPARE_FUNC TEXTURE_COMPARE_FUNC}</td></tr><tr><td>,</td><td>{@link GL11#GL_TEXTURE_BORDER_COLOR TEXTURE_BORDER_COLOR}</td></tr></table>
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetSamplerParameter">Reference Page</a>
      */
     @NativeType("void")
@@ -446,9 +444,7 @@ public class GL33C extends GL32C {
 
     // --- [ glGetSamplerParameterfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetSamplerParameterfv GetSamplerParameterfv}
-     */
+    /** Unsafe version of: {@link #glGetSamplerParameterfv GetSamplerParameterfv} */
     public static native void nglGetSamplerParameterfv(int sampler, int pname, long params);
 
     /**
@@ -457,6 +453,7 @@ public class GL33C extends GL32C {
      * @param sampler the name of the sampler object from which to retrieve parameters
      * @param pname   the symbolic name of a sampler parameter
      * @param params  the sampler parameters
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetSamplerParameter">Reference Page</a>
      */
     public static void glGetSamplerParameterfv(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLfloat *") FloatBuffer params) {
@@ -471,6 +468,7 @@ public class GL33C extends GL32C {
      *
      * @param sampler the name of the sampler object from which to retrieve parameters
      * @param pname   the symbolic name of a sampler parameter
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetSamplerParameter">Reference Page</a>
      */
     @NativeType("void")
@@ -488,9 +486,7 @@ public class GL33C extends GL32C {
 
     // --- [ glGetSamplerParameterIiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetSamplerParameterIiv GetSamplerParameterIiv}
-     */
+    /** Unsafe version of: {@link #glGetSamplerParameterIiv GetSamplerParameterIiv} */
     public static native void nglGetSamplerParameterIiv(int sampler, int pname, long params);
 
     /**
@@ -499,6 +495,7 @@ public class GL33C extends GL32C {
      * @param sampler the name of the sampler object from which to retrieve parameters
      * @param pname   the symbolic name of a sampler parameter
      * @param params  the sampler parameters
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetSamplerParameter">Reference Page</a>
      */
     public static void glGetSamplerParameterIiv(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
@@ -513,6 +510,7 @@ public class GL33C extends GL32C {
      *
      * @param sampler the name of the sampler object from which to retrieve parameters
      * @param pname   the symbolic name of a sampler parameter
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetSamplerParameter">Reference Page</a>
      */
     @NativeType("void")
@@ -530,9 +528,7 @@ public class GL33C extends GL32C {
 
     // --- [ glGetSamplerParameterIuiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetSamplerParameterIuiv GetSamplerParameterIuiv}
-     */
+    /** Unsafe version of: {@link #glGetSamplerParameterIuiv GetSamplerParameterIuiv} */
     public static native void nglGetSamplerParameterIuiv(int sampler, int pname, long params);
 
     /**
@@ -541,6 +537,7 @@ public class GL33C extends GL32C {
      * @param sampler the name of the sampler object from which to retrieve parameters
      * @param pname   the symbolic name of a sampler parameter
      * @param params  the sampler parameters
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetSamplerParameter">Reference Page</a>
      */
     public static void glGetSamplerParameterIuiv(@NativeType("GLuint") int sampler, @NativeType("GLenum") int pname, @NativeType("GLuint *") IntBuffer params) {
@@ -555,6 +552,7 @@ public class GL33C extends GL32C {
      *
      * @param sampler the name of the sampler object from which to retrieve parameters
      * @param pname   the symbolic name of a sampler parameter
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetSamplerParameter">Reference Page</a>
      */
     @NativeType("void")
@@ -577,15 +575,14 @@ public class GL33C extends GL32C {
      *
      * @param id     the name of a query object into which to record the GL time
      * @param target the counter to query. Must be:<br><table><tr><td>{@link #GL_TIMESTAMP TIMESTAMP}</td></tr></table>
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glQueryCounter">Reference Page</a>
      */
     public static native void glQueryCounter(@NativeType("GLuint") int id, @NativeType("GLenum") int target);
 
     // --- [ glGetQueryObjecti64v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetQueryObjecti64v GetQueryObjecti64v}
-     */
+    /** Unsafe version of: {@link #glGetQueryObjecti64v GetQueryObjecti64v} */
     public static native void nglGetQueryObjecti64v(int id, int pname, long params);
 
     /**
@@ -594,6 +591,7 @@ public class GL33C extends GL32C {
      * @param id     the name of a query object
      * @param pname  the symbolic name of a query object parameter. One of:<br><table><tr><td>{@link GL15#GL_QUERY_RESULT QUERY_RESULT}</td><td>{@link GL15#GL_QUERY_RESULT_AVAILABLE QUERY_RESULT_AVAILABLE}</td></tr></table>
      * @param params the requested data
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetQueryObject">Reference Page</a>
      */
     public static void glGetQueryObjecti64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer params) {
@@ -608,6 +606,7 @@ public class GL33C extends GL32C {
      *
      * @param id    the name of a query object
      * @param pname the symbolic name of a query object parameter. One of:<br><table><tr><td>{@link GL15#GL_QUERY_RESULT QUERY_RESULT}</td><td>{@link GL15#GL_QUERY_RESULT_AVAILABLE QUERY_RESULT_AVAILABLE}</td></tr></table>
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetQueryObject">Reference Page</a>
      */
     @NativeType("void")
@@ -625,9 +624,7 @@ public class GL33C extends GL32C {
 
     // --- [ glGetQueryObjectui64v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetQueryObjectui64v GetQueryObjectui64v}
-     */
+    /** Unsafe version of: {@link #glGetQueryObjectui64v GetQueryObjectui64v} */
     public static native void nglGetQueryObjectui64v(int id, int pname, long params);
 
     /**
@@ -636,6 +633,7 @@ public class GL33C extends GL32C {
      * @param id     the name of a query object
      * @param pname  the symbolic name of a query object parameter
      * @param params the requested data
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetQueryObject">Reference Page</a>
      */
     public static void glGetQueryObjectui64v(@NativeType("GLuint") int id, @NativeType("GLenum") int pname, @NativeType("GLuint64 *") LongBuffer params) {
@@ -650,6 +648,7 @@ public class GL33C extends GL32C {
      *
      * @param id    the name of a query object
      * @param pname the symbolic name of a query object parameter
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetQueryObject">Reference Page</a>
      */
     @NativeType("void")
@@ -672,6 +671,7 @@ public class GL33C extends GL32C {
      *
      * @param index   the index of the generic vertex attribute
      * @param divisor the number of instances that will pass between updates of the generic attribute at slot {@code index}
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttribDivisor">Reference Page</a>
      */
     public static native void glVertexAttribDivisor(@NativeType("GLuint") int index, @NativeType("GLuint") int divisor);
@@ -685,6 +685,7 @@ public class GL33C extends GL32C {
      * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link #GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttribP1ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value);
@@ -698,6 +699,7 @@ public class GL33C extends GL32C {
      * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link #GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttribP2ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value);
@@ -711,6 +713,7 @@ public class GL33C extends GL32C {
      * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link #GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttribP3ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value);
@@ -724,15 +727,14 @@ public class GL33C extends GL32C {
      * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link #GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static native void glVertexAttribP4ui(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint") int value);
 
     // --- [ glVertexAttribP1uiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribP1uiv VertexAttribP1uiv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribP1uiv VertexAttribP1uiv} */
     public static native void nglVertexAttribP1uiv(int index, int type, boolean normalized, long value);
 
     /**
@@ -742,6 +744,7 @@ public class GL33C extends GL32C {
      * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link #GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribP1uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
@@ -753,9 +756,7 @@ public class GL33C extends GL32C {
 
     // --- [ glVertexAttribP2uiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribP2uiv VertexAttribP2uiv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribP2uiv VertexAttribP2uiv} */
     public static native void nglVertexAttribP2uiv(int index, int type, boolean normalized, long value);
 
     /**
@@ -765,6 +766,7 @@ public class GL33C extends GL32C {
      * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link #GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribP2uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
@@ -776,9 +778,7 @@ public class GL33C extends GL32C {
 
     // --- [ glVertexAttribP3uiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribP3uiv VertexAttribP3uiv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribP3uiv VertexAttribP3uiv} */
     public static native void nglVertexAttribP3uiv(int index, int type, boolean normalized, long value);
 
     /**
@@ -788,6 +788,7 @@ public class GL33C extends GL32C {
      * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link #GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribP3uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {
@@ -799,9 +800,7 @@ public class GL33C extends GL32C {
 
     // --- [ glVertexAttribP4uiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glVertexAttribP4uiv VertexAttribP4uiv}
-     */
+    /** Unsafe version of: {@link #glVertexAttribP4uiv VertexAttribP4uiv} */
     public static native void nglVertexAttribP4uiv(int index, int type, boolean normalized, long value);
 
     /**
@@ -811,6 +810,7 @@ public class GL33C extends GL32C {
      * @param type       type of packing used on the data. One of:<br><table><tr><td>{@link #GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td></tr></table>
      * @param normalized whether values should be normalized or cast directly to floating-point
      * @param value      the packed value
+     *
      * @see <a target="_blank" href="http://docs.gl/gl4/glVertexAttrib">Reference Page</a>
      */
     public static void glVertexAttribP4uiv(@NativeType("GLuint") int index, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLuint const *") IntBuffer value) {

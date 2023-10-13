@@ -23,9 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class WGLNVDXInterop {
 
-    /**
-     * Accepted by the {@code access} parameters of {@link #wglDXRegisterObjectNV DXRegisterObjectNV} and {@link #wglDXObjectAccessNV DXObjectAccessNV}.
-     */
+    /** Accepted by the {@code access} parameters of {@link #wglDXRegisterObjectNV DXRegisterObjectNV} and {@link #wglDXObjectAccessNV DXObjectAccessNV}. */
     public static final int
             WGL_ACCESS_READ_ONLY_NV = 0x0,
             WGL_ACCESS_READ_WRITE_NV = 0x1,

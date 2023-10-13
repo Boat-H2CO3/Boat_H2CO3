@@ -59,9 +59,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class EXTPointParameters {
 
-    /**
-     * Accepted by the {@code pname} parameter of glPointParameterfvEXT, and the {@code pname} of glGet.
-     */
+    /** Accepted by the {@code pname} parameter of glPointParameterfvEXT, and the {@code pname} of glGet. */
     public static final int
             GL_POINT_SIZE_MIN_EXT = 0x8126,
             GL_POINT_SIZE_MAX_EXT = 0x8127,
@@ -97,9 +95,7 @@ public class EXTPointParameters {
         nglPointParameterfvEXT(pname, memAddress(params));
     }
 
-    /**
-     * Array version of: {@link #glPointParameterfvEXT PointParameterfvEXT}
-     */
+    /** Array version of: {@link #glPointParameterfvEXT PointParameterfvEXT} */
     public static void glPointParameterfvEXT(@NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] params) {
         long __functionAddress = GL.getICD().glPointParameterfvEXT;
         if (CHECKS) {

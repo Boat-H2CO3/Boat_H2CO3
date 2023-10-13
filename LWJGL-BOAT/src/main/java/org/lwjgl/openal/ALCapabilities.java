@@ -5,13 +5,13 @@
  */
 package org.lwjgl.openal;
 
-import static org.lwjgl.system.APIUtil.apiLog;
-
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.FunctionProvider;
-import org.lwjgl.system.ThreadLocalUtil;
+import org.lwjgl.system.*;
 
 import java.util.Set;
+
+import org.lwjgl.*;
+
+import static org.lwjgl.system.APIUtil.*;
 
 /**
  * Defines the capabilities of an OpenAL context.
@@ -138,142 +138,74 @@ public final class ALCapabilities {
             alGetSourcei64vSOFT,
             alGetStringiSOFT;
 
-    /**
-     * When true, {@link AL10} is supported.
-     */
+    /** When true, {@link AL10} is supported. */
     public final boolean OpenAL10;
-    /**
-     * When true, {@link AL11} is supported.
-     */
+    /** When true, {@link AL11} is supported. */
     public final boolean OpenAL11;
-    /**
-     * When true, {@link EXTAlaw} is supported.
-     */
+    /** When true, {@link EXTAlaw} is supported. */
     public final boolean AL_EXT_ALAW;
-    /**
-     * When true, {@link EXTBFormat} is supported.
-     */
+    /** When true, {@link EXTBFormat} is supported. */
     public final boolean AL_EXT_BFORMAT;
-    /**
-     * When true, {@link EXTDouble} is supported.
-     */
+    /** When true, {@link EXTDouble} is supported. */
     public final boolean AL_EXT_DOUBLE;
-    /**
-     * When true, {@link EXTEfx} is supported.
-     */
+    /** When true, {@link EXTEfx} is supported. */
     public final boolean ALC_EXT_EFX;
-    /**
-     * When true, {@link EXTExponentDistance} is supported.
-     */
+    /** When true, {@link EXTExponentDistance} is supported. */
     public final boolean AL_EXT_EXPONENT_DISTANCE;
-    /**
-     * When true, {@link EXTFloat32} is supported.
-     */
+    /** When true, {@link EXTFloat32} is supported. */
     public final boolean AL_EXT_FLOAT32;
-    /**
-     * When true, {@link EXTIma4} is supported.
-     */
+    /** When true, {@link EXTIma4} is supported. */
     public final boolean AL_EXT_IMA4;
-    /**
-     * When true, {@link EXTLinearDistance} is supported.
-     */
+    /** When true, {@link EXTLinearDistance} is supported. */
     public final boolean AL_EXT_LINEAR_DISTANCE;
-    /**
-     * When true, {@link EXTMCFormats} is supported.
-     */
+    /** When true, {@link EXTMCFormats} is supported. */
     public final boolean AL_EXT_MCFORMATS;
-    /**
-     * When true, {@link EXTMulaw} is supported.
-     */
+    /** When true, {@link EXTMulaw} is supported. */
     public final boolean AL_EXT_MULAW;
-    /**
-     * When true, {@link EXTMulawBFormat} is supported.
-     */
+    /** When true, {@link EXTMulawBFormat} is supported. */
     public final boolean AL_EXT_MULAW_BFORMAT;
-    /**
-     * When true, {@link EXTMulawMCFormats} is supported.
-     */
+    /** When true, {@link EXTMulawMCFormats} is supported. */
     public final boolean AL_EXT_MULAW_MCFORMATS;
-    /**
-     * When true, {@link EXTOffset} is supported.
-     */
+    /** When true, {@link EXTOffset} is supported. */
     public final boolean AL_EXT_OFFSET;
-    /**
-     * When true, {@link EXTSourceDistanceModel} is supported.
-     */
+    /** When true, {@link EXTSourceDistanceModel} is supported. */
     public final boolean AL_EXT_source_distance_model;
-    /**
-     * When true, {@link EXTSourceRadius} is supported.
-     */
+    /** When true, {@link EXTSourceRadius} is supported. */
     public final boolean AL_EXT_SOURCE_RADIUS;
-    /**
-     * When true, {@link EXTStaticBuffer} is supported.
-     */
+    /** When true, {@link EXTStaticBuffer} is supported. */
     public final boolean AL_EXT_static_buffer;
-    /**
-     * When true, {@link EXTStereoAngles} is supported.
-     */
+    /** When true, {@link EXTStereoAngles} is supported. */
     public final boolean AL_EXT_STEREO_ANGLES;
-    /**
-     * When true, {@link EXTVorbis} is supported.
-     */
+    /** When true, {@link EXTVorbis} is supported. */
     public final boolean AL_EXT_vorbis;
-    /**
-     * When true, {@link LOKIIMAADPCM} is supported.
-     */
+    /** When true, {@link LOKIIMAADPCM} is supported. */
     public final boolean AL_LOKI_IMA_ADPCM;
-    /**
-     * When true, {@link LOKIQuadriphonic} is supported.
-     */
+    /** When true, {@link LOKIQuadriphonic} is supported. */
     public final boolean AL_LOKI_quadriphonic;
-    /**
-     * When true, {@link LOKIWAVEFormat} is supported.
-     */
+    /** When true, {@link LOKIWAVEFormat} is supported. */
     public final boolean AL_LOKI_WAVE_format;
-    /**
-     * When true, {@link SOFTBlockAlignment} is supported.
-     */
+    /** When true, {@link SOFTBlockAlignment} is supported. */
     public final boolean AL_SOFT_block_alignment;
-    /**
-     * When true, {@link SOFTDeferredUpdates} is supported.
-     */
+    /** When true, {@link SOFTDeferredUpdates} is supported. */
     public final boolean AL_SOFT_deferred_updates;
-    /**
-     * When true, {@link SOFTDirectChannels} is supported.
-     */
+    /** When true, {@link SOFTDirectChannels} is supported. */
     public final boolean AL_SOFT_direct_channels;
-    /**
-     * When true, {@link SOFTGainClampEx} is supported.
-     */
+    /** When true, {@link SOFTGainClampEx} is supported. */
     public final boolean AL_SOFT_gain_clamp_ex;
-    /**
-     * When true, {@link SOFTLoopPoints} is supported.
-     */
+    /** When true, {@link SOFTLoopPoints} is supported. */
     public final boolean AL_SOFT_loop_points;
-    /**
-     * When true, {@link SOFTMSADPCM} is supported.
-     */
+    /** When true, {@link SOFTMSADPCM} is supported. */
     public final boolean AL_SOFT_MSADPCM;
-    /**
-     * When true, {@link SOFTSourceLatency} is supported.
-     */
+    /** When true, {@link SOFTSourceLatency} is supported. */
     public final boolean AL_SOFT_source_latency;
-    /**
-     * When true, {@link SOFTSourceLength} is supported.
-     */
+    /** When true, {@link SOFTSourceLength} is supported. */
     public final boolean AL_SOFT_source_length;
-    /**
-     * When true, {@link SOFTSourceResampler} is supported.
-     */
+    /** When true, {@link SOFTSourceResampler} is supported. */
     public final boolean AL_SOFT_source_resampler;
-    /**
-     * When true, {@link SOFTSourceSpatialize} is supported.
-     */
+    /** When true, {@link SOFTSourceSpatialize} is supported. */
     public final boolean AL_SOFT_source_spatialize;
 
-    /**
-     * Off-heap array of the above function addresses.
-     */
+    /** Off-heap array of the above function addresses. */
     final PointerBuffer addresses;
 
     ALCapabilities(FunctionProvider provider, Set<String> ext) {

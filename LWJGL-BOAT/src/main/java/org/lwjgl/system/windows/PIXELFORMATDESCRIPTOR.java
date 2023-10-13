@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code nVersion} &ndash; specifies the version of this data structure. This value should be set to 1</li>
  * <li>{@code dwFlags} &ndash; a set of bit flags that specify properties of the pixel buffer</li>
  * <li>{@code iPixelType} &ndash; specifies the type of pixel data</li>
- * <li>{@code cColorBits} &ndash;
+ * <li>{@code cColorBits} &ndash; 
  * specifies the number of color bitplanes in each color buffer. For RGBA pixel types, it is the size of the color buffer, excluding the alpha bitplanes.
  * For color-index pixels, it is the size of the color-index buffer.</li>
  * <li>{@code cRedBits} &ndash; specifies the number of red bitplanes in each RGBA color buffer</li>
@@ -45,11 +45,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code cStencilBits} &ndash; specifies the depth of the stencil buffer</li>
  * <li>{@code cAuxBuffers} &ndash; specifies the number of auxiliary buffers. Auxiliary buffers are not supported</li>
  * <li>{@code iLayerType} &ndash; Ignored. Earlier implementations of OpenGL used this member, but it is no longer used.</li>
- * <li>{@code bReserved} &ndash;
+ * <li>{@code bReserved} &ndash; 
  * specifies the number of overlay and underlay planes. Bits 0 through 3 specify up to 15 overlay planes and bits 4 through 7 specify up to 15 underlay
  * planes</li>
  * <li>{@code dwLayerMask} &ndash; Ignored. Earlier implementations of OpenGL used this member, but it is no longer used.</li>
- * <li>{@code dwVisibleMask} &ndash;
+ * <li>{@code dwVisibleMask} &ndash; 
  * specifies the transparent color or index of an underlay plane. When the pixel type is RGBA, {@code dwVisibleMask} is a transparent RGB color value.
  * When the pixel type is color index, it is a transparent index value.</li>
  * <li>{@code dwDamageMask} &ndash; Ignored. Earlier implementations of OpenGL used this member, but it is no longer used.</li>
@@ -651,7 +651,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
             byte bReserved,
             int dwLayerMask,
             int dwVisibleMask,
-            int dwDamageMask
+        int dwDamageMask
     ) {
         nSize(nSize);
         nVersion(nVersion);
@@ -687,6 +687,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public PIXELFORMATDESCRIPTOR set(PIXELFORMATDESCRIPTOR src) {
@@ -696,38 +697,28 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code PIXELFORMATDESCRIPTOR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code PIXELFORMATDESCRIPTOR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static PIXELFORMATDESCRIPTOR malloc() {
         return wrap(PIXELFORMATDESCRIPTOR.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code PIXELFORMATDESCRIPTOR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code PIXELFORMATDESCRIPTOR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static PIXELFORMATDESCRIPTOR calloc() {
         return wrap(PIXELFORMATDESCRIPTOR.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code PIXELFORMATDESCRIPTOR} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code PIXELFORMATDESCRIPTOR} instance allocated with {@link BufferUtils}. */
     public static PIXELFORMATDESCRIPTOR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(PIXELFORMATDESCRIPTOR.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code PIXELFORMATDESCRIPTOR} instance for the specified memory address.
-     */
+    /** Returns a new {@code PIXELFORMATDESCRIPTOR} instance for the specified memory address. */
     public static PIXELFORMATDESCRIPTOR create(long address) {
         return wrap(PIXELFORMATDESCRIPTOR.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static PIXELFORMATDESCRIPTOR createSafe(long address) {
         return address == NULL ? null : wrap(PIXELFORMATDESCRIPTOR.class, address);
@@ -771,9 +762,7 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -781,16 +770,12 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code PIXELFORMATDESCRIPTOR} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code PIXELFORMATDESCRIPTOR} instance allocated on the thread-local {@link MemoryStack}. */
     public static PIXELFORMATDESCRIPTOR mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code PIXELFORMATDESCRIPTOR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code PIXELFORMATDESCRIPTOR} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static PIXELFORMATDESCRIPTOR callocStack() {
         return callocStack(stackGet());
     }
@@ -1207,21 +1192,13 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
      * Unsafe version of {@link #dwVisibleMask(int) dwVisibleMask}.
      */
     public static void ndwVisibleMask(long struct, int value) {
-        UNSAFE.putInt(null, struct + PIXELFORMATDESCRIPTOR.DWVISIBLEMASK, value);
-    }
-
-    /**
-     * Unsafe version of {@link #dwDamageMask(int) dwDamageMask}.
-     */
-    public static void ndwDamageMask(long struct, int value) {
-        UNSAFE.putInt(null, struct + PIXELFORMATDESCRIPTOR.DWDAMAGEMASK, value);
-    }
+        UNSAFE.putInt(null, struct + PIXELFORMATDESCRIPTOR.DWVISIBLEMASK, value); }
+    /** Unsafe version of {@link #dwDamageMask(int) dwDamageMask}. */
+    public static void ndwDamageMask(long struct, int value) { UNSAFE.putInt(null, struct + PIXELFORMATDESCRIPTOR.DWDAMAGEMASK, value); }
 
     // -----------------------------------
 
-    /**
-     * An array of {@link PIXELFORMATDESCRIPTOR} structs.
-     */
+    /** An array of {@link PIXELFORMATDESCRIPTOR} structs. */
     public static class Buffer extends StructBuffer<PIXELFORMATDESCRIPTOR, Buffer> implements NativeResource {
 
         private static final PIXELFORMATDESCRIPTOR ELEMENT_FACTORY = PIXELFORMATDESCRIPTOR.create(-1L);
@@ -1621,57 +1598,19 @@ public class PIXELFORMATDESCRIPTOR extends Struct implements NativeResource {
          * Sets the specified value to the {@code cStencilBits} field.
          */
         public Buffer cStencilBits(@NativeType("BYTE") byte value) {
-            PIXELFORMATDESCRIPTOR.ncStencilBits(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code cAuxBuffers} field.
-         */
-        public Buffer cAuxBuffers(@NativeType("BYTE") byte value) {
-            PIXELFORMATDESCRIPTOR.ncAuxBuffers(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code iLayerType} field.
-         */
-        public Buffer iLayerType(@NativeType("BYTE") byte value) {
-            PIXELFORMATDESCRIPTOR.niLayerType(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code bReserved} field.
-         */
-        public Buffer bReserved(@NativeType("BYTE") byte value) {
-            PIXELFORMATDESCRIPTOR.nbReserved(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code dwLayerMask} field.
-         */
-        public Buffer dwLayerMask(@NativeType("DWORD") int value) {
-            PIXELFORMATDESCRIPTOR.ndwLayerMask(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code dwVisibleMask} field.
-         */
-        public Buffer dwVisibleMask(@NativeType("DWORD") int value) {
-            PIXELFORMATDESCRIPTOR.ndwVisibleMask(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code dwDamageMask} field.
-         */
-        public Buffer dwDamageMask(@NativeType("DWORD") int value) {
-            PIXELFORMATDESCRIPTOR.ndwDamageMask(address(), value);
-            return this;
-        }
+            PIXELFORMATDESCRIPTOR.ncStencilBits(address(), value); return this; }
+        /** Sets the specified value to the {@code cAuxBuffers} field. */
+        public Buffer cAuxBuffers(@NativeType("BYTE") byte value) { PIXELFORMATDESCRIPTOR.ncAuxBuffers(address(), value); return this; }
+        /** Sets the specified value to the {@code iLayerType} field. */
+        public Buffer iLayerType(@NativeType("BYTE") byte value) { PIXELFORMATDESCRIPTOR.niLayerType(address(), value); return this; }
+        /** Sets the specified value to the {@code bReserved} field. */
+        public Buffer bReserved(@NativeType("BYTE") byte value) { PIXELFORMATDESCRIPTOR.nbReserved(address(), value); return this; }
+        /** Sets the specified value to the {@code dwLayerMask} field. */
+        public Buffer dwLayerMask(@NativeType("DWORD") int value) { PIXELFORMATDESCRIPTOR.ndwLayerMask(address(), value); return this; }
+        /** Sets the specified value to the {@code dwVisibleMask} field. */
+        public Buffer dwVisibleMask(@NativeType("DWORD") int value) { PIXELFORMATDESCRIPTOR.ndwVisibleMask(address(), value); return this; }
+        /** Sets the specified value to the {@code dwDamageMask} field. */
+        public Buffer dwDamageMask(@NativeType("DWORD") int value) { PIXELFORMATDESCRIPTOR.ndwDamageMask(address(), value); return this; }
 
     }
 

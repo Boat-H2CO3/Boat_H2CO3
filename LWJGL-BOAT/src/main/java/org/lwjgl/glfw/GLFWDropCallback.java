@@ -41,17 +41,13 @@ public abstract class GLFWDropCallback extends Callback implements GLFWDropCallb
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWDropCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWDropCallback} instance that delegates to the specified {@code GLFWDropCallbackI} instance.
-     */
+    /** Creates a {@code GLFWDropCallback} instance that delegates to the specified {@code GLFWDropCallbackI} instance. */
     public static GLFWDropCallback create(GLFWDropCallbackI instance) {
         return instance instanceof GLFWDropCallback
                 ? (GLFWDropCallback) instance
@@ -73,15 +69,14 @@ public abstract class GLFWDropCallback extends Callback implements GLFWDropCallb
      *
      * @param names pointer to the array of UTF-8 encoded path names of the dropped files
      * @param index the index to decode
+     *
      * @return the name at the specified index as a String
      */
     public static String getName(long names, int index) {
         return memUTF8(memGetAddress(names + Pointer.POINTER_SIZE * index));
     }
 
-    /**
-     * See {@link GLFW#glfwSetDropCallback SetDropCallback}.
-     */
+    /** See {@link GLFW#glfwSetDropCallback SetDropCallback}. */
     public GLFWDropCallback set(long window) {
         glfwSetDropCallback(window, this);
         return this;

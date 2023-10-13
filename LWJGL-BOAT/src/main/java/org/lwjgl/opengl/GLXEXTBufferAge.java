@@ -15,9 +15,7 @@ package org.lwjgl.opengl;
  */
 public final class GLXEXTBufferAge {
 
-    /**
-     * Accepted by {@link GLX13#glXQueryDrawable QueryDrawable}.
-     */
+    /** Accepted by {@link GLX13#glXQueryDrawable QueryDrawable}. */
     public static final int GLX_BACK_BUFFER_AGE_EXT = 0x20F4;
 
     private GLXEXTBufferAge() {

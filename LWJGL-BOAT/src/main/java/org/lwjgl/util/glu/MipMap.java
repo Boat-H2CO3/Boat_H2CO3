@@ -177,7 +177,6 @@ public class MipMap extends Util {
 
     /**
      * Method gluScaleImage.
-     *
      * @param format
      * @param widthIn
      * @param heightIn

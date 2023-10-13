@@ -41,17 +41,13 @@ public abstract class GLFWScrollCallback extends Callback implements GLFWScrollC
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWScrollCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWScrollCallback} instance that delegates to the specified {@code GLFWScrollCallbackI} instance.
-     */
+    /** Creates a {@code GLFWScrollCallback} instance that delegates to the specified {@code GLFWScrollCallbackI} instance. */
     public static GLFWScrollCallback create(GLFWScrollCallbackI instance) {
         return instance instanceof GLFWScrollCallback
                 ? (GLFWScrollCallback) instance
@@ -66,9 +62,7 @@ public abstract class GLFWScrollCallback extends Callback implements GLFWScrollC
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetScrollCallback SetScrollCallback}.
-     */
+    /** See {@link GLFW#glfwSetScrollCallback SetScrollCallback}. */
     public GLFWScrollCallback set(long window) {
         glfwSetScrollCallback(window, this);
         return this;

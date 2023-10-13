@@ -239,8 +239,8 @@ public class XGravityEvent extends Struct implements NativeResource {
             long display,
             long event,
             long window,
-            int x,
-            int y
+        int x,
+        int y
     ) {
         type(type);
         serial(serial);
@@ -258,6 +258,7 @@ public class XGravityEvent extends Struct implements NativeResource {
      * Copies the specified struct data to this struct.
      *
      * @param src the source struct
+     *
      * @return this struct
      */
     public XGravityEvent set(XGravityEvent src) {
@@ -267,38 +268,28 @@ public class XGravityEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XGravityEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XGravityEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XGravityEvent malloc() {
         return wrap(XGravityEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XGravityEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XGravityEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XGravityEvent calloc() {
         return wrap(XGravityEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XGravityEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XGravityEvent} instance allocated with {@link BufferUtils}. */
     public static XGravityEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XGravityEvent.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code XGravityEvent} instance for the specified memory address.
-     */
+    /** Returns a new {@code XGravityEvent} instance for the specified memory address. */
     public static XGravityEvent create(long address) {
         return wrap(XGravityEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XGravityEvent createSafe(long address) {
         return address == NULL ? null : wrap(XGravityEvent.class, address);
@@ -342,9 +333,7 @@ public class XGravityEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -352,16 +341,12 @@ public class XGravityEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XGravityEvent} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code XGravityEvent} instance allocated on the thread-local {@link MemoryStack}. */
     public static XGravityEvent mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XGravityEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XGravityEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XGravityEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -405,7 +390,7 @@ public class XGravityEvent extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -559,16 +544,14 @@ public class XGravityEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XGravityEvent} structs.
-     */
+    /** An array of {@link XGravityEvent} structs. */
     public static class Buffer extends StructBuffer<XGravityEvent, Buffer> implements NativeResource {
 
         private static final XGravityEvent ELEMENT_FACTORY = XGravityEvent.create(-1L);
 
         /**
          * Creates a new {@code XGravityEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XGravityEvent#SIZEOF}, and its mark will be undefined.
@@ -698,29 +681,12 @@ public class XGravityEvent extends Struct implements NativeResource {
             return this;
         }
 
-        /**
-         * Sets the specified value to the {@code window} field.
-         */
-        public Buffer window(@NativeType("Window") long value) {
-            XGravityEvent.nwindow(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code x} field.
-         */
-        public Buffer x(int value) {
-            XGravityEvent.nx(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code y} field.
-         */
-        public Buffer y(int value) {
-            XGravityEvent.ny(address(), value);
-            return this;
-        }
+        /** Sets the specified value to the {@code window} field. */
+        public Buffer window(@NativeType("Window") long value) { XGravityEvent.nwindow(address(), value); return this; }
+        /** Sets the specified value to the {@code x} field. */
+        public Buffer x(int value) { XGravityEvent.nx(address(), value); return this; }
+        /** Sets the specified value to the {@code y} field. */
+        public Buffer y(int value) { XGravityEvent.ny(address(), value); return this; }
 
     }
 

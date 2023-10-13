@@ -49,9 +49,7 @@ public abstract class ExtentSplit extends Callback implements ExtentSplitI {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code ExtentSplit} instance that delegates to the specified {@code ExtentSplitI} instance.
-     */
+    /** Creates a {@code ExtentSplit} instance that delegates to the specified {@code ExtentSplitI} instance. */
     public static ExtentSplit create(ExtentSplitI instance) {
         return instance instanceof ExtentSplit
                 ? (ExtentSplit) instance

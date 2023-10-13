@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_geometry_shader4.txt">ARB_geometry_shader4</a> extension.
@@ -33,22 +33,16 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBGeometryShader4 {
 
-    /**
-     * Accepted by the {@code type} parameter of CreateShader and returned by the {@code params} parameter of GetShaderiv.
-     */
+    /** Accepted by the {@code type} parameter of CreateShader and returned by the {@code params} parameter of GetShaderiv. */
     public static final int GL_GEOMETRY_SHADER_ARB = 0x8DD9;
 
-    /**
-     * Accepted by the {@code pname} parameter of ProgramParameteriARB and GetProgramiv.
-     */
+    /** Accepted by the {@code pname} parameter of ProgramParameteriARB and GetProgramiv. */
     public static final int
             GL_GEOMETRY_VERTICES_OUT_ARB = 0x8DDA,
             GL_GEOMETRY_INPUT_TYPE_ARB = 0x8DDB,
             GL_GEOMETRY_OUTPUT_TYPE_ARB = 0x8DDC;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_ARB = 0x8C29,
             GL_MAX_GEOMETRY_VARYING_COMPONENTS_ARB = 0x8DDD,
@@ -57,25 +51,19 @@ public class ARBGeometryShader4 {
             GL_MAX_GEOMETRY_OUTPUT_VERTICES_ARB = 0x8DE0,
             GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_ARB = 0x8DE1;
 
-    /**
-     * Accepted by the {@code mode} parameter of Begin, DrawArrays, MultiDrawArrays, DrawElements, MultiDrawElements, and DrawRangeElements.
-     */
+    /** Accepted by the {@code mode} parameter of Begin, DrawArrays, MultiDrawArrays, DrawElements, MultiDrawElements, and DrawRangeElements. */
     public static final int
             GL_LINES_ADJACENCY_ARB = 0xA,
             GL_LINE_STRIP_ADJACENCY_ARB = 0xB,
             GL_TRIANGLES_ADJACENCY_ARB = 0xC,
             GL_TRIANGLE_STRIP_ADJACENCY_ARB = 0xD;
 
-    /**
-     * Returned by CheckFramebufferStatusARB.
-     */
+    /** Returned by CheckFramebufferStatusARB. */
     public static final int
             GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_ARB = 0x8DA8,
             GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_ARB = 0x8DA9;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetFramebufferAttachment- ParameterivARB.
-     */
+    /** Accepted by the {@code pname} parameter of GetFramebufferAttachment- ParameterivARB. */
     public static final int
             GL_FRAMEBUFFER_ATTACHMENT_LAYERED_ARB = 0x8DA7,
             GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER = 0x8CD4;

@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GLX14 extends GLX13 {
 
-    /**
-     * Added in GLX 1.4.
-     */
+    /** Added in GLX 1.4. */
     public static final int
             GLX_SAMPLE_BUFFERS = 0x186A0,
             GLX_SAMPLES = 0x186A1;
@@ -38,9 +36,7 @@ public class GLX14 extends GLX13 {
 
     // --- [ glXGetProcAddress ] ---
 
-    /**
-     * Unsafe version of: {@link #glXGetProcAddress GetProcAddress}
-     */
+    /** Unsafe version of: {@link #glXGetProcAddress GetProcAddress} */
     public static long nglXGetProcAddress(long procName) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetProcAddress;
         if (CHECKS) {

@@ -68,6 +68,7 @@ public class STBRectPack {
      *
      * @param context an {@link STBRPContext} struct
      * @param rects   an array of {@link STBRPRect} structs
+     *
      * @return 1 if all of the rectangles were successfully packed and 0 otherwise
      */
     public static int stbrp_pack_rects(@NativeType("stbrp_context *") STBRPContext context, @NativeType("stbrp_rect *") STBRPRect.Buffer rects) {
@@ -115,9 +116,7 @@ public class STBRectPack {
 
     // --- [ stbrp_setup_allow_out_of_mem ] ---
 
-    /**
-     * Unsafe version of: {@link #stbrp_setup_allow_out_of_mem setup_allow_out_of_mem}
-     */
+    /** Unsafe version of: {@link #stbrp_setup_allow_out_of_mem setup_allow_out_of_mem} */
     public static native void nstbrp_setup_allow_out_of_mem(long context, int allow_out_of_mem);
 
     /**
@@ -133,9 +132,7 @@ public class STBRectPack {
 
     // --- [ stbrp_setup_heuristic ] ---
 
-    /**
-     * Unsafe version of: {@link #stbrp_setup_heuristic setup_heuristic}
-     */
+    /** Unsafe version of: {@link #stbrp_setup_heuristic setup_heuristic} */
     public static native void nstbrp_setup_heuristic(long context, int heuristic);
 
     /**

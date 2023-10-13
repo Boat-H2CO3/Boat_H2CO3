@@ -205,38 +205,28 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code DISPLAY_DEVICE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code DISPLAY_DEVICE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static DISPLAY_DEVICE malloc() {
         return wrap(DISPLAY_DEVICE.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code DISPLAY_DEVICE} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code DISPLAY_DEVICE} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static DISPLAY_DEVICE calloc() {
         return wrap(DISPLAY_DEVICE.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code DISPLAY_DEVICE} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code DISPLAY_DEVICE} instance allocated with {@link BufferUtils}. */
     public static DISPLAY_DEVICE create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(DISPLAY_DEVICE.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code DISPLAY_DEVICE} instance for the specified memory address.
-     */
+    /** Returns a new {@code DISPLAY_DEVICE} instance for the specified memory address. */
     public static DISPLAY_DEVICE create(long address) {
         return wrap(DISPLAY_DEVICE.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DISPLAY_DEVICE createSafe(long address) {
         return address == NULL ? null : wrap(DISPLAY_DEVICE.class, address);
@@ -280,9 +270,7 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -290,16 +278,12 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code DISPLAY_DEVICE} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code DISPLAY_DEVICE} instance allocated on the thread-local {@link MemoryStack}. */
     public static DISPLAY_DEVICE mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code DISPLAY_DEVICE} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code DISPLAY_DEVICE} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static DISPLAY_DEVICE callocStack() {
         return callocStack(stackGet());
     }
@@ -343,7 +327,7 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -450,7 +434,7 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
 
         /**
          * Creates a new {@code DISPLAY_DEVICE.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link DISPLAY_DEVICE#SIZEOF}, and its mark will be undefined.
@@ -555,17 +539,10 @@ public class DISPLAY_DEVICE extends Struct implements NativeResource {
          * Decodes the null-terminated string stored in the {@code DeviceKey} field.
          */
         @NativeType("TCHAR[128]")
-        public String DeviceKeyString() {
-            return DISPLAY_DEVICE.nDeviceKeyString(address());
-        }
+        public String DeviceKeyString() { return DISPLAY_DEVICE.nDeviceKeyString(address()); }
 
-        /**
-         * Sets the specified value to the {@code cb} field.
-         */
-        public Buffer cb(@NativeType("DWORD") int value) {
-            DISPLAY_DEVICE.ncb(address(), value);
-            return this;
-        }
+        /** Sets the specified value to the {@code cb} field. */
+        public Buffer cb(@NativeType("DWORD") int value) { DISPLAY_DEVICE.ncb(address(), value); return this; }
 
     }
 

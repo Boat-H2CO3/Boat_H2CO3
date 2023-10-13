@@ -29,9 +29,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class NVConditionalRender {
 
-    /**
-     * Accepted by the {@code mode} parameter of BeginConditionalRenderNV.
-     */
+    /** Accepted by the {@code mode} parameter of BeginConditionalRenderNV. */
     public static final int
             GL_QUERY_WAIT_NV = 0x8E13,
             GL_QUERY_NO_WAIT_NV = 0x8E14,

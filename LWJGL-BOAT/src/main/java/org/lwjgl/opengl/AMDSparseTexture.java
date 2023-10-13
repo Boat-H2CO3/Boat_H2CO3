@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_sparse_texture.txt">AMD_sparse_texture</a> extension.
@@ -26,35 +26,25 @@ import org.lwjgl.system.NativeType;
  */
 public class AMDSparseTexture {
 
-    /**
-     * Accepted by the {@code flags} parameter to TexStorageSparseAMD and TextureStorageSparseAMD.
-     */
+    /** Accepted by the {@code flags} parameter to TexStorageSparseAMD and TextureStorageSparseAMD. */
     public static final int GL_TEXTURE_STORAGE_SPARSE_BIT_AMD = 0x1;
 
-    /**
-     * Accepted by the {@code pname} parameter to GetInternalformativ.
-     */
+    /** Accepted by the {@code pname} parameter to GetInternalformativ. */
     public static final int
             GL_VIRTUAL_PAGE_SIZE_X_AMD = 0x9195,
             GL_VIRTUAL_PAGE_SIZE_Y_AMD = 0x9196,
             GL_VIRTUAL_PAGE_SIZE_Z_AMD = 0x9197;
 
-    /**
-     * Accepted by the {@code pname} parameter to GetIntegerv, GetFloatv, GetDoublev, GetInteger64v, and GetBooleanv.
-     */
+    /** Accepted by the {@code pname} parameter to GetIntegerv, GetFloatv, GetDoublev, GetInteger64v, and GetBooleanv. */
     public static final int
             GL_MAX_SPARSE_TEXTURE_SIZE_AMD = 0x9198,
             GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD = 0x9199,
             GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS = 0x919A;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetTexParameter{if}v.
-     */
+    /** Accepted by the {@code pname} parameter of GetTexParameter{if}v. */
     public static final int GL_MIN_SPARSE_LEVEL_AMD = 0x919B;
 
-    /**
-     * Accepted by the {@code pname} parameter of TexParameter{if}{v} and GetTexParameter{if}v.
-     */
+    /** Accepted by the {@code pname} parameter of TexParameter{if}{v} and GetTexParameter{if}v. */
     public static final int GL_MIN_LOD_WARNING_AMD = 0x919C;
 
     static {

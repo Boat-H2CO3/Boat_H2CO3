@@ -57,16 +57,12 @@ public class NVPixelDataRange {
             GL_WRITE_PIXEL_DATA_RANGE_NV = 0x8878,
             GL_READ_PIXEL_DATA_RANGE_NV = 0x8879;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_WRITE_PIXEL_DATA_RANGE_LENGTH_NV = 0x887A,
             GL_READ_PIXEL_DATA_RANGE_LENGTH_NV = 0x887B;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetPointerv.
-     */
+    /** Accepted by the {@code pname} parameter of GetPointerv. */
     public static final int
             GL_WRITE_PIXEL_DATA_RANGE_POINTER_NV = 0x887C,
             GL_READ_PIXEL_DATA_RANGE_POINTER_NV = 0x887D;

@@ -5,60 +5,35 @@
  */
 package org.lwjgl.openal;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.Checks.checkNT1;
-import static org.lwjgl.system.Checks.checkNT1Safe;
-import static org.lwjgl.system.Checks.checkNTSafe;
-import static org.lwjgl.system.JNI.invokeP;
-import static org.lwjgl.system.JNI.invokePI;
-import static org.lwjgl.system.JNI.invokePP;
-import static org.lwjgl.system.JNI.invokePPI;
-import static org.lwjgl.system.JNI.invokePPP;
-import static org.lwjgl.system.JNI.invokePPV;
-import static org.lwjgl.system.JNI.invokePPZ;
-import static org.lwjgl.system.JNI.invokePV;
-import static org.lwjgl.system.JNI.invokePZ;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjgl.system.MemoryUtil.memAddress;
-import static org.lwjgl.system.MemoryUtil.memAddressSafe;
-import static org.lwjgl.system.MemoryUtil.memUTF8Safe;
+import javax.annotation.*;
 
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.MemoryUtil;
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to ALC 1.0 functionality.
  */
 public class ALC10 {
 
-    /**
-     * General tokens.
-     */
+    /** General tokens. */
     public static final int
             ALC_INVALID = 0xFFFFFFFF,
             ALC_FALSE = 0x0,
             ALC_TRUE = 0x1;
 
-    /**
-     * Context creation attributes.
-     */
+    /** Context creation attributes. */
     public static final int
             ALC_FREQUENCY = 0x1007,
             ALC_REFRESH = 0x1008,
             ALC_SYNC = 0x1009;
 
-    /**
-     * Error conditions.
-     */
+    /** Error conditions. */
     public static final int
             ALC_NO_ERROR = 0x0,
             ALC_INVALID_DEVICE = 0xA001,
@@ -67,17 +42,13 @@ public class ALC10 {
             ALC_INVALID_VALUE = 0xA004,
             ALC_OUT_OF_MEMORY = 0xA005;
 
-    /**
-     * String queries.
-     */
+    /** String queries. */
     public static final int
             ALC_DEFAULT_DEVICE_SPECIFIER = 0x1004,
             ALC_DEVICE_SPECIFIER = 0x1005,
             ALC_EXTENSIONS = 0x1006;
 
-    /**
-     * Integer queries.
-     */
+    /** Integer queries. */
     public static final int
             ALC_MAJOR_VERSION = 0x1000,
             ALC_MINOR_VERSION = 0x1001,
@@ -98,7 +69,7 @@ public class ALC10 {
 
     static ALCcontext alcContext;
 
-    public static ALCcontext alcCreateContext(ALCdevice device, java.nio.IntBuffer attrList) {
+    public static ALCcontext alcCreateContext(ALCdevice device, IntBuffer attrList) {
         long alContextHandle = alcCreateContext(device.device, attrList);
         alcContext = new ALCcontext(alContextHandle);
         return alcContext;
@@ -108,16 +79,14 @@ public class ALC10 {
         return AL.alcDevice;
     }
 
-    public static void alcGetInteger(ALCdevice device, int pname, java.nio.IntBuffer integerdata) {
+    public static void alcGetInteger(ALCdevice device, int pname, IntBuffer integerdata) {
         int res = alcGetInteger(device.device, pname);
         integerdata.put(0, res);
     }
 
     // --- [ alcOpenDevice ] ---
 
-    /**
-     * Unsafe version of: {@link #alcOpenDevice OpenDevice}
-     */
+    /** Unsafe version of: {@link #alcOpenDevice OpenDevice} */
     public static long nalcOpenDevice(long deviceSpecifier) {
         long __functionAddress = ALC.getICD().alcOpenDevice;
         return invokePP(deviceSpecifier, __functionAddress);
@@ -181,9 +150,7 @@ public class ALC10 {
 
     // --- [ alcCreateContext ] ---
 
-    /**
-     * Unsafe version of: {@link #alcCreateContext CreateContext}
-     */
+    /** Unsafe version of: {@link #alcCreateContext CreateContext} */
     public static long nalcCreateContext(long deviceHandle, long attrList) {
         long __functionAddress = ALC.getICD().alcCreateContext;
         if (CHECKS) {
@@ -287,9 +254,7 @@ public class ALC10 {
 
     // --- [ alcGetCurrentContext ] ---
 
-    /**
-     * Queries for, and obtains a handle to, the current context for the application. If there is no current context, {@code NULL} is returned.
-     */
+    /** Queries for, and obtains a handle to, the current context for the application. If there is no current context, {@code NULL} is returned. */
     @NativeType("ALCcontext *")
     public static long alcGetCurrentContext() {
         long __functionAddress = ALC.getICD().alcGetCurrentContext;
@@ -314,9 +279,7 @@ public class ALC10 {
 
     // --- [ alcIsExtensionPresent ] ---
 
-    /**
-     * Unsafe version of: {@link #alcIsExtensionPresent IsExtensionPresent}
-     */
+    /** Unsafe version of: {@link #alcIsExtensionPresent IsExtensionPresent} */
     public static boolean nalcIsExtensionPresent(long deviceHandle, long extName) {
         long __functionAddress = ALC.getICD().alcIsExtensionPresent;
         return invokePPZ(deviceHandle, extName, __functionAddress);
@@ -363,9 +326,7 @@ public class ALC10 {
 
     // --- [ alcGetProcAddress ] ---
 
-    /**
-     * Unsafe version of: {@link #alcGetProcAddress GetProcAddress}
-     */
+    /** Unsafe version of: {@link #alcGetProcAddress GetProcAddress} */
     public static long nalcGetProcAddress(long deviceHandle, long funcName) {
         long __functionAddress = ALC.getICD().alcGetProcAddress;
         return invokePPP(deviceHandle, funcName, __functionAddress);
@@ -418,9 +379,7 @@ public class ALC10 {
 
     // --- [ alcGetEnumValue ] ---
 
-    /**
-     * Unsafe version of: {@link #alcGetEnumValue GetEnumValue}
-     */
+    /** Unsafe version of: {@link #alcGetEnumValue GetEnumValue} */
     public static int nalcGetEnumValue(long deviceHandle, long enumName) {
         long __functionAddress = ALC.getICD().alcGetEnumValue;
         return invokePPI(deviceHandle, enumName, __functionAddress);
@@ -485,9 +444,7 @@ public class ALC10 {
 
     // --- [ alcGetString ] ---
 
-    /**
-     * Unsafe version of: {@link #alcGetString GetString}
-     */
+    /** Unsafe version of: {@link #alcGetString GetString} */
     public static long nalcGetString(long deviceHandle, int token) {
         long __functionAddress = ALC.getICD().alcGetString;
         return invokePP(deviceHandle, token, __functionAddress);
@@ -558,9 +515,7 @@ public class ALC10 {
         }
     }
 
-    /**
-     * Array version of: {@link #alcCreateContext CreateContext}
-     */
+    /** Array version of: {@link #alcCreateContext CreateContext} */
     @NativeType("ALCcontext *")
     public static long alcCreateContext(@NativeType("ALCdevice const *") long deviceHandle, @Nullable @NativeType("ALCint const *") int[] attrList) {
         long __functionAddress = ALC.getICD().alcCreateContext;
@@ -571,9 +526,7 @@ public class ALC10 {
         return invokePPP(deviceHandle, attrList, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #alcGetIntegerv GetIntegerv}
-     */
+    /** Array version of: {@link #alcGetIntegerv GetIntegerv} */
     @NativeType("ALCvoid")
     public static void alcGetIntegerv(@NativeType("ALCdevice *") long deviceHandle, @NativeType("ALCenum") int token, @NativeType("ALCint *") int[] dest) {
         long __functionAddress = ALC.getICD().alcGetIntegerv;

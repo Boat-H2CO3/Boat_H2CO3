@@ -4,9 +4,11 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
+DISABLE_WARNINGS()
 #define STBRP_ASSERT
 #define STB_RECT_PACK_IMPLEMENTATION
 #include "stb_rect_pack.h"
+ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 

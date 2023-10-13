@@ -7,7 +7,6 @@ package org.lwjgl.system;
 import org.lwjgl.*;
 
 import javax.annotation.*;
-
 import java.lang.reflect.*;
 import java.util.*;
 
@@ -93,14 +92,10 @@ public final class ThreadLocalUtil {
     capabilities instance).
     */
 
-    /**
-     * The global JNIEnv.
-     */
+    /** The global JNIEnv. */
     private static final long JNI_NATIVE_INTERFACE = getThreadJNIEnv();
 
-    /**
-     * A function to delegate to when an unsupported function is called.
-     */
+    /** A function to delegate to when an unsupported function is called. */
     private static final long FUNCTION_MISSING_ABORT = getFunctionMissingAbort();
 
     private static final long SIZE_OF_JNI_NATIVE_INTERFACE;

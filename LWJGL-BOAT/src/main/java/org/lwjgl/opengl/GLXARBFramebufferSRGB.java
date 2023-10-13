@@ -12,9 +12,7 @@ package org.lwjgl.opengl;
  */
 public final class GLXARBFramebufferSRGB {
 
-    /**
-     * Accepted by the {@code attribList} parameter of {@link GLX#glXChooseVisual ChooseVisual}, and by the {@code attrib} parameter of {@link GLX#glXGetConfig GetConfig}.
-     */
+    /** Accepted by the {@code attribList} parameter of {@link GLX#glXChooseVisual ChooseVisual}, and by the {@code attrib} parameter of {@link GLX#glXGetConfig GetConfig}. */
     public static final int GLX_FRAMEBUFFER_SRGB_CAPABLE_ARB = 0x20B2;
 
     private GLXARBFramebufferSRGB() {

@@ -29,7 +29,7 @@ public class WGLNVDelayBeforeSwap {
 
     static boolean isAvailable(WGLCapabilities caps) {
         return checkFunctions(
-                caps.wglDelayBeforeSwapNV
+            caps.wglDelayBeforeSwapNV
         );
     }
 

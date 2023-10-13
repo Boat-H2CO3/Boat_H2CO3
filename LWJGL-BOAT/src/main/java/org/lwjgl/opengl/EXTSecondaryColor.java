@@ -153,9 +153,7 @@ public class EXTSecondaryColor {
 
     // --- [ glSecondaryColor3bvEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glSecondaryColor3bvEXT SecondaryColor3bvEXT}
-     */
+    /** Unsafe version of: {@link #glSecondaryColor3bvEXT SecondaryColor3bvEXT} */
     public static native void nglSecondaryColor3bvEXT(long v);
 
     /**
@@ -172,9 +170,7 @@ public class EXTSecondaryColor {
 
     // --- [ glSecondaryColor3svEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glSecondaryColor3svEXT SecondaryColor3svEXT}
-     */
+    /** Unsafe version of: {@link #glSecondaryColor3svEXT SecondaryColor3svEXT} */
     public static native void nglSecondaryColor3svEXT(long v);
 
     /**
@@ -191,9 +187,7 @@ public class EXTSecondaryColor {
 
     // --- [ glSecondaryColor3ivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glSecondaryColor3ivEXT SecondaryColor3ivEXT}
-     */
+    /** Unsafe version of: {@link #glSecondaryColor3ivEXT SecondaryColor3ivEXT} */
     public static native void nglSecondaryColor3ivEXT(long v);
 
     /**
@@ -210,9 +204,7 @@ public class EXTSecondaryColor {
 
     // --- [ glSecondaryColor3fvEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glSecondaryColor3fvEXT SecondaryColor3fvEXT}
-     */
+    /** Unsafe version of: {@link #glSecondaryColor3fvEXT SecondaryColor3fvEXT} */
     public static native void nglSecondaryColor3fvEXT(long v);
 
     /**
@@ -229,9 +221,7 @@ public class EXTSecondaryColor {
 
     // --- [ glSecondaryColor3dvEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glSecondaryColor3dvEXT SecondaryColor3dvEXT}
-     */
+    /** Unsafe version of: {@link #glSecondaryColor3dvEXT SecondaryColor3dvEXT} */
     public static native void nglSecondaryColor3dvEXT(long v);
 
     /**
@@ -248,9 +238,7 @@ public class EXTSecondaryColor {
 
     // --- [ glSecondaryColor3ubvEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glSecondaryColor3ubvEXT SecondaryColor3ubvEXT}
-     */
+    /** Unsafe version of: {@link #glSecondaryColor3ubvEXT SecondaryColor3ubvEXT} */
     public static native void nglSecondaryColor3ubvEXT(long v);
 
     /**
@@ -267,9 +255,7 @@ public class EXTSecondaryColor {
 
     // --- [ glSecondaryColor3usvEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glSecondaryColor3usvEXT SecondaryColor3usvEXT}
-     */
+    /** Unsafe version of: {@link #glSecondaryColor3usvEXT SecondaryColor3usvEXT} */
     public static native void nglSecondaryColor3usvEXT(long v);
 
     /**
@@ -286,9 +272,7 @@ public class EXTSecondaryColor {
 
     // --- [ glSecondaryColor3uivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glSecondaryColor3uivEXT SecondaryColor3uivEXT}
-     */
+    /** Unsafe version of: {@link #glSecondaryColor3uivEXT SecondaryColor3uivEXT} */
     public static native void nglSecondaryColor3uivEXT(long v);
 
     /**
@@ -305,9 +289,7 @@ public class EXTSecondaryColor {
 
     // --- [ glSecondaryColorPointerEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT}
-     */
+    /** Unsafe version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT} */
     public static native void nglSecondaryColorPointerEXT(int size, int type, int stride, long pointer);
 
     /**
@@ -370,9 +352,7 @@ public class EXTSecondaryColor {
         nglSecondaryColorPointerEXT(size, type, stride, memAddress(pointer));
     }
 
-    /**
-     * Array version of: {@link #glSecondaryColor3svEXT SecondaryColor3svEXT}
-     */
+    /** Array version of: {@link #glSecondaryColor3svEXT SecondaryColor3svEXT} */
     public static void glSecondaryColor3svEXT(@NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glSecondaryColor3svEXT;
         if (CHECKS) {
@@ -382,9 +362,7 @@ public class EXTSecondaryColor {
         callPV(v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSecondaryColor3ivEXT SecondaryColor3ivEXT}
-     */
+    /** Array version of: {@link #glSecondaryColor3ivEXT SecondaryColor3ivEXT} */
     public static void glSecondaryColor3ivEXT(@NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glSecondaryColor3ivEXT;
         if (CHECKS) {
@@ -394,9 +372,7 @@ public class EXTSecondaryColor {
         callPV(v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSecondaryColor3fvEXT SecondaryColor3fvEXT}
-     */
+    /** Array version of: {@link #glSecondaryColor3fvEXT SecondaryColor3fvEXT} */
     public static void glSecondaryColor3fvEXT(@NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glSecondaryColor3fvEXT;
         if (CHECKS) {
@@ -406,9 +382,7 @@ public class EXTSecondaryColor {
         callPV(v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSecondaryColor3dvEXT SecondaryColor3dvEXT}
-     */
+    /** Array version of: {@link #glSecondaryColor3dvEXT SecondaryColor3dvEXT} */
     public static void glSecondaryColor3dvEXT(@NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glSecondaryColor3dvEXT;
         if (CHECKS) {
@@ -418,9 +392,7 @@ public class EXTSecondaryColor {
         callPV(v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSecondaryColor3usvEXT SecondaryColor3usvEXT}
-     */
+    /** Array version of: {@link #glSecondaryColor3usvEXT SecondaryColor3usvEXT} */
     public static void glSecondaryColor3usvEXT(@NativeType("GLushort const *") short[] v) {
         long __functionAddress = GL.getICD().glSecondaryColor3usvEXT;
         if (CHECKS) {
@@ -430,9 +402,7 @@ public class EXTSecondaryColor {
         callPV(v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSecondaryColor3uivEXT SecondaryColor3uivEXT}
-     */
+    /** Array version of: {@link #glSecondaryColor3uivEXT SecondaryColor3uivEXT} */
     public static void glSecondaryColor3uivEXT(@NativeType("GLuint const *") int[] v) {
         long __functionAddress = GL.getICD().glSecondaryColor3uivEXT;
         if (CHECKS) {
@@ -442,9 +412,7 @@ public class EXTSecondaryColor {
         callPV(v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT}
-     */
+    /** Array version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT} */
     public static void glSecondaryColorPointerEXT(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") short[] pointer) {
         long __functionAddress = GL.getICD().glSecondaryColorPointerEXT;
         if (CHECKS) {
@@ -453,9 +421,7 @@ public class EXTSecondaryColor {
         callPV(size, type, stride, pointer, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT}
-     */
+    /** Array version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT} */
     public static void glSecondaryColorPointerEXT(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") int[] pointer) {
         long __functionAddress = GL.getICD().glSecondaryColorPointerEXT;
         if (CHECKS) {
@@ -464,9 +430,7 @@ public class EXTSecondaryColor {
         callPV(size, type, stride, pointer, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT}
-     */
+    /** Array version of: {@link #glSecondaryColorPointerEXT SecondaryColorPointerEXT} */
     public static void glSecondaryColorPointerEXT(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride, @NativeType("void const *") float[] pointer) {
         long __functionAddress = GL.getICD().glSecondaryColorPointerEXT;
         if (CHECKS) {

@@ -11,17 +11,13 @@ import static org.lwjgl.system.APIUtil.*;
  */
 public final class Version {
 
-    /**
-     * Current version of library.
-     */
+    /** Current version of library. */
     public static final int
             VERSION_MAJOR = 3,
             VERSION_MINOR = 2,
             VERSION_REVISION = 3;
 
-    /**
-     * The development state of the current build.
-     */
+    /** The development state of the current build. */
     public static final BuildType BUILD_TYPE = BuildType.STABLE;
 
     private static final String version =
@@ -37,28 +33,18 @@ public final class Version {
         System.out.println(getVersion());
     }
 
-    /**
-     * Returns the LWJGL version.
-     */
+    /** Returns the LWJGL version. */
     public static String getVersion() {
         return version;
     }
 
-    /**
-     * The development state of the current build.
-     */
+    /** The development state of the current build. */
     public enum BuildType {
-        /**
-         * Work in progress, unstable.
-         */
+        /** Work in progress, unstable. */
         ALPHA("a"),
-        /**
-         * Feature complete, unstable.
-         */
+        /** Feature complete, unstable. */
         BETA("b"),
-        /**
-         * Feature complete, stable, official release.
-         */
+        /** Feature complete, stable, official release. */
         STABLE("");
 
         public final String postfix;

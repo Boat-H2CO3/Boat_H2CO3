@@ -40,17 +40,13 @@ public abstract class GLDebugMessageAMDCallback extends Callback implements GLDe
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLDebugMessageAMDCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLDebugMessageAMDCallback} instance that delegates to the specified {@code GLDebugMessageAMDCallbackI} instance.
-     */
+    /** Creates a {@code GLDebugMessageAMDCallback} instance that delegates to the specified {@code GLDebugMessageAMDCallbackI} instance. */
     public static GLDebugMessageAMDCallback create(GLDebugMessageAMDCallbackI instance) {
         return instance instanceof GLDebugMessageAMDCallback
                 ? (GLDebugMessageAMDCallback) instance
@@ -72,6 +68,7 @@ public abstract class GLDebugMessageAMDCallback extends Callback implements GLDe
      *
      * @param length  the GLDebugMessageAMDCallback {@code length} argument
      * @param message the GLDebugMessageAMDCallback {@code message} argument
+     *
      * @return the message as a String
      */
     public static String getMessage(int length, long message) {

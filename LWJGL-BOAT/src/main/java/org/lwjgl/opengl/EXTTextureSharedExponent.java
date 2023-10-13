@@ -24,9 +24,7 @@ package org.lwjgl.opengl;
  */
 public final class EXTTextureSharedExponent {
 
-    /**
-     * Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT.
-     */
+    /** Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT. */
     public static final int GL_RGB9_E5_EXT = 0x8C3D;
 
     /**
@@ -36,9 +34,7 @@ public final class EXTTextureSharedExponent {
      */
     public static final int GL_UNSIGNED_INT_5_9_9_9_REV_EXT = 0x8C3E;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.
-     */
+    /** Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv. */
     public static final int GL_TEXTURE_SHARED_SIZE_EXT = 0x8C3F;
 
     private EXTTextureSharedExponent() {

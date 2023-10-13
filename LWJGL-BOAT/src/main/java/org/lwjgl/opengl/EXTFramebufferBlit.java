@@ -28,9 +28,7 @@ public class EXTFramebufferBlit {
             GL_READ_FRAMEBUFFER_EXT = 0x8CA8,
             GL_DRAW_FRAMEBUFFER_EXT = 0x8CA9;
 
-    /**
-     * Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
             GL_DRAW_FRAMEBUFFER_BINDING_EXT = 0x8CA6,
             GL_READ_FRAMEBUFFER_BINDING_EXT = 0x8CAA;

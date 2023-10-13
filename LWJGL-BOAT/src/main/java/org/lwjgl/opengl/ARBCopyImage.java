@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_copy_image.txt">ARB_copy_image</a> extension.
@@ -38,7 +38,7 @@ public class ARBCopyImage {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glCopyImageSubData
+            caps.glCopyImageSubData
         );
     }
 

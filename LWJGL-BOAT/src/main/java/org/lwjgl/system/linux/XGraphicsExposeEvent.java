@@ -322,7 +322,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
             int height,
             int count,
             int major_code,
-            int minor_code
+        int minor_code
     ) {
         type(type);
         serial(serial);
@@ -353,38 +353,28 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XGraphicsExposeEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XGraphicsExposeEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XGraphicsExposeEvent malloc() {
         return wrap(XGraphicsExposeEvent.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XGraphicsExposeEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code XGraphicsExposeEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XGraphicsExposeEvent calloc() {
         return wrap(XGraphicsExposeEvent.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code XGraphicsExposeEvent} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code XGraphicsExposeEvent} instance allocated with {@link BufferUtils}. */
     public static XGraphicsExposeEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(XGraphicsExposeEvent.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code XGraphicsExposeEvent} instance for the specified memory address.
-     */
+    /** Returns a new {@code XGraphicsExposeEvent} instance for the specified memory address. */
     public static XGraphicsExposeEvent create(long address) {
         return wrap(XGraphicsExposeEvent.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XGraphicsExposeEvent createSafe(long address) {
         return address == NULL ? null : wrap(XGraphicsExposeEvent.class, address);
@@ -428,9 +418,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -438,16 +426,12 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code XGraphicsExposeEvent} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code XGraphicsExposeEvent} instance allocated on the thread-local {@link MemoryStack}. */
     public static XGraphicsExposeEvent mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code XGraphicsExposeEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code XGraphicsExposeEvent} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static XGraphicsExposeEvent callocStack() {
         return callocStack(stackGet());
     }
@@ -491,7 +475,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
     /**
      * Returns a new {@link Buffer} instance allocated on the specified {@link MemoryStack}.
      *
-     * @param stack    the stack from which to allocate
+     * @param stack the stack from which to allocate
      * @param capacity the buffer capacity
      */
     public static Buffer mallocStack(int capacity, MemoryStack stack) {
@@ -674,9 +658,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
     /**
      * Unsafe version of {@link #minor_code(int) minor_code}.
      */
-    public static void nminor_code(long struct, int value) {
-        UNSAFE.putInt(null, struct + XGraphicsExposeEvent.MINOR_CODE, value);
-    }
+    public static void nminor_code(long struct, int value) { UNSAFE.putInt(null, struct + XGraphicsExposeEvent.MINOR_CODE, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -701,16 +683,14 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * An array of {@link XGraphicsExposeEvent} structs.
-     */
+    /** An array of {@link XGraphicsExposeEvent} structs. */
     public static class Buffer extends StructBuffer<XGraphicsExposeEvent, Buffer> implements NativeResource {
 
         private static final XGraphicsExposeEvent ELEMENT_FACTORY = XGraphicsExposeEvent.create(-1L);
 
         /**
          * Creates a new {@code XGraphicsExposeEvent.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link XGraphicsExposeEvent#SIZEOF}, and its mark will be undefined.
@@ -894,34 +874,13 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
         /**
          * Sets the specified value to the {@code height} field.
          */
-        public Buffer height(int value) {
-            XGraphicsExposeEvent.nheight(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code count} field.
-         */
-        public Buffer count(int value) {
-            XGraphicsExposeEvent.ncount(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code major_code} field.
-         */
-        public Buffer major_code(int value) {
-            XGraphicsExposeEvent.nmajor_code(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code minor_code} field.
-         */
-        public Buffer minor_code(int value) {
-            XGraphicsExposeEvent.nminor_code(address(), value);
-            return this;
-        }
+        public Buffer height(int value) { XGraphicsExposeEvent.nheight(address(), value); return this; }
+        /** Sets the specified value to the {@code count} field. */
+        public Buffer count(int value) { XGraphicsExposeEvent.ncount(address(), value); return this; }
+        /** Sets the specified value to the {@code major_code} field. */
+        public Buffer major_code(int value) { XGraphicsExposeEvent.nmajor_code(address(), value); return this; }
+        /** Sets the specified value to the {@code minor_code} field. */
+        public Buffer minor_code(int value) { XGraphicsExposeEvent.nminor_code(address(), value); return this; }
 
     }
 

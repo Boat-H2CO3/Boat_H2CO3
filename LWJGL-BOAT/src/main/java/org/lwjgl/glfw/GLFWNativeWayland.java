@@ -28,9 +28,7 @@ public class GLFWNativeWayland {
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 GetWaylandDisplay = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWaylandDisplay"),
                 GetWaylandMonitor = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetWaylandMonitor"),
@@ -46,6 +44,7 @@ public class GLFWNativeWayland {
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
      * @return the {@code struct wl_display*} used by GLFW, or {@code NULL} if an error occurred.
+     *
      * @since version 3.2
      */
     @NativeType("struct wl_display *")
@@ -62,6 +61,7 @@ public class GLFWNativeWayland {
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
      * @return the {@code struct wl_output*} of the specified monitor, or {@code NULL} if an error occurred.
+     *
      * @since version 3.2
      */
     @NativeType("struct wl_output *")
@@ -81,6 +81,7 @@ public class GLFWNativeWayland {
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
      * @return the main {@code struct wl_surface*} of the specified window, or {@code NULL} if an error occurred.
+     *
      * @since version 3.2
      */
     @NativeType("struct wl_surface *")

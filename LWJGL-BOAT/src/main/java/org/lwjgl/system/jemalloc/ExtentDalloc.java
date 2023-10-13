@@ -39,17 +39,13 @@ public abstract class ExtentDalloc extends Callback implements ExtentDallocI {
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static ExtentDalloc createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code ExtentDalloc} instance that delegates to the specified {@code ExtentDallocI} instance.
-     */
+    /** Creates a {@code ExtentDalloc} instance that delegates to the specified {@code ExtentDallocI} instance. */
     public static ExtentDalloc create(ExtentDallocI instance) {
         return instance instanceof ExtentDalloc
                 ? (ExtentDalloc) instance

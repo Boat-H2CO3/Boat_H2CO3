@@ -79,14 +79,10 @@ public final class EFXUtil {
      * Constant for testSupportGeneric to check an effect.
      */
     private static final int EFFECT = 1111;
-    /**
-     * Constant for testSupportGeneric to check a filter.
-     */
+    /** Constant for testSupportGeneric to check a filter. */
     private static final int FILTER = 2222;
 
-    /**
-     * Utility class, hidden contructor.
-     */
+    /** Utility class, hidden contructor. */
     private EFXUtil() {
     }
 
@@ -106,8 +102,8 @@ public final class EFXUtil {
      *
      * @param effectType Type of effect whose support is to be tested, e.g. AL_EFFECT_REVERB.
      * @return True if it is supported, false if not.
-     * @throws OpenALException          If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has
-     *                                  not been created yet.
+     * @throws OpenALException If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has
+     * not been created yet.
      * @throws IllegalArgumentException effectType is not a valid effect type.
      */
     public static boolean isEffectSupported(final int effectType) {
@@ -141,8 +137,8 @@ public final class EFXUtil {
      *
      * @param filterType Type of filter whose support is to be tested, e.g. AL_FILTER_LOWPASS.
      * @return True if it is supported, false if not.
-     * @throws OpenALException          If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has
-     *                                  not been created yet.
+     * @throws OpenALException If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has
+     * not been created yet.
      * @throws IllegalArgumentException filterType is not a valid filter type.
      */
     public static boolean isFilterSupported(final int filterType) {
@@ -165,8 +161,8 @@ public final class EFXUtil {
      * effects and filters.
      *
      * @param objectType Type of object to test. Must be either EFXUtil.EFFECT or EFXUtil.FILTER.
-     * @param typeValue  OpenAL type the object should be tested for support, e.g. AL_FILTER_LOWPASS
-     *                   or AL_EFFECT_REVERB.
+     * @param typeValue OpenAL type the object should be tested for support, e.g. AL_FILTER_LOWPASS
+     * or AL_EFFECT_REVERB.
      * @return True if object supports typeValue, false else.
      */
     private static boolean testSupportGeneric(final int objectType, final int typeValue) {

@@ -35,7 +35,7 @@ import java.util.HashMap;
 
 /**
  * The ALCdevice class represents a device opened in OpenAL space.
- * <p>
+ *
  * ALC introduces the notion of a Device. A Device can be, depending on the
  * implementation, a hardware device, or a daemon/OS service/actual server. This
  * mechanism also permits different drivers (and hardware) to coexist within the same
@@ -122,6 +122,6 @@ public final class ALCdevice {
      * @return true if this device is still valid
      */
     public boolean isValid() {
-        return valid;
-    }
+		return valid;
+	}
 }

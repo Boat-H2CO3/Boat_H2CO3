@@ -27,15 +27,13 @@ public class WGLARBExtensionsString {
 
     static boolean isAvailable(WGLCapabilities caps) {
         return checkFunctions(
-                caps.wglGetExtensionsStringARB
+            caps.wglGetExtensionsStringARB
         );
     }
 
     // --- [ wglGetExtensionsStringARB ] ---
 
-    /**
-     * Unsafe version of: {@link #wglGetExtensionsStringARB GetExtensionsStringARB}
-     */
+    /** Unsafe version of: {@link #wglGetExtensionsStringARB GetExtensionsStringARB} */
     public static long nwglGetExtensionsStringARB(long hdc) {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetExtensionsStringARB;
         if (CHECKS) {

@@ -33,7 +33,7 @@ public interface EnumerationMutationHandlerI extends CallbackI.V {
     @Override
     default void callback(long args) {
         invoke(
-                dcbArgPointer(args)
+            dcbArgPointer(args)
         );
     }
 

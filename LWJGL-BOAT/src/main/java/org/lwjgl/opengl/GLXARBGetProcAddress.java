@@ -29,15 +29,13 @@ public class GLXARBGetProcAddress {
 
     static boolean isAvailable(GLXCapabilities caps) {
         return checkFunctions(
-                caps.glXGetProcAddressARB
+            caps.glXGetProcAddressARB
         );
     }
 
     // --- [ glXGetProcAddressARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glXGetProcAddressARB GetProcAddressARB}
-     */
+    /** Unsafe version of: {@link #glXGetProcAddressARB GetProcAddressARB} */
     public static long nglXGetProcAddressARB(long procName) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetProcAddressARB;
         if (CHECKS) {

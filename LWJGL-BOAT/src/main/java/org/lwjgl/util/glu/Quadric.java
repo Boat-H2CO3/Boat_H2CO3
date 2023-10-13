@@ -103,7 +103,7 @@ public class Quadric {
      */
     public void setDrawStyle(int drawStyle) {
         this.drawStyle = drawStyle;
-    }
+	}
 
     /**
      * specifies what kind	of normals are desired for quadrics.
@@ -201,7 +201,7 @@ public class Quadric {
     }
 
     protected float cos(float r) {
-        return (float) Math.cos(r);
-    }
+        return (float)Math.cos(r);
+	}
 
 }

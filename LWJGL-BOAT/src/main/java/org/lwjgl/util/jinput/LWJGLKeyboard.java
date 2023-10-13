@@ -68,7 +68,7 @@ final class LWJGLKeyboard extends Keyboard {
                 throw new RuntimeException(e);
             }
         }
-        return components.toArray(new Component[0]);
+        return components.toArray(new Component[components.size()]);
     }
 
     public synchronized void pollDevice() throws IOException {
@@ -105,7 +105,7 @@ final class LWJGLKeyboard extends Keyboard {
         private final int lwjgl_key;
         private float value;
 
-        Key(Component.Identifier.Key key_id, int lwjgl_key) {
+        Key(Identifier.Key key_id, int lwjgl_key) {
             super(key_id.getName(), key_id);
             this.lwjgl_key = lwjgl_key;
         }

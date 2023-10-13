@@ -21,20 +21,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Member documentation</h3>
  *
  * <ul>
- * <li>{@code dmDeviceName[32]} &ndash;
+ * <li>{@code dmDeviceName[32]} &ndash; 
  * A zero-terminated character array that specifies the "friendly" name of the printer or display; for example, "PCL/HP LaserJet" in the case of PCL/HP
  * LaserJet. This string is unique among device drivers. Note that this name may be truncated to fit in the {@code dmDeviceName} array.</li>
- * <li>{@code dmSpecVersion} &ndash;
+ * <li>{@code dmSpecVersion} &ndash; 
  * the version number of the initialization data specification on which the structure is based. To ensure the correct version is used for any operating
  * system, use {@link GDI32#DM_SPECVERSION}.</li>
  * <li>{@code dmDriverVersion} &ndash; the driver version number assigned by the driver developer</li>
- * <li>{@code dmSize} &ndash;
+ * <li>{@code dmSize} &ndash; 
  * specifies the size, in bytes, of the {@code DEVMODE} structure, not including any private driver-specific data that might follow the structure's
  * public members. Set this member to {@link #SIZEOF} to indicate the version of the {@code DEVMODE} structure being used.</li>
- * <li>{@code dmDriverExtra} &ndash;
+ * <li>{@code dmDriverExtra} &ndash; 
  * contains the number of bytes of private driver-data that follow this structure. If a device driver does not use device-specific information, set this
  * member to zero.</li>
- * <li>{@code dmFields} &ndash;
+ * <li>{@code dmFields} &ndash; 
  * specifies whether certain members of the {@code DEVMODE} structure have been initialized. If a member is initialized, its corresponding bit is set
  * otherwise the bit is clear. A driver supports only those {@code DEVMODE} members that are appropriate for the printer or display technology.</li>
  * <li><em>&lt;union&gt;</em>
@@ -55,16 +55,16 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li><em>&lt;struct&gt;</em>
  *
  * <ul>
- * <li>{@code dmPosition} &ndash;
+ * <li>{@code dmPosition} &ndash; 
  * for display devices only, a {@link POINTL} structure that indicates the positional coordinates of the display device in reference to the desktop
  * area. The primary display device is always located at coordinates (0,0).</li>
- * <li>{@code dmDisplayOrientation} &ndash;
+ * <li>{@code dmDisplayOrientation} &ndash; 
  * for display devices only, the orientation at which images should be presented. If {@link GDI32#DM_DISPLAYORIENTATION} is not set, this member must be
  * zero. If {@link GDI32#DM_DISPLAYORIENTATION} is set, this member must be one of the following values:<br>{@link GDI32#DMDO_DEFAULT}, {@link GDI32#DMDO_90}, {@link GDI32#DMDO_180}, {@link GDI32#DMDO_270}
  *
  * <p>To determine whether the display orientation is portrait or landscape orientation, check the ratio of {@code dmPelsWidth} to
  * {@code dmPelsHeight}.</p></li>
- * <li>{@code dmDisplayFixedOutput} &ndash;
+ * <li>{@code dmDisplayFixedOutput} &ndash; 
  * for fixed-resolution display devices only, how the display presents a low-resolution mode on a higher-resolution display. For example, if a
  * display device's resolution is fixed at 1024 x 768 pixels but its mode is set to 640 x 480 pixels, the device can either display a 640 x 480
  * image somewhere in the interior of the 1024 x 768 screen space or stretch the 640 x 480 image to fill the larger screen space. If
@@ -79,7 +79,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code dmCollate} &ndash; for printer devices only</li>
  * <li>{@code dmFormName[32]} &ndash; for printer devices only</li>
  * <li>{@code dmLogPixels} &ndash; the number of pixels per logical inch</li>
- * <li>{@code dmBitsPerPel} &ndash;
+ * <li>{@code dmBitsPerPel} &ndash; 
  * specifies the color resolution, in bits per pixel, of the display device (for example: 4 bits for 16 colors, 8 bits for 256 colors, or 16 bits for
  * 65,536 colors)</li>
  * <li>{@code dmPelsWidth} &ndash; specifies the width, in pixels, of the visible device surface</li>
@@ -90,7 +90,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code dmDisplayFlags} &ndash; specifies the device's display mode, one or more of:<br>{@link GDI32#DM_INTERLACED}, {@link GDI32#DMDISPLAYFLAGS_TEXTMODE}</li>
  * <li>{@code dmNup} &ndash; for printer devices only</li>
  * </ul></li>
- * <li>{@code dmDisplayFrequency} &ndash;
+ * <li>{@code dmDisplayFrequency} &ndash; 
  * specifies the frequency, in hertz (cycles per second), of the display device in a particular mode. This value is also known as the display device's
  * vertical refresh rate.
  *
@@ -665,38 +665,28 @@ public class DEVMODE extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code DEVMODE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code DEVMODE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static DEVMODE malloc() {
         return wrap(DEVMODE.class, nmemAllocChecked(SIZEOF));
     }
 
-    /**
-     * Returns a new {@code DEVMODE} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     */
+    /** Returns a new {@code DEVMODE} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static DEVMODE calloc() {
         return wrap(DEVMODE.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /**
-     * Returns a new {@code DEVMODE} instance allocated with {@link BufferUtils}.
-     */
+    /** Returns a new {@code DEVMODE} instance allocated with {@link BufferUtils}. */
     public static DEVMODE create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
         return wrap(DEVMODE.class, memAddress(container), container);
     }
 
-    /**
-     * Returns a new {@code DEVMODE} instance for the specified memory address.
-     */
+    /** Returns a new {@code DEVMODE} instance for the specified memory address. */
     public static DEVMODE create(long address) {
         return wrap(DEVMODE.class, address);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DEVMODE createSafe(long address) {
         return address == NULL ? null : wrap(DEVMODE.class, address);
@@ -740,9 +730,7 @@ public class DEVMODE extends Struct implements NativeResource {
         return wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}.
-     */
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
@@ -750,16 +738,12 @@ public class DEVMODE extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /**
-     * Returns a new {@code DEVMODE} instance allocated on the thread-local {@link MemoryStack}.
-     */
+    /** Returns a new {@code DEVMODE} instance allocated on the thread-local {@link MemoryStack}. */
     public static DEVMODE mallocStack() {
         return mallocStack(stackGet());
     }
 
-    /**
-     * Returns a new {@code DEVMODE} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero.
-     */
+    /** Returns a new {@code DEVMODE} instance allocated on the thread-local {@link MemoryStack} and initializes all its bits to zero. */
     public static DEVMODE callocStack() {
         return callocStack(stackGet());
     }
@@ -1116,25 +1100,19 @@ public class DEVMODE extends Struct implements NativeResource {
         UNSAFE.putShort(null, struct + DEVMODE.DMSIZE, value);
     }
 
-    /**
-     * Unsafe version of {@link #dmDriverExtra(short) dmDriverExtra}.
-     */
-    public static void ndmDriverExtra(long struct, short value) {
-        UNSAFE.putShort(null, struct + DEVMODE.DMDRIVEREXTRA, value);
-    }
+    /** Unsafe version of {@link #dmDriverExtra(short) dmDriverExtra}. */
+    public static void ndmDriverExtra(long struct, short value) { UNSAFE.putShort(null, struct + DEVMODE.DMDRIVEREXTRA, value); }
 
     // -----------------------------------
 
-    /**
-     * An array of {@link DEVMODE} structs.
-     */
+    /** An array of {@link DEVMODE} structs. */
     public static class Buffer extends StructBuffer<DEVMODE, Buffer> implements NativeResource {
 
         private static final DEVMODE ELEMENT_FACTORY = DEVMODE.create(-1L);
 
         /**
          * Creates a new {@code DEVMODE.Buffer} instance backed by the specified container.
-         * <p>
+         *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
          * by {@link DEVMODE#SIZEOF}, and its mark will be undefined.
@@ -1449,49 +1427,20 @@ public class DEVMODE extends Struct implements NativeResource {
          * Returns the value of the {@code dmReserved2} field.
          */
         @NativeType("DWORD")
-        public int dmReserved2() {
-            return DEVMODE.ndmReserved2(address());
-        }
-
-        /**
-         * Returns the value of the {@code dmPanningWidth} field.
-         */
+        public int dmReserved2() { return DEVMODE.ndmReserved2(address()); }
+        /** Returns the value of the {@code dmPanningWidth} field. */
         @NativeType("DWORD")
-        public int dmPanningWidth() {
-            return DEVMODE.ndmPanningWidth(address());
-        }
-
-        /**
-         * Returns the value of the {@code dmPanningHeight} field.
-         */
+        public int dmPanningWidth() { return DEVMODE.ndmPanningWidth(address()); }
+        /** Returns the value of the {@code dmPanningHeight} field. */
         @NativeType("DWORD")
-        public int dmPanningHeight() {
-            return DEVMODE.ndmPanningHeight(address());
-        }
+        public int dmPanningHeight() { return DEVMODE.ndmPanningHeight(address()); }
 
-        /**
-         * Sets the specified value to the {@code dmSpecVersion} field.
-         */
-        public Buffer dmSpecVersion(@NativeType("WORD") short value) {
-            DEVMODE.ndmSpecVersion(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code dmSize} field.
-         */
-        public Buffer dmSize(@NativeType("WORD") short value) {
-            DEVMODE.ndmSize(address(), value);
-            return this;
-        }
-
-        /**
-         * Sets the specified value to the {@code dmDriverExtra} field.
-         */
-        public Buffer dmDriverExtra(@NativeType("WORD") short value) {
-            DEVMODE.ndmDriverExtra(address(), value);
-            return this;
-        }
+        /** Sets the specified value to the {@code dmSpecVersion} field. */
+        public Buffer dmSpecVersion(@NativeType("WORD") short value) { DEVMODE.ndmSpecVersion(address(), value); return this; }
+        /** Sets the specified value to the {@code dmSize} field. */
+        public Buffer dmSize(@NativeType("WORD") short value) { DEVMODE.ndmSize(address(), value); return this; }
+        /** Sets the specified value to the {@code dmDriverExtra} field. */
+        public Buffer dmDriverExtra(@NativeType("WORD") short value) { DEVMODE.ndmDriverExtra(address(), value); return this; }
 
     }
 

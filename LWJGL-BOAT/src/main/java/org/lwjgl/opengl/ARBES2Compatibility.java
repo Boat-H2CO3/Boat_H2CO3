@@ -5,12 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_ES2_compatibility.txt">ARB_ES2_compatibility</a> extension.
@@ -22,9 +21,7 @@ import java.nio.IntBuffer;
  */
 public class ARBES2Compatibility {
 
-    /**
-     * Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
             GL_SHADER_COMPILER = 0x8DFA,
             GL_SHADER_BINARY_FORMATS = 0x8DF8,
@@ -35,14 +32,10 @@ public class ARBES2Compatibility {
             GL_IMPLEMENTATION_COLOR_READ_TYPE = 0x8B9A,
             GL_IMPLEMENTATION_COLOR_READ_FORMAT = 0x8B9B;
 
-    /**
-     * Accepted by the {@code type} parameter of VertexAttribPointer.
-     */
+    /** Accepted by the {@code type} parameter of VertexAttribPointer. */
     public static final int GL_FIXED = 0x140C;
 
-    /**
-     * Accepted by the {@code precisiontype} parameter of GetShaderPrecisionFormat.
-     */
+    /** Accepted by the {@code precisiontype} parameter of GetShaderPrecisionFormat. */
     public static final int
             GL_LOW_FLOAT = 0x8DF0,
             GL_MEDIUM_FLOAT = 0x8DF1,
@@ -51,9 +44,7 @@ public class ARBES2Compatibility {
             GL_MEDIUM_INT = 0x8DF4,
             GL_HIGH_INT = 0x8DF5;
 
-    /**
-     * Accepted by the {@code format} parameter of most commands taking sized internal formats.
-     */
+    /** Accepted by the {@code format} parameter of most commands taking sized internal formats. */
     public static final int GL_RGB565 = 0x8D62;
 
     static {
@@ -72,9 +63,7 @@ public class ARBES2Compatibility {
 
     // --- [ glReleaseShaderCompiler ] ---
 
-    /**
-     * Releases resources allocated by the shader compiler. This is a hint from the application, and does not prevent later use of the shader compiler.
-     */
+    /** Releases resources allocated by the shader compiler. This is a hint from the application, and does not prevent later use of the shader compiler. */
     public static void glReleaseShaderCompiler() {
         GL41C.glReleaseShaderCompiler();
     }
@@ -104,9 +93,7 @@ public class ARBES2Compatibility {
 
     // --- [ glGetShaderPrecisionFormat ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetShaderPrecisionFormat GetShaderPrecisionFormat}
-     */
+    /** Unsafe version of: {@link #glGetShaderPrecisionFormat GetShaderPrecisionFormat} */
     public static void nglGetShaderPrecisionFormat(int shadertype, int precisiontype, long range, long precision) {
         GL41C.nglGetShaderPrecisionFormat(shadertype, precisiontype, range, precision);
     }
@@ -158,16 +145,12 @@ public class ARBES2Compatibility {
         GL41C.glClearDepthf(depth);
     }
 
-    /**
-     * Array version of: {@link #glShaderBinary ShaderBinary}
-     */
+    /** Array version of: {@link #glShaderBinary ShaderBinary} */
     public static void glShaderBinary(@NativeType("GLuint const *") int[] shaders, @NativeType("GLenum") int binaryformat, @NativeType("void const *") ByteBuffer binary) {
         GL41C.glShaderBinary(shaders, binaryformat, binary);
     }
 
-    /**
-     * Array version of: {@link #glGetShaderPrecisionFormat GetShaderPrecisionFormat}
-     */
+    /** Array version of: {@link #glGetShaderPrecisionFormat GetShaderPrecisionFormat} */
     public static void glGetShaderPrecisionFormat(@NativeType("GLenum") int shadertype, @NativeType("GLenum") int precisiontype, @NativeType("GLint *") int[] range, @NativeType("GLint *") int[] precision) {
         GL41C.glGetShaderPrecisionFormat(shadertype, precisiontype, range, precision);
     }

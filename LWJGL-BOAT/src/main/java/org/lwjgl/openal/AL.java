@@ -177,8 +177,7 @@ public final class AL {
 
     private static ICD icd = new ICDStatic();
 
-    private AL() {
-    }
+    private AL() {}
 
     static void init() {
         functionProvider = new FunctionProvider() {
@@ -276,6 +275,7 @@ public final class AL {
      * Creates a new {@link ALCapabilities} instance for the OpenAL context that is current in the current thread or process.
      *
      * @param alcCaps the {@link ALCCapabilities} of the device associated with the current context
+     *
      * @return the ALCapabilities instance
      */
     public static ALCapabilities createCapabilities(ALCCapabilities alcCaps) {

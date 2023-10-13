@@ -74,9 +74,7 @@ public class STBImageResize {
      */
     public static final int STBIR_FLAG_ALPHA_PREMULTIPLIED = -1;
 
-    /**
-     * The specified alpha channel should be handled as gamma-corrected value even when doing sRGB operations.
-     */
+    /** The specified alpha channel should be handled as gamma-corrected value even when doing sRGB operations. */
     public static final int STBIR_FLAG_ALPHA_USES_COLORSPACE = -1;
 
     /**
@@ -161,9 +159,7 @@ public class STBImageResize {
 
     // --- [ stbir_resize_uint8 ] ---
 
-    /**
-     * Unsafe version of: {@link #stbir_resize_uint8 resize_uint8}
-     */
+    /** Unsafe version of: {@link #stbir_resize_uint8 resize_uint8} */
     public static native int nstbir_resize_uint8(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels);
 
     /**
@@ -187,6 +183,7 @@ public class STBImageResize {
      * @param output_h               the resized image height
      * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
      * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -200,9 +197,7 @@ public class STBImageResize {
 
     // --- [ stbir_resize_float ] ---
 
-    /**
-     * Unsafe version of: {@link #stbir_resize_float resize_float}
-     */
+    /** Unsafe version of: {@link #stbir_resize_float resize_float} */
     public static native int nstbir_resize_float(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels);
 
     /**
@@ -217,6 +212,7 @@ public class STBImageResize {
      * @param output_h               the resized image height
      * @param output_stride_in_bytes the offset between successive rows of the resized image data in memory, in bytes. You can specify 0 to mean packed continuously in memory
      * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -230,9 +226,7 @@ public class STBImageResize {
 
     // --- [ stbir_resize_uint8_srgb ] ---
 
-    /**
-     * Unsafe version of: {@link #stbir_resize_uint8_srgb resize_uint8_srgb}
-     */
+    /** Unsafe version of: {@link #stbir_resize_uint8_srgb resize_uint8_srgb} */
     public static native int nstbir_resize_uint8_srgb(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags);
 
     /**
@@ -257,6 +251,7 @@ public class STBImageResize {
      * @param num_channels           the number of channels in the image (e.g. RGB=3, RGBA=4)
      * @param alpha_channel          the alpha channel index, or {@link #STBIR_ALPHA_CHANNEL_NONE ALPHA_CHANNEL_NONE} if there is no alpha channel
      * @param flags                  the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean. One of:<br><table><tr><td>{@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}</td><td>{@link #STBIR_FLAG_ALPHA_USES_COLORSPACE FLAG_ALPHA_USES_COLORSPACE}</td></tr></table>
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -270,9 +265,7 @@ public class STBImageResize {
 
     // --- [ stbir_resize_uint8_srgb_edgemode ] ---
 
-    /**
-     * Unsafe version of: {@link #stbir_resize_uint8_srgb_edgemode resize_uint8_srgb_edgemode}
-     */
+    /** Unsafe version of: {@link #stbir_resize_uint8_srgb_edgemode resize_uint8_srgb_edgemode} */
     public static native int nstbir_resize_uint8_srgb_edgemode(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode);
 
     /**
@@ -290,6 +283,7 @@ public class STBImageResize {
      * @param alpha_channel          the alpha channel index, or {@link #STBIR_ALPHA_CHANNEL_NONE ALPHA_CHANNEL_NONE} if there is no alpha channel
      * @param flags                  the alpha channel flags. 0 will propably do the right thing if you're not sure what the flags mean. One of:<br><table><tr><td>{@link #STBIR_FLAG_ALPHA_PREMULTIPLIED FLAG_ALPHA_PREMULTIPLIED}</td><td>{@link #STBIR_FLAG_ALPHA_USES_COLORSPACE FLAG_ALPHA_USES_COLORSPACE}</td></tr></table>
      * @param edge_wrap_mode         the edge wrap mode. One of:<br><table><tr><td>{@link #STBIR_EDGE_CLAMP EDGE_CLAMP}</td><td>{@link #STBIR_EDGE_REFLECT EDGE_REFLECT}</td><td>{@link #STBIR_EDGE_WRAP EDGE_WRAP}</td><td>{@link #STBIR_EDGE_ZERO EDGE_ZERO}</td></tr></table>
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -303,9 +297,7 @@ public class STBImageResize {
 
     // --- [ stbir_resize_uint8_generic ] ---
 
-    /**
-     * Unsafe version of: {@link #stbir_resize_uint8_generic resize_uint8_generic}
-     */
+    /** Unsafe version of: {@link #stbir_resize_uint8_generic resize_uint8_generic} */
     public static native int nstbir_resize_uint8_generic(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode, int filter, int space, long alloc_context);
 
     /**
@@ -326,6 +318,7 @@ public class STBImageResize {
      * @param filter                 the scale filter. One of:<br><table><tr><td>{@link #STBIR_FILTER_DEFAULT FILTER_DEFAULT}</td><td>{@link #STBIR_FILTER_BOX FILTER_BOX}</td><td>{@link #STBIR_FILTER_TRIANGLE FILTER_TRIANGLE}</td><td>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE}</td><td>{@link #STBIR_FILTER_CATMULLROM FILTER_CATMULLROM}</td></tr><tr><td>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL}</td></tr></table>
      * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
      * @param alloc_context          pointer to the allocation context
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -355,6 +348,7 @@ public class STBImageResize {
      * @param edge_wrap_mode         the edge wrap mode. One of:<br><table><tr><td>{@link #STBIR_EDGE_CLAMP EDGE_CLAMP}</td><td>{@link #STBIR_EDGE_REFLECT EDGE_REFLECT}</td><td>{@link #STBIR_EDGE_WRAP EDGE_WRAP}</td><td>{@link #STBIR_EDGE_ZERO EDGE_ZERO}</td></tr></table>
      * @param filter                 the scale filter. One of:<br><table><tr><td>{@link #STBIR_FILTER_DEFAULT FILTER_DEFAULT}</td><td>{@link #STBIR_FILTER_BOX FILTER_BOX}</td><td>{@link #STBIR_FILTER_TRIANGLE FILTER_TRIANGLE}</td><td>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE}</td><td>{@link #STBIR_FILTER_CATMULLROM FILTER_CATMULLROM}</td></tr><tr><td>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL}</td></tr></table>
      * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -368,9 +362,7 @@ public class STBImageResize {
 
     // --- [ stbir_resize_uint16_generic ] ---
 
-    /**
-     * Unsafe version of: {@link #stbir_resize_uint16_generic resize_uint16_generic}
-     */
+    /** Unsafe version of: {@link #stbir_resize_uint16_generic resize_uint16_generic} */
     public static native int nstbir_resize_uint16_generic(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode, int filter, int space, long alloc_context);
 
     /**
@@ -391,6 +383,7 @@ public class STBImageResize {
      * @param filter                 the scale filter. One of:<br><table><tr><td>{@link #STBIR_FILTER_DEFAULT FILTER_DEFAULT}</td><td>{@link #STBIR_FILTER_BOX FILTER_BOX}</td><td>{@link #STBIR_FILTER_TRIANGLE FILTER_TRIANGLE}</td><td>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE}</td><td>{@link #STBIR_FILTER_CATMULLROM FILTER_CATMULLROM}</td></tr><tr><td>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL}</td></tr></table>
      * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
      * @param alloc_context          pointer to the allocation context
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -420,6 +413,7 @@ public class STBImageResize {
      * @param edge_wrap_mode         the edge wrap mode. One of:<br><table><tr><td>{@link #STBIR_EDGE_CLAMP EDGE_CLAMP}</td><td>{@link #STBIR_EDGE_REFLECT EDGE_REFLECT}</td><td>{@link #STBIR_EDGE_WRAP EDGE_WRAP}</td><td>{@link #STBIR_EDGE_ZERO EDGE_ZERO}</td></tr></table>
      * @param filter                 the scale filter. One of:<br><table><tr><td>{@link #STBIR_FILTER_DEFAULT FILTER_DEFAULT}</td><td>{@link #STBIR_FILTER_BOX FILTER_BOX}</td><td>{@link #STBIR_FILTER_TRIANGLE FILTER_TRIANGLE}</td><td>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE}</td><td>{@link #STBIR_FILTER_CATMULLROM FILTER_CATMULLROM}</td></tr><tr><td>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL}</td></tr></table>
      * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -433,9 +427,7 @@ public class STBImageResize {
 
     // --- [ stbir_resize_float_generic ] ---
 
-    /**
-     * Unsafe version of: {@link #stbir_resize_float_generic resize_float_generic}
-     */
+    /** Unsafe version of: {@link #stbir_resize_float_generic resize_float_generic} */
     public static native int nstbir_resize_float_generic(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode, int filter, int space, long alloc_context);
 
     /**
@@ -456,6 +448,7 @@ public class STBImageResize {
      * @param filter                 the scale filter. One of:<br><table><tr><td>{@link #STBIR_FILTER_DEFAULT FILTER_DEFAULT}</td><td>{@link #STBIR_FILTER_BOX FILTER_BOX}</td><td>{@link #STBIR_FILTER_TRIANGLE FILTER_TRIANGLE}</td><td>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE}</td><td>{@link #STBIR_FILTER_CATMULLROM FILTER_CATMULLROM}</td></tr><tr><td>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL}</td></tr></table>
      * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
      * @param alloc_context          pointer to the allocation context
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -485,6 +478,7 @@ public class STBImageResize {
      * @param edge_wrap_mode         the edge wrap mode. One of:<br><table><tr><td>{@link #STBIR_EDGE_CLAMP EDGE_CLAMP}</td><td>{@link #STBIR_EDGE_REFLECT EDGE_REFLECT}</td><td>{@link #STBIR_EDGE_WRAP EDGE_WRAP}</td><td>{@link #STBIR_EDGE_ZERO EDGE_ZERO}</td></tr></table>
      * @param filter                 the scale filter. One of:<br><table><tr><td>{@link #STBIR_FILTER_DEFAULT FILTER_DEFAULT}</td><td>{@link #STBIR_FILTER_BOX FILTER_BOX}</td><td>{@link #STBIR_FILTER_TRIANGLE FILTER_TRIANGLE}</td><td>{@link #STBIR_FILTER_CUBICBSPLINE FILTER_CUBICBSPLINE}</td><td>{@link #STBIR_FILTER_CATMULLROM FILTER_CATMULLROM}</td></tr><tr><td>{@link #STBIR_FILTER_MITCHELL FILTER_MITCHELL}</td></tr></table>
      * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -498,9 +492,7 @@ public class STBImageResize {
 
     // --- [ stbir_resize ] ---
 
-    /**
-     * Unsafe version of: {@link #stbir_resize resize}
-     */
+    /** Unsafe version of: {@link #stbir_resize resize} */
     public static native int nstbir_resize(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int datatype, int num_channels, int alpha_channel, int flags, int edge_mode_horizontal, int edge_mode_vertical, int filter_horizontal, int filter_vertical, int space, long alloc_context);
 
     /**
@@ -524,6 +516,7 @@ public class STBImageResize {
      * @param filter_vertical        the vertical scale filter
      * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
      * @param alloc_context          pointer to the allocation context
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -556,6 +549,7 @@ public class STBImageResize {
      * @param filter_horizontal      the horizontal scale filter
      * @param filter_vertical        the vertical scale filter
      * @param space                  the image colorspace. One of:<br><table><tr><td>{@link #STBIR_COLORSPACE_LINEAR COLORSPACE_LINEAR}</td><td>{@link #STBIR_COLORSPACE_SRGB COLORSPACE_SRGB}</td></tr></table>
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -569,9 +563,7 @@ public class STBImageResize {
 
     // --- [ stbir_resize_subpixel ] ---
 
-    /**
-     * Unsafe version of: {@link #stbir_resize_subpixel resize_subpixel}
-     */
+    /** Unsafe version of: {@link #stbir_resize_subpixel resize_subpixel} */
     public static native int nstbir_resize_subpixel(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int datatype, int num_channels, int alpha_channel, int flags, int edge_mode_horizontal, int edge_mode_vertical, int filter_horizontal, int filter_vertical, int space, long alloc_context, float x_scale, float y_scale, float x_offset, float y_offset);
 
     /**
@@ -599,6 +591,7 @@ public class STBImageResize {
      * @param y_scale                vertical scale for subpixel correctness
      * @param x_offset               horizontal offset for subpixel correctness
      * @param y_offset               vertical offset for subpixel correctness
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -635,6 +628,7 @@ public class STBImageResize {
      * @param y_scale                vertical scale for subpixel correctness
      * @param x_offset               horizontal offset for subpixel correctness
      * @param y_offset               vertical offset for subpixel correctness
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -648,9 +642,7 @@ public class STBImageResize {
 
     // --- [ stbir_resize_region ] ---
 
-    /**
-     * Unsafe version of: {@link #stbir_resize_region resize_region}
-     */
+    /** Unsafe version of: {@link #stbir_resize_region resize_region} */
     public static native int nstbir_resize_region(long input_pixels, int input_w, int input_h, int input_stride_in_bytes, long output_pixels, int output_w, int output_h, int output_stride_in_bytes, int datatype, int num_channels, int alpha_channel, int flags, int edge_mode_horizontal, int edge_mode_vertical, int filter_horizontal, int filter_vertical, int space, long alloc_context, float s0, float t0, float s1, float t1);
 
     /**
@@ -678,6 +670,7 @@ public class STBImageResize {
      * @param t0                     the top texture coordinate of the region to scale
      * @param s1                     the right texture coordinate of the region to scale
      * @param t1                     the bottom texture coordinate of the region to scale
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -714,6 +707,7 @@ public class STBImageResize {
      * @param t0                     the top texture coordinate of the region to scale
      * @param s1                     the right texture coordinate of the region to scale
      * @param t1                     the bottom texture coordinate of the region to scale
+     *
      * @return 1 on success, 0 on failure
      */
     @NativeType("int")
@@ -725,14 +719,10 @@ public class STBImageResize {
         return nstbir_resize_region(memAddress(input_pixels), input_w, input_h, input_stride_in_bytes, memAddress(output_pixels), output_w, output_h, output_stride_in_bytes, datatype, num_channels, alpha_channel, flags, edge_mode_horizontal, edge_mode_vertical, filter_horizontal, filter_vertical, space, NULL, s0, t0, s1, t1) != 0;
     }
 
-    /**
-     * Array version of: {@link #nstbir_resize_float}
-     */
+    /** Array version of: {@link #nstbir_resize_float} */
     public static native int nstbir_resize_float(float[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, float[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels);
 
-    /**
-     * Array version of: {@link #stbir_resize_float resize_float}
-     */
+    /** Array version of: {@link #stbir_resize_float resize_float} */
     @NativeType("int")
     public static boolean stbir_resize_float(@NativeType("float const *") float[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("float *") float[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels) {
         if (CHECKS) {
@@ -742,14 +732,10 @@ public class STBImageResize {
         return nstbir_resize_float(input_pixels, input_w, input_h, input_stride_in_bytes, output_pixels, output_w, output_h, output_stride_in_bytes, num_channels) != 0;
     }
 
-    /**
-     * Array version of: {@link #nstbir_resize_uint16_generic}
-     */
+    /** Array version of: {@link #nstbir_resize_uint16_generic} */
     public static native int nstbir_resize_uint16_generic(short[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, short[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode, int filter, int space, long alloc_context);
 
-    /**
-     * Array version of: {@link #stbir_resize_uint16_generic resize_uint16_generic}
-     */
+    /** Array version of: {@link #stbir_resize_uint16_generic resize_uint16_generic} */
     @NativeType("int")
     public static boolean stbir_resize_uint16_generic(@NativeType("stbir_uint16 const *") short[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("stbir_uint16 *") short[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_wrap_mode, @NativeType("stbir_filter") int filter, @NativeType("stbir_colorspace") int space, @NativeType("void *") long alloc_context) {
         if (CHECKS) {
@@ -760,9 +746,7 @@ public class STBImageResize {
         return nstbir_resize_uint16_generic(input_pixels, input_w, input_h, input_stride_in_bytes, output_pixels, output_w, output_h, output_stride_in_bytes, num_channels, alpha_channel, flags, edge_wrap_mode, filter, space, alloc_context) != 0;
     }
 
-    /**
-     * Array version of: {@link #stbir_resize_uint16_generic resize_uint16_generic}
-     */
+    /** Array version of: {@link #stbir_resize_uint16_generic resize_uint16_generic} */
     @NativeType("int")
     public static boolean stbir_resize_uint16_generic(@NativeType("stbir_uint16 const *") short[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("stbir_uint16 *") short[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_wrap_mode, @NativeType("stbir_filter") int filter, @NativeType("stbir_colorspace") int space) {
         if (CHECKS) {
@@ -772,14 +756,10 @@ public class STBImageResize {
         return nstbir_resize_uint16_generic(input_pixels, input_w, input_h, input_stride_in_bytes, output_pixels, output_w, output_h, output_stride_in_bytes, num_channels, alpha_channel, flags, edge_wrap_mode, filter, space, NULL) != 0;
     }
 
-    /**
-     * Array version of: {@link #nstbir_resize_float_generic}
-     */
+    /** Array version of: {@link #nstbir_resize_float_generic} */
     public static native int nstbir_resize_float_generic(float[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, float[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, int edge_wrap_mode, int filter, int space, long alloc_context);
 
-    /**
-     * Array version of: {@link #stbir_resize_float_generic resize_float_generic}
-     */
+    /** Array version of: {@link #stbir_resize_float_generic resize_float_generic} */
     @NativeType("int")
     public static boolean stbir_resize_float_generic(@NativeType("float const *") float[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("float *") float[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_wrap_mode, @NativeType("stbir_filter") int filter, @NativeType("stbir_colorspace") int space, @NativeType("void *") long alloc_context) {
         if (CHECKS) {
@@ -790,9 +770,7 @@ public class STBImageResize {
         return nstbir_resize_float_generic(input_pixels, input_w, input_h, input_stride_in_bytes, output_pixels, output_w, output_h, output_stride_in_bytes, num_channels, alpha_channel, flags, edge_wrap_mode, filter, space, alloc_context) != 0;
     }
 
-    /**
-     * Array version of: {@link #stbir_resize_float_generic resize_float_generic}
-     */
+    /** Array version of: {@link #stbir_resize_float_generic resize_float_generic} */
     @NativeType("int")
     public static boolean stbir_resize_float_generic(@NativeType("float const *") float[] input_pixels, int input_w, int input_h, int input_stride_in_bytes, @NativeType("float *") float[] output_pixels, int output_w, int output_h, int output_stride_in_bytes, int num_channels, int alpha_channel, int flags, @NativeType("stbir_edge") int edge_wrap_mode, @NativeType("stbir_filter") int filter, @NativeType("stbir_colorspace") int space) {
         if (CHECKS) {

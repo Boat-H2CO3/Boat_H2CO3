@@ -34,14 +34,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVTransformFeedback2 {
 
-    /**
-     * Accepted by the {@code target} parameter of BindTransformFeedbackNV.
-     */
+    /** Accepted by the {@code target} parameter of BindTransformFeedbackNV. */
     public static final int GL_TRANSFORM_FEEDBACK_NV = 0x8E22;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int
             GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV = 0x8E23,
             GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV = 0x8E24,
@@ -126,9 +122,7 @@ public class NVTransformFeedback2 {
 
     public static native void glDrawTransformFeedbackNV(@NativeType("GLenum") int mode, @NativeType("GLuint") int id);
 
-    /**
-     * Array version of: {@link #glDeleteTransformFeedbacksNV DeleteTransformFeedbacksNV}
-     */
+    /** Array version of: {@link #glDeleteTransformFeedbacksNV DeleteTransformFeedbacksNV} */
     public static void glDeleteTransformFeedbacksNV(@NativeType("GLuint const *") int[] ids) {
         long __functionAddress = GL.getICD().glDeleteTransformFeedbacksNV;
         if (CHECKS) {
@@ -137,9 +131,7 @@ public class NVTransformFeedback2 {
         callPV(ids.length, ids, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGenTransformFeedbacksNV GenTransformFeedbacksNV}
-     */
+    /** Array version of: {@link #glGenTransformFeedbacksNV GenTransformFeedbacksNV} */
     public static void glGenTransformFeedbacksNV(@NativeType("GLuint *") int[] ids) {
         long __functionAddress = GL.getICD().glGenTransformFeedbacksNV;
         if (CHECKS) {

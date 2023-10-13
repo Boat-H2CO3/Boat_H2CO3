@@ -33,7 +33,7 @@ public interface STBIEOFCallbackI extends CallbackI.I {
     @Override
     default int callback(long args) {
         return invoke(
-                dcbArgPointer(args)
+            dcbArgPointer(args)
         );
     }
 
@@ -41,6 +41,7 @@ public interface STBIEOFCallbackI extends CallbackI.I {
      * The {@code stbi_io_callbacks.eof} callback.
      *
      * @param user a pointer to user data
+     *
      * @return nonzero if we are at the end of file/data
      */
     int invoke(@NativeType("void *") long user);

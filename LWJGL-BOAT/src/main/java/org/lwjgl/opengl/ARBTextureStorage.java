@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_storage.txt">ARB_texture_storage</a> extension.
@@ -29,9 +29,7 @@ import org.lwjgl.system.NativeType;
  */
 public class ARBTextureStorage {
 
-    /**
-     * Accepted by the {@code value} parameter of GetTexParameter{if}v.
-     */
+    /** Accepted by the {@code value} parameter of GetTexParameter{if}v. */
     public static final int GL_TEXTURE_IMMUTABLE_FORMAT = 0x912F;
 
     static {

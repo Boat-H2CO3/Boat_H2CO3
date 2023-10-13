@@ -16,9 +16,7 @@ package org.lwjgl.opengl;
  */
 public final class ARBStencilTexturing {
 
-    /**
-     * Accepted by the {@code pname} parameter of TexParameter and GetTexParameter*.
-     */
+    /** Accepted by the {@code pname} parameter of TexParameter and GetTexParameter*. */
     public static final int GL_DEPTH_STENCIL_TEXTURE_MODE = 0x90EA;
 
     private ARBStencilTexturing() {

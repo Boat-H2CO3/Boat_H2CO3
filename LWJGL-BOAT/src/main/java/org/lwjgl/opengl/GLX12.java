@@ -27,9 +27,7 @@ public class GLX12 extends GLX11 {
 
     // --- [ glXGetCurrentDisplay ] ---
 
-    /**
-     * Returns the display associated with the current context and drawable.
-     */
+    /** Returns the display associated with the current context and drawable. */
     @NativeType("Display *")
     public static long glXGetCurrentDisplay() {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetCurrentDisplay;

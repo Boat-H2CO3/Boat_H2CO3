@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_array_object.txt">ARB_vertex_array_object</a> extension.
@@ -25,9 +25,7 @@ import java.nio.IntBuffer;
  */
 public class ARBVertexArrayObject {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_VERTEX_ARRAY_BINDING = 0x85B5;
 
     static {
@@ -75,9 +73,7 @@ public class ARBVertexArrayObject {
         GL30C.glDeleteVertexArrays(arrays);
     }
 
-    /**
-     * Deletes vertex array objects.
-     */
+    /** Deletes vertex array objects. */
     public static void glDeleteVertexArrays(@NativeType("GLuint const *") int array) {
         GL30C.glDeleteVertexArrays(array);
     }
@@ -102,9 +98,7 @@ public class ARBVertexArrayObject {
         GL30C.glGenVertexArrays(arrays);
     }
 
-    /**
-     * Generates vertex array object names.
-     */
+    /** Generates vertex array object names. */
     @NativeType("void")
     public static int glGenVertexArrays() {
         return GL30C.glGenVertexArrays();
@@ -122,16 +116,12 @@ public class ARBVertexArrayObject {
         return GL30C.glIsVertexArray(array);
     }
 
-    /**
-     * Array version of: {@link #glDeleteVertexArrays DeleteVertexArrays}
-     */
+    /** Array version of: {@link #glDeleteVertexArrays DeleteVertexArrays} */
     public static void glDeleteVertexArrays(@NativeType("GLuint const *") int[] arrays) {
         GL30C.glDeleteVertexArrays(arrays);
     }
 
-    /**
-     * Array version of: {@link #glGenVertexArrays GenVertexArrays}
-     */
+    /** Array version of: {@link #glGenVertexArrays GenVertexArrays} */
     public static void glGenVertexArrays(@NativeType("GLuint *") int[] arrays) {
         GL30C.glGenVertexArrays(arrays);
     }

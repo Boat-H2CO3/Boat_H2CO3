@@ -32,14 +32,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVQueryResource {
 
-    /**
-     * Accepted by the {@code queryType} parameter of {@link #glQueryResourceNV QueryResourceNV}.
-     */
+    /** Accepted by the {@code queryType} parameter of {@link #glQueryResourceNV QueryResourceNV}. */
     public static final int GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV = 0x9540;
 
-    /**
-     * New enums defined.
-     */
+    /** New enums defined. */
     public static final int
             GL_QUERY_RESOURCE_MEMTYPE_VIDMEM_NV = 0x9542,
             GL_QUERY_RESOURCE_SYS_RESERVED_NV = 0x9544,
@@ -63,22 +59,16 @@ public class NVQueryResource {
 
     // --- [ glQueryResourceNV ] ---
 
-    /**
-     * Unsafe version of: {@link #glQueryResourceNV QueryResourceNV}
-     */
+    /** Unsafe version of: {@link #glQueryResourceNV QueryResourceNV} */
     public static native int nglQueryResourceNV(int queryType, int pname, int bufSize, long buffer);
 
-    /**
-     * @param queryType must be:<br><table><tr><td>{@link #GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV}</td></tr></table>
-     */
+    /** @param queryType must be:<br><table><tr><td>{@link #GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV}</td></tr></table> */
     @NativeType("GLint")
     public static int glQueryResourceNV(@NativeType("GLenum") int queryType, @NativeType("GLint") int pname, @NativeType("GLint *") IntBuffer buffer) {
         return nglQueryResourceNV(queryType, pname, buffer.remaining(), memAddress(buffer));
     }
 
-    /**
-     * Array version of: {@link #glQueryResourceNV QueryResourceNV}
-     */
+    /** Array version of: {@link #glQueryResourceNV QueryResourceNV} */
     @NativeType("GLint")
     public static int glQueryResourceNV(@NativeType("GLenum") int queryType, @NativeType("GLint") int pname, @NativeType("GLint *") int[] buffer) {
         long __functionAddress = GL.getICD().glQueryResourceNV;

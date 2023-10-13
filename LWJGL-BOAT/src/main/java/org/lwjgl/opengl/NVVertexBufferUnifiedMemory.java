@@ -25,23 +25,17 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class NVVertexBufferUnifiedMemory {
 
-    /**
-     * Accepted by the {@code cap} parameter of DisableClientState, EnableClientState, IsEnabled.
-     */
+    /** Accepted by the {@code cap} parameter of DisableClientState, EnableClientState, IsEnabled. */
     public static final int
             GL_VERTEX_ATTRIB_ARRAY_UNIFIED_NV = 0x8F1E,
             GL_ELEMENT_ARRAY_UNIFIED_NV = 0x8F1F;
 
-    /**
-     * Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64i_vNV.
-     */
+    /** Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64i_vNV. */
     public static final int
             GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV = 0x8F20,
             GL_TEXTURE_COORD_ARRAY_ADDRESS_NV = 0x8F25;
 
-    /**
-     * Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64vNV.
-     */
+    /** Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64vNV. */
     public static final int
             GL_VERTEX_ARRAY_ADDRESS_NV = 0x8F21,
             GL_NORMAL_ARRAY_ADDRESS_NV = 0x8F22,
@@ -52,16 +46,12 @@ public class NVVertexBufferUnifiedMemory {
             GL_FOG_COORD_ARRAY_ADDRESS_NV = 0x8F28,
             GL_ELEMENT_ARRAY_ADDRESS_NV = 0x8F29;
 
-    /**
-     * Accepted by the {@code target} parameter of GetIntegeri_vNV.
-     */
+    /** Accepted by the {@code target} parameter of GetIntegeri_vNV. */
     public static final int
             GL_VERTEX_ATTRIB_ARRAY_LENGTH_NV = 0x8F2A,
             GL_TEXTURE_COORD_ARRAY_LENGTH_NV = 0x8F2F;
 
-    /**
-     * Accepted by the {@code value} parameter of GetIntegerv.
-     */
+    /** Accepted by the {@code value} parameter of GetIntegerv. */
     public static final int
             GL_VERTEX_ARRAY_LENGTH_NV = 0x8F2B,
             GL_NORMAL_ARRAY_LENGTH_NV = 0x8F2C,
@@ -156,9 +146,7 @@ public class NVVertexBufferUnifiedMemory {
         }
     }
 
-    /**
-     * Array version of: {@link #glGetIntegerui64i_vNV GetIntegerui64i_vNV}
-     */
+    /** Array version of: {@link #glGetIntegerui64i_vNV GetIntegerui64i_vNV} */
     public static void glGetIntegerui64i_vNV(@NativeType("GLenum") int value, @NativeType("GLuint") int index, @NativeType("GLuint64EXT *") long[] result) {
         long __functionAddress = GL.getICD().glGetIntegerui64i_vNV;
         if (CHECKS) {

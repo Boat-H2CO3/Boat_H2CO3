@@ -35,17 +35,13 @@ public abstract class STBIEOFCallback extends Callback implements STBIEOFCallbac
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static STBIEOFCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code STBIEOFCallback} instance that delegates to the specified {@code STBIEOFCallbackI} instance.
-     */
+    /** Creates a {@code STBIEOFCallback} instance that delegates to the specified {@code STBIEOFCallbackI} instance. */
     public static STBIEOFCallback create(STBIEOFCallbackI instance) {
         return instance instanceof STBIEOFCallback
                 ? (STBIEOFCallback) instance

@@ -4,9 +4,11 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
+DISABLE_WARNINGS()
 #define STB_DXT_IMPLEMENTATION
 #define STB_DXT_STATIC
 #include "stb_dxt.h"
+ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 

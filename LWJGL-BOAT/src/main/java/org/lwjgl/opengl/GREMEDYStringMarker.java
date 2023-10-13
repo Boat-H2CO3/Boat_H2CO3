@@ -41,7 +41,7 @@ public class GREMEDYStringMarker {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glStringMarkerGREMEDY
+            caps.glStringMarkerGREMEDY
         );
     }
 

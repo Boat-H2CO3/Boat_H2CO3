@@ -308,9 +308,7 @@ public class NVBindlessTexture {
     @NativeType("GLboolean")
     public static native boolean glIsImageHandleResidentNV(@NativeType("GLuint64") long handle);
 
-    /**
-     * Array version of: {@link #glUniformHandleui64vNV UniformHandleui64vNV}
-     */
+    /** Array version of: {@link #glUniformHandleui64vNV UniformHandleui64vNV} */
     public static void glUniformHandleui64vNV(@NativeType("GLint") int location, @NativeType("GLuint64 const *") long[] values) {
         long __functionAddress = GL.getICD().glUniformHandleui64vNV;
         if (CHECKS) {
@@ -319,9 +317,7 @@ public class NVBindlessTexture {
         callPV(location, values.length, values, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glProgramUniformHandleui64vNV ProgramUniformHandleui64vNV}
-     */
+    /** Array version of: {@link #glProgramUniformHandleui64vNV ProgramUniformHandleui64vNV} */
     public static void glProgramUniformHandleui64vNV(@NativeType("GLuint") int program, @NativeType("GLint") int location, @NativeType("GLuint64 const *") long[] values) {
         long __functionAddress = GL.getICD().glProgramUniformHandleui64vNV;
         if (CHECKS) {

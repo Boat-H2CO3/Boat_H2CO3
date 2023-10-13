@@ -5,27 +5,16 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.Checks.checkSafe;
-import static org.lwjgl.system.Checks.lengthSafe;
-import static org.lwjgl.system.Checks.remainingSafe;
-import static org.lwjgl.system.JNI.callPPPV;
-import static org.lwjgl.system.JNI.callPPV;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.memAddress;
-import static org.lwjgl.system.MemoryUtil.memAddressSafe;
+import javax.annotation.*;
 
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_performance_monitor.txt">AMD_performance_monitor</a> extension.
@@ -37,23 +26,17 @@ import javax.annotation.Nullable;
  */
 public class AMDPerformanceMonitor {
 
-    /**
-     * Accepted by the {@code pame} parameter of GetPerfMonitorCounterInfoAMD.
-     */
+    /** Accepted by the {@code pame} parameter of GetPerfMonitorCounterInfoAMD. */
     public static final int
             GL_COUNTER_TYPE_AMD = 0x8BC0,
             GL_COUNTER_RANGE_AMD = 0x8BC1;
 
-    /**
-     * Returned as a valid value in {@code data} parameter of GetPerfMonitorCounterInfoAMD if {@code pname} = COUNTER_TYPE_AMD.
-     */
+    /** Returned as a valid value in {@code data} parameter of GetPerfMonitorCounterInfoAMD if {@code pname} = COUNTER_TYPE_AMD. */
     public static final int
             GL_UNSIGNED_INT64_AMD = 0x8BC2,
             GL_PERCENTAGE_AMD = 0x8BC3;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetPerfMonitorCounterDataAMD.
-     */
+    /** Accepted by the {@code pname} parameter of GetPerfMonitorCounterDataAMD. */
     public static final int
             GL_PERFMON_RESULT_AVAILABLE_AMD = 0x8BC4,
             GL_PERFMON_RESULT_SIZE_AMD = 0x8BC5,
@@ -212,9 +195,7 @@ public class AMDPerformanceMonitor {
         nglGetPerfMonitorCounterDataAMD(monitor, pname, data.remaining(), memAddress(data), memAddressSafe(bytesWritten));
     }
 
-    /**
-     * Array version of: {@link #glGetPerfMonitorGroupsAMD GetPerfMonitorGroupsAMD}
-     */
+    /** Array version of: {@link #glGetPerfMonitorGroupsAMD GetPerfMonitorGroupsAMD} */
     public static void glGetPerfMonitorGroupsAMD(@Nullable @NativeType("GLint *") int[] numGroups, @Nullable @NativeType("GLuint *") int[] groups) {
         long __functionAddress = GL.getICD().glGetPerfMonitorGroupsAMD;
         if (CHECKS) {
@@ -224,9 +205,7 @@ public class AMDPerformanceMonitor {
         callPPV(numGroups, lengthSafe(groups), groups, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetPerfMonitorCountersAMD GetPerfMonitorCountersAMD}
-     */
+    /** Array version of: {@link #glGetPerfMonitorCountersAMD GetPerfMonitorCountersAMD} */
     public static void glGetPerfMonitorCountersAMD(@NativeType("GLuint") int group, @NativeType("GLint *") int[] numCounters, @NativeType("GLint *") int[] maxActiveCounters, @NativeType("GLuint *") int[] counters) {
         long __functionAddress = GL.getICD().glGetPerfMonitorCountersAMD;
         if (CHECKS) {
@@ -237,9 +216,7 @@ public class AMDPerformanceMonitor {
         callPPPV(group, numCounters, maxActiveCounters, counters.length, counters, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetPerfMonitorGroupStringAMD GetPerfMonitorGroupStringAMD}
-     */
+    /** Array version of: {@link #glGetPerfMonitorGroupStringAMD GetPerfMonitorGroupStringAMD} */
     public static void glGetPerfMonitorGroupStringAMD(@NativeType("GLuint") int group, @NativeType("GLsizei *") int[] length, @NativeType("GLchar *") ByteBuffer groupString) {
         long __functionAddress = GL.getICD().glGetPerfMonitorGroupStringAMD;
         if (CHECKS) {
@@ -249,9 +226,7 @@ public class AMDPerformanceMonitor {
         callPPV(group, groupString.remaining(), length, memAddress(groupString), __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetPerfMonitorCounterStringAMD GetPerfMonitorCounterStringAMD}
-     */
+    /** Array version of: {@link #glGetPerfMonitorCounterStringAMD GetPerfMonitorCounterStringAMD} */
     public static void glGetPerfMonitorCounterStringAMD(@NativeType("GLuint") int group, @NativeType("GLuint") int counter, @Nullable @NativeType("GLsizei *") int[] length, @Nullable @NativeType("GLchar *") ByteBuffer counterString) {
         long __functionAddress = GL.getICD().glGetPerfMonitorCounterStringAMD;
         if (CHECKS) {
@@ -261,9 +236,7 @@ public class AMDPerformanceMonitor {
         callPPV(group, counter, remainingSafe(counterString), length, memAddressSafe(counterString), __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetPerfMonitorCounterInfoAMD GetPerfMonitorCounterInfoAMD}
-     */
+    /** Array version of: {@link #glGetPerfMonitorCounterInfoAMD GetPerfMonitorCounterInfoAMD} */
     public static void glGetPerfMonitorCounterInfoAMD(@NativeType("GLuint") int group, @NativeType("GLuint") int counter, @NativeType("GLenum") int pname, @NativeType("void *") int[] data) {
         long __functionAddress = GL.getICD().glGetPerfMonitorCounterInfoAMD;
         if (CHECKS) {
@@ -273,9 +246,7 @@ public class AMDPerformanceMonitor {
         callPV(group, counter, pname, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetPerfMonitorCounterInfoAMD GetPerfMonitorCounterInfoAMD}
-     */
+    /** Array version of: {@link #glGetPerfMonitorCounterInfoAMD GetPerfMonitorCounterInfoAMD} */
     public static void glGetPerfMonitorCounterInfoAMD(@NativeType("GLuint") int group, @NativeType("GLuint") int counter, @NativeType("GLenum") int pname, @NativeType("void *") float[] data) {
         long __functionAddress = GL.getICD().glGetPerfMonitorCounterInfoAMD;
         if (CHECKS) {
@@ -285,9 +256,7 @@ public class AMDPerformanceMonitor {
         callPV(group, counter, pname, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGenPerfMonitorsAMD GenPerfMonitorsAMD}
-     */
+    /** Array version of: {@link #glGenPerfMonitorsAMD GenPerfMonitorsAMD} */
     public static void glGenPerfMonitorsAMD(@NativeType("GLuint *") int[] monitors) {
         long __functionAddress = GL.getICD().glGenPerfMonitorsAMD;
         if (CHECKS) {
@@ -296,9 +265,7 @@ public class AMDPerformanceMonitor {
         callPV(monitors.length, monitors, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glDeletePerfMonitorsAMD DeletePerfMonitorsAMD}
-     */
+    /** Array version of: {@link #glDeletePerfMonitorsAMD DeletePerfMonitorsAMD} */
     public static void glDeletePerfMonitorsAMD(@NativeType("GLuint *") int[] monitors) {
         long __functionAddress = GL.getICD().glDeletePerfMonitorsAMD;
         if (CHECKS) {
@@ -307,9 +274,7 @@ public class AMDPerformanceMonitor {
         callPV(monitors.length, monitors, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glSelectPerfMonitorCountersAMD SelectPerfMonitorCountersAMD}
-     */
+    /** Array version of: {@link #glSelectPerfMonitorCountersAMD SelectPerfMonitorCountersAMD} */
     public static void glSelectPerfMonitorCountersAMD(@NativeType("GLuint") int monitor, @NativeType("GLboolean") boolean enable, @NativeType("GLuint") int group, @NativeType("GLuint *") int[] counterList) {
         long __functionAddress = GL.getICD().glSelectPerfMonitorCountersAMD;
         if (CHECKS) {
@@ -318,9 +283,7 @@ public class AMDPerformanceMonitor {
         callPV(monitor, enable, group, counterList.length, counterList, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetPerfMonitorCounterDataAMD GetPerfMonitorCounterDataAMD}
-     */
+    /** Array version of: {@link #glGetPerfMonitorCounterDataAMD GetPerfMonitorCounterDataAMD} */
     public static void glGetPerfMonitorCounterDataAMD(@NativeType("GLuint") int monitor, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] data, @Nullable @NativeType("GLint *") int[] bytesWritten) {
         long __functionAddress = GL.getICD().glGetPerfMonitorCounterDataAMD;
         if (CHECKS) {

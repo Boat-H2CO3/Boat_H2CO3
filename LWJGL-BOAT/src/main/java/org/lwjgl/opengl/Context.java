@@ -39,7 +39,7 @@ import org.lwjgl.LWJGLException;
  */
 interface Context {
 
-    boolean isCurrent() throws LWJGLException;
+	boolean isCurrent() throws LWJGLException;
 
     void makeCurrent() throws LWJGLException;
 

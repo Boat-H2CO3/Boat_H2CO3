@@ -5,25 +5,18 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.Checks.checkSafe;
-import static org.lwjgl.system.JNI.callPPPV;
-import static org.lwjgl.system.JNI.callPPV;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.memAddress;
-import static org.lwjgl.system.MemoryUtil.memAddressSafe;
-import static org.lwjgl.system.MemoryUtil.memUTF8;
+import javax.annotation.*;
 
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
+import org.lwjgl.*;
 
-import javax.annotation.Nullable;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shading_language_include.txt">ARB_shading_language_include</a> extension.
@@ -81,14 +74,10 @@ import javax.annotation.Nullable;
  */
 public class ARBShadingLanguageInclude {
 
-    /**
-     * Accepted by the {@code type} parameter of NamedStringARB.
-     */
+    /** Accepted by the {@code type} parameter of NamedStringARB. */
     public static final int GL_SHADER_INCLUDE_ARB = 0x8DAE;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetNamedStringivARB.
-     */
+    /** Accepted by the {@code pname} parameter of GetNamedStringivARB. */
     public static final int
             GL_NAMED_STRING_LENGTH_ARB = 0x8DE9,
             GL_NAMED_STRING_TYPE_ARB = 0x8DEA;
@@ -193,9 +182,7 @@ public class ARBShadingLanguageInclude {
 
     // --- [ glCompileShaderIncludeARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glCompileShaderIncludeARB CompileShaderIncludeARB}
-     */
+    /** Unsafe version of: {@link #glCompileShaderIncludeARB CompileShaderIncludeARB} */
     public static native void nglCompileShaderIncludeARB(int shader, int count, long path, long length);
 
     /**
@@ -401,9 +388,7 @@ public class ARBShadingLanguageInclude {
         }
     }
 
-    /**
-     * Array version of: {@link #glCompileShaderIncludeARB CompileShaderIncludeARB}
-     */
+    /** Array version of: {@link #glCompileShaderIncludeARB CompileShaderIncludeARB} */
     public static void glCompileShaderIncludeARB(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") PointerBuffer path, @Nullable @NativeType("GLint const *") int[] length) {
         long __functionAddress = GL.getICD().glCompileShaderIncludeARB;
         if (CHECKS) {
@@ -413,9 +398,7 @@ public class ARBShadingLanguageInclude {
         callPPV(shader, path.remaining(), memAddress(path), length, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedStringARB GetNamedStringARB}
-     */
+    /** Array version of: {@link #glGetNamedStringARB GetNamedStringARB} */
     public static void glGetNamedStringARB(@NativeType("GLchar const *") ByteBuffer name, @Nullable @NativeType("GLint *") int[] stringlen, @NativeType("GLchar *") ByteBuffer string) {
         long __functionAddress = GL.getICD().glGetNamedStringARB;
         if (CHECKS) {
@@ -425,9 +408,7 @@ public class ARBShadingLanguageInclude {
         callPPPV(name.remaining(), memAddress(name), string.remaining(), stringlen, memAddress(string), __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedStringARB GetNamedStringARB}
-     */
+    /** Array version of: {@link #glGetNamedStringARB GetNamedStringARB} */
     public static void glGetNamedStringARB(@NativeType("GLchar const *") CharSequence name, @Nullable @NativeType("GLint *") int[] stringlen, @NativeType("GLchar *") ByteBuffer string) {
         long __functionAddress = GL.getICD().glGetNamedStringARB;
         if (CHECKS) {
@@ -445,9 +426,7 @@ public class ARBShadingLanguageInclude {
         }
     }
 
-    /**
-     * Array version of: {@link #glGetNamedStringivARB GetNamedStringivARB}
-     */
+    /** Array version of: {@link #glGetNamedStringivARB GetNamedStringivARB} */
     public static void glGetNamedStringivARB(@NativeType("GLchar const *") ByteBuffer name, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetNamedStringivARB;
         if (CHECKS) {
@@ -457,9 +436,7 @@ public class ARBShadingLanguageInclude {
         callPPV(name.remaining(), memAddress(name), pname, params, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedStringivARB GetNamedStringivARB}
-     */
+    /** Array version of: {@link #glGetNamedStringivARB GetNamedStringivARB} */
     public static void glGetNamedStringivARB(@NativeType("GLchar const *") CharSequence name, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetNamedStringivARB;
         if (CHECKS) {

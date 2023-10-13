@@ -16,9 +16,7 @@ package org.lwjgl.opengl;
  */
 public final class GLXEXTSwapControlTear {
 
-    /**
-     * Accepted by {@link GLX13#glXQueryDrawable QueryDrawable}.
-     */
+    /** Accepted by {@link GLX13#glXQueryDrawable QueryDrawable}. */
     public static final int GLX_LATE_SWAPS_TEAR_EXT = 0x20F3;
 
     private GLXEXTSwapControlTear() {

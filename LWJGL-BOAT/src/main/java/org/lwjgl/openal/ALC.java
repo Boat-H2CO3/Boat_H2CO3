@@ -4,37 +4,18 @@
  */
 package org.lwjgl.openal;
 
-import static org.lwjgl.openal.ALC10.ALC_EXTENSIONS;
-import static org.lwjgl.openal.ALC10.ALC_MAJOR_VERSION;
-import static org.lwjgl.openal.ALC10.ALC_MINOR_VERSION;
-import static org.lwjgl.system.APIUtil.apiLog;
-import static org.lwjgl.system.JNI.invokePP;
-import static org.lwjgl.system.JNI.invokePPP;
-import static org.lwjgl.system.JNI.invokePPV;
-import static org.lwjgl.system.JNI.invokePPZ;
-import static org.lwjgl.system.MemoryStack.stackPush;
-import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjgl.system.MemoryUtil.memASCII;
-import static org.lwjgl.system.MemoryUtil.memASCIISafe;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.Checks;
-import org.lwjgl.system.Configuration;
-import org.lwjgl.system.FunctionProviderLocal;
-import org.lwjgl.system.Library;
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeResource;
-import org.lwjgl.system.Platform;
-import org.lwjgl.system.SharedLibrary;
+import javax.annotation.*;
 
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.nio.*;
+import java.util.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * This class must be used before any OpenAL function is called. It has the following responsibilities:
@@ -158,9 +139,7 @@ public final class ALC {
         AL.init();
     }
 
-    /**
-     * Unloads the OpenAL native library.
-     */
+    /** Unloads the OpenAL native library. */
     public static void destroy() {
         if (functionProvider == null) {
             return;
@@ -183,16 +162,12 @@ public final class ALC {
         return t;
     }
 
-    /**
-     * Returns the {@link FunctionProviderLocal} for the OpenAL native library.
-     */
+    /** Returns the {@link FunctionProviderLocal} for the OpenAL native library. */
     public static FunctionProviderLocal getFunctionProvider() {
         return check(ALC.functionProvider);
     }
 
-    /**
-     * Returns the {@link ALCCapabilities} of the OpenAL implementation.
-     */
+    /** Returns the {@link ALCCapabilities} of the OpenAL implementation. */
     static ALCCapabilities getICD() {
         return check(icd);
     }

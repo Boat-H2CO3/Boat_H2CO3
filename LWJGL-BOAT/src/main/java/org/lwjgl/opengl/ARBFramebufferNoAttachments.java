@@ -5,17 +5,14 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryStack.stackGet;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.IntBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_framebuffer_no_attachments.txt">ARB_framebuffer_no_attachments</a> extension.
@@ -59,9 +56,7 @@ public class ARBFramebufferNoAttachments {
             GL_FRAMEBUFFER_DEFAULT_SAMPLES = 0x9313,
             GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS = 0x9314;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
             GL_MAX_FRAMEBUFFER_WIDTH = 0x9315,
             GL_MAX_FRAMEBUFFER_HEIGHT = 0x9316,
@@ -99,9 +94,7 @@ public class ARBFramebufferNoAttachments {
 
     // --- [ glGetFramebufferParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetFramebufferParameteriv GetFramebufferParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetFramebufferParameteriv GetFramebufferParameteriv} */
     public static void nglGetFramebufferParameteriv(int target, int pname, long params) {
         GL43C.nglGetFramebufferParameteriv(target, pname, params);
     }
@@ -141,9 +134,7 @@ public class ARBFramebufferNoAttachments {
 
     // --- [ glGetNamedFramebufferParameterivEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetNamedFramebufferParameterivEXT GetNamedFramebufferParameterivEXT}
-     */
+    /** Unsafe version of: {@link #glGetNamedFramebufferParameterivEXT GetNamedFramebufferParameterivEXT} */
     public static native void nglGetNamedFramebufferParameterivEXT(int framebuffer, int pname, long params);
 
     /**
@@ -179,16 +170,12 @@ public class ARBFramebufferNoAttachments {
         }
     }
 
-    /**
-     * Array version of: {@link #glGetFramebufferParameteriv GetFramebufferParameteriv}
-     */
+    /** Array version of: {@link #glGetFramebufferParameteriv GetFramebufferParameteriv} */
     public static void glGetFramebufferParameteriv(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL43C.glGetFramebufferParameteriv(target, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedFramebufferParameterivEXT GetNamedFramebufferParameterivEXT}
-     */
+    /** Array version of: {@link #glGetNamedFramebufferParameterivEXT GetNamedFramebufferParameterivEXT} */
     public static void glGetNamedFramebufferParameterivEXT(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetNamedFramebufferParameterivEXT;
         if (CHECKS) {

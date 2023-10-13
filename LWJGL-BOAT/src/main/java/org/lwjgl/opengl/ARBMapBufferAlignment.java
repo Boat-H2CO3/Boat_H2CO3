@@ -15,9 +15,7 @@ package org.lwjgl.opengl;
  */
 public final class ARBMapBufferAlignment {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int GL_MIN_MAP_BUFFER_ALIGNMENT = 0x90BC;
 
     private ARBMapBufferAlignment() {

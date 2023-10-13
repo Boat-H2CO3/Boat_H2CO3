@@ -5,15 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryUtil.memAddress;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.FloatBuffer;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_sample_locations.txt">ARB_sample_locations</a> extension.
@@ -38,9 +36,7 @@ import java.nio.FloatBuffer;
  */
 public class ARBSampleLocations {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
             GL_SAMPLE_LOCATION_SUBPIXEL_BITS_ARB = 0x933D,
             GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_ARB = 0x933E,
@@ -123,9 +119,7 @@ public class ARBSampleLocations {
      */
     public static native void glEvaluateDepthValuesARB();
 
-    /**
-     * Array version of: {@link #glFramebufferSampleLocationsfvARB FramebufferSampleLocationsfvARB}
-     */
+    /** Array version of: {@link #glFramebufferSampleLocationsfvARB FramebufferSampleLocationsfvARB} */
     public static void glFramebufferSampleLocationsfvARB(@NativeType("GLenum") int target, @NativeType("GLuint") int start, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glFramebufferSampleLocationsfvARB;
         if (CHECKS) {
@@ -134,9 +128,7 @@ public class ARBSampleLocations {
         callPV(target, start, v.length >> 1, v, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glNamedFramebufferSampleLocationsfvARB NamedFramebufferSampleLocationsfvARB}
-     */
+    /** Array version of: {@link #glNamedFramebufferSampleLocationsfvARB NamedFramebufferSampleLocationsfvARB} */
     public static void glNamedFramebufferSampleLocationsfvARB(@NativeType("GLuint") int framebuffer, @NativeType("GLuint") int start, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glNamedFramebufferSampleLocationsfvARB;
         if (CHECKS) {

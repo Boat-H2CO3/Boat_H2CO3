@@ -17,16 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class CoreFoundation {
 
-    /**
-     * Boolean values.
-     */
+    /** Boolean values. */
     public static final byte
             TRUE = 1,
             FALSE = 0;
 
-    /**
-     * Platform-independent built-in encodings; always available on all platforms.
-     */
+    /** Platform-independent built-in encodings; always available on all platforms. */
     public static final int
             kCFStringEncodingMacRoman = 0,
             kCFStringEncodingWindowsLatin1 = 0x500,
@@ -43,9 +39,7 @@ public class CoreFoundation {
             kCFStringEncodingUTF32BE = 0x18000100,
             kCFStringEncodingUTF32LE = 0x1C000100;
 
-    /**
-     * URL path styles.
-     */
+    /** URL path styles. */
     public static final int
             kCFURLPOSIXPathStyle = 0,
             kCFURLHFSPathStyle = 1,
@@ -64,9 +58,7 @@ public class CoreFoundation {
     @NativeType("CFAllocatorRef")
     private static native long kCFAllocatorDefault();
 
-    /**
-     * This is a synonym for {@code NULL}, if you'd rather use a named constant.
-     */
+    /** This is a synonym for {@code NULL}, if you'd rather use a named constant. */
     public static final long kCFAllocatorDefault = kCFAllocatorDefault();
 
     // --- [ kCFAllocatorSystemDefault ] ---
@@ -74,9 +66,7 @@ public class CoreFoundation {
     @NativeType("CFAllocatorRef")
     private static native long kCFAllocatorSystemDefault();
 
-    /**
-     * Default system allocator; you rarely need to use this.
-     */
+    /** Default system allocator; you rarely need to use this. */
     public static final long kCFAllocatorSystemDefault = kCFAllocatorSystemDefault();
 
     // --- [ kCFAllocatorMalloc ] ---
@@ -118,16 +108,12 @@ public class CoreFoundation {
     @NativeType("CFAllocatorRef")
     private static native long kCFAllocatorUseContext();
 
-    /**
-     * Special allocator argument to CFAllocatorCreate which means "use the functions given in the context to allocate the allocator itself as well".
-     */
+    /** Special allocator argument to CFAllocatorCreate which means "use the functions given in the context to allocate the allocator itself as well". */
     public static final long kCFAllocatorUseContext = kCFAllocatorUseContext();
 
     // --- [ CFRetain ] ---
 
-    /**
-     * Unsafe version of: {@link #CFRetain}
-     */
+    /** Unsafe version of: {@link #CFRetain} */
     public static native long nCFRetain(long cf);
 
     /**
@@ -148,9 +134,7 @@ public class CoreFoundation {
 
     // --- [ CFRelease ] ---
 
-    /**
-     * Unsafe version of: {@link #CFRelease}
-     */
+    /** Unsafe version of: {@link #CFRelease} */
     public static native void nCFRelease(long cf);
 
     /**
@@ -170,9 +154,7 @@ public class CoreFoundation {
 
     // --- [ CFBundleCreate ] ---
 
-    /**
-     * Unsafe version of: {@link #CFBundleCreate}
-     */
+    /** Unsafe version of: {@link #CFBundleCreate} */
     public static native long nCFBundleCreate(long allocator, long bundleURL);
 
     /**
@@ -191,9 +173,7 @@ public class CoreFoundation {
 
     // --- [ CFBundleGetBundleWithIdentifier ] ---
 
-    /**
-     * Unsafe version of: {@link #CFBundleGetBundleWithIdentifier}
-     */
+    /** Unsafe version of: {@link #CFBundleGetBundleWithIdentifier} */
     public static native long nCFBundleGetBundleWithIdentifier(long bundleID);
 
     /**
@@ -211,9 +191,7 @@ public class CoreFoundation {
 
     // --- [ CFBundleGetFunctionPointerForName ] ---
 
-    /**
-     * Unsafe version of: {@link #CFBundleGetFunctionPointerForName}
-     */
+    /** Unsafe version of: {@link #CFBundleGetFunctionPointerForName} */
     public static native long nCFBundleGetFunctionPointerForName(long bundle, long functionName);
 
     /**
@@ -233,9 +211,7 @@ public class CoreFoundation {
 
     // --- [ CFStringCreateWithCString ] ---
 
-    /**
-     * Unsafe version of: {@link #CFStringCreateWithCString}
-     */
+    /** Unsafe version of: {@link #CFStringCreateWithCString} */
     public static native long nCFStringCreateWithCString(long allocator, long cStr, int encoding);
 
     /**
@@ -252,9 +228,7 @@ public class CoreFoundation {
 
     // --- [ CFStringCreateWithCStringNoCopy ] ---
 
-    /**
-     * Unsafe version of: {@link #CFStringCreateWithCStringNoCopy}
-     */
+    /** Unsafe version of: {@link #CFStringCreateWithCStringNoCopy} */
     public static native long nCFStringCreateWithCStringNoCopy(long allocator, long cStr, int encoding, long contentsDeallocator);
 
     /**
@@ -274,9 +248,7 @@ public class CoreFoundation {
 
     // --- [ CFURLCreateWithFileSystemPath ] ---
 
-    /**
-     * Unsafe version of: {@link #CFURLCreateWithFileSystemPath}
-     */
+    /** Unsafe version of: {@link #CFURLCreateWithFileSystemPath} */
     public static native long nCFURLCreateWithFileSystemPath(long allocator, long filePath, long pathStyle, boolean isDirectory);
 
     /**

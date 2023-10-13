@@ -18,9 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class GDI32 {
 
-    /**
-     * Display device state flags.
-     */
+    /** Display device state flags. */
     public static final int
             DISPLAY_DEVICE_ATTACHED_TO_DESKTOP = 0x1,
             DISPLAY_DEVICE_MULTI_DRIVER = 0x2,
@@ -34,21 +32,15 @@ public class GDI32 {
             DISPLAY_DEVICE_TS_COMPATIBLE = 0x200000,
             DISPLAY_DEVICE_UNSAFE_MODES_ON = 0x80000;
 
-    /**
-     * Child display device state flags.
-     */
+    /** Child display device state flags. */
     public static final int
             DISPLAY_DEVICE_ACTIVE = 0x1,
             DISPLAY_DEVICE_ATTACHED = 0x2;
 
-    /**
-     * {@link DEVMODE} specification version.
-     */
+    /** {@link DEVMODE} specification version. */
     public static final int DM_SPECVERSION = 0x401;
 
-    /**
-     * {@link DEVMODE} field selection bits.
-     */
+    /** {@link DEVMODE} field selection bits. */
     public static final int
             DM_ORIENTATION = 0x1,
             DM_PAPERSIZE = 0x2,
@@ -81,33 +73,25 @@ public class GDI32 {
             DM_PANNINGHEIGHT = 0x10000000,
             DM_DISPLAYFIXEDOUTPUT = 0x20000000;
 
-    /**
-     * {@link DEVMODE} {@code dmDisplayOrientation} specifications.
-     */
+    /** {@link DEVMODE} {@code dmDisplayOrientation} specifications. */
     public static final int
             DMDO_DEFAULT = 0,
             DMDO_90 = 1,
             DMDO_180 = 2,
             DMDO_270 = 3;
 
-    /**
-     * {@link DEVMODE} {@code dmDisplayFixedOutput} specifications.
-     */
+    /** {@link DEVMODE} {@code dmDisplayFixedOutput} specifications. */
     public static final int
             DMDFO_DEFAULT = 0,
             DMDFO_STRETCH = 1,
             DMDFO_CENTER = 2;
 
-    /**
-     * {@link DEVMODE} {@code dmDisplayFlags} flags.
-     */
+    /** {@link DEVMODE} {@code dmDisplayFlags} flags. */
     public static final int
             DM_INTERLACED = 0x2,
             DMDISPLAYFLAGS_TEXTMODE = 0x4;
 
-    /**
-     * {@link PIXELFORMATDESCRIPTOR} flags.
-     */
+    /** {@link PIXELFORMATDESCRIPTOR} flags. */
     public static final int
             PFD_DOUBLEBUFFER = 0x1,
             PFD_STEREO = 0x2,
@@ -129,16 +113,12 @@ public class GDI32 {
             PFD_DOUBLEBUFFER_DONTCARE = 0x40000000,
             PFD_STEREO_DONTCARE = 0x80000000;
 
-    /**
-     * {@link PIXELFORMATDESCRIPTOR} pixel types.
-     */
+    /** {@link PIXELFORMATDESCRIPTOR} pixel types. */
     public static final byte
             PFD_TYPE_RGBA = 0,
             PFD_TYPE_COLORINDEX = 1;
 
-    /**
-     * {@link PIXELFORMATDESCRIPTOR} layer types.
-     */
+    /** {@link PIXELFORMATDESCRIPTOR} layer types. */
     public static final byte
             PFD_MAIN_PLANE = 0,
             PFD_OVERLAY_PLANE = 1,
@@ -150,17 +130,13 @@ public class GDI32 {
 
     private static final SharedLibrary GDI32 = Library.loadNative(GDI32.class, "org.lwjgl", "gdi32");
 
-    /**
-     * Contains the function pointers loaded from the gdi32 {@link SharedLibrary}.
-     */
+    /** Contains the function pointers loaded from the gdi32 {@link SharedLibrary}. */
     public static final class Functions {
 
         private Functions() {
         }
 
-        /**
-         * Function address.
-         */
+        /** Function address. */
         public static final long
                 ChoosePixelFormat = apiGetFunctionAddress(GDI32, "ChoosePixelFormat"),
                 DescribePixelFormat = apiGetFunctionAddress(GDI32, "DescribePixelFormat"),
@@ -170,23 +146,17 @@ public class GDI32 {
 
     }
 
-    /**
-     * Returns the gdi32 {@link SharedLibrary}.
-     */
+    /** Returns the gdi32 {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return GDI32;
     }
 
     // --- [ ChoosePixelFormat ] ---
 
-    /**
-     * Unsafe version of: {@link #ChoosePixelFormat}
-     */
+    /** Unsafe version of: {@link #ChoosePixelFormat} */
     public static native int nChoosePixelFormat(long hdc, long pixelFormatDescriptor, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #ChoosePixelFormat}
-     */
+    /** Unsafe version of: {@link #ChoosePixelFormat} */
     public static int nChoosePixelFormat(long hdc, long pixelFormatDescriptor) {
         long __functionAddress = Functions.ChoosePixelFormat;
         if (CHECKS) {
@@ -207,14 +177,10 @@ public class GDI32 {
 
     // --- [ DescribePixelFormat ] ---
 
-    /**
-     * Unsafe version of: {@link #DescribePixelFormat}
-     */
+    /** Unsafe version of: {@link #DescribePixelFormat} */
     public static native int nDescribePixelFormat(long hdc, int pixelFormat, int bytes, long pixelFormatDescriptor, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #DescribePixelFormat}
-     */
+    /** Unsafe version of: {@link #DescribePixelFormat} */
     public static int nDescribePixelFormat(long hdc, int pixelFormat, int bytes, long pixelFormatDescriptor) {
         long __functionAddress = Functions.DescribePixelFormat;
         if (CHECKS) {
@@ -257,9 +223,7 @@ public class GDI32 {
 
     // --- [ GetPixelFormat ] ---
 
-    /**
-     * Unsafe version of: {@link #GetPixelFormat}
-     */
+    /** Unsafe version of: {@link #GetPixelFormat} */
     public static native int nGetPixelFormat(long hdc, long __functionAddress);
 
     /**
@@ -277,14 +241,10 @@ public class GDI32 {
 
     // --- [ SetPixelFormat ] ---
 
-    /**
-     * Unsafe version of: {@link #SetPixelFormat}
-     */
+    /** Unsafe version of: {@link #SetPixelFormat} */
     public static native int nSetPixelFormat(long hdc, int pixelFormat, long pixelFormatDescriptor, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #SetPixelFormat}
-     */
+    /** Unsafe version of: {@link #SetPixelFormat} */
     public static int nSetPixelFormat(long hdc, int pixelFormat, long pixelFormatDescriptor) {
         long __functionAddress = Functions.SetPixelFormat;
         if (CHECKS) {
@@ -308,9 +268,7 @@ public class GDI32 {
 
     // --- [ SwapBuffers ] ---
 
-    /**
-     * Unsafe version of: {@link #SwapBuffers}
-     */
+    /** Unsafe version of: {@link #SwapBuffers} */
     public static native int nSwapBuffers(long dc, long __functionAddress);
 
     /**

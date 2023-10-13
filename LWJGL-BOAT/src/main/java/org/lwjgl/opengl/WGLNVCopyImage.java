@@ -25,7 +25,7 @@ public class WGLNVCopyImage {
 
     static boolean isAvailable(WGLCapabilities caps) {
         return checkFunctions(
-                caps.wglCopyImageSubDataNV
+            caps.wglCopyImageSubDataNV
         );
     }
 

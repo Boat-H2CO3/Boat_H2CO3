@@ -26,15 +26,13 @@ public class NVTextureBarrier {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glTextureBarrierNV
+            caps.glTextureBarrierNV
         );
     }
 
     // --- [ glTextureBarrierNV ] ---
 
-    /**
-     * Guarantees that writes have completed and caches have been invalidated before subsequent Draws are executed.
-     */
+    /** Guarantees that writes have completed and caches have been invalidated before subsequent Draws are executed. */
     public static native void glTextureBarrierNV();
 
 }

@@ -38,17 +38,13 @@ public abstract class STBIZlibCompress extends Callback implements STBIZlibCompr
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static STBIZlibCompress createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code STBIZlibCompress} instance that delegates to the specified {@code STBIZlibCompressI} instance.
-     */
+    /** Creates a {@code STBIZlibCompress} instance that delegates to the specified {@code STBIZlibCompressI} instance. */
     public static STBIZlibCompress create(STBIZlibCompressI instance) {
         return instance instanceof STBIZlibCompress
                 ? (STBIZlibCompress) instance

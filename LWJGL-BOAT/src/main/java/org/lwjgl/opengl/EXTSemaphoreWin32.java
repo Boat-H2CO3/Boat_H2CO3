@@ -51,9 +51,7 @@ public class EXTSemaphoreWin32 {
      */
     public static final int GL_D3D12_FENCE_VALUE_EXT = 0x9595;
 
-    static {
-        GL.initialize();
-    }
+    static { GL.initialize(); }
 
     protected EXTSemaphoreWin32() {
         throw new UnsupportedOperationException();

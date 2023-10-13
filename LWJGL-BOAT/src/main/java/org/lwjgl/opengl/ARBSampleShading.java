@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.NativeType;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_sample_shading.txt">ARB_sample_shading</a> extension.
@@ -36,9 +36,7 @@ public class ARBSampleShading {
      */
     public static final int GL_SAMPLE_SHADING_ARB = 0x8C36;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
-     */
+    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int GL_MIN_SAMPLE_SHADING_VALUE_ARB = 0x8C37;
 
     static {
@@ -51,7 +49,7 @@ public class ARBSampleShading {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glMinSampleShadingARB
+            caps.glMinSampleShadingARB
         );
     }
 

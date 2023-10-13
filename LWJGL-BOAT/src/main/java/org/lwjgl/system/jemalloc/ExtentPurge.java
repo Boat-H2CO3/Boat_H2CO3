@@ -40,17 +40,13 @@ public abstract class ExtentPurge extends Callback implements ExtentPurgeI {
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static ExtentPurge createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code ExtentPurge} instance that delegates to the specified {@code ExtentPurgeI} instance.
-     */
+    /** Creates a {@code ExtentPurge} instance that delegates to the specified {@code ExtentPurgeI} instance. */
     public static ExtentPurge create(ExtentPurgeI instance) {
         return instance instanceof ExtentPurge
                 ? (ExtentPurge) instance

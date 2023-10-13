@@ -5,19 +5,15 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import javax.annotation.*;
 
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.LongBuffer;
-import java.nio.ShortBuffer;
+import org.lwjgl.*;
 
-import javax.annotation.Nullable;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_direct_state_access.txt">ARB_direct_state_access</a> extension.
@@ -36,14 +32,10 @@ import javax.annotation.Nullable;
  */
 public class ARBDirectStateAccess {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetTextureParameter{if}v and GetTextureParameterI{i ui}v.
-     */
+    /** Accepted by the {@code pname} parameter of GetTextureParameter{if}v and GetTextureParameterI{i ui}v. */
     public static final int GL_TEXTURE_TARGET = 0x1006;
 
-    /**
-     * Accepted by the {@code pname} parameter of GetQueryObjectiv.
-     */
+    /** Accepted by the {@code pname} parameter of GetQueryObjectiv. */
     public static final int GL_QUERY_TARGET = 0x82EA;
 
     static {
@@ -120,9 +112,7 @@ public class ARBDirectStateAccess {
         GL45C.glCreateTransformFeedbacks(ids);
     }
 
-    /**
-     * Returns {@code n} previously unused transform feedback object names in {@code ids}, each representing a new state vector.
-     */
+    /** Returns {@code n} previously unused transform feedback object names in {@code ids}, each representing a new state vector. */
     @NativeType("void")
     public static int glCreateTransformFeedbacks() {
         return GL45C.glCreateTransformFeedbacks();
@@ -158,9 +148,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetTransformFeedbackiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetTransformFeedbackiv GetTransformFeedbackiv}
-     */
+    /** Unsafe version of: {@link #glGetTransformFeedbackiv GetTransformFeedbackiv} */
     public static void nglGetTransformFeedbackiv(int xfb, int pname, long param) {
         GL45C.nglGetTransformFeedbackiv(xfb, pname, param);
     }
@@ -189,9 +177,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetTransformFeedbacki_v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetTransformFeedbacki_v GetTransformFeedbacki_v}
-     */
+    /** Unsafe version of: {@link #glGetTransformFeedbacki_v GetTransformFeedbacki_v} */
     public static void nglGetTransformFeedbacki_v(int xfb, int pname, int index, long param) {
         GL45C.nglGetTransformFeedbacki_v(xfb, pname, index, param);
     }
@@ -222,9 +208,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetTransformFeedbacki64_v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetTransformFeedbacki64_v GetTransformFeedbacki64_v}
-     */
+    /** Unsafe version of: {@link #glGetTransformFeedbacki64_v GetTransformFeedbacki64_v} */
     public static void nglGetTransformFeedbacki64_v(int xfb, int pname, int index, long param) {
         GL45C.nglGetTransformFeedbacki64_v(xfb, pname, index, param);
     }
@@ -744,9 +728,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glClearNamedBufferData ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearNamedBufferData ClearNamedBufferData}
-     */
+    /** Unsafe version of: {@link #glClearNamedBufferData ClearNamedBufferData} */
     public static void nglClearNamedBufferData(int buffer, int internalformat, int format, int type, long data) {
         GL45C.nglClearNamedBufferData(buffer, internalformat, format, type, data);
     }
@@ -813,9 +795,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glClearNamedBufferSubData ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData}
-     */
+    /** Unsafe version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData} */
     public static void nglClearNamedBufferSubData(int buffer, int internalformat, long offset, long size, int format, int type, long data) {
         GL45C.nglClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
     }
@@ -890,9 +870,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glMapNamedBuffer ] ---
 
-    /**
-     * Unsafe version of: {@link #glMapNamedBuffer MapNamedBuffer}
-     */
+    /** Unsafe version of: {@link #glMapNamedBuffer MapNamedBuffer} */
     public static long nglMapNamedBuffer(int buffer, int access) {
         return GL45C.nglMapNamedBuffer(buffer, access);
     }
@@ -935,9 +913,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glMapNamedBufferRange ] ---
 
-    /**
-     * Unsafe version of: {@link #glMapNamedBufferRange MapNamedBufferRange}
-     */
+    /** Unsafe version of: {@link #glMapNamedBufferRange MapNamedBufferRange} */
     public static long nglMapNamedBufferRange(int buffer, long offset, long length, int access) {
         return GL45C.nglMapNamedBufferRange(buffer, offset, length, access);
     }
@@ -997,9 +973,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetNamedBufferParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetNamedBufferParameteriv GetNamedBufferParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetNamedBufferParameteriv GetNamedBufferParameteriv} */
     public static void nglGetNamedBufferParameteriv(int buffer, int pname, long params) {
         GL45C.nglGetNamedBufferParameteriv(buffer, pname, params);
     }
@@ -1028,9 +1002,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetNamedBufferParameteri64v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetNamedBufferParameteri64v GetNamedBufferParameteri64v}
-     */
+    /** Unsafe version of: {@link #glGetNamedBufferParameteri64v GetNamedBufferParameteri64v} */
     public static void nglGetNamedBufferParameteri64v(int buffer, int pname, long params) {
         GL45C.nglGetNamedBufferParameteri64v(buffer, pname, params);
     }
@@ -1059,9 +1031,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetNamedBufferPointerv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetNamedBufferPointerv GetNamedBufferPointerv}
-     */
+    /** Unsafe version of: {@link #glGetNamedBufferPointerv GetNamedBufferPointerv} */
     public static void nglGetNamedBufferPointerv(int buffer, int pname, long params) {
         GL45C.nglGetNamedBufferPointerv(buffer, pname, params);
     }
@@ -1185,9 +1155,7 @@ public class ARBDirectStateAccess {
         GL45C.glCreateFramebuffers(framebuffers);
     }
 
-    /**
-     * Returns {@code n} previously unused framebuffer names in {@code framebuffers}, each representing a new framebuffer object.
-     */
+    /** Returns {@code n} previously unused framebuffer names in {@code framebuffers}, each representing a new framebuffer object. */
     @NativeType("void")
     public static int glCreateFramebuffers() {
         return GL45C.glCreateFramebuffers();
@@ -1373,9 +1341,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glClearNamedFramebufferiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearNamedFramebufferiv ClearNamedFramebufferiv}
-     */
+    /** Unsafe version of: {@link #glClearNamedFramebufferiv ClearNamedFramebufferiv} */
     public static void nglClearNamedFramebufferiv(int framebuffer, int buffer, int drawbuffer, long value) {
         GL45C.nglClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
     }
@@ -1395,9 +1361,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glClearNamedFramebufferuiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearNamedFramebufferuiv ClearNamedFramebufferuiv}
-     */
+    /** Unsafe version of: {@link #glClearNamedFramebufferuiv ClearNamedFramebufferuiv} */
     public static void nglClearNamedFramebufferuiv(int framebuffer, int buffer, int drawbuffer, long value) {
         GL45C.nglClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
     }
@@ -1416,9 +1380,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glClearNamedFramebufferfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearNamedFramebufferfv ClearNamedFramebufferfv}
-     */
+    /** Unsafe version of: {@link #glClearNamedFramebufferfv ClearNamedFramebufferfv} */
     public static void nglClearNamedFramebufferfv(int framebuffer, int buffer, int drawbuffer, long value) {
         GL45C.nglClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
     }
@@ -1488,9 +1450,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetNamedFramebufferParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetNamedFramebufferParameteriv GetNamedFramebufferParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetNamedFramebufferParameteriv GetNamedFramebufferParameteriv} */
     public static void nglGetNamedFramebufferParameteriv(int framebuffer, int pname, long params) {
         GL45C.nglGetNamedFramebufferParameteriv(framebuffer, pname, params);
     }
@@ -1519,9 +1479,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetNamedFramebufferAttachmentParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetNamedFramebufferAttachmentParameteriv GetNamedFramebufferAttachmentParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetNamedFramebufferAttachmentParameteriv GetNamedFramebufferAttachmentParameteriv} */
     public static void nglGetNamedFramebufferAttachmentParameteriv(int framebuffer, int attachment, int pname, long params) {
         GL45C.nglGetNamedFramebufferAttachmentParameteriv(framebuffer, attachment, pname, params);
     }
@@ -1570,9 +1528,7 @@ public class ARBDirectStateAccess {
         GL45C.glCreateRenderbuffers(renderbuffers);
     }
 
-    /**
-     * Returns {@code n} previously unused renderbuffer names in {@code renderbuffers}, each representing a new renderbuffer object.
-     */
+    /** Returns {@code n} previously unused renderbuffer names in {@code renderbuffers}, each representing a new renderbuffer object. */
     @NativeType("void")
     public static int glCreateRenderbuffers() {
         return GL45C.glCreateRenderbuffers();
@@ -1607,9 +1563,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetNamedRenderbufferParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetNamedRenderbufferParameteriv GetNamedRenderbufferParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetNamedRenderbufferParameteriv GetNamedRenderbufferParameteriv} */
     public static void nglGetNamedRenderbufferParameteriv(int renderbuffer, int pname, long params) {
         GL45C.nglGetNamedRenderbufferParameteriv(renderbuffer, pname, params);
     }
@@ -1775,9 +1729,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glTextureSubImage1D ] ---
 
-    /**
-     * Unsafe version of: {@link #glTextureSubImage1D TextureSubImage1D}
-     */
+    /** Unsafe version of: {@link #glTextureSubImage1D TextureSubImage1D} */
     public static void nglTextureSubImage1D(int texture, int level, int xoffset, int width, int format, int type, long pixels) {
         GL45C.nglTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
     }
@@ -1874,9 +1826,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glTextureSubImage2D ] ---
 
-    /**
-     * Unsafe version of: {@link #glTextureSubImage2D TextureSubImage2D}
-     */
+    /** Unsafe version of: {@link #glTextureSubImage2D TextureSubImage2D} */
     public static void nglTextureSubImage2D(int texture, int level, int xoffset, int yoffset, int width, int height, int format, int type, long pixels) {
         GL45C.nglTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
     }
@@ -1985,9 +1935,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glTextureSubImage3D ] ---
 
-    /**
-     * Unsafe version of: {@link #glTextureSubImage3D TextureSubImage3D}
-     */
+    /** Unsafe version of: {@link #glTextureSubImage3D TextureSubImage3D} */
     public static void nglTextureSubImage3D(int texture, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, long pixels) {
         GL45C.nglTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
     }
@@ -2306,9 +2254,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glTextureParameterfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glTextureParameterfv TextureParameterfv}
-     */
+    /** Unsafe version of: {@link #glTextureParameterfv TextureParameterfv} */
     public static void nglTextureParameterfv(int texture, int pname, long params) {
         GL45C.nglTextureParameterfv(texture, pname, params);
     }
@@ -2339,9 +2285,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glTextureParameterIiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glTextureParameterIiv TextureParameterIiv}
-     */
+    /** Unsafe version of: {@link #glTextureParameterIiv TextureParameterIiv} */
     public static void nglTextureParameterIiv(int texture, int pname, long params) {
         GL45C.nglTextureParameterIiv(texture, pname, params);
     }
@@ -2369,9 +2313,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glTextureParameterIuiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glTextureParameterIuiv TextureParameterIuiv}
-     */
+    /** Unsafe version of: {@link #glTextureParameterIuiv TextureParameterIuiv} */
     public static void nglTextureParameterIuiv(int texture, int pname, long params) {
         GL45C.nglTextureParameterIuiv(texture, pname, params);
     }
@@ -2399,9 +2341,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glTextureParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glTextureParameteriv TextureParameteriv}
-     */
+    /** Unsafe version of: {@link #glTextureParameteriv TextureParameteriv} */
     public static void nglTextureParameteriv(int texture, int pname, long params) {
         GL45C.nglTextureParameteriv(texture, pname, params);
     }
@@ -2570,9 +2510,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetTextureLevelParameterfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetTextureLevelParameterfv GetTextureLevelParameterfv}
-     */
+    /** Unsafe version of: {@link #glGetTextureLevelParameterfv GetTextureLevelParameterfv} */
     public static void nglGetTextureLevelParameterfv(int texture, int level, int pname, long params) {
         GL45C.nglGetTextureLevelParameterfv(texture, level, pname, params);
     }
@@ -2603,9 +2541,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetTextureLevelParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetTextureLevelParameteriv GetTextureLevelParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetTextureLevelParameteriv GetTextureLevelParameteriv} */
     public static void nglGetTextureLevelParameteriv(int texture, int level, int pname, long params) {
         GL45C.nglGetTextureLevelParameteriv(texture, level, pname, params);
     }
@@ -2636,9 +2572,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetTextureParameterfv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetTextureParameterfv GetTextureParameterfv}
-     */
+    /** Unsafe version of: {@link #glGetTextureParameterfv GetTextureParameterfv} */
     public static void nglGetTextureParameterfv(int texture, int pname, long params) {
         GL45C.nglGetTextureParameterfv(texture, pname, params);
     }
@@ -2667,9 +2601,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetTextureParameterIiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetTextureParameterIiv GetTextureParameterIiv}
-     */
+    /** Unsafe version of: {@link #glGetTextureParameterIiv GetTextureParameterIiv} */
     public static void nglGetTextureParameterIiv(int texture, int pname, long params) {
         GL45C.nglGetTextureParameterIiv(texture, pname, params);
     }
@@ -2698,9 +2630,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetTextureParameterIuiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetTextureParameterIuiv GetTextureParameterIuiv}
-     */
+    /** Unsafe version of: {@link #glGetTextureParameterIuiv GetTextureParameterIuiv} */
     public static void nglGetTextureParameterIuiv(int texture, int pname, long params) {
         GL45C.nglGetTextureParameterIuiv(texture, pname, params);
     }
@@ -2729,9 +2659,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetTextureParameteriv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetTextureParameteriv GetTextureParameteriv}
-     */
+    /** Unsafe version of: {@link #glGetTextureParameteriv GetTextureParameteriv} */
     public static void nglGetTextureParameteriv(int texture, int pname, long params) {
         GL45C.nglGetTextureParameteriv(texture, pname, params);
     }
@@ -2778,9 +2706,7 @@ public class ARBDirectStateAccess {
         GL45C.glCreateVertexArrays(arrays);
     }
 
-    /**
-     * Returns {@code n} previously unused vertex array object names in {@code arrays}.
-     */
+    /** Returns {@code n} previously unused vertex array object names in {@code arrays}. */
     @NativeType("void")
     public static int glCreateVertexArrays() {
         return GL45C.glCreateVertexArrays();
@@ -2936,9 +2862,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetVertexArrayiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexArrayiv GetVertexArrayiv}
-     */
+    /** Unsafe version of: {@link #glGetVertexArrayiv GetVertexArrayiv} */
     public static void nglGetVertexArrayiv(int vaobj, int pname, long param) {
         GL45C.nglGetVertexArrayiv(vaobj, pname, param);
     }
@@ -2967,9 +2891,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetVertexArrayIndexediv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexArrayIndexediv GetVertexArrayIndexediv}
-     */
+    /** Unsafe version of: {@link #glGetVertexArrayIndexediv GetVertexArrayIndexediv} */
     public static void nglGetVertexArrayIndexediv(int vaobj, int index, int pname, long param) {
         GL45C.nglGetVertexArrayIndexediv(vaobj, index, pname, param);
     }
@@ -3000,9 +2922,7 @@ public class ARBDirectStateAccess {
 
     // --- [ glGetVertexArrayIndexed64iv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetVertexArrayIndexed64iv GetVertexArrayIndexed64iv}
-     */
+    /** Unsafe version of: {@link #glGetVertexArrayIndexed64iv GetVertexArrayIndexed64iv} */
     public static void nglGetVertexArrayIndexed64iv(int vaobj, int index, int pname, long param) {
         GL45C.nglGetVertexArrayIndexed64iv(vaobj, index, pname, param);
     }
@@ -3051,9 +2971,7 @@ public class ARBDirectStateAccess {
         GL45C.glCreateSamplers(samplers);
     }
 
-    /**
-     * Returns {@code n} previously unused sampler names in {@code samplers}, each representing a new sampler object.
-     */
+    /** Returns {@code n} previously unused sampler names in {@code samplers}, each representing a new sampler object. */
     @NativeType("void")
     public static int glCreateSamplers() {
         return GL45C.glCreateSamplers();
@@ -3079,9 +2997,7 @@ public class ARBDirectStateAccess {
         GL45C.glCreateProgramPipelines(pipelines);
     }
 
-    /**
-     * Returns {@code n} previously unused program pipeline names in {@code pipelines}, each representing a new program pipeline object.
-     */
+    /** Returns {@code n} previously unused program pipeline names in {@code pipelines}, each representing a new program pipeline object. */
     @NativeType("void")
     public static int glCreateProgramPipelines() {
         return GL45C.glCreateProgramPipelines();
@@ -3174,548 +3090,392 @@ public class ARBDirectStateAccess {
         GL45C.glGetQueryBufferObjectuiv(id, buffer, pname, offset);
     }
 
-    /**
-     * Array version of: {@link #glCreateTransformFeedbacks CreateTransformFeedbacks}
-     */
+    /** Array version of: {@link #glCreateTransformFeedbacks CreateTransformFeedbacks} */
     public static void glCreateTransformFeedbacks(@NativeType("GLuint *") int[] ids) {
         GL45C.glCreateTransformFeedbacks(ids);
     }
 
-    /**
-     * Array version of: {@link #glGetTransformFeedbackiv GetTransformFeedbackiv}
-     */
+    /** Array version of: {@link #glGetTransformFeedbackiv GetTransformFeedbackiv} */
     public static void glGetTransformFeedbackiv(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] param) {
         GL45C.glGetTransformFeedbackiv(xfb, pname, param);
     }
 
-    /**
-     * Array version of: {@link #glGetTransformFeedbacki_v GetTransformFeedbacki_v}
-     */
+    /** Array version of: {@link #glGetTransformFeedbacki_v GetTransformFeedbacki_v} */
     public static void glGetTransformFeedbacki_v(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLint *") int[] param) {
         GL45C.glGetTransformFeedbacki_v(xfb, pname, index, param);
     }
 
-    /**
-     * Array version of: {@link #glGetTransformFeedbacki64_v GetTransformFeedbacki64_v}
-     */
+    /** Array version of: {@link #glGetTransformFeedbacki64_v GetTransformFeedbacki64_v} */
     public static void glGetTransformFeedbacki64_v(@NativeType("GLuint") int xfb, @NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLint64 *") long[] param) {
         GL45C.glGetTransformFeedbacki64_v(xfb, pname, index, param);
     }
 
-    /**
-     * Array version of: {@link #glCreateBuffers CreateBuffers}
-     */
+    /** Array version of: {@link #glCreateBuffers CreateBuffers} */
     public static void glCreateBuffers(@NativeType("GLuint *") int[] buffers) {
         GL45C.glCreateBuffers(buffers);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferStorage NamedBufferStorage}
-     */
+    /** Array version of: {@link #glNamedBufferStorage NamedBufferStorage} */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") short[] data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferStorage NamedBufferStorage}
-     */
+    /** Array version of: {@link #glNamedBufferStorage NamedBufferStorage} */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") int[] data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferStorage NamedBufferStorage}
-     */
+    /** Array version of: {@link #glNamedBufferStorage NamedBufferStorage} */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") float[] data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferStorage NamedBufferStorage}
-     */
+    /** Array version of: {@link #glNamedBufferStorage NamedBufferStorage} */
     public static void glNamedBufferStorage(@NativeType("GLuint") int buffer, @NativeType("void const *") double[] data, @NativeType("GLbitfield") int flags) {
         GL45C.glNamedBufferStorage(buffer, data, flags);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferData NamedBufferData}
-     */
+    /** Array version of: {@link #glNamedBufferData NamedBufferData} */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") short[] data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferData NamedBufferData}
-     */
+    /** Array version of: {@link #glNamedBufferData NamedBufferData} */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") int[] data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferData NamedBufferData}
-     */
+    /** Array version of: {@link #glNamedBufferData NamedBufferData} */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") long[] data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferData NamedBufferData}
-     */
+    /** Array version of: {@link #glNamedBufferData NamedBufferData} */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") float[] data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferData NamedBufferData}
-     */
+    /** Array version of: {@link #glNamedBufferData NamedBufferData} */
     public static void glNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("void const *") double[] data, @NativeType("GLenum") int usage) {
         GL45C.glNamedBufferData(buffer, data, usage);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferSubData NamedBufferSubData}
-     */
+    /** Array version of: {@link #glNamedBufferSubData NamedBufferSubData} */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") short[] data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferSubData NamedBufferSubData}
-     */
+    /** Array version of: {@link #glNamedBufferSubData NamedBufferSubData} */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") int[] data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferSubData NamedBufferSubData}
-     */
+    /** Array version of: {@link #glNamedBufferSubData NamedBufferSubData} */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") long[] data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferSubData NamedBufferSubData}
-     */
+    /** Array version of: {@link #glNamedBufferSubData NamedBufferSubData} */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") float[] data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
     }
 
-    /**
-     * Array version of: {@link #glNamedBufferSubData NamedBufferSubData}
-     */
+    /** Array version of: {@link #glNamedBufferSubData NamedBufferSubData} */
     public static void glNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void const *") double[] data) {
         GL45C.glNamedBufferSubData(buffer, offset, data);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferData ClearNamedBufferData}
-     */
+    /** Array version of: {@link #glClearNamedBufferData ClearNamedBufferData} */
     public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         GL45C.glClearNamedBufferData(buffer, internalformat, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferData ClearNamedBufferData}
-     */
+    /** Array version of: {@link #glClearNamedBufferData ClearNamedBufferData} */
     public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         GL45C.glClearNamedBufferData(buffer, internalformat, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferData ClearNamedBufferData}
-     */
+    /** Array version of: {@link #glClearNamedBufferData ClearNamedBufferData} */
     public static void glClearNamedBufferData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         GL45C.glClearNamedBufferData(buffer, internalformat, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData}
-     */
+    /** Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData} */
     public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         GL45C.glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData}
-     */
+    /** Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData} */
     public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         GL45C.glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData}
-     */
+    /** Array version of: {@link #glClearNamedBufferSubData ClearNamedBufferSubData} */
     public static void glClearNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         GL45C.glClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferParameteriv GetNamedBufferParameteriv}
-     */
+    /** Array version of: {@link #glGetNamedBufferParameteriv GetNamedBufferParameteriv} */
     public static void glGetNamedBufferParameteriv(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetNamedBufferParameteriv(buffer, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferParameteri64v GetNamedBufferParameteri64v}
-     */
+    /** Array version of: {@link #glGetNamedBufferParameteri64v GetNamedBufferParameteri64v} */
     public static void glGetNamedBufferParameteri64v(@NativeType("GLuint") int buffer, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
         GL45C.glGetNamedBufferParameteri64v(buffer, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData}
-     */
+    /** Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData} */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") short[] data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData}
-     */
+    /** Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData} */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") int[] data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData}
-     */
+    /** Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData} */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") long[] data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData}
-     */
+    /** Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData} */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") float[] data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData}
-     */
+    /** Array version of: {@link #glGetNamedBufferSubData GetNamedBufferSubData} */
     public static void glGetNamedBufferSubData(@NativeType("GLuint") int buffer, @NativeType("GLintptr") long offset, @NativeType("void *") double[] data) {
         GL45C.glGetNamedBufferSubData(buffer, offset, data);
     }
 
-    /**
-     * Array version of: {@link #glCreateFramebuffers CreateFramebuffers}
-     */
+    /** Array version of: {@link #glCreateFramebuffers CreateFramebuffers} */
     public static void glCreateFramebuffers(@NativeType("GLuint *") int[] framebuffers) {
         GL45C.glCreateFramebuffers(framebuffers);
     }
 
-    /**
-     * Array version of: {@link #glNamedFramebufferDrawBuffers NamedFramebufferDrawBuffers}
-     */
+    /** Array version of: {@link #glNamedFramebufferDrawBuffers NamedFramebufferDrawBuffers} */
     public static void glNamedFramebufferDrawBuffers(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") int[] bufs) {
         GL45C.glNamedFramebufferDrawBuffers(framebuffer, bufs);
     }
 
-    /**
-     * Array version of: {@link #glInvalidateNamedFramebufferData InvalidateNamedFramebufferData}
-     */
+    /** Array version of: {@link #glInvalidateNamedFramebufferData InvalidateNamedFramebufferData} */
     public static void glInvalidateNamedFramebufferData(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") int[] attachments) {
         GL45C.glInvalidateNamedFramebufferData(framebuffer, attachments);
     }
 
-    /**
-     * Array version of: {@link #glInvalidateNamedFramebufferSubData InvalidateNamedFramebufferSubData}
-     */
+    /** Array version of: {@link #glInvalidateNamedFramebufferSubData InvalidateNamedFramebufferSubData} */
     public static void glInvalidateNamedFramebufferSubData(@NativeType("GLuint") int framebuffer, @NativeType("GLenum const *") int[] attachments, @NativeType("GLint") int x, @NativeType("GLint") int y, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height) {
         GL45C.glInvalidateNamedFramebufferSubData(framebuffer, attachments, x, y, width, height);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedFramebufferiv ClearNamedFramebufferiv}
-     */
+    /** Array version of: {@link #glClearNamedFramebufferiv ClearNamedFramebufferiv} */
     public static void glClearNamedFramebufferiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
         GL45C.glClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedFramebufferuiv ClearNamedFramebufferuiv}
-     */
+    /** Array version of: {@link #glClearNamedFramebufferuiv ClearNamedFramebufferuiv} */
     public static void glClearNamedFramebufferuiv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLint *") int[] value) {
         GL45C.glClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedFramebufferfv ClearNamedFramebufferfv}
-     */
+    /** Array version of: {@link #glClearNamedFramebufferfv ClearNamedFramebufferfv} */
     public static void glClearNamedFramebufferfv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int buffer, @NativeType("GLint") int drawbuffer, @NativeType("GLfloat *") float[] value) {
         GL45C.glClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedFramebufferParameteriv GetNamedFramebufferParameteriv}
-     */
+    /** Array version of: {@link #glGetNamedFramebufferParameteriv GetNamedFramebufferParameteriv} */
     public static void glGetNamedFramebufferParameteriv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetNamedFramebufferParameteriv(framebuffer, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedFramebufferAttachmentParameteriv GetNamedFramebufferAttachmentParameteriv}
-     */
+    /** Array version of: {@link #glGetNamedFramebufferAttachmentParameteriv GetNamedFramebufferAttachmentParameteriv} */
     public static void glGetNamedFramebufferAttachmentParameteriv(@NativeType("GLuint") int framebuffer, @NativeType("GLenum") int attachment, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetNamedFramebufferAttachmentParameteriv(framebuffer, attachment, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glCreateRenderbuffers CreateRenderbuffers}
-     */
+    /** Array version of: {@link #glCreateRenderbuffers CreateRenderbuffers} */
     public static void glCreateRenderbuffers(@NativeType("GLuint *") int[] renderbuffers) {
         GL45C.glCreateRenderbuffers(renderbuffers);
     }
 
-    /**
-     * Array version of: {@link #glGetNamedRenderbufferParameteriv GetNamedRenderbufferParameteriv}
-     */
+    /** Array version of: {@link #glGetNamedRenderbufferParameteriv GetNamedRenderbufferParameteriv} */
     public static void glGetNamedRenderbufferParameteriv(@NativeType("GLuint") int renderbuffer, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetNamedRenderbufferParameteriv(renderbuffer, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glCreateTextures CreateTextures}
-     */
+    /** Array version of: {@link #glCreateTextures CreateTextures} */
     public static void glCreateTextures(@NativeType("GLenum") int target, @NativeType("GLuint *") int[] textures) {
         GL45C.glCreateTextures(target, textures);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage1D TextureSubImage1D}
-     */
+    /** Array version of: {@link #glTextureSubImage1D TextureSubImage1D} */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage1D TextureSubImage1D}
-     */
+    /** Array version of: {@link #glTextureSubImage1D TextureSubImage1D} */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage1D TextureSubImage1D}
-     */
+    /** Array version of: {@link #glTextureSubImage1D TextureSubImage1D} */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage1D TextureSubImage1D}
-     */
+    /** Array version of: {@link #glTextureSubImage1D TextureSubImage1D} */
     public static void glTextureSubImage1D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLsizei") int width, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         GL45C.glTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage2D TextureSubImage2D}
-     */
+    /** Array version of: {@link #glTextureSubImage2D TextureSubImage2D} */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage2D TextureSubImage2D}
-     */
+    /** Array version of: {@link #glTextureSubImage2D TextureSubImage2D} */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage2D TextureSubImage2D}
-     */
+    /** Array version of: {@link #glTextureSubImage2D TextureSubImage2D} */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage2D TextureSubImage2D}
-     */
+    /** Array version of: {@link #glTextureSubImage2D TextureSubImage2D} */
     public static void glTextureSubImage2D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         GL45C.glTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage3D TextureSubImage3D}
-     */
+    /** Array version of: {@link #glTextureSubImage3D TextureSubImage3D} */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") short[] pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage3D TextureSubImage3D}
-     */
+    /** Array version of: {@link #glTextureSubImage3D TextureSubImage3D} */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") int[] pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage3D TextureSubImage3D}
-     */
+    /** Array version of: {@link #glTextureSubImage3D TextureSubImage3D} */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") float[] pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureSubImage3D TextureSubImage3D}
-     */
+    /** Array version of: {@link #glTextureSubImage3D TextureSubImage3D} */
     public static void glTextureSubImage3D(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLint") int xoffset, @NativeType("GLint") int yoffset, @NativeType("GLint") int zoffset, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void const *") double[] pixels) {
         GL45C.glTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glTextureParameterfv TextureParameterfv}
-     */
+    /** Array version of: {@link #glTextureParameterfv TextureParameterfv} */
     public static void glTextureParameterfv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLfloat const *") float[] params) {
         GL45C.glTextureParameterfv(texture, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glTextureParameterIiv TextureParameterIiv}
-     */
+    /** Array version of: {@link #glTextureParameterIiv TextureParameterIiv} */
     public static void glTextureParameterIiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         GL45C.glTextureParameterIiv(texture, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glTextureParameterIuiv TextureParameterIuiv}
-     */
+    /** Array version of: {@link #glTextureParameterIuiv TextureParameterIuiv} */
     public static void glTextureParameterIuiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLuint const *") int[] params) {
         GL45C.glTextureParameterIuiv(texture, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glTextureParameteriv TextureParameteriv}
-     */
+    /** Array version of: {@link #glTextureParameteriv TextureParameteriv} */
     public static void glTextureParameteriv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint const *") int[] params) {
         GL45C.glTextureParameteriv(texture, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureImage GetTextureImage}
-     */
+    /** Array version of: {@link #glGetTextureImage GetTextureImage} */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") short[] pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureImage GetTextureImage}
-     */
+    /** Array version of: {@link #glGetTextureImage GetTextureImage} */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") int[] pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureImage GetTextureImage}
-     */
+    /** Array version of: {@link #glGetTextureImage GetTextureImage} */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") float[] pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureImage GetTextureImage}
-     */
+    /** Array version of: {@link #glGetTextureImage GetTextureImage} */
     public static void glGetTextureImage(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @NativeType("void *") double[] pixels) {
         GL45C.glGetTextureImage(texture, level, format, type, pixels);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureLevelParameterfv GetTextureLevelParameterfv}
-     */
+    /** Array version of: {@link #glGetTextureLevelParameterfv GetTextureLevelParameterfv} */
     public static void glGetTextureLevelParameterfv(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         GL45C.glGetTextureLevelParameterfv(texture, level, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureLevelParameteriv GetTextureLevelParameteriv}
-     */
+    /** Array version of: {@link #glGetTextureLevelParameteriv GetTextureLevelParameteriv} */
     public static void glGetTextureLevelParameteriv(@NativeType("GLuint") int texture, @NativeType("GLint") int level, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetTextureLevelParameteriv(texture, level, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureParameterfv GetTextureParameterfv}
-     */
+    /** Array version of: {@link #glGetTextureParameterfv GetTextureParameterfv} */
     public static void glGetTextureParameterfv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         GL45C.glGetTextureParameterfv(texture, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureParameterIiv GetTextureParameterIiv}
-     */
+    /** Array version of: {@link #glGetTextureParameterIiv GetTextureParameterIiv} */
     public static void glGetTextureParameterIiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetTextureParameterIiv(texture, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureParameterIuiv GetTextureParameterIuiv}
-     */
+    /** Array version of: {@link #glGetTextureParameterIuiv GetTextureParameterIuiv} */
     public static void glGetTextureParameterIuiv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
         GL45C.glGetTextureParameterIuiv(texture, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glGetTextureParameteriv GetTextureParameteriv}
-     */
+    /** Array version of: {@link #glGetTextureParameteriv GetTextureParameteriv} */
     public static void glGetTextureParameteriv(@NativeType("GLuint") int texture, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL45C.glGetTextureParameteriv(texture, pname, params);
     }
 
-    /**
-     * Array version of: {@link #glCreateVertexArrays CreateVertexArrays}
-     */
+    /** Array version of: {@link #glCreateVertexArrays CreateVertexArrays} */
     public static void glCreateVertexArrays(@NativeType("GLuint *") int[] arrays) {
         GL45C.glCreateVertexArrays(arrays);
     }
 
-    /**
-     * Array version of: {@link #glVertexArrayVertexBuffers VertexArrayVertexBuffers}
-     */
+    /** Array version of: {@link #glVertexArrayVertexBuffers VertexArrayVertexBuffers} */
     public static void glVertexArrayVertexBuffers(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int first, @Nullable @NativeType("GLuint const *") int[] buffers, @Nullable @NativeType("GLintptr const *") PointerBuffer offsets, @Nullable @NativeType("GLsizei const *") int[] strides) {
         GL45C.glVertexArrayVertexBuffers(vaobj, first, buffers, offsets, strides);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexArrayiv GetVertexArrayiv}
-     */
+    /** Array version of: {@link #glGetVertexArrayiv GetVertexArrayiv} */
     public static void glGetVertexArrayiv(@NativeType("GLuint") int vaobj, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] param) {
         GL45C.glGetVertexArrayiv(vaobj, pname, param);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexArrayIndexediv GetVertexArrayIndexediv}
-     */
+    /** Array version of: {@link #glGetVertexArrayIndexediv GetVertexArrayIndexediv} */
     public static void glGetVertexArrayIndexediv(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] param) {
         GL45C.glGetVertexArrayIndexediv(vaobj, index, pname, param);
     }
 
-    /**
-     * Array version of: {@link #glGetVertexArrayIndexed64iv GetVertexArrayIndexed64iv}
-     */
+    /** Array version of: {@link #glGetVertexArrayIndexed64iv GetVertexArrayIndexed64iv} */
     public static void glGetVertexArrayIndexed64iv(@NativeType("GLuint") int vaobj, @NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] param) {
         GL45C.glGetVertexArrayIndexed64iv(vaobj, index, pname, param);
     }
 
-    /**
-     * Array version of: {@link #glCreateSamplers CreateSamplers}
-     */
+    /** Array version of: {@link #glCreateSamplers CreateSamplers} */
     public static void glCreateSamplers(@NativeType("GLuint *") int[] samplers) {
         GL45C.glCreateSamplers(samplers);
     }
 
-    /**
-     * Array version of: {@link #glCreateProgramPipelines CreateProgramPipelines}
-     */
+    /** Array version of: {@link #glCreateProgramPipelines CreateProgramPipelines} */
     public static void glCreateProgramPipelines(@NativeType("GLuint *") int[] pipelines) {
         GL45C.glCreateProgramPipelines(pipelines);
     }
 
-    /**
-     * Array version of: {@link #glCreateQueries CreateQueries}
-     */
+    /** Array version of: {@link #glCreateQueries CreateQueries} */
     public static void glCreateQueries(@NativeType("GLenum") int target, @NativeType("GLuint *") int[] ids) {
         GL45C.glCreateQueries(target, ids);
     }

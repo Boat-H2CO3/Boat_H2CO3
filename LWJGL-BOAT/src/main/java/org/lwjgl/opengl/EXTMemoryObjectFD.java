@@ -19,9 +19,7 @@ import static org.lwjgl.system.Checks.*;
  */
 public class EXTMemoryObjectFD {
 
-    /**
-     * Accepted by the {@code handleType} parameter of {@link #glImportMemoryFdEXT ImportMemoryFdEXT}
-     */
+    /** Accepted by the {@code handleType} parameter of {@link #glImportMemoryFdEXT ImportMemoryFdEXT} */
     public static final int GL_HANDLE_TYPE_OPAQUE_FD_EXT = 0x9586;
 
     static {
@@ -34,7 +32,7 @@ public class EXTMemoryObjectFD {
 
     static boolean isAvailable(GLCapabilities caps) {
         return checkFunctions(
-                caps.glImportMemoryFdEXT
+            caps.glImportMemoryFdEXT
         );
     }
 

@@ -40,17 +40,13 @@ public abstract class GLFWWindowIconifyCallback extends Callback implements GLFW
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWWindowIconifyCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWWindowIconifyCallback} instance that delegates to the specified {@code GLFWWindowIconifyCallbackI} instance.
-     */
+    /** Creates a {@code GLFWWindowIconifyCallback} instance that delegates to the specified {@code GLFWWindowIconifyCallbackI} instance. */
     public static GLFWWindowIconifyCallback create(GLFWWindowIconifyCallbackI instance) {
         return instance instanceof GLFWWindowIconifyCallback
                 ? (GLFWWindowIconifyCallback) instance
@@ -65,9 +61,7 @@ public abstract class GLFWWindowIconifyCallback extends Callback implements GLFW
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetWindowIconifyCallback SetWindowIconifyCallback}.
-     */
+    /** See {@link GLFW#glfwSetWindowIconifyCallback SetWindowIconifyCallback}. */
     public GLFWWindowIconifyCallback set(long window) {
         glfwSetWindowIconifyCallback(window, this);
         return this;

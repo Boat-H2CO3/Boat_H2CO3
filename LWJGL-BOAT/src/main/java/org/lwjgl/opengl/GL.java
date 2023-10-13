@@ -10,7 +10,6 @@ import org.lwjgl.system.macosx.*;
 import org.lwjgl.system.windows.*;
 
 import javax.annotation.*;
-
 import java.nio.*;
 import java.util.*;
 
@@ -97,9 +96,7 @@ public final class GL {
         // intentionally empty to trigger static initializer
     }
 
-    /**
-     * Loads the OpenGL native library, using the default library name.
-     */
+    /** Loads the OpenGL native library, using the default library name. */
     public static void create() {
         SharedLibrary GL;
         switch (Platform.get()) {
@@ -136,7 +133,6 @@ public final class GL {
         SharedLibraryGL(SharedLibrary library) {
             super(library);
         }
-
         abstract long getExtensionAddress(long name);
 
         @Override
@@ -220,9 +216,7 @@ public final class GL {
         ThreadLocalUtil.setFunctionMissingAddresses(GLCapabilities.class, 3);
     }
 
-    /**
-     * Unloads the OpenGL native library.
-     */
+    /** Unloads the OpenGL native library. */
     public static void destroy() {
         if (functionProvider == null) {
             return;
@@ -239,9 +233,7 @@ public final class GL {
         functionProvider = null;
     }
 
-    /**
-     * Returns the {@link FunctionProvider} for the OpenGL native library.
-     */
+    /** Returns the {@link FunctionProvider} for the OpenGL native library. */
     @Nullable
     public static FunctionProvider getFunctionProvider() {
         return functionProvider;
@@ -293,9 +285,7 @@ public final class GL {
         return capabilitiesWGL;
     }
 
-    /**
-     * Returns the GLX client capabilities.
-     */
+    /** Returns the GLX client capabilities. */
     static GLXCapabilities getCapabilitiesGLXClient() {
         if (capabilitiesGLXClient == null) {
             capabilitiesGLXClient = initCapabilitiesGLX(true);
@@ -348,6 +338,7 @@ public final class GL {
      * <p>This method calls {@link #setCapabilities(GLCapabilities)} with the new instance before returning.</p>
      *
      * @param forwardCompatible if true, LWJGL will create forward compatible capabilities
+     *
      * @return the GLCapabilities instance
      */
     @SuppressWarnings("AssignmentToMethodParameter")
@@ -490,9 +481,7 @@ public final class GL {
         }
     }
 
-    /**
-     * Creates a dummy context and retrieves the WGL capabilities.
-     */
+    /** Creates a dummy context and retrieves the WGL capabilities. */
     private static WGLCapabilities createCapabilitiesWGLDummy() {
         long hdc = wglGetCurrentDC(); // just use the current context if one exists
         if (hdc != NULL) {

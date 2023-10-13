@@ -41,17 +41,13 @@ public abstract class GLFWCursorPosCallback extends Callback implements GLFWCurs
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWCursorPosCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWCursorPosCallback} instance that delegates to the specified {@code GLFWCursorPosCallbackI} instance.
-     */
+    /** Creates a {@code GLFWCursorPosCallback} instance that delegates to the specified {@code GLFWCursorPosCallbackI} instance. */
     public static GLFWCursorPosCallback create(GLFWCursorPosCallbackI instance) {
         return instance instanceof GLFWCursorPosCallback
                 ? (GLFWCursorPosCallback) instance
@@ -66,9 +62,7 @@ public abstract class GLFWCursorPosCallback extends Callback implements GLFWCurs
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetCursorPosCallback SetCursorPosCallback}.
-     */
+    /** See {@link GLFW#glfwSetCursorPosCallback SetCursorPosCallback}. */
     public GLFWCursorPosCallback set(long window) {
         glfwSetCursorPosCallback(window, this);
         return this;

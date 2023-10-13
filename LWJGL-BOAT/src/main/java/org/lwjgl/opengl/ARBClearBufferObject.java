@@ -5,21 +5,15 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.CHECKS;
-import static org.lwjgl.system.Checks.check;
-import static org.lwjgl.system.Checks.checkFunctions;
-import static org.lwjgl.system.JNI.callPPPV;
-import static org.lwjgl.system.JNI.callPV;
-import static org.lwjgl.system.MemoryUtil.memAddressSafe;
+import javax.annotation.*;
 
-import org.lwjgl.system.NativeType;
+import java.nio.*;
 
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import org.lwjgl.system.*;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_clear_buffer_object.txt">ARB_clear_buffer_object</a> extension.
@@ -53,9 +47,7 @@ public class ARBClearBufferObject {
 
     // --- [ glClearBufferData ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearBufferData ClearBufferData}
-     */
+    /** Unsafe version of: {@link #glClearBufferData ClearBufferData} */
     public static void nglClearBufferData(int target, int internalformat, int format, int type, long data) {
         GL43C.nglClearBufferData(target, internalformat, format, type, data);
     }
@@ -122,9 +114,7 @@ public class ARBClearBufferObject {
 
     // --- [ glClearBufferSubData ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearBufferSubData ClearBufferSubData}
-     */
+    /** Unsafe version of: {@link #glClearBufferSubData ClearBufferSubData} */
     public static void nglClearBufferSubData(int target, int internalformat, long offset, long size, int format, int type, long data) {
         GL43C.nglClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
@@ -199,9 +189,7 @@ public class ARBClearBufferObject {
 
     // --- [ glClearNamedBufferDataEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT}
-     */
+    /** Unsafe version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT} */
     public static native void nglClearNamedBufferDataEXT(int buffer, int internalformat, int format, int type, long data);
 
     /**
@@ -266,9 +254,7 @@ public class ARBClearBufferObject {
 
     // --- [ glClearNamedBufferSubDataEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT}
-     */
+    /** Unsafe version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT} */
     public static native void nglClearNamedBufferSubDataEXT(int buffer, int internalformat, long offset, long size, int format, int type, long data);
 
     /**
@@ -339,51 +325,37 @@ public class ARBClearBufferObject {
         nglClearNamedBufferSubDataEXT(buffer, internalformat, offset, size, format, type, memAddressSafe(data));
     }
 
-    /**
-     * Array version of: {@link #glClearBufferData ClearBufferData}
-     */
+    /** Array version of: {@link #glClearBufferData ClearBufferData} */
     public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         GL43C.glClearBufferData(target, internalformat, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearBufferData ClearBufferData}
-     */
+    /** Array version of: {@link #glClearBufferData ClearBufferData} */
     public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         GL43C.glClearBufferData(target, internalformat, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearBufferData ClearBufferData}
-     */
+    /** Array version of: {@link #glClearBufferData ClearBufferData} */
     public static void glClearBufferData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         GL43C.glClearBufferData(target, internalformat, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearBufferSubData ClearBufferSubData}
-     */
+    /** Array version of: {@link #glClearBufferSubData ClearBufferSubData} */
     public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         GL43C.glClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearBufferSubData ClearBufferSubData}
-     */
+    /** Array version of: {@link #glClearBufferSubData ClearBufferSubData} */
     public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         GL43C.glClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearBufferSubData ClearBufferSubData}
-     */
+    /** Array version of: {@link #glClearBufferSubData ClearBufferSubData} */
     public static void glClearBufferSubData(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         GL43C.glClearBufferSubData(target, internalformat, offset, size, format, type, data);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT}
-     */
+    /** Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT} */
     public static void glClearNamedBufferDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         long __functionAddress = GL.getICD().glClearNamedBufferDataEXT;
         if (CHECKS) {
@@ -392,9 +364,7 @@ public class ARBClearBufferObject {
         callPV(buffer, internalformat, format, type, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT}
-     */
+    /** Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT} */
     public static void glClearNamedBufferDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         long __functionAddress = GL.getICD().glClearNamedBufferDataEXT;
         if (CHECKS) {
@@ -403,9 +373,7 @@ public class ARBClearBufferObject {
         callPV(buffer, internalformat, format, type, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT}
-     */
+    /** Array version of: {@link #glClearNamedBufferDataEXT ClearNamedBufferDataEXT} */
     public static void glClearNamedBufferDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         long __functionAddress = GL.getICD().glClearNamedBufferDataEXT;
         if (CHECKS) {
@@ -414,9 +382,7 @@ public class ARBClearBufferObject {
         callPV(buffer, internalformat, format, type, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT} */
     public static void glClearNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") short[] data) {
         long __functionAddress = GL.getICD().glClearNamedBufferSubDataEXT;
         if (CHECKS) {
@@ -425,9 +391,7 @@ public class ARBClearBufferObject {
         callPPPV(buffer, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT} */
     public static void glClearNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") int[] data) {
         long __functionAddress = GL.getICD().glClearNamedBufferSubDataEXT;
         if (CHECKS) {
@@ -436,9 +400,7 @@ public class ARBClearBufferObject {
         callPPPV(buffer, internalformat, offset, size, format, type, data, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT}
-     */
+    /** Array version of: {@link #glClearNamedBufferSubDataEXT ClearNamedBufferSubDataEXT} */
     public static void glClearNamedBufferSubDataEXT(@NativeType("GLuint") int buffer, @NativeType("GLenum") int internalformat, @NativeType("GLintptr") long offset, @NativeType("GLsizeiptr") long size, @NativeType("GLenum") int format, @NativeType("GLenum") int type, @Nullable @NativeType("void const *") float[] data) {
         long __functionAddress = GL.getICD().glClearNamedBufferSubDataEXT;
         if (CHECKS) {

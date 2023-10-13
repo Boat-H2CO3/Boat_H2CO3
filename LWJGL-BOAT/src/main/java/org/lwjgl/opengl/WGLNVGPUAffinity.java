@@ -27,14 +27,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class WGLNVGPUAffinity {
 
-    /**
-     * New error code set by wglShareLists, wglMakeCurrent and {@link WGLARBMakeCurrentRead#wglMakeContextCurrentARB MakeContextCurrentARB}.
-     */
+    /** New error code set by wglShareLists, wglMakeCurrent and {@link WGLARBMakeCurrentRead#wglMakeContextCurrentARB MakeContextCurrentARB}. */
     public static final int ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV = 0x20D0;
 
-    /**
-     * New error code set by {@link WGL#wglMakeCurrent MakeCurrent} and {@link WGLARBMakeCurrentRead#wglMakeContextCurrentARB MakeContextCurrentARB}.
-     */
+    /** New error code set by {@link WGL#wglMakeCurrent MakeCurrent} and {@link WGLARBMakeCurrentRead#wglMakeContextCurrentARB MakeContextCurrentARB}. */
     public static final int ERROR_MISSING_AFFINITY_MASK_NV = 0x20D1;
 
     protected WGLNVGPUAffinity() {
@@ -49,9 +45,7 @@ public class WGLNVGPUAffinity {
 
     // --- [ wglEnumGpusNV ] ---
 
-    /**
-     * Unsafe version of: {@link #wglEnumGpusNV EnumGpusNV}
-     */
+    /** Unsafe version of: {@link #wglEnumGpusNV EnumGpusNV} */
     public static int nwglEnumGpusNV(int gpuIndex, long gpu) {
         long __functionAddress = GL.getCapabilitiesWGL().wglEnumGpusNV;
         if (CHECKS) {
@@ -80,9 +74,7 @@ public class WGLNVGPUAffinity {
 
     // --- [ wglEnumGpuDevicesNV ] ---
 
-    /**
-     * Unsafe version of: {@link #wglEnumGpuDevicesNV EnumGpuDevicesNV}
-     */
+    /** Unsafe version of: {@link #wglEnumGpuDevicesNV EnumGpuDevicesNV} */
     public static int nwglEnumGpuDevicesNV(long gpu, int deviceIndex, long gpuDevice) {
         long __functionAddress = GL.getCapabilitiesWGL().wglEnumGpuDevicesNV;
         if (CHECKS) {
@@ -106,9 +98,7 @@ public class WGLNVGPUAffinity {
 
     // --- [ wglCreateAffinityDCNV ] ---
 
-    /**
-     * Unsafe version of: {@link #wglCreateAffinityDCNV CreateAffinityDCNV}
-     */
+    /** Unsafe version of: {@link #wglCreateAffinityDCNV CreateAffinityDCNV} */
     public static long nwglCreateAffinityDCNV(long gpuList) {
         long __functionAddress = GL.getCapabilitiesWGL().wglCreateAffinityDCNV;
         if (CHECKS) {
@@ -137,9 +127,7 @@ public class WGLNVGPUAffinity {
 
     // --- [ wglEnumGpusFromAffinityDCNV ] ---
 
-    /**
-     * Unsafe version of: {@link #wglEnumGpusFromAffinityDCNV EnumGpusFromAffinityDCNV}
-     */
+    /** Unsafe version of: {@link #wglEnumGpusFromAffinityDCNV EnumGpusFromAffinityDCNV} */
     public static int nwglEnumGpusFromAffinityDCNV(long affinityDC, int gpuIndex, long gpu) {
         long __functionAddress = GL.getCapabilitiesWGL().wglEnumGpusFromAffinityDCNV;
         if (CHECKS) {

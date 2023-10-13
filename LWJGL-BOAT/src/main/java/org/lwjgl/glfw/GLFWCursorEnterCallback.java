@@ -40,17 +40,13 @@ public abstract class GLFWCursorEnterCallback extends Callback implements GLFWCu
                 : new Container(functionPointer, instance);
     }
 
-    /**
-     * Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}.
-     */
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code functionPointer} is {@code NULL}. */
     @Nullable
     public static GLFWCursorEnterCallback createSafe(long functionPointer) {
         return functionPointer == NULL ? null : create(functionPointer);
     }
 
-    /**
-     * Creates a {@code GLFWCursorEnterCallback} instance that delegates to the specified {@code GLFWCursorEnterCallbackI} instance.
-     */
+    /** Creates a {@code GLFWCursorEnterCallback} instance that delegates to the specified {@code GLFWCursorEnterCallbackI} instance. */
     public static GLFWCursorEnterCallback create(GLFWCursorEnterCallbackI instance) {
         return instance instanceof GLFWCursorEnterCallback
                 ? (GLFWCursorEnterCallback) instance
@@ -65,9 +61,7 @@ public abstract class GLFWCursorEnterCallback extends Callback implements GLFWCu
         super(functionPointer);
     }
 
-    /**
-     * See {@link GLFW#glfwSetCursorEnterCallback SetCursorEnterCallback}.
-     */
+    /** See {@link GLFW#glfwSetCursorEnterCallback SetCursorEnterCallback}. */
     public GLFWCursorEnterCallback set(long window) {
         glfwSetCursorEnterCallback(window, this);
         return this;

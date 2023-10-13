@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import static org.lwjgl.system.Checks.checkFunctions;
+import java.nio.*;
 
-import org.lwjgl.system.NativeType;
+import org.lwjgl.system.*;
 
-import java.nio.FloatBuffer;
+import static org.lwjgl.system.Checks.*;
 
 /**
  * Native bindings to the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_multisample.txt">ARB_texture_multisample</a> extension.
@@ -28,9 +28,7 @@ import java.nio.FloatBuffer;
  */
 public class ARBTextureMultisample {
 
-    /**
-     * Accepted by the {@code pname} parameter of GetMultisamplefv.
-     */
+    /** Accepted by the {@code pname} parameter of GetMultisamplefv. */
     public static final int GL_SAMPLE_POSITION = 0x8E50;
 
     /**
@@ -39,19 +37,13 @@ public class ARBTextureMultisample {
      */
     public static final int GL_SAMPLE_MASK = 0x8E51;
 
-    /**
-     * Accepted by the {@code target} parameter of GetBooleani_v and GetIntegeri_v.
-     */
+    /** Accepted by the {@code target} parameter of GetBooleani_v and GetIntegeri_v. */
     public static final int GL_SAMPLE_MASK_VALUE = 0x8E52;
 
-    /**
-     * Accepted by the {@code target} parameter of BindTexture and TexImage2DMultisample.
-     */
+    /** Accepted by the {@code target} parameter of BindTexture and TexImage2DMultisample. */
     public static final int GL_TEXTURE_2D_MULTISAMPLE = 0x9100;
 
-    /**
-     * Accepted by the {@code target} parameter of TexImage2DMultisample.
-     */
+    /** Accepted by the {@code target} parameter of TexImage2DMultisample. */
     public static final int GL_PROXY_TEXTURE_2D_MULTISAMPLE = 0x9101;
 
     /**
@@ -146,9 +138,7 @@ public class ARBTextureMultisample {
 
     // --- [ glGetMultisamplefv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetMultisamplefv GetMultisamplefv}
-     */
+    /** Unsafe version of: {@link #glGetMultisamplefv GetMultisamplefv} */
     public static void nglGetMultisamplefv(int pname, int index, long val) {
         GL32C.nglGetMultisamplefv(pname, index, val);
     }
@@ -187,9 +177,7 @@ public class ARBTextureMultisample {
         GL32C.glSampleMaski(index, mask);
     }
 
-    /**
-     * Array version of: {@link #glGetMultisamplefv GetMultisamplefv}
-     */
+    /** Array version of: {@link #glGetMultisamplefv GetMultisamplefv} */
     public static void glGetMultisamplefv(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] val) {
         GL32C.glGetMultisamplefv(pname, index, val);
     }
