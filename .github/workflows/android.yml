@@ -22,11 +22,6 @@ jobs:
           java-version: '17'  # 设置 Java 版本为 17
           distribution: 'temurin'  # 使用 Temurin 发行版
           cache: gradle  # 缓存 Gradle
-
-      - name: Build LWJGL
-        run: |
-          # Build the launcher
-          gradle :LWJGL:assemble
       # 打包
       - name: Build Debug .apk
         run: |
@@ -43,8 +38,3 @@ jobs:
         with:
           name: app-debug
           path: H2CO3/build/outputs/apk/debug/*.apk
-
-      - name: Create Download Link
-        id: create-download-link
-        run: |
-          echo "::set-output name=download-link::https://github.com/$GITHUB_REPOSITORY/actions/artifacts/$GITHUB_RUN_ID"
