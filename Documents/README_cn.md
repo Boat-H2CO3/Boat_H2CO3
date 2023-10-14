@@ -1,19 +1,18 @@
-[点击切换为中文](./Documents/README_cn.md)
 <h1 align="left" >Boat_H2CO3</h1>
 
-A Minecraft launcher based on the Boat App as the core.
+基于Boat App作为核心制作的Minecraft启动器。
 
-<h1 align="left">Repository Description</h1>
+<h1 align="left">该仓库说明</h1>
 
-**The original project has been discontinued, and this project is a derivative of it.**
+**原项目已经停更，该项目为其衍生项目**
 
-#### This project and its derivatives are based on [BoatAPP](https://github.com/AOF-Dev/Boat), please follow the [GPL-3](https://www.gnu.org/licenses/gpl-3.0.html) license for all related modifications.
+#### 本项目与衍生项目基于[BoatAPP](https://github.com/AOF-Dev/Boat)完成，所有相关修改请遵守[GPL-3](https://www.gnu.org/licenses/gpl-3.0.html)协议进行开源。
 
-<h1 align="left">Status</h1>
+<h1 align="left">状态</h1>
 
 [![Android CI](https://github.com/bilicainiaohh/Boat_H2CO3NewUI/actions/workflows/android.yml/badge.svg)](https://github.com/bilicainiaohh/Boat_H2CO3NewUI/actions/workflows/android.yml)
 
-<h1 align="left">Third-Party Libraries Used</h1>
+<h1 align="left">使用的第三方库</h1>
 
 - [HMCL](https://github.com/huanghongxun/HMCL)
 - [HMCL-PE](https://github.com/huanghongxun/HMCL-PE)
