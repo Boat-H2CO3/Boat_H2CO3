@@ -87,6 +87,11 @@
                         android:inputType="text"
                         android:selectAllOnFocus="true" />
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
                 </com.google.android.material.textfield.TextInputLayout>
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/dropdown_button"

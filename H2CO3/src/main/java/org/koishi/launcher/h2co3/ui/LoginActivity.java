@@ -1,5 +1,6 @@
 package org.koishi.launcher.h2co3.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,18 +13,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.circularreveal.CircularRevealFrameLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 
 import org.koishi.launcher.h2co3.R;
+import org.koishi.launcher.h2co3.adapter.UserListAdapter;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
+import org.koishi.launcher.h2co3.core.login.User;
 import org.koishi.launcher.h2co3.core.utils.FileUtils;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
@@ -32,8 +39,12 @@ import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3CustomViewDialog;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MessageDialog;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,11 +62,31 @@ public class LoginActivity extends H2CO3Activity {
 
     /***************登录部分*****************/
 
+    private List<User> userList;
+    private UserListAdapter userListAdapter;
+    private RecyclerView recyclerView;
+
     private ImageButton mDropDown;
     private CircularRevealFrameLayout login_name_layout;
     private TextInputEditText login_name,login_password,login_api;
     private TextInputLayout login_password_layout,login_api_layout;
     private void initUI() {
+        userList = loadUserListFromJson(H2CO3Tools.LOGIN); // 从JSON加载用户列表
+
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        userListAdapter = new UserListAdapter(userList, this);
+        recyclerView.setAdapter(userListAdapter);
+
+        List<User> userList = new ArrayList<>();
+
+        // 添加用户
+        User user1 = createUser("username1", "password1", "api1", "apiUrl1");
+        addUser(userList, user1);
+
+        User user2 = createUser("username2", "password2", "api2", "apiUrl2");
+        addUser(userList, user2);
+
         login_name = findViewById(R.id.login_name);
         login_password = findViewById(R.id.login_password);
         login_api = findViewById(R.id.login_api);
@@ -96,6 +127,49 @@ public class LoginActivity extends H2CO3Activity {
                 // 选项卡被重新选中时的逻辑
             }
         });
+    }
+
+    // 删除用户
+    public void deleteUser(int position) {
+        userList.remove(position);
+        userListAdapter.notifyItemRemoved(position);
+    }
+
+    // 刷新用户列表
+    @SuppressLint("NotifyDataSetChanged")
+    public void refreshUserList(List<User> userList) {
+        this.userList = userList;
+        userListAdapter.notifyDataSetChanged();
+    }
+
+    public static User createUser(String username, String password, String api, String apiUrl) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setApi(api);
+        user.setApiUrl(apiUrl);
+        // 设置其他属性的默认值或根据需要进行初始化
+        return user;
+    }
+
+    public static void addUser(List<User> userList, User user) {
+        userList.add(user);
+    }
+
+
+    // 从JSON加载用户列表
+    private List<User> loadUserListFromJson(String filePath) {
+        List<User> userList = null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            Gson gson = new Gson();
+            Type userListType = new TypeToken<List<User>>(){}.getType();
+            userList = gson.fromJson(reader, userListType);
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return userList;
     }
 
     /***************运行库部分*****************/

@@ -43,6 +43,8 @@ public class H2CO3Tools {
     public static String APP_DATA_PATH;
     public static String PUBLIC_FILE_PATH;
 
+    public static String LOGIN = "/data/data/org.koishi.launcher.h2co3/login.json";
+
     @SuppressLint("SdCardPath")
     public static void loadPaths(Context context) {
         CONTEXT = context;
