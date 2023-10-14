@@ -10,18 +10,17 @@ LOCAL_PATH := $(HERE_PATH)
 
 
 include $(CLEAR_VARS)
-LOCAL_MODULE     := xhook
-        LOCAL_SRC_FILES  := xhook/xhook.c \
-                    xhook/xh_core.c \
-                    xhook/xh_elf.c \
-                    xhook/xh_jni.c \
-                    xhook/xh_log.c \
-                    xhook/xh_util.c \
-                    xhook/xh_version.c
-        LOCAL_C_INCLUDES := $(LOCAL_PATH)/xhook
-LOCAL_CFLAGS     := -Wall -Wextra -Werror -fvisibility=hidden
-LOCAL_CONLYFLAGS := -std=c11
-LOCAL_LDLIBS     := -llog
+LOCAL_MODULE            := xhook
+LOCAL_SRC_FILES         := xhook/xhook.c \
+                           xhook/xh_core.c \
+                           xhook/xh_elf.c \
+                           xhook/xh_jni.c \
+                           xhook/xh_log.c \
+                           xhook/xh_util.c \
+                           xhook/xh_version.c
+LOCAL_C_INCLUDES        := $(LOCAL_PATH)/xhook
+LOCAL_CFLAGS            := -Wall -Wextra -Werror -fvisibility=hidden
+LOCAL_LDLIBS            := -llog
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -40,7 +39,6 @@ LOCAL_SRC_FILES  := xhook/xh_core.c \
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/h2co3_boat/include \
                     $(LOCAL_PATH)/xhook
 LOCAL_CFLAGS     := -Wall -Wall -Werror
-LOCAL_CONLYFLAGS := -std=c99
 LOCAL_LDLIBS     := -llog -ldl -landroid
 include $(BUILD_SHARED_LIBRARY)
 
@@ -49,8 +47,16 @@ LOCAL_MODULE := istdio
 LOCAL_SHARED_LIBRARIES := xhook
 LOCAL_SRC_FILES := \
     stdio_is.c
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/xhook
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/xhook/include
 include $(BUILD_SHARED_LIBRARY)
+
+#ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
+include $(CLEAR_VARS)
+LOCAL_MODULE            := linkerhook
+LOCAL_SRC_FILES         := driver_helper/hook.c
+LOCAL_LDFLAGS           := -z global
+include $(BUILD_SHARED_LIBRARY)
+#endif
 
 include $(CLEAR_VARS)
 LOCAL_MODULE            := glfw
@@ -67,11 +73,17 @@ LOCAL_SRC_FILES         := glfw/context.c \
                            glfw/egl_context.c \
                            glfw/osmesa_context.c \
                            glfw/posix_thread.c \
-                           glfw/posix_time.c
+                           glfw/posix_time.c \
+                           glfw/driver_helper.c \
+                           driver_helper/nsbypass.c
 LOCAL_C_INCLUDES        := $(LOCAL_PATH)/h2co3_boat/include \
                            $(LOCAL_PATH)/glfw/include
 LOCAL_CFLAGS            := -Wall
 LOCAL_LDLIBS            := -llog -ldl -landroid
+ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
+LOCAL_CFLAGS            += -DADRENO_POSSIBLE
+LOCAL_LDLIBS            += -lEGL -lGLESv2
+endif
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)

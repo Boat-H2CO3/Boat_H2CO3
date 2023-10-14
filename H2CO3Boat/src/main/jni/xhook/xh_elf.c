@@ -32,10 +32,10 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
-#include "xh_errno.h"
-#include "xh_log.h"
-#include "xh_util.h"
-#include "xh_elf.h"
+#include <xh_errno.h>
+#include <xh_log.h>
+#include <xh_util.h>
+#include <xh_elf.h>
 
 #define XH_ELF_DEBUG 0
 
@@ -378,11 +378,11 @@ static int xh_elf_gnu_hash_lookup_def(xh_elf_t *self, const char *symbol, uint32
 {
     uint32_t hash = xh_elf_gnu_hash((uint8_t *)symbol);
     
-    static uint32_t elboatass_bits = sizeof(ElfW(Addr)) * 8;
-    size_t word = self->bloom[(hash / elboatass_bits) % self->bloom_sz];
+    static uint32_t elfclass_bits = sizeof(ElfW(Addr)) * 8;
+    size_t word = self->bloom[(hash / elfclass_bits) % self->bloom_sz];
     size_t mask = 0
-        | (size_t)1 << (hash % elboatass_bits)
-        | (size_t)1 << ((hash >> self->bloom_shift) % elboatass_bits);
+        | (size_t)1 << (hash % elfclass_bits)
+        | (size_t)1 << ((hash >> self->bloom_shift) % elfclass_bits);
     
     //if at least one bit is not set, this symbol is surely missing
     if((word & mask) != mask) return XH_ERRNO_NOTFND;

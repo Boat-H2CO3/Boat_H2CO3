@@ -21,8 +21,8 @@
 
 // Created by caikelun on 2018-04-11.
 
-#include "xh_core.h"
-#include "xhook.h"
+#include <xh_core.h>
+#include <xhook.h>
 
 int xhook_register(const char *pathname_regex_str, const char *symbol,
                    void *new_func, void **old_func)

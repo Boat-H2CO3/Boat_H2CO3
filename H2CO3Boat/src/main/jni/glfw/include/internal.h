@@ -28,7 +28,7 @@
 #pragma once
 
 #if defined(_GLFW_USE_CONFIG_H)
- #include <glfw_config.h>
+#include <glfw_config.h>
 #endif
 
 #if defined(GLFW_INCLUDE_GLCOREARB) || \
@@ -176,13 +176,13 @@ typedef struct VkExtensionProperties
 typedef void (APIENTRY * PFN_vkVoidFunction)(void);
 
 #if defined(_GLFW_VULKAN_STATIC)
-  PFN_vkVoidFunction vkGetInstanceProcAddr(VkInstance,const char*);
+PFN_vkVoidFunction vkGetInstanceProcAddr(VkInstance,const char*);
   VkResult vkEnumerateInstanceExtensionProperties(const char*,uint32_t*,VkExtensionProperties*);
 #else
-  typedef PFN_vkVoidFunction (APIENTRY * PFN_vkGetInstanceProcAddr)(VkInstance,const char*);
-  typedef VkResult (APIENTRY * PFN_vkEnumerateInstanceExtensionProperties)(const char*,uint32_t*,VkExtensionProperties*);
-  #define vkEnumerateInstanceExtensionProperties _glfw.vk.EnumerateInstanceExtensionProperties
-  #define vkGetInstanceProcAddr _glfw.vk.GetInstanceProcAddr
+typedef PFN_vkVoidFunction (APIENTRY * PFN_vkGetInstanceProcAddr)(VkInstance,const char*);
+typedef VkResult (APIENTRY * PFN_vkEnumerateInstanceExtensionProperties)(const char*,uint32_t*,VkExtensionProperties*);
+#define vkEnumerateInstanceExtensionProperties _glfw.vk.EnumerateInstanceExtensionProperties
+#define vkGetInstanceProcAddr _glfw.vk.GetInstanceProcAddr
 #endif
 
 #include "h2co3_boat_platform.h"
@@ -725,7 +725,7 @@ void _glfwInputMonitorWindow(_GLFWmonitor* monitor, _GLFWwindow* window);
 
 #if defined(__GNUC__)
 void _glfwInputError(int code, const char* format, ...)
-    __attribute__((format(printf, 2, 3)));
+__attribute__((format(printf, 2, 3)));
 #else
 void _glfwInputError(int code, const char* format, ...);
 #endif

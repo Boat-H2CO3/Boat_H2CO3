@@ -21,7 +21,7 @@
 
 // Created by caikelun on 2018-04-11.
 
-#include "xh_version.h"
+#include <xh_version.h>
 
 #define XH_VERSION_MAJOR 1
 #define XH_VERSION_MINOR 2

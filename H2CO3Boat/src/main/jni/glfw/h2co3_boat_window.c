@@ -16,9 +16,10 @@
 #include <h2co3_boat_event.h>
 #include <h2co3_boat.h>
 
-// Translates an H2CO3 event modifier state mask
+// Translates an Boat event modifier state mask
 //
-static int translateState(int state) {
+static int translateState(int state)
+{
     int mods = 0;
 
     if (state & ShiftMask)
@@ -37,25 +38,25 @@ static int translateState(int state) {
     return mods;
 }
 
-// Translates an H2CO3 key code to a GLFW key token
+// Translates an Boat key code to a GLFW key token
 //
 static int translateKey(int scancode)
 {
-    // Use the pre-filled LUT (see createKeyTables() in h2co3_init.c)
+    // Use the pre-filled LUT (see createKeyTables() in h2co3_boat_init.c)
     if (scancode < 0 || scancode > 255)
         return GLFW_KEY_UNKNOWN;
 
-    return _glfw.h2co3.keycodes[scancode];
+    return _glfw.h2co3_boat.keycodes[scancode];
 }
 
 // Apply disabled cursor mode to a focused window
 //
 static void disableCursor(_GLFWwindow* window)
 {
-    _glfw.h2co3.disabledCursorWindow = window;
+    _glfw.h2co3_boat.disabledCursorWindow = window;
     _glfwPlatformGetCursorPos(window,
-                              &_glfw.h2co3.restoreCursorPosX,
-                              &_glfw.h2co3.restoreCursorPosY);
+                              &_glfw.h2co3_boat.restoreCursorPosX,
+                              &_glfw.h2co3_boat.restoreCursorPosY);
     // updateCursorImage(window);
     _glfwCenterCursorInContentArea(window);
     h2co3SetCursorMode(CursorDisabled);
@@ -63,38 +64,41 @@ static void disableCursor(_GLFWwindow* window)
 
 // Exit disabled cursor mode for the specified window
 //
-static void enableCursor(_GLFWwindow* window) {
-    _glfw.h2co3.disabledCursorWindow = NULL;
+static void enableCursor(_GLFWwindow* window)
+{
+    _glfw.h2co3_boat.disabledCursorWindow = NULL;
     h2co3SetCursorMode(CursorEnabled);
     _glfwPlatformSetCursorPos(window,
-                              _glfw.h2co3.restoreCursorPosX,
-                              _glfw.h2co3.restoreCursorPosY);
+                              _glfw.h2co3_boat.restoreCursorPosX,
+                              _glfw.h2co3_boat.restoreCursorPosY);
     // updateCursorImage(window);
 }
 
 // Get the ANativeWindow and peer infomation
 //
 static GLFWbool createNativeWindow(_GLFWwindow* window,
-                                   const _GLFWwndconfig* wndconfig) {
+                                   const _GLFWwndconfig* wndconfig)
+{
     // window width and height requirements ignored
-    window->h2co3.handle = h2co3GetNativeWindow();
-    ANativeWindow_acquire(window->h2co3.handle);
+    window->h2co3_boat.handle = h2co3GetNativeWindow();
+    ANativeWindow_acquire(window->h2co3_boat.handle);
 
-    if (!window->h2co3.handle) {
+    if (!window->h2co3_boat.handle)
+    {
         _glfwInputError(GLFW_PLATFORM_ERROR,
-                        "H2CO3: Failed to get window");
+                        "H2CO3Boat: Failed to get window");
         return GLFW_FALSE;
     }
 
-    _glfw.h2co3.eventCurrent = window;
+    _glfw.h2co3_boat.eventCurrent = window;
 
     if (!wndconfig->decorated)
         _glfwPlatformSetWindowDecorated(window, GLFW_FALSE);
 
-    window->h2co3.maximized = GLFW_TRUE;
+    window->h2co3_boat.maximized = GLFW_TRUE;
     _glfwPlatformSetWindowTitle(window, wndconfig->title);
-    _glfwPlatformGetWindowPos(window, &window->h2co3.xpos, &window->h2co3.ypos);
-    _glfwPlatformGetWindowSize(window, &window->h2co3.width, &window->h2co3.height);
+    _glfwPlatformGetWindowPos(window, &window->h2co3_boat.xpos, &window->h2co3_boat.ypos);
+    _glfwPlatformGetWindowSize(window, &window->h2co3_boat.width, &window->h2co3_boat.height);
 
     return GLFW_TRUE;
 }
@@ -116,13 +120,16 @@ static void releaseMonitor(_GLFWwindow* window)
     _glfwInputMonitorWindow(window->monitor, NULL);
 }
 
-// Process the specified H2CO3 event
+// Process the specified Boat event
 //
-static void processEvent(H2CO3BoatEvent *event) {
-    _GLFWwindow *window = _glfw.h2co3.eventCurrent;
+static void processEvent(H2CO3BoatEvent *event)
+{
+    _GLFWwindow* window = _glfw.h2co3_boat.eventCurrent;
 
-    switch (event->type) {
-        case KeyPress: {
+    switch (event->type)
+    {
+        case KeyPress:
+        {
             const int keycode = event->keycode;
             const int keychar = event->keychar;
             const int key = translateKey(keycode);
@@ -156,8 +163,7 @@ static void processEvent(H2CO3BoatEvent *event) {
                 _glfwInputMouseClick(window, GLFW_MOUSE_BUTTON_MIDDLE, GLFW_PRESS, mods);
             else if (event->button == Button3)
                 _glfwInputMouseClick(window, GLFW_MOUSE_BUTTON_RIGHT, GLFW_PRESS, mods);
-
-                // Like X11, H2CO3 provides scroll events as mouse button presses
+                // Like X11, Boat provides scroll events as mouse button presses
             else if (event->button == Button4)
                 _glfwInputScroll(window, 0.0, 1.0);
             else if (event->button == Button5)
@@ -218,40 +224,46 @@ static void processEvent(H2CO3BoatEvent *event) {
             return;
         }
 
-        case MotionNotify: {
+        case MotionNotify:
+        {
             const int x = event->x;
             const int y = event->y;
 
-            if (x != window->h2co3.warpCursorPosX ||
-                y != window->h2co3.warpCursorPosY) {
+            if (x != window->h2co3_boat.warpCursorPosX ||
+                y != window->h2co3_boat.warpCursorPosY)
+            {
                 // The cursor was moved by something other than GLFW
 
-                if (window->cursorMode == GLFW_CURSOR_DISABLED) {
-                    if (_glfw.h2co3.disabledCursorWindow != window)
+                if (window->cursorMode == GLFW_CURSOR_DISABLED)
+                {
+                    if (_glfw.h2co3_boat.disabledCursorWindow != window)
                         return;
                     if (window->rawMouseMotion)
                         return;
 
-                    const int dx = x - window->h2co3.lastCursorPosX;
-                    const int dy = y - window->h2co3.lastCursorPosY;
+                    const int dx = x - window->h2co3_boat.lastCursorPosX;
+                    const int dy = y - window->h2co3_boat.lastCursorPosY;
 
                     _glfwInputCursorPos(window,
                                         window->virtualCursorPosX + dx,
                                         window->virtualCursorPosY + dy);
-                } else
+                }
+                else
                     _glfwInputCursorPos(window, x, y);
             }
 
-            window->h2co3.lastCursorPosX = x;
-            window->h2co3.lastCursorPosY = y;
+            window->h2co3_boat.lastCursorPosX = x;
+            window->h2co3_boat.lastCursorPosY = y;
             return;
         }
 
-        case ConfigureNotify: {
+        case ConfigureNotify:
+        {
             const int width = event->width;
             const int height = event->height;
-            if (width != window->h2co3.width ||
-                height != window->h2co3.height) {
+            if (width != window->h2co3_boat.width ||
+                height != window->h2co3_boat.height)
+            {
                 _glfwInputFramebufferSize(window,
                                           width,
                                           height);
@@ -260,8 +272,8 @@ static void processEvent(H2CO3BoatEvent *event) {
                                      width,
                                      height);
 
-                window->h2co3.width = width;
-                window->h2co3.height = height;
+                window->h2co3_boat.width = width;
+                window->h2co3_boat.height = height;
             }
 
             return;
@@ -271,7 +283,7 @@ static void processEvent(H2CO3BoatEvent *event) {
         {
             if (event->message == CloseRequest)
             {
-                // The H2CO3 was asked to close the window, for
+                // The Boat was asked to close the window, for
                 // example by the user pressing 'back' key
                 _glfwInputWindowCloseRequest(window);
             }
@@ -279,12 +291,14 @@ static void processEvent(H2CO3BoatEvent *event) {
     }
 }
 
-static void handleEvents(int timeout) {
+static void handleEvents(int timeout)
+{
     if (h2co3WaitForEvent(timeout) == 0) {
         return;
     }
     H2CO3BoatEvent event;
-    while (h2co3PollEvent(&event)) {
+    while (h2co3PollEvent(&event))
+    {
         processEvent(&event);
         if (h2co3WaitForEvent(0) == 0) {
             break;
@@ -322,6 +336,10 @@ int _glfwPlatformCreateWindow(_GLFWwindow* window,
                 if (!_glfwInitEGL())
                     return GLFW_FALSE;
             }
+            if (strcmp(renderer, "Zink") == 0) {
+                if (!_glfwInitEGL())
+                    return GLFW_FALSE;
+            }
             if (!_glfwInitOSMesa())
                 return GLFW_FALSE;
             if (!_glfwCreateContextOSMesa(window, ctxconfig, fbconfig))
@@ -338,9 +356,10 @@ int _glfwPlatformCreateWindow(_GLFWwindow* window,
     return GLFW_TRUE;
 }
 
-void _glfwPlatformDestroyWindow(_GLFWwindow* window) {
-    if (_glfw.h2co3.disabledCursorWindow == window)
-        _glfw.h2co3.disabledCursorWindow = NULL;
+void _glfwPlatformDestroyWindow(_GLFWwindow* window)
+{
+    if (_glfw.h2co3_boat.disabledCursorWindow == window)
+        _glfw.h2co3_boat.disabledCursorWindow = NULL;
 
     if (window->monitor)
         releaseMonitor(window);
@@ -348,9 +367,10 @@ void _glfwPlatformDestroyWindow(_GLFWwindow* window) {
     if (window->context.destroy)
         window->context.destroy(window);
 
-    if (window->h2co3.handle) {
-        ANativeWindow_release(window->h2co3.handle);
-        window->h2co3.handle = NULL;
+    if (window->h2co3_boat.handle)
+    {
+        ANativeWindow_release(window->h2co3_boat.handle);
+        window->h2co3_boat.handle = NULL;
     }
 }
 
@@ -378,9 +398,9 @@ void _glfwPlatformSetWindowPos(_GLFWwindow* window, int xpos, int ypos)
 void _glfwPlatformGetWindowSize(_GLFWwindow* window, int* width, int* height)
 {
     if (width)
-        *width = ANativeWindow_getWidth(window->h2co3.handle);
+        *width = ANativeWindow_getWidth(window->h2co3_boat.handle);
     if (height)
-        *height = ANativeWindow_getHeight(window->h2co3.handle);
+        *height = ANativeWindow_getHeight(window->h2co3_boat.handle);
 }
 
 void _glfwPlatformSetWindowSize(_GLFWwindow* window, int width, int height)
@@ -425,9 +445,9 @@ void _glfwPlatformGetWindowContentScale(_GLFWwindow* window,
                                         float* xscale, float* yscale)
 {
     if (xscale)
-        *xscale = _glfw.h2co3.contentScaleX;
+        *xscale = _glfw.h2co3_boat.contentScaleX;
     if (yscale)
-        *yscale = _glfw.h2co3.contentScaleY;
+        *yscale = _glfw.h2co3_boat.contentScaleY;
 }
 
 void _glfwPlatformIconifyWindow(_GLFWwindow* window)
@@ -584,10 +604,11 @@ void _glfwPlatformGetCursorPos(_GLFWwindow* window, double* xpos, double* ypos)
         *ypos = y;
 }
 
-void _glfwPlatformSetCursorPos(_GLFWwindow* window, double x, double y) {
+void _glfwPlatformSetCursorPos(_GLFWwindow* window, double x, double y)
+{
     // Store the new position so it can be recognized later
-    window->h2co3.warpCursorPosX = (int) x;
-    window->h2co3.warpCursorPosY = (int) y;
+    window->h2co3_boat.warpCursorPosX = (int) x;
+    window->h2co3_boat.warpCursorPosY = (int) y;
     // h2co3SetCursorPos(x, y);
 }
 
@@ -605,29 +626,33 @@ void _glfwPlatformSetHitResultType(int type) {
 
 void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode)
 {
-    if (mode == GLFW_CURSOR_DISABLED) {
+    if (mode == GLFW_CURSOR_DISABLED)
+    {
         if (_glfwPlatformWindowFocused(window))
             disableCursor(window);
-    } else if (_glfw.h2co3.disabledCursorWindow == window)
+    }
+    else if (_glfw.h2co3_boat.disabledCursorWindow == window)
         enableCursor(window);
     // else
-        // updateCursorImage(window);
+    // updateCursorImage(window);
 }
 
-const char* _glfwPlatformGetScancodeName(int scancode) {
+const char* _glfwPlatformGetScancodeName(int scancode)
+{
     if (scancode < 0 || scancode > 0xff ||
-        _glfw.h2co3.keycodes[scancode] == GLFW_KEY_UNKNOWN) {
+        _glfw.h2co3_boat.keycodes[scancode] == GLFW_KEY_UNKNOWN)
+    {
 //        _glfwInputError(GLFW_INVALID_VALUE, "Invalid scancode:%d",scancode);
         return NULL;
     }
 
-    const int key = _glfw.h2co3.keycodes[scancode];
-    return _glfw.h2co3.keynames[key];
+    const int key = _glfw.h2co3_boat.keycodes[scancode];
+    return _glfw.h2co3_boat.keynames[key];
 }
 
 int _glfwPlatformGetKeyScancode(int key)
 {
-    return _glfw.h2co3.scancodes[key];
+    return _glfw.h2co3_boat.scancodes[key];
 }
 
 int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
@@ -690,23 +715,23 @@ VkResult _glfwPlatformCreateWindowSurface(VkInstance instance,
     PFN_vkCreateAndroidSurfaceKHR vkCreateAndroidSurfaceKHR;
 
     vkCreateAndroidSurfaceKHR = (PFN_vkCreateAndroidSurfaceKHR)
-        vkGetInstanceProcAddr(instance, "vkCreateAndroidSurfaceKHR");
+            vkGetInstanceProcAddr(instance, "vkCreateAndroidSurfaceKHR");
     if (!vkCreateAndroidSurfaceKHR)
     {
         _glfwInputError(GLFW_API_UNAVAILABLE,
-                        "H2CO3: Vulkan instance missing VK_KHR_android_surface extension");
+                        "H2CO3Boat: Vulkan instance missing VK_KHR_android_surface extension");
         return VK_ERROR_EXTENSION_NOT_PRESENT;
     }
 
     memset(&sci, 0, sizeof(sci));
     sci.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
-    sci.window = window->h2co3.handle;
+    sci.window = window->h2co3_boat.handle;
 
     err = vkCreateAndroidSurfaceKHR(instance, &sci, allocator, surface);
     if (err)
     {
         _glfwInputError(GLFW_PLATFORM_ERROR,
-                        "H2CO3: Failed to create Vulkan Android surface: %s",
+                        "H2CO3Boat: Failed to create Vulkan Android surface: %s",
                         _glfwGetVulkanResultString(err));
     }
 
@@ -718,9 +743,10 @@ VkResult _glfwPlatformCreateWindowSurface(VkInstance instance,
 //////                        GLFW native API                       //////
 //////////////////////////////////////////////////////////////////////////
 
-GLFWAPI struct ANativeWindow *glfwGetH2CO3Window(GLFWwindow *handle) {
-    _GLFWwindow *window = (_GLFWwindow *) handle;
+GLFWAPI struct ANativeWindow* glfwGetH2CO3Window(GLFWwindow* handle)
+{
+    _GLFWwindow* window = (_GLFWwindow*) handle;
     _GLFW_REQUIRE_INIT_OR_RETURN(NULL);
-    return window->h2co3.handle;
+    return window->h2co3_boat.handle;
 }
 

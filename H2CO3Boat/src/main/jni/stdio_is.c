@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <stdio.h>
-#include <xhook.h>
+#include "xhook/xhook.h"
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>

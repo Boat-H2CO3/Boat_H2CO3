@@ -391,12 +391,12 @@ GLFWbool _glfwStringInExtensionString(const char* string, const char* extensions
 //////////////////////////////////////////////////////////////////////////
 
 GLFWAPI int glfwGetOSMesaWidth() {
-    struct ANativeWindow *window = h2co3GetNativeWindow();
+    struct ANativeWindow* window = h2co3GetNativeWindow();
     return ANativeWindow_getWidth(window);
 }
 
 GLFWAPI int glfwGetOSMesaHeight() {
-    struct ANativeWindow *window = h2co3GetNativeWindow();
+    struct ANativeWindow* window = h2co3GetNativeWindow();
     return ANativeWindow_getHeight(window);
 }
 

@@ -22,7 +22,7 @@
 // Created by caikelun on 2018-04-11.
 
 #include <jni.h>
-#include "xhook.h"
+#include <xhook.h>
 
 #define JNI_API_DEF(f) Java_com_qiyi_xhook_NativeHandler_##f
 

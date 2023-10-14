@@ -31,13 +31,13 @@
 #include <regex.h>
 #include <setjmp.h>
 #include <errno.h>
-#include "queue.h"
-#include "tree.h"
-#include "xh_errno.h"
-#include "xh_log.h"
-#include "xh_elf.h"
-#include "xh_version.h"
-#include "xh_core.h"
+#include <queue.h>
+#include <tree.h>
+#include <xh_errno.h>
+#include <xh_log.h>
+#include <xh_elf.h>
+#include <xh_version.h>
+#include <xh_core.h>
 
 #define XH_CORE_DEBUG 0
 

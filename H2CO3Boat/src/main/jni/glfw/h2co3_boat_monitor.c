@@ -1,5 +1,5 @@
 //
-// Created by Tungsten on 2022/10/11.
+// Created by Cainiaohh on 2022/10/11.
 //
 //========================================================================
 // This file is derived from x11_monitor.c
@@ -29,7 +29,7 @@ static void modeChangeHandle(int width, int height, void* data)
         realloc(monitor->modes, monitor->modeCount * sizeof(GLFWvidmode));
     monitor->modes[monitor->modeCount - 1] = mode;
 
-    monitor->h2co3.currentMode = monitor->modeCount - 1;
+    monitor->h2co3_boat.currentMode = monitor->modeCount - 1;
 }
 
 
@@ -37,7 +37,7 @@ static void modeChangeHandle(int width, int height, void* data)
 //////                       GLFW internal API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-void _glfwPollMonitorsH2CO3(void) {
+void _glfwPollMonitorsH2CO3Boat(void) {
     struct ANativeWindow *window = h2co3GetNativeWindow();
     const float dpi = 141.f;
     _GLFWmonitor *monitor = _glfwAllocMonitor("H2CO3 Monitor 0",
@@ -68,9 +68,9 @@ void _glfwPlatformGetMonitorContentScale(_GLFWmonitor* monitor,
                                          float* xscale, float* yscale)
 {
     if (xscale)
-        *xscale = _glfw.h2co3.contentScaleX;
+        *xscale = _glfw.h2co3_boat.contentScaleX;
     if (yscale)
-        *yscale = _glfw.h2co3.contentScaleY;
+        *yscale = _glfw.h2co3_boat.contentScaleY;
 }
 
 void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor, int* xpos, int* ypos, int* width, int* height)
@@ -80,9 +80,9 @@ void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor, int* xpos, int* ypos
     if (ypos)
         *ypos = 0;
     if (width)
-        *width = monitor->modes[monitor->h2co3.currentMode].width;
+        *width = monitor->modes[monitor->h2co3_boat.currentMode].width;
     if (height)
-        *height = monitor->modes[monitor->h2co3.currentMode].height;
+        *height = monitor->modes[monitor->h2co3_boat.currentMode].height;
 }
 
 GLFWvidmode* _glfwPlatformGetVideoModes(_GLFWmonitor* monitor, int* count)
@@ -105,7 +105,7 @@ void _glfwPlatformGetVideoMode(_GLFWmonitor* monitor, GLFWvidmode* mode)
                          ANativeWindow_getHeight(window),
                          monitor);
     }
-    *mode = monitor->modes[monitor->h2co3.currentMode];
+    *mode = monitor->modes[monitor->h2co3_boat.currentMode];
 }
 
 GLFWbool _glfwPlatformGetGammaRamp(_GLFWmonitor* monitor, GLFWgammaramp* ramp)

@@ -16,6 +16,22 @@
         <item name="contentPaddingBottom">@dimen/app_16dp</item>
     </style>
 
+    <style name="Theme.H2CO3.CardViewOutlined.NoStroke" parent="@style/Widget.Material3.CardView.Outlined">
+        <item name="android:checkable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+        <item name="contentPaddingStart">@dimen/app_16dp</item>
+        <item name="contentPaddingEnd">@dimen/app_16dp</item>
+        <item name="contentPaddingLeft">@dimen/app_16dp</item>
+        <item name="contentPaddingRight">@dimen/app_16dp</item>
+        <item name="contentPaddingTop">@dimen/app_16dp</item>
+        <item name="contentPaddingBottom">@dimen/app_16dp</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
     <style name="Theme.H2CO3.CardViewElevated" parent="@style/Widget.Material3.CardView.Elevated">
         <item name="android:checkable">true</item>
         <item name="android:clickable">true</item>

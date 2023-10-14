@@ -1,5 +1,5 @@
 //
-// Created by Tungsten on 2022/10/11.
+// Created by Cainiaohh on 2023/10/11.
 //
 
 #include <stdlib.h>
@@ -8,12 +8,20 @@
 
 #include <internal.h>
 #include <android/native_window.h>
+#include <android/log.h>
 
 int (*vtest_main) (int argc, char** argv);
 void (*vtest_swap_buffers) (void);
 
 ANativeWindow_Buffer buf;
 int32_t stride;
+
+#ifndef H2CO3BOAT_NSBYPASS_H
+#define H2CO3BOAT_NSBYPASS_H
+
+void* load_turnip_vulkan();
+
+#endif
 
 void* makeContextCurrentEGL(void* win) {
     _GLFWwindow* window = win;
@@ -28,8 +36,7 @@ void* makeContextCurrentEGL(void* win) {
     }
 
     if (strcmp(getenv("LIBGL_STRING"), "VirGLRenderer") == 0) {
-        vtest_main(3, (char **) (const char *[]) {"vtest", "--no-loop-or-fork", "--use-gles", NULL,
-                                                  NULL});
+        vtest_main(3, (const char*[]) {"vtest", "--no-loop-or-fork", "--use-gles", NULL, NULL});
     }
 }
 
@@ -64,7 +71,7 @@ static void makeContextCurrentOSMesa(_GLFWwindow* window)
         }
 
         if (strcmp(getenv("LIBGL_STRING"), "VirGLRenderer") != 0) {
-            ANativeWindow_lock(window->h2co3.handle, &buf, NULL);
+            ANativeWindow_lock(window->h2co3_boat.handle, &buf, NULL);
             OSMesaPixelStore(OSMESA_ROW_LENGTH, buf.stride);
             stride = buf.stride;
             OSMesaPixelStore(OSMESA_Y_UP, 0);
@@ -121,17 +128,16 @@ static void swapBuffersOSMesa(_GLFWwindow* window)
     if (strcmp(getenv("LIBGL_STRING"), "VirGLRenderer") == 0) {
         window->context.Finish();
         vtest_swap_buffers();
-    } else {
+    } else if (strcmp(getenv("LIBGL_STRING"), "Zink") == 0) {
         OSMesaContext context = OSMesaGetCurrentContext();
         if (context == NULL) {
             printf("Zink: attempted to swap buffers without context!");
             return;
         }
-        OSMesaMakeCurrent(context, buf.bits, GL_UNSIGNED_BYTE, window->context.osmesa.width,
-                          window->context.osmesa.height);
+        OSMesaMakeCurrent(context, buf.bits, GL_UNSIGNED_BYTE, window->context.osmesa.width, window->context.osmesa.height);
         window->context.Finish();
-        ANativeWindow_unlockAndPost(window->h2co3.handle);
-        ANativeWindow_lock(window->h2co3.handle, &buf, NULL);
+        ANativeWindow_unlockAndPost(window->h2co3_boat.handle);
+        ANativeWindow_lock(window->h2co3_boat.handle, &buf, NULL);
     }
 }
 
@@ -153,12 +159,43 @@ static int extensionSupportedOSMesa(const char* extension)
 //////                       GLFW internal API                      //////
 //////////////////////////////////////////////////////////////////////////
 
+static void set_vulkan_ptr(void* ptr) {
+    char envval[64];
+    sprintf(envval, "%"PRIxPTR, (uintptr_t)ptr);
+    setenv("VULKAN_PTR", envval, 1);
+}
+
+void load_vulkan() {
+    if(getenv("Boat_ZINK_PREFER_SYSTEM_DRIVER") == NULL && android_get_device_api_level() >= 28) {
+    // the loader does not support below that
+#ifdef ADRENO_POSSIBLE
+        void* result = load_turnip_vulkan();
+        if(result != NULL) {
+            printf("AdrenoSupp: Loaded Turnip, loader address: %p\n", result);
+            set_vulkan_ptr(result);
+            return;
+        }
+#endif
+    }
+    printf("OSMDroid: loading vulkan regularly...\n");
+    void* vulkan_ptr = dlopen("libvulkan.so", RTLD_LAZY | RTLD_LOCAL);
+    printf("OSMDroid: loaded vulkan, ptr=%p\n", vulkan_ptr);
+    set_vulkan_ptr(vulkan_ptr);
+}
+
 GLFWbool _glfwInitOSMesa(void)
 {
     if (_glfw.osmesa.handle)
         return GLFW_TRUE;
-
+    
+    const char *renderer = getenv("LIBGL_STRING");
+    
+    if (strcmp(renderer, "VirGLRenderer") == 0) {
+    _glfw.osmesa.handle = _glfw_dlopen("libOSMesa_81.so");
+    } else if (strcmp(renderer, "Zink") == 0) {
+    load_vulkan();
     _glfw.osmesa.handle = _glfw_dlopen("libOSMesa_8.so");
+    }
 
     if (!_glfw.osmesa.handle)
     {
@@ -183,10 +220,9 @@ GLFWbool _glfwInitOSMesa(void)
     _glfw.osmesa.GetProcAddress = (PFN_OSMesaGetProcAddress)
         _glfw_dlsym(_glfw.osmesa.handle, "OSMesaGetProcAddress");
 
-    const char *renderer = getenv("LIBGL_STRING");
     if (strcmp(renderer, "VirGLRenderer") == 0) {
         char* fileName = calloc(1, 1024);
-        sprintf(fileName, "%s/libvirgl_test_server.so", getenv("H2CO3_NATIVEDIR"));
+        sprintf(fileName, "%s/libvirgl_test_server.so", getenv("H2CO3BOAT_NATIVEDIR"));
         void *handle = _glfw_dlopen(fileName);
         if (!handle) {
             printf("VirGL: %s\n", dlerror());
@@ -274,7 +310,7 @@ GLFWbool _glfwCreateContextOSMesa(_GLFWwindow* window,
             return GLFW_FALSE;
         }
 
-        ANativeWindow_setBuffersGeometry(window->h2co3.handle, 0, 0, vid);
+        ANativeWindow_setBuffersGeometry(window->h2co3_boat.handle, 0, 0, vid);
 
         eglBindAPI(EGL_OPENGL_ES_API);
 

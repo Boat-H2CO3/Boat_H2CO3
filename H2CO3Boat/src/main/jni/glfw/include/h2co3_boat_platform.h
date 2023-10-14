@@ -33,76 +33,80 @@ typedef VkResult (APIENTRY *PFN_vkCreateAndroidSurfaceKHR)(VkInstance, const VkA
 #define _glfw_dlclose(handle) dlclose(handle)
 #define _glfw_dlsym(handle, name) dlsym(handle, name)
 
-#define _GLFW_EGL_NATIVE_WINDOW  ((EGLNativeWindowType) window->h2co3.handle)
+#define _GLFW_EGL_NATIVE_WINDOW  ((EGLNativeWindowType) window->h2co3_boat.handle)
 #define _GLFW_EGL_NATIVE_DISPLAY EGL_DEFAULT_DISPLAY
 
-#define _GLFW_PLATFORM_WINDOW_STATE         _GLFWwindowH2CO3  h2co3
-#define _GLFW_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryH2CO3 h2co3
-#define _GLFW_PLATFORM_MONITOR_STATE        _GLFWmonitorH2CO3 h2co3
-#define _GLFW_PLATFORM_CURSOR_STATE         _GLFWcursorH2CO3  h2co3
+#define _GLFW_PLATFORM_WINDOW_STATE         _GLFWwindowH2CO3Boat  h2co3_boat
+#define _GLFW_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryH2CO3Boat h2co3_boat
+#define _GLFW_PLATFORM_MONITOR_STATE        _GLFWmonitorH2CO3Boat h2co3_boat
+#define _GLFW_PLATFORM_CURSOR_STATE         _GLFWcursorH2CO3Boat  h2co3_boat
 
 #define _GLFW_PLATFORM_CONTEXT_STATE         struct { int dummyContext; }
 #define _GLFW_PLATFORM_LIBRARY_CONTEXT_STATE struct { int dummyLibraryContext; }
 
-// H2CO3-specific per-window data
+// H2CO3Boat-specific per-window data
 //
-typedef struct _GLFWwindowH2CO3 {
-    struct ANativeWindow *handle;
+typedef struct _GLFWwindowH2CO3Boat
+{
+    struct ANativeWindow*  handle;
 
-    GLFWbool overrideRedirect;
-    GLFWbool iconified;
-    GLFWbool maximized;
+    GLFWbool        overrideRedirect;
+    GLFWbool        iconified;
+    GLFWbool        maximized;
 
     // Whether the visual supports framebuffer transparency
-    GLFWbool transparent;
+    GLFWbool        transparent;
 
     // Cached position and size used to filter out duplicate events
-    int width, height;
-    int xpos, ypos;
+    int             width, height;
+    int             xpos, ypos;
 
     // The last received cursor position, regardless of source
-    int lastCursorPosX, lastCursorPosY;
+    int             lastCursorPosX, lastCursorPosY;
     // The last position the cursor was warped to by GLFW
-    int warpCursorPosX, warpCursorPosY;
+    int             warpCursorPosX, warpCursorPosY;
 
-} _GLFWwindowH2CO3;
+} _GLFWwindowH2CO3Boat;
 
-// H2CO3-specific global data
+// H2CO3Boat-specific global data
 //
-typedef struct _GLFWlibraryH2CO3 {
+typedef struct _GLFWlibraryH2CO3Boat
+{
     // System content scale
-    float contentScaleX, contentScaleY;
+    float           contentScaleX, contentScaleY;
     // Key name string
-    char keynames[GLFW_KEY_LAST + 1][5];
-    // H2CO3 keycode to GLFW key LUT
-    short int keycodes[256];
-    // GLFW key to H2CO3 keycode LUT
-    short int scancodes[GLFW_KEY_LAST + 1];
+    char            keynames[GLFW_KEY_LAST + 1][5];
+    // H2CO3Boat keycode to GLFW key LUT
+    short int       keycodes[256];
+    // GLFW key to H2CO3Boat keycode LUT
+    short int       scancodes[GLFW_KEY_LAST + 1];
     // Where to place the cursor when re-enabled
-    double restoreCursorPosX, restoreCursorPosY;
+    double          restoreCursorPosX, restoreCursorPosY;
     // The window whose disabled cursor mode is active
-    _GLFWwindow *disabledCursorWindow;
+    _GLFWwindow*    disabledCursorWindow;
     // The window receiving and processing events
-    _GLFWwindow *eventCurrent;
+    _GLFWwindow*    eventCurrent;
 
-} _GLFWlibraryH2CO3;
+} _GLFWlibraryH2CO3Boat;
 
-// H2CO3-specific per-monitor data
+// H2CO3Boat-specific per-monitor data
 //
-typedef struct _GLFWmonitorH2CO3 {
+typedef struct _GLFWmonitorH2CO3Boat
+{
     // Current monitor mode index
-    int currentMode;
+    int             currentMode;
 
-} _GLFWmonitorH2CO3;
+} _GLFWmonitorH2CO3Boat;
 
-// H2CO3-specific per-cursor data
+// H2CO3Boat-specific per-cursor data
 //
-typedef struct _GLFWcursorH2CO3 {
+typedef struct _GLFWcursorH2CO3Boat
+{
     // Useless struct filler
-    void *handle;
+    void* handle;
 
-} _GLFWcursorH2CO3;
+} _GLFWcursorH2CO3Boat;
 
 
-void _glfwPollMonitorsH2CO3(void);
+void _glfwPollMonitorsH2CO3Boat(void);
 

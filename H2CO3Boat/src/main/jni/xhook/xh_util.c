@@ -33,9 +33,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
-#include "xh_util.h"
-#include "xh_errno.h"
-#include "xh_log.h"
+#include <xh_util.h>
+#include <xh_errno.h>
+#include <xh_log.h>
 
 #define PAGE_START(addr) ((addr) & PAGE_MASK)
 #define PAGE_END(addr)   (PAGE_START(addr + sizeof(uintptr_t) - 1) + PAGE_SIZE)

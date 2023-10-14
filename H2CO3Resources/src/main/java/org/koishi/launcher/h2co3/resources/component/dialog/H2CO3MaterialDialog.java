@@ -18,10 +18,4 @@ public class H2CO3MaterialDialog extends MaterialAlertDialogBuilder {
     public void dismiss() {
         this.create().dismiss();
     }
-
-    @NonNull
-    @Override
-    public AlertDialog create() {
-        return super.create();
-    }
 }

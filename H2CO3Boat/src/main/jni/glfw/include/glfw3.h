@@ -4130,18 +4130,18 @@ GLFWAPI int glfwGetInputMode(GLFWwindow* window, int mode);
 GLFWAPI void glfwSetInputMode(GLFWwindow* window, int mode, int value);
 
 /**
- * For H2CO3, set injector mode
+ * For Boat, set injector mode
  * @param mode 0 is disable, 1 is enable, when enabled, lwjgl will try to get hit result type
  */
 GLFWAPI void glfwSetInjectorMode(int mode);
 
 /**
- * For H2CO3, get injector mode
+ * For Boat, get injector mode
  */
 GLFWAPI int glfwGetInjectorMode();
 
 /**
- * For H2CO3, set type of what player's cursor point to
+ * For Boat, set type of what player's cursor point to
  * @param type Hit result type
  */
 GLFWAPI void glfwSetHitResultType(int type);
