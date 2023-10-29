@@ -21,7 +21,6 @@
         android:allowBackup="true"
         android:allowNativeHeapPointerTagging="false"
         android:appCategory="game"
-        android:extractNativeLibs="true"
         android:icon="@drawable/ic_launcher"
         android:isGame="true"
         android:label="@string/app_name"
@@ -31,7 +30,7 @@
         android:theme="@style/Theme.H2CO3.DynamicColors"
         tools:targetApi="34">
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>

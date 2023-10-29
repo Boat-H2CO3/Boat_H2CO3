@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/splash_view"
+    tools:context=".ui.SplashActivity">
+
+    <com.google.android.material.circularreveal.CircularRevealRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="275dp"
+        tools:layout_editor_absoluteY="239dp">
+
+        <org.koishi.launcher.h2co3.resources.component.H2CO3CardView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_centerInParent="true"
+            app:cardCornerRadius="200dp"
+            app:cardElevation="5dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?colorPrimaryContainer"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_launcher" />
+
+            </LinearLayout>
+
+        </org.koishi.launcher.h2co3.resources.component.H2CO3CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/progressBar2"
+                style="@android:style/Widget.Material.Light.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                android:id="@+id/splash_load"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/progressBar2"
+                android:text="Loading"
+                android:textSize="18sp"
+                android:visibility="gone"/>
+
+            <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                android:id="@+id/splash_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/splash_load"
+                android:text="@string/launcher_initial_install_check" />
+
+        </LinearLayout>
+
+    </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+</LinearLayout>

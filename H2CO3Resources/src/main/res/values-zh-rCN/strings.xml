@@ -26,5 +26,8 @@
     <string name="login_offline">离线登录</string>
     <string name="login_microsoft">微软登录</string>
     <string name="login_other">第三方登录</string>
+    <string name="launcher_initial_install_check">检查文件...</string>
+    <string name="user_add">创建用户</string>
+    <string name="user_state_offline">离线模式</string>
 
 </resources>

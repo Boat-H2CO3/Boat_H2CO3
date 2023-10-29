@@ -96,22 +96,22 @@ public class H2CO3Tools {
     }
 
     public static boolean getBoatValue(String key, boolean defaultValue) {
-        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", "usesGlobal", false, boolean.class)) {
-            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", key, defaultValue, boolean.class);
+        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", "usesGlobal", false, Boolean.class)) {
+            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", key, defaultValue, Boolean.class);
         } else {
-            return getValue(H2CO3_SETTING_DIR + "/BoatConfig.json", key, defaultValue, boolean.class);
+            return getValue(H2CO3_SETTING_DIR + "/BoatConfig.json", key, defaultValue, Boolean.class);
         }
     }
 
     public static String getBoatValueString(String key, String defaultValue) {
-        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", "usesGlobal", false, boolean.class)) {
+        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", "usesGlobal", false, Boolean.class)) {
             return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", key, defaultValue, String.class);
         } else {
             return getValue(H2CO3_SETTING_DIR + "/BoatConfig.json", key, defaultValue, String.class);
         }
     }
 
-    public static void setBoatValue(String key, Object value) {
+    public static void setBoatValue(String key, java.io.Serializable value) {
         if (getBoatValue("usesGlobal", false)) {
             setValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", key, value);
         } else {
@@ -124,10 +124,10 @@ public class H2CO3Tools {
     }
 
     public static boolean getH2CO3Value(String key, boolean defaultValue) {
-        return getValue(H2CO3_SETTING_DIR + "/H2CO3Config.json", key, defaultValue, boolean.class);
+        return getValue(H2CO3_SETTING_DIR + "/H2CO3Config.json", key, defaultValue, Boolean.class);
     }
 
-    public static void setH2CO3Value(String key, Object value) {
+    public static void setH2CO3Value(String key, String value) {
         setValue(H2CO3_SETTING_DIR + "/H2CO3Config.json", key, value);
     }
 
@@ -155,7 +155,7 @@ public class H2CO3Tools {
 
                 if (type == String.class) {
                     return (T) configJson.optString(key);
-                } else if (type == boolean.class) {
+                } else if (type == Boolean.class) {
                     return (T) Boolean.valueOf(configJson.optBoolean(key));
                 } else {
                     return (T) configJson.opt(key);
@@ -168,7 +168,7 @@ public class H2CO3Tools {
         }
     }
 
-    public static void setValue(String configFile, String key, Object value) {
+    public static void setValue(String configFile, String key, java.io.Serializable value) {
         try {
             Path configPath = Paths.get(configFile);
             if (!Files.exists(configPath)) {
@@ -198,6 +198,5 @@ public class H2CO3Tools {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 }

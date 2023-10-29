@@ -1,12 +1,64 @@
 <org.koishi.launcher.h2co3.resources.component.H2CO3CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include
-        layout="@layout/appbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true">
+
+        <org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@null"
+            android:elevation="0dp"
+            android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+            app:layout_collapseMode="pin">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:id="@+id/home_topbar_user">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/home_topbar_user_icon"
+                    style="@style/Theme.H2CO3.IconNormal.NoBackGround"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:duplicateParentState="true"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_error" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                        android:id="@+id/home_topbar_user_name"
+                        style="@style/Theme.H2CO3.CardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textSize="16sp" />
+
+                    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                        android:id="@+id/home_topbar_user_state"
+                        style="@style/Theme.H2CO3.CardContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested"

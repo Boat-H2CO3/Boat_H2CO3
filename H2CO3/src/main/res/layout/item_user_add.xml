@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <org.koishi.launcher.h2co3.resources.component.H2CO3CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/login_user_item"
+        android:id="@+id/login_user_add"
         style="@style/Theme.H2CO3.CardViewOutlined.NoStroke"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,11 +19,11 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/item_listview_userImageView"
-                style="@style/Theme.H2CO3.IconNormal.NoBackGround"
+                style="@style/Theme.H2CO3.IconMaterial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_home_user_normal" />
+                android:src="@drawable/ic_launcher_add" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -38,26 +38,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
-
-                <TextView
-                    android:id="@+id/item_listview_user_state"
-                    style="@style/Theme.H2CO3.CardContent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="@string/user_state_offline" />
+                    android:textSize="16sp"
+                    android:text="@string/user_add" />
 
             </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/item_listview_user_remove"
-                style="@style/Theme.H2CO3.IconMaterial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_del_all" />
 
         </LinearLayout>
 

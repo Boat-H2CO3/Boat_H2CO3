@@ -11,10 +11,19 @@ import org.koishi.launcher.h2co3.resources.R;
 
 public class H2CO3MaterialDialog extends MaterialAlertDialogBuilder {
 
+    AlertDialog dialog;
     public H2CO3MaterialDialog(Context context) {
         super(context, R.style.AppTheme_MaterialAlertDialog);
+        dialog = create();
     }
-
+    public AlertDialog show() {
+        dialog.show();
+        return dialog;
+    }
+    public AlertDialog cancel() {
+        dialog.cancel();
+        return dialog;
+    }
     public void dismiss() {
         this.create().dismiss();
     }

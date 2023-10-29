@@ -33,7 +33,8 @@ public class HomeFragment extends H2CO3Fragment {
     }
 
     private void findView() {
-        home_file_check = findViewById(view, R.id.home_file_check);
+        home_file_check_title = findViewById(view, R.id.home_file_check_title);
+        home_file_check_title.setText(H2CO3Tools.getBoatValueString("auth_player_name","Player"));
     }
 
     @Override

@@ -9,13 +9,13 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.widget.NestedScrollView;
 
-import org.koishi.launcher.h2co3.core.view.ViewFinder;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import org.koishi.launcher.h2co3.resources.R;
 
 public class H2CO3CustomViewDialog extends H2CO3MaterialDialog {
     private View customView;
-    private ViewFinder viewFinder;
 
     public H2CO3CustomViewDialog(Context context) {
         super(context);
@@ -38,19 +38,12 @@ public class H2CO3CustomViewDialog extends H2CO3MaterialDialog {
     public void setCustomView(int layoutResId) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         customView = inflater.inflate(layoutResId, null);
-
-        NestedScrollView customViewContainer = new NestedScrollView(getContext());
-        customViewContainer.addView(customView);
-
-        setView(customViewContainer);
+        setView(customView);
     }
 
     @NonNull
     @Override
     public AlertDialog create() {
-        if (customView != null) {
-            viewFinder = new ViewFinder(customView);
-        }
         AlertDialog dialog = super.create();
         Window window = dialog.getWindow();
         if (window != null) {
@@ -68,8 +61,8 @@ public class H2CO3CustomViewDialog extends H2CO3MaterialDialog {
      * @return 查找到的视图，如果未找到则返回null
      */
     public <T extends View> T findViewById(int viewId) {
-        if (viewFinder != null) {
-            return viewFinder.findViewById(viewId);
+        if (getCustomView() != null) {
+            return getCustomView().findViewById(viewId);
         }
         return null;
     }

@@ -35,4 +35,7 @@
     <string name="login_offline">Offline</string>
     <string name="login_microsoft">Microsoft</string>
     <string name="login_other">Other</string>
+    <string name="launcher_initial_install_check">Checking files...</string>
+    <string name="user_add">Create User</string>
+    <string name="user_state_offline">Offline</string>
 </resources>

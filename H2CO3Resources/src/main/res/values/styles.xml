@@ -7,6 +7,8 @@
         <item name="android:focusable">true</item>
         <item name="android:clipChildren">false</item>
         <item name="android:clipToPadding">false</item>
+        <item name="android:layout_marginTop">@dimen/app_10dp</item>
+        <item name="android:layout_marginHorizontal">@dimen/app_15dp</item>
         <item name="cardCornerRadius">@dimen/card_radius</item>
         <item name="contentPaddingStart">@dimen/app_16dp</item>
         <item name="contentPaddingEnd">@dimen/app_16dp</item>
@@ -22,6 +24,8 @@
         <item name="android:focusable">true</item>
         <item name="android:clipChildren">false</item>
         <item name="android:clipToPadding">false</item>
+        <item name="android:layout_marginTop">@dimen/app_10dp</item>
+        <item name="android:layout_marginHorizontal">@dimen/app_15dp</item>
         <item name="cardCornerRadius">@dimen/card_radius</item>
         <item name="contentPaddingStart">@dimen/app_16dp</item>
         <item name="contentPaddingEnd">@dimen/app_16dp</item>
@@ -38,6 +42,8 @@
         <item name="android:focusable">true</item>
         <item name="android:clipChildren">false</item>
         <item name="android:clipToPadding">false</item>
+        <item name="android:layout_marginTop">@dimen/app_10dp</item>
+        <item name="android:layout_marginHorizontal">@dimen/app_15dp</item>
         <item name="cardCornerRadius">@dimen/card_radius</item>
         <item name="contentPaddingStart">@dimen/app_16dp</item>
         <item name="contentPaddingEnd">@dimen/app_16dp</item>
@@ -54,6 +60,8 @@
         <item name="android:focusable">true</item>
         <item name="android:clipChildren">false</item>
         <item name="android:clipToPadding">false</item>
+        <item name="android:layout_marginTop">@dimen/app_10dp</item>
+        <item name="android:layout_marginHorizontal">@dimen/app_15dp</item>
         <item name="cardCornerRadius">@dimen/card_radius</item>
         <item name="contentPaddingStart">@dimen/app_16dp</item>
         <item name="contentPaddingEnd">@dimen/app_16dp</item>
@@ -70,6 +78,8 @@
         <item name="android:focusable">true</item>
         <item name="android:clipChildren">false</item>
         <item name="android:clipToPadding">false</item>
+        <item name="android:layout_marginTop">@dimen/app_10dp</item>
+        <item name="android:layout_marginHorizontal">@dimen/app_15dp</item>
         <item name="cardCornerRadius">@dimen/card_radius</item>
         <item name="contentPaddingStart">@dimen/app_16dp</item>
         <item name="contentPaddingEnd">@dimen/app_16dp</item>
@@ -97,6 +107,16 @@
         <item name="android:background">@drawable/shape_circle_icon_background</item>
         <item name="android:tintMode">src_in</item>
         <item name="android:backgroundTint">?colorPrimaryContainer</item>
+        <item name="android:backgroundTintMode">src_in</item>
+    </style>
+
+    <style name="Theme.H2CO3.IconNormal.NoBackGround">
+        <item name="android:layout_marginRight">@dimen/app_15dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_circle_icon_no_background</item>
+        <item name="android:tintMode">src_in</item>
+        <item name="android:backgroundTint">@null</item>
         <item name="android:backgroundTintMode">src_in</item>
     </style>
 
