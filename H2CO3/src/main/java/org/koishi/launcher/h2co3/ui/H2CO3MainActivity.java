@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -94,10 +95,12 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
             H2CO3Tools.setBoatValue("apiUrl", "");
             homeTopbarUserName.setText(getString(org.koishi.launcher.h2co3.resources.R.string.user_add));
             homeTopbarUserState.setText(getString(org.koishi.launcher.h2co3.resources.R.string.user_add));
+            homeTopbarUserIcon.setImageDrawable(ContextCompat.getDrawable(H2CO3MainActivity.this,org.koishi.launcher.h2co3.resources.R.drawable.xicon));
         } else {
             homeTopbarUserName.setText(H2CO3Tools.getBoatValueString("auth_player_name",""));
             if (H2CO3Tools.getBoatValue("isOffline", true)) {
                 homeTopbarUserState.setText(getString(org.koishi.launcher.h2co3.resources.R.string.user_state_offline));
+                homeTopbarUserIcon.setImageDrawable(ContextCompat.getDrawable(this,org.koishi.launcher.h2co3.resources.R.drawable.ic_home_user));
             } else {
                 homeTopbarUserState.setText(H2CO3Tools.getBoatValueString("apiUrl", "Error"));
             }
@@ -167,13 +170,6 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                     loginNameLayout.setVisibility(View.VISIBLE);
                     loginPasswordLayout.setVisibility(View.VISIBLE);
                     loginApiLayout.setVisibility(View.VISIBLE);
-
-                    if (!TextUtils.isEmpty(loginName.getText())) {
-                        addUserToJson(loginName.getText().toString(), true, false, "", "", "", "", "");
-                        adapterUser.notifyDataSetChanged();
-                        popView.dismiss();
-                        loginDialogAlert.dismiss();
-                    }
                 }
             }
 
@@ -186,7 +182,12 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
             }
         });
         login.setOnClickListener(p1 -> {
-
+            if (!TextUtils.isEmpty(loginName.getText())) {
+                addUserToJson(loginName.getText().toString(), true, false, "", "", "", "", "");
+                adapterUser.notifyDataSetChanged();
+                popView.dismiss();
+                loginDialogAlert.dismiss();
+            }
         });
     }
 
@@ -296,6 +297,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                 homeTopbarUserName.setText(user.getUserName());
                 if (user.getIsOffline()) {
                     homeTopbarUserState.setText(getString(org.koishi.launcher.h2co3.resources.R.string.user_state_offline));
+                    homeTopbarUserIcon.setImageDrawable(ContextCompat.getDrawable(H2CO3MainActivity.this,org.koishi.launcher.h2co3.resources.R.drawable.ic_home_user));
                     H2CO3Tools.setBoatValue("isOffline", true);
                 } else {
                     homeTopbarUserState.setText(user.getApiUrl());
@@ -318,6 +320,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                 homeTopbarUserName.setText(user.getUserName());
                 if (user.getIsOffline()) {
                     H2CO3Tools.setBoatValue("user_type", 0);
+                    homeTopbarUserIcon.setImageDrawable(ContextCompat.getDrawable(H2CO3MainActivity.this,org.koishi.launcher.h2co3.resources.R.drawable.ic_home_user));
                     homeTopbarUserState.setText(getString(org.koishi.launcher.h2co3.resources.R.string.user_state_offline));
                 } else {
                     H2CO3Tools.setBoatValue("user_type", 0);
@@ -368,6 +371,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                 H2CO3Tools.setBoatValue("apiUrl", "");
                 homeTopbarUserName.setText(getString(org.koishi.launcher.h2co3.resources.R.string.user_add));
                 homeTopbarUserState.setText(getString(org.koishi.launcher.h2co3.resources.R.string.user_add));
+                homeTopbarUserIcon.setImageDrawable(ContextCompat.getDrawable(H2CO3MainActivity.this,org.koishi.launcher.h2co3.resources.R.drawable.xicon));
             } else if (position < selectedPosition) {
                 selectedPosition--;
                 UserBean userBean = list.get(selectedPosition);
@@ -376,6 +380,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                 homeTopbarUserName.setText(H2CO3Tools.getBoatValueString("auth_player_name",userBean.getUserName()));
                 if (H2CO3Tools.getBoatValue("isOffline", true)) {
                     homeTopbarUserState.setText(getString(org.koishi.launcher.h2co3.resources.R.string.user_state_offline));
+                    homeTopbarUserIcon.setImageDrawable(ContextCompat.getDrawable(H2CO3MainActivity.this,org.koishi.launcher.h2co3.resources.R.drawable.ic_home_user));
                 } else {
                     homeTopbarUserState.setText(H2CO3Tools.getBoatValueString("apiUrl", userBean.getApiUrl()));
                 }
