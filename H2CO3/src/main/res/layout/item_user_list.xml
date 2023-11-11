@@ -1,65 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <org.koishi.launcher.h2co3.resources.component.H2CO3CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <org.koishi.launcher.h2co3.resources.component.H2CO3CardView
         android:id="@+id/login_user_item"
         style="@style/Theme.H2CO3.CardViewOutlined.NoStroke"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginHorizontal="0dp"
+        android:layout_marginTop="0dp"
         android:orientation="vertical"
-        android:layout_marginHorizontal="@dimen/app_10dp">
+        app:contentPadding="@dimen/app_5dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/item_listview_userImageView"
-                style="@style/Theme.H2CO3.IconNormal.NoBackGround"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_home_user_normal" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_toStartOf="@+id/item_listview_user_remove"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/item_listview_user_name"
-                    style="@style/Theme.H2CO3.CardTitle"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/item_listview_userImageView"
+                    style="@style/Theme.H2CO3.IconNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+                    android:src="@drawable/ic_home_user_normal" />
 
-                <TextView
-                    android:id="@+id/item_listview_user_state"
-                    style="@style/Theme.H2CO3.CardContent"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="@string/user_state_offline" />
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
+                    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                        android:id="@+id/item_listview_user_name"
+                        style="@style/Theme.H2CO3.CardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="aaaaaaaaavvxvxvxcvxvxcvxvxcvaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+
+                    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
+                        android:id="@+id/item_listview_user_state"
+                        style="@style/Theme.H2CO3.CardContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="@string/user_state_offline" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/item_listview_user_remove"
-                style="@style/Theme.H2CO3.IconMaterial"
+                style="@style/Theme.H2CO3.IconMaterial.NoBackGround"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="0dp"
                 android:src="@drawable/ic_del_all" />
-
-        </LinearLayout>
+        </RelativeLayout>
 
     </org.koishi.launcher.h2co3.resources.component.H2CO3CardView>
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -29,5 +29,8 @@
     <string name="launcher_initial_install_check">检查文件...</string>
     <string name="user_add">创建用户</string>
     <string name="user_state_offline">离线模式</string>
+    <string name="login_wait">Wait...</string>
+    <string name="title_delete">Delete</string>
+    <string name="message_delete">"Do you want to delete "</string>
 
 </resources>

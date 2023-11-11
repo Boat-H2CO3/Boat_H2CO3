@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
@@ -39,6 +40,7 @@ public class SplashActivity extends H2CO3Activity {
     private boolean java17 = false;
     private boolean installing = false;
     private H2CO3MessageDialog permissionDialog;
+    private AlertDialog permissionDialogAlert;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
 
@@ -96,12 +98,13 @@ public class SplashActivity extends H2CO3Activity {
             dismissDialog();
         });
         permissionDialog.setNegativeButton(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.button_cancel), (dialog, which) -> finish());
-        permissionDialog.setCancelable(false);
-        permissionDialog.show();
+        permissionDialogAlert = permissionDialog.create();
+        permissionDialogAlert.setCancelable(false);
+        permissionDialogAlert.show();
     }
 
     private void dismissDialog() {
-        permissionDialog.dismiss();
+        permissionDialogAlert.dismiss();
     }
 
     private boolean isLatest() {

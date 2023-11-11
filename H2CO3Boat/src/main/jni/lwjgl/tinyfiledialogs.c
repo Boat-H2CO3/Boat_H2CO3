@@ -7376,7 +7376,7 @@ lTheSaveFileName = tinyfd_saveFileDialog(
 if (!lTheSaveFileName)
 {
         tinyfd_messageBox(
-                "Error",
+                "error",
                 "Save file name is NULL",
                 "ok",
                 "error",
@@ -7388,7 +7388,7 @@ lIn = fopen(lTheSaveFileName, "w");
 if (!lIn)
 {
         tinyfd_messageBox(
-                "Error",
+                "error",
                 "Can not open this file in write mode",
                 "ok",
                 "error",
@@ -7409,7 +7409,7 @@ lTheOpenFileName = tinyfd_openFileDialog(
 if (!lTheOpenFileName)
 {
         tinyfd_messageBox(
-                "Error",
+                "error",
                 "Open file name is NULL",
                 "ok",
                 "error",
@@ -7422,7 +7422,7 @@ lIn = fopen(lTheOpenFileName, "r");
 if (!lIn)
 {
         tinyfd_messageBox(
-                "Error",
+                "error",
                 "Can not open this file in read mode",
                 "ok",
                 "error",
@@ -7442,7 +7442,7 @@ lTheSelectFolderName = tinyfd_selectFolderDialog(
 if (!lTheSelectFolderName)
 {
         tinyfd_messageBox(
-                "Error",
+                "error",
                 "Select folder name is NULL",
                 "ok",
                 "error",
@@ -7462,7 +7462,7 @@ lTheHexColor = tinyfd_colorChooser(
 if (!lTheHexColor)
 {
         tinyfd_messageBox(
-                "Error",
+                "error",
                 "hexcolor is NULL",
                 "ok",
                 "error",

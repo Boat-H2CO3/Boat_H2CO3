@@ -30,6 +30,9 @@
         android:theme="@style/Theme.H2CO3.DynamicColors"
         tools:targetApi="34">
         <activity
+            android:name=".ui.MicrosoftLoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.SplashActivity"
             android:exported="true"
             tools:ignore="LockedOrientationActivity">

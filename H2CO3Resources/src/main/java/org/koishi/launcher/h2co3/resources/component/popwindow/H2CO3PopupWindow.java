@@ -4,15 +4,11 @@ import android.content.Context;
 import android.view.View;
 import android.widget.PopupWindow;
 
-/**
- * @author iwen大大怪
- * @create 2021/11/09 0:07
- */
-public class CommonPopupWindow extends PopupWindow {
+public class H2CO3PopupWindow extends PopupWindow {
 
     public final PopupController controller;
 
-    public CommonPopupWindow(PopupController controller) {
+    public H2CO3PopupWindow(PopupController controller) {
         this.controller = controller;
     }
 
@@ -53,7 +49,7 @@ public class CommonPopupWindow extends PopupWindow {
      *
      * @param context 上下文
      */
-    private CommonPopupWindow(Context context) {
+    private H2CO3PopupWindow(Context context) {
         controller = new PopupController(context, this);
     }
 
@@ -151,8 +147,8 @@ public class CommonPopupWindow extends PopupWindow {
             return this;
         }
 
-        public CommonPopupWindow builder() {
-            final CommonPopupWindow popupWindow = new CommonPopupWindow(params.mContext);
+        public H2CO3PopupWindow builder() {
+            final H2CO3PopupWindow popupWindow = new H2CO3PopupWindow(params.mContext);
             params.apply(popupWindow.controller);
             if (listener != null && params.layoutResId != 0) {
                 listener.getChildView(popupWindow.controller.mPopupView, params.layoutResId);

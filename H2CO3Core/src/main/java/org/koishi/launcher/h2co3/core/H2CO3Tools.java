@@ -4,11 +4,16 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +21,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class H2CO3Tools {
+
 
     @SuppressLint("StaticFieldLeak")
     public static Context CONTEXT;
@@ -43,7 +49,28 @@ public class H2CO3Tools {
     public static String APP_DATA_PATH;
     public static String PUBLIC_FILE_PATH;
 
-    public static String LOGIN = "/data/data/org.koishi.launcher.h2co3/login.json";
+
+    public static String H2CO3_CONFIG_NAME;
+    public static String H2CO3_BOAT_CONFIG_NAME;
+
+
+    public static String LOGIN_USERS;
+    public static String LOGIN_AUTH_PLAYER_NAME;
+    public static String LOGIN_USER_EMAIL;
+    public static String LOGIN_USER_PASSWORD;
+    public static String LOGIN_USER_TYPE;
+    public static String LOGIN_API_URL;
+    public static String LOGIN_AUTH_SESSION;
+    public static String LOGIN_UUID;
+    public static String LOGIN_USER_SKINTEXTURE;
+    public static String LOGIN_TOKEN;
+    public static String LOGIN_REFRESH_TOKEN;
+    public static String LOGIN_CLIENT_TOKEN;
+    public static String LOGIN_IS_OFFLINE;
+    public static String LOGIN_IS_SELECTED;
+    public static String LOGIN_ERROR;
+    public static String LOGIN_INFO;
+
 
     @SuppressLint("SdCardPath")
     public static void loadPaths(Context context) {
@@ -72,6 +99,25 @@ public class H2CO3Tools {
         AUTHLIB_INJECTOR_PATH = PLUGIN_DIR + "/authlib-injector.jar";
         MULTIPLAYER_FIX_PATH = PLUGIN_DIR + "/MultiplayerFix.jar";
 
+        H2CO3_CONFIG_NAME = "H2CO3Config.json";
+        H2CO3_BOAT_CONFIG_NAME = "H2CO3BoatConfig.json";
+
+        LOGIN_USERS = "h2co3_users";
+        LOGIN_AUTH_PLAYER_NAME = "h2co3_users_auth_player_name";
+        LOGIN_USER_EMAIL = "h2co3_users_email";
+        LOGIN_USER_PASSWORD = "h2co3_users_auth_player_password";
+        LOGIN_USER_TYPE = "h2co3_users_type";
+        LOGIN_API_URL = "h2co3_users_api_url";
+        LOGIN_AUTH_SESSION = "h2co3_users_auth_session";
+        LOGIN_UUID = "h2co3_users_uuid";
+        LOGIN_USER_SKINTEXTURE = "h2co3_skin_texture";
+        LOGIN_TOKEN = "h2co3_users_token";
+        LOGIN_REFRESH_TOKEN = "h2co3_users_refresh_token";
+        LOGIN_CLIENT_TOKEN = "h2co3_users_client_token";
+        LOGIN_IS_OFFLINE = "h2co3_users_isOffline";
+        LOGIN_IS_SELECTED = "h2co3_users_isSelected";
+        LOGIN_ERROR = "Login Filed";
+        LOGIN_INFO = "h2co3_users_info";
 
         init(LOG_DIR);
         init(CACHE_DIR);
@@ -87,6 +133,8 @@ public class H2CO3Tools {
         init(APP_DATA_PATH);
         init(SHARED_COMMON_DIR);
         init(PUBLIC_FILE_PATH);
+        init(H2CO3_CONFIG_NAME);
+        init(H2CO3_BOAT_CONFIG_NAME);
     }
 
     private static void init(String path) {
@@ -96,39 +144,39 @@ public class H2CO3Tools {
     }
 
     public static boolean getBoatValue(String key, boolean defaultValue) {
-        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", "usesGlobal", false, Boolean.class)) {
-            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", key, defaultValue, Boolean.class);
+        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) +"/"+ H2CO3_BOAT_CONFIG_NAME, "usesGlobal", false, Boolean.class)) {
+            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) +"/"+H2CO3_BOAT_CONFIG_NAME, key, defaultValue, Boolean.class);
         } else {
-            return getValue(H2CO3_SETTING_DIR + "/BoatConfig.json", key, defaultValue, Boolean.class);
+            return getValue(H2CO3_SETTING_DIR + "/"+H2CO3_BOAT_CONFIG_NAME, key, defaultValue, Boolean.class);
         }
     }
 
     public static String getBoatValueString(String key, String defaultValue) {
-        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", "usesGlobal", false, Boolean.class)) {
-            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", key, defaultValue, String.class);
+        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+H2CO3_BOAT_CONFIG_NAME, "usesGlobal", false, Boolean.class)) {
+            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+H2CO3_BOAT_CONFIG_NAME, key, defaultValue, String.class);
         } else {
-            return getValue(H2CO3_SETTING_DIR + "/BoatConfig.json", key, defaultValue, String.class);
+            return getValue(H2CO3_SETTING_DIR + "/"+H2CO3_BOAT_CONFIG_NAME, key, defaultValue, String.class);
         }
     }
 
     public static void setBoatValue(String key, java.io.Serializable value) {
         if (getBoatValue("usesGlobal", false)) {
-            setValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/BoatConfig.json", key, value);
+            setValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+H2CO3_BOAT_CONFIG_NAME, key, value);
         } else {
-            setValue(H2CO3_SETTING_DIR + "/BoatConfig.json", key, value);
+            setValue(H2CO3_SETTING_DIR + "/"+H2CO3_BOAT_CONFIG_NAME, key, value);
         }
     }
 
     public static String getH2CO3ValueString(String key, String defaultValue) {
-        return getValue(H2CO3_SETTING_DIR + "/H2CO3Config.json", key, defaultValue, String.class);
+        return getValue(H2CO3_SETTING_DIR + "/"+H2CO3_CONFIG_NAME, key, defaultValue, String.class);
     }
 
     public static boolean getH2CO3Value(String key, boolean defaultValue) {
-        return getValue(H2CO3_SETTING_DIR + "/H2CO3Config.json", key, defaultValue, Boolean.class);
+        return getValue(H2CO3_SETTING_DIR + "/"+H2CO3_CONFIG_NAME, key, defaultValue, Boolean.class);
     }
 
     public static void setH2CO3Value(String key, String value) {
-        setValue(H2CO3_SETTING_DIR + "/H2CO3Config.json", key, value);
+        setValue(H2CO3_SETTING_DIR + "/"+H2CO3_CONFIG_NAME, key, value);
     }
 
     private static <T> T getValue(String configFile, String key, T defaultValue, Class<T> type) {
@@ -197,6 +245,27 @@ public class H2CO3Tools {
             Files.write(configPath, defaultConfigJson.toString().getBytes());
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static String read(InputStream is) throws IOException {
+        String readResult = IOUtils.toString(is, StandardCharsets.UTF_8);
+        is.close();
+        return readResult;
+    }
+
+    public static String read(String path) throws IOException {
+        return read(new FileInputStream(path));
+    }
+
+    public static void write(String path, String content) throws IOException {
+        File file = new File(path);
+        File parent = file.getParentFile();
+        if(parent != null && !parent.exists()) {
+            if(!parent.mkdirs()) throw new IOException("Failed to create parent directory");
+        }
+        try(FileOutputStream outStream = new FileOutputStream(file)) {
+            IOUtils.write(content, outStream);
         }
     }
 }

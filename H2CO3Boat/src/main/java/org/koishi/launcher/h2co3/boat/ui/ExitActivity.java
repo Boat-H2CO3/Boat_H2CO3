@@ -28,7 +28,7 @@ public class ExitActivity extends H2CO3Activity {
         }
 
         AlertDialog exitDialog = new H2CO3MessageDialog(this)
-                .setMessage("Error" + code)
+                .setMessage("ERROR" + code)
                 .setPositiveButton("Exit", (dialog, which) -> finish())
                 .setOnDismissListener(dialog -> ExitActivity.this.finish())
                 .show();

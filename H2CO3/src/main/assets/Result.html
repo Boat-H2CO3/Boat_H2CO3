@@ -1,0 +1,28 @@
+<!DICTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Successful!</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,300,400,500,700,900">
+    <style rel="stylesheet" type="text/css">
+        html{
+            font-family: Noto Sans SC;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.js"></script>
+<script>
+$(document).ready(function (){
+    window.jsact({
+        request: 'getResult',
+        persistent:false,
+        onSuccess: function (response) {
+            document.body.innerHTML='<h1>It seems you got the token!</h1><p>your token is:'+response+'</p>'
+        },
+        onFailure: function(error_code, error_message) {}
+    });
+})
+</script>
+</body>
+</html>

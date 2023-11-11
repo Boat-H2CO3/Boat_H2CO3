@@ -23,12 +23,10 @@ import java.util.concurrent.Executors;
 
 public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.SurfaceTextureListener {
 
-    // 加载本地库
     static {
         System.loadLibrary("h2co3_boat");
     }
 
-    // 缩放因子
     public final float scaleFactor = 1.0F;
     // 主纹理视图
     public TextureView mainTextureView;
@@ -36,16 +34,6 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
     public H2CO3Callback h2co3Callback;
     // 定时器
     public Timer timer;
-    // 基础布局
-    public RelativeLayout base;
-    // 初始X坐标
-    public int initialX;
-    // 初始Y坐标
-    public int initialY;
-    // 基础X坐标
-    public int baseX;
-    // 基础Y坐标
-    public int baseY;
     // 输出
     int output = 0;
 
@@ -165,7 +153,7 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
                 @Override
                 public void onExit(int code) {
                     AlertDialog exitDialog = new H2CO3MessageDialog(H2CO3BoatActivity.this)
-                            .setMessage("Error" + code)
+                            .setMessage("error" + code)
                             .setPositiveButton("Exit", (dialog, which) -> finish())
                             .setOnDismissListener(dialog -> H2CO3BoatActivity.this.finish())
                             .show();

@@ -10,21 +10,17 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import org.koishi.launcher.h2co3.resources.R;
 
 public class H2CO3MaterialDialog extends MaterialAlertDialogBuilder {
-
     AlertDialog dialog;
-    public H2CO3MaterialDialog(Context context) {
-        super(context, R.style.AppTheme_MaterialAlertDialog);
-        dialog = create();
+    MaterialAlertDialogBuilder builder;
+    public H2CO3MaterialDialog(@NonNull Context context) {
+        super(context);
+        this.builder = new MaterialAlertDialogBuilder((context));
     }
-    public AlertDialog show() {
-        dialog.show();
-        return dialog;
+    public void createDialog(){
+        builder.create().show();
     }
-    public AlertDialog cancel() {
-        dialog.cancel();
-        return dialog;
-    }
-    public void dismiss() {
-        this.create().dismiss();
+
+    public void dismissDialog(){
+        builder.create().dismiss();
     }
 }

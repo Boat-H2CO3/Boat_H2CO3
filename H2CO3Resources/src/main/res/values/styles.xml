@@ -10,12 +10,7 @@
         <item name="android:layout_marginTop">@dimen/app_10dp</item>
         <item name="android:layout_marginHorizontal">@dimen/app_15dp</item>
         <item name="cardCornerRadius">@dimen/card_radius</item>
-        <item name="contentPaddingStart">@dimen/app_16dp</item>
-        <item name="contentPaddingEnd">@dimen/app_16dp</item>
-        <item name="contentPaddingLeft">@dimen/app_16dp</item>
-        <item name="contentPaddingRight">@dimen/app_16dp</item>
-        <item name="contentPaddingTop">@dimen/app_16dp</item>
-        <item name="contentPaddingBottom">@dimen/app_16dp</item>
+        <item name="contentPadding">@dimen/app_16dp</item>
     </style>
 
     <style name="Theme.H2CO3.CardViewOutlined.NoStroke" parent="@style/Widget.Material3.CardView.Outlined">
@@ -27,12 +22,7 @@
         <item name="android:layout_marginTop">@dimen/app_10dp</item>
         <item name="android:layout_marginHorizontal">@dimen/app_15dp</item>
         <item name="cardCornerRadius">@dimen/card_radius</item>
-        <item name="contentPaddingStart">@dimen/app_16dp</item>
-        <item name="contentPaddingEnd">@dimen/app_16dp</item>
-        <item name="contentPaddingLeft">@dimen/app_16dp</item>
-        <item name="contentPaddingRight">@dimen/app_16dp</item>
-        <item name="contentPaddingTop">@dimen/app_16dp</item>
-        <item name="contentPaddingBottom">@dimen/app_16dp</item>
+        <item name="contentPadding">@dimen/app_16dp</item>
         <item name="strokeWidth">0dp</item>
     </style>
 
@@ -97,6 +87,17 @@
         <item name="android:tint">?colorOnPrimaryContainer</item>
         <item name="android:tintMode">src_in</item>
         <item name="android:backgroundTint">?colorPrimaryContainer</item>
+        <item name="android:backgroundTintMode">src_in</item>
+    </style>
+
+    <style name="Theme.H2CO3.IconMaterial.NoBackGround">
+        <item name="android:layout_marginRight">@dimen/app_15dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_circle_icon_no_background</item>
+        <item name="android:tint">?colorOnPrimaryContainer</item>
+        <item name="android:tintMode">src_in</item>
+        <item name="android:backgroundTint">@null</item>
         <item name="android:backgroundTintMode">src_in</item>
     </style>
 
@@ -184,6 +185,12 @@
         <item name="shapeAppearanceOverlay">@style/MaterialDialog.ShapeAppearance</item>
         <item name="android:windowEnterAnimation">@anim/dialog_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_out</item>
+    </style>
+
+    <style name="AppTheme.MaterialPopWindow" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/MaterialDialog.ShapeAppearance</item>
+        <item name="android:windowEnterAnimation">@anim/pop_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_out</item>
     </style>
 
     <style name="MaterialDialog.ShapeAppearance" parent="">

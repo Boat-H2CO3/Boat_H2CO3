@@ -135,7 +135,7 @@ public final class GLUtil {
     private static String getDebugType(int type) {
         switch (type) {
             case GL_DEBUG_TYPE_ERROR:
-                return "ERROR";
+                return "error";
             case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
                 return "DEPRECATED BEHAVIOR";
             case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
@@ -190,7 +190,7 @@ public final class GLUtil {
     private static String getTypeARB(int type) {
         switch (type) {
             case GL_DEBUG_TYPE_ERROR_ARB:
-                return "ERROR";
+                return "error";
             case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_ARB:
                 return "DEPRECATED BEHAVIOR";
             case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR_ARB:
