@@ -3,6 +3,7 @@ package org.koishi.launcher.h2co3.application;
 import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,14 +18,20 @@ import com.orhanobut.logger.PrettyFormatStrategy;
 import org.koishi.launcher.h2co3.resources.R;
 import org.koishi.launcher.h2co3.ui.CrashActivity;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
+import timber.log.Timber;
 
 public class H2CO3Application extends Application implements Application.ActivityLifecycleCallbacks {
     public static final H2CO3Application mInstance = new H2CO3Application();
     public static Activity mCurrentActivity;
     public SharedPreferences mPref;
-    private boolean is_OTG = false;
+    private final boolean is_OTG = false;
 
     public static Activity getCurrentActivity() {
         return mCurrentActivity;
@@ -34,13 +41,7 @@ public class H2CO3Application extends Application implements Application.Activit
         return mInstance;
     }
 
-    public boolean is_OTG() {
-        return is_OTG;
-    }
-
-    public void setIs_OTG(boolean is_OTG) {
-        this.is_OTG = is_OTG;
-    }
+    public static final ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
 
     @Override
     public void onCreate() {
@@ -57,6 +58,9 @@ public class H2CO3Application extends Application implements Application.Activit
                 .errorActivity(CrashActivity.class)
                 .eventListener(new CustomEventListener())
                 .apply();
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 
     @Override
@@ -97,6 +101,13 @@ public class H2CO3Application extends Application implements Application.Activit
     @Override
     public void onActivityDestroyed(@NonNull Activity activity) {
 
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // 处理配置更改逻辑，例如更新UI布局
+        // 不重载Activity
     }
 
     private static class CustomEventListener implements CustomActivityOnCrash.EventListener {

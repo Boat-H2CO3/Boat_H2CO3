@@ -1,23 +1,26 @@
 package org.koishi.launcher.h2co3.core.login.bean;
 
+import android.graphics.drawable.Drawable;
+
 public class UserBean {
-    private String userName; // 用户名
-    private String userEmail; // 用户邮箱
-    private String userPassword; // 用户密码
-    private String userType; // 用户类型
-    private String apiUrl; // API地址
-    private String authSession; // 授权会话
-    private String uuid; // 用户唯一标识
-    private String skinTexture; // 皮肤纹理
-    private String token; // 令牌
-    private String refreshToken; // 刷新令牌
-    private String clientToken; // 客户端令牌
-    private String userInfo; // 用户信息
-    private boolean isOffline; // 是否离线
-    private boolean isSelected; // 是否被选中
+    private String userName;
+    private String userEmail;
+    private String userPassword;
+    private String userType;
+    private String apiUrl;
+    private String authSession;
+    private String uuid;
+    private String skinTexture;
+    private String token;
+    private String refreshToken;
+    private String clientToken;
+    private String userInfo;
+    private boolean isOffline;
+    private boolean isSelected;
+    private Drawable userIcon; // 添加用户头像字段
 
     public UserBean() {
-
+        // 构造方法
     }
 
     public void setUserName(String userName) {
@@ -130,5 +133,14 @@ public class UserBean {
 
     public boolean isSelected() {
         return isSelected;
+    }
+
+    // 设置和获取用户头像的方法
+    public void setUserIcon(Drawable userIcon) {
+        this.userIcon = userIcon;
+    }
+
+    public Drawable getUserIcon() {
+        return userIcon;
     }
 }

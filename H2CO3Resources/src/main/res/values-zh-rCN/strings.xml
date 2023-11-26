@@ -32,5 +32,9 @@
     <string name="login_wait">Wait...</string>
     <string name="title_delete">Delete</string>
     <string name="message_delete">"Do you want to delete "</string>
+    <string name="login_yggdrasil">Yggdrasil API</string>
+    <string name="login_unified_pass">Unified Pass</string>
+    <string name="user_state_microsoft">Microsoft</string>
+    <string name="user_state_other">"Server: "</string>
 
 </resources>

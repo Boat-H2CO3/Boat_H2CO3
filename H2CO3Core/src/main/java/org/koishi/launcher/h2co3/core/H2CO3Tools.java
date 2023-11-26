@@ -7,6 +7,7 @@ import android.os.Environment;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.koishi.launcher.h2co3.core.utils.H2CO3DownloadUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -267,5 +268,10 @@ public class H2CO3Tools {
         try(FileOutputStream outStream = new FileOutputStream(file)) {
             IOUtils.write(content, outStream);
         }
+    }
+
+    public static void downloadFile(String urlInput, String nameOutput) throws IOException {
+        File file = new File(nameOutput);
+        H2CO3DownloadUtils.downloadFile(urlInput, file);
     }
 }

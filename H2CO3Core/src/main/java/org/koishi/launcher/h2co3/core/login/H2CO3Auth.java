@@ -14,6 +14,7 @@ import java.util.List;
 
 public class H2CO3Auth {
     private static final List<UserBean> userList = new ArrayList<>();
+
     public static void addUserToJson(String name, String email, String password, String userType, String apiUrl, String authSession, String uuid, String skinTexture, String token, String refreshToken, String clientToken, Boolean isOffline, boolean isSelected) {
         try {
             String usersJson = H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USERS, "");
@@ -42,7 +43,6 @@ public class H2CO3Auth {
     }
 
     public static void parseJsonToUser() {
-
         String usersJson = H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USERS, "");
         if (TextUtils.isEmpty(usersJson) || usersJson.equals("{}")) {
             return;
@@ -57,18 +57,18 @@ public class H2CO3Auth {
 
                 UserBean user = new UserBean();
                 user.setUserName(userName);
-                user.setUserEmail(userObj.getString(H2CO3Tools.LOGIN_USER_EMAIL));
-                user.setUserPassword(userObj.getString(H2CO3Tools.LOGIN_USER_PASSWORD));
-                user.setUserType(userObj.getString(H2CO3Tools.LOGIN_USER_TYPE));
-                user.setApiUrl(userObj.getString(H2CO3Tools.LOGIN_API_URL));
-                user.setAuthSession(userObj.getString(H2CO3Tools.LOGIN_AUTH_SESSION));
-                user.setUuid(userObj.getString(H2CO3Tools.LOGIN_UUID));
-                user.setSkinTexture(userObj.getString(H2CO3Tools.LOGIN_USER_SKINTEXTURE));
-                user.setToken(userObj.getString(H2CO3Tools.LOGIN_TOKEN));
-                user.setRefreshToken(userObj.getString(H2CO3Tools.LOGIN_REFRESH_TOKEN));
-                user.setClientToken(userObj.getString(H2CO3Tools.LOGIN_CLIENT_TOKEN));
-                user.setIsSelected(userObj.getBoolean(H2CO3Tools.LOGIN_IS_SELECTED));
-                user.setIsOffline(userObj.getBoolean(H2CO3Tools.LOGIN_IS_OFFLINE));
+                user.setUserEmail(getString(userObj, H2CO3Tools.LOGIN_USER_EMAIL));
+                user.setUserPassword(getString(userObj, H2CO3Tools.LOGIN_USER_PASSWORD));
+                user.setUserType(getString(userObj, H2CO3Tools.LOGIN_USER_TYPE));
+                user.setApiUrl(getString(userObj, H2CO3Tools.LOGIN_API_URL));
+                user.setAuthSession(getString(userObj, H2CO3Tools.LOGIN_AUTH_SESSION));
+                user.setUuid(getString(userObj, H2CO3Tools.LOGIN_UUID));
+                user.setSkinTexture(getString(userObj, H2CO3Tools.LOGIN_USER_SKINTEXTURE));
+                user.setToken(getString(userObj, H2CO3Tools.LOGIN_TOKEN));
+                user.setRefreshToken(getString(userObj, H2CO3Tools.LOGIN_REFRESH_TOKEN));
+                user.setClientToken(getString(userObj, H2CO3Tools.LOGIN_CLIENT_TOKEN));
+                user.setIsSelected(getBoolean(userObj, H2CO3Tools.LOGIN_IS_SELECTED));
+                user.setIsOffline(getBoolean(userObj, H2CO3Tools.LOGIN_IS_OFFLINE));
 
                 JSONArray loginInfoArray = userObj.getJSONArray(H2CO3Tools.LOGIN_INFO);
                 if (loginInfoArray.length() >= 2) {
@@ -82,7 +82,38 @@ public class H2CO3Auth {
             e.printStackTrace();
         }
     }
-    public static List<UserBean> getUserList(){
+
+    public static void reSetUserState() {
+        UserBean emptyUser = new UserBean();
+        setUserState(emptyUser);
+    }
+
+    public static String getString(JSONObject jsonObject, String key) {
+        return jsonObject.optString(key, "");
+    }
+
+    public static boolean getBoolean(JSONObject jsonObject, String key) {
+        return jsonObject.optBoolean(key, false);
+    }
+
+    public static List<UserBean> getUserList() {
         return userList;
+    }
+
+    public static void setUserState(UserBean user) {
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_AUTH_PLAYER_NAME, user.getUserName());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_USER_EMAIL, user.getUserEmail());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_USER_PASSWORD, user.getUserPassword());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_USER_TYPE, user.getUserType());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_API_URL, user.getApiUrl());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_AUTH_SESSION, user.getAuthSession());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_UUID, user.getUuid());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_USER_SKINTEXTURE, user.getSkinTexture());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_TOKEN, user.getToken());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_REFRESH_TOKEN, user.getRefreshToken());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_CLIENT_TOKEN, user.getClientToken());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_INFO, user.getUserInfo());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_IS_OFFLINE, user.getIsOffline());
+        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_IS_SELECTED, user.isSelected());
     }
 }

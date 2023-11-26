@@ -35,8 +35,8 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/home_file_check_icon"
                         style="@style/Theme.H2CO3.IconNormal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/app_40dp"
+                        android:layout_height="@dimen/app_40dp"
                         android:duplicateParentState="true"
                         android:importantForAccessibility="no"
                         android:src="@drawable/ic_error" />
@@ -90,8 +90,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     style="@style/Theme.H2CO3.IconMaterial"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/app_40dp"
+                    android:layout_height="@dimen/app_40dp"
                     android:duplicateParentState="true"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_done" />
@@ -134,8 +134,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     style="@style/Theme.H2CO3.IconMaterial"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/app_40dp"
+                    android:layout_height="@dimen/app_40dp"
                     android:duplicateParentState="true"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_done" />

@@ -177,4 +177,5 @@ dependencies {
 
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'androidx.annotation:annotation:1.6.0'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

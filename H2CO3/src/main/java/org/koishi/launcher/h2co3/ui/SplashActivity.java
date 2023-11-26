@@ -2,9 +2,11 @@ package org.koishi.launcher.h2co3.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import com.hjq.permissions.XXPermissions;
 
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
+import org.koishi.launcher.h2co3.core.login.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.utils.FileUtils;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
@@ -51,7 +54,19 @@ public class SplashActivity extends H2CO3Activity {
         setContentView(R.layout.activity_splash);
         splash = findViewById(R.id.splash_view);
         splashCheck = findViewById(R.id.splash_check);
-        checkPermission();
+
+        // 判断是否是第一次启动App
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isFirstLaunch = preferences.getBoolean("isFirstLaunch", true);
+        if (isFirstLaunch) {
+            H2CO3Auth.reSetUserState();
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("isFirstLaunch", false);
+            editor.apply();
+            start();
+        } else {
+            start();
+        }
     }
 
     public void start() {

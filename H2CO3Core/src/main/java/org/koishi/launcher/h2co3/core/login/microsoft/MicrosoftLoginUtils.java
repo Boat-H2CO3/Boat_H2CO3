@@ -1,5 +1,6 @@
 package org.koishi.launcher.h2co3.core.login.microsoft;
 
+import android.net.Uri;
 import android.util.Log;
 
 import com.google.gson.JsonParseException;
@@ -8,22 +9,20 @@ import com.google.gson.annotations.SerializedName;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
+import org.koishi.launcher.h2co3.core.login.Texture.Texture;
+import org.koishi.launcher.h2co3.core.login.Texture.TextureType;
 import org.koishi.launcher.h2co3.core.login.utils.AuthenticationException;
 import org.koishi.launcher.h2co3.core.login.utils.HttpRequest;
 import org.koishi.launcher.h2co3.core.login.utils.NetworkUtils;
 import org.koishi.launcher.h2co3.core.login.utils.ResponseCodeException;
-import org.koishi.launcher.h2co3.core.login.Texture.Texture;
-import org.koishi.launcher.h2co3.core.login.Texture.TextureType;
 import org.koishi.launcher.h2co3.core.utils.gson.JsonUtils;
 import org.koishi.launcher.h2co3.core.utils.gson.tools.TolerableValidationException;
 import org.koishi.launcher.h2co3.core.utils.gson.tools.Validation;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -34,23 +33,21 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
-
-public class Msa {
+public class MicrosoftLoginUtils {
     private static final String AUTH_TOKEN_URL = "https://login.live.com/oauth20_token.srf";
     private static final String XBL_AUTH_URL = "https://user.auth.xboxlive.com/user/authenticate";
     private static final String XSTS_AUTH_URL = "https://xsts.auth.xboxlive.com/xsts/authorize";
     private static final String MC_LOGIN_URL = "https://api.minecraftservices.com/authentication/login_with_xbox";
     private static final String MC_PROFILE_URL = "https://api.minecraftservices.com/minecraft/profile";
-    public String mcUuid;
 
+    public String mcUuid;
     public String msRefreshToken;
     public String mcName;
     public String mcToken;
     public String tokenType;
     public boolean doesOwnGame;
 
-    public Msa(boolean isRefresh, String authCode) throws IOException, JSONException {
+    public MicrosoftLoginUtils(boolean isRefresh, String authCode) throws IOException, JSONException {
         acquireAccessToken(isRefresh, authCode);
     }
 
@@ -238,9 +235,9 @@ public class Msa {
                 .authorization(tokenType, accessToken)
                 .createConnection();
         int responseCode = conn.getResponseCode();
-        if (responseCode == HTTP_NOT_FOUND) {
+        if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
             throw new NoMinecraftJavaEditionProfileException();
-        } else if (responseCode != 200) {
+        } else if (responseCode != HttpURLConnection.HTTP_OK) {
             throw new ResponseCodeException(new URL(MC_PROFILE_URL), responseCode);
         }
 
@@ -303,16 +300,11 @@ public class Msa {
     }
 
     public static String ofFormData(Map<String, String> data) {
-        StringBuilder builder = new StringBuilder();
+        Uri.Builder builder = new Uri.Builder();
         for (Map.Entry<String, String> entry : data.entrySet()) {
-            if (builder.length() > 0) {
-                builder.append("&");
-            }
-            builder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
-            builder.append("=");
-            builder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+            builder.appendQueryParameter(entry.getKey(), entry.getValue());
         }
-        return builder.toString();
+        return builder.build().getEncodedQuery();
     }
 
     private static void throwResponseError(HttpURLConnection conn) throws IOException {
