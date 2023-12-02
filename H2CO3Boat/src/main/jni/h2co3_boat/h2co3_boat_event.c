@@ -11,9 +11,8 @@ void EventQueue_init(EventQueue *queue) {
 
 H2CO3BoatEvent *EventQueue_add(EventQueue *queue) {
     H2CO3BoatEvent *ret = NULL;
-    QueueElement *e = malloc(sizeof(QueueElement));
+    QueueElement *e = calloc(1, sizeof(QueueElement));
     if (e != NULL) {
-        e->next = NULL;
         if (queue->count > 0) {
             queue->tail->next = e;
             queue->tail = e;
@@ -62,25 +61,22 @@ void h2co3SetCursorMode(int mode) {
     jint result = (*h2co3Boat->android_jvm)->AttachCurrentThread(h2co3Boat->android_jvm, &env, 0);
 
     if (result != JNI_OK || env == 0) {
-        //__android_log_print(ANDROID_LOG_ERROR, "Boat", "Failed to attach thread to JavaVM.");
         abort();
     }
 
     jclass class_H2CO3BoatActivity = h2co3Boat->class_H2CO3BoatActivity;
 
     if (class_H2CO3BoatActivity == 0) {
-        //__android_log_print(ANDROID_LOG_ERROR, "Boat", "Failed to find class: org/koishi/launcher/h2co3/boat/H2CO3BoatActivity.");
         abort();
     }
 
     jmethodID H2CO3BoatActivity_setCursorMode = h2co3Boat->setCursorMode;
 
     if (H2CO3BoatActivity_setCursorMode == 0) {
-        //__android_log_print(ANDROID_LOG_ERROR, "Boat", "Failed to find method H2CO3BoatActivity::setCursorMode");
         abort();
     }
     (*env)->CallVoidMethod(env, h2co3Boat->h2co3Activity, H2CO3BoatActivity_setCursorMode, mode);
-    (*env)->CallVoidMethod(env, h2co3Boat->class_H2CO3BoatActivity, h2co3Boat->setGrabCursorId,
+    (*env)->CallVoidMethod(env, class_H2CO3BoatActivity, h2co3Boat->setGrabCursorId,
                            mode == CursorDisabled ? JNI_TRUE : JNI_FALSE);
     (*h2co3Boat->android_jvm)->DetachCurrentThread(h2co3Boat->android_jvm);
 }
@@ -215,6 +211,7 @@ Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_setEventPipe(JNIEnv *env, jclas
     h2co3Boat->has_event_pipe = 1;
     H2CO3_BOAT_INTERNAL_LOG("Succeeded to set event pipe");
 }
+
 int injector_mode = 0;
 
 void h2co3SetInjectorMode(int mode) {
@@ -232,6 +229,3 @@ void h2co3SetHitResultType(int type) {
     PrepareH2CO3BoatLibJNI();
     CallH2CO3BoatLibJNIFunc(, Void, setHitResultType, "(I)V", type);
 }
-
-
-

@@ -54,8 +54,6 @@ public class H2CO3Tools {
     public static String H2CO3_CONFIG_NAME;
     public static String H2CO3_BOAT_CONFIG_NAME;
 
-
-    public static String LOGIN_USERS;
     public static String LOGIN_AUTH_PLAYER_NAME;
     public static String LOGIN_USER_EMAIL;
     public static String LOGIN_USER_PASSWORD;
@@ -103,7 +101,6 @@ public class H2CO3Tools {
         H2CO3_CONFIG_NAME = "H2CO3Config.json";
         H2CO3_BOAT_CONFIG_NAME = "H2CO3BoatConfig.json";
 
-        LOGIN_USERS = "h2co3_users";
         LOGIN_AUTH_PLAYER_NAME = "h2co3_users_auth_player_name";
         LOGIN_USER_EMAIL = "h2co3_users_email";
         LOGIN_USER_PASSWORD = "h2co3_users_auth_player_password";
@@ -184,34 +181,19 @@ public class H2CO3Tools {
         try {
             Path configPath = Paths.get(configFile);
             if (!Files.exists(configPath)) {
-                createConfigFile(configPath, key, defaultValue);
                 return defaultValue;
             }
 
-            try (Stream<String> lines = Files.lines(configPath)) {
-                Optional<String> configContent = lines.reduce((a, b) -> a + b);
-                if (!configContent.isPresent()) {
-                    throw new IOException("Failed to read config file: " + configFile);
-                }
+            String configContent = new String(Files.readAllBytes(configPath));
+            JSONObject configJson = new JSONObject(configContent);
 
-                JSONObject configJson = new JSONObject(configContent.get());
-
-                if (!configJson.has(key)) {
-                    configJson.put(key, defaultValue);
-                    Files.write(configPath, configJson.toString().getBytes());
-                    return defaultValue;
-                }
-
-                if (type == String.class) {
-                    return (T) configJson.optString(key);
-                } else if (type == Boolean.class) {
-                    return (T) Boolean.valueOf(configJson.optBoolean(key));
-                } else {
-                    return (T) configJson.opt(key);
-                }
+            if (configJson.has(key)) {
+                return type.cast(configJson.get(key));
+            } else {
+                return defaultValue;
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read or create config file: " + configFile, e);
+            throw new RuntimeException("Failed to read config file: " + configFile, e);
         } catch (JSONException e) {
             throw new RuntimeException("Failed to parse config file: " + configFile, e);
         }

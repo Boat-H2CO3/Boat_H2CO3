@@ -36,7 +36,7 @@ public class LoginUtils {
 
     public void login(String userName,String password,Listener listener) throws IOException {
         if (Objects.isNull(baseUrl)){
-            listener.onFailed("未设置baseUrl");
+            listener.onFailed("no baseUrl");
             return;
         }
         AuthRequest authRequest=new AuthRequest();
@@ -47,7 +47,7 @@ public class LoginUtils {
         agent.setVersion(1.0);
         authRequest.setAgent(agent);
         authRequest.setRequestUser(true);
-        authRequest.setClientToken("miolauncher");
+        authRequest.setClientToken("Boat_H2CO3");
         System.out.println(new Gson().toJson(authRequest));
         RequestBody body = RequestBody.create(MediaType.parse("application/json"), new Gson().toJson(authRequest));
         Request request = new Request.Builder()
@@ -62,7 +62,7 @@ public class LoginUtils {
             AuthResult result=new Gson().fromJson(res,AuthResult.class);
             listener.onSuccess(result);
         } else {
-            listener.onFailed("错误代码："+response.code()+"\n"+res);
+            listener.onFailed(response.code()+"\n"+res);
         }
     }
 
@@ -79,8 +79,7 @@ public class LoginUtils {
             if (response.code()==200){
                 return res;
             }
-        }catch (Exception e){
-            Log.e("测试",""+ e);
+        }catch (Exception ignored){
         }
         return null;
     }

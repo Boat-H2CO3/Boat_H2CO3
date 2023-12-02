@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
+import org.koishi.launcher.h2co3.core.login.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.login.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.login.bean.UserBean;
 import org.koishi.launcher.h2co3.resources.component.H2CO3CardView;
@@ -29,7 +30,7 @@ import org.koishi.launcher.h2co3.ui.H2CO3MainActivity;
 
 import java.util.List;
 
-public class AdapterListUser extends BaseAdapter {
+public class HomeAdapterListUser extends BaseAdapter {
 
     private final Context context;
     private final List<UserBean> list;
@@ -38,7 +39,7 @@ public class AdapterListUser extends BaseAdapter {
 
     private final H2CO3MainActivity activity;
 
-    public AdapterListUser(H2CO3MainActivity activity, List<UserBean> list) {
+    public HomeAdapterListUser(H2CO3MainActivity activity, List<UserBean> list) {
         this.context = activity;
         this.activity = activity;
         this.list = list;
@@ -51,7 +52,7 @@ public class AdapterListUser extends BaseAdapter {
         }
     }
 
-    public AdapterListUser(Context context, List<UserBean> list, String usersJson, H2CO3MainActivity activity) {
+    public HomeAdapterListUser(Context context, List<UserBean> list, String usersJson, H2CO3MainActivity activity) {
         this.context = activity;
         this.list = list;
         this.activity = activity;
@@ -130,40 +131,28 @@ public class AdapterListUser extends BaseAdapter {
         JSONObject usersJson;
         try {
             // 获取登录用户信息的JSON对象
-            usersJson = new JSONObject(H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USERS, ""));
-            // 获取选中用户的JSON对象
-            JSONObject selectedUserJson = usersJson.getJSONObject(selectedUser.getUserName());
-            // 设置选中用户的登录状态为true
-            selectedUserJson.put(H2CO3Tools.LOGIN_IS_SELECTED, true);
-            // 更新用户信息到登录用户信息的JSON对象中
-            usersJson.put(selectedUser.getUserName(), selectedUserJson);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        // 遍历用户列表
-        for (int i = 0; i < list.size(); i++) {
-            UserBean user = list.get(i);
-            // 如果不是选中的用户
-            if (i != selectedPosition) {
-                try {
-                    // 获取用户的JSON对象
-                    JSONObject userJson = usersJson.getJSONObject(user.getUserName());
+            usersJson = new JSONObject(H2CO3Auth.getUserJson());
+            // 遍历用户列表
+            for (int i = 0; i < list.size(); i++) {
+                UserBean user = list.get(i);
+                // 如果是选中的用户
+                if (i == selectedPosition) {
+                    // 设置选中用户的登录状态为true
+                    selectedUser.setIsSelected(true);
+                    usersJson.getJSONObject(user.getUserName()).put(H2CO3Tools.LOGIN_IS_SELECTED, true);
+                } else {
                     // 设置用户的登录状态为false
-                    userJson.put(H2CO3Tools.LOGIN_IS_SELECTED, false);
-                    // 更新用户信息到登录用户信息的JSON对象中
-                    usersJson.put(user.getUserName(), userJson);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    user.setIsSelected(false);
+                    usersJson.getJSONObject(user.getUserName()).put(H2CO3Tools.LOGIN_IS_SELECTED, false);
                 }
             }
-            // 设置用户的选中状态
-            user.setIsSelected(i == selectedPosition);
+            // 更新用户信息到登录用户信息的JSON对象中
+            usersJson.put(selectedUser.getUserName(), usersJson.getJSONObject(selectedUser.getUserName()));
+            // 将更新后的登录用户信息保存到本地
+            H2CO3Auth.setUserJson(usersJson.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
-        // 将更新后的登录用户信息保存到本地
-        H2CO3Tools.setH2CO3Value(H2CO3Tools.LOGIN_USERS, usersJson.toString());
     }
 
     private void removeUser(int position) {
@@ -188,9 +177,9 @@ public class AdapterListUser extends BaseAdapter {
                     }
                     notifyDataSetChanged();
                     try {
-                        JSONObject usersJson = new JSONObject(H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USERS, ""));
+                        JSONObject usersJson = new JSONObject(H2CO3Auth.getUserJson());
                         usersJson.remove(removedUser.getUserName());
-                        H2CO3Tools.setH2CO3Value(H2CO3Tools.LOGIN_USERS, usersJson.toString());
+                        H2CO3Auth.setUserJson(usersJson.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -214,14 +203,11 @@ public class AdapterListUser extends BaseAdapter {
     }
 
     private String getUserStateText(UserBean user) {
-        switch (user.getUserType()) {
-            case "1":
-                return context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_microsoft);
-            case "2":
-                return context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_other) + user.getApiUrl();
-            default:
-                return context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_offline);
-        }
+        return switch (user.getUserType()) {
+            case "1" -> context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_microsoft);
+            case "2" -> context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_other) + user.getApiUrl();
+            default -> context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_offline);
+        };
     }
 
     private Drawable getUserIcon(UserBean user) {

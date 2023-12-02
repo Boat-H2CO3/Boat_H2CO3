@@ -18,6 +18,7 @@ import org.koishi.launcher.h2co3.core.login.microsoft.MicrosoftLoginUtils;
 import org.koishi.launcher.h2co3.core.utils.Avatar;
 import org.koishi.launcher.h2co3.ui.H2CO3MainActivity;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -37,16 +38,13 @@ public class HomeLoginHandler extends Handler {
     }
 
     public void login(Intent intent) {
-        Uri data = null;
-        if (intent != null) {
-            data = intent.getData();
-        }
-        if (data != null && Objects.equals(data.getScheme(), "ms-xal-00000000402b5328") && data.getHost().equals("auth")) {
+        Uri data = intent != null ? intent.getData() : null;
+        if (data != null && Objects.equals(data.getScheme(), "ms-xal-00000000402b5328") && Objects.equals(data.getHost(), "auth")) {
             String error = data.getQueryParameter("error");
-            String error_description = data.getQueryParameter("error_description");
+            String errorDescription = data.getQueryParameter("error_description");
             if (error != null) {
-                if (error_description != null && !error_description.startsWith("The user has denied access to the scope requested by the client application")) {
-                    Toast.makeText(activity, "Error: " + error + ": " + error_description, Toast.LENGTH_SHORT).show();
+                if (errorDescription != null && !errorDescription.startsWith("The user has denied access to the scope requested by the client application")) {
+                    Toast.makeText(activity, "Error: " + error + ": " + errorDescription, Toast.LENGTH_SHORT).show();
                 }
             } else {
                 String code = data.getQueryParameter("code");
@@ -60,20 +58,51 @@ public class HomeLoginHandler extends Handler {
                             Bitmap skin;
                             if (texture == null) {
                                 AssetManager manager = activity.getAssets();
-                                InputStream inputStream;
-                                inputStream = manager.open("drawable/alex.png");
-                                skin = BitmapFactory.decodeStream(inputStream);
+                                InputStream inputStream = null;
+                                try {
+                                    inputStream = manager.open("drawable/alex.png");
+                                    skin = BitmapFactory.decodeStream(inputStream);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                    return;
+                                } finally {
+                                    if (inputStream != null) {
+                                        try {
+                                            inputStream.close();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
                             } else {
                                 String u = texture.getUrl();
                                 if (u != null && !u.startsWith("https")) {
                                     u = u.replaceFirst("http", "https");
                                 }
                                 URL url = new URL(u);
-                                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                                httpURLConnection.setDoInput(true);
-                                httpURLConnection.connect();
-                                InputStream inputStream = httpURLConnection.getInputStream();
-                                skin = BitmapFactory.decodeStream(inputStream);
+                                HttpURLConnection httpURLConnection = null;
+                                InputStream inputStream = null;
+                                try {
+                                    httpURLConnection = (HttpURLConnection) url.openConnection();
+                                    httpURLConnection.setDoInput(true);
+                                    httpURLConnection.connect();
+                                    inputStream = httpURLConnection.getInputStream();
+                                    skin = BitmapFactory.decodeStream(inputStream);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                    return;
+                                } finally {
+                                    if (httpURLConnection != null) {
+                                        httpURLConnection.disconnect();
+                                    }
+                                    if (inputStream != null) {
+                                        try {
+                                            inputStream.close();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
                             }
                             activity.runOnUiThread(() -> {
                                 String skinTexture = Avatar.bitmapToString(skin);
