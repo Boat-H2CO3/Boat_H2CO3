@@ -39,7 +39,7 @@
                         android:layout_height="@dimen/app_40dp"
                         android:duplicateParentState="true"
                         android:importantForAccessibility="no"
-                        android:src="@drawable/ic_error" />
+                        android:src="@drawable/ic_play" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
                 </LinearLayout>
 
                 <org.koishi.launcher.h2co3.resources.component.H2CO3Button
-                    android:id="@+id/home_file_check_button"
+                    android:id="@+id/home_game_play_button"
                     style="@style/Theme.H2CO3.CardButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

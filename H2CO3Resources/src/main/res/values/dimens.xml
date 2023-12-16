@@ -17,6 +17,8 @@
     <dimen name="text_small">10sp</dimen>
     <dimen name="app_5dp">5dp</dimen>
 
+    <dimen name="bottombar_flo_mar">100dp</dimen>
+
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="app_40dp">40dp</dimen>

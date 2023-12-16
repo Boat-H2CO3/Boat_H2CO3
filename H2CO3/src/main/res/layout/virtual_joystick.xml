@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:kongqw="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.kongqw.rockerlibrary.view.RockerView
+        android:id="@+id/joystick_rocker"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        kongqw:areaBackground="@drawable/default_area_bg"
+        kongqw:rockerBackground="@drawable/default_rocker_bg"
+        kongqw:rockerRadius="30dp" />
+
+    <Button
+        android:id="@+id/joystick_move"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="start"
+        android:layout_weight="0.5"
+        android:background="@drawable/ic_move"
+        android:visibility="invisible" />
+</LinearLayout>

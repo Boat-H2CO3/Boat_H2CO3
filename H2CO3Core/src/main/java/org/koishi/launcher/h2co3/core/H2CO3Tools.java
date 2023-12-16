@@ -33,8 +33,8 @@ public class H2CO3Tools {
     public static String CACHE_DIR;
 
     public static String RUNTIME_DIR;
+    public static String JAVA_PATH;
     public static String JAVA_8_PATH;
-    public static String JAVA_17_PATH;
     public static String BOAT_LIBRARY_DIR;
 
     public static String FILES_DIR;
@@ -69,6 +69,8 @@ public class H2CO3Tools {
     public static String LOGIN_IS_SELECTED;
     public static String LOGIN_ERROR;
     public static String LOGIN_INFO;
+    public static String GL_GL114;
+    public static String GL_VIRGL;
 
 
     @SuppressLint("SdCardPath")
@@ -84,8 +86,8 @@ public class H2CO3Tools {
 
         APP_DATA_PATH = "/data/data/org.koishi.launcher.h2co3";
         RUNTIME_DIR = APP_DATA_PATH + "/app_runtime";
-        JAVA_8_PATH = RUNTIME_DIR + "/jre_8";
-        JAVA_17_PATH = RUNTIME_DIR + "/jre_17";
+        JAVA_PATH = RUNTIME_DIR + "/java";
+        JAVA_8_PATH = JAVA_PATH + "/jre_8";
         BOAT_LIBRARY_DIR = RUNTIME_DIR + "/boat";
         PLUGIN_DIR = RUNTIME_DIR + "/boat/plugin";
         H2CO3_LIBRARY_DIR = APP_DATA_PATH + "/h2co3";
@@ -117,11 +119,13 @@ public class H2CO3Tools {
         LOGIN_ERROR = "Login Filed";
         LOGIN_INFO = "h2co3_users_info";
 
+        GL_GL114 = "gl4es";
+        GL_VIRGL = "virgl";
+
         init(LOG_DIR);
         init(CACHE_DIR);
         init(RUNTIME_DIR);
         init(JAVA_8_PATH);
-        init(JAVA_17_PATH);
         init(BOAT_LIBRARY_DIR);
         init(FILES_DIR);
         init(PLUGIN_DIR);
@@ -173,7 +177,7 @@ public class H2CO3Tools {
         return getValue(H2CO3_SETTING_DIR + "/"+H2CO3_CONFIG_NAME, key, defaultValue, Boolean.class);
     }
 
-    public static void setH2CO3Value(String key, String value) {
+    public static void setH2CO3Value(String key, java.io.Serializable value) {
         setValue(H2CO3_SETTING_DIR + "/"+H2CO3_CONFIG_NAME, key, value);
     }
 

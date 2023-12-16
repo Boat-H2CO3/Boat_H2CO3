@@ -73,5 +73,5 @@ dependencies {
 
     implementation 'com.alibaba:fastjson:2.0.40'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
-    implementation 'com.larswerkman:HoloColorPicker:1.5'
+    implementation 'com.github.QuadFlask:colorpicker:0.0.15'
 }

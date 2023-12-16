@@ -49,6 +49,18 @@
             android:name=".ui.H2CO3MainActivity"
             tools:ignore="LockedOrientationActivity" />
 
+        <activity
+            android:name=".ui.H2CO3BoatClientActivity"
+            android:alwaysRetainTaskState="false"
+            android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|uiMode|screenSize|navigation"
+            android:excludeFromRecents="false"
+            android:launchMode="singleInstance"
+            android:screenOrientation="sensorLandscape">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="h2co3_boat" />
+        </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="@string/file_browser_provider"

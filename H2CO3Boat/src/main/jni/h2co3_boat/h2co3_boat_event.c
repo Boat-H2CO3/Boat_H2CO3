@@ -9,8 +9,7 @@ void EventQueue_init(EventQueue *queue) {
     queue->tail = NULL;
 }
 
-H2CO3BoatEvent *EventQueue_add(EventQueue *queue) {
-    H2CO3BoatEvent *ret = NULL;
+void EventQueue_add(EventQueue *queue, H2CO3BoatEvent *event) {
     QueueElement *e = calloc(1, sizeof(QueueElement));
     if (e != NULL) {
         if (queue->count > 0) {
@@ -21,13 +20,11 @@ H2CO3BoatEvent *EventQueue_add(EventQueue *queue) {
             queue->tail = e;
         }
         queue->count++;
-        ret = &queue->tail->event;
+        memcpy(&queue->tail->event, event, sizeof(H2CO3BoatEvent));
     }
-    return ret;
 }
 
 int EventQueue_take(EventQueue *queue, H2CO3BoatEvent *event) {
-    int ret = 0;
     if (queue->count > 0) {
         QueueElement *e = queue->head;
         if (queue->count == 1) {
@@ -37,13 +34,13 @@ int EventQueue_take(EventQueue *queue, H2CO3BoatEvent *event) {
             queue->head = e->next;
         }
         queue->count--;
-        ret = 1;
         if (event != NULL) {
             memcpy(event, &e->event, sizeof(H2CO3BoatEvent));
         }
         free(e);
+        return 1;
     }
-    return ret;
+    return 0;
 }
 
 void EventQueue_clear(EventQueue *queue) {
@@ -141,45 +138,41 @@ Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_pushEvent(JNIEnv *env, jclass c
         return;
     }
 
-    H2CO3BoatEvent *event = EventQueue_add(&h2co3Boat->event_queue);
-    if (event == NULL) {
-        H2CO3_BOAT_INTERNAL_LOG("Failed to add event to event queue");
-        pthread_mutex_unlock(&h2co3Boat->event_queue_mutex);
-        return;
-    }
-
-    event->time = time;
-    event->type = type;
-    event->state = 0;
+    H2CO3BoatEvent event;
+    event.time = time;
+    event.type = type;
+    event.state = 0;
 
     switch (type) {
         case MotionNotify:
-            event->x = p1;
-            event->y = p2;
+            event.x = p1;
+            event.y = p2;
             current_event.time = time;
             current_event.x = p1;
             current_event.y = p2;
             break;
         case ButtonPress:
         case ButtonRelease:
-            event->button = p1;
+            event.button = p1;
             break;
         case KeyPress:
         case KeyRelease:
-            event->keycode = p1;
-            event->keychar = p2;
+            event.keycode = p1;
+            event.keychar = p2;
             break;
         case ConfigureNotify:
-            event->width = p1;
-            event->height = p2;
+            event.width = p1;
+            event.height = p2;
             break;
         case BoatMessage:
-            event->message = p1;
+            event.message = p1;
             break;
         default:
             // 处理未覆盖的代码路径
             break;
     }
+
+    EventQueue_add(&h2co3Boat->event_queue, &event);
 
     write(h2co3Boat->event_pipe_fd[1], "E", 1);
 

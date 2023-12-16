@@ -2,7 +2,6 @@ package org.koishi.launcher.h2co3.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,10 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -25,8 +21,10 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.circularreveal.CircularRevealFrameLayout;
@@ -42,8 +40,8 @@ import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.adapter.HomeAdapterListUser;
 import org.koishi.launcher.h2co3.application.H2CO3Application;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
-import org.koishi.launcher.h2co3.core.login.H2CO3Auth;
-import org.koishi.launcher.h2co3.core.login.H2CO3Loader;
+import org.koishi.launcher.h2co3.core.H2CO3Auth;
+import org.koishi.launcher.h2co3.core.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.login.bean.UserBean;
 import org.koishi.launcher.h2co3.core.login.other.AuthResult;
 import org.koishi.launcher.h2co3.core.login.other.LoginUtils;
@@ -101,8 +99,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
     private EditText userEditText;
     private EditText passEditText;
     private Button loginButton;
-    private TextView register;
-    private ImageButton addServer;
+    private H2CO3Button register;
     private File serversFile;
     private Servers servers;
     private List<String> serverList;
@@ -118,9 +115,12 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
         setContentView(R.layout.activity_main);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
+        NavController navController = null;
+        if (navHostFragment != null) {
+            navController = navHostFragment.getNavController();
+        }
         NavigationUI.setupWithNavController(navView, navController);
-
         initUI();
     }
 
@@ -148,10 +148,10 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
 
     @SuppressLint("SetTextI18n")
     private void setUserStateFromJson() {
-        String apiUrl = H2CO3Tools.getBoatValueString(H2CO3Tools.LOGIN_API_URL, H2CO3Tools.LOGIN_ERROR);
-        homeTopbarUserName.setText(H2CO3Tools.getBoatValueString(H2CO3Tools.LOGIN_AUTH_PLAYER_NAME, ""));
-        String userType = H2CO3Tools.getBoatValueString(H2CO3Tools.LOGIN_USER_TYPE, "0");
-        String userSkinTexture = H2CO3Tools.getBoatValueString(H2CO3Tools.LOGIN_USER_SKINTEXTURE, "");
+        String apiUrl = H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_API_URL, H2CO3Tools.LOGIN_ERROR);
+        homeTopbarUserName.setText(H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_AUTH_PLAYER_NAME, ""));
+        String userType = H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USER_TYPE, "0");
+        String userSkinTexture = H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USER_SKINTEXTURE, "");
 
         final String MICROSOFT_USER_STATE = getString(org.koishi.launcher.h2co3.resources.R.string.user_state_microsoft);
         final String OTHER_USER_STATE = getString(org.koishi.launcher.h2co3.resources.R.string.user_state_other);
@@ -191,13 +191,13 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                     userList.clear();
                     H2CO3Auth.parseJsonToUser();
                     adapterUser = new HomeAdapterListUser(this, userList);
-                    ListView userList = view.findViewById(R.id.layout_user_listview);
+                    RecyclerView recyclerView = view.findViewById(R.id.recycler_view_user_list);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    recyclerView.setAdapter(adapterUser);
                     LayoutInflater inflater = LayoutInflater.from(this);
                     @SuppressLint("InflateParams") View footView = inflater.inflate(R.layout.item_user_add, null, false);
-                    userList.addFooterView(footView);
                     H2CO3CardView userAdd = footView.findViewById(R.id.login_user_add);
                     userAdd.setOnClickListener(v1 -> showLoginDialog());
-                    userList.setAdapter(adapterUser);
                 })
                 .setWidthAndHeight(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                 .setOutsideTouchable(true)
@@ -206,7 +206,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
         popView.showAsDropDown(toolbar);
     }
 
-    private void showLoginDialog() {
+    public void showLoginDialog() {
         loginDialog = new H2CO3CustomViewDialog(this);
         loginDialog.setCustomView(R.layout.custom_dialog_login);
         loginDialog.setTitle(getString(org.koishi.launcher.h2co3.resources.R.string.title_activity_login));
@@ -226,7 +226,6 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
 
         serverSpinner = loginDialog.findViewById(R.id.server_spinner);
         register = loginDialog.findViewById(R.id.register);
-        addServer = loginDialog.findViewById(R.id.add_server);
         TabLayout tab = loginDialog.findViewById(R.id.login_tab);
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -262,7 +261,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
             if (selectedTabPosition == 0) {
                 if (isValidUsername(text)) {
                     H2CO3Auth.addUserToJson(text, "", "", "0", "", "", "", "", "", "", "", true, false);
-                    adapterUser.notifyDataSetChanged();
+                    adapterUser.notifyItemInserted(adapterUser.getItemCount() - 1);
                     popView.dismiss();
                     loginDialogAlert.dismiss();
                 }
@@ -277,6 +276,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                         try {
                             LoginUtils.getINSTANCE().setBaseUrl(currentBaseUrl);
                             LoginUtils.getINSTANCE().login(user, pass, new LoginUtils.Listener() {
+                                @SuppressLint("NotifyDataSetChanged")
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     runOnUiThread(() -> {
@@ -304,6 +304,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                                     });
                                 }
 
+                                @SuppressLint("NotifyDataSetChanged")
                                 @Override
                                 public void onFailed(String error) {
                                     runOnUiThread(() -> {
@@ -327,10 +328,9 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                 });
             }
         });
-
         refreshServer();
         serverSpinner.setAdapter(serverSpinnerAdapter);
-        addServer.setOnClickListener(v -> {
+        register.setOnClickListener(v -> {
             MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this);
             alertDialogBuilder.setTitle("请选择认证服务器类型");
             alertDialogBuilder.setItems(new String[]{"外置登录", "统一通行证"}, (dialog, which) -> {
@@ -392,40 +392,51 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
             alertDialogBuilder.show();
         });
 
-        register.setOnClickListener(v -> Optional.ofNullable(currentRegisterUrl)
-                .ifPresent(url -> {
-                    Intent intent = new Intent();
-                    intent.setAction("android.intent.action.VIEW");
-                    Uri uri = Uri.parse(currentRegisterUrl);
-                    intent.setData(uri);
-                    startActivity(intent);
-                }));
+        register.setOnLongClickListener(v -> {
+            Optional.ofNullable(currentRegisterUrl)
+                    .ifPresent(url -> {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(intent);
+                    });
+            return true;
+        });
     }
 
     public void refreshServer() {
         List<String> serverList = new ArrayList<>();
-        if (serversFile.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(serversFile))) {
-                servers = new Gson().fromJson(reader, Servers.class);
-                if (servers != null) {
-                    currentBaseUrl = servers.getServer().get(0).getBaseUrl();
-                    for (Servers.Server server : servers.getServer()) {
-                        serverList.add(server.getServerName());
+        try {
+            if (serversFile.exists()) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(serversFile))) {
+                    servers = new Gson().fromJson(reader, Servers.class);
+                    if (servers != null) {
+                        currentBaseUrl = servers.getServer().get(0).getBaseUrl();
+                        for (Servers.Server server : servers.getServer()) {
+                            serverList.add(server.getServerName());
+                        }
                     }
+                } catch (IOException e) {
+                    // 处理文件读取异常
+                    e.printStackTrace();
                 }
-            } catch (IOException ignored) {
             }
+        } catch (SecurityException e) {
+            // 处理文件访问权限异常
+            e.printStackTrace();
         }
+
         if (servers == null) {
             serverList.add("无认证服务器");
         }
+
         if (serverSpinnerAdapter == null) {
             serverSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, serverList);
+            serverSpinner.setAdapter(serverSpinnerAdapter);
         } else {
+            serverSpinnerAdapter.clear();
+            serverSpinnerAdapter.addAll(serverList);
             serverSpinnerAdapter.notifyDataSetChanged();
         }
     }
-
     private boolean isValidUsername(String username) {
         return !TextUtils.isEmpty(username)
                 && username.length() >= 3

@@ -120,9 +120,9 @@ void custom_exit(int code) {
     old_exit(code);
 }
 
-JNIEXPORT void JNICALL Java_org_koishi_launcher_h2co3_boat_LoadMe_setupExitTrap(JNIEnv *env,
-                                                                                __attribute((unused)) jclass clazz,
-                                                                                jobject context) {
+JNIEXPORT void JNICALL Java_org_koishi_launcher_h2co3_boat_H2CO3LoadMe_setupExitTrap(JNIEnv *env,
+                                                                                     __attribute((unused)) jclass clazz,
+                                                                                     jobject context) {
     exitTrap_ctx = (*env)->NewGlobalRef(env, context);
     (*env)->GetJavaVM(env, &exitTrap_jvm);
     exitTrap_exitClass = (*env)->NewGlobalRef(env, (*env)->FindClass(env,

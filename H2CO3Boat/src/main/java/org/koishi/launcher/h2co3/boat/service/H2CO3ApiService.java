@@ -7,7 +7,7 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
-import org.koishi.launcher.h2co3.boat.LoadMe;
+import org.koishi.launcher.h2co3.boat.H2CO3LoadMe;
 import org.koishi.launcher.h2co3.boat.function.ApiInstallerCallback;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class H2CO3ApiService extends Service {
     public void startApiInstaller(String javaPath, ArrayList<String> commands, String debugDir, ApiInstallerCallback callback) {
         this.callback = callback;
         new Thread(() -> {
-            int exitCode = LoadMe.launchJVM(javaPath, commands, debugDir);
+            int exitCode = H2CO3LoadMe.launchJVM(javaPath, commands, debugDir);
             onExit(H2CO3ApiService.this, exitCode);
         }).start();
     }

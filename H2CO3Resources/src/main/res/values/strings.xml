@@ -35,14 +35,138 @@
     <string name="login_offline">Offline</string>
     <string name="login_microsoft">Microsoft</string>
     <string name="login_other">Other</string>
-    <string name="launcher_initial_install_check">Checking files...</string>
+    <string name="launcher_initial_install_check">Checking files…</string>
     <string name="user_add">Create User</string>
     <string name="user_state_offline">Offline</string>
-    <string name="login_wait">Wait...</string>
+    <string name="login_wait">Wait…</string>
     <string name="title_delete">Delete</string>
     <string name="message_delete">"Do you want to delete "</string>
     <string name="login_yggdrasil">Yggdrasil API</string>
     <string name="login_unified_pass">Unified Pass</string>
     <string name="user_state_microsoft">Microsoft</string>
     <string name="user_state_other">"Server: "</string>
+
+    <string name="title_all">All</string>
+    <string name="title_in_game">In-game</string>
+    <string name="title_out_game">Out-game</string>
+    <string name="title_restore">Restore</string>
+    <string name="title_show">show</string>
+    <string name="title_import">Import</string>
+    <string name="title_output">Export</string>
+    <string name="title_ok">OK</string>
+    <string name="title_cancel">Cancel</string>
+    <string name="title_step">Operation</string>
+    <string name="title_theme">Theme</string>
+    <string name="title_name">Name</string>
+    <string name="title_size">size</string>
+    <string name="title_width">Width</string>
+    <string name="title_height">Height</string>
+    <string name="title_keep">Keep</string>
+    <string name="title_corner">Corner</string>
+    <string name="title_hide">Hide</string>
+    <string name="title_edit">Edit</string>
+    <string name="title_error">Error</string>
+    <string name="title_over_write">Overwrite</string>
+    <string name="title_note">Prompt</string>
+    <string name="title_virtual_controller">Virtual controller</string>
+    <string name="title_global_setting">Global Settings</string>
+    <string name="title_custom_keyboard">Custom Keyboard</string>
+    <string name="title_pc_keyboard">PC Keyboard</string>
+    <string name="title_pe_keyboard">MCPE Keyboard</string>
+    <string name="title_pe_itembar">MCPE Item Bar</string>
+    <string name="title_pe_joystick">MCPE Joystick</string>
+    <string name="title_touchpad">Touchpad</string>
+    <string name="title_inputbox">Input Box</string>
+    <string name="title_inputbox_config">Input Box Settings</string>
+    <string name="title_alpha_size">Transperancy</string>
+    <string name="title_move">Move</string>
+    <string name="title_itembar_config">MCPE Item Bar Settings</string>
+    <string name="title_pe_keyboard_config">MCPE Keyboard Settings</string>
+    <string name="title_pe_joystick_config">MCPE Joystick Settings</string>
+    <string name="title_pc_keyboard_config">PC Keyboard Settings</string>
+    <string name="title_screen_touchpad_config">Screen Touchpad Settings</string>
+    <string name="title_custom_keyboard_config">Custom Keyboard Settings</string>
+    <string name="title_button_config">Key Settings</string>
+    <string name="title_sensitivity">Sensitivity</string>
+    <string name="title_trigger">Trigger</string>
+    <string name="title_mode">Mode</string>
+    <string name="title_point">Point</string>
+    <string name="title_slide_touch">Slide</string>
+    <string name="title_effect">Effect</string>
+    <string name="title_total_count">Total</string>
+    <string name="title_add">Add</string>
+    <string name="title_clear">Empty</string>
+    <string name="title_choice">Select</string>
+    <string name="title_save">Save</string>
+    <string name="title_mould">Template</string>
+    <string name="title_custom_button_editor">Custom Key Editor</string>
+    <string name="title_margin_left">Left Margin</string>
+    <string name="title_margin_top">Top Margin</string>
+    <string name="title_mapping">Mapping</string>
+    <string name="title_back_color">Background Color</string>
+    <string name="title_text_color">Text Color</string>
+    <string name="title_text_size">Text Size</string>
+    <string name="title_sight_follow">Sight Follow</string>
+    <string name="title_input_chars">Input Chars</string>
+    <string name="title_copy">Copy</string>
+    <string name="title_mouse_lb">Left Button</string>
+    <string name="title_mouse_rb">Right Button</string>
+    <string name="title_mouse_cb">Middle Button</string>
+    <string name="title_wheel_up">Wheel Up</string>
+    <string name="title_wheel_down">Wheel Down</string>
+    <string name="title_un_alpha_size">Opacity</string>
+    <string name="title_colorpicker">Color picker</string>
+    <string name="title_multi_line" translatable="false">Multi line</string>
+    <string name="title_order">Order</string>
+    <string name="title_input">Input</string>
+    <string name="title_shortcut">Shortcut</string>
+    <string name="title_console">Console</string>
+    <string name="title_default">Default</string>
+
+    <string name="tips_failed_to_import_keyboard_layout">Failed to load the keyboard file, the file is damaged!</string>
+    <string name="tips_successed_to_import_keyboard_layout">The keyboard file is loaded successfully!</string>
+    <string name="tips_filename_can_not_be_void">The file name cannot be empty!</string>
+    <string name="tips_filename_has_been_used">"A file with the same name exists. Do you want to overwrite the existing file? Overwrite operation is not recoverable"</string>
+    <string name="tips_are_you_sure_to_delete_file">You are about to delete the file %s. This operation cannot be recovered.</string>
+    <string name="tips_are_you_sure_to_import_keyboard_layout">You are about to load the file %s. The load operation will clear your current configuration. Please make sure you have saved the current template.</string>
+    <string name="tips_are_you_sure_to_clear_all_buttons">You are about to clear all the currently added custom buttons. This operation will not affect the saved template files. The clearing operation cannot be restored.</string>
+    <string name="tips_are_you_sure_to_restore_setting">Are you sure that you want to restore the default settings?</string>
+    <string name="tips_are_you_sure_to_delete_button">Are you sure that you want to delete this button?  It cannot be restored after performing this operation.</string>
+    <string name="tips_are_you_sure_to_clone_button">Are you sure that you want to copy this button?  After performing this operation, the editing object will be switched to a new button.</string>
+    <string name="tips_itembar_warn">*Note: The inventory is only visible in the game</string>
+    <string name="tips_stand_keyboard_buttons">Standard keyboard keys</string>
+    <string name="tips_stand_mouse_button">Standard Mouse button</string>
+    <string name="tips_selected">Selected：</string>
+    <string name="tips_please_change_file_name">Please change the file name!</string>
+    <string name="tips_are_you_sure_to_auto_config_layout">Are you sure you want to configure the layout automatically? This will change your controller and automatically calculate possible layout locations.</string>
+    <string name="tips_try_to_convert_keyboard_layout">Try to convert the keyboard file?</string>
+    <string name="tips_successed_to_convert_keyboard_file">Success to convert it，new file name: %s</string>
+    <string name="tips_failed_to_convert_keyboard_file">Failed to convert the keyboard file.</string>
+
+    <string name="title_point_up" translatable="false">↑</string>
+    <string name="title_point_right" translatable="false">→</string>
+    <string name="title_point_left" translatable="false">←</string>
+    <string name="title_point_down" translatable="false">↓</string>
+
+    <string name="title_enter" translatable="false">Enter</string>
+    <string name="title_t_enter" translatable="false">T + Enter</string>
+    <string name="title_done" translatable="false">Done</string>
+
+    <string name="add_directory">New Directory</string>
+
+    <string name="ver_input_hint">/storage/emulated/0 or /sdcard or /mnt/sdcard</string>
+    <string name="ver_not_dir">It is not a directory</string>
+    <string name="ver_already_exists">Directory already exists</string>
+    <string name="ver_not_right_dir">It is not a right directory.</string>
+    <string name="ver_add_done">Done</string>
+    <string name="ver_null_dir">This directory was disappointed or null.</string>
+    <string name="ver_if_del">Delete this version?</string>
+
+    <string name="manager_set_directory">Directory</string>
+    <string name="menu_ver">Versions</string>
+    <string name="title_remove">Remove</string>
+    <string name="title_action">Action</string>
+    <string name="title_reg">Register</string>
+    <string name="title_runtime">Java Runtime</string>
+
 </resources>

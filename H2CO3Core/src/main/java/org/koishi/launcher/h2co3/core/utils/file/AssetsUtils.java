@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class AssetsUtils {
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -45,5 +47,35 @@ public class AssetsUtils {
                 }
             }
         }
+    }
+
+    public static void extractZipFromAssets(Context context, String zipFileName, String destDir) throws IOException {
+        InputStream inputStream = context.getAssets().open(zipFileName);
+        ZipInputStream zipInputStream = new ZipInputStream(inputStream);
+        ZipEntry zipEntry;
+        byte[] buffer = new byte[1024];
+        int length;
+
+        while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+            String entryName = zipEntry.getName();
+            File entryFile = new File(destDir, entryName);
+
+            if (zipEntry.isDirectory()) {
+                entryFile.mkdirs();
+            } else {
+                File parentDir = entryFile.getParentFile();
+                if (!parentDir.exists()) {
+                    parentDir.mkdirs();
+                }
+
+                FileOutputStream outputStream = new FileOutputStream(entryFile);
+                while ((length = zipInputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, length);
+                }
+                outputStream.close();
+            }
+            zipInputStream.closeEntry();
+        }
+        zipInputStream.close();
     }
 }

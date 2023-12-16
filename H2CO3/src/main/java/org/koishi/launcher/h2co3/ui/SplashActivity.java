@@ -18,9 +18,10 @@ import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 
 import org.koishi.launcher.h2co3.R;
+import org.koishi.launcher.h2co3.core.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
-import org.koishi.launcher.h2co3.core.login.H2CO3Auth;
-import org.koishi.launcher.h2co3.core.utils.FileUtils;
+import org.koishi.launcher.h2co3.core.H2CO3Auth;
+import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
@@ -40,7 +41,6 @@ public class SplashActivity extends H2CO3Activity {
     private boolean boat = false;
     private boolean h2co3_app = false;
     private boolean java8 = false;
-    private boolean java17 = false;
     private boolean installing = false;
     private H2CO3MessageDialog permissionDialog;
     private AlertDialog permissionDialogAlert;
@@ -51,21 +51,20 @@ public class SplashActivity extends H2CO3Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setTheme(R.style.Theme_Boat_H2O2_Custom_GREEN);
-        setContentView(R.layout.activity_splash);
-        splash = findViewById(R.id.splash_view);
-        splashCheck = findViewById(R.id.splash_check);
+
 
         // 判断是否是第一次启动App
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isFirstLaunch = preferences.getBoolean("isFirstLaunch", true);
         if (isFirstLaunch) {
             H2CO3Auth.reSetUserState();
+            H2CO3Loader.setDir(H2CO3Tools.MINECRAFT_DIR);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("isFirstLaunch", false);
             editor.apply();
-            start();
+            checkPermission();
         } else {
-            start();
+            checkPermission();
         }
     }
 
@@ -74,6 +73,9 @@ public class SplashActivity extends H2CO3Activity {
     }
 
     public void startApp() {
+        setContentView(R.layout.activity_splash);
+        splash = findViewById(R.id.splash_view);
+        splashCheck = findViewById(R.id.splash_check);
         initState();
         check();
         install();
@@ -123,7 +125,7 @@ public class SplashActivity extends H2CO3Activity {
     }
 
     private boolean isLatest() {
-        return boat && java8 && java17 && h2co3_app;
+        return boat && java8 && h2co3_app;
     }
 
     private void check() {
@@ -140,11 +142,6 @@ public class SplashActivity extends H2CO3Activity {
         }
         try {
             java8 = RuntimeUtils.isLatest(H2CO3Tools.JAVA_8_PATH, "/assets/app_runtime/jre_8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            java17 = RuntimeUtils.isLatest(H2CO3Tools.JAVA_17_PATH, "/assets/app_runtime/jre_17");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -188,22 +185,6 @@ public class SplashActivity extends H2CO3Activity {
                 try {
                     RuntimeUtils.installJava(SplashActivity.this, H2CO3Tools.JAVA_8_PATH, "app_runtime/jre_8");
                     java8 = true;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                handler.post(this::check);
-            }).start();
-        }
-        if (!java17) {
-            new Thread(() -> {
-                try {
-                    RuntimeUtils.installJava(SplashActivity.this, H2CO3Tools.JAVA_17_PATH, "app_runtime/jre_17");
-                    if (!LocaleUtils.getSystemLocale().getDisplayName().equals(Locale.CHINA.getDisplayName())) {
-                        FileUtils.writeText(new File(H2CO3Tools.JAVA_17_PATH + "/resolv.conf"), "nameserver 1.1.1.1\n" + "nameserver 1.0.0.1");
-                    } else {
-                        FileUtils.writeText(new File(H2CO3Tools.JAVA_17_PATH + "/resolv.conf"), "nameserver 8.8.8.8\n" + "nameserver 8.8.4.4");
-                    }
-                    java17 = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

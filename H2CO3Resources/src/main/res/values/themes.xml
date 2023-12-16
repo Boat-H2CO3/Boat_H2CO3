@@ -52,7 +52,7 @@
         <item name="textAppearanceBodySmall">@style/TextAppearance.H2CO3.BodySmall</item>
     </style>
 
-    <style name="Theme.H2CO3" parent="Theme.H2CO3.Styled"></style>
+    <style name="Theme.H2CO3" parent="Theme.H2CO3.Styled" />
 
     <!---DynamicColors-->
 
@@ -86,6 +86,6 @@
         <item name="textAppearanceBodySmall">@style/TextAppearance.H2CO3.BodySmall</item>
     </style>
 
-    <style name="Theme.H2CO3.DynamicColors" parent="Theme.H2CO3.Styled.DynamicColors"></style>
+    <style name="Theme.H2CO3.DynamicColors" parent="Theme.H2CO3.Styled.DynamicColors" />
 
 </resources>

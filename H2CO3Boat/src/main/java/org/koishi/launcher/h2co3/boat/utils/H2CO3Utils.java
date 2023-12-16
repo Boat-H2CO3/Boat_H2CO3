@@ -1,11 +1,11 @@
 package org.koishi.launcher.h2co3.boat.utils;
 
-import static org.koishi.launcher.h2co3.boat.LoadMe.chdir;
-import static org.koishi.launcher.h2co3.boat.LoadMe.dlexec;
-import static org.koishi.launcher.h2co3.boat.LoadMe.dlopen;
-import static org.koishi.launcher.h2co3.boat.LoadMe.patchLinker;
-import static org.koishi.launcher.h2co3.boat.LoadMe.redirectStdio;
-import static org.koishi.launcher.h2co3.boat.LoadMe.setenv;
+import static org.koishi.launcher.h2co3.boat.H2CO3LoadMe.chdir;
+import static org.koishi.launcher.h2co3.boat.H2CO3LoadMe.dlexec;
+import static org.koishi.launcher.h2co3.boat.H2CO3LoadMe.dlopen;
+import static org.koishi.launcher.h2co3.boat.H2CO3LoadMe.patchLinker;
+import static org.koishi.launcher.h2co3.boat.H2CO3LoadMe.redirectStdio;
+import static org.koishi.launcher.h2co3.boat.H2CO3LoadMe.setenv;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

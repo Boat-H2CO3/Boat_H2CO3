@@ -4,42 +4,45 @@ import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import org.koishi.launcher.h2co3.boat.function.H2CO3Callback;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import org.koishi.launcher.h2co3.boat.function.H2CO3BoatCallback;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MessageDialog;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.SurfaceTextureListener {
+public abstract class H2CO3BoatActivity extends H2CO3Activity implements TextureView.SurfaceTextureListener {
 
     static {
         System.loadLibrary("h2co3_boat");
     }
 
-    public final float scaleFactor = 1.0F;
     // 主纹理视图
     public TextureView mainTextureView;
     // H2CO3回调
-    public H2CO3Callback h2co3Callback;
+    public H2CO3BoatCallback h2co3BoatCallback;
     // 定时器
     public Timer timer;
     // 输出
     int output = 0;
+    public final float scaleFactor = 1.0F;
 
     // 退出
     public static void onExit(Context ctx, int code) {
-        ((H2CO3BoatActivity) ctx).h2co3Callback.onExit(code);
+        ((H2CO3BoatActivity) ctx).h2co3BoatCallback.onExit(code);
     }
 
     // 发送按键事件
@@ -85,13 +88,13 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
     // 当SurfaceTexture可用时调用
     public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
         System.out.println("SurfaceTexture is available!");
-        h2co3Callback.onSurfaceTextureAvailable(surface, width, height);
+        h2co3BoatCallback.onSurfaceTextureAvailable(surface, width, height);
     }
 
     // 当SurfaceTexture尺寸改变时调用
     @Override
     public void onSurfaceTextureSizeChanged(@NonNull SurfaceTexture surface, int width, int height) {
-        h2co3Callback.onSurfaceTextureSizeChanged(surface, width, height);
+        h2co3BoatCallback.onSurfaceTextureSizeChanged(surface, width, height);
     }
 
     // 当SurfaceTexture销毁时调用
@@ -104,7 +107,7 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
     @Override
     public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surface) {
         if (output == 1) {
-            h2co3Callback.onPicOutput();
+            h2co3BoatCallback.onPicOutput();
             output++;
         }
         if (output < 1) {
@@ -116,12 +119,13 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
     // 启动游戏
     public void startGame(final String javaPath, final String home, final boolean highVersion, final Vector<String> args, String renderer, String gameDir) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
+        Log.e("H2CO3.launchMinecraft", String.valueOf(args));
         executor.execute(() -> {
             Handler handler = new Handler(Looper.getMainLooper());
-            LoadMe.launchMinecraft(handler, H2CO3BoatActivity.this, javaPath, home, highVersion, args, renderer, gameDir, new H2CO3Callback() {
+            H2CO3LoadMe.launchMinecraft(handler, H2CO3BoatActivity.this, javaPath, home, highVersion, args, renderer, gameDir, new H2CO3BoatCallback() {
                 @Override
                 public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-                    H2CO3BoatLib.setH2CO3NativeWindow(new Surface(surface));
+                    H2CO3BoatLib.setH2CO3BoatNativeWindow(new Surface(surface));
                     H2CO3BoatLib.setEventPipe();
                 }
 
@@ -137,7 +141,7 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
 
                 @Override
                 public void onStart() {
-                    h2co3Callback.onStart();
+                    h2co3BoatCallback.onStart();
                 }
 
                 @Override
@@ -147,16 +151,16 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
 
                 @Override
                 public void onError(Exception e) {
-                    h2co3Callback.onError(e);
+                    h2co3BoatCallback.onError(e);
                 }
 
                 @Override
                 public void onExit(int code) {
-                    AlertDialog exitDialog = new H2CO3MessageDialog(H2CO3BoatActivity.this)
+                    MaterialAlertDialogBuilder exitDialog = new H2CO3MessageDialog(H2CO3BoatActivity.this)
                             .setMessage("error" + code)
                             .setPositiveButton("Exit", (dialog, which) -> finish())
-                            .setOnDismissListener(dialog -> H2CO3BoatActivity.this.finish())
-                            .show();
+                            .setOnDismissListener(dialog -> H2CO3BoatActivity.this.finish());
+                    exitDialog.show();
                 }
             });
         });
@@ -165,12 +169,12 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
 
     // 设置光标模式
     public void setCursorMode(int mode) {
-        h2co3Callback.onCursorModeChange(mode);
+        h2co3BoatCallback.onCursorModeChange(mode);
     }
 
     // 设置H2CO3回调
-    public void setH2CO3Callback(H2CO3Callback callback) {
-        this.h2co3Callback = callback;
+    public void setH2CO3BoatCallback(H2CO3BoatCallback callback) {
+        this.h2co3BoatCallback = callback;
     }
 
     // 当窗口焦点改变时调用
@@ -188,17 +192,15 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
         }
     }
 
+    public abstract void onClick(View p1);
+
     // 在恢复后调用
     @Override
     protected void onPostResume() {
         super.onPostResume();
         if (mainTextureView != null && mainTextureView.getSurfaceTexture() != null) {
-            mainTextureView.post(() -> h2co3Callback.onSurfaceTextureSizeChanged(mainTextureView.getSurfaceTexture(), mainTextureView.getWidth(), mainTextureView.getHeight()));
+            mainTextureView.post(() -> h2co3BoatCallback.onSurfaceTextureSizeChanged(mainTextureView.getSurfaceTexture(), mainTextureView.getWidth(), mainTextureView.getHeight()));
         }
-    }
-
-    // 设置光标抓取
-    public void setGrabCursor(boolean isGrabbed) {
     }
 
     // 获取指针坐标
@@ -206,20 +208,6 @@ public class H2CO3BoatActivity extends H2CO3Activity implements TextureView.Surf
         return H2CO3BoatLib.getPointer();
     }
 
-    // 设置按键
-    public void setKey(int keyCode, int keyChar, boolean isPressed) {
-        H2CO3BoatLib.setKey(keyCode, keyChar, isPressed);
-    }
-
-    // 设置鼠标按键
-    public void setMouseButton(int button, boolean isPressed) {
-        H2CO3BoatLib.setMouseButton(button, isPressed);
-    }
-
-    // 设置指针坐标
-    public void setPointer(int x, int y) {
-        H2CO3BoatLib.setPointer(x, y);
-    }
 }
 
 

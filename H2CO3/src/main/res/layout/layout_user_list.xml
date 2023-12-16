@@ -6,11 +6,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         style="@style/Theme.H2CO3.CardViewElevated">
-    <ListView
-        android:id="@+id/layout_user_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:dividerHeight="0dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_user_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </org.koishi.launcher.h2co3.resources.component.H2CO3CardView>
 </LinearLayout>

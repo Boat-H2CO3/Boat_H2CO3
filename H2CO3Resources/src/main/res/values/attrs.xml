@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="H2CO3CardView">
-        <!--圆角度-->
-        <attr name="android:radius" />
-        <attr name="android:topLeftRadius" />
-        <attr name="android:topRightRadius" />
-        <attr name="android:bottomLeftRadius" />
-        <attr name="android:bottomRightRadius" />
-        <!--阴影的X轴偏移-->
-        <attr name="android:x" />
-        <!--阴影的Y轴偏移-->
-        <attr name="android:y" />
-        <!--阴影的X+Y轴偏移-->
-        <attr name="shadowOffset" format="dimension" />
-        <!--阴影颜色-->
-        <attr name="android:shadowColor" />
-        <attr name="cardBackgroundColor" format="color" />
-        <!--阴影半径，越大越模糊 阴影越宽-->
-        <attr name="shadowRadius" format="dimension" />
+
+    <declare-styleable name="BubbleLayout">
+        <attr name="background_color" format="color" />
+        <attr name="shadow_color" format="color" />
+        <attr name="shadow_size" format="dimension" />
+        <attr name="radius" format="dimension" />
+        <attr name="direction" format="enum">
+            <enum name="left" value="1" />
+            <enum name="top" value="2" />
+            <enum name="right" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+        <attr name="offset" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="BaseButton">
+        <attr name="button_name" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="MouseButton" parent="BaseButton">
+        <attr name="mouse_name" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="QwertButton" parent="BaseButton">
+        <attr name="char_none" format="string" />
+        <attr name="char_shift" format="string" />
+        <attr name="char_capslock" format="string" />
+    </declare-styleable>
+
 </resources>

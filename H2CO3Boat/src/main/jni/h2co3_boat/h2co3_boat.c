@@ -13,13 +13,17 @@ ANativeWindow *h2co3GetNativeWindow() {
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_setH2CO3NativeWindow(JNIEnv *env,
-                                                                      jclass clazz,
-                                                                      jobject surface) {
+Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_setH2CO3BoatNativeWindow(JNIEnv *env,
+                                                                          jclass clazz,
+                                                                          jobject surface) {
     if (h2co3Boat == NULL) {
         return;
     }
     h2co3Boat->window = ANativeWindow_fromSurface(env, surface);
+    if (h2co3Boat->window == NULL) {
+        // handle error
+        return;
+    }
     H2CO3_BOAT_INTERNAL_LOG("setH2CO3BoatNativeWindow : %p", h2co3Boat->window);
 }
 
@@ -77,11 +81,7 @@ Java_org_koishi_launcher_h2co3_boat_H2CO3BoatActivity_nOnCreate(JNIEnv *env, job
     // Get the setCursorMode function from the H2CO3BoatActivity class
     h2co3Boat->setCursorMode = (*env)->GetMethodID(env, h2co3Boat->class_H2CO3BoatActivity, "setCursorMode",
                                                    "(I)V");
-    h2co3Boat->setGrabCursorId = (*env)->GetMethodID(env,
-                                                     h2co3Boat->class_H2CO3BoatActivity, "setGrabCursor",
-                                                     "(Z)V");
-    if (h2co3Boat->setGrabCursorId == NULL) {
-        H2CO3_BOAT_INTERNAL_LOG("Failed to find method: H2CO3BoatActivity::setGrabCursor");
+    if (h2co3Boat->setCursorMode == NULL) {
         free(h2co3Boat);
         h2co3Boat = NULL;
         return;

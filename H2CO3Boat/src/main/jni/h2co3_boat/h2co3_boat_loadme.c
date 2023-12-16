@@ -1,4 +1,3 @@
-
 #include <fcntl.h>
 #include <unistd.h>
 #include <jni.h>
@@ -7,6 +6,8 @@
 #include <android/log.h>
 #include <sys/mman.h>
 #include <xhook.h>
+
+#define LOG_TAG "H2CO3"
 
 static volatile jobject exitTrap_ctx;
 static volatile jclass exitTrap_exitClass;
@@ -27,8 +28,8 @@ void custom_exit(int code) {
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_boat_LoadMe_redirectStdio(JNIEnv *env, jclass clazz, jstring path) {
-    char const *file = (*env)->GetStringUTFChars(env, path, 0);
+Java_org_koishi_launcher_h2co3_boat_H2CO3LoadMe_redirectStdio(JNIEnv *env, jclass clazz, jstring path) {
+    const char *file = (*env)->GetStringUTFChars(env, path, 0);
 
     int fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
     dup2(fd, 1);
@@ -38,8 +39,8 @@ Java_org_koishi_launcher_h2co3_boat_LoadMe_redirectStdio(JNIEnv *env, jclass cla
 }
 
 JNIEXPORT jint JNICALL
-Java_org_koishi_launcher_h2co3_boat_LoadMe_chdir(JNIEnv *env, jclass clazz, jstring path) {
-    char const *dir = (*env)->GetStringUTFChars(env, path, 0);
+Java_org_koishi_launcher_h2co3_boat_H2CO3LoadMe_chdir(JNIEnv *env, jclass clazz, jstring path) {
+    const char *dir = (*env)->GetStringUTFChars(env, path, 0);
 
     int b = chdir(dir);
 
@@ -48,10 +49,10 @@ Java_org_koishi_launcher_h2co3_boat_LoadMe_chdir(JNIEnv *env, jclass clazz, jstr
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_boat_LoadMe_setenv(JNIEnv *env, jclass clazz, jstring str1,
-                                                  jstring str2) {
-    char const *name = (*env)->GetStringUTFChars(env, str1, 0);
-    char const *value = (*env)->GetStringUTFChars(env, str2, 0);
+Java_org_koishi_launcher_h2co3_boat_H2CO3LoadMe_setenv(JNIEnv *env, jclass clazz, jstring str1,
+                                                       jstring str2) {
+    const char *name = (*env)->GetStringUTFChars(env, str1, 0);
+    const char *value = (*env)->GetStringUTFChars(env, str2, 0);
 
     setenv(name, value, 1);
 
@@ -60,16 +61,16 @@ Java_org_koishi_launcher_h2co3_boat_LoadMe_setenv(JNIEnv *env, jclass clazz, jst
 }
 
 JNIEXPORT jint JNICALL
-Java_org_koishi_launcher_h2co3_boat_LoadMe_dlopen(JNIEnv *env, jclass clazz, jstring str1) {
+Java_org_koishi_launcher_h2co3_boat_H2CO3LoadMe_dlopen(JNIEnv *env, jclass clazz, jstring str1) {
     dlerror();
 
     int ret = 0;
-    char const *lib_name = (*env)->GetStringUTFChars(env, str1, 0);
+    const char *lib_name = (*env)->GetStringUTFChars(env, str1, 0);
 
     void *handle;
     dlerror();
     handle = dlopen(lib_name, RTLD_GLOBAL);
-    __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "loading %s (error = %s)", lib_name, dlerror());
+    __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "loading %s (error = %s)", lib_name, dlerror());
 
     if (handle == NULL) {
         ret = -1;
@@ -80,8 +81,8 @@ Java_org_koishi_launcher_h2co3_boat_LoadMe_dlopen(JNIEnv *env, jclass clazz, jst
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_boat_LoadMe_setupExitTrap(JNIEnv *env, jclass clazz,
-                                                         jobject context) {
+Java_org_koishi_launcher_h2co3_boat_H2CO3LoadMe_setupExitTrap(JNIEnv *env, jclass clazz,
+                                                              jobject context) {
     exitTrap_ctx = (*env)->NewGlobalRef(env, context);
     (*env)->GetJavaVM(env, &exitTrap_jvm);
     exitTrap_exitClass = (*env)->NewGlobalRef(env,
@@ -95,8 +96,8 @@ Java_org_koishi_launcher_h2co3_boat_LoadMe_setupExitTrap(JNIEnv *env, jclass cla
 }
 
 JNIEXPORT int JNICALL
-Java_org_koishi_launcher_h2co3_boat_LoadMe_dlexec(JNIEnv *env, jclass clazz,
-                                                  jobjectArray argsArray) {
+Java_org_koishi_launcher_h2co3_boat_H2CO3LoadMe_dlexec(JNIEnv *env, jclass clazz,
+                                                       jobjectArray argsArray) {
     dlerror();
 
     int argc = (*env)->GetArrayLength(env, argsArray);
@@ -113,17 +114,17 @@ Java_org_koishi_launcher_h2co3_boat_LoadMe_dlexec(JNIEnv *env, jclass clazz,
     char **envp = environ;
 
     jstring str0 = (*env)->GetObjectArrayElement(env, argsArray, 0);
-    char const *lib_name = (*env)->GetStringUTFChars(env, str0, 0);
+    const char *lib_name = (*env)->GetStringUTFChars(env, str0, 0);
 
     void *handle;
     handle = dlopen(lib_name, RTLD_GLOBAL);
-    __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "loading %s (error = %s)", lib_name, dlerror());
+    __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "loading %s (error = %s)", lib_name, dlerror());
     if (handle == NULL) {
         return -1;
     }
 
     int (*main_func)(int, char **, char **) = (int (*)()) dlsym(handle, "main");
-    __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "getting main() in %s (error = %s)", lib_name,
+    __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "getting main() in %s (error = %s)", lib_name,
                         dlerror());
     if (main_func == NULL) {
         return -2;
@@ -134,10 +135,6 @@ Java_org_koishi_launcher_h2co3_boat_LoadMe_dlexec(JNIEnv *env, jclass clazz,
 }
 
 unsigned gen_ldr_pc(unsigned rt, signed long off) {
-    // 33 222 2 22 2222111111111100000 00000
-    // 10 987 6 54 3210987654321098765 43210
-    // 01 011 0 00 1111111111111111011 00010
-    //             imm                 rt
     unsigned result = 0x0;
 
     result |= 0x58; // 01 011 0 00;
@@ -155,10 +152,6 @@ unsigned gen_ldr_pc(unsigned rt, signed long off) {
 }
 
 unsigned gen_ret(unsigned lr) {
-    // 3322222 2 2 22 21111 1111 1 1 00000 00000
-    // 1098765 4 3 21 09876 5432 1 0 98765 43210
-    // 1101011 0 0 10 11111 0000 0 0 11110 00000
-    //                               lr
     unsigned result = 0x0;
 
     result |= 0x3597c0;  // 1101011 0 0 10 11111 0000 0 0
@@ -171,10 +164,6 @@ unsigned gen_ret(unsigned lr) {
 }
 
 unsigned gen_mov_reg(unsigned tr, unsigned sr) {
-    // 3 32 22222 22 2 21111 111111 00000 00000
-    // 1 09 87654 32 1 09876 543210 98765 43210
-    // 1 01 01010 00 0 11110 000000 11111 00010
-    //                 sr                 tr
     unsigned result = 0x0;
 
     result |= 0x550;  // 1 01 01010 00 0
@@ -194,10 +183,6 @@ unsigned gen_mov_reg(unsigned tr, unsigned sr) {
 }
 
 unsigned gen_mov_imm(unsigned tr, signed short imm) {
-    // 3 32 222222 22 2111111111100000 00000
-    // 1 09 876543 21 0987654321098765 43210
-    // 1 10 100101 00 0000000001111111 00000
-    //                imm              tr
     unsigned result = 0x0;
 
     result |= 0x694;  // 1 10 100101 00
@@ -217,62 +202,66 @@ void stub() {
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_boat_LoadMe_patchLinker(JNIEnv *env, jclass clazz) {
-
-#define PAGE_START(x) ((void*)((unsigned long)(x) & ~((unsigned long)getpagesize() - 1)))
-
+Java_org_koishi_launcher_h2co3_boat_H2CO3LoadMe_patchLinker(JNIEnv *env, jclass clazz) {
     void *libdl_handle = dlopen("libdl.so", RTLD_GLOBAL);
     if (libdl_handle == NULL) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to open libdl.so");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to open libdl.so");
         return;
     }
 
-    unsigned *dlopen_addr = (unsigned *) dlsym(libdl_handle, "dlopen");
+    void *dlopen_addr = dlsym(libdl_handle, "dlopen");
     if (dlopen_addr == NULL) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to find dlopen");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to find dlopen");
         return;
     }
-    unsigned *dlsym_addr = (unsigned *) dlsym(libdl_handle, "dlsym");
+    void *dlsym_addr = dlsym(libdl_handle, "dlsym");
     if (dlsym_addr == NULL) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to find dlsym");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to find dlsym");
         return;
     }
-    unsigned *dlvsym_addr = (unsigned *) dlsym(libdl_handle, "dlvsym");
+    void *dlvsym_addr = dlsym(libdl_handle, "dlvsym");
     if (dlvsym_addr == NULL) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to find dlvsym");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to find dlvsym");
         return;
     }
 
-    unsigned *buffer = (unsigned *) dlsym(libdl_handle, "android_get_LD_LIBRARY_PATH");
+    void *buffer = dlsym(libdl_handle, "android_get_LD_LIBRARY_PATH");
     if (buffer == NULL) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to find android_get_LD_LIBRARY_PATH");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to find android_get_LD_LIBRARY_PATH");
         return;
     }
 
-    if (mprotect(PAGE_START(buffer), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to mprotect buffer");
+    size_t page_size = getpagesize();
+    void *page_start_buffer = (void*)((uintptr_t)buffer & ~(page_size - 1));
+    void *page_start_dlopen = (void*)((uintptr_t)dlopen_addr & ~(page_size - 1));
+    void *page_start_dlsym = (void*)((uintptr_t)dlsym_addr & ~(page_size - 1));
+    void *page_start_dlvsym = (void*)((uintptr_t)dlvsym_addr & ~(page_size - 1));
+
+    if (mprotect(page_start_buffer, page_size, PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to mprotect buffer");
         return;
     }
-    if (mprotect(PAGE_START(dlopen_addr), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to mprotect dlopen_addr");
+    if (mprotect(page_start_dlopen, page_size, PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to mprotect dlopen_addr");
         return;
     }
-    if (mprotect(PAGE_START(dlsym_addr), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to mprotect dlsym_addr");
+    if (mprotect(page_start_dlsym, page_size, PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to mprotect dlsym_addr");
         return;
     }
-    if (mprotect(PAGE_START(dlvsym_addr), getpagesize(), PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "Failed to mprotect dlvsym_addr");
+    if (mprotect(page_start_dlvsym, page_size, PROT_READ | PROT_WRITE | PROT_EXEC) != 0) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to mprotect dlvsym_addr");
         return;
     }
 
     unsigned ins_ret = gen_ret(30);
     unsigned ins_mov_x0_0 = gen_mov_imm(0, 0);
 
-    buffer[0] = ins_mov_x0_0;
-    buffer[1] = ins_ret;
+    unsigned *buffer_instructions = (unsigned *)buffer;
+    buffer_instructions[0] = ins_mov_x0_0;
+    buffer_instructions[1] = ins_ret;
 
-    void **tmp_addr = (void **) (buffer + 2);
+    void **tmp_addr = (void **)(buffer_instructions + 2);
     *tmp_addr = stub;
 
     unsigned ins_mov_x2_x30 = gen_mov_reg(2, 30);
@@ -281,40 +270,40 @@ Java_org_koishi_launcher_h2co3_boat_LoadMe_patchLinker(JNIEnv *env, jclass clazz
     int dlopen_hooked = 0;
     int dlsym_hooked = 0;
     int dlvsym_hooked = 0;
-    for (int i = 0; dlopen_addr[i] != ins_ret; i++) {
-        if (dlopen_addr[i] == ins_mov_x2_x30) {
-            dlopen_addr[i] = gen_ldr_pc(2,
-                                        (long) (tmp_addr - (long) &dlopen_addr[i]));
+
+    unsigned *dlopen_instructions = (unsigned *)dlopen_addr;
+    unsigned *dlsym_instructions = (unsigned *)dlsym_addr;
+    unsigned *dlvsym_instructions = (unsigned *)dlvsym_addr;
+
+    for (int i = 0; dlopen_instructions[i] != ins_ret; i++) {
+        if (dlopen_instructions[i] == ins_mov_x2_x30) {
+            dlopen_instructions[i] = gen_ldr_pc(2, (long)(tmp_addr - (long)&dlopen_instructions[i]));
             dlopen_hooked = 1;
             break;
         }
     }
-    for (int i = 0; dlsym_addr[i] != ins_ret; i++) {
-        if (dlsym_addr[i] == ins_mov_x2_x30) {
-            dlsym_addr[i] = gen_ldr_pc(2,
-                                       (long) (tmp_addr - (long) &dlsym_addr[i]));
+    for (int i = 0; dlsym_instructions[i] != ins_ret; i++) {
+        if (dlsym_instructions[i] == ins_mov_x2_x30) {
+            dlsym_instructions[i] = gen_ldr_pc(2, (long)(tmp_addr - (long)&dlsym_instructions[i]));
             dlsym_hooked = 1;
             break;
         }
     }
-    for (int i = 0; dlvsym_addr[i] != ins_ret; i++) {
-        if (dlvsym_addr[i] == ins_mov_x3_x30) {
-            dlvsym_addr[i] = gen_ldr_pc(3,
-                                        (long) tmp_addr - (long) &dlvsym_addr[i]);
+    for (int i = 0; dlvsym_instructions[i] != ins_ret; i++) {
+        if (dlvsym_instructions[i] == ins_mov_x3_x30) {
+            dlvsym_instructions[i] = gen_ldr_pc(3, (long)(tmp_addr - (long)&dlvsym_instructions[i]));
             dlvsym_hooked = 1;
             break;
         }
     }
 
     if (dlopen_hooked == 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "dlopen() not patched");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "dlopen() not patched");
     }
     if (dlsym_hooked == 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "dlsym() not patched");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "dlsym() not patched");
     }
     if (dlvsym_hooked == 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3", "dlvsym() not patched");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "dlvsym() not patched");
     }
-#undef PAGE_START
 }
-

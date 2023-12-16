@@ -9,7 +9,7 @@ import android.webkit.CookieManager;
 import androidx.annotation.Nullable;
 
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
-import org.koishi.launcher.h2co3.core.utils.FileUtils;
+import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 import org.koishi.launcher.h2co3.resources.R;
 
 import java.io.File;
@@ -49,7 +49,7 @@ public class H2CO3Activity extends MaterialActivity {
 
     public static void clearWebViewCache(Context context) throws IOException {
         String WEB_VIEW_CACHE_DIR = context.getDir("webview",0).getAbsolutePath();
-        FileUtils.deleteDirectory(new File(WEB_VIEW_CACHE_DIR));
+        FileTools.deleteDirectory(new File(WEB_VIEW_CACHE_DIR));
         CookieManager.getInstance().removeAllCookies(null);
     }
 

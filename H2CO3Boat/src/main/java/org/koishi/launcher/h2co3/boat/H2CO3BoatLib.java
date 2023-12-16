@@ -79,7 +79,7 @@ public class H2CO3BoatLib {
     public static native int[] getPointer();
 
     // 设置H2CO3本地窗口
-    public static native void setH2CO3NativeWindow(Surface surface);
+    public static native void setH2CO3BoatNativeWindow(Surface surface);
 
     public static void openLink(final String link) {
         Context context = H2CO3Tools.CONTEXT;

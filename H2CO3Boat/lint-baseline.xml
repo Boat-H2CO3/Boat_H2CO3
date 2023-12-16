@@ -577,7 +577,7 @@
 
     <issue id="SdCardPath"
         message="Do not hardcode &quot;`/data/`&quot;; use `Context.getFilesDir().getPath()` instead">
-        <location file="src\main\java\cosine\boat\utils\CHTools.java" line="40" />
+        <location file="src\main\java\cosine\boat\utils\H2CO3Tools.java" line="40" />
     </issue>
 
     <issue id="SdCardPath"
