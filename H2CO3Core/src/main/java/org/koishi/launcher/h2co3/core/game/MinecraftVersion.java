@@ -89,41 +89,41 @@ public class MinecraftVersion {
         return result;
     }
 
-    public String getClassPath(H2CO3Game config, boolean high, boolean isJava17) {
+    public String getClassPath(boolean high, boolean isJava17) {
         StringBuilder cp = new StringBuilder();
-        int count = 0;
         String librariesPath = H2CO3Game.getGameDirectory() + "/libraries/";
 
-        for (Library lib : this.libraries) {
+        for (Library lib : libraries) {
             if (lib.name == null || lib.name.isEmpty() || lib.name.contains("org.lwjgl") || lib.name.contains("natives") || (isJava17 && lib.name.contains("java-objc-bridge"))) {
                 continue;
             }
+
             String[] names = lib.name.split(":");
             String packageName = names[0];
             String mainName = names[1];
             String versionName = names[2];
 
-            String path = librariesPath + packageName.replaceAll("\\.", "/") + "/" + mainName + "/" + versionName + "/" + mainName + "-" + versionName + ".jar";
-            Log.d("路径",path);
+            String path = String.format("%s%s/%s/%s/%s-%s.jar", librariesPath, packageName.replaceAll("\\.", "/"), mainName, versionName, mainName, versionName);
 
-            if (count > 0) {
-                cp.append(":");
-            }
-            cp.append(path);
-            count++;
+            cp.append(path).append(":");
         }
-        String split = count > 0 ? ":" : "";
+
+        if (cp.length() > 0) {
+            cp.setLength(cp.length() - 1);
+        }
+
+        String split = cp.length() > 0 ? ":" : "";
+
         if (high) {
             cp.append(split).append(minecraftPath);
         } else {
             cp.insert(0, minecraftPath + split);
         }
-        cp.insert(0, minecraftPath);
 
         return cp.toString();
     }
 
-    public String[] getJVMArguments(H2CO3Game gameLaunchSetting) {
+    public String[] getJVMArguments() {
         StringBuilder test = new StringBuilder();
         if (arguments != null && arguments.jvm != null) {
             for (Object obj : this.arguments.jvm) {
@@ -170,7 +170,7 @@ public class MinecraftVersion {
                         case "auth_access_token" -> H2CO3Auth.getAuthAccessToken();
                         case "user_type" -> H2CO3Auth.getUserType();
                         case "primary_jar_name" ->
-                                H2CO3Game.getGameCurrentVersion() + "/" + FileTools.getFolderName(H2CO3Game.getGameCurrentVersion()) + ".jar";
+                                H2CO3Game.getGameCurrentVersion() + "/" + id + ".jar";
                         case "library_directory" -> H2CO3Game.getGameDirectory() + "/libraries";
                         case "classpath_separator" -> ":";
                         default -> "";
@@ -180,7 +180,6 @@ public class MinecraftVersion {
                 }
             }
         }
-        Log.d("路径",(Arrays.toString(result.toString().split(" "))));
         return result.toString().split(" ");
     }
 
@@ -231,7 +230,7 @@ public class MinecraftVersion {
                         case "auth_access_token" -> H2CO3Auth.getAuthAccessToken();
                         case "user_type" -> H2CO3Auth.getUserType();
                         case "primary_jar_name" ->
-                                H2CO3Game.getGameCurrentVersion() + "/" + FileTools.getFolderName(H2CO3Game.getGameCurrentVersion()) + ".jar";
+                                H2CO3Game.getGameCurrentVersion() + "/" + id + ".jar";
                         case "library_directory" -> H2CO3Game.getGameDirectory() + "/libraries";
                         case "classpath_separator" -> ":";
                         default -> "";

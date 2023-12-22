@@ -218,7 +218,7 @@ public final class LibraryResource {
 
     private static void printError() {
         Library.printError(
-                "[LWJGL] Failed to load a library resource. Possible solutions:\n" +
+                "[LWJGL-H2CO3] Failed to load a library resource. Possible solutions:\n" +
                         "\ta) Add the directory that contains the resource to -Djava.library.path or -Dorg.lwjgl.librarypath.\n" +
                         "\tb) Add the JAR that contains the resource to the classpath."
         );

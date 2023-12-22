@@ -1,7 +1,12 @@
 package org.koishi.launcher.h2co3.core.utils.file;
 
+import android.content.Context;
 import android.content.res.AssetManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.OpenableColumns;
 import android.system.Os;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,6 +35,28 @@ import java.util.logging.Level;
 public final class FileTools {
 
     private FileTools() {
+    }
+
+    /**
+     * 从Uri获取完整路径
+     * @param context 上下文
+     * @param uri Uri对象
+     * @return 完整路径字符串
+     */
+    public static String getFullPathFromUri(Context context, Uri uri) {
+        String fullPath = null;
+        if (DocumentsContract.isDocumentUri(context, uri)) { // 判断Uri是否为文档类型的Uri
+            String documentId = DocumentsContract.getDocumentId(uri); // 获取文档的ID
+            String[] split = documentId.split(":"); // 以冒号分割文档ID
+            String type = split[0]; // 获取类型
+            if ("primary".equalsIgnoreCase(type)) { // 如果类型为primary
+                fullPath = Environment.getExternalStorageDirectory() + "/" + split[1]; // 获取外部存储路径
+            }
+        }
+        if (fullPath == null) { // 如果完整路径为空
+            fullPath = uri.getPath(); // 获取Uri的路径
+        }
+        return fullPath; // 返回完整路径
     }
 
     public static boolean canCreateDirectory(String path) {
@@ -518,6 +545,17 @@ public final class FileTools {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getFileName(Context ctx, Uri uri) {
+        Cursor c = ctx.getContentResolver().query(uri, null, null, null, null);
+        if(c == null) return uri.getLastPathSegment(); // idk myself but it happens on asus file manager
+        c.moveToFirst();
+        int columnIndex = c.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        if(columnIndex == -1) return uri.getLastPathSegment();
+        String fileName = c.getString(columnIndex);
+        c.close();
+        return fileName;
     }
 
     /**

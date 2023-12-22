@@ -4,28 +4,32 @@
 H2CO3BoatEvent current_event;
 
 void EventQueue_init(EventQueue *queue) {
-    queue->count = 0;
-    queue->head = NULL;
-    queue->tail = NULL;
+    if (queue != NULL) {
+        queue->count = 0;
+        queue->head = NULL;
+        queue->tail = NULL;
+    }
 }
 
 void EventQueue_add(EventQueue *queue, H2CO3BoatEvent *event) {
-    QueueElement *e = calloc(1, sizeof(QueueElement));
-    if (e != NULL) {
-        if (queue->count > 0) {
-            queue->tail->next = e;
-            queue->tail = e;
-        } else { // count == 0
-            queue->head = e;
-            queue->tail = e;
+    if (queue != NULL && event != NULL) {
+        QueueElement *e = calloc(1, sizeof(QueueElement));
+        if (e != NULL) {
+            if (queue->count > 0) {
+                queue->tail->next = e;
+                queue->tail = e;
+            } else { // count == 0
+                queue->head = e;
+                queue->tail = e;
+            }
+            queue->count++;
+            memcpy(&queue->tail->event, event, sizeof(H2CO3BoatEvent));
         }
-        queue->count++;
-        memcpy(&queue->tail->event, event, sizeof(H2CO3BoatEvent));
     }
 }
 
 int EventQueue_take(EventQueue *queue, H2CO3BoatEvent *event) {
-    if (queue->count > 0) {
+    if (queue != NULL && queue->count > 0) {
         QueueElement *e = queue->head;
         if (queue->count == 1) {
             queue->head = NULL;
@@ -44,19 +48,19 @@ int EventQueue_take(EventQueue *queue, H2CO3BoatEvent *event) {
 }
 
 void EventQueue_clear(EventQueue *queue) {
-    while (queue->count > 0) {
-        EventQueue_take(queue, NULL);
+    if (queue != NULL) {
+        while (queue->count > 0) {
+            EventQueue_take(queue, NULL);
+        }
     }
 }
 
 void h2co3SetCursorMode(int mode) {
-    if (h2co3Boat->android_jvm == 0) {
+    if (h2co3Boat == NULL || h2co3Boat->android_jvm == 0) {
         return;
     }
     JNIEnv *env = 0;
-
     jint result = (*h2co3Boat->android_jvm)->AttachCurrentThread(h2co3Boat->android_jvm, &env, 0);
-
     if (result != JNI_OK || env == 0) {
         abort();
     }

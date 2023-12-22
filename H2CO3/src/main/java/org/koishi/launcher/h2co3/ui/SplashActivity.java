@@ -21,9 +21,9 @@ import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.core.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.H2CO3Auth;
-import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
+import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MessageDialog;
 
@@ -41,6 +41,7 @@ public class SplashActivity extends H2CO3Activity {
     private boolean boat = false;
     private boolean h2co3_app = false;
     private boolean java8 = false;
+    private boolean java17 = false;
     private boolean installing = false;
     private H2CO3MessageDialog permissionDialog;
     private AlertDialog permissionDialogAlert;
@@ -125,7 +126,7 @@ public class SplashActivity extends H2CO3Activity {
     }
 
     private boolean isLatest() {
-        return boat && java8 && h2co3_app;
+        return boat && java8 && java17 && h2co3_app;
     }
 
     private void check() {
@@ -141,7 +142,12 @@ public class SplashActivity extends H2CO3Activity {
             e.printStackTrace();
         }
         try {
-            java8 = RuntimeUtils.isLatest(H2CO3Tools.JAVA_8_PATH, "/assets/app_runtime/jre_8");
+            java8 = RuntimeUtils.isLatest(H2CO3Tools.JAVA_8_PATH, "/assets/app_runtime/java/jre_8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            java17 = RuntimeUtils.isLatest(H2CO3Tools.JAVA_17_PATH, "/assets/app_runtime/java/jre_17");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -183,8 +189,24 @@ public class SplashActivity extends H2CO3Activity {
         if (!java8) {
             new Thread(() -> {
                 try {
-                    RuntimeUtils.installJava(SplashActivity.this, H2CO3Tools.JAVA_8_PATH, "app_runtime/jre_8");
+                    RuntimeUtils.installJava(SplashActivity.this, H2CO3Tools.JAVA_8_PATH, "app_runtime/java/jre_8");
                     java8 = true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                handler.post(this::check);
+            }).start();
+        }
+        if (!java17) {
+            new Thread(() -> {
+                try {
+                    RuntimeUtils.installJava(SplashActivity.this, H2CO3Tools.JAVA_17_PATH, "app_runtime/java/jre_17");
+                    if (!LocaleUtils.getSystemLocale().getDisplayName().equals(Locale.CHINA.getDisplayName())) {
+                        FileTools.writeText(new File(H2CO3Tools.JAVA_17_PATH + "/resolv.conf"), "nameserver 1.1.1.1\n" + "nameserver 1.0.0.1");
+                    } else {
+                        FileTools.writeText(new File(H2CO3Tools.JAVA_17_PATH + "/resolv.conf"), "nameserver 8.8.8.8\n" + "nameserver 8.8.4.4");
+                    }
+                    java17 = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

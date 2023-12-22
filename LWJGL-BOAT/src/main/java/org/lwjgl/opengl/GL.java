@@ -100,7 +100,7 @@ public final class GL {
     public static void create() {
         SharedLibrary GL;
         switch (Platform.get()) {
-            case H2CO3Boat:
+            case H2CO3:
             case LINUX:
                 GL = Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_LIBRARY_NAME, "libGL.so.1", "libGL.so");
                 break;
@@ -164,7 +164,7 @@ public final class GL {
                         }
                     };
                     break;
-                case H2CO3Boat:
+                case H2CO3:
                 case LINUX:
                     functionProvider = new SharedLibraryGL(OPENGL) {
                         private final long glXGetProcAddress;

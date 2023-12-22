@@ -88,4 +88,9 @@
 
     <style name="Theme.H2CO3.DynamicColors" parent="Theme.H2CO3.Styled.DynamicColors" />
 
+    <style name="FullScreen" parent="Theme.H2CO3">
+        <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

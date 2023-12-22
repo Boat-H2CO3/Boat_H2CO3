@@ -15,7 +15,7 @@ import static org.lwjgl.system.APIUtil.*;
  */
 public enum Platform {
 
-    H2CO3Boat("H2CO3Boat", "h2co3_boat") {
+    H2CO3("H2CO3", "h2co3") {
         private final Pattern SO = Pattern.compile("(?:^|/)lib\\w+[.]so(?:[.]\\d+)*$");
 
         @Override
@@ -98,12 +98,7 @@ public enum Platform {
         if (osName.startsWith("Windows")) {
             current = WINDOWS;
         } else if (osName.startsWith("Linux") || osName.startsWith("FreeBSD") || osName.startsWith("SunOS") || osName.startsWith("Unix")) {
-            String platformName = System.getProperty("lwjgl.platform");
-            if (platformName != null && platformName.startsWith("H2CO3Boat")) {
-                current = H2CO3Boat;
-            } else {
-                current = LINUX;
-            }
+            current = H2CO3;
         } else if (osName.startsWith("Mac OS X") || osName.startsWith("Darwin")) {
             current = MACOSX;
         } else {

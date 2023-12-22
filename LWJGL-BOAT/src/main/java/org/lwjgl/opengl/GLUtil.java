@@ -45,7 +45,7 @@ public final class GLUtil {
         if (caps.OpenGL43) {
             apiLog("[GL] Using OpenGL 4.3 for error logging.");
             GLDebugMessageCallback proc = GLDebugMessageCallback.create((source, type, id, severity, length, message, userParam) -> {
-                stream.println("[LWJGL] OpenGL debug message");
+                stream.println("[LWJGL-H2CO3] OpenGL debug message");
                 printDetail(stream, "ID", String.format("0x%X", id));
                 printDetail(stream, "Source", getDebugSource(source));
                 printDetail(stream, "Type", getDebugType(type));
@@ -63,7 +63,7 @@ public final class GLUtil {
         if (caps.GL_KHR_debug) {
             apiLog("[GL] Using KHR_debug for error logging.");
             GLDebugMessageCallback proc = GLDebugMessageCallback.create((source, type, id, severity, length, message, userParam) -> {
-                stream.println("[LWJGL] OpenGL debug message");
+                stream.println("[LWJGL-H2CO3] OpenGL debug message");
                 printDetail(stream, "ID", String.format("0x%X", id));
                 printDetail(stream, "Source", getDebugSource(source));
                 printDetail(stream, "Type", getDebugType(type));
@@ -81,7 +81,7 @@ public final class GLUtil {
         if (caps.GL_ARB_debug_output) {
             apiLog("[GL] Using ARB_debug_output for error logging.");
             GLDebugMessageARBCallback proc = GLDebugMessageARBCallback.create((source, type, id, severity, length, message, userParam) -> {
-                stream.println("[LWJGL] ARB_debug_output message");
+                stream.println("[LWJGL-H2CO3] ARB_debug_output message");
                 printDetail(stream, "ID", String.format("0x%X", id));
                 printDetail(stream, "Source", getSourceARB(source));
                 printDetail(stream, "Type", getTypeARB(type));
@@ -95,7 +95,7 @@ public final class GLUtil {
         if (caps.GL_AMD_debug_output) {
             apiLog("[GL] Using AMD_debug_output for error logging.");
             GLDebugMessageAMDCallback proc = GLDebugMessageAMDCallback.create((id, category, severity, length, message, userParam) -> {
-                stream.println("[LWJGL] AMD_debug_output message");
+                stream.println("[LWJGL-H2CO3] AMD_debug_output message");
                 printDetail(stream, "ID", String.format("0x%X", id));
                 printDetail(stream, "Category", getCategoryAMD(category));
                 printDetail(stream, "Severity", getSeverityAMD(severity));

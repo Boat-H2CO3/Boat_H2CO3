@@ -51,11 +51,13 @@
 
         <activity
             android:name=".ui.H2CO3BoatClientActivity"
-            android:alwaysRetainTaskState="false"
-            android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|uiMode|screenSize|navigation"
-            android:excludeFromRecents="false"
-            android:launchMode="singleInstance"
-            android:screenOrientation="sensorLandscape">
+            android:process=":game"
+            android:launchMode="standard"
+            android:multiprocess="true"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/FullScreen">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="h2co3_boat" />

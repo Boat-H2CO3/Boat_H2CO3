@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app2="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:key="">
+
+    <org.koishi.launcher.h2co3.resources.component.BackButtonPreference/>
+
+    <PreferenceCategory
+        android:title="string/preference_category_main_categories"
+        >
+
+        <Preference
+            android:key="video_screen_setting"
+            android:title="string/preference_video_title"
+            android:summary="string/preference_video_description"
+            android:icon="@drawable/ic_lang"
+            android:fragment="org.koishi.launcher.h2co3.ui.fragment.HomeFragmentr"
+            />
+
+        <Preference
+            android:key="control_screen_setting"
+            android:title="string/preference_control_title"
+            android:summary="string/preference_control_description"
+            android:icon="@drawable/ic_play"
+            />
+    </PreferenceCategory>
+
+    <SwitchPreference
+        android:title="string/preference_force_english_title"
+        android:key="force_english"
+        android:summary="string/preference_force_english_description"
+        />
+
+    <Preference
+        android:title="string/preference_ask_for_notification_title"
+        android:summary="string/preference_ask_for_notification_description"
+        android:key="notification_permission_request"
+        />
+
+
+
+
+
+</PreferenceScreen>

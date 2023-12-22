@@ -116,17 +116,17 @@ public class H2CO3Game extends HashMap<String, String> {
     public static Vector<String> getMcArgs(H2CO3Game config, Context context, int width, int height) {
         try {
             MinecraftVersion version = MinecraftVersion.fromDirectory(new File(getGameCurrentVersion()));
-            String lwjglPath = H2CO3Tools.RUNTIME_DIR + "/boat";
+            String lwjglPath = H2CO3Tools.RUNTIME_DIR + "/boat/lwjgl";
             String javaPath = getJavaPath();
             boolean highVersion = version.minimumLauncherVersion >= 21;
             String libraryPath;
             String classPath;
             String r = getRender().equals(H2CO3Tools.GL_VIRGL) ? H2CO3Tools.GL_VIRGL : H2CO3Tools.GL_GL114;
-            boolean isJava17 = javaPath.endsWith("jre_17");
+            boolean isJava17 = javaPath.equals(H2CO3Tools.JAVA_17_PATH);
             if (!highVersion) {
-                classPath = lwjglPath + "/lwjgl/lwjgl.jar:" + version.getClassPath(config, false, isJava17);
+                classPath = lwjglPath + "/lwjgl.jar:" + version.getClassPath(false, isJava17);
             } else {
-                classPath = lwjglPath + "/lwjgl/lwjgl.jar:" + version.getClassPath(config, true, isJava17);
+                classPath = lwjglPath + "/lwjgl.jar:" + version.getClassPath(true, isJava17);
             }
 
             String nativeDir = context.getApplicationInfo().nativeLibraryDir;
@@ -138,46 +138,64 @@ public class H2CO3Game extends HashMap<String, String> {
                 libraryPath = javaPath +
                         "/lib/" +
                         split +
+
                         javaPath +
                         "/lib/" +
                         jliLibDir +
                         split +
+
                         javaPath +
-                        "/lib//server" +
+                        "/lib/server" +
                         split +
+
                         "/system/" +
                         libDirName +
                         split +
+
                         "/vendor/" +
                         libDirName +
                         split +
+
                         "/vendor/" +
                         libDirName +
                         "/hw" +
                         split +
-                        nativeDir;
+
+                        nativeDir +
+                        split +
+
+                        lwjglPath;
             } else {
                 libraryPath = javaPath +
                         "/lib/aarch64" +
                         split +
+
                         javaPath +
                         "/lib/aarch64" +
                         jliLibDir +
                         split +
+
                         javaPath +
                         "/lib/aarch64/server" +
                         split +
+
                         "/system/" +
                         libDirName +
                         split +
+
                         "/vendor/" +
                         libDirName +
                         split +
+
                         "/vendor/" +
                         libDirName +
                         "/hw" +
                         split +
-                        nativeDir;
+
+                        nativeDir +
+                        split +
+
+                        lwjglPath;
             }
 
             Vector<String> args = new Vector<>();
@@ -213,9 +231,10 @@ public class H2CO3Game extends HashMap<String, String> {
                     args.add("--add-opens=java.base/java.lang.reflect=ALL-UNNAMED");
                     args.add("--add-opens=java.base/java.net=ALL-UNNAMED");
                 }
+                String boatPath = H2CO3Tools.RUNTIME_DIR + "/boat";
                 StringBuilder cacioClasspath = new StringBuilder();
                 cacioClasspath.append("-Xbootclasspath/" + (!isJava17 ? "p" : "a"));
-                File cacioDir = new File(lwjglPath + "/plugin" + "/caciocavallo" + (!isJava17 ? "" : "17"));
+                File cacioDir = new File(boatPath + "/plugin" + "/caciocavallo" + (!isJava17 ? "" : "17"));
                 if (cacioDir.exists() && cacioDir.isDirectory()) {
                     for (File file : cacioDir.listFiles()) {
                         if (file.getName().endsWith(".jar")) {
@@ -232,20 +251,20 @@ public class H2CO3Game extends HashMap<String, String> {
             args.add("-Dorg.lwjgl.util.DebugLoader=true");
             args.add("-Dorg.lwjgl.util.Debug=true");
             args.add("-Dos.name=Linux");
-            args.add("-Dlwjgl.platform=Boat_H2CO3");
+            args.add("-Dlwjgl.platform=H2CO3");
             args.add("-Duser.language=" + System.getProperty("user.language"));
+            args.add("-Dwindow.width="+ width);
+            args.add("-Dwindow.height=" + height);
             if (getRender().equals(H2CO3Tools.GL_VIRGL)) {
                 args.add("-Dorg.lwjgl.opengl.libname=libGL.so.1");
             } else {
                 args.add("-Dorg.lwjgl.opengl.libname=libgl4es_114.so");
             }
-            args.add("-Dlwjgl.platform=Boat_H2CO3");
-            args.add("-Dos.name=Linux");
             args.add("-Djava.io.tmpdir=" + H2CO3Tools.CACHE_DIR);
             H2CO3Tools.loadPaths(context);
             String[] accountArgs = new String[0];
             Collections.addAll(args, accountArgs);
-            String[] JVMArgs = version.getJVMArguments(config);
+            String[] JVMArgs = version.getJVMArguments();
             for (String JVMArg : JVMArgs) {
                 if (JVMArg.startsWith("-DignoreList") && !JVMArg.endsWith("," + new File(getGameCurrentVersion()).getName() + ".jar")) {
                     JVMArg = JVMArg + "," + new File(getGameCurrentVersion()).getName() + ".jar";
@@ -259,10 +278,6 @@ public class H2CO3Game extends HashMap<String, String> {
             args.add(version.mainClass);
             String[] minecraftArgs = version.getMinecraftArguments(config, highVersion);
             Collections.addAll(args, minecraftArgs);
-            args.add("--width");
-            args.add(Integer.toString(width));
-            args.add("--height");
-            args.add(Integer.toString(height));
             String[] extraMinecraftArgs = getExtraMinecraftFlags();
             Collections.addAll(args, extraMinecraftArgs);
             return TouchInjector.rebaseArguments(args);

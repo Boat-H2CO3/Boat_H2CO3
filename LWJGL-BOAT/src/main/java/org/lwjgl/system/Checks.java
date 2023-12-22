@@ -57,7 +57,7 @@ public final class Checks {
 
     static {
         if (DEBUG_FUNCTIONS && !DEBUG) {
-            APIUtil.DEBUG_STREAM.println("[LWJGL] The DEBUG_FUNCTIONS option requires DEBUG to produce output.");
+            APIUtil.DEBUG_STREAM.println("[LWJGL-H2CO3] The DEBUG_FUNCTIONS option requires DEBUG to produce output.");
         }
     }
 

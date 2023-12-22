@@ -226,7 +226,7 @@ final class MemoryManage {
                     Allocation allocation = entry.getValue();
 
                     DEBUG_STREAM.format(
-                            "[LWJGL] %d bytes leaked, thread %d (%s), address: 0x%s\n",
+                            "[LWJGL-H2CO3] %d bytes leaked, thread %d (%s), address: 0x%s\n",
                             allocation.size,
                             allocation.threadId,
                             THREADS.get(allocation.threadId),

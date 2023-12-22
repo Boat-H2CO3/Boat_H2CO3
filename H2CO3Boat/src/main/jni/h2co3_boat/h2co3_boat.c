@@ -1,7 +1,7 @@
 #include "h2co3_boat_internal.h"
-
 #include <android/native_window_jni.h>
 #include <jni.h>
+#include <stdlib.h>
 
 struct H2CO3BoatInternal *h2co3Boat = NULL;
 
@@ -19,11 +19,11 @@ Java_org_koishi_launcher_h2co3_boat_H2CO3BoatLib_setH2CO3BoatNativeWindow(JNIEnv
     if (h2co3Boat == NULL) {
         return;
     }
-    h2co3Boat->window = ANativeWindow_fromSurface(env, surface);
-    if (h2co3Boat->window == NULL) {
-        // handle error
-        return;
+    if (h2co3Boat->window != NULL) {
+        ANativeWindow_release(h2co3Boat->window);
+        h2co3Boat->window = NULL;
     }
+    h2co3Boat->window = ANativeWindow_fromSurface(env, surface);
     H2CO3_BOAT_INTERNAL_LOG("setH2CO3BoatNativeWindow : %p", h2co3Boat->window);
 }
 
@@ -42,8 +42,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
         h2co3Boat = NULL;
         return JNI_ERR;
     }
-    jclass class_H2CO3BoatLib = (*env)->FindClass(env,
-                                                  "org/koishi/launcher/h2co3/boat/H2CO3BoatLib");
+    jclass class_H2CO3BoatLib = (*env)->FindClass(env, "org/koishi/launcher/h2co3/boat/H2CO3BoatLib");
     if (class_H2CO3BoatLib == NULL) {
         H2CO3_BOAT_INTERNAL_LOG("Failed to find class: org/koishi/launcher/h2co3/boat/H2CO3BoatLib.");
         free(h2co3Boat);
@@ -51,11 +50,9 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
         return JNI_ERR;
     }
     h2co3Boat->class_H2CO3BoatLib = (jclass) (*env)->NewGlobalRef(env, class_H2CO3BoatLib);
-    jclass class_H2CO3BoatActivity = (*env)->FindClass(env,
-                                                       "org/koishi/launcher/h2co3/boat/H2CO3BoatActivity");
+    jclass class_H2CO3BoatActivity = (*env)->FindClass(env, "org/koishi/launcher/h2co3/boat/H2CO3BoatActivity");
     if (class_H2CO3BoatActivity == NULL) {
-        H2CO3_BOAT_INTERNAL_LOG(
-                "Failed to find class: org/koishi/launcher/h2co3/boat/H2CO3BoatActivity.");
+        H2CO3_BOAT_INTERNAL_LOG("Failed to find class: org/koishi/launcher/h2co3/boat/H2CO3BoatActivity.");
         free(h2co3Boat);
         h2co3Boat = NULL;
         return JNI_ERR;
@@ -79,8 +76,7 @@ Java_org_koishi_launcher_h2co3_boat_H2CO3BoatActivity_nOnCreate(JNIEnv *env, job
     h2co3Boat->class_H2CO3BoatActivity = (*env)->NewGlobalRef(env, class_H2CO3BoatActivity);
 
     // Get the setCursorMode function from the H2CO3BoatActivity class
-    h2co3Boat->setCursorMode = (*env)->GetMethodID(env, h2co3Boat->class_H2CO3BoatActivity, "setCursorMode",
-                                                   "(I)V");
+    h2co3Boat->setCursorMode = (*env)->GetMethodID(env, h2co3Boat->class_H2CO3BoatActivity, "setCursorMode", "(I)V");
     if (h2co3Boat->setCursorMode == NULL) {
         free(h2co3Boat);
         h2co3Boat = NULL;

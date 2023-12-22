@@ -23,6 +23,9 @@ import java.util.Timer;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public abstract class H2CO3BoatActivity extends H2CO3Activity implements TextureView.SurfaceTextureListener {
 
@@ -115,12 +118,12 @@ public abstract class H2CO3BoatActivity extends H2CO3Activity implements Texture
         }
     }
 
+    public static final ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
+
     // 启动游戏
     // 启动游戏
     public void startGame(final String javaPath, final String home, final boolean highVersion, final Vector<String> args, String renderer, String gameDir) {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Log.e("H2CO3.launchMinecraft", String.valueOf(args));
-        executor.execute(() -> {
+        sExecutorService.execute(() -> {
             Handler handler = new Handler(Looper.getMainLooper());
             H2CO3LoadMe.launchMinecraft(handler, H2CO3BoatActivity.this, javaPath, home, highVersion, args, renderer, gameDir, new H2CO3BoatCallback() {
                 @Override
@@ -152,6 +155,11 @@ public abstract class H2CO3BoatActivity extends H2CO3Activity implements Texture
                 @Override
                 public void onError(Exception e) {
                     h2co3BoatCallback.onError(e);
+                    MaterialAlertDialogBuilder exitDialog = new H2CO3MessageDialog(H2CO3BoatActivity.this)
+                            .setMessage("error" + e)
+                            .setPositiveButton("Exit", (dialog, which) -> finish())
+                            .setOnDismissListener(dialog -> H2CO3BoatActivity.this.finish());
+                    exitDialog.show();
                 }
 
                 @Override
@@ -164,7 +172,6 @@ public abstract class H2CO3BoatActivity extends H2CO3Activity implements Texture
                 }
             });
         });
-        executor.shutdown();
     }
 
     // 设置光标模式
@@ -207,7 +214,6 @@ public abstract class H2CO3BoatActivity extends H2CO3Activity implements Texture
     public int[] getPointer() {
         return H2CO3BoatLib.getPointer();
     }
-
 }
 
 

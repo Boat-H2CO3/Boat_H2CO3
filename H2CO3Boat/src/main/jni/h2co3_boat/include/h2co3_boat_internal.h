@@ -65,7 +65,7 @@ extern struct H2CO3BoatInternal *h2co3Boat;
 #define CallH2CO3BoatLibJNIFunc(return_exp, func_type, func_name, signature, args...) \
     jmethodID H2CO3BoatLib_##func_name = (*env)->GetStaticMethodID(env, h2co3Boat->class_H2CO3BoatLib, #func_name, signature); \
     if (H2CO3BoatLib_##func_name == NULL) { \
-        H2CO3_BOAT_INTERNAL_LOG("Failed to find static method H2CO3BoatLib_"#func_name ); \
+        H2CO3_BOAT_INTERNAL_LOG("Failed to find static method H2CO3BoatLib"#func_name ); \
     } \
     return_exp (*env)->CallStatic##func_type##Method(env, h2co3Boat->class_H2CO3BoatLib, H2CO3BoatLib_##func_name, ##args); \
     do {} while(0)

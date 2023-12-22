@@ -7,7 +7,6 @@
     android:orientation="horizontal">
 
     <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ver_item"
         style="@style/Theme.H2CO3.CardViewOutlined"
         android:layout_width="match_parent"
@@ -64,6 +63,16 @@
                         android:singleLine="true"
                         android:text=""
                         android:textSize="13.5sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_path"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="start"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="11.5sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"

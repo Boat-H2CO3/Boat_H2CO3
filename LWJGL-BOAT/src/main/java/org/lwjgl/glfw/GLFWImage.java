@@ -11,6 +11,7 @@ import java.nio.*;
 
 
 import org.lwjgl.*;
+import org.lwjgl.MemoryUtil;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
@@ -169,12 +170,12 @@ public class GLFWImage extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Returns a new {@code GLFWImage} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code GLFWImage} instance allocated with . The instance must be explicitly freed. */
     public static GLFWImage malloc() {
         return wrap(GLFWImage.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@code GLFWImage} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    /** Returns a new {@code GLFWImage} instance allocated with . The instance must be explicitly freed. */
     public static GLFWImage calloc() {
         return wrap(GLFWImage.class, nmemCallocChecked(1, SIZEOF));
     }

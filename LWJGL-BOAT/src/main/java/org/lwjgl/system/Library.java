@@ -484,7 +484,7 @@ public final class Library {
 
     private static void printError(boolean bundledWithLWJGL) {
         printError(
-                "[LWJGL] Failed to load a library. Possible solutions:\n" + (bundledWithLWJGL
+                "[LWJGL-H2CO3] Failed to load a library. Possible solutions:\n" + (bundledWithLWJGL
                         ? "\ta) Add the directory that contains the shared library to -Djava.library.path or -Dorg.lwjgl.librarypath.\n" +
                         "\tb) Add the JAR that contains the shared library to the classpath."
                         : "\ta) Install the library or the driver that provides the library.\n" +
@@ -496,9 +496,9 @@ public final class Library {
     static void printError(String message) {
         DEBUG_STREAM.println(message);
         if (!DEBUG) {
-            DEBUG_STREAM.println("[LWJGL] Enable debug mode with -Dorg.lwjgl.util.Debug=true for better diagnostics.");
+            DEBUG_STREAM.println("[LWJGL-H2CO3] Enable debug mode with -Dorg.lwjgl.util.Debug=true for better diagnostics.");
             if (!Configuration.DEBUG_LOADER.get(false)) {
-                DEBUG_STREAM.println("[LWJGL] Enable the SharedLibraryLoader debug mode with -Dorg.lwjgl.util.DebugLoader=true for better diagnostics.");
+                DEBUG_STREAM.println("[LWJGL-H2CO3] Enable the SharedLibraryLoader debug mode with -Dorg.lwjgl.util.DebugLoader=true for better diagnostics.");
             }
         }
     }
@@ -540,7 +540,7 @@ public final class Library {
 
             if (!Arrays.equals(expected, actual)) {
                 DEBUG_STREAM.println(
-                        "[LWJGL] [ERROR] Incompatible Java and native library versions detected.\n" +
+                        "[LWJGL-H2CO3] [ERROR] Incompatible Java and native library versions detected.\n" +
                                 "Possible reasons:\n" +
                                 "\ta) -Djava.library.path is set to a folder containing shared libraries of an older LWJGL version.\n" +
                                 "\tb) The classpath contains jar files of an older LWJGL version.\n" +

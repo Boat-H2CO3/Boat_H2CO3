@@ -3391,7 +3391,7 @@ public class GLFW {
             check(window);
         }
         invokePV(window, mode, value, __functionAddress);
-        H2CO3BoatInjector.setClassLoader(Thread.currentThread().getContextClassLoader());
+        H2CO3Injector.setClassLoader(Thread.currentThread().getContextClassLoader());
     }
 
     // --- [ glfwRawMouseMotionSupported ] ---

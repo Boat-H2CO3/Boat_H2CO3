@@ -208,7 +208,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
 
         private static void reportAsymmetricPop(Object pushed, Object popped) {
             DEBUG_STREAM.format(
-                    "[LWJGL] Asymmetric pop detected:\n\tPUSHED: %s\n\tPOPPED: %s\n\tTHREAD: %s\n",
+                    "[LWJGL-H2CO3] Asymmetric pop detected:\n\tPUSHED: %s\n\tPOPPED: %s\n\tTHREAD: %s\n",
                     pushed.toString(),
                     popped.toString(),
                     Thread.currentThread()

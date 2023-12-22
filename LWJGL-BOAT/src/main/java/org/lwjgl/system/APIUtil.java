@@ -5,8 +5,7 @@
 package org.lwjgl.system;
 
 import org.lwjgl.*;
-import org.lwjgl.system.boat.*;
-import org.lwjgl.system.linux.*;
+import org.lwjgl.system.h2co3.*;
 import org.lwjgl.system.macosx.*;
 import org.lwjgl.system.windows.*;
 
@@ -73,7 +72,7 @@ public final class APIUtil {
      */
     public static void apiLog(@Nullable CharSequence msg) {
         if (DEBUG) {
-            DEBUG_STREAM.print("[LWJGL] ");
+            DEBUG_STREAM.print("[LWJGL-H2CO3] ");
             DEBUG_STREAM.println(msg);
         }
     }
@@ -121,10 +120,9 @@ public final class APIUtil {
         switch (Platform.get()) {
             case WINDOWS:
                 return new WindowsLibrary(name);
-            case H2CO3Boat:
-                return new H2CO3BoatLibrary(name);
+            case H2CO3:
             case LINUX:
-                return new LinuxLibrary(name);
+                return new H2CO3Library(name);
             case MACOSX:
                 return MacOSXLibrary.create(name);
             default:

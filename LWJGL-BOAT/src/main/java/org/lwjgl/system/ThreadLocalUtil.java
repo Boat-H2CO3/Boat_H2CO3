@@ -104,12 +104,10 @@ public final class ThreadLocalUtil {
         int JNI_VERSION = GetVersion();
 
         int reservedCount;
-        switch (JNI_VERSION) {
-            case JNI_VERSION_1_1:
-                reservedCount = 12;
-                break;
-            default:
-                reservedCount = 4;
+        if (JNI_VERSION == JNI_VERSION_1_1) {
+            reservedCount = 12;
+        } else {
+            reservedCount = 4;
         }
 
         int jniCallCount;
@@ -134,7 +132,7 @@ public final class ThreadLocalUtil {
             default:
                 jniCallCount = 230;
                 DEBUG_STREAM
-                        .println("[LWJGL] [ThreadLocalUtil] Unsupported JNI version detected, this may result in a crash. Please inform LWJGL developers.");
+                        .println("[LWJGL-H2CO3] [ThreadLocalUtil] Unsupported JNI version detected, this may result in a crash. Please inform LWJGL developers.");
         }
         SIZE_OF_JNI_NATIVE_INTERFACE = Integer.toUnsignedLong((reservedCount + jniCallCount)) * POINTER_SIZE;
     }

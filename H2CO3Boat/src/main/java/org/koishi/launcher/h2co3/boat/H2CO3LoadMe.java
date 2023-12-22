@@ -12,7 +12,7 @@ import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Vector;
 
@@ -42,9 +42,9 @@ public class H2CO3LoadMe {
         int architecture = Architecture.getDeviceArchitecture();
         String arch = getArchitectureString(architecture);
 
-        boolean isJava17 = javaPath.endsWith("jre_17");
+        boolean isJava17 = javaPath.equals(H2CO3Tools.JAVA_17_PATH);
 
-        patchLinker();
+
 
         try {
             setEnvironmentVariables(home, javaPath, renderer, context, highVersion);
@@ -55,16 +55,14 @@ public class H2CO3LoadMe {
 
             redirectStdio(H2CO3Tools.LOG_DIR + "/client_output.txt");
             chdir(gameDir);
-
+            patchLinker();
             String[] finalArgs = args.stream().filter(arg -> !arg.equals(" ")).toArray(String[]::new);
             saveArgsToFile(finalArgs);
 
-            Log.d("H2CO3.launchMinecraft", String.valueOf(args));
-
             int exitCode = dlexec(finalArgs);
-            receiveLog("OpenJDK exited with code : " + exitCode);
+            Log.e("OpenJDK exited with code  " , String.valueOf(exitCode));
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("H2CO3LoadMe", "Error occurred: " + e.getMessage());
             handler.post(() -> callback.onError(e));
         }
     }
@@ -87,7 +85,7 @@ public class H2CO3LoadMe {
         setenv("LIBGL_VSYNC", "1");
         setenv("LIBGL_NOINTOVLHACK", "1");
 
-        if (renderer.equals("VirGL")) {
+        if (renderer.equals(H2CO3Tools.GL_VIRGL)) {
             setVirGLEnvironmentVariables(context);
         } else {
             setGL4ESEnvironmentVariables(context, highVersion);
@@ -96,7 +94,7 @@ public class H2CO3LoadMe {
     }
 
     private static void setVirGLEnvironmentVariables(Context context) {
-        dlopen(context.getApplicationInfo().nativeLibraryDir + "/libOSMesa_8.so");
+        List.of("libOSMesa_8.so").forEach(library -> dlopen(context.getApplicationInfo().nativeLibraryDir + "/" + library));
         setenv("LIBGL_DRIVERS_PATH", context.getApplicationInfo().nativeLibraryDir);
         setenv("MESA_GL_VERSION_OVERRIDE", "4.3");
         setenv("MESA_GLSL_VERSION_OVERRIDE", "430");
@@ -107,7 +105,7 @@ public class H2CO3LoadMe {
     }
 
     private static void setGL4ESEnvironmentVariables(Context context, boolean highVersion) {
-        dlopen(context.getApplicationInfo().nativeLibraryDir + "/libgl4es_114.so");
+        List.of("libgl4es_114.so").forEach(library -> dlopen(context.getApplicationInfo().nativeLibraryDir + "/" + library));
         setenv("LIBGL_NAME", "libgl4es_114.so");
         setenv("LIBEGL_NAME", "libEGL.so");
         setenv("LIBGL_STRING", "Holy-GL4ES");
@@ -119,18 +117,17 @@ public class H2CO3LoadMe {
     private static void loadNativeLibraries(String javaPath, String arch, boolean isJava17) {
         List<String> libraries;
         if (isJava17) {
-            libraries = List.of("server", "libjvm.so", "libjava.so", "libjli.so", "libverify.so", "libnet.so", "libnio.so", "libawt.so", "libawt_headless.so", "libfreetype.so", "libfontmanager.so", "libawt_headless.so");
+            libraries = List.of("server/libjvm.so", "libjava.so", "libjli.so", "libverify.so", "libnet.so", "libnio.so", "libawt.so", "libawt_headless.so", "libfreetype.so");
+            libraries.forEach(library -> dlopen(javaPath + "/lib/" + library));
         } else {
-            libraries = List.of("libfreetype.so", "libpng16.so.16", "libfontmanager.so", "libpng16.so", "jli/libjli.so", "server/libjvm.so", "libverify.so", "libjava.so", "libnet.so", "libnio.so", "libawt.so", "libawt_headless.so");
+            libraries = List.of("libfreetype.so", "jli/libjli.so", "server/libjvm.so", "libverify.so", "libjava.so", "libnet.so", "libnio.so", "libawt.so", "libawt_headless.so");
+            libraries.forEach(library -> dlopen(Paths.get(javaPath, "lib", arch, library).toString()));
         }
-
-        libraries.forEach(library -> dlopen(javaPath + "/lib/" + arch + "/" + library));
     }
 
     private static void saveArgsToFile(String[] args) {
         String argsString = String.join("\n", args);
         FileTools.writeFile(new File(H2CO3Tools.LOG_DIR + "/BoatArgs.txt"), argsString);
-        receiveLog(argsString);
     }
 
     public static void startVirGLService(Context context, String home, String tmpdir) {
@@ -147,13 +144,13 @@ public class H2CO3LoadMe {
 
             chdir(home);
             String[] finalArgs = {H2CO3_LIB_DIR + "/virgl/libvirgl_test_server.so", "--no-loop-or-fork", "--use-gles", "--socket-name", context.getCacheDir().getAbsolutePath() + "/.virgl_test"};
-            receiveLog("Exited with code : " + dlexec(finalArgs));
+            Log.e("H2CO3LoadMe", "Exited with code : " + dlexec(finalArgs));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static int launchJVM(String javaPath, ArrayList<String> args, String home) {
+    public static int launchJVM(String javaPath, List<String> args, String home) {
         patchLinker();
 
         try {
@@ -170,16 +167,17 @@ public class H2CO3LoadMe {
             StringBuilder finalArgs = new StringBuilder();
             args.stream().filter(arg -> !arg.equals(" ")).forEach(arg -> {
                 finalArgs.append(arg).append(" ");
-                receiveLog("JVM Args:" + arg);
+                Log.e("H2CO3LoadMe", "JVM Args:" + arg);
             });
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("H2CO3LoadMe", "Error occurred: " + e.getMessage());
             return 1;
         }
         return 0;
     }
 
     public static void receiveLog(String str) {
+        Log.e("H2CO3BoatLoadMe.receiveLog", str);
         if (logReceiver == null || logReceiver.get() == null) {
             Log.e("H2CO3BoatLoadMe.receiveLog", "LogReceiver is null. So use default receiver.");
             logReceiver = new WeakReference<>(new LogReceiver() {

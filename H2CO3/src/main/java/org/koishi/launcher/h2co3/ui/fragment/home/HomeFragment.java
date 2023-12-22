@@ -53,8 +53,7 @@ public class HomeFragment extends H2CO3Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == home_game_play_button){
-            H2CO3BoatRuntimeDialog dialog = new H2CO3BoatRuntimeDialog(requireActivity());
-            dialog.show();
+            startActivity(new Intent(requireActivity(), H2CO3BoatClientActivity.class));
         }
     }
 }

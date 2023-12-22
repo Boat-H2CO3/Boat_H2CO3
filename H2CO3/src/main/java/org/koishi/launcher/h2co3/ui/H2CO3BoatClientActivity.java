@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 
@@ -21,7 +20,6 @@ import org.koishi.launcher.h2co3.utils.launch.MCOptionUtils;
 import org.koishi.launcher.h2co3.utils.launch.boat.VirGLService;
 
 import java.io.File;
-import java.util.List;
 import java.util.Vector;
 
 public class H2CO3BoatClientActivity extends H2CO3BoatActivity {

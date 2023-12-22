@@ -57,11 +57,11 @@ public class LWJGLUtil {
 	public static final int PLATFORM_LINUX = 1;
 	public static final int PLATFORM_MACOSX = 2;
 	public static final int PLATFORM_WINDOWS = 3;
-	public static final int PLATFORM_H2CO3Boat = 1728;
+	public static final int PLATFORM_H2CO3 = 1728;
 	public static final String PLATFORM_LINUX_NAME = "linux";
 	public static final String PLATFORM_MACOSX_NAME = "macosx";
 	public static final String PLATFORM_WINDOWS_NAME = "windows";
-	public static final String PLATFORM_H2CO3Boat_NAME = "h2co3_boat";
+	public static final String PLATFORM_H2CO3_NAME = "h2co3";
 
 	private static final String LWJGL_ICON_DATA_16x16 =
 			"\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377" +
@@ -283,10 +283,10 @@ public class LWJGLUtil {
 		if (osName.startsWith("Windows"))
 			PLATFORM = PLATFORM_WINDOWS;
 		else if (osName.startsWith("Linux") || osName.startsWith("FreeBSD") || osName.startsWith("OpenBSD") || osName.startsWith("SunOS") || osName.startsWith("Unix")) {
-			if (getPrivilegedProperty("lwjgl.platform").startsWith("H2CO3Boat"))
-				PLATFORM = PLATFORM_H2CO3Boat;
+			if (getPrivilegedProperty("lwjgl.platform").startsWith("H2CO3"))
+				PLATFORM = PLATFORM_H2CO3;
 			else
-				PLATFORM = PLATFORM_LINUX;
+				PLATFORM = PLATFORM_H2CO3;
 		} else if (osName.startsWith("Mac OS X") || osName.startsWith("Darwin"))
 			PLATFORM = PLATFORM_MACOSX;
 		else
@@ -306,7 +306,7 @@ public class LWJGLUtil {
 	 * @see #PLATFORM_WINDOWS
 	 * @see #PLATFORM_LINUX
 	 * @see #PLATFORM_MACOSX
-	 * @see #PLATFORM_H2CO3Boat
+	 * @see #PLATFORM_H2CO3
 	 * @return the current platform type
 	 */
 	public static int getPlatform() {
@@ -318,7 +318,7 @@ public class LWJGLUtil {
 	 * @see #PLATFORM_WINDOWS_NAME
 	 * @see #PLATFORM_LINUX_NAME
 	 * @see #PLATFORM_MACOSX_NAME
-	 * @see #PLATFORM_H2CO3Boat_NAME
+	 * @see #PLATFORM_H2CO3_NAME
 	 * @return current platform name
 	 */
 	public static String getPlatformName() {
@@ -329,8 +329,8 @@ public class LWJGLUtil {
 				return PLATFORM_MACOSX_NAME;
 			case LWJGLUtil.PLATFORM_WINDOWS:
 				return PLATFORM_WINDOWS_NAME;
-			case LWJGLUtil.PLATFORM_H2CO3Boat:
-				return PLATFORM_H2CO3Boat_NAME;
+			case LWJGLUtil.PLATFORM_H2CO3:
+				return PLATFORM_H2CO3_NAME;
 			default:
 				return "unknown";
 		}
@@ -505,7 +505,7 @@ public class LWJGLUtil {
 	 */
 	public static void log(CharSequence msg) {
 		if (DEBUG) {
-			System.err.println("[LWJGL] " + msg);
+			System.out.println("[LWJGL-H2CO3] " + msg);
 		}
 	}
 

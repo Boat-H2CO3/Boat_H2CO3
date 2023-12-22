@@ -7,6 +7,7 @@ import android.os.Environment;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.koishi.launcher.h2co3.core.utils.Architecture;
 import org.koishi.launcher.h2co3.core.utils.H2CO3DownloadUtils;
 
 import java.io.File;
@@ -24,6 +25,7 @@ import java.util.stream.Stream;
 public class H2CO3Tools {
 
 
+    public static final int FILE_SELECTED_CODE_OK = 11450;
     @SuppressLint("StaticFieldLeak")
     public static Context CONTEXT;
 
@@ -35,6 +37,7 @@ public class H2CO3Tools {
     public static String RUNTIME_DIR;
     public static String JAVA_PATH;
     public static String JAVA_8_PATH;
+    public static String JAVA_17_PATH;
     public static String BOAT_LIBRARY_DIR;
 
     public static String FILES_DIR;
@@ -73,6 +76,11 @@ public class H2CO3Tools {
     public static String GL_VIRGL;
 
 
+
+    public static int DEVICE_ARCHITECTURE = Architecture.getDeviceArchitecture();
+
+
+
     @SuppressLint("SdCardPath")
     public static void loadPaths(Context context) {
         CONTEXT = context;
@@ -88,6 +96,7 @@ public class H2CO3Tools {
         RUNTIME_DIR = APP_DATA_PATH + "/app_runtime";
         JAVA_PATH = RUNTIME_DIR + "/java";
         JAVA_8_PATH = JAVA_PATH + "/jre_8";
+        JAVA_17_PATH = JAVA_PATH + "/jre_17";
         BOAT_LIBRARY_DIR = RUNTIME_DIR + "/boat";
         PLUGIN_DIR = RUNTIME_DIR + "/boat/plugin";
         H2CO3_LIBRARY_DIR = APP_DATA_PATH + "/h2co3";
@@ -259,5 +268,14 @@ public class H2CO3Tools {
     public static void downloadFile(String urlInput, String nameOutput) throws IOException {
         File file = new File(nameOutput);
         H2CO3DownloadUtils.downloadFile(urlInput, file);
+    }
+
+    public static String extractUntilCharacter(String input, String whatFor, char terminator) {
+        int whatForStart = input.indexOf(whatFor);
+        if(whatForStart == -1) return null;
+        whatForStart += whatFor.length();
+        int terminatorIndex = input.indexOf(terminator, whatForStart);
+        if(terminatorIndex == -1) return null;
+        return input.substring(whatForStart, terminatorIndex);
     }
 }
