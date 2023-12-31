@@ -1,5 +1,6 @@
 package org.koishi.launcher.h2co3.resources.component;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,33 +16,35 @@ public class LineTextView extends H2CO3TextView {
         super(context);
         setFocusable(true);
         line = new Paint();
-        line.setColor(Color.RED);
+        line.setColor(Color.BLUE);
         line.setStrokeWidth(2);
+        paddingStart = dpToPx(context, 95);
+        setPadding(paddingStart, 0, 0, 0);
+        setGravity(Gravity.TOP);
         textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
         textPaint.setTextSize(getTextSize());
-        paddingStart = 95;
-        setPadding(paddingStart, 0, 0, 0);
-        setGravity(Gravity.TOP);
     }
 
     @Override
     protected void onDraw(final Canvas canvas) {
-        super.onDraw(canvas);
-
-        if (getText().toString().length() != 0) {
+        if (getText().length() != 0) {
             int lineHeight = getLineHeight();
             int lineCount = getLineCount();
             for (int l = 0; l < lineCount; l++) {
-                float y = ((l + 1) * lineHeight) - (float) lineHeight / 4;
-                canvas.drawText(String.valueOf(l + 1), paddingStart, y, textPaint);
+                float y = (l + 1) * lineHeight - lineHeight / 4;
+                canvas.drawText(String.valueOf(l + 1), 0, y, textPaint);
             }
         }
-
         int lineHeight = getLineHeight();
         int lineCount = getLineCount();
         int y = (getLayout().getLineForOffset(getSelectionStart()) + 1) * lineHeight;
         canvas.drawLine(paddingStart - 5, 0, paddingStart - 5, getHeight() + (lineCount * lineHeight), line);
-        canvas.drawLine(paddingStart - 10, y, paddingStart, y, line);
+        super.onDraw(canvas);
+    }
+
+    private int dpToPx(Context context, int dp) {
+        float density = context.getResources().getDisplayMetrics().density;
+        return (int) (dp * density + 0.5f);
     }
 }

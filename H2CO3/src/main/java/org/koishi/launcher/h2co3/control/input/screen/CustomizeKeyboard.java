@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import org.koishi.launcher.h2co3.control.ckb.achieve.CkbManager;
 import org.koishi.launcher.h2co3.control.ckb.achieve.CkbManagerDialog;
 import org.koishi.launcher.h2co3.control.ckb.support.CallCustomizeKeyboard;
-import org.koishi.launcher.h2co3.control.client.Client;
+import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.controller.Controller;
 import org.koishi.launcher.h2co3.control.event.BaseKeyEvent;
 import org.koishi.launcher.h2co3.control.input.Input;
@@ -129,7 +129,7 @@ public class CustomizeKeyboard implements OnscreenInput, Controller, CallCustomi
     }
 
     @Override
-    public Client getClient() {
+    public H2CO3ControlClient getClient() {
         return null;
     }
 

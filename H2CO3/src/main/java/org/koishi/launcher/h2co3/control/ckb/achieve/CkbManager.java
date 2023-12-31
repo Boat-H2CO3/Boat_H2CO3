@@ -60,11 +60,19 @@ public class CkbManager {
 
     public static boolean outputFile(KeyboardRecorder kr, String fileName) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        StringBuilder jsonString = new StringBuilder(gson.toJson(kr));
+        String jsonString = gson.toJson(kr);
         try {
-            FileWriter jsonWriter = new FileWriter(H2CO3Tools.APP_DATA_PATH + "/keyboards" + "/" + fileName + ".json");
+            File dir = new File(H2CO3Tools.H2CO3_CONTROL_DIR);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            File file = new File(dir, fileName + ".json");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter jsonWriter = new FileWriter(file);
             BufferedWriter out = new BufferedWriter(jsonWriter);
-            out.write(jsonString.toString());
+            out.write(jsonString);
             out.close();
             return true;
         } catch (IOException e) {
@@ -219,7 +227,7 @@ public class CkbManager {
     }
 
     public boolean loadKeyboard(String fileName) {
-        File file = new File(H2CO3Tools.H2CO3_SETTING_DIR + "/keyboards" + "/" + fileName);
+        File file = new File(H2CO3Tools.H2CO3_CONTROL_DIR + "/" + fileName);
         return loadKeyboard(file);
     }
 

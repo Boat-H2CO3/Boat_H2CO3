@@ -50,7 +50,11 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name=".ui.H2CO3BoatClientActivity"
+            android:name=".launcher.ui.ExitActivity"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".ui.H2CO3LauncherClientActivity"
             android:process=":game"
             android:launchMode="standard"
             android:multiprocess="true"
@@ -60,7 +64,7 @@
             android:theme="@style/FullScreen">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="h2co3_boat" />
+                android:value="h2co3_launcher" />
         </activity>
 
         <provider

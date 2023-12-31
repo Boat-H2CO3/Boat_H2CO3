@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.koishi.launcher.h2co3.control.client.Client;
+import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.input.Input;
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
 
@@ -15,7 +15,7 @@ import java.util.TimerTask;
 public abstract class BaseController implements Controller {
     private final static String TAG = "BaseController";
     private final static int DEFAULT_INTERVAL_TIME = 5000;
-    public final Client client;
+    public final H2CO3ControlClient h2CO3ControlClient;
     public final Context context;
     private final int internalTime;
     private final Config mConfig;
@@ -23,9 +23,9 @@ public abstract class BaseController implements Controller {
     public ArrayList<Input> inputs;
     private Timer mTimer;
 
-    public BaseController(Client client, int intervalTime, boolean enableTimer) {
-        this.client = client;
-        this.context = client.getActivity();
+    public BaseController(H2CO3ControlClient h2CO3ControlClient, int intervalTime, boolean enableTimer) {
+        this.h2CO3ControlClient = h2CO3ControlClient;
+        this.context = h2CO3ControlClient.getActivity();
         inputs = new ArrayList<>();
         this.internalTime = intervalTime;
         this.mConfig = new Config(DisplayUtils.getDisplayWindowSize(context)[0], DisplayUtils.getDisplayWindowSize(context)[1]);
@@ -35,8 +35,8 @@ public abstract class BaseController implements Controller {
         }
     }
 
-    public BaseController(Client client, boolean enableTimer) {
-        this(client, BaseController.DEFAULT_INTERVAL_TIME, enableTimer);
+    public BaseController(H2CO3ControlClient h2CO3ControlClient, boolean enableTimer) {
+        this(h2CO3ControlClient, BaseController.DEFAULT_INTERVAL_TIME, enableTimer);
     }
 
 
@@ -106,17 +106,17 @@ public abstract class BaseController implements Controller {
 
     @Override
     public void addContentView(View view, ViewGroup.LayoutParams params) {
-        client.addContentView(view, params);
+        h2CO3ControlClient.addContentView(view, params);
     }
 
     @Override
     public void addView(View view) {
-        client.addContentView(view, view.getLayoutParams());
+        h2CO3ControlClient.addContentView(view, view.getLayoutParams());
     }
 
     @Override
     public void typeWords(String str) {
-        client.typeWords(str);
+        h2CO3ControlClient.typeWords(str);
     }
 
     @Override
@@ -126,12 +126,12 @@ public abstract class BaseController implements Controller {
 
     @Override
     public boolean isGrabbed() {
-        return client.isGrabbed();
+        return h2CO3ControlClient.isGrabbed();
     }
 
     @Override
     public int[] getGrabbedPointer() {
-        return client.getGrabbedPointer();
+        return h2CO3ControlClient.getGrabbedPointer();
     }
 
     @Override
@@ -142,8 +142,8 @@ public abstract class BaseController implements Controller {
     }
 
     @Override
-    public Client getClient() {
-        return client;
+    public H2CO3ControlClient getClient() {
+        return h2CO3ControlClient;
     }
 
     @Override
@@ -180,7 +180,7 @@ public abstract class BaseController implements Controller {
 
     @Override
     public int[] getLossenPointer() {
-        return client.getLoosenPointer();
+        return h2CO3ControlClient.getLoosenPointer();
     }
 
     @Override

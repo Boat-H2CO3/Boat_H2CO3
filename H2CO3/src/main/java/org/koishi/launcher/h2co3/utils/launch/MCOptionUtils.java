@@ -22,7 +22,11 @@ public class MCOptionUtils {
     private static final ArrayList<WeakReference<MCOptionListener>> optionListeners = new ArrayList<>();
     private static FileObserver fileObserver;
 
-    public static void load(String gameDir) {
+    /**
+     * 加载选项
+     * @param gameDir 游戏目录
+     */
+    public static void loadOptions(String gameDir) {
         if (fileObserver == null) {
             setupFileObserver(gameDir);
         }
@@ -45,26 +49,40 @@ public class MCOptionUtils {
         }
     }
 
-    public static void set(String key, String value) {
+    /**
+     * 设置选项值
+     * @param key 选项键
+     * @param value 选项值
+     */
+    public static void setOption(String key, String value) {
         parameterMap.put(key, value);
     }
 
     /**
-     * Set an array of String, instead of a simple value. Not supported on all options
+     * 设置选项值
+     * @param key 选项键
+     * @param values 选项值列表
      */
-    public static void set(String key, List<String> values) {
+    public static void setOption(String key, List<String> values) {
         parameterMap.put(key, values.toString());
     }
 
-    public static String get(String key) {
+    /**
+     * 获取选项值
+     * @param key 选项键
+     * @return 选项值
+     */
+    public static String getOption(String key) {
         return parameterMap.get(key);
     }
 
     /**
-     * @return A list of values from an array stored as a string
+     * 获取选项值列表
+     * @param key 选项键
+     * @return 选项值列表
      */
-    public static List<String> getAsList(String key) {
-        String value = get(key);
+    public static List<String> getOptionAsList(String key) {
+        String value = getOption(key);
 
         // Fallback if the value doesn't exist
         if (value == null) return new ArrayList<>();
@@ -76,7 +94,11 @@ public class MCOptionUtils {
         return Arrays.asList(value.split(","));
     }
 
-    public static void save(String gameDir) {
+    /**
+     * 保存选项
+     * @param gameDir 游戏目录
+     */
+    public static void saveOptions(String gameDir) {
         StringBuilder result = new StringBuilder();
         for (String key : parameterMap.keySet())
             result.append(key)
@@ -92,11 +114,13 @@ public class MCOptionUtils {
     }
 
     /**
-     * @return The stored Minecraft GUI scale, also auto-computed if on auto-mode or improper setting
+     * 获取Minecraft GUI缩放比例
+     * @param gameDir 游戏目录
+     * @return GUI缩放比例
      */
     public static int getMcScale(String gameDir) {
-        MCOptionUtils.load(gameDir);
-        String str = MCOptionUtils.get("guiScale");
+        loadOptions(gameDir);
+        String str = getOption("guiScale");
         int guiScale = (str == null ? 0 : Integer.parseInt(str));
 
         int scale = Math.min(1920 / 320, 1080 / 240);
@@ -108,15 +132,15 @@ public class MCOptionUtils {
     }
 
     /**
-     * Add a file observer to reload options on file change
-     * Listeners get notified of the change
+     * 设置文件观察者，当文件发生变化时重新加载选项
+     * @param gameDir 游戏目录
      */
     private static void setupFileObserver(String gameDir) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             fileObserver = new FileObserver(new File(gameDir + "/options.txt"), FileObserver.MODIFY) {
                 @Override
                 public void onEvent(int i, @Nullable String s) {
-                    MCOptionUtils.load(gameDir);
+                    loadOptions(gameDir);
                     notifyListeners();
                 }
             };
@@ -124,7 +148,7 @@ public class MCOptionUtils {
             fileObserver = new FileObserver(gameDir + "/options.txt", FileObserver.MODIFY) {
                 @Override
                 public void onEvent(int i, @Nullable String s) {
-                    MCOptionUtils.load(gameDir);
+                    loadOptions(gameDir);
                     notifyListeners();
                 }
             };
@@ -134,7 +158,7 @@ public class MCOptionUtils {
     }
 
     /**
-     * Notify the option listeners
+     * 通知选项监听器
      */
     public static void notifyListeners() {
         for (WeakReference<MCOptionListener> weakReference : optionListeners) {
@@ -146,16 +170,18 @@ public class MCOptionUtils {
     }
 
     /**
-     * Add an option listener, notice how we don't have a reference to it
+     * 添加选项监听器
+     * @param listener 选项监听器
      */
-    public static void addMCOptionListener(MCOptionListener listener) {
+    public static void addOptionListener(MCOptionListener listener) {
         optionListeners.add(new WeakReference<>(listener));
     }
 
     /**
-     * Remove a listener from existence, or at least, its reference here
+     * 移除选项监听器
+     * @param listener 选项监听器
      */
-    public static void removeMCOptionListener(MCOptionListener listener) {
+    public static void removeOptionListener(MCOptionListener listener) {
         for (WeakReference<MCOptionListener> weakReference : optionListeners) {
             MCOptionListener optionListener = weakReference.get();
             if (optionListener == null) continue;
@@ -168,9 +194,8 @@ public class MCOptionUtils {
 
     public interface MCOptionListener {
         /**
-         * Called when an option is changed. Don't know which one though
+         * 当选项发生变化时调用
          */
         void onOptionChanged();
     }
-
 }

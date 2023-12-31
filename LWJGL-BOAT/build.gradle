@@ -15,7 +15,7 @@ jar {
     doLast {
         archiveFileName = 'lwjgl.jar'
         manifest {
-            attributes 'Manifest-Version': '3.2.3-Boat_H2CO3'
+            attributes 'Manifest-Version': '3.2.4'
         }
         destinationDirectory.set(file("../H2CO3/src/main/assets/app_runtime/boat/lwjgl"))
         File versionFile = file("../H2CO3/src/main/assets/app_runtime/boat/lwjgl/version")

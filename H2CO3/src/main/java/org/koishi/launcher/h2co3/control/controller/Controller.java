@@ -3,7 +3,7 @@ package org.koishi.launcher.h2co3.control.controller;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.koishi.launcher.h2co3.control.client.Client;
+import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.event.BaseKeyEvent;
 import org.koishi.launcher.h2co3.control.input.Input;
 
@@ -39,7 +39,7 @@ public interface Controller {
 
     void saveConfig();
 
-    Client getClient();
+    H2CO3ControlClient getClient();
 
     void onPaused();
 

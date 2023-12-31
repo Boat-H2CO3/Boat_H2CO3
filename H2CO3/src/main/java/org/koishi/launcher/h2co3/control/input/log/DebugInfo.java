@@ -11,15 +11,14 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 
 import org.koishi.launcher.h2co3.control.controller.Controller;
 import org.koishi.launcher.h2co3.control.input.Input;
-
-import org.koishi.launcher.h2co3.boat.H2CO3LoadMe;
+import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
@@ -35,9 +34,7 @@ public class DebugInfo implements Input, View.OnClickListener {
     private Controller mController;
     private boolean isEnabled;
 
-    //private Button switchButton;
     private LogView mLogView;
-    //private boolean isShowInfo = true;
     private boolean firstWrite = true;
     private boolean isWrite = true;
 
@@ -45,16 +42,15 @@ public class DebugInfo implements Input, View.OnClickListener {
     public boolean load(Context context, Controller controller) {
         this.mContext = context;
         this.mController = controller;
-        //this.switchButton = new Button(mContext);
 
         mLogView = new LogView(mContext);
-        mLogView.setLayoutParams(new ViewGroup.LayoutParams(mController.getConfig().getScreenWidth() - DisplayUtils.getPxFromDp(mContext, 10), mController.getConfig().getScreenHeight() / 2 - DisplayUtils.getPxFromDp(mContext, 30)));
+        mLogView.setLayoutParams(new ViewGroup.LayoutParams(mController.getConfig().getScreenWidth() - DisplayUtils.getPxFromDp(mContext, 10), mController.getConfig().getScreenHeight() - DisplayUtils.getPxFromDp(mContext, 30)));
         mController.addView(mLogView);
         mLogView.setX(0);
         mLogView.setY(mController.getConfig().getScreenHeight() - mLogView.getLayoutParams().height);
 
-        if (H2CO3LoadMe.logReceiver == null || H2CO3LoadMe.logReceiver.get() == null) {
-            H2CO3LoadMe.LogReceiver mReceiver = new H2CO3LoadMe.LogReceiver() {
+        if (H2CO3LauncherLoader.logReceiver == null || H2CO3LauncherLoader.logReceiver.get() == null) {
+            H2CO3LauncherLoader.LogReceiver mReceiver = new H2CO3LauncherLoader.LogReceiver() {
                 final StringBuilder stringBuilder = new StringBuilder();
 
                 @Override
@@ -69,7 +65,7 @@ public class DebugInfo implements Input, View.OnClickListener {
                     return stringBuilder.toString();
                 }
             };
-            H2CO3LoadMe.logReceiver = new WeakReference<>(mReceiver);
+            H2CO3LauncherLoader.logReceiver = new WeakReference<>(mReceiver);
         }
 
         return true;
@@ -79,8 +75,7 @@ public class DebugInfo implements Input, View.OnClickListener {
     public boolean unload() {
         ViewGroup vg = (ViewGroup) mLogView.getParent();
         vg.removeView(mLogView);
-        //vg.removeView(switchButton);
-        H2CO3LoadMe.logReceiver = null;
+        H2CO3LauncherLoader.logReceiver = null;
         return true;
     }
 
@@ -107,12 +102,7 @@ public class DebugInfo implements Input, View.OnClickListener {
     @Override
     public void setEnabled(boolean enabled) {
         this.isEnabled = enabled;
-        if (enabled) {
-            mLogView.setVisibility(View.VISIBLE);
-        } else {
-            mLogView.setVisibility(View.GONE);
-        }
-
+        mLogView.setVisibility(enabled ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -153,11 +143,9 @@ public class DebugInfo implements Input, View.OnClickListener {
         } else {
             FileTools.addStringLineToFile(log, logFile);
         }
-
-
     }
 
-    public class LogView extends ScrollView {
+    public class LogView extends NestedScrollView {
 
         private final TextView mTextView;
 
@@ -170,22 +158,21 @@ public class DebugInfo implements Input, View.OnClickListener {
             addView(mTextView);
             mTextView.setTextColor(Color.WHITE);
             mTextView.setTextIsSelectable(true);
-            mTextView.setTextSize(DisplayUtils.getPxFromSp(mContext, 2));
+            mTextView.setTextSize(DisplayUtils.getPxFromSp(mContext, 3.2F));
             mTextView.setLineSpacing(0, 1f);
         }
 
         public void appendLog(String str) {
             this.post(() -> {
                 if (mTextView != null) {
-                    LogView.this.mTextView.append(str);
-                    new Handler(Looper.getMainLooper()).postDelayed(() -> toBottom(LogView.this, mTextView), 50);
+                    mTextView.append(str);
+                    new Handler(Looper.getMainLooper()).postDelayed(() -> toBottom(this, mTextView), 50);
                 }
             });
         }
 
-        private void toBottom(final ScrollView scrollView, final View view) {
-            int offset = view.getHeight()
-                    - scrollView.getHeight();
+        private void toBottom(final NestedScrollView scrollView, final View view) {
+            int offset = view.getHeight() - scrollView.getHeight();
             if (offset < 0) {
                 offset = 0;
             }

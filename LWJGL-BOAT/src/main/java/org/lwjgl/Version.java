@@ -15,7 +15,7 @@ public final class Version {
     public static final int
             VERSION_MAJOR = 3,
             VERSION_MINOR = 2,
-            VERSION_REVISION = 3;
+            VERSION_REVISION = 5;
 
     /** The development state of the current build. */
     public static final BuildType BUILD_TYPE = BuildType.STABLE;
@@ -24,7 +24,7 @@ public final class Version {
             String.valueOf(VERSION_MAJOR) +
                     '.' + VERSION_MINOR +
                     '.' + VERSION_REVISION + BUILD_TYPE.postfix +
-                    ' ' + apiGetManifestValue("Implementation-Version").orElse("SNAPSHOT");
+                    ' ' + apiGetManifestValue("Implementation-Version").orElse("Boat_H2CO3");
 
     private Version() {
     }
@@ -41,7 +41,7 @@ public final class Version {
     /** The development state of the current build. */
     public enum BuildType {
         /** Work in progress, unstable. */
-        ALPHA("a"),
+        H2CO3("h2co3"),
         /** Feature complete, unstable. */
         BETA("b"),
         /** Feature complete, stable, official release. */

@@ -40,5 +40,4 @@ rootProject.name = "Boat_H2CO3"
 include ':H2CO3'
 include ':H2CO3Resources'
 include ':H2CO3Core'
-include ':H2CO3Boat'
-include ':LWJGL-BOAT'
+include ':H2CO3Launcher'

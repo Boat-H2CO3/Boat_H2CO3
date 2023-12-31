@@ -20,7 +20,7 @@ import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.control.ckb.achieve.CkbManager;
 import org.koishi.launcher.h2co3.control.ckb.achieve.CkbManagerDialog;
 import org.koishi.launcher.h2co3.control.ckb.support.CallCustomizeKeyboard;
-import org.koishi.launcher.h2co3.control.client.Client;
+import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.controller.Controller;
 import org.koishi.launcher.h2co3.control.controller.VirtualController;
 import org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent;
@@ -31,7 +31,7 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CustomizeKeyboardEditorActivity extends AppCompatActivity implements View.OnSystemUiVisibilityChangeListener, View.OnClickListener, DrawerLayout.DrawerListener, CallCustomizeKeyboard, Client {
+public class CustomizeKeyboardEditorActivity extends AppCompatActivity implements View.OnSystemUiVisibilityChangeListener, View.OnClickListener, DrawerLayout.DrawerListener, CallCustomizeKeyboard, H2CO3ControlClient {
 
     private final static int SYSTEM_UI_HIDE_DELAY_MS = 3000;
     private final int[] pointer = new int[]{0, 0};

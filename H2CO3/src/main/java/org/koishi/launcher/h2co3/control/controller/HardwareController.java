@@ -18,7 +18,7 @@ import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-import org.koishi.launcher.h2co3.control.client.Client;
+import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.codes.AndroidKeyMap;
 import org.koishi.launcher.h2co3.control.codes.Translation;
 import org.koishi.launcher.h2co3.control.event.BaseKeyEvent;
@@ -46,8 +46,8 @@ public class HardwareController extends BaseController implements HwController {
     private final Translation mTranslation;
     private USBDeviceReceiver mUsbReceiver;
 
-    public HardwareController(Client client, int transType) {
-        super(client, false);
+    public HardwareController(H2CO3ControlClient h2CO3ControlClient, int transType) {
+        super(h2CO3ControlClient, false);
         //printInputDevices();
 
         //初始化键值翻译器
@@ -109,14 +109,14 @@ public class HardwareController extends BaseController implements HwController {
     private void sendKeyEvent(BaseKeyEvent e) {
         switch (e.getType()) {
             case KEYBOARD_BUTTON:
-                client.setKey(mTranslation.trans(e.getKeyName()), e.isPressed());
+                h2CO3ControlClient.setKey(mTranslation.trans(e.getKeyName()), e.isPressed());
                 break;
             case MOUSE_BUTTON:
-                client.setMouseButton(mTranslation.trans(e.getKeyName()), e.isPressed());
+                h2CO3ControlClient.setMouseButton(mTranslation.trans(e.getKeyName()), e.isPressed());
                 break;
             case MOUSE_POINTER:
                 if (e.getPointer() != null) {
-                    client.setPointer(e.getPointer()[0], e.getPointer()[1]);
+                    h2CO3ControlClient.setPointer(e.getPointer()[0], e.getPointer()[1]);
                 }
                 break;
             case TYPE_WORDS:
@@ -124,7 +124,7 @@ public class HardwareController extends BaseController implements HwController {
                 break;
             case MOUSE_POINTER_INC:
                 if (e.getPointer() != null) {
-                    client.setPointerInc(e.getPointer()[0], e.getPointer()[1]);
+                    h2CO3ControlClient.setPointerInc(e.getPointer()[0], e.getPointer()[1]);
                 }
                 break;
             default:
@@ -187,7 +187,7 @@ public class HardwareController extends BaseController implements HwController {
     }
 
     private void printInputDevices() {
-        InputManager inputManager = (InputManager) client.getActivity().getSystemService(Context.INPUT_SERVICE);
+        InputManager inputManager = (InputManager) h2CO3ControlClient.getActivity().getSystemService(Context.INPUT_SERVICE);
         int[] inputDeviceIds = inputManager.getInputDeviceIds();
         ArrayList<InputDevice> inputDevices = new ArrayList<>();
         for (int id : inputDeviceIds) {
@@ -201,7 +201,7 @@ public class HardwareController extends BaseController implements HwController {
     }
 
     private void refreshInputs() {
-        InputManager inputManager = (InputManager) client.getActivity().getSystemService(Context.INPUT_SERVICE);
+        InputManager inputManager = (InputManager) h2CO3ControlClient.getActivity().getSystemService(Context.INPUT_SERVICE);
         int[] inputDeviceIds = inputManager.getInputDeviceIds();
         for (Input i : this.inputs) {
             i.setEnabled(false);
@@ -267,12 +267,12 @@ public class HardwareController extends BaseController implements HwController {
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
         mUsbReceiver = new USBDeviceReceiver();
-        this.client.getActivity().registerReceiver(mUsbReceiver, filter);
+        this.h2CO3ControlClient.getActivity().registerReceiver(mUsbReceiver, filter);
     }
 
     private void unregisterReceiver() {
         if (mUsbReceiver != null) {
-            this.client.getActivity().unregisterReceiver(mUsbReceiver);
+            this.h2CO3ControlClient.getActivity().unregisterReceiver(mUsbReceiver);
             mUsbReceiver = null;
         }
 

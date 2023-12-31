@@ -1,5 +1,7 @@
 package org.koishi.launcher.h2co3.ui.fragment.home;
 
+import static org.koishi.launcher.h2co3.ui.H2CO3LauncherClientActivity.attachControllerInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,13 +11,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import org.koishi.launcher.h2co3.R;
-import org.koishi.launcher.h2co3.core.H2CO3Tools;
-import org.koishi.launcher.h2co3.dialog.H2CO3BoatRuntimeDialog;
 import org.koishi.launcher.h2co3.resources.component.H2CO3Button;
 import org.koishi.launcher.h2co3.resources.component.H2CO3CardView;
 import org.koishi.launcher.h2co3.resources.component.H2CO3Fragment;
 import org.koishi.launcher.h2co3.resources.component.H2CO3TextView;
-import org.koishi.launcher.h2co3.ui.H2CO3BoatClientActivity;
+import org.koishi.launcher.h2co3.ui.H2CO3LauncherClientActivity;
 
 public class HomeFragment extends H2CO3Fragment implements View.OnClickListener{
 
@@ -53,7 +53,8 @@ public class HomeFragment extends H2CO3Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == home_game_play_button){
-            startActivity(new Intent(requireActivity(), H2CO3BoatClientActivity.class));
+            startActivity(new Intent(requireActivity(), H2CO3LauncherClientActivity.class));
+            attachControllerInterface();
         }
     }
 }

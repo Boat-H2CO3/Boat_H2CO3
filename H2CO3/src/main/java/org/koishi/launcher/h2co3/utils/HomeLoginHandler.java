@@ -43,7 +43,7 @@ public class HomeLoginHandler extends Handler {
             String error = data.getQueryParameter("error");
             String errorDescription = data.getQueryParameter("error_description");
             if (error != null) {
-                if (errorDescription != null && !errorDescription.startsWith("The user has denied access to the scope requested by the client application")) {
+                if (errorDescription != null && !errorDescription.startsWith("The user has denied access to the scope requested by the h2CO3ControlClient application")) {
                     Toast.makeText(activity, "Error: " + error + ": " + errorDescription, Toast.LENGTH_SHORT).show();
                 }
             } else {

@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 public class CkbManagerDialog implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, Dialog.OnCancelListener {
 
     private final static String TAG = "CkbConfigDialog";
@@ -85,37 +84,33 @@ public class CkbManagerDialog implements View.OnClickListener, CompoundButton.On
         buttonClear = view.findViewById(R.id.input_customize_keyboard_dialog_button_clear);
         buttonDefault = view.findViewById(R.id.input_customize_keyboard_dialog_button_default);
 
-        //设定监听
-        for (View v : new View[]{buttonAdd, buttonLoad, buttonExport, buttonOK, buttonDel, buttonClear, buttonDefault}) {
-            v.setOnClickListener(this);
-        }
-        for (RadioButton r : new RadioButton[]{radioGame, radioEditable}) {
-            r.setOnCheckedChangeListener(this);
-        }
+        buttonAdd.setOnClickListener(this);
+        buttonLoad.setOnClickListener(this);
+        buttonExport.setOnClickListener(this);
+        buttonOK.setOnClickListener(this);
+        buttonDel.setOnClickListener(this);
+        buttonClear.setOnClickListener(this);
+        buttonDefault.setOnClickListener(this);
+
+        radioEditable.setOnCheckedChangeListener(this);
+        radioGame.setOnCheckedChangeListener(this);
+
         dialog.setOnCancelListener(this);
 
-        //是否显示模式选项
-
-        //当进入游戏的时候自动设定客制化键盘模式为生效，如果是编辑界面，则不自动设置
         radioGame.setChecked(mManager.getController() != null);
-
     }
 
     public void dismiss() {
         dialog.dismiss();
-        //关闭目录监听
         fileListener.stopWatching();
-        //关闭按键数量刷新
         setCountsRefresh(false);
     }
 
     public void show() {
         dialog.show();
-        //启用目录变化监听
         fileListener = new KeyboardFileListener(this);
         fileListener.startWatching();
         updateUI();
-        //启用按键数量刷新
         setCountsRefresh(true);
     }
 
@@ -125,7 +120,7 @@ public class CkbManagerDialog implements View.OnClickListener, CompoundButton.On
     }
 
     private void removeSelectedFile() {
-        String filePath = H2CO3Tools.H2CO3_SETTING_DIR + "/" + spinnerSelected.getSelectedItem().toString();
+        String filePath = H2CO3Tools.H2CO3_CONTROL_DIR + "/" + spinnerSelected.getSelectedItem().toString();
         FileTools.deleteFile(new File(filePath));
     }
 
@@ -147,23 +142,18 @@ public class CkbManagerDialog implements View.OnClickListener, CompoundButton.On
             mManager.addGameButton(null);
         }
         if (v == buttonExport) {
-            if (editFileName.getText() == null) {
+            String fn = editFileName.getText().toString();
+            if (fn.isEmpty()) {
                 Toast.makeText(mContext, mContext.getString(org.koishi.launcher.h2co3.resources.R.string.tips_filename_can_not_be_void), Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (editFileName.getText().toString().equals(CkbManager.LAST_KEYBOARD_LAYOUT_NAME)) {
+            if (fn.equals(CkbManager.LAST_KEYBOARD_LAYOUT_NAME)) {
                 Toast.makeText(mContext, mContext.getString(org.koishi.launcher.h2co3.resources.R.string.tips_please_change_file_name), Toast.LENGTH_SHORT).show();
                 return;
             }
-            final String fn = editFileName.getText().toString();
-            if (fn.equals("")) {
-                Toast.makeText(mContext, mContext.getString(org.koishi.launcher.h2co3.resources.R.string.tips_filename_can_not_be_void), Toast.LENGTH_SHORT).show();
-                return;
-            }
 
-            //检查文件是否存在重复，如果重复，提示是否覆盖。
             boolean run = true;
-            for (String str : FileTools.listChildFilesFromTargetDir(H2CO3Tools.H2CO3_SETTING_DIR)) {
+            for (String str : FileTools.listChildFilesFromTargetDir(H2CO3Tools.H2CO3_CONTROL_DIR)) {
                 if (str.equals(fn + ".json")) {
                     run = false;
                     DialogUtils.createBothChoicesDialog(mContext, mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_warn), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.tips_filename_has_been_used), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_over_write), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_cancel), new DialogSupports() {
@@ -180,30 +170,26 @@ public class CkbManagerDialog implements View.OnClickListener, CompoundButton.On
         }
 
         if (v == buttonDel) {
-            if (spinnerSelected.getSelectedItem() != null) {
-                String str = spinnerSelected.getSelectedItem().toString();
-                if (!str.equals("")) {
-                    DialogUtils.createBothChoicesDialog(mContext, mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_warn), String.format(mContext.getString(org.koishi.launcher.h2co3.resources.R.string.tips_are_you_sure_to_delete_file), str), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_delete), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_cancel), new DialogSupports() {
-                        @Override
-                        public void runWhenPositive() {
-                            removeSelectedFile();
-                        }
-                    });
-                }
+            String str = spinnerSelected.getSelectedItem().toString();
+            if (!str.isEmpty()) {
+                DialogUtils.createBothChoicesDialog(mContext, mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_warn), String.format(mContext.getString(org.koishi.launcher.h2co3.resources.R.string.tips_are_you_sure_to_delete_file), str), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_delete), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_cancel), new DialogSupports() {
+                    @Override
+                    public void runWhenPositive() {
+                        removeSelectedFile();
+                    }
+                });
             }
         }
 
         if (v == buttonLoad) {
-            if (spinnerSelected.getSelectedItem() != null) {
-                String str = spinnerSelected.getSelectedItem().toString();
-                if (!str.equals("")) {
-                    DialogUtils.createBothChoicesDialog(mContext, mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_warn), String.format(mContext.getString(org.koishi.launcher.h2co3.resources.R.string.tips_are_you_sure_to_import_keyboard_layout), str), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_import), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_cancel), new DialogSupports() {
-                        @Override
-                        public void runWhenPositive() {
-                            loadSelectedFile();
-                        }
-                    });
-                }
+            String str = spinnerSelected.getSelectedItem().toString();
+            if (!str.isEmpty()) {
+                DialogUtils.createBothChoicesDialog(mContext, mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_warn), String.format(mContext.getString(org.koishi.launcher.h2co3.resources.R.string.tips_are_you_sure_to_import_keyboard_layout), str), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_import), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_cancel), new DialogSupports() {
+                    @Override
+                    public void runWhenPositive() {
+                        loadSelectedFile();
+                    }
+                });
             }
         }
 
@@ -229,30 +215,25 @@ public class CkbManagerDialog implements View.OnClickListener, CompoundButton.On
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-        if (buttonView == radioEditable) {
-            if (isChecked) {
-                mManager.setButtonMode(GameButton.MODE_MOVEABLE_EDITABLE);
-                buttonAdd.setVisibility(View.VISIBLE);
-            }
+        if (buttonView == radioEditable && isChecked) {
+            mManager.setButtonMode(GameButton.MODE_MOVEABLE_EDITABLE);
+            buttonAdd.setVisibility(View.VISIBLE);
         }
 
-        if (buttonView == radioGame) {
-            if (isChecked) {
-                mManager.setButtonMode(GameButton.MODE_GAME);
-                buttonAdd.setVisibility(View.GONE);
-            }
+        if (buttonView == radioGame && isChecked) {
+            mManager.setButtonMode(GameButton.MODE_GAME);
+            buttonAdd.setVisibility(View.GONE);
         }
     }
 
     public void updateUI() {
         if (data == null) {
             data = new ArrayList<>();
-            data.addAll(FileTools.listChildFilesFromTargetDir(H2CO3Tools.H2CO3_SETTING_DIR));
+            data.addAll(FileTools.listChildFilesFromTargetDir(H2CO3Tools.H2CO3_CONTROL_DIR));
             spinnerSelected.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, data));
         } else {
             data.clear();
-            data.addAll(FileTools.listChildFilesFromTargetDir(H2CO3Tools.H2CO3_SETTING_DIR));
+            data.addAll(FileTools.listChildFilesFromTargetDir(H2CO3Tools.H2CO3_CONTROL_DIR));
             ((BaseAdapter) spinnerSelected.getAdapter()).notifyDataSetChanged();
         }
     }
@@ -282,16 +263,19 @@ public class CkbManagerDialog implements View.OnClickListener, CompoundButton.On
         private final CkbManagerDialog mDialog;
 
         public KeyboardFileListener(CkbManagerDialog dialog) {
-            super(H2CO3Tools.H2CO3_SETTING_DIR);
+            super(H2CO3Tools.H2CO3_CONTROL_DIR);
             this.mDialog = dialog;
         }
 
         @Override
         public void onEvent(int event, @Nullable String path) {
             switch (event) {
-                case FileObserver.CREATE, FileObserver.DELETE -> mDialog.updateUI();
-                default -> {
-                }
+                case FileObserver.CREATE:
+                case FileObserver.DELETE:
+                    mDialog.updateUI();
+                    break;
+                default:
+                    break;
             }
         }
     }

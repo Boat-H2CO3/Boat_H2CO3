@@ -109,7 +109,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':H2CO3Core')
     implementation project(path: ':H2CO3Resources')
-    implementation project(path: ':H2CO3Boat')
+    implementation project(path: ':H2CO3Launcher')
 
     // Google
     implementation 'com.google.code.gson:gson:2.10.1'

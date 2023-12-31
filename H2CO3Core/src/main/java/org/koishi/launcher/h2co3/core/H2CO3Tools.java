@@ -26,6 +26,11 @@ public class H2CO3Tools {
 
 
     public static final int FILE_SELECTED_CODE_OK = 11450;
+    public static String H2CO3_CONTROL_DIR;
+    public static String CACIOCAVALLO_8_DIR;
+    public static String CACIOCAVALLO_17_DIR;
+
+
     @SuppressLint("StaticFieldLeak")
     public static Context CONTEXT;
 
@@ -55,7 +60,7 @@ public class H2CO3Tools {
 
 
     public static String H2CO3_CONFIG_NAME;
-    public static String H2CO3_BOAT_CONFIG_NAME;
+    public static String h2co3_launcher_CONFIG_NAME;
 
     public static String LOGIN_AUTH_PLAYER_NAME;
     public static String LOGIN_USER_EMAIL;
@@ -99,8 +104,12 @@ public class H2CO3Tools {
         JAVA_17_PATH = JAVA_PATH + "/jre_17";
         BOAT_LIBRARY_DIR = RUNTIME_DIR + "/boat";
         PLUGIN_DIR = RUNTIME_DIR + "/boat/plugin";
+        CACIOCAVALLO_8_DIR = PLUGIN_DIR + "/caciocavallo";
+        CACIOCAVALLO_17_DIR = PLUGIN_DIR + "/caciocavallo17";
         H2CO3_LIBRARY_DIR = APP_DATA_PATH + "/h2co3";
         H2CO3_SETTING_DIR = APP_DATA_PATH + "/h2co3_setting";
+
+        H2CO3_CONTROL_DIR = APP_DATA_PATH + "/KEYBOARDS";
 
         FILES_DIR = context.getFilesDir().getAbsolutePath();
 
@@ -110,7 +119,7 @@ public class H2CO3Tools {
         MULTIPLAYER_FIX_PATH = PLUGIN_DIR + "/MultiplayerFix.jar";
 
         H2CO3_CONFIG_NAME = "H2CO3Config.json";
-        H2CO3_BOAT_CONFIG_NAME = "H2CO3BoatConfig.json";
+        h2co3_launcher_CONFIG_NAME = "H2CO3LauncherConfig.json";
 
         LOGIN_AUTH_PLAYER_NAME = "h2co3_users_auth_player_name";
         LOGIN_USER_EMAIL = "h2co3_users_email";
@@ -145,7 +154,7 @@ public class H2CO3Tools {
         init(SHARED_COMMON_DIR);
         init(PUBLIC_FILE_PATH);
         init(H2CO3_CONFIG_NAME);
-        init(H2CO3_BOAT_CONFIG_NAME);
+        init(h2co3_launcher_CONFIG_NAME);
     }
 
     private static void init(String path) {
@@ -155,26 +164,26 @@ public class H2CO3Tools {
     }
 
     public static boolean getBoatValue(String key, boolean defaultValue) {
-        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) +"/"+ H2CO3_BOAT_CONFIG_NAME, "usesGlobal", false, Boolean.class)) {
-            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) +"/"+H2CO3_BOAT_CONFIG_NAME, key, defaultValue, Boolean.class);
+        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) +"/"+ h2co3_launcher_CONFIG_NAME, "usesGlobal", false, Boolean.class)) {
+            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) +"/"+h2co3_launcher_CONFIG_NAME, key, defaultValue, Boolean.class);
         } else {
-            return getValue(H2CO3_SETTING_DIR + "/"+H2CO3_BOAT_CONFIG_NAME, key, defaultValue, Boolean.class);
+            return getValue(H2CO3_SETTING_DIR + "/"+h2co3_launcher_CONFIG_NAME, key, defaultValue, Boolean.class);
         }
     }
 
     public static String getBoatValueString(String key, String defaultValue) {
-        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+H2CO3_BOAT_CONFIG_NAME, "usesGlobal", false, Boolean.class)) {
-            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+H2CO3_BOAT_CONFIG_NAME, key, defaultValue, String.class);
+        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+h2co3_launcher_CONFIG_NAME, "usesGlobal", false, Boolean.class)) {
+            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+h2co3_launcher_CONFIG_NAME, key, defaultValue, String.class);
         } else {
-            return getValue(H2CO3_SETTING_DIR + "/"+H2CO3_BOAT_CONFIG_NAME, key, defaultValue, String.class);
+            return getValue(H2CO3_SETTING_DIR + "/"+h2co3_launcher_CONFIG_NAME, key, defaultValue, String.class);
         }
     }
 
     public static void setBoatValue(String key, java.io.Serializable value) {
         if (getBoatValue("usesGlobal", false)) {
-            setValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+H2CO3_BOAT_CONFIG_NAME, key, value);
+            setValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+h2co3_launcher_CONFIG_NAME, key, value);
         } else {
-            setValue(H2CO3_SETTING_DIR + "/"+H2CO3_BOAT_CONFIG_NAME, key, value);
+            setValue(H2CO3_SETTING_DIR + "/"+h2co3_launcher_CONFIG_NAME, key, value);
         }
     }
 

@@ -5,6 +5,7 @@ import android.util.Log;
 import org.koishi.launcher.h2co3.core.H2CO3Game;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 
+import java.util.HashSet;
 import java.util.Vector;
 
 public class TouchInjector {
@@ -15,8 +16,10 @@ public class TouchInjector {
             return args;
         }
         Vector<String> newArgs = new Vector<>();
-        if (args.contains("Forge") || args.contains("cpw.mods.fml.common.launcher.FMLTweaker") || args.contains("fmlclient") || args.contains("forgeclient")) {
-            if (args.contains("cpw.mods.bootstraplauncher.BootstrapLauncher")) {
+        HashSet<String> argSet = new HashSet<>(args);
+
+        if (argSet.contains("Forge") || argSet.contains("cpw.mods.fml.common.launcher.FMLTweaker") || argSet.contains("fmlclient") || argSet.contains("forgeclient")) {
+            if (argSet.contains("cpw.mods.bootstraplauncher.BootstrapLauncher")) {
                 String version = "unknown";
                 boolean hit = false;
                 for (String arg : args) {
@@ -64,7 +67,7 @@ public class TouchInjector {
                 }
             }
             return newArgs;
-        } else if (args.contains("optifine.OptiFineTweaker") || args.contains("com.mumfrey.liteloader.launch.LiteLoaderTweaker")) {
+        } else if (argSet.contains("optifine.OptiFineTweaker") || argSet.contains("com.mumfrey.liteloader.launch.LiteLoaderTweaker")) {
             for (int i = 0; i < args.size(); i++) {
                 if (args.get(i).startsWith("-Xms")) {
                     newArgs.add("-javaagent:" + H2CO3Tools.APP_DATA_PATH + "/boat" + "/plugin/touch/TouchInjector.jar=optifine");
@@ -72,7 +75,7 @@ public class TouchInjector {
                 newArgs.add(args.get(i));
             }
             return newArgs;
-        } else if (args.contains("net.fabricmc.loader.impl.launch.knot.KnotClient")) {
+        } else if (argSet.contains("net.fabricmc.loader.impl.launch.knot.KnotClient")) {
             boolean hit = false;
             for (int i = 0; i < args.size(); i++) {
                 if (hit) {
@@ -88,7 +91,7 @@ public class TouchInjector {
                 }
             }
             return newArgs;
-        } else if (args.contains("org.quiltmc.loader.impl.launch.knot.KnotClient")) {
+        } else if (argSet.contains("org.quiltmc.loader.impl.launch.knot.KnotClient")) {
             boolean hit = false;
             for (int i = 0; i < args.size(); i++) {
                 if (hit) {
