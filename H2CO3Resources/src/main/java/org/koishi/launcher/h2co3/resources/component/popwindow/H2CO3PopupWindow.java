@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.PopupWindow;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 
 public class H2CO3PopupWindow extends PopupWindow {
@@ -43,7 +45,7 @@ public class H2CO3PopupWindow extends PopupWindow {
      * 查看界面
      */
     public interface ViewInterface {
-        void getChildView(View view, int layoutResId) throws IOException;
+        void getChildView(View view, int layoutResId) throws IOException, JSONException;
     }
 
     /**
@@ -149,7 +151,7 @@ public class H2CO3PopupWindow extends PopupWindow {
             return this;
         }
 
-        public H2CO3PopupWindow builder() throws IOException {
+        public H2CO3PopupWindow builder() throws IOException, JSONException {
             final H2CO3PopupWindow popupWindow = new H2CO3PopupWindow(params.mContext);
             params.apply(popupWindow.controller);
             if (listener != null && params.layoutResId != 0) {

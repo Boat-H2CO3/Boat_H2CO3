@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.koishi.launcher.h2co3.launcher.function.H2CO3LauncherCallback;
-import org.koishi.launcher.h2co3.launcher.ui.ExitActivity;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MessageDialog;
 
@@ -33,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class H2CO3LauncherActivity extends H2CO3Activity implements TextureView.SurfaceTextureListener {
 
     static {
-        System.loadLibrary("h2co3_launcher");
+        System.loadLibrary("h2co3launcher");
     }
 
     // 主纹理视图
@@ -61,6 +60,8 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
     // 调用本地方法
     public native void nOnCreate();
+
+    public static native void setupExitTrap(Context context);
 
     // 当SurfaceTexture可用时调用
     public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
@@ -95,13 +96,14 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
     public static final ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
 
     // 启动游戏
-    public void startGame(final String javaPath, final String home, final boolean highVersion, final Vector<String> args, String renderer, String gameDir) {
+    public void startGame(Context context,final String javaPath, final String home, final boolean highVersion, final Vector<String> args, String renderer, String gameDir) {
+        setupExitTrap(this);
         sExecutorService.execute(() -> {
             Handler handler = new Handler(Looper.getMainLooper());
-            H2CO3LauncherLoader.launchMinecraft(handler, H2CO3LauncherActivity.this, javaPath, home, highVersion, args, renderer, gameDir, new H2CO3LauncherCallback() {
+            H2CO3LauncherLoader.launchMinecraft(handler, context, javaPath, home, highVersion, args, renderer, gameDir, new H2CO3LauncherCallback() {
                 @Override
                 public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-                    H2CO3LauncherLib.setH2CO3LauncherNativeWindow(new Surface(surface));
+                    H2CO3LauncherLib.h2co3launcherSetNativeWindow(new Surface(surface));
                     H2CO3LauncherLib.setEventPipe();
                 }
 
@@ -122,26 +124,19 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
                 @Override
                 public void onPicOutput() {
-
                 }
 
                 @Override
                 public void onError(Exception e) {
                     h2co3LauncherCallback.onError(e);
-                    MaterialAlertDialogBuilder exitDialog = new H2CO3MessageDialog(H2CO3LauncherActivity.this)
-                            .setMessage("error" + e)
-                            .setPositiveButton("Exit", (dialog, which) -> finish())
-                            .setOnDismissListener(dialog -> H2CO3LauncherActivity.this.finish());
-                    exitDialog.show();
                 }
 
+                /**
+                 * @param code
+                 */
                 @Override
                 public void onExit(int code) {
-                    MaterialAlertDialogBuilder exitDialog = new H2CO3MessageDialog(H2CO3LauncherActivity.this)
-                            .setMessage("error" + code)
-                            .setPositiveButton("Exit", (dialog, which) -> finish())
-                            .setOnDismissListener(dialog -> H2CO3LauncherActivity.this.finish());
-                    exitDialog.show();
+
                 }
             });
         });
@@ -283,6 +278,10 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
     public void setCursorMode(int mode) {
         h2co3LauncherCallback.onCursorModeChange(mode);
+    }
+
+    public static void onExit(Context ctx, int code) {
+        ((H2CO3LauncherActivity) ctx).h2co3LauncherCallback.onExit(code);
     }
 
 }

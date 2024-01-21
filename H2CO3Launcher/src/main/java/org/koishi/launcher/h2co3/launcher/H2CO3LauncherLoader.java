@@ -23,7 +23,7 @@ public class H2CO3LauncherLoader {
     public static WeakReference<LogReceiver> logReceiver;
 
     static {
-        System.loadLibrary("h2co3_launcher");
+        System.loadLibrary("h2co3launcher");
     }
 
     public static native int chdir(String path);
@@ -32,7 +32,6 @@ public class H2CO3LauncherLoader {
     public static native void setenv(String name, String value);
     public static native int dlopen(String name);
     public static native void patchLinker();
-    public static native void setupExitTrap(Context context);
     public static native int dlexec(String[] args);
 
     @SuppressLint("SuspiciousIndentation")
@@ -48,8 +47,6 @@ public class H2CO3LauncherLoader {
             setEnvironmentVariables(home, javaPath, renderer, context, highVersion);
 
             loadNativeLibraries(javaPath, arch, isJava17);
-
-            setupExitTrap(context);
 
             saveLogToPath(H2CO3Tools.LOG_DIR + "/client_output.txt");
             chdir(gameDir);
@@ -82,6 +79,7 @@ public class H2CO3LauncherLoader {
         setenv("LIBGL_NORMALIZE", "1");
         setenv("LIBGL_VSYNC", "1");
         setenv("LIBGL_NOINTOVLHACK", "1");
+        setenv("H2CO3Launcher_NATIVEDIR", context.getApplicationInfo().nativeLibraryDir);
 
         if (renderer.equals(H2CO3Tools.GL_VIRGL)) {
             setVirGLEnvironmentVariables(context);

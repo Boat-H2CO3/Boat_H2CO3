@@ -18,6 +18,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MCOptionUtils {
+    private static final String OPTIONS_FILE_NAME = "options.txt";
+    private static final String OPTION_SEPARATOR = ":";
+    private static final String LINE_SEPARATOR = "\n";
+    private static final String VALUE_SEPARATOR = ",";
+    private static final int DEFAULT_GUI_SCALE = 0;
+
     private static final HashMap<String, String> parameterMap = new HashMap<>();
     private static final ArrayList<WeakReference<MCOptionListener>> optionListeners = new ArrayList<>();
     private static FileObserver fileObserver;
@@ -33,17 +39,15 @@ public class MCOptionUtils {
 
         parameterMap.clear();
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(gameDir + "/options.txt"));
+        try (BufferedReader reader = new BufferedReader(new FileReader(gameDir + File.separator + OPTIONS_FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                int firstColonIndex = line.indexOf(':');
+                int firstColonIndex = line.indexOf(OPTION_SEPARATOR);
                 if (firstColonIndex < 0) {
                     continue;
                 }
                 parameterMap.put(line.substring(0, firstColonIndex), line.substring(firstColonIndex + 1));
             }
-            reader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -91,7 +95,7 @@ public class MCOptionUtils {
         value = value.replace("[", "").replace("]", "");
         if (value.isEmpty()) return new ArrayList<>();
 
-        return Arrays.asList(value.split(","));
+        return Arrays.asList(value.split(VALUE_SEPARATOR));
     }
 
     /**
@@ -100,14 +104,15 @@ public class MCOptionUtils {
      */
     public static void saveOptions(String gameDir) {
         StringBuilder result = new StringBuilder();
-        for (String key : parameterMap.keySet())
+        for (String key : parameterMap.keySet()) {
             result.append(key)
-                    .append(':')
+                    .append(OPTION_SEPARATOR)
                     .append(parameterMap.get(key))
-                    .append('\n');
+                    .append(LINE_SEPARATOR);
+        }
 
         try {
-            H2CO3Tools.write(gameDir + "/options.txt", result.toString());
+            H2CO3Tools.write(gameDir + File.separator + OPTIONS_FILE_NAME, result.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -121,10 +126,10 @@ public class MCOptionUtils {
     public static int getMcScale(String gameDir) {
         loadOptions(gameDir);
         String str = getOption("guiScale");
-        int guiScale = (str == null ? 0 : Integer.parseInt(str));
+        int guiScale = (str == null ? DEFAULT_GUI_SCALE : Integer.parseInt(str));
 
         int scale = Math.min(1920 / 320, 1080 / 240);
-        if (scale < guiScale || guiScale == 0) {
+        if (scale < guiScale || guiScale == DEFAULT_GUI_SCALE) {
             guiScale = scale;
         }
 
@@ -137,7 +142,7 @@ public class MCOptionUtils {
      */
     private static void setupFileObserver(String gameDir) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            fileObserver = new FileObserver(new File(gameDir + "/options.txt"), FileObserver.MODIFY) {
+            fileObserver = new FileObserver(new File(gameDir + File.separator + OPTIONS_FILE_NAME), FileObserver.MODIFY) {
                 @Override
                 public void onEvent(int i, @Nullable String s) {
                     loadOptions(gameDir);
@@ -145,7 +150,7 @@ public class MCOptionUtils {
                 }
             };
         } else {
-            fileObserver = new FileObserver(gameDir + "/options.txt", FileObserver.MODIFY) {
+            fileObserver = new FileObserver(gameDir + File.separator + OPTIONS_FILE_NAME, FileObserver.MODIFY) {
                 @Override
                 public void onEvent(int i, @Nullable String s) {
                     loadOptions(gameDir);

@@ -1,5 +1,7 @@
 package org.koishi.launcher.h2co3.ui;
 
+import static org.koishi.launcher.h2co3.core.H2CO3Auth.usersFile;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -29,12 +31,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.circularreveal.CircularRevealFrameLayout;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.adapter.HomeAdapterListUser;
@@ -59,6 +63,7 @@ import org.koishi.launcher.h2co3.utils.HomeLoginHandler;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -92,8 +97,6 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
     private AlertDialog otherLoginWaitDialogAlert;
     private NavController navController;
 
-    private final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
-
     private H2CO3ProgressDialog progressDialog;
     private Spinner serverSpinner;
     private EditText userEditText;
@@ -107,7 +110,14 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
     private String currentRegisterUrl;
     private ArrayAdapter<String> serverSpinnerAdapter;
 
+    private final String usersJson = H2CO3Auth.getUserJson();
+    private final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
+    private final HomeLoginHandler loginHandler = new HomeLoginHandler(this);
     private MaterialAlertDialogBuilder alertDialogBuilder;
+    private boolean isServersFileExists;
+
+    String user;
+    String pass;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,7 +142,6 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
         homeTopbarUser.setOnClickListener(this);
         toolbar = findViewById(R.id.toolbar);
 
-        String usersJson = H2CO3Auth.getUserJson();
         if (TextUtils.isEmpty(usersJson) || usersJson.equals("{}")) {
             setDefaultUserState();
         } else {
@@ -158,18 +167,18 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
         final String OFFLINE_USER_STATE = getString(org.koishi.launcher.h2co3.resources.R.string.user_state_offline);
 
         switch (userType) {
-            case "1" -> {
+            case "1":
                 homeTopbarUserState.setText(MICROSOFT_USER_STATE);
                 H2CO3Loader.getHead(this, userSkinTexture, homeTopbarUserIcon);
-            }
-            case "2" -> {
+                break;
+            case "2":
                 homeTopbarUserState.setText(OTHER_USER_STATE + apiUrl);
                 H2CO3Loader.getHead(this, userSkinTexture, homeTopbarUserIcon);
-            }
-            default -> {
+                break;
+            default:
                 homeTopbarUserState.setText(OFFLINE_USER_STATE);
                 homeTopbarUserIcon.setImageDrawable(ContextCompat.getDrawable(this, org.koishi.launcher.h2co3.resources.R.drawable.ic_home_user));
-            }
+                break;
         }
     }
 
@@ -178,18 +187,17 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
         if (v == homeTopbarUser) {
             try {
                 showUserListPopup();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (IOException | JSONException e) {
+                Snackbar.make(this.getCon, "提示：您有新消息", Snackbar.LENGTH_SHORT).show();
             }
         }
     }
-
-    private void showUserListPopup() throws IOException {
+    private void showUserListPopup() throws IOException, JSONException {
         popView = new H2CO3PopupWindow.Builder(this)
                 .setView(R.layout.layout_user_list)
                 .setViewOnClickListener((view, layoutResId) -> {
                     userList.clear();
-                    H2CO3Auth.parseJsonToUser();
+                    H2CO3Auth.parseJsonToUser(new JSONObject(H2CO3Auth.readFileContent(usersFile)));
                     adapterUser = new HomeAdapterListUser(this, userList);
                     RecyclerView recyclerView = view.findViewById(R.id.recycler_view_user_list);
                     recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -270,56 +278,12 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
             } else if (selectedTabPosition == 2) {
                 progressDialog.showWithProgress();
                 H2CO3Application.sExecutorService.execute(() -> {
-                    String user = loginName.getText().toString();
-                    String pass = Objects.requireNonNull(loginPassword.getText()).toString();
+                    user = loginName.getText().toString();
+                    pass = Objects.requireNonNull(loginPassword.getText()).toString();
                     if (!user.isEmpty() && !pass.isEmpty()) {
                         try {
                             LoginUtils.getINSTANCE().setBaseUrl(currentBaseUrl);
-                            LoginUtils.getINSTANCE().login(user, pass, new LoginUtils.Listener() {
-                                @SuppressLint("NotifyDataSetChanged")
-                                @Override
-                                public void onSuccess(AuthResult authResult) {
-                                    runOnUiThread(() -> {
-                                        progressDialog.dismiss();
-                                        if (authResult.getSelectedProfile() != null) {
-                                            H2CO3Auth.addUserToJson(authResult.getSelectedProfile().getName(), text, pass, "2", currentBaseUrl, authResult.getSelectedProfile().getId(), "", "", authResult.getAccessToken(), "", "", true, false);
-                                            adapterUser.notifyDataSetChanged();
-                                            popView.dismiss();
-                                            loginDialogAlert.dismiss();
-                                        } else {
-                                            String[] items = authResult.getAvailableProfiles().stream()
-                                                    .map(AuthResult.AvailableProfiles::getName).toArray(String[]::new);
-                                            alertDialogBuilder = new MaterialAlertDialogBuilder(H2CO3MainActivity.this);
-                                            alertDialogBuilder.setTitle("请选择角色");
-                                            alertDialogBuilder.setItems(items, (dialog, which) -> {
-                                                AuthResult.AvailableProfiles selectedProfile = authResult.getAvailableProfiles().get(which);
-                                                H2CO3Auth.addUserToJson(selectedProfile.getName(), text, pass, "2", currentBaseUrl, selectedProfile.getId(), "", "", authResult.getAccessToken(), "", "", true, false);
-                                                adapterUser.notifyDataSetChanged();
-                                                popView.dismiss();
-                                                loginDialogAlert.dismiss();
-                                            });
-                                            alertDialogBuilder.setNegativeButton(H2CO3MainActivity.this.getString(org.koishi.launcher.h2co3.resources.R.string.button_cancel), null);
-                                            alertDialogBuilder.show();
-                                        }
-                                    });
-                                }
-
-                                @SuppressLint("NotifyDataSetChanged")
-                                @Override
-                                public void onFailed(String error) {
-                                    runOnUiThread(() -> {
-                                        progressDialog.dismiss();
-                                        adapterUser.notifyDataSetChanged();
-                                        popView.dismiss();
-                                        loginDialogAlert.dismiss();
-                                        alertDialogBuilder = new MaterialAlertDialogBuilder(H2CO3MainActivity.this);
-                                        alertDialogBuilder.setTitle(org.koishi.launcher.h2co3.resources.R.string.title_warn);
-                                        alertDialogBuilder.setMessage(error);
-                                        alertDialogBuilder.setPositiveButton(H2CO3MainActivity.this.getString(org.koishi.launcher.h2co3.resources.R.string.button_ok), null);
-                                        alertDialogBuilder.show();
-                                    });
-                                }
-                            });
+                            LoginUtils.getINSTANCE().login(user, pass, loginUtilsListener);
                         } catch (IOException e) {
                             runOnUiThread(progressDialog::dismiss);
                             Timber.tag("登录").e(e.toString());
@@ -402,10 +366,60 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
         });
     }
 
+    private final LoginUtils.Listener loginUtilsListener = new LoginUtils.Listener() {
+
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void onSuccess(AuthResult authResult) {
+            runOnUiThread(() -> {
+                progressDialog.dismiss();
+                if (authResult.getSelectedProfile() != null) {
+                    H2CO3Auth.addUserToJson(authResult.getSelectedProfile().getName(), user, pass, "2", currentBaseUrl, authResult.getSelectedProfile().getId(), "", "", authResult.getAccessToken(), "", "", true, false);
+                    adapterUser.notifyDataSetChanged();
+                    popView.dismiss();
+                    loginDialogAlert.dismiss();
+                } else {
+                    String[] items = authResult.getAvailableProfiles().stream()
+                            .map(AuthResult.AvailableProfiles::getName).toArray(String[]::new);
+                    alertDialogBuilder = new MaterialAlertDialogBuilder(H2CO3MainActivity.this);
+                    alertDialogBuilder.setTitle("请选择角色");
+                    alertDialogBuilder.setItems(items, (dialog, which) -> {
+                        AuthResult.AvailableProfiles selectedProfile = authResult.getAvailableProfiles().get(which);
+                        H2CO3Auth.addUserToJson(selectedProfile.getName(), user, pass, "2", currentBaseUrl, selectedProfile.getId(), "", "", authResult.getAccessToken(), "", "", true, false);
+                        adapterUser.notifyDataSetChanged();
+                        popView.dismiss();
+                        loginDialogAlert.dismiss();
+                    });
+                    alertDialogBuilder.setNegativeButton(H2CO3MainActivity.this.getString(org.koishi.launcher.h2co3.resources.R.string.button_cancel), null);
+                    alertDialogBuilder.show();
+                }
+            });
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void onFailed(String error) {
+            runOnUiThread(() -> {
+                progressDialog.dismiss();
+                adapterUser.notifyDataSetChanged();
+                popView.dismiss();
+                loginDialogAlert.dismiss();
+                alertDialogBuilder = new MaterialAlertDialogBuilder(H2CO3MainActivity.this);
+                alertDialogBuilder.setTitle(org.koishi.launcher.h2co3.resources.R.string.title_warn);
+                alertDialogBuilder.setMessage(error);
+                alertDialogBuilder.setPositiveButton(H2CO3MainActivity.this.getString(org.koishi.launcher.h2co3.resources.R.string.button_ok), null);
+                alertDialogBuilder.show();
+            });
+        }
+    };
+
     public void refreshServer() {
         List<String> serverList = new ArrayList<>();
         try {
-            if (serversFile.exists()) {
+            if (!isServersFileExists) {
+                isServersFileExists = serversFile.exists();
+            }
+            if (isServersFileExists) {
                 try (BufferedReader reader = new BufferedReader(new FileReader(serversFile))) {
                     servers = new Gson().fromJson(reader, Servers.class);
                     if (servers != null) {
@@ -444,8 +458,6 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                 && username.matches("\\w+");
     }
 
-    private final HomeLoginHandler loginHandler = new HomeLoginHandler(this);
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -459,6 +471,28 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
             if (loginHandler != null) {
                 loginHandler.login(data);
             }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        closeFile();
+    }
+
+    private void closeFile() {
+        try {
+            // 关闭文件句柄
+            if (usersFile != null) {
+                // 检查文件是否已打开
+                if (usersFile.exists() && usersFile.canRead()) {
+                    // 关闭文件输入流
+                    FileInputStream fis = new FileInputStream(usersFile);
+                    fis.close();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

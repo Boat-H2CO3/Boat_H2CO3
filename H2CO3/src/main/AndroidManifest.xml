@@ -50,7 +50,11 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name=".launcher.ui.ExitActivity"
+            android:name=".ui.VanillaActivity"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".ui.ExitActivity"
             tools:ignore="LockedOrientationActivity" />
 
         <activity
@@ -64,7 +68,7 @@
             android:theme="@style/FullScreen">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="h2co3_launcher" />
+                android:value="h2co3launcher" />
         </activity>
 
         <provider

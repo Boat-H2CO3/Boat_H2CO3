@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 public class H2CO3Loader {
@@ -21,6 +22,9 @@ public class H2CO3Loader {
     private static final int HEAD_TOP = 8;
     private static final int HEAD_RIGHT = 17;
     private static final int HEAD_BOTTOM = 16;
+
+    private static final RequestOptions requestOptions = new RequestOptions()
+            .diskCacheStrategy(DiskCacheStrategy.ALL);
 
     public static Drawable getHeadDrawable(Context context, String texture) {
         if (context == null || texture == null) {
@@ -57,7 +61,6 @@ public class H2CO3Loader {
 
             if (skinBitmap != null) {
                 Bitmap headBitmap = cropHeadFromSkin(skinBitmap);
-                RequestOptions requestOptions = new RequestOptions();
                 Glide.with(context)
                         .load(headBitmap)
                         .apply(requestOptions)

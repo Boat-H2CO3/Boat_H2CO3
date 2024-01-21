@@ -22,9 +22,10 @@ public class H2CO3DownloadUtils {
     }
 
     public static void download(URL url, OutputStream os) throws IOException {
+        HttpURLConnection conn = null;
         InputStream is = null;
         try {
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(10000);
             conn.setDoInput(true);
             conn.connect();
@@ -34,59 +35,33 @@ public class H2CO3DownloadUtils {
             }
             is = conn.getInputStream();
             IOUtils.copy(is, os);
-        } catch (IOException e) {
-            throw new IOException("Unable to download from " + url, e);
         } finally {
             if (is != null) {
-                try {
-                    is.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                is.close();
+            }
+            if (conn != null) {
+                conn.disconnect();
             }
         }
     }
 
     public static String downloadString(String url) throws IOException {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        download(url, bos);
-        bos.close();
-        return bos.toString(StandardCharsets.UTF_8);
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            download(url, bos);
+            return bos.toString(StandardCharsets.UTF_8);
+        }
     }
 
     public static void downloadFile(String url, File out) throws IOException {
         out.getParentFile().mkdirs();
         File tempOut = File.createTempFile(out.getName(), ".part", out.getParentFile());
-        BufferedOutputStream bos = null;
-        try {
-            OutputStream bos2 = new BufferedOutputStream(new FileOutputStream(tempOut));
-            try {
-                download(url, bos2);
-                tempOut.renameTo(out);
-                if (bos2 != null) {
-                    bos2.close();
-                }
-                if (tempOut.exists()) {
-                    tempOut.delete();
-                }
-            } catch (IOException th2) {
-                if (bos != null) {
-                    bos.close();
-                }
-                if (tempOut.exists()) {
-                    tempOut.delete();
-                }
-                throw th2;
-            }
-        } catch (IOException th3) {
-
-            if (bos != null) {
-                bos.close();
-            }
+        try (OutputStream bos = new BufferedOutputStream(new FileOutputStream(tempOut))) {
+            download(url, bos);
+            tempOut.renameTo(out);
+        } finally {
             if (tempOut.exists()) {
                 tempOut.delete();
             }
-            throw th3;
         }
     }
 
@@ -96,22 +71,35 @@ public class H2CO3DownloadUtils {
             outputFile.getParentFile().mkdirs();
         }
 
-        HttpURLConnection conn = (HttpURLConnection) new URL(urlInput).openConnection();
-        InputStream readStr = conn.getInputStream();
-        FileOutputStream fos = new FileOutputStream(outputFile);
-        int cur;
-        int oval = 0;
-        int len = conn.getContentLength();
+        HttpURLConnection conn = null;
+        InputStream is = null;
+        FileOutputStream fos = null;
+        try {
+            conn = (HttpURLConnection) new URL(urlInput).openConnection();
+            is = conn.getInputStream();
+            fos = new FileOutputStream(outputFile);
+            int cur;
+            int oval = 0;
+            int len = conn.getContentLength();
 
-        if (buffer == null) buffer = new byte[65535];
+            if (buffer == null) buffer = new byte[65535];
 
-        while ((cur = readStr.read(buffer)) != -1) {
-            oval += cur;
-            fos.write(buffer, 0, cur);
-            monitor.updateProgress(oval, len);
+            while ((cur = is.read(buffer)) != -1) {
+                oval += cur;
+                fos.write(buffer, 0, cur);
+                monitor.updateProgress(oval, len);
+            }
+        } finally {
+            if (fos != null) {
+                fos.close();
+            }
+            if (is != null) {
+                is.close();
+            }
+            if (conn != null) {
+                conn.disconnect();
+            }
         }
-        fos.close();
-        conn.disconnect();
     }
 
     public interface H2CO3DownloaderFeedback {

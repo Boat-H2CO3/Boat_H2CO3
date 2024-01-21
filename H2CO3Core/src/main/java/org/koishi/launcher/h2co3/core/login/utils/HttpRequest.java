@@ -1,16 +1,17 @@
 package org.koishi.launcher.h2co3.core.login.utils;
 
-import static org.koishi.launcher.h2co3.core.login.utils.NetworkUtils.createHttpConnection;
 import static org.koishi.launcher.h2co3.core.login.utils.NetworkUtils.resolveConnection;
 import static org.koishi.launcher.h2co3.core.utils.Lang.mapOf;
-import static org.koishi.launcher.h2co3.core.utils.Lang.wrap;
-import static org.koishi.launcher.h2co3.core.utils.gson.JsonUtils.GSON;
 
 import com.google.gson.JsonParseException;
+import org.koishi.launcher.h2co3.core.utils.Pair;
+import org.koishi.launcher.h2co3.core.utils.Schedulers;
+import org.koishi.launcher.h2co3.core.utils.function.ExceptionalBiConsumer;
+import org.koishi.launcher.h2co3.core.utils.gson.JsonUtils;
+import org.koishi.launcher.h2co3.core.utils.io.IOUtils;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,14 +21,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
-
-import org.koishi.launcher.h2co3.core.utils.Pair;
-import org.koishi.launcher.h2co3.core.utils.Schedulers;
-import org.koishi.launcher.h2co3.core.utils.function.ExceptionalBiConsumer;
-import org.koishi.launcher.h2co3.core.utils.gson.JsonUtils;
-import org.koishi.launcher.h2co3.core.utils.io.IOUtils;
 
 public abstract class HttpRequest {
     protected final String url;
@@ -71,14 +64,20 @@ public abstract class HttpRequest {
     public abstract String getString() throws IOException;
 
     public CompletableFuture<String> getStringAsync() {
-        return CompletableFuture.supplyAsync(wrap(this::getString), Schedulers.io());
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return getString();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }, Schedulers.io());
     }
 
     public <T> T getJson(Class<T> typeOfT) throws IOException, JsonParseException {
         return JsonUtils.fromNonNullJson(getString(), typeOfT);
     }
 
-    public <T> T getJson(Type type) throws IOException, JsonParseException {
+    public <T> T getJson(java.lang.reflect.Type type) throws IOException, JsonParseException {
         return JsonUtils.fromNonNullJson(getString(), type);
     }
 
@@ -86,7 +85,7 @@ public abstract class HttpRequest {
         return getStringAsync().thenApplyAsync(jsonString -> JsonUtils.fromNonNullJson(jsonString, typeOfT));
     }
 
-    public <T> CompletableFuture<T> getJsonAsync(Type type) {
+    public <T> CompletableFuture<T> getJsonAsync(java.lang.reflect.Type type) {
         return getStringAsync().thenApplyAsync(jsonString -> JsonUtils.fromNonNullJson(jsonString, type));
     }
 
@@ -101,7 +100,7 @@ public abstract class HttpRequest {
     }
 
     public HttpURLConnection createConnection() throws IOException {
-        HttpURLConnection con = createHttpConnection(new URL(url));
+        HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
         con.setRequestMethod(method);
         for (Map.Entry<String, String> entry : headers.entrySet()) {
             con.setRequestProperty(entry.getKey(), entry.getValue());
@@ -134,7 +133,7 @@ public abstract class HttpRequest {
         }
 
         public HttpPostRequest json(Object payload) throws JsonParseException {
-            return string(payload instanceof String ? (String) payload : GSON.toJson(payload), "application/json");
+            return string(payload instanceof String ? (String) payload : JsonUtils.GSON.toJson(payload), "application/json");
         }
 
         public HttpPostRequest form(Map<String, String> params) {
@@ -147,8 +146,8 @@ public abstract class HttpRequest {
         }
 
         public HttpPostRequest string(String payload, String contentType) {
-            bytes = payload.getBytes(UTF_8);
-            header("Content-Length", "" + bytes.length);
+            bytes = payload.getBytes(StandardCharsets.UTF_8);
+            header("Content-Length", String.valueOf(bytes.length));
             contentType(contentType + "; charset=utf-8");
             return this;
         }

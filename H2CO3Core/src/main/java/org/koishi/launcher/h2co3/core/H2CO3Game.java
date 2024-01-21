@@ -32,7 +32,7 @@ public class H2CO3Game extends HashMap<String, String> {
         return getBoatValueString("h2co3_launcher_render", H2CO3Tools.GL_GL114);
     }
 
-    public static void setRender(String path) {
+    public void setRender(String path) {
         setBoatValue("h2co3_launcher_render", path);
     }
 
@@ -44,27 +44,27 @@ public class H2CO3Game extends HashMap<String, String> {
         setBoatValue("h2co3_launcher_java", path);
     }
 
-    public static String getRuntimePath() {
+    public String getRuntimePath() {
         return getBoatValueString("runtime_path", H2CO3Tools.RUNTIME_DIR);
     }
 
-    public static void setRuntimePath(String path) {
+    public void setRuntimePath(String path) {
         setBoatValue("runtime_path", path);
     }
 
-    public static String getH2CO3Home() {
+    public String getH2CO3Home() {
         return getBoatValueString("h2co3_home", H2CO3Tools.PUBLIC_FILE_PATH);
     }
 
-    public static void setH2CO3Home(String home) {
+    public void setH2CO3Home(String home) {
         setBoatValue("h2co3_home", home);
     }
 
-    public static String getBackground() {
+    public String getBackground() {
         return getBoatValueString("background", "");
     }
 
-    public static void setBackground(String background) {
+    public void setBackground(String background) {
         setBoatValue("background", background);
     }
 
@@ -76,7 +76,7 @@ public class H2CO3Game extends HashMap<String, String> {
         setBoatValue("game_directory", directory);
     }
 
-    public static String getGameAssets() {
+    public String getGameAssets() {
         return getBoatValueString("game_assets", H2CO3Tools.MINECRAFT_DIR + "/assets/virtual/legacy/");
     }
 
@@ -92,11 +92,11 @@ public class H2CO3Game extends HashMap<String, String> {
         setBoatValue("game_assets_root", assetsRoot);
     }
 
-    public static String[] getExtraJavaFlags() {
+    public String[] getExtraJavaFlags() {
         return new String[]{getBoatValueString("extra_java_flags", "")};
     }
 
-    public static void setExtraJavaFlags(String[] javaFlags) {
+    public void setExtraJavaFlags(String[] javaFlags) {
         setBoatValue("extra_java_flags", javaFlags);
     }
 
@@ -104,7 +104,7 @@ public class H2CO3Game extends HashMap<String, String> {
         return new String[]{getBoatValueString("extra_minecraft_flags", "")};
     }
 
-    public static void setExtraMinecraftFlags(String[] minecraftFlags) {
+    public void setExtraMinecraftFlags(String[] minecraftFlags) {
         setBoatValue("extra_minecraft_flags", minecraftFlags);
     }
 
@@ -178,7 +178,7 @@ public class H2CO3Game extends HashMap<String, String> {
             args.add("-Dorg.lwjgl.util.Debug=true");
             args.add("-Dos.name=Linux");
             args.add("-Dos.version=Android-" + Build.VERSION.RELEASE);
-            args.add("-Dlwjgl.platform=H2CO3");
+            args.add("-Dlwjgl.platform=H2CO3Launcher");
             args.add("-Duser.language=" + System.getProperty("user.language"));
             args.add("-Dwindow.width=" + width);
             args.add("-Dwindow.height=" + height);
@@ -189,10 +189,10 @@ public class H2CO3Game extends HashMap<String, String> {
 
             args.add("-Dfml.ignoreInvalidMinecraftCertificates=true");
             args.add("-Dfml.ignorePatchDiscrepancies=true");
-            args.add("-Dh2co3.injector=3:bib:z:s:a");
 
             args.add("-Duser.timezone=" + TimeZone.getDefault().getID());
-            args.add("-Duser.home=" + H2CO3Game.getGameDirectory());
+            args.add("-Duser.home=" + getGameDirectory());
+
 
             if (getRender().equals(H2CO3Tools.GL_VIRGL)) {
                 args.add("-Dorg.lwjgl.opengl.libname=libGL.so.1");
@@ -236,38 +236,6 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     private static void addCacioOptions(Vector<String> args, boolean isJava17, int width, int height) {
-        args.add("-Djava.awt.headless=false");
-        args.add("-Dcacio.managed.screensize=" + width + "x" + height);
-        args.add("-Dcacio.font.fontmanager=sun.awt.X11FontManager");
-        args.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
-        args.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
-
-        if (!isJava17) {
-            args.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
-            args.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
-        } else {
-            args.add("-Dawt.toolkit=com.github.caciocavallosilano.cacio.ctc.CTCToolkit");
-            args.add("-Djava.awt.graphicsenv=com.github.caciocavallosilano.cacio.ctc.CTCGraphicsEnvironment");
-            args.add("-Djava.system.class.loader=com.github.caciocavallosilano.cacio.ctc.CTCPreloadClassLoader");
-
-            args.add("--add-exports=java.desktop/java.awt=ALL-UNNAMED");
-            args.add("--add-exports=java.desktop/java.awt.peer=ALL-UNNAMED");
-            args.add("--add-exports=java.desktop/sun.awt.image=ALL-UNNAMED");
-            args.add("--add-exports=java.desktop/sun.java2d=ALL-UNNAMED");
-            args.add("--add-exports=java.desktop/java.awt.dnd.peer=ALL-UNNAMED");
-            args.add("--add-exports=java.desktop/sun.awt=ALL-UNNAMED");
-            args.add("--add-exports=java.desktop/sun.awt.event=ALL-UNNAMED");
-            args.add("--add-exports=java.desktop/sun.awt.datatransfer=ALL-UNNAMED");
-            args.add("--add-exports=java.desktop/sun.font=ALL-UNNAMED");
-            args.add("--add-exports=java.base/sun.security.action=ALL-UNNAMED");
-            args.add("--add-opens=java.base/java.util=ALL-UNNAMED");
-            args.add("--add-opens=java.desktop/java.awt=ALL-UNNAMED");
-            args.add("--add-opens=java.desktop/sun.font=ALL-UNNAMED");
-            args.add("--add-opens=java.desktop/sun.java2d=ALL-UNNAMED");
-            args.add("--add-opens=java.base/java.lang.reflect=ALL-UNNAMED");
-            args.add("--add-opens=java.base/java.net=ALL-UNNAMED");
-        }
-
         StringBuilder cacioClasspath = new StringBuilder();
         cacioClasspath.append("-Xbootclasspath/").append(!isJava17 ? "p" : "a");
         File cacioDir = new File(!isJava17 ? H2CO3Tools.CACIOCAVALLO_8_DIR : H2CO3Tools.CACIOCAVALLO_17_DIR);
@@ -279,5 +247,36 @@ public class H2CO3Game extends HashMap<String, String> {
             }
         }
         args.add(cacioClasspath.toString());
+            args.add("-Djava.awt.headless=false");
+            args.add("-Dcacio.managed.screensize="+ width + "x" + height);
+            args.add("-Dcacio.font.fontmanager=sun.awt.X11FontManager");
+            args.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
+            args.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
+            if (!isJava17) {
+                args.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
+                args.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
+            } else {
+                args.add("-Dawt.toolkit=com.github.caciocavallosilano.cacio.ctc.CTCToolkit");
+                args.add("-Djava.awt.graphicsenv=com.github.caciocavallosilano.cacio.ctc.CTCGraphicsEnvironment");
+                args.add("-Djava.system.class.loader=com.github.caciocavallosilano.cacio.ctc.CTCPreloadClassLoader");
+
+                args.add("--add-exports=java.desktop/java.awt=ALL-UNNAMED");
+                args.add("--add-exports=java.desktop/java.awt.peer=ALL-UNNAMED");
+                args.add("--add-exports=java.desktop/sun.awt.image=ALL-UNNAMED");
+                args.add("--add-exports=java.desktop/sun.java2d=ALL-UNNAMED");
+                args.add("--add-exports=java.desktop/java.awt.dnd.peer=ALL-UNNAMED");
+                args.add("--add-exports=java.desktop/sun.awt=ALL-UNNAMED");
+                args.add("--add-exports=java.desktop/sun.awt.event=ALL-UNNAMED");
+                args.add("--add-exports=java.desktop/sun.awt.datatransfer=ALL-UNNAMED");
+                args.add("--add-exports=java.desktop/sun.font=ALL-UNNAMED");
+                args.add("--add-exports=java.base/sun.security.action=ALL-UNNAMED");
+                args.add("--add-opens=java.base/java.util=ALL-UNNAMED");
+                args.add("--add-opens=java.desktop/java.awt=ALL-UNNAMED");
+                args.add("--add-opens=java.desktop/sun.font=ALL-UNNAMED");
+                args.add("--add-opens=java.desktop/sun.java2d=ALL-UNNAMED");
+                args.add("--add-opens=java.base/java.lang.reflect=ALL-UNNAMED");
+                args.add("--add-opens=java.base/java.net=ALL-UNNAMED");
+
+        }
     }
 }

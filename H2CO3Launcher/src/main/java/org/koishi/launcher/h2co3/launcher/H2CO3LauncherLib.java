@@ -1,19 +1,30 @@
 package org.koishi.launcher.h2co3.launcher;
 
+import static org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader.receiveLog;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.SurfaceTexture;
 import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Surface;
 
 import androidx.core.content.FileProvider;
 
+import org.koishi.launcher.h2co3.core.H2CO3Game;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 
 import java.io.File;
 
 public class H2CO3LauncherLib {
+
+    public static final int DEFAULT_WIDTH = 1280;
+    public static final int DEFAULT_HEIGHT = 720;
 
     public static final int KeyPress = 2;
     public static final int KeyRelease = 3;
@@ -34,8 +45,11 @@ public class H2CO3LauncherLib {
     public static final int CursorDisabled = 0;
 
     static {
-        System.loadLibrary("h2co3_launcher");
+        System.loadLibrary("h2co3launcher");
+        System.loadLibrary("h2co3_exec_awt");
     }
+
+    private boolean surfaceDestroyed;
 
     public static void setMouseButton(int button, boolean press) {
         pushEventMouseButton(button, press);
@@ -52,6 +66,8 @@ public class H2CO3LauncherLib {
     public static native void setEventPipe();
 
     public static native void pushEvent(long time, int type, int p1, int p2);
+
+    public native int[] renderAWTScreenFrame();
 
     public static void pushEventMouseButton(int button, boolean press) {
         H2CO3LauncherLib.pushEvent(System.nanoTime(), press ? ButtonPress : ButtonRelease, button, 0);
@@ -79,7 +95,7 @@ public class H2CO3LauncherLib {
     public static native int[] getPointer();
 
     // 设置H2CO3本地窗口
-    public static native void setH2CO3LauncherNativeWindow(Surface surface);
+    public static native void h2co3launcherSetNativeWindow(Surface surface);
 
     public static void openLink(final String link) {
         Context context = H2CO3Tools.CONTEXT;
@@ -108,4 +124,45 @@ public class H2CO3LauncherLib {
     }
 
 
+    public void setSurfaceDestroyed(boolean surfaceDestroyed) {
+        this.surfaceDestroyed = surfaceDestroyed;
+    }
+
+    public boolean isSurfaceDestroyed() {
+        return surfaceDestroyed;
+    }
+
+    public void handleWindow(Surface surface) {
+        if (H2CO3Game.getGameDirectory() != null) {
+            receiveLog("invoke setFCLNativeWindow");
+            h2co3launcherSetNativeWindow(surface);
+        } else {
+            receiveLog("start Android AWT Renderer thread");
+            Thread canvasThread = new Thread(() -> {
+                Canvas canvas;
+                Bitmap rgbArrayBitmap = Bitmap.createBitmap(DEFAULT_WIDTH, DEFAULT_HEIGHT, Bitmap.Config.ARGB_8888);
+                Paint paint = new Paint();
+                try {
+                    while (!surfaceDestroyed && surface.isValid()) {
+                        canvas = surface.lockCanvas(null);
+                        canvas.drawRGB(0, 0, 0);
+                        int[] rgbArray = renderAWTScreenFrame();
+                        if (rgbArray != null) {
+                            canvas.save();
+                            rgbArrayBitmap.setPixels(rgbArray, 0, DEFAULT_WIDTH, 0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+                            canvas.drawBitmap(rgbArrayBitmap, 0, 0, paint);
+                            canvas.restore();
+                        }
+                        surface.unlockCanvasAndPost(canvas);
+                    }
+                } catch (Throwable throwable) {
+                    Handler handler = new Handler();
+                    handler.post(() -> receiveLog(throwable.toString()));
+                }
+                rgbArrayBitmap.recycle();
+                surface.release();
+            }, "AndroidAWTRenderer");
+            canvasThread.start();
+        }
+    }
 }

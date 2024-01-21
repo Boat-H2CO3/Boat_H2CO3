@@ -1,7 +1,6 @@
 package org.koishi.launcher.h2co3.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.SurfaceTexture;
@@ -18,10 +17,6 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import org.koishi.launcher.h2co3.launcher.H2CO3LauncherActivity;
-import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLib;
-import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader;
-import org.koishi.launcher.h2co3.launcher.function.H2CO3LauncherCallback;
 import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.controller.HardwareController;
 import org.koishi.launcher.h2co3.control.controller.VirtualController;
@@ -29,6 +24,10 @@ import org.koishi.launcher.h2co3.core.H2CO3Game;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.game.MinecraftVersion;
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
+import org.koishi.launcher.h2co3.launcher.H2CO3LauncherActivity;
+import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLib;
+import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader;
+import org.koishi.launcher.h2co3.launcher.function.H2CO3LauncherCallback;
 import org.koishi.launcher.h2co3.utils.launch.MCOptionUtils;
 import org.koishi.launcher.h2co3.utils.launch.boat.VirGLService;
 
@@ -45,7 +44,7 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
     private int screenWidth;
     private int screenHeight;
     MaterialAlertDialogBuilder dialog;
-
+    H2CO3LauncherLib launcherLib = new H2CO3LauncherLib();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +75,8 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
                 configureSurfaceTexture(surface, width, height);
+                launcherLib.setSurfaceDestroyed(false);
+                launcherLib.handleWindow(new Surface(surface));
                 new Thread(() -> {
                     H2CO3Game gameLaunchSetting = new H2CO3Game();
                     Vector<String> args = H2CO3Game.getMcArgs(gameLaunchSetting, H2CO3LauncherClientActivity.this, (int) (width * scaleFactor), (int) (height * scaleFactor));
@@ -84,6 +85,8 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
                         startGame(args);
                     });
                 }).start();
+                surface.setDefaultBufferSize(width, height);
+                H2CO3LauncherLib.pushEventWindow(width,height);
             }
 
             @Override
@@ -114,6 +117,8 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
 
             @Override
             public void onExit(int code) {
+                startActivity(new Intent(H2CO3LauncherClientActivity.this,ExitActivity.class));
+                ExitActivity.showExitMessage(H2CO3LauncherClientActivity.this,code);
                 stopVirGLService();
             }
         });
@@ -129,7 +134,7 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
     }
 
     private void configureBoatLib(SurfaceTexture surface) {
-        H2CO3LauncherLib.setH2CO3LauncherNativeWindow(new Surface(surface));
+        H2CO3LauncherLib.h2co3launcherSetNativeWindow(new Surface(surface));
         H2CO3LauncherLib.setEventPipe();
     }
 
@@ -140,7 +145,8 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
         System.out.println(args);
         MinecraftVersion mcVersion = MinecraftVersion.fromDirectory(new File(H2CO3Game.getGameCurrentVersion()));
         boolean isHighVersion = mcVersion.minimumLauncherVersion >= 21;
-        startGame(javaPath,
+        startGame(this,
+                javaPath,
                 H2CO3Tools.PUBLIC_FILE_PATH,
                 isHighVersion,
                 args,

@@ -1,16 +1,20 @@
 package org.koishi.launcher.h2co3.core.utils;
 
-import static org.koishi.launcher.h2co3.core.utils.file.AssetsUtils.copyAssets;
 import static org.koishi.launcher.h2co3.core.utils.file.FileTools.uncompressTarXZ;
 
 import android.content.Context;
 
+import org.koishi.launcher.h2co3.core.utils.file.AssetsUtils;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 import org.koishi.launcher.h2co3.core.utils.io.IOUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import java.util.Optional;
 
 public class RuntimeUtils {
 
@@ -20,14 +24,12 @@ public class RuntimeUtils {
         return targetFile.exists() && Long.parseLong(FileTools.readText(targetFile)) == version;
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void install(Context context, String targetDir, String srcDir) throws IOException {
         FileTools.deleteDirectory(new File(targetDir));
         new File(targetDir).mkdirs();
-        copyAssets(context, srcDir, targetDir);
+        AssetsUtils.copyAssets(context, srcDir, targetDir);
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void installJava(Context context, String targetDir, String srcDir) throws IOException {
         FileTools.deleteDirectory(new File(targetDir));
         new File(targetDir).mkdirs();
@@ -40,7 +42,6 @@ public class RuntimeUtils {
         patchJava(context, targetDir);
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void patchJava(Context context, String javaPath) throws IOException {
         Pack200Utils.unpack(context.getApplicationContext().getApplicationInfo().nativeLibraryDir, javaPath);
         File dest = new File(javaPath);

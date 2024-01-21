@@ -1,6 +1,6 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="card_radius">28dp</dimen>
+    <dimen name="card_radius">23dp</dimen>
     <dimen name="app_15dp">15dp</dimen>
     <dimen name="app_16dp">16dp</dimen>
     <dimen name="app_10dp">10dp</dimen>

@@ -145,5 +145,16 @@
     <string name="title_action">提示</string>
     <string name="title_reg">Reg</string>
     <string name="title_runtime">Java Runtime</string>
+    <string name="ver_type_release">Release</string>
+    <string name="download_release">release</string>
+    <string name="download_snapshot">snapshot</string>
+    <string name="download_old_beta">Old</string>
+    <string name="download_tip">Tip</string>
+    <string name="download_page_title">Downloading</string>
+    <string name="total">Progress</string>
+    <string name="spinner_official">official</string>
+    <string name="spinner_mcbbs">mcbbs</string>
+    <string name="spinner_bmclapi">bmclapi</string>
+    <string name="refresh">Refresh</string>
 
 </resources>

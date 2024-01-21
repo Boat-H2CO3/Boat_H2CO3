@@ -3,10 +3,15 @@ package org.koishi.launcher.h2co3.core.login.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
-
-import java.lang.reflect.Method;
+import android.os.Build;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
 
 public class DisplayUtils {
+
+    private static final String NAV_BAR_HEIGHT_RES_NAME = "navigation_bar_height";
+    private static final String SHOW_NAV_BAR_RES_NAME = "config_showNavigationBar";
 
     public static int getPxFromDp(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
@@ -23,44 +28,45 @@ public class DisplayUtils {
         return (int) (spValue * fontScale + 0.5f);
     }
 
-
-    @SuppressLint("ObsoleteSdkInt")
     public static boolean checkDeviceHasNavigationBar(Context context) {
-        boolean hasNavigationBar = false;
-        Resources rs = context.getResources();
-        @SuppressLint("DiscouragedApi") int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
-        if (id > 0) {
-            hasNavigationBar = rs.getBoolean(id);
-        }
-        try {
-            @SuppressLint("PrivateApi") Class<?> systemPropertiesClass = Class.forName("android.os.SystemProperties");
-            Method m = systemPropertiesClass.getMethod("get", String.class);
-            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
-            if ("1".equals(navBarOverride)) {
-                hasNavigationBar = false;
-            } else if ("0".equals(navBarOverride)) {
-                hasNavigationBar = true;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            if (windowManager != null) {
+                Display display = windowManager.getDefaultDisplay();
+                DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+                display.getRealMetrics(realDisplayMetrics);
+                int realHeight = realDisplayMetrics.heightPixels;
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                display.getMetrics(displayMetrics);
+                int displayHeight = displayMetrics.heightPixels;
+                return realHeight - displayHeight > 0;
             }
-        } catch (Exception e) {
-            return false;
+        } else {
+            Resources rs = context.getResources();
+            int id = rs.getIdentifier(SHOW_NAV_BAR_RES_NAME, "bool", "android");
+            if (id > 0) {
+                return rs.getBoolean(id);
+            }
         }
-        return hasNavigationBar;
+        return false;
     }
 
     public static int getNavigationBarHeight(Context context) {
         Resources resources = context.getResources();
-        @SuppressLint({"DiscouragedApi", "InternalInsetResource"}) int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
-        return resources.getDimensionPixelSize(resourceId);
+        int resourceId = resources.getIdentifier(NAV_BAR_HEIGHT_RES_NAME, "dimen", "android");
+        return resourceId > 0 ? resources.getDimensionPixelSize(resourceId) : 0;
     }
 
     public static int[] getApplicationWindowSize(Context context) {
-        int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-        int screenHeight = context.getResources().getDisplayMetrics().heightPixels;
-        return new int[]{screenWidth, screenHeight};
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return new int[]{displayMetrics.widthPixels, displayMetrics.heightPixels};
     }
 
     public static int[] getDisplayWindowSize(Context context) {
-        return new int[]{DisplayUtils.checkDeviceHasNavigationBar(context) ? DisplayUtils.getApplicationWindowSize(context)[0] + DisplayUtils.getNavigationBarHeight(context) : context.getResources().getDisplayMetrics().widthPixels, DisplayUtils.getApplicationWindowSize(context)[1]};
+        int[] applicationWindowSize = getApplicationWindowSize(context);
+        int screenWidth = applicationWindowSize[0];
+        int screenHeight = applicationWindowSize[1];
+        int navigationBarHeight = checkDeviceHasNavigationBar(context) ? getNavigationBarHeight(context) : 0;
+        return new int[]{screenWidth, screenHeight + navigationBarHeight};
     }
-
 }

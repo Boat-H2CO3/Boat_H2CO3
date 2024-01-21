@@ -8,9 +8,14 @@ import org.json.JSONObject;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.login.bean.UserBean;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -69,13 +74,17 @@ public class H2CO3Auth {
 
     private static final List<UserBean> userList = new ArrayList<>();
 
-    static File usersFile = new File(H2CO3Tools.H2CO3_SETTING_DIR, "h2co3_users.json");
+    public static File usersFile = new File(H2CO3Tools.H2CO3_SETTING_DIR, "h2co3_users.json");
 
     public static void addUserToJson(String name, String email, String password, String userType, String apiUrl, String authSession, String uuid, String skinTexture, String token, String refreshToken, String clientToken, Boolean isOffline, boolean isSelected) {
         try {
-            String content = readFileContent(usersFile);
-            JSONObject json = new JSONObject(content.isEmpty() ? "{}" : content);
-
+            JSONObject json;
+            if (usersFile.exists()) {
+                String content = readFileContent(usersFile);
+                json = new JSONObject(content);
+            } else {
+                json = new JSONObject();
+            }
             JSONObject userData = new JSONObject();
             userData.put(H2CO3Tools.LOGIN_USER_EMAIL, email);
             userData.put(H2CO3Tools.LOGIN_USER_PASSWORD, password);
@@ -93,21 +102,19 @@ public class H2CO3Auth {
             json.put(name, userData);
 
             writeFileContent(usersFile, json.toString());
-            parseJsonToUser();
+            parseJsonToUser(json);
         } catch (JSONException ignored) {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void parseJsonToUser() throws IOException {
-        String content = readFileContent(usersFile);
-        if (TextUtils.isEmpty(content) || content.equals("{}")) {
+    public static void parseJsonToUser(JSONObject usersObj) throws IOException {
+        if (usersObj == null || usersObj.length() == 0) {
             return;
         }
 
         try {
-            JSONObject usersObj = new JSONObject(content);
             Iterator<String> keys = usersObj.keys();
             while (keys.hasNext()) {
                 String userName = keys.next();
@@ -177,28 +184,46 @@ public class H2CO3Auth {
 
     public static void setUserJson(String json) {
         try {
+            JSONObject jsonObject = new JSONObject(json);
             writeFileContent(usersFile, json);
-            parseJsonToUser();
-        } catch (IOException e) {
+            parseJsonToUser(jsonObject);
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static String readFileContent(File file) throws IOException {
-        if (!file.exists()) {
-            file.createNewFile();
+    public static String readFileContent(File file) throws IOException {
+        if (!file.exists() || !file.isFile()) {
+            throw new FileNotFoundException("File not found: " + file.getPath());
         }
-        try (FileInputStream fis = new FileInputStream(file)) {
-            byte[] data = new byte[(int) file.length()];
-            fis.read(data);
-            return new String(data, StandardCharsets.UTF_8);
+        if (!file.canRead()) {
+            throw new IOException("No permission to read file: " + file.getPath());
         }
+        StringBuilder content = new StringBuilder((int) file.length());
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            char[] buffer = new char[8192];
+            int bytesRead;
+            while ((bytesRead = reader.read(buffer)) != -1) {
+                content.append(buffer, 0, bytesRead);
+            }
+        }
+        return content.toString();
     }
 
     private static void writeFileContent(File file, String content) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            byte[] data = content.getBytes(StandardCharsets.UTF_8);
-            fos.write(data);
+        if (!file.exists()) {
+            if (!file.createNewFile()) {
+                throw new IOException("Failed to create file: " + file.getPath());
+            }
+        }
+        if (!file.isFile()) {
+            throw new IOException("Not a valid file: " + file.getPath());
+        }
+        if (!file.canWrite()) {
+            throw new IOException("No permission to write to file: " + file.getPath());
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write(content);
         }
     }
 }

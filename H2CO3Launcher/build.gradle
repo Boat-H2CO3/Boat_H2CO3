@@ -6,11 +6,6 @@ android {
         minSdkVersion 28
         targetSdkVersion 34
     }
-    externalNativeBuild {
-        ndkBuild {
-            path file('src/main/jni/Android.mk')
-        }
-    }
 
     buildTypes {
         release {

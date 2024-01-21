@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 
 public final class StringUtils {
 
-    public static int MAX_SHORT_STRING_LENGTH = 77;
+    public static final int MAX_SHORT_STRING_LENGTH = 77;
 
     private StringUtils() {
     }
@@ -113,24 +113,27 @@ public final class StringUtils {
     }
 
     public static String removeSurrounding(String str, String prefix, String suffix) {
-        if ((str.length() >= prefix.length() + suffix.length()) && str.startsWith(prefix) && str.endsWith(suffix))
+        if (str.length() >= prefix.length() + suffix.length() && str.startsWith(prefix) && str.endsWith(suffix)) {
             return str.substring(prefix.length(), str.length() - suffix.length());
-        else
+        } else {
             return str;
+        }
     }
 
     public static String addPrefix(String str, String prefix) {
-        if (str.startsWith(prefix))
+        if (str.startsWith(prefix)) {
             return str;
-        else
+        } else {
             return prefix + str;
+        }
     }
 
     public static String addSuffix(String str, String suffix) {
-        if (str.endsWith(suffix))
+        if (str.endsWith(suffix)) {
             return str;
-        else
+        } else {
             return str + suffix;
+        }
     }
 
     public static String removePrefix(String str, String prefix) {
@@ -138,9 +141,11 @@ public final class StringUtils {
     }
 
     public static String removePrefix(String str, String... prefixes) {
-        for (String prefix : prefixes)
-            if (str.startsWith(prefix))
+        for (String prefix : prefixes) {
+            if (str.startsWith(prefix)) {
                 return str.substring(prefix.length());
+            }
+        }
         return str;
     }
 
@@ -148,48 +153,53 @@ public final class StringUtils {
         return str.endsWith(suffix) ? str.substring(0, str.length() - suffix.length()) : str;
     }
 
-    /**
-     * Remove one suffix of the suffixes of the string.
-     */
     public static String removeSuffix(String str, String... suffixes) {
-        for (String suffix : suffixes)
-            if (str.endsWith(suffix))
+        for (String suffix : suffixes) {
+            if (str.endsWith(suffix)) {
                 return str.substring(0, str.length() - suffix.length());
+            }
+        }
         return str;
     }
 
     public static boolean containsOne(Collection<String> patterns, String... targets) {
         for (String pattern : patterns) {
             String lowerPattern = pattern.toLowerCase(Locale.ROOT);
-            for (String target : targets)
-                if (lowerPattern.contains(target.toLowerCase(Locale.ROOT)))
+            for (String target : targets) {
+                if (lowerPattern.contains(target.toLowerCase(Locale.ROOT))) {
                     return true;
+                }
+            }
         }
         return false;
     }
 
     public static boolean containsOne(String pattern, String... targets) {
         String lowerPattern = pattern.toLowerCase(Locale.ROOT);
-        for (String target : targets)
-            if (lowerPattern.contains(target.toLowerCase(Locale.ROOT)))
+        for (String target : targets) {
+            if (lowerPattern.contains(target.toLowerCase(Locale.ROOT))) {
                 return true;
+            }
+        }
         return false;
     }
 
     public static boolean containsChinese(String str) {
         for (int i = 0; i < str.length(); i++) {
             char ch = str.charAt(i);
-            if (ch >= '一' && ch <= '龥')
+            if (ch >= '一' && ch <= '龥') {
                 return true;
+            }
         }
         return false;
     }
 
     public static List<String> tokenize(String str) {
-        if (str == null)
+        if (str == null) {
             return new ArrayList<>();
-        else
+        } else {
             return tokenize(str, " \t\n\r\f");
+        }
     }
 
     public static List<String> tokenize(String str, String delim) {
@@ -204,8 +214,9 @@ public final class StringUtils {
     }
 
     public static String parseColorEscapes(String original) {
-        if (original.indexOf('§') < 0)
+        if (original.indexOf('§') < 0) {
             return original;
+        }
 
         return original.replaceAll("§[0-9a-gklmnor]", "");
     }
@@ -246,9 +257,11 @@ public final class StringUtils {
     }
 
     public static boolean isASCII(String cs) {
-        for (int i = 0; i < cs.length(); i++)
-            if (cs.charAt(i) >= 128)
+        for (int i = 0; i < cs.length(); i++) {
+            if (cs.charAt(i) >= 128) {
                 return false;
+            }
+        }
         return true;
     }
 
@@ -256,8 +269,9 @@ public final class StringUtils {
         int length = str.length();
         for (int i = 0; i < length; i++) {
             char ch = str.charAt(i);
-            if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z') && !(ch >= 'A' && ch <= 'Z'))
+            if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z') && !(ch >= 'A' && ch <= 'Z')) {
                 return false;
+            }
         }
         return true;
     }
@@ -266,7 +280,6 @@ public final class StringUtils {
      * Class for computing the longest common subsequence between strings.
      */
     public static class LongestCommonSubsequence {
-        // We reuse dynamic programming storage array here to reduce allocations.
         private final int[][] f;
         private final int maxLengthA;
         private final int maxLengthB;
@@ -274,10 +287,7 @@ public final class StringUtils {
         public LongestCommonSubsequence(int maxLengthA, int maxLengthB) {
             this.maxLengthA = maxLengthA;
             this.maxLengthB = maxLengthB;
-            f = new int[maxLengthA + 1][];
-            for (int i = 0; i <= maxLengthA; i++) {
-                f[i] = new int[maxLengthB + 1];
-            }
+            f = new int[maxLengthA + 1][maxLengthB + 1];
         }
 
         public int calc(CharSequence a, CharSequence b) {

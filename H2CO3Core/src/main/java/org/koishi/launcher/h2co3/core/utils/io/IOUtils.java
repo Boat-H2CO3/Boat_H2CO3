@@ -20,43 +20,43 @@ public final class IOUtils {
     public static final int DEFAULT_BUFFER_SIZE = 8 * 1024;
 
     /**
-     * Read all bytes to a buffer from given input stream. The stream will not be closed.
+     * Read all bytes to a buffer from the given input stream. The stream will not be closed.
      *
-     * @param stream the InputStream being read.
+     * @param inputStream the InputStream being read.
      * @return all bytes read from the stream
      * @throws IOException if an I/O error occurs.
      */
-    public static byte[] readFullyWithoutClosing(InputStream stream) throws IOException {
+    public static byte[] readFullyWithoutClosing(InputStream inputStream) throws IOException {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
-        copyTo(stream, result);
+        copyTo(inputStream, result);
         return result.toByteArray();
     }
 
     /**
-     * Read all bytes to a buffer from given input stream, and close the input stream finally.
+     * Read all bytes to a buffer from the given input stream, and close the input stream finally.
      *
-     * @param stream the InputStream being read, closed finally.
+     * @param inputStream the InputStream being read, closed finally.
      * @return all bytes read from the stream
      * @throws IOException if an I/O error occurs.
      */
-    public static ByteArrayOutputStream readFully(InputStream stream) throws IOException {
-        try (InputStream is = stream) {
+    public static ByteArrayOutputStream readFully(InputStream inputStream) throws IOException {
+        try (InputStream is = inputStream) {
             ByteArrayOutputStream result = new ByteArrayOutputStream();
             copyTo(is, result);
             return result;
         }
     }
 
-    public static byte[] readFullyAsByteArray(InputStream stream) throws IOException {
-        return readFully(stream).toByteArray();
+    public static byte[] readFullyAsByteArray(InputStream inputStream) throws IOException {
+        return readFully(inputStream).toByteArray();
     }
 
-    public static String readFullyAsString(InputStream stream) throws IOException {
-        return readFully(stream).toString();
+    public static String readFullyAsString(InputStream inputStream) throws IOException {
+        return readFully(inputStream).toString();
     }
 
-    public static String readFullyAsString(InputStream stream, Charset charset) throws IOException {
-        return readFully(stream).toString(charset.name());
+    public static String readFullyAsString(InputStream inputStream, Charset charset) throws IOException {
+        return readFully(inputStream).toString(charset);
     }
 
     public static void write(String text, OutputStream outputStream) throws IOException {
@@ -71,12 +71,10 @@ public final class IOUtils {
         copyTo(src, dest, new byte[DEFAULT_BUFFER_SIZE]);
     }
 
-    public static void copyTo(InputStream src, OutputStream dest, byte[] buf) throws IOException {
-        while (true) {
-            int len = src.read(buf);
-            if (len == -1)
-                break;
-            dest.write(buf, 0, len);
+    public static void copyTo(InputStream src, OutputStream dest, byte[] buffer) throws IOException {
+        int length;
+        while ((length = src.read(buffer)) != -1) {
+            dest.write(buffer, 0, length);
         }
     }
 }

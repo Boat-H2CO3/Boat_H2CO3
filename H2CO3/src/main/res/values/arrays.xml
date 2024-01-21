@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- Reply Preference -->
+
+    <string-array name="download_source">
+        <item>@string/spinner_official</item>
+        <item>@string/spinner_mcbbs</item>
+        <item>@string/spinner_bmclapi</item>
+    </string-array>
+
+    <string-array name="download_source_value">
+        <item>https://launchermeta.mojang.com</item>
+        <item>https://download.mcbbs.net</item>
+        <item>https://bmclapi2.bangbang93.com</item>
+    </string-array>
+
+
+</resources>

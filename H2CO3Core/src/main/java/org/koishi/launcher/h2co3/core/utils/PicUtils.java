@@ -3,27 +3,28 @@ package org.koishi.launcher.h2co3.core.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.renderscript.Allocation;
+import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 
 public class PicUtils {
 
-    //高斯模糊
+    // 高斯模糊
     public static Bitmap blur(Context context, int radius, final Bitmap bitmap) {
-
         RenderScript rs = RenderScript.create(context);
-        Bitmap bitmap1 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-        Allocation allocation = Allocation.createFromBitmap(rs, bitmap1);
+        Bitmap blurredBitmap = bitmap.copy(bitmap.getConfig(), true);
 
-        ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, allocation.getElement());
-        blur.setInput(allocation);
+        Allocation input = Allocation.createFromBitmap(rs, blurredBitmap);
+        Allocation output = Allocation.createTyped(rs, input.getType());
+
+        ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        blur.setInput(input);
         blur.setRadius(radius);
+        blur.forEach(output);
 
-        blur.forEach(allocation);
-        allocation.copyTo(bitmap1);
-
+        output.copyTo(blurredBitmap);
         rs.destroy();
-        return bitmap1;
-    }
 
+        return blurredBitmap;
+    }
 }

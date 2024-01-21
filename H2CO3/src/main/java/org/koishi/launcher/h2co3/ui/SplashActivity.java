@@ -52,6 +52,7 @@ public class SplashActivity extends H2CO3Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setTheme(R.style.Theme_Boat_H2O2_Custom_GREEN);
+        setContentView(R.layout.activity_splash);
 
 
         // 判断是否是第一次启动App
@@ -74,7 +75,6 @@ public class SplashActivity extends H2CO3Activity {
     }
 
     public void startApp() {
-        setContentView(R.layout.activity_splash);
         splash = findViewById(R.id.splash_view);
         splashCheck = findViewById(R.id.splash_check);
         initState();

@@ -15,9 +15,17 @@ import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 
+import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.resources.R;
 import org.koishi.launcher.h2co3.ui.CrashActivity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -58,9 +66,32 @@ public class H2CO3Application extends Application implements Application.Activit
                 .errorActivity(CrashActivity.class)
                 .eventListener(new CustomEventListener())
                 .apply();
-        if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        }
+        Thread.setDefaultUncaughtExceptionHandler((p1, p2) -> {
+
+
+            Writer i = new StringWriter();
+            p2.printStackTrace(new PrintWriter(i));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            p2.printStackTrace(new PrintStream(baos));
+            byte[] bug = baos.toByteArray();
+
+            try {
+                FileOutputStream f = new FileOutputStream(H2CO3Tools.PUBLIC_FILE_PATH + "/log.txt");
+
+                f.write(i.toString().getBytes());
+
+
+                f.write(bug);
+
+
+                f.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Utils.writeFile("/sdcard/boat/err.log",i.toString());
+        });
     }
 
     @Override

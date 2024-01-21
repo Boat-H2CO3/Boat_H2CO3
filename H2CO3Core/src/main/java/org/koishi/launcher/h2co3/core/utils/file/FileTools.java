@@ -863,10 +863,6 @@ public final class FileTools {
         return file;
     }
 
-    public static byte[] readFile(String filePath) {
-        return FileTools.readFile(new File(filePath));
-    }
-
     public static byte[] readFile(File file) {
         FileInputStream fis = null;
         try {
@@ -878,6 +874,28 @@ public final class FileTools {
             return result;
         } catch (Exception e) {
 
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    public static String readFileToString(File file) {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(file);
+            byte[] result = new byte[(int) file.length()];
+            fis.read(result);
+            fis.close();
+            return new String(result, StandardCharsets.UTF_8);
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (fis != null) {

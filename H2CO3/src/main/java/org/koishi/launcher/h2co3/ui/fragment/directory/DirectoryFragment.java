@@ -4,6 +4,7 @@ import static org.koishi.launcher.h2co3.core.H2CO3Tools.MINECRAFT_DIR;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +40,7 @@ import org.koishi.launcher.h2co3.core.H2CO3Game;
 import org.koishi.launcher.h2co3.core.utils.data.DbDao;
 import org.koishi.launcher.h2co3.core.utils.file.AssetsUtils;
 import org.koishi.launcher.h2co3.resources.component.H2CO3Fragment;
+import org.koishi.launcher.h2co3.ui.VanillaActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -100,7 +102,7 @@ public class DirectoryFragment extends H2CO3Fragment {
         dir = root.findViewById(R.id.ver_new_dir);
         dir.setOnClickListener(v -> showDirDialog());
         ver = root.findViewById(R.id.ver_new_ver);
-        //ver.setOnClickListener(v -> startActivity(new Intent(requireActivity(), VanillaActivity.class)));
+        ver.setOnClickListener(v -> startActivity(new Intent(requireActivity(), VanillaActivity.class)));
         mRecyclerView = root.findViewById(R.id.mRecyclerView);
         mVerRecyclerView = root.findViewById(R.id.mVerRecyclerView);
         dir.hide();
