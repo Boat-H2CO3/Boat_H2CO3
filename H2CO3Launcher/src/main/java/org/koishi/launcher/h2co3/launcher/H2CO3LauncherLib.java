@@ -134,7 +134,7 @@ public class H2CO3LauncherLib {
 
     public void handleWindow(Surface surface) {
         if (H2CO3Game.getGameDirectory() != null) {
-            receiveLog("invoke setFCLNativeWindow");
+            receiveLog("invoke setH2CO3LauncherNativeWindow");
             h2co3launcherSetNativeWindow(surface);
         } else {
             receiveLog("start Android AWT Renderer thread");

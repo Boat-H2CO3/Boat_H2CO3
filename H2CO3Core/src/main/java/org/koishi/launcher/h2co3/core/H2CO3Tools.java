@@ -11,7 +11,6 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.core.utils.Architecture;
-import org.koishi.launcher.h2co3.core.utils.H2CO3DownloadUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,8 +21,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 import rikka.material.app.MaterialActivity;
 
@@ -65,7 +62,7 @@ public class H2CO3Tools {
 
 
     public static String H2CO3_CONFIG_NAME;
-    public static String h2co3_launcher_CONFIG_NAME;
+    public static String H2CO3_LAUNCHER_CONFIG_NAME;
 
     public static String LOGIN_AUTH_PLAYER_NAME;
     public static String LOGIN_USER_EMAIL;
@@ -124,7 +121,7 @@ public class H2CO3Tools {
         MULTIPLAYER_FIX_PATH = PLUGIN_DIR + "/MultiplayerFix.jar";
 
         H2CO3_CONFIG_NAME = "H2CO3Config.json";
-        h2co3_launcher_CONFIG_NAME = "H2CO3LauncherConfig.json";
+        H2CO3_LAUNCHER_CONFIG_NAME = "H2CO3LauncherConfig.json";
 
         LOGIN_AUTH_PLAYER_NAME = "h2co3_users_auth_player_name";
         LOGIN_USER_EMAIL = "h2co3_users_email";
@@ -159,7 +156,7 @@ public class H2CO3Tools {
         init(SHARED_COMMON_DIR);
         init(PUBLIC_FILE_PATH);
         init(H2CO3_CONFIG_NAME);
-        init(h2co3_launcher_CONFIG_NAME);
+        init(H2CO3_LAUNCHER_CONFIG_NAME);
     }
 
     private static void init(String path) {
@@ -168,36 +165,20 @@ public class H2CO3Tools {
         }
     }
 
-    public static boolean getBoatValue(String key, boolean defaultValue) {
-        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) +"/"+ h2co3_launcher_CONFIG_NAME, "usesGlobal", false, Boolean.class)) {
-            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) +"/"+h2co3_launcher_CONFIG_NAME, key, defaultValue, Boolean.class);
-        } else {
-            return getValue(H2CO3_SETTING_DIR + "/"+h2co3_launcher_CONFIG_NAME, key, defaultValue, Boolean.class);
-        }
-    }
-
-    public static String getBoatValueString(String key, String defaultValue) {
-        if (getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+h2co3_launcher_CONFIG_NAME, "usesGlobal", false, Boolean.class)) {
-            return getValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+h2co3_launcher_CONFIG_NAME, key, defaultValue, String.class);
-        } else {
-            return getValue(H2CO3_SETTING_DIR + "/"+h2co3_launcher_CONFIG_NAME, key, defaultValue, String.class);
-        }
+    public static <T> T getBoatValue(String key, T defaultValue, Class<T> type) {
+        return getValue(H2CO3_SETTING_DIR + "/" + H2CO3_LAUNCHER_CONFIG_NAME, key, defaultValue, type);
     }
 
     public static void setBoatValue(String key, java.io.Serializable value) {
-        if (getBoatValue("usesGlobal", false)) {
-            setValue(getH2CO3ValueString("currentVersion", H2CO3_SETTING_DIR) + "/"+h2co3_launcher_CONFIG_NAME, key, value);
+        if (getBoatValue("usesGlobal", false,Boolean.class)) {
+            setValue(getH2CO3Value("currentVersion", H2CO3_SETTING_DIR,String.class) + "/"+ H2CO3_LAUNCHER_CONFIG_NAME, key, value);
         } else {
-            setValue(H2CO3_SETTING_DIR + "/"+h2co3_launcher_CONFIG_NAME, key, value);
+            setValue(H2CO3_SETTING_DIR + "/"+ H2CO3_LAUNCHER_CONFIG_NAME, key, value);
         }
     }
 
-    public static String getH2CO3ValueString(String key, String defaultValue) {
-        return getValue(H2CO3_SETTING_DIR + "/"+H2CO3_CONFIG_NAME, key, defaultValue, String.class);
-    }
-
-    public static boolean getH2CO3Value(String key, boolean defaultValue) {
-        return getValue(H2CO3_SETTING_DIR + "/"+H2CO3_CONFIG_NAME, key, defaultValue, Boolean.class);
+    public static <T> T getH2CO3Value(String key, T defaultValue, Class<T> type) {
+        return getValue(H2CO3_SETTING_DIR + "/" + H2CO3_CONFIG_NAME, key, defaultValue, type);
     }
 
     public static void setH2CO3Value(String key, java.io.Serializable value) {
@@ -279,19 +260,28 @@ public class H2CO3Tools {
         }
     }
 
-    public static void downloadFile(String urlInput, String nameOutput) throws IOException {
-        File file = new File(nameOutput);
-        H2CO3DownloadUtils.downloadFile(urlInput, file);
+    public static <T> T convertValue(Object value, Class<T> type) {
+        if (value == null) {
+            return null;
+        }
+
+        if (type.isAssignableFrom(value.getClass())) {
+            return type.cast(value);
+        }
+
+        // 根据type的类型进行相应的转换操作
+        if (type == String.class) {
+            return type.cast(value.toString());
+        } else if (type == Integer.class) {
+            return type.cast(Integer.parseInt(value.toString()));
+        } else if (type == Boolean.class) {
+            return type.cast(Boolean.parseBoolean(value.toString()));
+        }
+
+        // 如果无法转换，则返回默认值
+        return null;
     }
 
-    public static String extractUntilCharacter(String input, String whatFor, char terminator) {
-        int whatForStart = input.indexOf(whatFor);
-        if(whatForStart == -1) return null;
-        whatForStart += whatFor.length();
-        int terminatorIndex = input.indexOf(terminator, whatForStart);
-        if(terminatorIndex == -1) return null;
-        return input.substring(whatForStart, terminatorIndex);
-    }
     public static void showError(Context context, String message) {
         View view = ((MaterialActivity) context).findViewById(android.R.id.content);
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();

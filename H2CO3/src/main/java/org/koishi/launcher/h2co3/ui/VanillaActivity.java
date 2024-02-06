@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.adapter.VersionAdapter;
+import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 import org.koishi.launcher.h2co3.utils.Version;
 
 import java.io.BufferedReader;
@@ -31,7 +32,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VanillaActivity extends AppCompatActivity {
+public class VanillaActivity extends H2CO3Activity {
 
     private static final String API_URL_BMCLAPI = "https://bmclapi2.bangbang93.com/mc/game/version_manifest_v2.json";
     private static final String API_URL_MCBBS = "https://download.mcbbs.net/mc/game/version_manifest_v2.json";

@@ -25,6 +25,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -35,15 +36,11 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         System.loadLibrary("h2co3launcher");
     }
 
-    // 主纹理视图
     public TextureView mainTextureView;
     public RelativeLayout baseLayout;
-    // H2CO3回调
     public H2CO3LauncherCallback h2co3LauncherCallback;
-    // 定时器
     public Timer timer;
     private TimerTask systemUiTimerTask;
-    // 输出
     int output = 0;
     public final float scaleFactor = 1.0F;
 
@@ -51,37 +48,31 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
     private static final int SYSTEM_UI_HIDE_DELAY_MS = 3000;
 
-    // 初始化
     public void init() {
         nOnCreate();
         timer = new Timer();
         mainTextureView.setSurfaceTextureListener(this);
     }
 
-    // 调用本地方法
     public native void nOnCreate();
 
     public static native void setupExitTrap(Context context);
 
-    // 当SurfaceTexture可用时调用
     public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
         Log.d("H2CO3LauncherActivity", "SurfaceTexture is available!");
         h2co3LauncherCallback.onSurfaceTextureAvailable(surface, width, height);
     }
 
-    // 当SurfaceTexture尺寸改变时调用
     @Override
     public void onSurfaceTextureSizeChanged(@NonNull SurfaceTexture surface, int width, int height) {
         h2co3LauncherCallback.onSurfaceTextureSizeChanged(surface, width, height);
     }
 
-    // 当SurfaceTexture销毁时调用
     @Override
     public boolean onSurfaceTextureDestroyed(@NonNull SurfaceTexture surface) {
         return false;
     }
 
-    // 当SurfaceTexture更新时调用
     @Override
     public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surface) {
         if (output == 1) {
@@ -93,9 +84,8 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         }
     }
 
-    public static final ExecutorService executorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
+    public static final ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-    // 启动游戏
     public void startGame(Context context,final String javaPath, final String home, final boolean highVersion, final Vector<String> args, String renderer, String gameDir) {
         setupExitTrap(this);
         executorService.execute(() -> {
@@ -131,9 +121,6 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
                     h2co3LauncherCallback.onError(e);
                 }
 
-                /**
-                 * @param code
-                 */
                 @Override
                 public void onExit(int code) {
 
@@ -142,19 +129,17 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         });
     }
 
-    // 设置H2CO3回调
     public void setH2CO3LauncherCallback(H2CO3LauncherCallback callback) {
         this.h2co3LauncherCallback = callback;
     }
 
     public abstract void onClick(View p1);
 
-    // 在恢复后调用
     @Override
     protected void onPostResume() {
         super.onPostResume();
         if (mainTextureView != null && mainTextureView.getSurfaceTexture() != null) {
-            mainTextureView.post(() -> h2co3LauncherCallback.onSurfaceTextureSizeChanged(mainTextureView.getSurfaceTexture(), mainTextureView.getWidth(), mainTextureView.getHeight()));
+            h2co3LauncherCallback.onSurfaceTextureSizeChanged(mainTextureView.getSurfaceTexture(), mainTextureView.getWidth(), mainTextureView.getHeight());
         }
     }
 
@@ -162,7 +147,6 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         runOnUiThread(() -> boatInterface.setGrabCursor(isGrabbed));
     }
 
-    // Override addContentView method to dynamically add views
     @Override
     public void addContentView(View view, ViewGroup.LayoutParams params) {
         if (params instanceof RelativeLayout.LayoutParams) {
@@ -173,7 +157,6 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         }
     }
 
-    // Override the dispatchKeyEvent method to redirect events to Boat
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (boatInterface.dispatchKeyEvent(event)) {
@@ -183,7 +166,6 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         return super.dispatchKeyEvent(event);
     }
 
-    // Override the dispatchGenericMotionEvent method to redirect events to Boat
     @Override
     public boolean dispatchGenericMotionEvent(MotionEvent event) {
         if (boatInterface.dispatchGenericMotionEvent(event)) {
@@ -193,7 +175,6 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         return super.dispatchGenericMotionEvent(event);
     }
 
-    // 获取指针坐标
     public int[] getPointer() {
         return H2CO3LauncherLib.getPointer();
     }

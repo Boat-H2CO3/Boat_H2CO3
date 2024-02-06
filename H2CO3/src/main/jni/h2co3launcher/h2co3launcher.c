@@ -35,7 +35,7 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_h2co3launcherSetNativeW
                                                                                       jclass clazz,
                                                                                       jobject surface) {
     h2co3launcher->window = ANativeWindow_fromSurface(env, surface);
-    H2CO3_INTERNAL_LOG("setFCLNativeWindow : %p, size : %dx%d", h2co3launcher->window, ANativeWindow_getWidth(h2co3launcher->window), ANativeWindow_getHeight(h2co3launcher->window));
+    H2CO3_INTERNAL_LOG("setH2CO3LauncherNativeWindow : %p, size : %dx%d", h2co3launcher->window, ANativeWindow_getWidth(h2co3launcher->window), ANativeWindow_getHeight(h2co3launcher->window));
 }
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {

@@ -22,16 +22,17 @@ import org.koishi.launcher.h2co3.control.ckb.achieve.CkbManagerDialog;
 import org.koishi.launcher.h2co3.control.ckb.support.CallCustomizeKeyboard;
 import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.controller.Controller;
-import org.koishi.launcher.h2co3.control.controller.VirtualController;
+import org.koishi.launcher.h2co3.control.controller.H2CO3VirtualController;
 import org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent;
 import org.koishi.launcher.h2co3.control.input.screen.CustomizeKeyboard;
 import org.koishi.launcher.h2co3.core.utils.PicUtils;
+import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CustomizeKeyboardEditorActivity extends AppCompatActivity implements View.OnSystemUiVisibilityChangeListener, View.OnClickListener, DrawerLayout.DrawerListener, CallCustomizeKeyboard, H2CO3ControlClient {
+public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements View.OnSystemUiVisibilityChangeListener, View.OnClickListener, DrawerLayout.DrawerListener, CallCustomizeKeyboard, H2CO3ControlClient {
 
     private final static int SYSTEM_UI_HIDE_DELAY_MS = 3000;
     private final int[] pointer = new int[]{0, 0};
@@ -114,11 +115,11 @@ public class CustomizeKeyboardEditorActivity extends AppCompatActivity implement
         mLayout_main.setBackground(new BitmapDrawable(getResources(), PicUtils.blur(this, 10, ((BitmapDrawable) Objects.requireNonNull(ContextCompat.getDrawable(this, org.koishi.launcher.h2co3.resources.R.drawable.background))).getBitmap())));
 
         //初始化控制器
-        mController = new VirtualController(this, KeyEvent.KEYMAP_TO_X) {
+        mController = new H2CO3VirtualController(this, KeyEvent.KEYMAP_TO_X) {
             @Override
             public void init() {
                 super.init();
-                //移除屏幕触摸板
+                /*//移除屏幕触摸板
                 this.removeInput(onscreenTouchpad);
                 //禁用自定义键盘
                 this.custmoizeKeyboard.setEnabled(false);
@@ -140,7 +141,7 @@ public class CustomizeKeyboardEditorActivity extends AppCompatActivity implement
                 this.addInput(custmoizeKeyboard);
                 //启用新的自定义键盘
                 this.custmoizeKeyboard.setEnabled(true);
-                //重新绑定一级界面的控件与输入器
+                //重新绑定一级界面的控件与输入器*/
                 bindViewWithInput();
             }
         };

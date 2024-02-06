@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 public class DebugInfo implements Input, View.OnClickListener {
-    private final static String TAG = "DebugInfo";
     private Context mContext;
     private Controller mController;
     private boolean isEnabled;
@@ -49,7 +48,7 @@ public class DebugInfo implements Input, View.OnClickListener {
         mLogView.setX(0);
         mLogView.setY(mController.getConfig().getScreenHeight() - mLogView.getLayoutParams().height);
 
-        if (H2CO3LauncherLoader.logReceiver == null || H2CO3LauncherLoader.logReceiver.get() == null) {
+        if (H2CO3LauncherLoader.logReceiver == null || H2CO3LauncherLoader.logReceiver.getLogs() == null) {
             H2CO3LauncherLoader.LogReceiver mReceiver = new H2CO3LauncherLoader.LogReceiver() {
                 final StringBuilder stringBuilder = new StringBuilder();
 
@@ -65,7 +64,7 @@ public class DebugInfo implements Input, View.OnClickListener {
                     return stringBuilder.toString();
                 }
             };
-            H2CO3LauncherLoader.logReceiver = new WeakReference<>(mReceiver);
+            H2CO3LauncherLoader.logReceiver = new WeakReference<>(mReceiver).get();
         }
 
         return true;

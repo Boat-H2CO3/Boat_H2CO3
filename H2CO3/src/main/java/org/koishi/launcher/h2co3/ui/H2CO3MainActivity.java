@@ -155,10 +155,10 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
 
     @SuppressLint("SetTextI18n")
     private void setUserStateFromJson() {
-        String apiUrl = H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_API_URL, H2CO3Tools.LOGIN_ERROR);
-        homeTopbarUserName.setText(H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_AUTH_PLAYER_NAME, ""));
-        String userType = H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USER_TYPE, "0");
-        String userSkinTexture = H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USER_SKINTEXTURE, "");
+        String apiUrl = H2CO3Tools.getH2CO3Value(H2CO3Tools.LOGIN_API_URL, H2CO3Tools.LOGIN_ERROR, String.class);
+        homeTopbarUserName.setText(H2CO3Tools.getH2CO3Value(H2CO3Tools.LOGIN_AUTH_PLAYER_NAME, "", String.class));
+        String userType = H2CO3Tools.getH2CO3Value(H2CO3Tools.LOGIN_USER_TYPE, "0", String.class);
+        String userSkinTexture = H2CO3Tools.getH2CO3Value(H2CO3Tools.LOGIN_USER_SKINTEXTURE, "", String.class);
 
         final String MICROSOFT_USER_STATE = getString(org.koishi.launcher.h2co3.resources.R.string.user_state_microsoft);
         final String OTHER_USER_STATE = getString(org.koishi.launcher.h2co3.resources.R.string.user_state_other);
@@ -295,7 +295,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
             switch (selectedTabPosition) {
                 case 0:
                     if (isValidUsername(text)) {
-                        H2CO3Auth.addUserToJson(text, "", "", "0", "", "", "", "", "", "", "", true, false);
+                        H2CO3Auth.addUserToJson(text, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", true, false);
                         adapterUser.notifyItemInserted(adapterUser.getItemCount() - 1);
                         popView.dismiss();
                         loginDialogAlert.dismiss();

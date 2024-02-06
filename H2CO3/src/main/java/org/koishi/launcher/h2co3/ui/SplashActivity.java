@@ -54,16 +54,12 @@ public class SplashActivity extends H2CO3Activity {
         //setTheme(R.style.Theme_Boat_H2O2_Custom_GREEN);
         setContentView(R.layout.activity_splash);
 
+        boolean isFirstLaunch = H2CO3Tools.getH2CO3Value("isFirstLaunch",true, Boolean.class);
 
-        // 判断是否是第一次启动App
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isFirstLaunch = preferences.getBoolean("isFirstLaunch", true);
         if (isFirstLaunch) {
             H2CO3Auth.resetUserState();
             H2CO3Loader.setDir(H2CO3Tools.MINECRAFT_DIR);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean("isFirstLaunch", false);
-            editor.apply();
+            H2CO3Tools.setH2CO3Value("isFirstLaunch",false);
             checkPermission();
         } else {
             checkPermission();

@@ -24,7 +24,7 @@ public class H2CO3Activity extends MaterialActivity {
         H2CO3Tools.loadPaths(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             //这里做你想做的事
-            boolean spIsAuth = H2CO3Tools.getH2CO3Value("enable_monet", true);
+            boolean spIsAuth = H2CO3Tools.getH2CO3Value("enable_monet", true, Boolean.class);
             if (spIsAuth) {
                 setTheme(R.style.Theme_H2CO3_DynamicColors);
             } else {

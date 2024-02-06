@@ -31,51 +31,51 @@ public class H2CO3Auth {
     public static File serversFile = new File(H2CO3Tools.H2CO3_SETTING_DIR + "/h2co3_servers.json");
 
     public static String getPlayerName() {
-        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_AUTH_PLAYER_NAME, null);
+        return H2CO3Tools.getH2CO3Value(H2CO3Tools.LOGIN_AUTH_PLAYER_NAME, null,String.class);
     }
 
     public static void setPlayerName(String properties) {
-        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_AUTH_PLAYER_NAME, properties);
+        H2CO3Tools.setH2CO3Value(H2CO3Tools.LOGIN_AUTH_PLAYER_NAME, properties);
     }
 
     public static String getAuthSession() {
-        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_AUTH_SESSION, "0");
+        return H2CO3Tools.getH2CO3Value(H2CO3Tools.LOGIN_AUTH_SESSION, "0",String.class);
     }
 
     public static void setAuthSession(String session) {
-        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_AUTH_SESSION, session);
+        H2CO3Tools.setH2CO3Value(H2CO3Tools.LOGIN_AUTH_SESSION, session);
     }
 
     public static String getUserProperties() {
-        return H2CO3Tools.getH2CO3ValueString(USER_PROPERTIES, "{}");
+        return H2CO3Tools.getH2CO3Value(USER_PROPERTIES, "{}",String.class);
     }
 
     public static void setUserProperties(String properties) {
-        H2CO3Tools.setBoatValue(USER_PROPERTIES, properties);
+        H2CO3Tools.setH2CO3Value(USER_PROPERTIES, properties);
     }
 
     public static String getUserType() {
-        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USER_TYPE, LOGIN_USER_TYPE);
+        return H2CO3Tools.getH2CO3Value(H2CO3Tools.LOGIN_USER_TYPE, LOGIN_USER_TYPE,String.class);
     }
 
     public static void setUserType(String type) {
-        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_USER_TYPE, type);
+        H2CO3Tools.setH2CO3Value(H2CO3Tools.LOGIN_USER_TYPE, type);
     }
 
     public static String getAuthUUID() {
-        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_UUID, LOGIN_UUID);
+        return H2CO3Tools.getH2CO3Value(H2CO3Tools.LOGIN_UUID, LOGIN_UUID,String.class);
     }
 
     public static void setAuthUUID(String uuid) {
-        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_UUID, uuid);
+        H2CO3Tools.setH2CO3Value(H2CO3Tools.LOGIN_UUID, uuid);
     }
 
     public static String getAuthAccessToken() {
-        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_TOKEN, LOGIN_TOKEN);
+        return H2CO3Tools.getH2CO3Value(H2CO3Tools.LOGIN_TOKEN, LOGIN_TOKEN,String.class);
     }
 
     public static void setAuthAccessToken(String token) {
-        H2CO3Tools.setBoatValue(H2CO3Tools.LOGIN_TOKEN, token);
+        H2CO3Tools.setH2CO3Value(H2CO3Tools.LOGIN_TOKEN, token);
     }
 
     private static final List<UserBean> userList = new ArrayList<>();

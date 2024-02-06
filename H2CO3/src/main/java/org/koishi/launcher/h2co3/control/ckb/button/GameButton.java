@@ -28,6 +28,7 @@ import org.koishi.launcher.h2co3.control.controller.Controller;
 import org.koishi.launcher.h2co3.control.event.BaseKeyEvent;
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
 import org.koishi.launcher.h2co3.core.utils.ColorUtils;
+import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -106,9 +107,9 @@ public class GameButton extends AppCompatButton implements View.OnTouchListener 
         this.mCall = call;
         this.mController = controller;
         this.mManager = manager;
-        AppCompatActivity mActivity;
-        if (mContext instanceof AppCompatActivity) {
-            mActivity = (AppCompatActivity) mContext;
+        H2CO3Activity mActivity;
+        if (mContext instanceof H2CO3Activity) {
+            mActivity = (H2CO3Activity) mContext;
 
         } else {
             mActivity = null;

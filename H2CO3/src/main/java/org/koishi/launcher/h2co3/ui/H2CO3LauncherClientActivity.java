@@ -19,7 +19,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.controller.HardwareController;
-import org.koishi.launcher.h2co3.control.controller.VirtualController;
+import org.koishi.launcher.h2co3.control.controller.H2CO3VirtualController;
 import org.koishi.launcher.h2co3.core.H2CO3Game;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.game.MinecraftVersion;
@@ -51,10 +51,8 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
         setContentView(org.koishi.launcher.h2co3.launcher.R.layout.overlay);
         mainTextureView = findViewById(org.koishi.launcher.h2co3.launcher.R.id.main_game_render_view);
         baseLayout = findViewById(org.koishi.launcher.h2co3.launcher.R.id.main_base);
-        getWindow().getDecorView().findViewById(android.R.id.content).post(() -> {
-            screenWidth = getSurfaceLayerView().getWidth();
-            screenHeight = getResources().getDisplayMetrics().heightPixels;
-        });
+        screenWidth = getSurfaceLayerView().getWidth();
+        screenHeight = getResources().getDisplayMetrics().heightPixels;
         cursorIcon = new ImageView(this);
         cursorIcon.setLayoutParams(new ViewGroup.LayoutParams(DisplayUtils.getPxFromDp(this, CURSOR_SIZE), DisplayUtils.getPxFromDp(this, CURSOR_SIZE)));
         cursorIcon.setImageResource(org.koishi.launcher.h2co3.resources.R.drawable.cursor5);
@@ -142,7 +140,6 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
         String javaPath = H2CO3Game.getJavaPath();
         String boatRenderer = H2CO3Tools.GL_GL114;
 
-        System.out.println(args);
         MinecraftVersion mcVersion = MinecraftVersion.fromDirectory(new File(H2CO3Game.getGameCurrentVersion()));
         boolean isHighVersion = mcVersion.minimumLauncherVersion >= 21;
         startGame(this,
@@ -205,10 +202,8 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
             if (y >= 0 && y <= screenHeight)
                 grabbedPointer[1] += yInc;
             setPointer(grabbedPointer[0], grabbedPointer[1]);
-            this.cursorIcon.post(() -> {
-                cursorIcon.setX(grabbedPointer[0]);
-                cursorIcon.setY(grabbedPointer[1]);
-            });
+            cursorIcon.setX(grabbedPointer[0]);
+            cursorIcon.setY(grabbedPointer[1]);
         } else {
             setPointer(getPointer()[0] + xInc, getPointer()[1] + yInc);
         }
@@ -218,10 +213,8 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
     public void setPointer(int x, int y) {
         super.setPointer(x, y);
         if (!grabbed) {
-            this.cursorIcon.post(() -> {
-                cursorIcon.setX(x);
-                cursorIcon.setY(y);
-            });
+            cursorIcon.setX(x);
+            cursorIcon.setY(y);
             grabbedPointer[0] = x;
             grabbedPointer[1] = y;
         }
@@ -277,21 +270,21 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
         this.grabbed = isGrabbed;
         if (!isGrabbed) {
             setPointer(grabbedPointer[0], grabbedPointer[1]);
-            cursorIcon.post(() -> cursorIcon.setVisibility(View.VISIBLE));
+            cursorIcon.setVisibility(View.VISIBLE);
         } else if (cursorIcon.getVisibility() == View.VISIBLE) {
-            cursorIcon.post(() -> cursorIcon.setVisibility(View.INVISIBLE));
+            cursorIcon.setVisibility(View.INVISIBLE);
         }
     }
 
     public static void attachControllerInterface() {
         H2CO3LauncherClientActivity.boatInterface = new H2CO3LauncherClientActivity.IBoat() {
-            private VirtualController virtualController;
+            private H2CO3VirtualController virtualController;
             private HardwareController hardwareController;
             private Timer timer;
 
             @Override
             public void onActivityCreate(H2CO3LauncherActivity boatActivity) {
-                virtualController = new VirtualController((H2CO3ControlClient) boatActivity, KEYMAP_TO_X);
+                virtualController = new H2CO3VirtualController((H2CO3ControlClient) boatActivity, KEYMAP_TO_X);
                 hardwareController = new HardwareController((H2CO3ControlClient) boatActivity, KEYMAP_TO_X);
             }
 
