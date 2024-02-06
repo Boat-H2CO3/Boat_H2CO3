@@ -64,19 +64,10 @@ public class MicrosoftLoginUtils {
 
         String req = ofFormData(data);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        conn.setRequestProperty("charset", "utf-8");
-        conn.setRequestProperty("Content-Length", String.valueOf(req.getBytes(StandardCharsets.UTF_8).length));
-        conn.setRequestMethod("POST");
-        conn.setUseCaches(false);
-        conn.setDoInput(true);
-        conn.setDoOutput(true);
-        conn.connect();
-        try (OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes(StandardCharsets.UTF_8));
-        }
+        setRequestProperties(conn, "application/x-www-form-urlencoded", req);
+        setRequestOutput(conn, req);
         if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            JSONObject jo = new JSONObject(H2CO3Tools.read(conn.getInputStream()));
+            JSONObject jo = new JSONObject(readResponse(conn));
             msRefreshToken = jo.getString("refresh_token");
             Log.i("MicroAuth", "Acess Token = " + jo.getString("access_token"));
             acquireXBLToken(jo.getString("access_token"));
@@ -98,20 +89,10 @@ public class MicrosoftLoginUtils {
         data.put("TokenType", "JWT");
         String req = ofJSONData(data);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("Accept", "application/json");
-        conn.setRequestProperty("charset", "utf-8");
-        conn.setRequestProperty("Content-Length", String.valueOf(req.getBytes(StandardCharsets.UTF_8).length));
-        conn.setRequestMethod("POST");
-        conn.setUseCaches(false);
-        conn.setDoInput(true);
-        conn.setDoOutput(true);
-        conn.connect();
-        try (OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes(StandardCharsets.UTF_8));
-        }
+        setRequestProperties(conn, "application/json", req);
+        setRequestOutput(conn, req);
         if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            JSONObject jo = new JSONObject(H2CO3Tools.read(conn.getInputStream()));
+            JSONObject jo = new JSONObject(readResponse(conn));
             Log.i("MicroAuth", "Xbl Token = " + jo.getString("Token"));
             acquireXsts(jo.getString("Token"));
         } else {
@@ -130,21 +111,10 @@ public class MicrosoftLoginUtils {
         data.put("TokenType", "JWT");
         String req = ofJSONData(data);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("Accept", "application/json");
-        conn.setRequestProperty("charset", "utf-8");
-        conn.setRequestProperty("Content-Length", String.valueOf(req.getBytes(StandardCharsets.UTF_8).length));
-        conn.setRequestMethod("POST");
-        conn.setUseCaches(false);
-        conn.setDoInput(true);
-        conn.setDoOutput(true);
-        conn.connect();
-        try (OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes(StandardCharsets.UTF_8));
-        }
-
+        setRequestProperties(conn, "application/json", req);
+        setRequestOutput(conn, req);
         if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            JSONObject jo = new JSONObject(H2CO3Tools.read(conn.getInputStream()));
+            JSONObject jo = new JSONObject(readResponse(conn));
             String uhs = jo.getJSONObject("DisplayClaims").getJSONArray("xui").getJSONObject(0).getString("uhs");
             Log.i("MicroAuth", "Xbl Xsts = " + jo.getString("Token") + "; Uhs = " + uhs);
             acquireMinecraftToken(uhs, jo.getString("Token"));
@@ -161,21 +131,10 @@ public class MicrosoftLoginUtils {
 
         String req = ofJSONData(data);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("Accept", "application/json");
-        conn.setRequestProperty("charset", "utf-8");
-        conn.setRequestProperty("Content-Length", String.valueOf(req.getBytes(StandardCharsets.UTF_8).length));
-        conn.setRequestMethod("POST");
-        conn.setUseCaches(false);
-        conn.setDoInput(true);
-        conn.setDoOutput(true);
-        conn.connect();
-        try (OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes(StandardCharsets.UTF_8));
-        }
-
+        setRequestProperties(conn, "application/json", req);
+        setRequestOutput(conn, req);
         if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            JSONObject jo = new JSONObject(H2CO3Tools.read(conn.getInputStream()));
+            JSONObject jo = new JSONObject(readResponse(conn));
             Log.i("MicroAuth", "MC token: " + jo.getString("access_token"));
             mcToken = jo.getString("access_token");
             tokenType = jo.getString("token_type");
@@ -194,7 +153,7 @@ public class MicrosoftLoginUtils {
         conn.connect();
 
         if (conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
-            String s = H2CO3Tools.read(conn.getInputStream());
+            String s = readResponse(conn);
             Log.i("MicroAuth", "profile:" + s);
             JSONObject jsonObject = new JSONObject(s);
             String name = jsonObject.getString("name");
@@ -307,9 +266,30 @@ public class MicrosoftLoginUtils {
         return builder.build().getEncodedQuery();
     }
 
+    private static void setRequestProperties(HttpURLConnection conn, String contentType, String req) {
+        conn.setRequestProperty("Content-Type", contentType);
+        conn.setRequestProperty("charset", "utf-8");
+        conn.setRequestProperty("Content-Length", String.valueOf(req.getBytes(StandardCharsets.UTF_8).length));
+    }
+
+    private static void setRequestOutput(HttpURLConnection conn, String req) throws IOException {
+        conn.setRequestMethod("POST");
+        conn.setUseCaches(false);
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
+        conn.connect();
+        try (OutputStream wr = conn.getOutputStream()) {
+            wr.write(req.getBytes(StandardCharsets.UTF_8));
+        }
+    }
+
+    private static String readResponse(HttpURLConnection conn) throws IOException {
+        return H2CO3Tools.read(conn.getInputStream());
+    }
+
     private static void throwResponseError(HttpURLConnection conn) throws IOException {
         String otherErrStr = "";
-        String errStr = H2CO3Tools.read(conn.getErrorStream());
+        String errStr = readResponse(conn);
         Log.i("MicroAuth", "Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n" + errStr);
 
         if (errStr.contains("NOT_FOUND") &&

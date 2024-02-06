@@ -12,6 +12,7 @@ import org.koishi.launcher.h2co3.core.utils.io.IOUtils;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -136,12 +137,12 @@ public abstract class HttpRequest {
             return string(payload instanceof String ? (String) payload : JsonUtils.GSON.toJson(payload), "application/json");
         }
 
-        public HttpPostRequest form(Map<String, String> params) {
+        public HttpPostRequest form(Map<String, String> params) throws UnsupportedEncodingException {
             return string(NetworkUtils.withQuery("", params), "application/x-www-form-urlencoded");
         }
 
         @SafeVarargs
-        public final HttpPostRequest form(Pair<String, String>... params) {
+        public final HttpPostRequest form(Pair<String, String>... params) throws UnsupportedEncodingException {
             return form(mapOf(params));
         }
 
@@ -180,7 +181,7 @@ public abstract class HttpRequest {
     }
 
     @SafeVarargs
-    public static HttpGetRequest GET(String url, Pair<String, String>... query) {
+    public static HttpGetRequest GET(String url, Pair<String, String>... query) throws UnsupportedEncodingException {
         return GET(NetworkUtils.withQuery(url, mapOf(query)));
     }
 

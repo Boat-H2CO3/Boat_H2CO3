@@ -5,7 +5,7 @@
     <org.koishi.launcher.h2co3.resources.component.H2CO3CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/Theme.H2CO3.CardViewElevated">
+        style="@style/Theme.H2CO3.CardViewElevated.NoPadding">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_user_list"
             android:layout_width="match_parent"

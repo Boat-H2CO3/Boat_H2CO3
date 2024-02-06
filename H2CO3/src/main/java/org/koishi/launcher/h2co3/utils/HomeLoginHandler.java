@@ -109,7 +109,7 @@ public class HomeLoginHandler extends Handler {
                                 H2CO3Auth.addUserToJson(microsoftLoginUtils.mcName, "", "", "1", "https://www.microsoft.com", "0", microsoftLoginUtils.mcUuid, skinTexture, microsoftLoginUtils.mcToken, microsoftLoginUtils.msRefreshToken, "00000000-0000-0000-0000-000000000000", false, false);
                                 activity.popView.dismiss();
                                 activity.loginDialogAlert.dismiss();
-                                activity.microsoftsoftLoginWaitDialogAlert.dismiss();
+                                activity.progressDialog.dismiss();
                             });
                         }
                     } catch (Exception e) {

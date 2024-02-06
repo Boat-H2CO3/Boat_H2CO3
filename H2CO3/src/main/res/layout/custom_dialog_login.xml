@@ -107,7 +107,8 @@
             android:visibility="gone"
             android:id="@+id/server_selector"
             android:layout_marginTop="@dimen/app_15dp">
-            <Spinner
+            <androidx.appcompat.widget.AppCompatSpinner
+                style="?attr/listPopupWindowStyle"
                 android:id="@+id/server_spinner"
                 android:layout_width="0dp"
                 android:layout_height="?actionBarSize"

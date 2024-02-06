@@ -5,10 +5,10 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
-import org.koishi.launcher.h2co3.launcher.function.H2CO3LauncherCallback;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.utils.Architecture;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
+import org.koishi.launcher.h2co3.launcher.function.H2CO3LauncherCallback;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -17,9 +17,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class H2CO3LauncherLoader {
-
     private static final String H2CO3_LIB_DIR = H2CO3Tools.RUNTIME_DIR + "/h2co3_launcher";
-
     public static WeakReference<LogReceiver> logReceiver;
 
     static {
@@ -27,11 +25,17 @@ public class H2CO3LauncherLoader {
     }
 
     public static native int chdir(String path);
+
     public static native void saveLogToPath(String path);
+
     public static native void redirectStdio();
+
     public static native void setenv(String name, String value);
+
     public static native int dlopen(String name);
+
     public static native void patchLinker();
+
     public static native int dlexec(String[] args);
 
     @SuppressLint("SuspiciousIndentation")
@@ -39,25 +43,19 @@ public class H2CO3LauncherLoader {
         handler.post(callback::onStart);
         int architecture = Architecture.getDeviceArchitecture();
         String arch = getArchitectureString(architecture);
-
         boolean isJava17 = javaPath.equals(H2CO3Tools.JAVA_17_PATH);
-
         patchLinker();
         try {
             setEnvironmentVariables(home, javaPath, renderer, context, highVersion);
-
             loadNativeLibraries(javaPath, arch, isJava17);
-
-            saveLogToPath(H2CO3Tools.LOG_DIR + "/client_output.txt");
+            saveLogToPath(H2CO3Tools.LOG_DIR + "/minecraft_log.txt");
             chdir(gameDir);
-            String[] finalArgs = args.stream().filter(arg -> !arg.equals(" ")).toArray(String[]::new);
+            String[] finalArgs = args.stream().filter(arg -> !arg.trim().isEmpty()).toArray(String[]::new);
             saveArgsToFile(finalArgs);
-
             int exitCode = dlexec(finalArgs);
-
-            Log.e("OpenJDK exited with code  " , String.valueOf(exitCode));
+            Log.e("OpenJDK", "Exited with code: " + exitCode);
         } catch (Exception e) {
-            Log.e("H2CO3LauncherLoader", "Error occurred: " + e.getMessage());
+            Log.e("H2CO3LauncherLoader", "Error occurred: ", e);
             handler.post(() -> callback.onError(e));
         }
     }
@@ -80,7 +78,6 @@ public class H2CO3LauncherLoader {
         setenv("LIBGL_VSYNC", "1");
         setenv("LIBGL_NOINTOVLHACK", "1");
         setenv("H2CO3Launcher_NATIVEDIR", context.getApplicationInfo().nativeLibraryDir);
-
         if (renderer.equals(H2CO3Tools.GL_VIRGL)) {
             setVirGLEnvironmentVariables(context);
         } else {
@@ -114,31 +111,26 @@ public class H2CO3LauncherLoader {
         List<String> libraries;
         if (isJava17) {
             libraries = List.of("server/libjvm.so", "libjava.so", "libjli.so", "libverify.so", "libnet.so", "libnio.so", "libawt.so", "libawt_headless.so", "libfreetype.so");
-            libraries.forEach(library -> dlopen(javaPath + "/lib/" + library));
         } else {
             libraries = List.of("libfreetype.so", "jli/libjli.so", "server/libjvm.so", "libverify.so", "libjava.so", "libnet.so", "libnio.so", "libawt.so", "libawt_headless.so");
-            libraries.forEach(library -> dlopen(Paths.get(javaPath, "lib", arch, library).toString()));
         }
+        libraries.forEach(library -> dlopen(isJava17 ? javaPath + "/lib/" + library : Paths.get(javaPath, "lib", arch, library).toString()));
     }
 
     private static void saveArgsToFile(String[] args) {
         String argsString = String.join("\n", args);
-        FileTools.writeFile(new File(H2CO3Tools.LOG_DIR + "/BoatArgs.txt"), argsString);
+        FileTools.writeFile(new File(H2CO3Tools.LOG_DIR + "/boat_args.txt"), argsString);
         setLogPipeReady();
     }
 
     public static void startVirGLService(Context context, String home, String tmpdir) {
         patchLinker();
-
         try {
             saveLogToPath(H2CO3Tools.LOG_DIR + "/h2co3_service_log.txt");
-
             setenv("HOME", home);
             setenv("TMPDIR", tmpdir);
             setenv("VIRGL_VTEST_SOCKET_NAME", context.getCacheDir().getAbsolutePath() + "/.virgl_test");
-
             List.of("libepoxy.so.0", "libvirglrenderer.so").forEach(library -> dlopen(H2CO3_LIB_DIR + "/virgl/" + library));
-
             chdir(home);
             String[] finalArgs = {H2CO3_LIB_DIR + "/virgl/libvirgl_test_server.so", "--no-loop-or-fork", "--use-gles", "--socket-name", context.getCacheDir().getAbsolutePath() + "/.virgl_test"};
             Log.e("H2CO3LauncherLoader", "Exited with code : " + dlexec(finalArgs));
@@ -149,25 +141,16 @@ public class H2CO3LauncherLoader {
 
     public static int launchJVM(String javaPath, List<String> args, String home) {
         patchLinker();
-
         try {
             setenv("HOME", home);
             setenv("JAVA_HOME", javaPath);
-
             String arch = getArchitectureString(Architecture.getDeviceArchitecture());
-
             List.of("libfreetype.so", "jli/libjli.so", "server/libjvm.so", "libverify.so", "libjava.so", "libnet.so", "libnio.so", "libawt.so", "libawt_headless.so", "libfontmanager.so").forEach(library -> dlopen(javaPath + "/lib/" + arch + "/" + library));
-
             saveLogToPath(H2CO3Tools.LOG_DIR + "/h2co3_api_installer_log.txt");
             chdir(home);
-
-            StringBuilder finalArgs = new StringBuilder();
-            args.stream().filter(arg -> !arg.equals(" ")).forEach(arg -> {
-                finalArgs.append(arg).append(" ");
-                Log.e("H2CO3LauncherLoader", "JVM Args:" + arg);
-            });
+            args.stream().filter(arg -> !arg.trim().isEmpty()).forEach(arg -> Log.e("H2CO3LauncherLoader", "JVM Args: " + arg));
         } catch (Exception e) {
-            Log.e("H2CO3LauncherLoader", "Error occurred: " + e.getMessage());
+            Log.e("H2CO3LauncherLoader", "Error occurred: ", e);
             return 1;
         }
         return 0;
@@ -178,13 +161,12 @@ public class H2CO3LauncherLoader {
     }
 
     public static void receiveLog(String str) {
-        Log.e("H2CO3LauncherLoadMe.receiveLog", str);
-        if (logReceiver == null || logReceiver.get() == null) {
-            Log.e("H2CO3LauncherLoadMe.receiveLog", "LogReceiver is null. So use default receiver.");
-            logReceiver = new WeakReference<>(new DefaultLogReceiver());
-        } else {
-            logReceiver.get().pushLog(str);
+        LogReceiver receiver = logReceiver.get();
+        if (receiver == null) {
+            receiver = new DefaultLogReceiver();
+            logReceiver = new WeakReference<>(receiver);
         }
+        receiver.pushLog(str);
     }
 
     public interface LogReceiver {
@@ -198,8 +180,7 @@ public class H2CO3LauncherLoader {
 
         @Override
         public void pushLog(String log) {
-            Log.e("H2CO3LauncherLoadMe.receiveLog", log);
-            builder.append(log);
+            builder.append(log).append("\n");
         }
 
         @Override

@@ -56,7 +56,8 @@ public final class IOUtils {
     }
 
     public static String readFullyAsString(InputStream inputStream, Charset charset) throws IOException {
-        return readFully(inputStream).toString(charset);
+        ByteArrayOutputStream result = readFully(inputStream);
+        return result.toString(charset);
     }
 
     public static void write(String text, OutputStream outputStream) throws IOException {

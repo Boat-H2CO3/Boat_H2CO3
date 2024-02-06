@@ -890,6 +890,9 @@ public final class FileTools {
     public static String readFileToString(File file) {
         FileInputStream fis = null;
         try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             fis = new FileInputStream(file);
             byte[] result = new byte[(int) file.length()];
             fis.read(result);

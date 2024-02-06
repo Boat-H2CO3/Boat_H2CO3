@@ -7,8 +7,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.koishi.launcher.h2co3.R;
+import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
@@ -34,12 +43,36 @@ public class CrashActivity extends H2CO3Activity {
     }
 
     private void initData() {
-        //可以获取到的四个信息:
-        String stackString = CustomActivityOnCrash.getStackTraceFromIntent(getIntent());//将堆栈跟踪作为字符串获取。
-        String logString = CustomActivityOnCrash.getActivityLogFromIntent(getIntent()); //获取错误报告的Log信息
         String allString = CustomActivityOnCrash.getAllErrorDetailsFromIntent(this, getIntent());// 获取所有的信息
         config = CustomActivityOnCrash.getConfigFromIntent(getIntent());//获得配置信息,比如设置的程序崩溃显示的页面和重新启动显示的页面等等信息
         crash.setText(allString);
+
+        Thread.setDefaultUncaughtExceptionHandler((p1, p2) -> {
+
+
+            Writer i = new StringWriter();
+            p2.printStackTrace(new PrintWriter(i));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            p2.printStackTrace(new PrintStream(baos));
+            byte[] bug = baos.toByteArray();
+
+            try {
+                FileOutputStream f = new FileOutputStream(H2CO3Tools.PUBLIC_FILE_PATH + "/log.txt");
+
+                f.write(i.toString().getBytes());
+
+
+                f.write(bug);
+
+
+                f.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Utils.writeFile("/sdcard/boat/err.log",i.toString());
+        });
     }
 
     public void oc(View v) {

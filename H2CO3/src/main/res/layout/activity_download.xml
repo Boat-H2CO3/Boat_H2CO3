@@ -52,7 +52,7 @@
 
     </RadioGroup>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <me.zhanghai.android.fastscroll.FixOnItemTouchListenerRecyclerView
         android:id="@+id/loadingversionFileListView1"
         android:layout_width="match_parent"
         android:layout_height="0dp"

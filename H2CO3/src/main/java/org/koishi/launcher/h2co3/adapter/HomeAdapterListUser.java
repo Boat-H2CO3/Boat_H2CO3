@@ -24,6 +24,7 @@ import org.koishi.launcher.h2co3.core.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.login.bean.UserBean;
 import org.koishi.launcher.h2co3.resources.component.H2CO3CardView;
+import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MaterialDialog;
 import org.koishi.launcher.h2co3.ui.H2CO3MainActivity;
 
 import java.util.HashMap;
@@ -39,6 +40,7 @@ public class HomeAdapterListUser extends RecyclerView.Adapter<HomeAdapterListUse
     private final boolean hasFooter;
     private final Map<String, Drawable> userIconCache = new HashMap<>();
     private final H2CO3MainActivity activity;
+    private boolean isRemoveUserDialogShowing = false;
 
     public HomeAdapterListUser(H2CO3MainActivity activity, List<UserBean> list) {
         this.context = activity;
@@ -88,6 +90,23 @@ public class HomeAdapterListUser extends RecyclerView.Adapter<HomeAdapterListUse
             if (user.isSelected()) {
                 selectedPosition = position;
                 updateUserState(user);
+                holder.selectorCardView.setStrokeWidth(13);
+                holder.selectorCardView.setClickable(false); // 禁用点击
+                holder.selectorCardView.setOnClickListener(null); // 移除点击事件监听器
+            } else {
+                holder.selectorCardView.setStrokeWidth(0);
+                holder.selectorCardView.setClickable(true); // 启用点击
+                holder.selectorCardView.setOnClickListener(v -> {
+                    selectedPosition = holder.getBindingAdapterPosition();
+                    try {
+                        updateSelectedUser();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                    notifyItemChanged(holder.getBindingAdapterPosition());
+                    activity.popView.dismiss();
+                    updateUserState(user);
+                });
             }
             holder.nameTextView.setText(user.getUserName());
             holder.stateTextView.setText(getUserStateText(user));
@@ -98,19 +117,12 @@ public class HomeAdapterListUser extends RecyclerView.Adapter<HomeAdapterListUse
             }
             holder.userIcon.setImageDrawable(user.getUserIcon());
 
-            holder.selectorCardView.setOnClickListener(v -> {
-                selectedPosition = holder.getBindingAdapterPosition();
-                try {
-                    updateSelectedUser();
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
+            holder.removeImageButton.setOnClickListener(v -> {
+                if (!isRemoveUserDialogShowing) {
+                    isRemoveUserDialogShowing = true;
+                    showRemoveUserDialog(holder.getBindingAdapterPosition());
                 }
-                notifyItemChanged(holder.getBindingAdapterPosition());
-                activity.popView.dismiss();
-                updateUserState(user);
             });
-
-            holder.removeImageButton.setOnClickListener(v -> removeUser(holder.getBindingAdapterPosition()));
         } else {
             holder.addCardView.setOnClickListener(v -> activity.showLoginDialog());
         }
@@ -188,6 +200,24 @@ public class HomeAdapterListUser extends RecyclerView.Adapter<HomeAdapterListUse
             case "2" -> context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_other) + user.getApiUrl();
             default -> context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_offline);
         };
+    }
+
+    private void showRemoveUserDialog(int position) {
+        H2CO3MaterialDialog dialog = new H2CO3MaterialDialog(context);
+        dialog.setTitle("确认删除用户");
+        dialog.setMessage("确定要删除该用户吗？");
+        dialog.setPositiveButton("确定", (dialogInterface, which) -> {
+            removeUser(position);
+            isRemoveUserDialogShowing = false;
+            activity.popView.dismiss();
+        });
+        dialog.setNegativeButton("取消", (dialogInterface, which) -> {
+            isRemoveUserDialogShowing = false;
+        });
+        dialog.setOnDismissListener(dialogInterface -> {
+            isRemoveUserDialogShowing = false;
+        });
+        dialog.show();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

@@ -3,6 +3,9 @@ package org.koishi.launcher.h2co3.core;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
+import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
@@ -21,6 +24,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import rikka.material.app.MaterialActivity;
 
 public class H2CO3Tools {
 
@@ -286,5 +291,9 @@ public class H2CO3Tools {
         int terminatorIndex = input.indexOf(terminator, whatForStart);
         if(terminatorIndex == -1) return null;
         return input.substring(whatForStart, terminatorIndex);
+    }
+    public static void showError(Context context, String message) {
+        View view = ((MaterialActivity) context).findViewById(android.R.id.content);
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
     }
 }

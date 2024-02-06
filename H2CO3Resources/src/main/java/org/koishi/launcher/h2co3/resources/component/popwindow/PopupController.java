@@ -126,9 +126,9 @@ public class PopupController {
      */
     void setBackGroundLevel(float level) {
         mWindow = ((Activity) context).getWindow();
-        WindowManager.LayoutParams params = mWindow.getAttributes();
-        params.alpha = level;
-        mWindow.setAttributes(params);
+        WindowManager.LayoutParams lp = ((Activity) context).getWindow().getAttributes();
+        lp.alpha = level;
+        ((Activity) context).getWindow().setAttributes(lp);
     }
 
 

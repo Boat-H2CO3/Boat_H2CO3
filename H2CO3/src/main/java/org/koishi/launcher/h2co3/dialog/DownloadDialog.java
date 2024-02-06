@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +66,8 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
         setView(view);
     }
 
-    public DownloadDialog setJsonString(String jsonString) {
+    public void setJsonString(String jsonString) {
         this.jsonString = jsonString.replace(LIBRARY_URL_PREFIX, LIBRARY_URL_REPLACE);
-        return this;
     }
 
     @Override
@@ -105,11 +103,11 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
                 JSONObject downloads = library.getJSONObject("downloads");
                 JSONObject artifact = downloads.getJSONObject("artifact");
 
-                String name = library.optString("name");
-                String path = artifact.optString("path");
-                String url = artifact.optString("url");
+                String name = library.getString("name");
+                String path = artifact.getString("path");
+                String url = artifact.getString("url");
 
-                int size = artifact.optInt("size");
+                int size = artifact.getInt("size");
 
                 // 过滤掉name中包含"windows"或"macos"的项
                 if (name.contains("windows") || name.contains("macos")) {
@@ -174,6 +172,10 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
                     int retryCount = 0;
                     while (retryCount < 3) { // 最多重试3次
                         try {
+                            if (isCancelled()) {
+                                return null;
+                            }
+
                             URL url = new URL(item.getUrl());
                             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                             connection.connect();
@@ -196,11 +198,17 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
                                 int count;
                                 int downloadedSizeForItem = 0;
                                 while ((count = input.read(data)) != -1) {
+                                    if (isCancelled()) {
+                                        return null;
+                                    }
+
                                     downloadedSizeForItem += count;
                                     output.write(data, 0, count);
                                     int progress = (downloadedSizeForItem * 100) / item.getSize();
-                                    item.setProgress(progress);
-                                    if (progress % 10 == 0) {
+                                    synchronized (downloadItems) {
+                                        item.setProgress(progress);
+                                    }
+                                    if (progress % 5 == 0) {
                                         publishProgress(finalI);
                                     }
                                 }
@@ -211,6 +219,8 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
                         } catch (IOException e) {
                             e.printStackTrace();
                             retryCount++;
+                            showErrorDialog(e.getMessage());
+                            publishProgress(finalI);
                         }
                     }
 
@@ -224,6 +234,8 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
                     future.get();
                 } catch (Exception e) {
                     e.printStackTrace();
+                    cancel(true); // 取消所有下载任务
+                    break;
                 }
             }
 
@@ -232,27 +244,37 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            adapter.notifyItemChanged(values[0]);
-            adapter.removeCompletedItems();
+            synchronized (downloadItems) {
+                adapter.notifyItemChanged(values[0]);
+                adapter.removeCompletedItems();
+            }
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            for (int i = downloadItems.size() - 1; i >= 0; i--) {
-                DownloadItem item = downloadItems.get(i);
-                File file = new File(DOWNLOAD_PATH + "/" + item.getPath());
-                if (item.getProgress() == 100 && file.exists() && file.length() == item.getSize()) {
-                    item.setCompleted(true);
+            synchronized (downloadItems) {
+                adapter.removeCompletedItems();
+
+                if (downloadItems.isEmpty()) {
+                    dialog.dismiss();
                 }
+
+                adapter.notifyDataSetChanged();
             }
+        }
 
-            adapter.removeCompletedItems();
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            showErrorDialog("下载失败");
+        }
 
-            if (downloadItems.isEmpty()) {
-                dialog.dismiss();
-            }
-
-            adapter.notifyDataSetChanged();
+        private void showErrorDialog(String message) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("错误")
+                    .setMessage(message)
+                    .setPositiveButton("确定", null)
+                    .show();
         }
     }
 
@@ -274,29 +296,30 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            DownloadItem item = downloadItems.get(position);
-            holder.fileNameText.setText(item.getName());
-            holder.progress.setProgress(item.getProgress());
+            synchronized (downloadItems) {
+                if (position >= 0 && position < downloadItems.size()) {
+                    DownloadItem item = downloadItems.get(position);
+                    holder.bind(item);
+                }
+            }
         }
 
         @Override
         public int getItemCount() {
-            int count = 0;
-            for (DownloadItem item : downloadItems) {
-                if (!item.isCompleted()) {
-                    count++;
-                }
+            synchronized (downloadItems) {
+                return downloadItems.size();
             }
-            return count;
         }
 
         public void removeCompletedItems() {
-            for (int i = downloadItems.size() - 1; i >= 0; i--) {
-                DownloadItem item = downloadItems.get(i);
-                File file = new File(DOWNLOAD_PATH + "/" + item.getPath());
-                if (item.getProgress() == 100 && file.exists() && file.length() == item.getSize()) {
-                    downloadItems.remove(i);
-                    notifyItemRemoved(i);
+            synchronized (downloadItems) {
+                for (int i = downloadItems.size() - 1; i >= 0; i--) {
+                    DownloadItem item = downloadItems.get(i);
+                    File file = new File(DOWNLOAD_PATH + "/" + item.getPath());
+                    if (item.getProgress() == 100 && file.exists() && file.length() == item.getSize()) {
+                        downloadItems.remove(i);
+                        notifyItemRemoved(i);
+                    }
                 }
             }
         }
@@ -309,6 +332,11 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
                 super(itemView);
                 fileNameText = itemView.findViewById(R.id.fileNameText);
                 progress = itemView.findViewById(R.id.fileProgress);
+            }
+
+            public void bind(DownloadItem item) {
+                fileNameText.setText(item.getName());
+                progress.setProgress(item.getProgress());
             }
         }
     }

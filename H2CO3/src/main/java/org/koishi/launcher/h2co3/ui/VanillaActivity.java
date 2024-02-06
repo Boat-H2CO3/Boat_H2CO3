@@ -125,13 +125,12 @@ public class VanillaActivity extends AppCompatActivity {
                 filteredList.add(version);
             } else if (checkedId == R.id.rb_snapshot && version.getVersionType().equals("snapshot")) {
                 filteredList.add(version);
-            } else if (checkedId == R.id.rb_old_beta && version.getVersionType().equals("old_alpha")|version.getVersionType().equals("old_beta")) {
+            } else if (checkedId == R.id.rb_old_beta && (version.getVersionType().equals("old_alpha") || version.getVersionType().equals("old_beta"))) {
                 filteredList.add(version);
             }
         }
         versionAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(versionAdapter);
-
     }
 
     private class FetchVersionsTask extends AsyncTask<String, Void, List<Version>> {
@@ -153,7 +152,7 @@ public class VanillaActivity extends AppCompatActivity {
                         StringBuilder response = new StringBuilder();
                         String line;
                         while ((line = reader.readLine()) != null) {
-                            response.append(line);
+                            response.append(line).append("\n");
                         }
 
                         JSONObject jsonObject = new JSONObject(response.toString());

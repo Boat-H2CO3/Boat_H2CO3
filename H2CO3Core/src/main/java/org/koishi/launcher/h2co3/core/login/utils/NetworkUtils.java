@@ -27,7 +27,7 @@ public final class NetworkUtils {
     private NetworkUtils() {
     }
 
-    public static String withQuery(String baseUrl, Map<String, String> params) {
+    public static String withQuery(String baseUrl, Map<String, String> params) throws UnsupportedEncodingException {
         StringBuilder sb = new StringBuilder(baseUrl);
         boolean first = true;
         for (Entry<String, String> param : params.entrySet()) {
@@ -61,7 +61,7 @@ public final class NetworkUtils {
             scanner.useDelimiter("&");
             while (scanner.hasNext()) {
                 String[] nameValue = scanner.next().split(NAME_VALUE_SEPARATOR);
-                if (nameValue.length <= 0 || nameValue.length > 2) {
+                if (nameValue.length == 0 || nameValue.length > 2) {
                     throw new IllegalArgumentException("bad query string");
                 }
 
@@ -107,8 +107,13 @@ public final class NetworkUtils {
                     left = false;
                     // fallthrough
                 default:
-                    if (ch >= 0x80)
-                        sb.append(encodeURL(Character.toString(ch)));
+                    if (ch >= 0x80) {
+                        try {
+                            sb.append(encodeURL(Character.toString(ch)));
+                        } catch (UnsupportedEncodingException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                     else
                         sb.append(ch);
                     break;
@@ -194,7 +199,7 @@ public final class NetworkUtils {
         con.setRequestMethod("POST");
         con.setDoOutput(true);
         con.setRequestProperty("Content-Type", contentType + "; charset=utf-8");
-        con.setRequestProperty("Content-Length", "" + bytes.length);
+        con.setRequestProperty("Content-Length", String.valueOf(bytes.length));
         try (OutputStream os = con.getOutputStream()) {
             os.write(bytes);
         }
@@ -262,12 +267,11 @@ public final class NetworkUtils {
     }
 
     // ==== Shortcut methods for encoding/decoding URLs in UTF-8 ====
-    public static String encodeURL(String toEncode) {
+    public static String encodeURL(String toEncode) throws UnsupportedEncodingException {
         return URLEncoder.encode(toEncode, UTF_8);
     }
 
     public static String decodeURL(String toDecode) {
         return URLDecoder.decode(toDecode, UTF_8);
     }
-    // ====
 }

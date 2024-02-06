@@ -59,7 +59,7 @@ public class SplashActivity extends H2CO3Activity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isFirstLaunch = preferences.getBoolean("isFirstLaunch", true);
         if (isFirstLaunch) {
-            H2CO3Auth.reSetUserState();
+            H2CO3Auth.resetUserState();
             H2CO3Loader.setDir(H2CO3Tools.MINECRAFT_DIR);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("isFirstLaunch", false);

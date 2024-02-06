@@ -66,32 +66,6 @@ public class H2CO3Application extends Application implements Application.Activit
                 .errorActivity(CrashActivity.class)
                 .eventListener(new CustomEventListener())
                 .apply();
-        Thread.setDefaultUncaughtExceptionHandler((p1, p2) -> {
-
-
-            Writer i = new StringWriter();
-            p2.printStackTrace(new PrintWriter(i));
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-            p2.printStackTrace(new PrintStream(baos));
-            byte[] bug = baos.toByteArray();
-
-            try {
-                FileOutputStream f = new FileOutputStream(H2CO3Tools.PUBLIC_FILE_PATH + "/log.txt");
-
-                f.write(i.toString().getBytes());
-
-
-                f.write(bug);
-
-
-                f.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //Utils.writeFile("/sdcard/boat/err.log",i.toString());
-        });
     }
 
     @Override

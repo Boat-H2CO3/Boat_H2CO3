@@ -1,28 +1,34 @@
 package org.koishi.launcher.h2co3.core;
 
-import android.text.TextUtils;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.login.bean.UserBean;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class H2CO3Auth {
+
+    private static final String USER_PROPERTIES = "user_properties";
+    private static final String LOGIN_USER_TYPE = "mojang";
+    private static final String LOGIN_UUID = "0000-0000-0000-0000";
+    private static final String LOGIN_TOKEN = "0";
+    private static final String LOGIN_INFO = "login_info";
+    private static final String LOGIN_IS_OFFLINE = "login_is_offline";
+    private static final String LOGIN_IS_SELECTED = "login_is_selected";
+
+    public static File serversFile = new File(H2CO3Tools.H2CO3_SETTING_DIR + "/h2co3_servers.json");
 
     public static String getPlayerName() {
         return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_AUTH_PLAYER_NAME, null);
@@ -41,15 +47,15 @@ public class H2CO3Auth {
     }
 
     public static String getUserProperties() {
-        return H2CO3Tools.getH2CO3ValueString("user_properties", "{}");
+        return H2CO3Tools.getH2CO3ValueString(USER_PROPERTIES, "{}");
     }
 
     public static void setUserProperties(String properties) {
-        H2CO3Tools.setBoatValue("user_properties", properties);
+        H2CO3Tools.setBoatValue(USER_PROPERTIES, properties);
     }
 
     public static String getUserType() {
-        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USER_TYPE, "mojang");
+        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_USER_TYPE, LOGIN_USER_TYPE);
     }
 
     public static void setUserType(String type) {
@@ -57,7 +63,7 @@ public class H2CO3Auth {
     }
 
     public static String getAuthUUID() {
-        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_UUID, "0000-0000-0000-0000");
+        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_UUID, LOGIN_UUID);
     }
 
     public static void setAuthUUID(String uuid) {
@@ -65,7 +71,7 @@ public class H2CO3Auth {
     }
 
     public static String getAuthAccessToken() {
-        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_TOKEN, "0");
+        return H2CO3Tools.getH2CO3ValueString(H2CO3Tools.LOGIN_TOKEN, LOGIN_TOKEN);
     }
 
     public static void setAuthAccessToken(String token) {
@@ -80,8 +86,7 @@ public class H2CO3Auth {
         try {
             JSONObject json;
             if (usersFile.exists()) {
-                String content = readFileContent(usersFile);
-                json = new JSONObject(content);
+                json = new JSONObject(readFileContent(usersFile));
             } else {
                 json = new JSONObject();
             }
@@ -148,7 +153,7 @@ public class H2CO3Auth {
         }
     }
 
-    public static void reSetUserState() {
+    public static void resetUserState() {
         UserBean emptyUser = new UserBean();
         setUserState(emptyUser);
     }
@@ -222,7 +227,8 @@ public class H2CO3Auth {
         if (!file.canWrite()) {
             throw new IOException("No permission to write to file: " + file.getPath());
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (FileOutputStream fos = new FileOutputStream(file);
+             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos, StandardCharsets.UTF_8))) {
             writer.write(content);
         }
     }

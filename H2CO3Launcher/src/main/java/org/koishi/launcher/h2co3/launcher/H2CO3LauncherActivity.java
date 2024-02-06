@@ -93,12 +93,12 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         }
     }
 
-    public static final ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
+    public static final ExecutorService executorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
 
     // 启动游戏
     public void startGame(Context context,final String javaPath, final String home, final boolean highVersion, final Vector<String> args, String renderer, String gameDir) {
         setupExitTrap(this);
-        sExecutorService.execute(() -> {
+        executorService.execute(() -> {
             Handler handler = new Handler(Looper.getMainLooper());
             H2CO3LauncherLoader.launchMinecraft(handler, context, javaPath, home, highVersion, args, renderer, gameDir, new H2CO3LauncherCallback() {
                 @Override
