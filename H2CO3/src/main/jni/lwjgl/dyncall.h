@@ -42,10 +42,10 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
-typedef struct DCCallVM_    DCCallVM;
-typedef struct DCstruct_    DCstruct;
+typedef struct DCCallVM_ DCCallVM;
+typedef struct DCstruct_ DCstruct;
 
 /* Supported Calling Convention Modes */
 
@@ -91,48 +91,74 @@ typedef struct DCstruct_    DCstruct;
 #define DC_ERROR_NONE                0
 #define DC_ERROR_UNSUPPORTED_MODE   -1
 
-DC_API DCCallVM*  dcNewCallVM     (DCsize size);
-DC_API void       dcFree          (DCCallVM* vm);
-DC_API void       dcReset         (DCCallVM* vm);
+DC_API DCCallVM *dcNewCallVM(DCsize size);
 
-DC_API void       dcMode          (DCCallVM* vm, DCint mode);
+DC_API void dcFree(DCCallVM *vm);
 
-DC_API void       dcArgBool       (DCCallVM* vm, DCbool     value);
-DC_API void       dcArgChar       (DCCallVM* vm, DCchar     value);
-DC_API void       dcArgShort      (DCCallVM* vm, DCshort    value);
-DC_API void       dcArgInt        (DCCallVM* vm, DCint      value);
-DC_API void       dcArgLong       (DCCallVM* vm, DClong     value);
-DC_API void       dcArgLongLong   (DCCallVM* vm, DClonglong value);
-DC_API void       dcArgFloat      (DCCallVM* vm, DCfloat    value);
-DC_API void       dcArgDouble     (DCCallVM* vm, DCdouble   value);
-DC_API void       dcArgPointer    (DCCallVM* vm, DCpointer  value);
-DC_API void       dcArgStruct     (DCCallVM* vm, DCstruct* s, DCpointer value);
+DC_API void dcReset(DCCallVM *vm);
 
-DC_API void       dcCallVoid      (DCCallVM* vm, DCpointer funcptr);
-DC_API DCbool     dcCallBool      (DCCallVM* vm, DCpointer funcptr);
-DC_API DCchar     dcCallChar      (DCCallVM* vm, DCpointer funcptr);
-DC_API DCshort    dcCallShort     (DCCallVM* vm, DCpointer funcptr);
-DC_API DCint      dcCallInt       (DCCallVM* vm, DCpointer funcptr);
-DC_API DClong     dcCallLong      (DCCallVM* vm, DCpointer funcptr);
-DC_API DClonglong dcCallLongLong  (DCCallVM* vm, DCpointer funcptr);
-DC_API DCfloat    dcCallFloat     (DCCallVM* vm, DCpointer funcptr);
-DC_API DCdouble   dcCallDouble    (DCCallVM* vm, DCpointer funcptr);
-DC_API DCpointer  dcCallPointer   (DCCallVM* vm, DCpointer funcptr);
-DC_API void       dcCallStruct    (DCCallVM* vm, DCpointer funcptr, DCstruct* s, DCpointer returnValue);
+DC_API void dcMode(DCCallVM *vm, DCint mode);
 
-DC_API DCint      dcGetError      (DCCallVM* vm);
+DC_API void dcArgBool(DCCallVM *vm, DCbool value);
+
+DC_API void dcArgChar(DCCallVM *vm, DCchar value);
+
+DC_API void dcArgShort(DCCallVM *vm, DCshort value);
+
+DC_API void dcArgInt(DCCallVM *vm, DCint value);
+
+DC_API void dcArgLong(DCCallVM *vm, DClong value);
+
+DC_API void dcArgLongLong(DCCallVM *vm, DClonglong value);
+
+DC_API void dcArgFloat(DCCallVM *vm, DCfloat value);
+
+DC_API void dcArgDouble(DCCallVM *vm, DCdouble value);
+
+DC_API void dcArgPointer(DCCallVM *vm, DCpointer value);
+
+DC_API void dcArgStruct(DCCallVM *vm, DCstruct *s, DCpointer value);
+
+DC_API void dcCallVoid(DCCallVM *vm, DCpointer funcptr);
+
+DC_API DCbool dcCallBool(DCCallVM *vm, DCpointer funcptr);
+
+DC_API DCchar dcCallChar(DCCallVM *vm, DCpointer funcptr);
+
+DC_API DCshort dcCallShort(DCCallVM *vm, DCpointer funcptr);
+
+DC_API DCint dcCallInt(DCCallVM *vm, DCpointer funcptr);
+
+DC_API DClong dcCallLong(DCCallVM *vm, DCpointer funcptr);
+
+DC_API DClonglong dcCallLongLong(DCCallVM *vm, DCpointer funcptr);
+
+DC_API DCfloat dcCallFloat(DCCallVM *vm, DCpointer funcptr);
+
+DC_API DCdouble dcCallDouble(DCCallVM *vm, DCpointer funcptr);
+
+DC_API DCpointer dcCallPointer(DCCallVM *vm, DCpointer funcptr);
+
+DC_API void dcCallStruct(DCCallVM *vm, DCpointer funcptr, DCstruct *s, DCpointer returnValue);
+
+DC_API DCint dcGetError(DCCallVM *vm);
 
 #define DEFAULT_ALIGNMENT 0
-DC_API DCstruct*  dcNewStruct      (DCsize fieldCount, DCint alignment);
-DC_API void       dcStructField    (DCstruct* s, DCint type, DCint alignment, DCsize arrayLength);
-DC_API void       dcSubStruct      (DCstruct* s, DCsize fieldCount, DCint alignment, DCsize arrayLength);  	
-/* Each dcNewStruct or dcSubStruct call must be paired with a dcCloseStruct. */
-DC_API void       dcCloseStruct    (DCstruct* s);  	
-DC_API DCsize     dcStructSize     (DCstruct* s);  	
-DC_API DCsize     dcStructAlignment(DCstruct* s);  	
-DC_API void       dcFreeStruct     (DCstruct* s);
+DC_API DCstruct *dcNewStruct(DCsize fieldCount, DCint alignment);
 
-DC_API DCstruct*  dcDefineStruct  (const char* signature);
+DC_API void dcStructField(DCstruct *s, DCint type, DCint alignment, DCsize arrayLength);
+
+DC_API void dcSubStruct(DCstruct *s, DCsize fieldCount, DCint alignment, DCsize arrayLength);
+/* Each dcNewStruct or dcSubStruct call must be paired with a dcCloseStruct. */
+DC_API void dcCloseStruct(DCstruct *s);
+
+DC_API DCsize dcStructSize(DCstruct *s);
+
+DC_API DCsize dcStructAlignment(DCstruct *s);
+
+DC_API void dcFreeStruct(DCstruct *s);
+
+DC_API DCstruct *dcDefineStruct(const char *signature);
 
 
 #ifdef __cplusplus

@@ -5,8 +5,8 @@
     android:id="@+id/nested"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.H2CO3MainActivity"
-    android:padding="@dimen/app_15dp">
+    android:padding="@dimen/app_15dp"
+    tools:context=".ui.H2CO3MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
@@ -16,13 +16,12 @@
 
 
         <LinearLayout
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/select_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <org.koishi.launcher.h2co3.resources.component.H2CO3CardView
                 android:id="@+id/button_jre_8"
@@ -111,6 +110,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/select_layout">
+
             <org.koishi.launcher.h2co3.resources.component.H2CO3Button
                 android:id="@+id/runtime_new"
                 style="@style/Widget.Material3.Button.TextButton"

@@ -18,6 +18,16 @@ import java.io.IOException;
 import rikka.material.app.MaterialActivity;
 
 public class H2CO3Activity extends MaterialActivity {
+    public static void clearCacheFiles(Context context) {
+
+    }
+
+    public static void clearWebViewCache(Context context) throws IOException {
+        String WEB_VIEW_CACHE_DIR = context.getDir("webview", 0).getAbsolutePath();
+        FileTools.deleteDirectory(new File(WEB_VIEW_CACHE_DIR));
+        CookieManager.getInstance().removeAllCookies(null);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +51,6 @@ public class H2CO3Activity extends MaterialActivity {
         if (getWindow() != null) {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-    }
-
-    public static void clearCacheFiles(Context context){
-
-    }
-
-    public static void clearWebViewCache(Context context) throws IOException {
-        String WEB_VIEW_CACHE_DIR = context.getDir("webview",0).getAbsolutePath();
-        FileTools.deleteDirectory(new File(WEB_VIEW_CACHE_DIR));
-        CookieManager.getInstance().removeAllCookies(null);
     }
 
 }

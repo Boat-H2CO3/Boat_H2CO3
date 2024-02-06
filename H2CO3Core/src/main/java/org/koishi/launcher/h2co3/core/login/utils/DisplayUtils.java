@@ -1,6 +1,5 @@
 package org.koishi.launcher.h2co3.core.login.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;

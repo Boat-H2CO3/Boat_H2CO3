@@ -1,7 +1,5 @@
 package org.koishi.launcher.h2co3.core.game;
 
-import android.util.Log;
-
 import org.koishi.launcher.h2co3.core.H2CO3Game;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 

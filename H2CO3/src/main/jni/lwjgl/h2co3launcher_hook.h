@@ -6,6 +6,7 @@
 #define FOLD_CRAFT_LAUNCHER_H2CO3Launcher_HOOK_H
 
 #include <jni.h>
+
 void hookExec(JNIEnv *env);
 
 

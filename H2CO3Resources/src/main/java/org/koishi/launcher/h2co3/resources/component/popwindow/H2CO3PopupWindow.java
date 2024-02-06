@@ -17,6 +17,15 @@ public class H2CO3PopupWindow extends PopupWindow {
     }
 
     /**
+     * 构造方法
+     *
+     * @param context 上下文
+     */
+    private H2CO3PopupWindow(Context context) {
+        controller = new PopupController(context, this);
+    }
+
+    /**
      * 获取宽
      */
     @Override
@@ -46,15 +55,6 @@ public class H2CO3PopupWindow extends PopupWindow {
      */
     public interface ViewInterface {
         void getChildView(View view, int layoutResId) throws IOException, JSONException;
-    }
-
-    /**
-     * 构造方法
-     *
-     * @param context 上下文
-     */
-    private H2CO3PopupWindow(Context context) {
-        controller = new PopupController(context, this);
     }
 
     /**

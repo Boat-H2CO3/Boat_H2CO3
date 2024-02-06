@@ -51,6 +51,84 @@ public class MicrosoftLoginUtils {
         acquireAccessToken(isRefresh, authCode);
     }
 
+    public static Optional<Map<TextureType, Texture>> getTextures(MinecraftProfileResponse profile) {
+        Objects.requireNonNull(profile);
+
+        Map<TextureType, Texture> textures = new EnumMap<>(TextureType.class);
+
+        if (!profile.skins.isEmpty()) {
+            textures.put(TextureType.SKIN, new Texture(profile.skins.get(0).url, null));
+        }
+        // if (!profile.capes.isEmpty()) {
+        // textures.put(TextureType.CAPE, new Texture(profile.capes.get(0).url, null);
+        // }
+
+        return Optional.of(textures);
+    }
+
+    public static MinecraftProfileResponse getMinecraftProfile(String tokenType, String accessToken)
+            throws IOException, AuthenticationException {
+        HttpURLConnection conn = HttpRequest.GET(MC_PROFILE_URL)
+                .authorization(tokenType, accessToken)
+                .createConnection();
+        int responseCode = conn.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+            throw new NoMinecraftJavaEditionProfileException();
+        } else if (responseCode != HttpURLConnection.HTTP_OK) {
+            throw new ResponseCodeException(new URL(MC_PROFILE_URL), responseCode);
+        }
+
+        String result = NetworkUtils.readData(conn);
+        return JsonUtils.fromNonNullJson(result, MinecraftProfileResponse.class);
+    }
+
+    public static String ofJSONData(Map<String, Object> data) {
+        return new JSONObject(data).toString();
+    }
+
+    public static String ofFormData(Map<String, String> data) {
+        Uri.Builder builder = new Uri.Builder();
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            builder.appendQueryParameter(entry.getKey(), entry.getValue());
+        }
+        return builder.build().getEncodedQuery();
+    }
+
+    private static void setRequestProperties(HttpURLConnection conn, String contentType, String req) {
+        conn.setRequestProperty("Content-Type", contentType);
+        conn.setRequestProperty("charset", "utf-8");
+        conn.setRequestProperty("Content-Length", String.valueOf(req.getBytes(StandardCharsets.UTF_8).length));
+    }
+
+    private static void setRequestOutput(HttpURLConnection conn, String req) throws IOException {
+        conn.setRequestMethod("POST");
+        conn.setUseCaches(false);
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
+        conn.connect();
+        try (OutputStream wr = conn.getOutputStream()) {
+            wr.write(req.getBytes(StandardCharsets.UTF_8));
+        }
+    }
+
+    private static String readResponse(HttpURLConnection conn) throws IOException {
+        return H2CO3Tools.read(conn.getInputStream());
+    }
+
+    private static void throwResponseError(HttpURLConnection conn) throws IOException {
+        String otherErrStr = "";
+        String errStr = readResponse(conn);
+        Log.i("MicroAuth", "Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n" + errStr);
+
+        if (errStr.contains("NOT_FOUND") &&
+                errStr.contains("The server has not found anything matching the request URI")) {
+            // TODO localize this
+            otherErrStr = "It seems that this Microsoft Account does not own the game. Make sure that you have bought/migrated to your Microsoft account.";
+        }
+
+        throw new RuntimeException(otherErrStr + "\n\nMSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + ", error stream:\n" + errStr);
+    }
+
     private void acquireAccessToken(boolean isRefresh, String authCode) throws IOException, JSONException {
         URL url = new URL(AUTH_TOKEN_URL);
         Log.i("MicroAuth", "isRefresh=" + isRefresh + ", authCode= " + authCode);
@@ -173,37 +251,6 @@ public class MicrosoftLoginUtils {
         }
     }
 
-    public static Optional<Map<TextureType, Texture>> getTextures(MinecraftProfileResponse profile) {
-        Objects.requireNonNull(profile);
-
-        Map<TextureType, Texture> textures = new EnumMap<>(TextureType.class);
-
-        if (!profile.skins.isEmpty()) {
-            textures.put(TextureType.SKIN, new Texture(profile.skins.get(0).url, null));
-        }
-        // if (!profile.capes.isEmpty()) {
-        // textures.put(TextureType.CAPE, new Texture(profile.capes.get(0).url, null);
-        // }
-
-        return Optional.of(textures);
-    }
-
-    public static MinecraftProfileResponse getMinecraftProfile(String tokenType, String accessToken)
-            throws IOException, AuthenticationException {
-        HttpURLConnection conn = HttpRequest.GET(MC_PROFILE_URL)
-                .authorization(tokenType, accessToken)
-                .createConnection();
-        int responseCode = conn.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
-            throw new NoMinecraftJavaEditionProfileException();
-        } else if (responseCode != HttpURLConnection.HTTP_OK) {
-            throw new ResponseCodeException(new URL(MC_PROFILE_URL), responseCode);
-        }
-
-        String result = NetworkUtils.readData(conn);
-        return JsonUtils.fromNonNullJson(result, MinecraftProfileResponse.class);
-    }
-
     public static class MinecraftProfileResponseSkin implements Validation {
         public String id;
         public String state;
@@ -252,52 +299,5 @@ public class MicrosoftLoginUtils {
     }
 
     public static class NoMinecraftJavaEditionProfileException extends AuthenticationException {
-    }
-
-    public static String ofJSONData(Map<String, Object> data) {
-        return new JSONObject(data).toString();
-    }
-
-    public static String ofFormData(Map<String, String> data) {
-        Uri.Builder builder = new Uri.Builder();
-        for (Map.Entry<String, String> entry : data.entrySet()) {
-            builder.appendQueryParameter(entry.getKey(), entry.getValue());
-        }
-        return builder.build().getEncodedQuery();
-    }
-
-    private static void setRequestProperties(HttpURLConnection conn, String contentType, String req) {
-        conn.setRequestProperty("Content-Type", contentType);
-        conn.setRequestProperty("charset", "utf-8");
-        conn.setRequestProperty("Content-Length", String.valueOf(req.getBytes(StandardCharsets.UTF_8).length));
-    }
-
-    private static void setRequestOutput(HttpURLConnection conn, String req) throws IOException {
-        conn.setRequestMethod("POST");
-        conn.setUseCaches(false);
-        conn.setDoInput(true);
-        conn.setDoOutput(true);
-        conn.connect();
-        try (OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes(StandardCharsets.UTF_8));
-        }
-    }
-
-    private static String readResponse(HttpURLConnection conn) throws IOException {
-        return H2CO3Tools.read(conn.getInputStream());
-    }
-
-    private static void throwResponseError(HttpURLConnection conn) throws IOException {
-        String otherErrStr = "";
-        String errStr = readResponse(conn);
-        Log.i("MicroAuth", "Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + "\n" + errStr);
-
-        if (errStr.contains("NOT_FOUND") &&
-                errStr.contains("The server has not found anything matching the request URI")) {
-            // TODO localize this
-            otherErrStr = "It seems that this Microsoft Account does not own the game. Make sure that you have bought/migrated to your Microsoft account.";
-        }
-
-        throw new RuntimeException(otherErrStr + "\n\nMSA Error: " + conn.getResponseCode() + ": " + conn.getResponseMessage() + ", error stream:\n" + errStr);
     }
 }

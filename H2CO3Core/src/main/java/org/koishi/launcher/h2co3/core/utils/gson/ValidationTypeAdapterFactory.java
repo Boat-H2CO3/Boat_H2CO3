@@ -13,7 +13,6 @@ import org.koishi.launcher.h2co3.core.utils.gson.tools.Validation;
 import java.io.IOException;
 
 /**
- *
  * @author huangyuhui
  */
 public final class ValidationTypeAdapterFactory implements TypeAdapterFactory {

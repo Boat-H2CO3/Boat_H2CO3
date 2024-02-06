@@ -10,16 +10,6 @@ public enum OperatingSystem {
     OSX("osx"),
     UNKNOWN("universal");
 
-    private final String checkedName;
-
-    OperatingSystem(String checkedName) {
-        this.checkedName = checkedName;
-    }
-
-    public String getCheckedName() {
-        return checkedName;
-    }
-
     public static final Charset NATIVE_CHARSET;
 
     static {
@@ -43,7 +33,17 @@ public enum OperatingSystem {
         NATIVE_CHARSET = nativeCharset;
     }
 
+    private final String checkedName;
+
+    OperatingSystem(String checkedName) {
+        this.checkedName = checkedName;
+    }
+
     public static boolean isNameValid(String name) {
         return !name.isEmpty() && !name.equals(".") && name.indexOf('/') == -1 && name.indexOf('\0') == -1;
+    }
+
+    public String getCheckedName() {
+        return checkedName;
     }
 }

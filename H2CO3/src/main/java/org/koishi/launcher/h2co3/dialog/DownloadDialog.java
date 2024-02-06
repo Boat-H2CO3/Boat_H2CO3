@@ -44,15 +44,11 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
     private static final String LIBRARY_URL_REPLACE = "https://bmclapi2.bangbang93.com/maven/";
 
     private final Context context;
-    private String jsonString;
-
     private final RecyclerView recyclerView;
-
-    private AlertDialog dialog;
-
-    private DownloadTask downloadTask;
-
     private final List<DownloadItem> downloadItems;
+    private String jsonString;
+    private AlertDialog dialog;
+    private DownloadTask downloadTask;
 
     public DownloadDialog(@NonNull Context context) {
         super(context);
@@ -136,6 +132,69 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
             }
         }
         return 1;
+    }
+
+    private static class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHolder> {
+        private final Context context;
+        private final List<DownloadItem> downloadItems;
+
+        public DownloadAdapter(Context context, List<DownloadItem> downloadItems) {
+            this.context = context;
+            this.downloadItems = downloadItems;
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_download, parent, false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            synchronized (downloadItems) {
+                if (position >= 0 && position < downloadItems.size()) {
+                    DownloadItem item = downloadItems.get(position);
+                    holder.bind(item);
+                }
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            synchronized (downloadItems) {
+                return downloadItems.size();
+            }
+        }
+
+        public void removeCompletedItems() {
+            synchronized (downloadItems) {
+                for (int i = downloadItems.size() - 1; i >= 0; i--) {
+                    DownloadItem item = downloadItems.get(i);
+                    File file = new File(DOWNLOAD_PATH + "/" + item.getPath());
+                    if (item.getProgress() == 100 && file.exists() && file.length() == item.getSize()) {
+                        downloadItems.remove(i);
+                        notifyItemRemoved(i);
+                    }
+                }
+            }
+        }
+
+        public static class ViewHolder extends RecyclerView.ViewHolder {
+            TextView fileNameText;
+            LinearProgressIndicator progress;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                fileNameText = itemView.findViewById(R.id.fileNameText);
+                progress = itemView.findViewById(R.id.fileProgress);
+            }
+
+            public void bind(DownloadItem item) {
+                fileNameText.setText(item.getName());
+                progress.setProgress(item.getProgress());
+            }
+        }
     }
 
     private class DownloadTask extends AsyncTask<Void, Integer, Void> {
@@ -275,69 +334,6 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
                     .setMessage(message)
                     .setPositiveButton("确定", null)
                     .show();
-        }
-    }
-
-    private static class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHolder> {
-        private final Context context;
-        private final List<DownloadItem> downloadItems;
-
-        public DownloadAdapter(Context context, List<DownloadItem> downloadItems) {
-            this.context = context;
-            this.downloadItems = downloadItems;
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_download, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            synchronized (downloadItems) {
-                if (position >= 0 && position < downloadItems.size()) {
-                    DownloadItem item = downloadItems.get(position);
-                    holder.bind(item);
-                }
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            synchronized (downloadItems) {
-                return downloadItems.size();
-            }
-        }
-
-        public void removeCompletedItems() {
-            synchronized (downloadItems) {
-                for (int i = downloadItems.size() - 1; i >= 0; i--) {
-                    DownloadItem item = downloadItems.get(i);
-                    File file = new File(DOWNLOAD_PATH + "/" + item.getPath());
-                    if (item.getProgress() == 100 && file.exists() && file.length() == item.getSize()) {
-                        downloadItems.remove(i);
-                        notifyItemRemoved(i);
-                    }
-                }
-            }
-        }
-
-        public static class ViewHolder extends RecyclerView.ViewHolder {
-            TextView fileNameText;
-            LinearProgressIndicator progress;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-                fileNameText = itemView.findViewById(R.id.fileNameText);
-                progress = itemView.findViewById(R.id.fileProgress);
-            }
-
-            public void bind(DownloadItem item) {
-                fileNameText.setText(item.getName());
-                progress.setProgress(item.getProgress());
-            }
         }
     }
 }

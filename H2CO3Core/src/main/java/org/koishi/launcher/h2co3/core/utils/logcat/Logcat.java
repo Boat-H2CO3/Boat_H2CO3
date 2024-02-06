@@ -9,6 +9,11 @@ import android.content.Intent;
 public class Logcat {
 
     /**
+     * 用于独立进程模式的后台服务类。
+     */
+    private static Class<? extends LogcatService> mServiceClass = null;
+
+    /**
      * 使用独立进程模式初始化NDCrash库信号处理程序。应该在Application的子类的onCreate()方法中调用。
      *
      * @param context         Context实例。用于确定套接字名称并启动服务。
@@ -42,7 +47,6 @@ public class Logcat {
         return 0;
     }
 
-
     /**
      * 使用独立进程模式取消初始化NDCrash库信号处理程序。
      *
@@ -56,16 +60,6 @@ public class Logcat {
         }
         return true;
     }
-
-
-
-
-
-    /**
-     * 用于独立进程模式的后台服务类。
-     */
-    private static Class<? extends LogcatService> mServiceClass = null;
-
 
 
 }

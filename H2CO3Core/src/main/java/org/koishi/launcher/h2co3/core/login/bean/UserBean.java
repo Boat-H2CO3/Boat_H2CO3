@@ -23,108 +23,108 @@ public class UserBean {
         // 构造方法
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getUserName() {
         return userName;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUserEmail() {
         return userEmail;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getUserPassword() {
         return userPassword;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     public String getUserType() {
         return userType;
     }
 
-    public void setApiUrl(String apiUrl) {
-        this.apiUrl = apiUrl;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getApiUrl() {
         return apiUrl;
     }
 
-    public void setAuthSession(String authSession) {
-        this.authSession = authSession;
+    public void setApiUrl(String apiUrl) {
+        this.apiUrl = apiUrl;
     }
 
     public String getAuthSession() {
         return authSession;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setAuthSession(String authSession) {
+        this.authSession = authSession;
     }
 
     public String getUuid() {
         return uuid;
     }
 
-    public void setSkinTexture(String skinTexture) {
-        this.skinTexture = skinTexture;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getSkinTexture() {
         return skinTexture;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setSkinTexture(String skinTexture) {
+        this.skinTexture = skinTexture;
     }
 
     public String getToken() {
         return token;
     }
 
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getRefreshToken() {
         return refreshToken;
     }
 
-    public void setClientToken(String clientToken) {
-        this.clientToken = clientToken;
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     public String getClientToken() {
         return clientToken;
     }
 
-    public void setUserInfo(String userInfo) {
-        this.userInfo = userInfo;
+    public void setClientToken(String clientToken) {
+        this.clientToken = clientToken;
     }
 
     public String getUserInfo() {
         return userInfo;
     }
 
-    public void setIsOffline(boolean isOffline) {
-        this.isOffline = isOffline;
+    public void setUserInfo(String userInfo) {
+        this.userInfo = userInfo;
     }
 
     public boolean getIsOffline() {
         return isOffline;
+    }
+
+    public void setIsOffline(boolean isOffline) {
+        this.isOffline = isOffline;
     }
 
     public void setIsSelected(boolean isSelected) {
@@ -135,12 +135,12 @@ public class UserBean {
         return isSelected;
     }
 
+    public Drawable getUserIcon() {
+        return userIcon;
+    }
+
     // 设置和获取用户头像的方法
     public void setUserIcon(Drawable userIcon) {
         this.userIcon = userIcon;
-    }
-
-    public Drawable getUserIcon() {
-        return userIcon;
     }
 }

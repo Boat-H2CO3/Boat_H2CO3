@@ -33,19 +33,23 @@
 typedef struct DCCallback DCCallback;
 
 // return value is the type encoded as a signature char (character of the set [vBcCsSiIjJlLfd]).
-typedef char (DCCallbackHandler)(DCCallback* pcb, DCArgs* args, DCValue* result, void* userdata);
+typedef char (DCCallbackHandler)(DCCallback *pcb, DCArgs *args, DCValue *result, void *userdata);
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
-DCCallback* dcbNewCallback(const char* signature, DCCallbackHandler* funcptr, void* userdata);
-void        dcbInitCallback(DCCallback* pcb, const char* signature, DCCallbackHandler* handler, void* userdata);
-void        dcbFreeCallback(DCCallback* pcb);
-void*       dcbGetUserData (DCCallback* pcb);
+DCCallback *dcbNewCallback(const char *signature, DCCallbackHandler *funcptr, void *userdata);
+
+void
+dcbInitCallback(DCCallback *pcb, const char *signature, DCCallbackHandler *handler, void *userdata);
+
+void dcbFreeCallback(DCCallback *pcb);
+
+void *dcbGetUserData(DCCallback *pcb);
 
 #ifdef __cplusplus
 }
-#endif 
+#endif
 
 #endif /* DYNCALL_CALLBACK_H */

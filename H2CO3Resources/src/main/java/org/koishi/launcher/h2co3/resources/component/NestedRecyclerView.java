@@ -2,10 +2,8 @@ package org.koishi.launcher.h2co3.resources.component;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import rikka.widget.borderview.BorderRecyclerView;
 

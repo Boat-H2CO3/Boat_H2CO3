@@ -23,37 +23,39 @@ static jmethodID logger_onEventLogged;
 static volatile jobject logListener = NULL;
 static int latestlog_fd = -1;
 
-static bool recordBuffer(char* buf, ssize_t len) {
-    if(strstr(buf, "Session ID is")) return false;
-    if(latestlog_fd != -1) {
+static bool recordBuffer(char *buf, ssize_t len) {
+    if (strstr(buf, "Session ID is")) return false;
+    if (latestlog_fd != -1) {
         write(latestlog_fd, buf, len);
         fdatasync(latestlog_fd);
     }
     return true;
 }
 
-JNIEXPORT jint JNI_OnLoad(JavaVM* vm, __attribute((unused)) void* reserved) {
-stdiois_jvm = vm;
-JNIEnv *env;
-(*vm)->GetEnv(vm, (void**)&env, JNI_VERSION_1_4);
-jclass eventLogListener = (*env)->FindClass(env, "org/koishi/launcher/h2co3/launcher/logcat/Logger$eventLogListener");
-logger_onEventLogged = (*env)->GetMethodID(env, eventLogListener, "onEventLogged", "(Ljava/lang/String;)V");
-return JNI_VERSION_1_4;
+JNIEXPORT jint JNI_OnLoad(JavaVM *vm, __attribute((unused)) void *reserved) {
+    stdiois_jvm = vm;
+    JNIEnv *env;
+    (*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_4);
+    jclass eventLogListener = (*env)->FindClass(env,
+                                                "org/koishi/launcher/h2co3/launcher/logcat/Logger$eventLogListener");
+    logger_onEventLogged = (*env)->GetMethodID(env, eventLogListener, "onEventLogged",
+                                               "(Ljava/lang/String;)V");
+    return JNI_VERSION_1_4;
 }
 
 static void *logger_thread() {
     JNIEnv *env;
     jstring writeString;
     (*stdiois_jvm)->AttachCurrentThread(stdiois_jvm, &env, NULL);
-    ssize_t  rsize;
+    ssize_t rsize;
     char buf[BUFFER_SIZE];
-    while((rsize = read(pfd[0], buf, sizeof(buf)-1)) > 0) {
+    while ((rsize = read(pfd[0], buf, sizeof(buf) - 1)) > 0) {
         bool shouldRecordString = recordBuffer(buf, rsize); //record with newline int latestlog
-        if(buf[rsize-1]=='\n') {
-            rsize=rsize-1; //truncate
+        if (buf[rsize - 1] == '\n') {
+            rsize = rsize - 1; //truncate
         }
-        buf[rsize]=0x00;
-        if(shouldRecordString && logListener != NULL) {
+        buf[rsize] = 0x00;
+        if (shouldRecordString && logListener != NULL) {
             writeString = (*env)->NewStringUTF(env, buf); //send to app without newline
             (*env)->CallVoidMethod(env, logListener, logger_onEventLogged, writeString);
             (*env)->DeleteLocalRef(env, writeString);
@@ -65,49 +67,51 @@ static void *logger_thread() {
 
 JNIEXPORT void JNICALL
 Java_org_koishi_launcher_h2co3_launcher_logcat_Logger_begin(JNIEnv *env,
-__attribute((unused)) jclass clazz,
-        jstring logPath) {
+                                                            __attribute((unused)) jclass clazz,
+                                                            jstring logPath) {
 // TODO: implement logToActivity()
-if (latestlog_fd != -1) {
-int localfd = latestlog_fd;
-latestlog_fd = -1;
-close(localfd);
-}
-jclass ioeClass = (*env)->FindClass(env, "java/io/IOException");
+    if (latestlog_fd != -1) {
+        int localfd = latestlog_fd;
+        latestlog_fd = -1;
+        close(localfd);
+    }
+    jclass ioeClass = (*env)->FindClass(env, "java/io/IOException");
 
-setvbuf(stdout, 0, _IOLBF, 0); // make stdout line-buffered
-setvbuf(stderr, 0, _IONBF, 0); // make stderr unbuffered
+    setvbuf(stdout, 0, _IOLBF, 0); // make stdout line-buffered
+    setvbuf(stderr, 0, _IONBF, 0); // make stderr unbuffered
 
 /* create the pipe and redirect stdout and stderr */
-pipe(pfd);
-dup2(pfd[1], 1);
-dup2(pfd[1], 2);
+    pipe(pfd);
+    dup2(pfd[1], 1);
+    dup2(pfd[1], 2);
 
 /* open latestlog.txt for writing */
-const char* logFilePath = (*env)->GetStringUTFChars(env, logPath, NULL);
-latestlog_fd = open(logFilePath, O_WRONLY | O_TRUNC);
-if(latestlog_fd == -1) {
-latestlog_fd = 0;
-(*env)->ThrowNew(env, ioeClass, strerror(errno));
-return;
-}
-(*env)->ReleaseStringUTFChars(env, logPath, logFilePath);
+    const char *logFilePath = (*env)->GetStringUTFChars(env, logPath, NULL);
+    latestlog_fd = open(logFilePath, O_WRONLY | O_TRUNC);
+    if (latestlog_fd == -1) {
+        latestlog_fd = 0;
+        (*env)->ThrowNew(env, ioeClass, strerror(errno));
+        return;
+    }
+    (*env)->ReleaseStringUTFChars(env, logPath, logFilePath);
 
 /* spawn the logging thread */
-int result = pthread_create(&logger, 0, logger_thread, 0);
-if(result != 0) {
-close(latestlog_fd);
-(*env)->ThrowNew(env, ioeClass, strerror(result));
-}
-pthread_detach(logger);
+    int result = pthread_create(&logger, 0, logger_thread, 0);
+    if (result != 0) {
+        close(latestlog_fd);
+        (*env)->ThrowNew(env, ioeClass, strerror(result));
+    }
+    pthread_detach(logger);
 }
 
 void (*old_exit)(int code);
+
 void custom_exit(int code) {
-    if(code != 0) {
+    if (code != 0) {
         JNIEnv *env;
         (*exitTrap_jvm)->AttachCurrentThread(exitTrap_jvm, &env, NULL);
-        (*env)->CallStaticVoidMethod(env, exitTrap_exitClass, exitTrap_staticMethod, exitTrap_ctx, code);
+        (*env)->CallStaticVoidMethod(env, exitTrap_exitClass, exitTrap_staticMethod, exitTrap_ctx,
+                                     code);
         (*env)->DeleteGlobalRef(env, exitTrap_ctx);
         (*env)->DeleteGlobalRef(env, exitTrap_exitClass);
         (*exitTrap_jvm)->DetachCurrentThread(exitTrap_jvm);
@@ -115,43 +119,47 @@ void custom_exit(int code) {
     old_exit(code);
 }
 
-JNIEXPORT void JNICALL Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_setupExitTrap(JNIEnv *env,
-__attribute((unused)) jclass clazz,
-        jobject context) {
-exitTrap_ctx = (*env)->NewGlobalRef(env, context);
-(*env)->GetJavaVM(env, &exitTrap_jvm);
-exitTrap_exitClass = (*env)->NewGlobalRef(env, (*env)->FindClass(env, "org/koishi/launcher/h2co3/launcher/ui/ExitActivity"));
-exitTrap_staticMethod = (*env)->GetStaticMethodID(env, exitTrap_exitClass, "showExitMessage", "(Landroid/content/Context;I)V");
-xhook_enable_debug(0);
-xhook_register(".*\\.so$", "exit", custom_exit, (void **) &old_exit);
-xhook_refresh(1);
+JNIEXPORT void JNICALL
+Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_setupExitTrap(JNIEnv *env,
+                                                                          __attribute((unused)) jclass clazz,
+                                                                          jobject context) {
+    exitTrap_ctx = (*env)->NewGlobalRef(env, context);
+    (*env)->GetJavaVM(env, &exitTrap_jvm);
+    exitTrap_exitClass = (*env)->NewGlobalRef(env, (*env)->FindClass(env,
+                                                                     "org/koishi/launcher/h2co3/launcher/ui/ExitActivity"));
+    exitTrap_staticMethod = (*env)->GetStaticMethodID(env, exitTrap_exitClass, "showExitMessage",
+                                                      "(Landroid/content/Context;I)V");
+    xhook_enable_debug(0);
+    xhook_register(".*\\.so$", "exit", custom_exit, (void **) &old_exit);
+    xhook_refresh(1);
 }
 
-JNIEXPORT void JNICALL Java_org_koishi_launcher_h2co3_launcher_logcat_Logger_appendToLog(JNIEnv *env,
-__attribute((unused)) jclass clazz,
-        jstring text) {
-const char *appendString = (*env)->GetStringUTFChars(env, text, NULL);
-jsize appendStringLength = (*env)->GetStringUTFLength(env, text);
-char newChars[appendStringLength + 2];
-strncpy(newChars, appendString, appendStringLength);
-newChars[appendStringLength] = '\n';
-newChars[appendStringLength + 1] = '\0';
-(*env)->ReleaseStringUTFChars(env, text, appendString);
-if (recordBuffer(newChars, appendStringLength + 1) && logListener != NULL) {
-jstring writeString = (*env)->NewStringUTF(env, newChars);
-(*env)->CallVoidMethod(env, logListener, logger_onEventLogged, writeString);
-(*env)->DeleteLocalRef(env, writeString);
-}
+JNIEXPORT void JNICALL
+Java_org_koishi_launcher_h2co3_launcher_logcat_Logger_appendToLog(JNIEnv *env,
+                                                                  __attribute((unused)) jclass clazz,
+                                                                  jstring text) {
+    const char *appendString = (*env)->GetStringUTFChars(env, text, NULL);
+    jsize appendStringLength = (*env)->GetStringUTFLength(env, text);
+    char newChars[appendStringLength + 2];
+    strncpy(newChars, appendString, appendStringLength);
+    newChars[appendStringLength] = '\n';
+    newChars[appendStringLength + 1] = '\0';
+    (*env)->ReleaseStringUTFChars(env, text, appendString);
+    if (recordBuffer(newChars, appendStringLength + 1) && logListener != NULL) {
+        jstring writeString = (*env)->NewStringUTF(env, newChars);
+        (*env)->CallVoidMethod(env, logListener, logger_onEventLogged, writeString);
+        (*env)->DeleteLocalRef(env, writeString);
+    }
 }
 
 JNIEXPORT void JNICALL Java_org_koishi_launcher_h2co3_launcher_logcat_setLogListener(JNIEnv *env,
-__attribute((unused)) jclass clazz,
-        jobject log_listener) {
-jobject logListenerLocal = logListener;
-if (log_listener == NULL) {
-logListener = NULL;
-} else {
-logListener = (*env)->NewGlobalRef(env, log_listener);
-}
-if (logListenerLocal != NULL) (*env)->DeleteGlobalRef(env, logListenerLocal);
+                                                                                     __attribute((unused)) jclass clazz,
+                                                                                     jobject log_listener) {
+    jobject logListenerLocal = logListener;
+    if (log_listener == NULL) {
+        logListener = NULL;
+    } else {
+        logListener = (*env)->NewGlobalRef(env, log_listener);
+    }
+    if (logListenerLocal != NULL) (*env)->DeleteGlobalRef(env, logListenerLocal);
 }

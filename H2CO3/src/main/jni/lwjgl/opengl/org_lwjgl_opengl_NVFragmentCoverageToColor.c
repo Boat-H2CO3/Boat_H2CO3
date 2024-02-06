@@ -6,12 +6,16 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glFragmentCoverageColorNVPROC) (jint);
+typedef void (APIENTRY *glFragmentCoverageColorNVPROC)(jint);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVFragmentCoverageToColor_glFragmentCoverageColorNV(JNIEnv *__env, jclass clazz, jint color) {
-    glFragmentCoverageColorNVPROC glFragmentCoverageColorNV = (glFragmentCoverageColorNVPROC)tlsGetFunction(1970);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_NVFragmentCoverageToColor_glFragmentCoverageColorNV(JNIEnv *__env,
+                                                                          jclass clazz,
+                                                                          jint color) {
+    glFragmentCoverageColorNVPROC glFragmentCoverageColorNV = (glFragmentCoverageColorNVPROC) tlsGetFunction(
+            1970);
     UNUSED_PARAM(clazz)
     glFragmentCoverageColorNV(color);
 }

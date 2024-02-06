@@ -7,8 +7,6 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
-import org.koishi.launcher.h2co3.R;
-
 public class QwertButton extends androidx.appcompat.widget.AppCompatButton {
 
     private String button_name;

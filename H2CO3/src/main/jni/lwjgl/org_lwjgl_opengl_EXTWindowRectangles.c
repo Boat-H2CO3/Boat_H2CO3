@@ -6,15 +6,22 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glWindowRectanglesEXTPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glWindowRectanglesEXTPROC)(jint, jint, intptr_t);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTWindowRectangles_nglWindowRectanglesEXT__IIJ(JNIEnv *__env, jclass clazz, jint mode, jint count, jlong boxAddress) {
-    glWindowRectanglesEXTPROC glWindowRectanglesEXT = (glWindowRectanglesEXTPROC)tlsGetFunction(1846);
-    intptr_t box = (intptr_t)boxAddress;
-    UNUSED_PARAM(clazz)
-    glWindowRectanglesEXT(mode, count, box);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_EXTWindowRectangles_nglWindowRectanglesEXT__IIJ(JNIEnv
+*__env,
+jclass clazz, jint
+mode,
+jint count, jlong
+boxAddress) {
+glWindowRectanglesEXTPROC glWindowRectanglesEXT = (glWindowRectanglesEXTPROC) tlsGetFunction(1846);
+intptr_t box = (intptr_t) boxAddress;
+UNUSED_PARAM(clazz)
+glWindowRectanglesEXT(mode, count, box
+);
 }
 
 EXTERN_C_EXIT

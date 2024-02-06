@@ -51,10 +51,9 @@ public class VersionAdapter extends RecyclerView.Adapter<VersionAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final String baseUrl = "https://piston-meta.mojang.com/v1/packages/";
         public TextView versionNameTextView;
         public TextView versionTypeTextView;
-
-        private final String baseUrl = "https://piston-meta.mojang.com/v1/packages/";
 
         public ViewHolder(View itemView) {
             super(itemView);

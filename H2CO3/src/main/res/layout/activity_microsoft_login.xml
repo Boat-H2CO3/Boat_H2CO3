@@ -3,29 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="ContentDescription"
-    tools:context=".ui.MicrosoftLoginActivity">
+    tools:context=".ui.MicrosoftLoginActivity"
+    tools:ignore="ContentDescription">
 
     <WebView
         android:id="@+id/microsoft_login_webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomAppBar"/>
+        app:layout_constraintBottom_toTopOf="@id/bottomAppBar"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-
         app:contentInsetEnd="0dp"
         app:contentInsetLeft="0dp"
         app:contentInsetRight="0dp"
+
         app:contentInsetStart="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="BottomAppBar">
 
         <RelativeLayout
@@ -50,28 +50,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:indeterminate="true"
                         android:layout_margin="5dp"
+                        android:indeterminate="true"
                         app:indicatorColor="?attr/colorAccent"
-                        app:indicatorSize="25dp"/>
+                        app:indicatorSize="25dp" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/omniBox_tab"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginEnd="10dp"
                         android:layout_marginStart="5dp"
-                        app:fabCustomSize="45dp"
-                        app:backgroundTint="?attr/colorSecondaryContainer" />
+                        android:layout_marginEnd="10dp"
+                        app:backgroundTint="?attr/colorSecondaryContainer"
+                        app:fabCustomSize="45dp" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/omnibox_overview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:fabCustomSize="45dp"
-                        app:backgroundTint="?attr/colorSecondaryContainer" />
+                        app:backgroundTint="?attr/colorSecondaryContainer"
+                        app:fabCustomSize="45dp" />
 
                 </LinearLayout>
 

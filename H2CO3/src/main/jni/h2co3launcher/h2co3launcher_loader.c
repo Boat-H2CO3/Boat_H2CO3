@@ -18,7 +18,8 @@ static JavaVM *exitTrap_jvm;
 
 jstring CStr2Jstring(JNIEnv *env, const char *buffer);
 
-void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(JNIEnv* env, jclass clazz) {
+void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(JNIEnv *env,
+                                                                               jclass clazz) {
     int boatPipe[2];
 
     if (pipe(boatPipe) < 0) {
@@ -28,7 +29,8 @@ void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(J
         H2CO3_INTERNAL_LOG("succeed to create log pipe!");
     }
 
-    if (dup2(boatPipe[1], STDOUT_FILENO) != STDOUT_FILENO && dup2(boatPipe[1], STDERR_FILENO) != STDERR_FILENO) {
+    if (dup2(boatPipe[1], STDOUT_FILENO) != STDOUT_FILENO &&
+        dup2(boatPipe[1], STDERR_FILENO) != STDERR_FILENO) {
         H2CO3_INTERNAL_LOG("failed to redirect stdio !");
         return;
     } else {
@@ -37,8 +39,10 @@ void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(J
 
     char buffer[BUFFER_SIZE];
 
-    jclass loadme = (*env)->FindClass(env, "org/koishi/launcher/h2co3/launcher/H2CO3LauncherLoader");
-    jmethodID loadme_static_method_receiveLog = (*env)->GetStaticMethodID(env, loadme, "receiveLog", "(Ljava/lang/String;)V");
+    jclass loadme = (*env)->FindClass(env,
+                                      "org/koishi/launcher/h2co3/launcher/H2CO3LauncherLoader");
+    jmethodID loadme_static_method_receiveLog = (*env)->GetStaticMethodID(env, loadme, "receiveLog",
+                                                                          "(Ljava/lang/String;)V");
     if (loadme_static_method_receiveLog == NULL) {
         H2CO3_INTERNAL_LOG("failed to find receive method !");
         return;
@@ -59,7 +63,8 @@ void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(J
             continue;
         } else {
             H2CO3_INTERNAL_LOG("%s", buffer);
-            (*env)->CallStaticVoidMethod(env, clazz, loadme_static_method_receiveLog, CStr2Jstring(env, buffer));
+            (*env)->CallStaticVoidMethod(env, clazz, loadme_static_method_receiveLog,
+                                         CStr2Jstring(env, buffer));
         }
     }
 }
@@ -77,7 +82,8 @@ jstring CStr2Jstring(JNIEnv *env, const char *buffer) {
 void custom_exit(int code) {
     JNIEnv *env;
     (*exitTrap_jvm)->AttachCurrentThread(exitTrap_jvm, &env, NULL);
-    (*env)->CallStaticVoidMethod(env, exitTrap_exitClass, exitTrap_staticMethod, exitTrap_ctx, code);
+    (*env)->CallStaticVoidMethod(env, exitTrap_exitClass, exitTrap_staticMethod, exitTrap_ctx,
+                                 code);
     (*env)->DeleteGlobalRef(env, exitTrap_ctx);
     (*env)->DeleteGlobalRef(env, exitTrap_exitClass);
     (*exitTrap_jvm)->DetachCurrentThread(exitTrap_jvm);
@@ -85,7 +91,8 @@ void custom_exit(int code) {
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_saveLogToPath(JNIEnv *env, jclass clazz, jstring path) {
+Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_saveLogToPath(JNIEnv *env, jclass clazz,
+                                                                          jstring path) {
     const char *file = (*env)->GetStringUTFChars(env, path, NULL);
 
     int fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
@@ -98,7 +105,8 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_saveLogToPath(JNIEnv
 }
 
 JNIEXPORT jint JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_chdir(JNIEnv *env, jclass clazz, jstring path) {
+Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_chdir(JNIEnv *env, jclass clazz,
+                                                                  jstring path) {
     const char *dir = (*env)->GetStringUTFChars(env, path, NULL);
 
     int ret = chdir(dir);
@@ -108,7 +116,8 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_chdir(JNIEnv *env, j
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_setenv(JNIEnv *env, jclass clazz, jstring str1, jstring str2) {
+Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_setenv(JNIEnv *env, jclass clazz,
+                                                                   jstring str1, jstring str2) {
     const char *name = (*env)->GetStringUTFChars(env, str1, NULL);
     const char *value = (*env)->GetStringUTFChars(env, str2, NULL);
 
@@ -119,7 +128,8 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_setenv(JNIEnv *env, 
 }
 
 JNIEXPORT jint JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_dlopen(JNIEnv *env, jclass clazz, jstring str1) {
+Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_dlopen(JNIEnv *env, jclass clazz,
+                                                                   jstring str1) {
     const char *lib_name = (*env)->GetStringUTFChars(env, str1, NULL);
 
     void *handle = dlopen(lib_name, RTLD_GLOBAL);
@@ -132,6 +142,7 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_dlopen(JNIEnv *env, 
     (*env)->ReleaseStringUTFChars(env, str1, lib_name);
     return 0;
 }
+
 void stub() {
 
 }
@@ -140,11 +151,15 @@ void stub() {
 
 void (*old_exit)(int code);
 
-void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherActivity_setupExitTrap(JNIEnv *env, jclass clazz, jobject context) {
+void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherActivity_setupExitTrap(JNIEnv *env,
+                                                                                 jclass clazz,
+                                                                                 jobject context) {
     exitTrap_ctx = (*env)->NewGlobalRef(env, context);
     (*env)->GetJavaVM(env, &exitTrap_jvm);
-    exitTrap_exitClass = (*env)->NewGlobalRef(env, (*env)->FindClass(env, "org/koishi/launcher/h2co3/launcher/H2CO3LauncherActivity"));
-    exitTrap_staticMethod = (*env)->GetStaticMethodID(env, exitTrap_exitClass, "onExit", "(Landroid/content/Context;I)V");
+    exitTrap_exitClass = (*env)->NewGlobalRef(env, (*env)->FindClass(env,
+                                                                     "org/koishi/launcher/h2co3/launcher/H2CO3LauncherActivity"));
+    exitTrap_staticMethod = (*env)->GetStaticMethodID(env, exitTrap_exitClass, "onExit",
+                                                      "(Landroid/content/Context;I)V");
 
     if (exitTrap_exitClass == NULL || exitTrap_staticMethod == NULL) {
         H2CO3_INTERNAL_LOG("NO CLASS");
@@ -157,7 +172,8 @@ void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherActivity_setupExitTrap
 }
 
 JNIEXPORT int JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_dlexec(JNIEnv *env, jclass clazz, jobjectArray argsArray) {
+Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_dlexec(JNIEnv *env, jclass clazz,
+                                                                   jobjectArray argsArray) {
     int argc = (*env)->GetArrayLength(env, argsArray);
     char *argv[argc];
     for (int i = 0; i < argc; i++) {
@@ -298,21 +314,24 @@ void patchLinker(JNIEnv *env, jclass clazz) {
     int dlvsym_hooked = 0;
     for (int i = 0; dlopen_addr[i] != ins_ret; i++) {
         if (dlopen_addr[i] == ins_mov_x2_x30) {
-            dlopen_addr[i] = gen_ldr_pc(2, (unsigned long) tmp_addr - (unsigned long) &dlopen_addr[i]);
+            dlopen_addr[i] = gen_ldr_pc(2,
+                                        (unsigned long) tmp_addr - (unsigned long) &dlopen_addr[i]);
             dlopen_hooked = 1;
             break;
         }
     }
     for (int i = 0; dlsym_addr[i] != ins_ret; i++) {
         if (dlsym_addr[i] == ins_mov_x2_x30) {
-            dlsym_addr[i] = gen_ldr_pc(2, (unsigned long) tmp_addr - (unsigned long) &dlsym_addr[i]);
+            dlsym_addr[i] = gen_ldr_pc(2,
+                                       (unsigned long) tmp_addr - (unsigned long) &dlsym_addr[i]);
             dlsym_hooked = 1;
             break;
         }
     }
     for (int i = 0; dlvsym_addr[i] != ins_ret; i++) {
         if (dlvsym_addr[i] == ins_mov_x3_x30) {
-            dlvsym_addr[i] = gen_ldr_pc(3, (unsigned long) tmp_addr - (unsigned long) &dlvsym_addr[i]);
+            dlvsym_addr[i] = gen_ldr_pc(3,
+                                        (unsigned long) tmp_addr - (unsigned long) &dlvsym_addr[i]);
             dlvsym_hooked = 1;
             break;
         }

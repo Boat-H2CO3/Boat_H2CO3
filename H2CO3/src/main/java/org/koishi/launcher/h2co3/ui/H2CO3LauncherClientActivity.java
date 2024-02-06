@@ -18,8 +18,8 @@ import androidx.annotation.Nullable;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
-import org.koishi.launcher.h2co3.control.controller.HardwareController;
 import org.koishi.launcher.h2co3.control.controller.H2CO3VirtualController;
+import org.koishi.launcher.h2co3.control.controller.HardwareController;
 import org.koishi.launcher.h2co3.core.H2CO3Game;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.game.MinecraftVersion;
@@ -37,14 +37,63 @@ import java.util.Vector;
 
 public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implements H2CO3ControlClient {
 
-    private final int[] grabbedPointer = new int[]{999, 89999};
-    private boolean grabbed = false;
-    private ImageView cursorIcon;
     private final static int CURSOR_SIZE = 16; //dp
-    private int screenWidth;
-    private int screenHeight;
+    private final int[] grabbedPointer = new int[]{999, 89999};
     MaterialAlertDialogBuilder dialog;
     H2CO3LauncherLib launcherLib = new H2CO3LauncherLib();
+    private boolean grabbed = false;
+    private ImageView cursorIcon;
+    private int screenWidth;
+    private int screenHeight;
+
+    public static void attachControllerInterface() {
+        H2CO3LauncherClientActivity.boatInterface = new H2CO3LauncherClientActivity.IBoat() {
+            private H2CO3VirtualController virtualController;
+            private HardwareController hardwareController;
+            private Timer timer;
+
+            @Override
+            public void onActivityCreate(H2CO3LauncherActivity boatActivity) {
+                virtualController = new H2CO3VirtualController((H2CO3ControlClient) boatActivity, KEYMAP_TO_X);
+                hardwareController = new HardwareController((H2CO3ControlClient) boatActivity, KEYMAP_TO_X);
+            }
+
+            @Override
+            public void setGrabCursor(boolean isGrabbed) {
+                virtualController.setGrabCursor(isGrabbed);
+                hardwareController.setGrabCursor(isGrabbed);
+            }
+
+            @Override
+            public void onStop() {
+                virtualController.onStop();
+                hardwareController.onStop();
+            }
+
+            @Override
+            public void onResume() {
+                virtualController.onResumed();
+                hardwareController.onResumed();
+            }
+
+            @Override
+            public void onPause() {
+                virtualController.onPaused();
+                hardwareController.onPaused();
+            }
+
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent event) {
+                return hardwareController.dispatchKeyEvent(event);
+            }
+
+            @Override
+            public boolean dispatchGenericMotionEvent(MotionEvent event) {
+                return hardwareController.dispatchMotionKeyEvent(event);
+            }
+        };
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +133,7 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
                     });
                 }).start();
                 surface.setDefaultBufferSize(width, height);
-                H2CO3LauncherLib.pushEventWindow(width,height);
+                H2CO3LauncherLib.pushEventWindow(width, height);
             }
 
             @Override
@@ -115,8 +164,8 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
 
             @Override
             public void onExit(int code) {
-                startActivity(new Intent(H2CO3LauncherClientActivity.this,ExitActivity.class));
-                ExitActivity.showExitMessage(H2CO3LauncherClientActivity.this,code);
+                startActivity(new Intent(H2CO3LauncherClientActivity.this, ExitActivity.class));
+                ExitActivity.showExitMessage(H2CO3LauncherClientActivity.this, code);
                 stopVirGLService();
             }
         });
@@ -274,53 +323,5 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
         } else if (cursorIcon.getVisibility() == View.VISIBLE) {
             cursorIcon.setVisibility(View.INVISIBLE);
         }
-    }
-
-    public static void attachControllerInterface() {
-        H2CO3LauncherClientActivity.boatInterface = new H2CO3LauncherClientActivity.IBoat() {
-            private H2CO3VirtualController virtualController;
-            private HardwareController hardwareController;
-            private Timer timer;
-
-            @Override
-            public void onActivityCreate(H2CO3LauncherActivity boatActivity) {
-                virtualController = new H2CO3VirtualController((H2CO3ControlClient) boatActivity, KEYMAP_TO_X);
-                hardwareController = new HardwareController((H2CO3ControlClient) boatActivity, KEYMAP_TO_X);
-            }
-
-            @Override
-            public void setGrabCursor(boolean isGrabbed) {
-                virtualController.setGrabCursor(isGrabbed);
-                hardwareController.setGrabCursor(isGrabbed);
-            }
-
-            @Override
-            public void onStop() {
-                virtualController.onStop();
-                hardwareController.onStop();
-            }
-
-            @Override
-            public void onResume() {
-                virtualController.onResumed();
-                hardwareController.onResumed();
-            }
-
-            @Override
-            public void onPause() {
-                virtualController.onPaused();
-                hardwareController.onPaused();
-            }
-
-            @Override
-            public boolean dispatchKeyEvent(KeyEvent event) {
-                return hardwareController.dispatchKeyEvent(event);
-            }
-
-            @Override
-            public boolean dispatchGenericMotionEvent(MotionEvent event) {
-                return hardwareController.dispatchMotionKeyEvent(event);
-            }
-        };
     }
 }

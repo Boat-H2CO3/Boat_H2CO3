@@ -6,19 +6,25 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glBeginConditionalRenderNVXPROC) (jint);
-typedef void (APIENTRY *glEndConditionalRenderNVXPROC) (void);
+typedef void (APIENTRY *glBeginConditionalRenderNVXPROC)(jint);
+
+typedef void (APIENTRY *glEndConditionalRenderNVXPROC)(void);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXConditionalRender_glBeginConditionalRenderNVX(JNIEnv *__env, jclass clazz, jint id) {
-    glBeginConditionalRenderNVXPROC glBeginConditionalRenderNVX = (glBeginConditionalRenderNVXPROC)tlsGetFunction(2210);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_NVXConditionalRender_glBeginConditionalRenderNVX(JNIEnv *__env, jclass clazz,
+                                                                       jint id) {
+    glBeginConditionalRenderNVXPROC glBeginConditionalRenderNVX = (glBeginConditionalRenderNVXPROC) tlsGetFunction(
+            2210);
     UNUSED_PARAM(clazz)
     glBeginConditionalRenderNVX(id);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXConditionalRender_glEndConditionalRenderNVX(JNIEnv *__env, jclass clazz) {
-    glEndConditionalRenderNVXPROC glEndConditionalRenderNVX = (glEndConditionalRenderNVXPROC)tlsGetFunction(2211);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_NVXConditionalRender_glEndConditionalRenderNVX(JNIEnv *__env, jclass clazz) {
+    glEndConditionalRenderNVXPROC glEndConditionalRenderNVX = (glEndConditionalRenderNVXPROC) tlsGetFunction(
+            2211);
     UNUSED_PARAM(clazz)
     glEndConditionalRenderNVX();
 }

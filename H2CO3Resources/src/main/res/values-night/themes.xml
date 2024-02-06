@@ -34,11 +34,9 @@
         <item name="android:statusBarColor">?android:colorBackground</item>
     </style>
 
-    <style name="Theme.H2CO3" parent="Theme.H2CO3.Styled">
-    </style>
+    <style name="Theme.H2CO3" parent="Theme.H2CO3.Styled"></style>
 
-    <style name="Theme.H2CO3.DynamicColors" parent="Theme.H2CO3.Styled.DynamicColors">
-    </style>
+    <style name="Theme.H2CO3.DynamicColors" parent="Theme.H2CO3.Styled.DynamicColors"></style>
 
     <style name="Theme.H2CO3.Material.DynamicColors" parent="Theme.Material3.DynamicColors.Dark.Rikka">
         <!--    Colors    -->

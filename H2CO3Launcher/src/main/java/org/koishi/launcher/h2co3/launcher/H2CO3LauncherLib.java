@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.SurfaceTexture;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
@@ -67,8 +66,6 @@ public class H2CO3LauncherLib {
 
     public static native void pushEvent(long time, int type, int p1, int p2);
 
-    public native int[] renderAWTScreenFrame();
-
     public static void pushEventMouseButton(int button, boolean press) {
         H2CO3LauncherLib.pushEvent(System.nanoTime(), press ? ButtonPress : ButtonRelease, button, 0);
     }
@@ -123,13 +120,14 @@ public class H2CO3LauncherLib {
         });
     }
 
-
-    public void setSurfaceDestroyed(boolean surfaceDestroyed) {
-        this.surfaceDestroyed = surfaceDestroyed;
-    }
+    public native int[] renderAWTScreenFrame();
 
     public boolean isSurfaceDestroyed() {
         return surfaceDestroyed;
+    }
+
+    public void setSurfaceDestroyed(boolean surfaceDestroyed) {
+        this.surfaceDestroyed = surfaceDestroyed;
     }
 
     public void handleWindow(Surface surface) {

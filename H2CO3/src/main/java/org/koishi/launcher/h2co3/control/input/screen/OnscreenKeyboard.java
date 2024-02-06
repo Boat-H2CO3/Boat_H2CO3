@@ -29,8 +29,8 @@ import org.koishi.launcher.h2co3.control.controller.Controller;
 import org.koishi.launcher.h2co3.control.event.BaseKeyEvent;
 import org.koishi.launcher.h2co3.control.input.OnscreenInput;
 import org.koishi.launcher.h2co3.control.input.screen.button.QwertButton;
-import org.koishi.launcher.h2co3.core.utils.ColorUtils;
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
+import org.koishi.launcher.h2co3.core.utils.ColorUtils;
 import org.koishi.launcher.h2co3.resources.component.dialog.DialogUtils;
 import org.koishi.launcher.h2co3.resources.component.dialog.support.DialogSupports;
 

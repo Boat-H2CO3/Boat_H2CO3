@@ -10,20 +10,25 @@
 
 // Overridable memory management functions
 
-typedef void* (*mallocPROC)         (size_t);
-typedef void* (*callocPROC)         (size_t num, size_t size);
-typedef void* (*reallocPROC)        (void *ptr, size_t size);
-typedef void  (*freePROC)           (void *ptr);
-typedef void* (*aligned_allocPROC)  (size_t alignment, size_t size);
-typedef void  (*aligned_freePROC)   (void *ptr);
+typedef void *(*mallocPROC)(size_t);
 
-extern mallocPROC        org_lwjgl_malloc;
-extern callocPROC        org_lwjgl_calloc;
-extern reallocPROC       org_lwjgl_realloc;
-extern freePROC          org_lwjgl_free;
+typedef void *(*callocPROC)(size_t num, size_t size);
+
+typedef void *(*reallocPROC)(void *ptr, size_t size);
+
+typedef void  (*freePROC)(void *ptr);
+
+typedef void *(*aligned_allocPROC)(size_t alignment, size_t size);
+
+typedef void  (*aligned_freePROC)(void *ptr);
+
+extern mallocPROC org_lwjgl_malloc;
+extern callocPROC org_lwjgl_calloc;
+extern reallocPROC org_lwjgl_realloc;
+extern freePROC org_lwjgl_free;
 
 extern aligned_allocPROC org_lwjgl_aligned_alloc;
-extern aligned_freePROC  org_lwjgl_aligned_free;
+extern aligned_freePROC org_lwjgl_aligned_free;
 
 #ifdef LWJGL_MALLOC_LIB
 #define XSETUP_MALLOC(classPath) SETUP_MALLOC(classPath)
@@ -50,13 +55,13 @@ JNIEXPORT void JNICALL Java_##classPath##_setupMalloc( \
     org_lwjgl_aligned_free = (aligned_freePROC)(uintptr_t)aligned_free; \
 }
 
-mallocPROC        org_lwjgl_malloc;
-callocPROC        org_lwjgl_calloc;
-reallocPROC       org_lwjgl_realloc;
-freePROC          org_lwjgl_free;
+mallocPROC org_lwjgl_malloc;
+callocPROC org_lwjgl_calloc;
+reallocPROC org_lwjgl_realloc;
+freePROC org_lwjgl_free;
 
 aligned_allocPROC org_lwjgl_aligned_alloc;
-aligned_freePROC  org_lwjgl_aligned_free;
+aligned_freePROC org_lwjgl_aligned_free;
 
 EXTERN_C_ENTER
 

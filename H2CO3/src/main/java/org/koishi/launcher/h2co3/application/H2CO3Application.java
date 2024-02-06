@@ -7,25 +7,12 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.BuildConfig;
 
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.DiskLogAdapter;
-import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
-import com.orhanobut.logger.PrettyFormatStrategy;
 
-import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.resources.R;
 import org.koishi.launcher.h2co3.ui.CrashActivity;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -33,13 +20,13 @@ import java.util.concurrent.TimeUnit;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
-import timber.log.Timber;
 
 public class H2CO3Application extends Application implements Application.ActivityLifecycleCallbacks {
     public static final H2CO3Application mInstance = new H2CO3Application();
+    public static final ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
     public static Activity mCurrentActivity;
-    public SharedPreferences mPref;
     private final boolean is_OTG = false;
+    public SharedPreferences mPref;
 
     public static Activity getCurrentActivity() {
         return mCurrentActivity;
@@ -48,8 +35,6 @@ public class H2CO3Application extends Application implements Application.Activit
     public static H2CO3Application getInstance() {
         return mInstance;
     }
-
-    public static final ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
 
     @Override
     public void onCreate() {

@@ -22,7 +22,8 @@ const char *h2co3launcherGetPrimaryClipString() {
     PrepareH2CO3LauncherLibJNI();
     free(h2co3launcher->clipboard_string);
     h2co3launcher->clipboard_string = NULL;
-    CallH2CO3LauncherLibJNIFunc(jstring clipstr =, Object, getPrimaryClipString, "()Ljava/lang/String;");
+    CallH2CO3LauncherLibJNIFunc(jstring clipstr =, Object, getPrimaryClipString,
+                                "()Ljava/lang/String;");
     if (clipstr == NULL) {
         H2CO3_INTERNAL_LOG("h2co3launcherGetPrimaryClipString: Failed to get clipstr");
         return NULL;

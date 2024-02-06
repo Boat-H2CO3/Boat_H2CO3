@@ -6,14 +6,18 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glMinSampleShadingARBPROC) (jfloat);
+typedef void (APIENTRY *glMinSampleShadingARBPROC)(jfloat);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBSampleShading_glMinSampleShadingARB(JNIEnv *__env, jclass clazz, jfloat value) {
-    glMinSampleShadingARBPROC glMinSampleShadingARB = (glMinSampleShadingARBPROC)tlsGetFunction(1280);
-    UNUSED_PARAM(clazz)
-    glMinSampleShadingARB(value);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_ARBSampleShading_glMinSampleShadingARB(JNIEnv
+*__env,
+jclass clazz, jfloat
+value) {
+glMinSampleShadingARBPROC glMinSampleShadingARB = (glMinSampleShadingARBPROC) tlsGetFunction(1280);
+UNUSED_PARAM(clazz)
+glMinSampleShadingARB(value);
 }
 
 EXTERN_C_EXIT

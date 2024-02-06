@@ -21,9 +21,9 @@ import java.util.Vector;
 
 public class H2CO3Game extends HashMap<String, String> {
 
-    public boolean touchInjector = false;
     public final String extraJavaFlags;
     public final String extraMinecraftFlags;
+    public boolean touchInjector = false;
 
     public H2CO3Game() {
         this.extraJavaFlags = "";
@@ -31,7 +31,7 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     public static String getRender() {
-        return getH2CO3Value("h2co3_launcher_render", H2CO3Tools.GL_GL114,String.class);
+        return getH2CO3Value("h2co3_launcher_render", H2CO3Tools.GL_GL114, String.class);
     }
 
     public void setRender(String path) {
@@ -39,71 +39,31 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     public static String getJavaPath() {
-        return getBoatValue("h2co3_launcher_java", H2CO3Tools.JAVA_8_PATH,String.class);
+        return getBoatValue("h2co3_launcher_java", H2CO3Tools.JAVA_8_PATH, String.class);
     }
 
     public static void setJavaPath(String path) {
         setBoatValue("h2co3_launcher_java", path);
     }
 
-    public String getRuntimePath() {
-        return getH2CO3Value("runtime_path", H2CO3Tools.RUNTIME_DIR,String.class);
-    }
-
-    public void setRuntimePath(String path) {
-        setH2CO3Value("runtime_path", path);
-    }
-
-    public String getH2CO3Home() {
-        return getH2CO3Value("h2co3_home", H2CO3Tools.PUBLIC_FILE_PATH,String.class);
-    }
-
-    public void setH2CO3Home(String home) {
-        setBoatValue("h2co3_home", home);
-    }
-
-    public String getBackground() {
-        return getH2CO3Value("background", "",String.class);
-    }
-
-    public void setBackground(String background) {
-        setBoatValue("background", background);
-    }
-
     public static String getGameDirectory() {
-        return getH2CO3Value("game_directory", H2CO3Tools.MINECRAFT_DIR,String.class);
+        return getH2CO3Value("game_directory", H2CO3Tools.MINECRAFT_DIR, String.class);
     }
 
     public static void setGameDirectory(String directory) {
         setBoatValue("game_directory", directory);
     }
 
-    public String getGameAssets() {
-        return getH2CO3Value("game_assets", H2CO3Tools.MINECRAFT_DIR + "/assets/virtual/legacy/",String.class);
-    }
-
-    public static void setGameAssets(String assets) {
-        setBoatValue("game_assets", assets);
-    }
-
     public static String getGameAssetsRoot() {
-        return getH2CO3Value("game_assets_root", H2CO3Tools.MINECRAFT_DIR + "/assets/",String.class);
+        return getH2CO3Value("game_assets_root", H2CO3Tools.MINECRAFT_DIR + "/assets/", String.class);
     }
 
     public static void setGameAssetsRoot(String assetsRoot) {
         setBoatValue("game_assets_root", assetsRoot);
     }
 
-    public String[] getExtraJavaFlags() {
-        return new String[]{getBoatValue("extra_java_flags", "",String.class)};
-    }
-
-    public void setExtraJavaFlags(String[] javaFlags) {
-        setBoatValue("extra_java_flags", javaFlags);
-    }
-
     public static String[] getExtraMinecraftFlags() {
-        return new String[]{getBoatValue("extra_minecraft_flags", "",String.class)};
+        return new String[]{getBoatValue("extra_minecraft_flags", "", String.class)};
     }
 
     public void setExtraMinecraftFlags(String[] minecraftFlags) {
@@ -111,7 +71,7 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     public static String getGameCurrentVersion() {
-        return getBoatValue("current_version", "null",String.class);
+        return getBoatValue("current_version", "null", String.class);
     }
 
     public static void setGameCurrentVersion(String version) {
@@ -249,36 +209,76 @@ public class H2CO3Game extends HashMap<String, String> {
             }
         }
         args.add(cacioClasspath.toString());
-            args.add("-Djava.awt.headless=false");
-            args.add("-Dcacio.managed.screensize="+ width + "x" + height);
-            args.add("-Dcacio.font.fontmanager=sun.awt.X11FontManager");
-            args.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
-            args.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
-            if (!isJava17) {
-                args.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
-                args.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
-            } else {
-                args.add("-Dawt.toolkit=com.github.caciocavallosilano.cacio.ctc.CTCToolkit");
-                args.add("-Djava.awt.graphicsenv=com.github.caciocavallosilano.cacio.ctc.CTCGraphicsEnvironment");
-                args.add("-Djava.system.class.loader=com.github.caciocavallosilano.cacio.ctc.CTCPreloadClassLoader");
+        args.add("-Djava.awt.headless=false");
+        args.add("-Dcacio.managed.screensize=" + width + "x" + height);
+        args.add("-Dcacio.font.fontmanager=sun.awt.X11FontManager");
+        args.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
+        args.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
+        if (!isJava17) {
+            args.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
+            args.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
+        } else {
+            args.add("-Dawt.toolkit=com.github.caciocavallosilano.cacio.ctc.CTCToolkit");
+            args.add("-Djava.awt.graphicsenv=com.github.caciocavallosilano.cacio.ctc.CTCGraphicsEnvironment");
+            args.add("-Djava.system.class.loader=com.github.caciocavallosilano.cacio.ctc.CTCPreloadClassLoader");
 
-                args.add("--add-exports=java.desktop/java.awt=ALL-UNNAMED");
-                args.add("--add-exports=java.desktop/java.awt.peer=ALL-UNNAMED");
-                args.add("--add-exports=java.desktop/sun.awt.image=ALL-UNNAMED");
-                args.add("--add-exports=java.desktop/sun.java2d=ALL-UNNAMED");
-                args.add("--add-exports=java.desktop/java.awt.dnd.peer=ALL-UNNAMED");
-                args.add("--add-exports=java.desktop/sun.awt=ALL-UNNAMED");
-                args.add("--add-exports=java.desktop/sun.awt.event=ALL-UNNAMED");
-                args.add("--add-exports=java.desktop/sun.awt.datatransfer=ALL-UNNAMED");
-                args.add("--add-exports=java.desktop/sun.font=ALL-UNNAMED");
-                args.add("--add-exports=java.base/sun.security.action=ALL-UNNAMED");
-                args.add("--add-opens=java.base/java.util=ALL-UNNAMED");
-                args.add("--add-opens=java.desktop/java.awt=ALL-UNNAMED");
-                args.add("--add-opens=java.desktop/sun.font=ALL-UNNAMED");
-                args.add("--add-opens=java.desktop/sun.java2d=ALL-UNNAMED");
-                args.add("--add-opens=java.base/java.lang.reflect=ALL-UNNAMED");
-                args.add("--add-opens=java.base/java.net=ALL-UNNAMED");
+            args.add("--add-exports=java.desktop/java.awt=ALL-UNNAMED");
+            args.add("--add-exports=java.desktop/java.awt.peer=ALL-UNNAMED");
+            args.add("--add-exports=java.desktop/sun.awt.image=ALL-UNNAMED");
+            args.add("--add-exports=java.desktop/sun.java2d=ALL-UNNAMED");
+            args.add("--add-exports=java.desktop/java.awt.dnd.peer=ALL-UNNAMED");
+            args.add("--add-exports=java.desktop/sun.awt=ALL-UNNAMED");
+            args.add("--add-exports=java.desktop/sun.awt.event=ALL-UNNAMED");
+            args.add("--add-exports=java.desktop/sun.awt.datatransfer=ALL-UNNAMED");
+            args.add("--add-exports=java.desktop/sun.font=ALL-UNNAMED");
+            args.add("--add-exports=java.base/sun.security.action=ALL-UNNAMED");
+            args.add("--add-opens=java.base/java.util=ALL-UNNAMED");
+            args.add("--add-opens=java.desktop/java.awt=ALL-UNNAMED");
+            args.add("--add-opens=java.desktop/sun.font=ALL-UNNAMED");
+            args.add("--add-opens=java.desktop/sun.java2d=ALL-UNNAMED");
+            args.add("--add-opens=java.base/java.lang.reflect=ALL-UNNAMED");
+            args.add("--add-opens=java.base/java.net=ALL-UNNAMED");
 
         }
+    }
+
+    public String getRuntimePath() {
+        return getH2CO3Value("runtime_path", H2CO3Tools.RUNTIME_DIR, String.class);
+    }
+
+    public void setRuntimePath(String path) {
+        setH2CO3Value("runtime_path", path);
+    }
+
+    public String getH2CO3Home() {
+        return getH2CO3Value("h2co3_home", H2CO3Tools.PUBLIC_FILE_PATH, String.class);
+    }
+
+    public void setH2CO3Home(String home) {
+        setBoatValue("h2co3_home", home);
+    }
+
+    public String getBackground() {
+        return getH2CO3Value("background", "", String.class);
+    }
+
+    public void setBackground(String background) {
+        setBoatValue("background", background);
+    }
+
+    public String getGameAssets() {
+        return getH2CO3Value("game_assets", H2CO3Tools.MINECRAFT_DIR + "/assets/virtual/legacy/", String.class);
+    }
+
+    public static void setGameAssets(String assets) {
+        setBoatValue("game_assets", assets);
+    }
+
+    public String[] getExtraJavaFlags() {
+        return new String[]{getBoatValue("extra_java_flags", "", String.class)};
+    }
+
+    public void setExtraJavaFlags(String[] javaFlags) {
+        setBoatValue("extra_java_flags", javaFlags);
     }
 }

@@ -72,8 +72,8 @@ extern "C" {
 #endif
 
 typedef struct stbrp_context stbrp_context;
-typedef struct stbrp_node    stbrp_node;
-typedef struct stbrp_rect    stbrp_rect;
+typedef struct stbrp_node stbrp_node;
+typedef struct stbrp_rect stbrp_rect;
 
 #ifdef STBRP_LARGE_RECTS
 typedef int            stbrp_coord;
@@ -81,7 +81,7 @@ typedef int            stbrp_coord;
 typedef unsigned short stbrp_coord;
 #endif
 
-STBRP_DEF int stbrp_pack_rects (stbrp_context *context, stbrp_rect *rects, int num_rects);
+STBRP_DEF int stbrp_pack_rects(stbrp_context *context, stbrp_rect *rects, int num_rects);
 // Assign packed locations to rectangles. The rectangles are of type
 // 'stbrp_rect' defined below, stored in the array 'rects', and there
 // are 'num_rects' many of them.
@@ -106,22 +106,22 @@ STBRP_DEF int stbrp_pack_rects (stbrp_context *context, stbrp_rect *rects, int n
 // The function returns 1 if all of the rectangles were successfully
 // packed and 0 otherwise.
 
-struct stbrp_rect
-{
-   // reserved for your use:
-   int            id;
+struct stbrp_rect {
+    // reserved for your use:
+    int id;
 
-   // input:
-   stbrp_coord    w, h;
+    // input:
+    stbrp_coord w, h;
 
-   // output:
-   stbrp_coord    x, y;
-   int            was_packed;  // non-zero if valid packing
+    // output:
+    stbrp_coord x, y;
+    int was_packed;  // non-zero if valid packing
 
 }; // 16 bytes, nominally
 
 
-STBRP_DEF void stbrp_init_target (stbrp_context *context, int width, int height, stbrp_node *nodes, int num_nodes);
+STBRP_DEF void
+stbrp_init_target(stbrp_context *context, int width, int height, stbrp_node *nodes, int num_nodes);
 // Initialize a rectangle packer to:
 //    pack a rectangle that is 'width' by 'height' in dimensions
 //    using temporary storage provided by the array 'nodes', which is 'num_nodes' long
@@ -142,22 +142,21 @@ STBRP_DEF void stbrp_init_target (stbrp_context *context, int width, int height,
 // If you do #2, then the non-quantized algorithm will be used, but the algorithm
 // may run out of temporary storage and be unable to pack some rectangles.
 
-STBRP_DEF void stbrp_setup_allow_out_of_mem (stbrp_context *context, int allow_out_of_mem);
+STBRP_DEF void stbrp_setup_allow_out_of_mem(stbrp_context *context, int allow_out_of_mem);
 // Optionally call this function after init but before doing any packing to
 // change the handling of the out-of-temp-memory scenario, described above.
 // If you call init again, this will be reset to the default (false).
 
 
-STBRP_DEF void stbrp_setup_heuristic (stbrp_context *context, int heuristic);
+STBRP_DEF void stbrp_setup_heuristic(stbrp_context *context, int heuristic);
 // Optionally select which packing heuristic the library should use. Different
 // heuristics will produce better/worse results for different data sets.
 // If you call init again, this will be reset to the default.
 
-enum
-{
-   STBRP_HEURISTIC_Skyline_default=0,
-   STBRP_HEURISTIC_Skyline_BL_sortHeight = STBRP_HEURISTIC_Skyline_default,
-   STBRP_HEURISTIC_Skyline_BF_sortHeight
+enum {
+    STBRP_HEURISTIC_Skyline_default = 0,
+    STBRP_HEURISTIC_Skyline_BL_sortHeight = STBRP_HEURISTIC_Skyline_default,
+    STBRP_HEURISTIC_Skyline_BF_sortHeight
 };
 
 
@@ -166,23 +165,21 @@ enum
 // the details of the following structures don't matter to you, but they must
 // be visible so you can handle the memory allocations for them
 
-struct stbrp_node
-{
-   stbrp_coord  x,y;
-   stbrp_node  *next;
+struct stbrp_node {
+    stbrp_coord x, y;
+    stbrp_node *next;
 };
 
-struct stbrp_context
-{
-   int width;
-   int height;
-   int align;
-   int init_mode;
-   int heuristic;
-   int num_nodes;
-   stbrp_node *active_head;
-   stbrp_node *free_head;
-   stbrp_node extra[2]; // we allocate two extra nodes so optimal user-node-count is 'width' not 'width+2'
+struct stbrp_context {
+    int width;
+    int height;
+    int align;
+    int init_mode;
+    int heuristic;
+    int num_nodes;
+    stbrp_node *active_head;
+    stbrp_node *free_head;
+    stbrp_node extra[2]; // we allocate two extra nodes so optimal user-node-count is 'width' not 'width+2'
 };
 
 #ifdef __cplusplus
@@ -293,13 +290,13 @@ static int stbrp__skyline_find_min_y(stbrp_context *c, stbrp_node *first, int x0
 
    STBRP_ASSERT(first->x <= x0);
 
-   #if 0
+#if 0
    // skip in case we're past the node
    while (node->next->x <= x0)
       ++node;
-   #else
+#else
    STBRP_ASSERT(node->next->x > x0); // we ended up handling this in the caller for efficiency
-   #endif
+#endif
 
    STBRP_ASSERT(node->x <= x0);
 

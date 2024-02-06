@@ -4,6 +4,7 @@ import static org.koishi.launcher.h2co3.core.login.utils.NetworkUtils.resolveCon
 import static org.koishi.launcher.h2co3.core.utils.Lang.mapOf;
 
 import com.google.gson.JsonParseException;
+
 import org.koishi.launcher.h2co3.core.utils.Pair;
 import org.koishi.launcher.h2co3.core.utils.Schedulers;
 import org.koishi.launcher.h2co3.core.utils.function.ExceptionalBiConsumer;
@@ -27,13 +28,26 @@ public abstract class HttpRequest {
     protected final String url;
     protected final String method;
     protected final Map<String, String> headers = new HashMap<>();
-    protected ExceptionalBiConsumer<URL, Integer, IOException> responseCodeTester;
     protected final Set<Integer> toleratedHttpCodes = new HashSet<>();
+    protected ExceptionalBiConsumer<URL, Integer, IOException> responseCodeTester;
     protected boolean ignoreHttpCode;
 
     private HttpRequest(String url, String method) {
         this.url = url;
         this.method = method;
+    }
+
+    public static HttpGetRequest GET(String url) {
+        return new HttpGetRequest(url);
+    }
+
+    @SafeVarargs
+    public static HttpGetRequest GET(String url, Pair<String, String>... query) throws UnsupportedEncodingException {
+        return GET(NetworkUtils.withQuery(url, mapOf(query)));
+    }
+
+    public static HttpPostRequest POST(String url) throws MalformedURLException {
+        return new HttpPostRequest(url);
     }
 
     public HttpRequest accept(String contentType) {
@@ -109,6 +123,12 @@ public abstract class HttpRequest {
         return con;
     }
 
+    public interface Authorization {
+        String getTokenType();
+
+        String getAccessToken();
+    }
+
     public static class HttpGetRequest extends HttpRequest {
         public HttpGetRequest(String url) {
             super(url, "GET");
@@ -174,24 +194,5 @@ public abstract class HttpRequest {
 
             return NetworkUtils.readData(con);
         }
-    }
-
-    public static HttpGetRequest GET(String url) {
-        return new HttpGetRequest(url);
-    }
-
-    @SafeVarargs
-    public static HttpGetRequest GET(String url, Pair<String, String>... query) throws UnsupportedEncodingException {
-        return GET(NetworkUtils.withQuery(url, mapOf(query)));
-    }
-
-    public static HttpPostRequest POST(String url) throws MalformedURLException {
-        return new HttpPostRequest(url);
-    }
-
-    public interface Authorization {
-        String getTokenType();
-
-        String getAccessToken();
     }
 }

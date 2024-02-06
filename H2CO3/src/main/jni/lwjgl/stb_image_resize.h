@@ -188,8 +188,10 @@ typedef unsigned char  stbir_uint8;
 typedef unsigned short stbir_uint16;
 typedef unsigned int   stbir_uint32;
 #else
+
 #include <stdint.h>
-typedef uint8_t  stbir_uint8;
+
+typedef uint8_t stbir_uint8;
 typedef uint16_t stbir_uint16;
 typedef uint32_t stbir_uint32;
 #endif
@@ -224,13 +226,16 @@ typedef uint32_t stbir_uint32;
 //       you can change the compile-time defaults by #defining STBIR_DEFAULT_FILTER_UPSAMPLE
 //       and STBIR_DEFAULT_FILTER_DOWNSAMPLE, or you can use the medium-complexity API.
 
-STBIRDEF int stbir_resize_uint8(     const unsigned char *input_pixels , int input_w , int input_h , int input_stride_in_bytes,
-                                           unsigned char *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
-                                     int num_channels);
+STBIRDEF int stbir_resize_uint8(const unsigned char *input_pixels, int input_w, int input_h,
+                                int input_stride_in_bytes,
+                                unsigned char *output_pixels, int output_w, int output_h,
+                                int output_stride_in_bytes,
+                                int num_channels);
 
-STBIRDEF int stbir_resize_float(     const float *input_pixels , int input_w , int input_h , int input_stride_in_bytes,
-                                           float *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
-                                     int num_channels);
+STBIRDEF int
+stbir_resize_float(const float *input_pixels, int input_w, int input_h, int input_stride_in_bytes,
+                   float *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
+                   int num_channels);
 
 
 // The following functions interpret image data as gamma-corrected sRGB. 
@@ -249,24 +254,28 @@ STBIRDEF int stbir_resize_float(     const float *input_pixels , int input_w , i
 // when doing sRGB operations.
 #define STBIR_FLAG_ALPHA_USES_COLORSPACE  (1 << 1)
 
-STBIRDEF int stbir_resize_uint8_srgb(const unsigned char *input_pixels , int input_w , int input_h , int input_stride_in_bytes,
-                                           unsigned char *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
+STBIRDEF int stbir_resize_uint8_srgb(const unsigned char *input_pixels, int input_w, int input_h,
+                                     int input_stride_in_bytes,
+                                     unsigned char *output_pixels, int output_w, int output_h,
+                                     int output_stride_in_bytes,
                                      int num_channels, int alpha_channel, int flags);
 
 
-typedef enum
-{
-    STBIR_EDGE_CLAMP   = 1,
+typedef enum {
+    STBIR_EDGE_CLAMP = 1,
     STBIR_EDGE_REFLECT = 2,
-    STBIR_EDGE_WRAP    = 3,
-    STBIR_EDGE_ZERO    = 4,
+    STBIR_EDGE_WRAP = 3,
+    STBIR_EDGE_ZERO = 4,
 } stbir_edge;
 
 // This function adds the ability to specify how requests to sample off the edge of the image are handled.
-STBIRDEF int stbir_resize_uint8_srgb_edgemode(const unsigned char *input_pixels , int input_w , int input_h , int input_stride_in_bytes,
-                                                    unsigned char *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
-                                              int num_channels, int alpha_channel, int flags,
-                                              stbir_edge edge_wrap_mode);
+STBIRDEF int
+stbir_resize_uint8_srgb_edgemode(const unsigned char *input_pixels, int input_w, int input_h,
+                                 int input_stride_in_bytes,
+                                 unsigned char *output_pixels, int output_w, int output_h,
+                                 int output_stride_in_bytes,
+                                 int num_channels, int alpha_channel, int flags,
+                                 stbir_edge edge_wrap_mode);
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -283,18 +292,16 @@ STBIRDEF int stbir_resize_uint8_srgb_edgemode(const unsigned char *input_pixels 
 //     * sRGB colorspace available for all types
 //     * context parameter for passing to STBIR_MALLOC
 
-typedef enum
-{
-    STBIR_FILTER_DEFAULT      = 0,  // use same filter type that easy-to-use API chooses
-    STBIR_FILTER_BOX          = 1,  // A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios
-    STBIR_FILTER_TRIANGLE     = 2,  // On upsampling, produces same results as bilinear texture filtering
+typedef enum {
+    STBIR_FILTER_DEFAULT = 0,  // use same filter type that easy-to-use API chooses
+    STBIR_FILTER_BOX = 1,  // A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios
+    STBIR_FILTER_TRIANGLE = 2,  // On upsampling, produces same results as bilinear texture filtering
     STBIR_FILTER_CUBICBSPLINE = 3,  // The cubic b-spline (aka Mitchell-Netrevalli with B=1,C=0), gaussian-esque
-    STBIR_FILTER_CATMULLROM   = 4,  // An interpolating cubic spline
-    STBIR_FILTER_MITCHELL     = 5,  // Mitchell-Netrevalli filter with B=1/3, C=1/3
+    STBIR_FILTER_CATMULLROM = 4,  // An interpolating cubic spline
+    STBIR_FILTER_MITCHELL = 5,  // Mitchell-Netrevalli filter with B=1/3, C=1/3
 } stbir_filter;
 
-typedef enum
-{
+typedef enum {
     STBIR_COLORSPACE_LINEAR,
     STBIR_COLORSPACE_SRGB,
 
@@ -303,23 +310,32 @@ typedef enum
 
 // The following functions are all identical except for the type of the image data
 
-STBIRDEF int stbir_resize_uint8_generic( const unsigned char *input_pixels , int input_w , int input_h , int input_stride_in_bytes,
-                                               unsigned char *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
+STBIRDEF int stbir_resize_uint8_generic(const unsigned char *input_pixels, int input_w, int input_h,
+                                        int input_stride_in_bytes,
+                                        unsigned char *output_pixels, int output_w, int output_h,
+                                        int output_stride_in_bytes,
+                                        int num_channels, int alpha_channel, int flags,
+                                        stbir_edge edge_wrap_mode, stbir_filter filter,
+                                        stbir_colorspace space,
+                                        void *alloc_context);
+
+STBIRDEF int stbir_resize_uint16_generic(const stbir_uint16 *input_pixels, int input_w, int input_h,
+                                         int input_stride_in_bytes,
+                                         stbir_uint16 *output_pixels, int output_w, int output_h,
+                                         int output_stride_in_bytes,
                                          int num_channels, int alpha_channel, int flags,
-                                         stbir_edge edge_wrap_mode, stbir_filter filter, stbir_colorspace space, 
+                                         stbir_edge edge_wrap_mode, stbir_filter filter,
+                                         stbir_colorspace space,
                                          void *alloc_context);
 
-STBIRDEF int stbir_resize_uint16_generic(const stbir_uint16 *input_pixels  , int input_w , int input_h , int input_stride_in_bytes,
-                                               stbir_uint16 *output_pixels , int output_w, int output_h, int output_stride_in_bytes,
-                                         int num_channels, int alpha_channel, int flags,
-                                         stbir_edge edge_wrap_mode, stbir_filter filter, stbir_colorspace space, 
-                                         void *alloc_context);
-
-STBIRDEF int stbir_resize_float_generic( const float *input_pixels         , int input_w , int input_h , int input_stride_in_bytes,
-                                               float *output_pixels        , int output_w, int output_h, int output_stride_in_bytes,
-                                         int num_channels, int alpha_channel, int flags,
-                                         stbir_edge edge_wrap_mode, stbir_filter filter, stbir_colorspace space, 
-                                         void *alloc_context);
+STBIRDEF int stbir_resize_float_generic(const float *input_pixels, int input_w, int input_h,
+                                        int input_stride_in_bytes,
+                                        float *output_pixels, int output_w, int output_h,
+                                        int output_stride_in_bytes,
+                                        int num_channels, int alpha_channel, int flags,
+                                        stbir_edge edge_wrap_mode, stbir_filter filter,
+                                        stbir_colorspace space,
+                                        void *alloc_context);
 
 
 
@@ -336,51 +352,50 @@ STBIRDEF int stbir_resize_float_generic( const float *input_pixels         , int
 //     * can specify scale explicitly for subpixel correctness
 //     * can specify image source tile using texture coordinates
 
-typedef enum
-{
-    STBIR_TYPE_UINT8 ,
+typedef enum {
+    STBIR_TYPE_UINT8,
     STBIR_TYPE_UINT16,
     STBIR_TYPE_UINT32,
-    STBIR_TYPE_FLOAT ,
+    STBIR_TYPE_FLOAT,
 
     STBIR_MAX_TYPES
 } stbir_datatype;
 
-STBIRDEF int stbir_resize(         const void *input_pixels , int input_w , int input_h , int input_stride_in_bytes,
-                                         void *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
-                                   stbir_datatype datatype,
-                                   int num_channels, int alpha_channel, int flags,
-                                   stbir_edge edge_mode_horizontal, stbir_edge edge_mode_vertical, 
-                                   stbir_filter filter_horizontal,  stbir_filter filter_vertical,
-                                   stbir_colorspace space, void *alloc_context);
+STBIRDEF int
+stbir_resize(const void *input_pixels, int input_w, int input_h, int input_stride_in_bytes,
+             void *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
+             stbir_datatype datatype,
+             int num_channels, int alpha_channel, int flags,
+             stbir_edge edge_mode_horizontal, stbir_edge edge_mode_vertical,
+             stbir_filter filter_horizontal, stbir_filter filter_vertical,
+             stbir_colorspace space, void *alloc_context);
 
-STBIRDEF int stbir_resize_subpixel(const void *input_pixels , int input_w , int input_h , int input_stride_in_bytes,
-                                         void *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
-                                   stbir_datatype datatype,
-                                   int num_channels, int alpha_channel, int flags,
-                                   stbir_edge edge_mode_horizontal, stbir_edge edge_mode_vertical, 
-                                   stbir_filter filter_horizontal,  stbir_filter filter_vertical,
-                                   stbir_colorspace space, void *alloc_context,
-                                   float x_scale, float y_scale,
-                                   float x_offset, float y_offset);
+STBIRDEF int
+stbir_resize_subpixel(const void *input_pixels, int input_w, int input_h, int input_stride_in_bytes,
+                      void *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
+                      stbir_datatype datatype,
+                      int num_channels, int alpha_channel, int flags,
+                      stbir_edge edge_mode_horizontal, stbir_edge edge_mode_vertical,
+                      stbir_filter filter_horizontal, stbir_filter filter_vertical,
+                      stbir_colorspace space, void *alloc_context,
+                      float x_scale, float y_scale,
+                      float x_offset, float y_offset);
 
-STBIRDEF int stbir_resize_region(  const void *input_pixels , int input_w , int input_h , int input_stride_in_bytes,
-                                         void *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
-                                   stbir_datatype datatype,
-                                   int num_channels, int alpha_channel, int flags,
-                                   stbir_edge edge_mode_horizontal, stbir_edge edge_mode_vertical, 
-                                   stbir_filter filter_horizontal,  stbir_filter filter_vertical,
-                                   stbir_colorspace space, void *alloc_context,
-                                   float s0, float t0, float s1, float t1);
+STBIRDEF int
+stbir_resize_region(const void *input_pixels, int input_w, int input_h, int input_stride_in_bytes,
+                    void *output_pixels, int output_w, int output_h, int output_stride_in_bytes,
+                    stbir_datatype datatype,
+                    int num_channels, int alpha_channel, int flags,
+                    stbir_edge edge_mode_horizontal, stbir_edge edge_mode_vertical,
+                    stbir_filter filter_horizontal, stbir_filter filter_vertical,
+                    stbir_colorspace space, void *alloc_context,
+                    float s0, float t0, float s1, float t1);
 // (s0, t0) & (s1, t1) are the top-left and bottom right corner (uv addressing style: [0, 1]x[0, 1]) of a region of the input image to use.
 
 //
 //
 ////   end header file   /////////////////////////////////////////////////////
 #endif // STBIR_INCLUDE_STB_IMAGE_RESIZE_H
-
-
-
 
 
 #ifdef STB_IMAGE_RESIZE_IMPLEMENTATION
@@ -1727,16 +1742,16 @@ static void stbir__encode_scanline(stbir__info* stbir_info, int num_pixels, void
         }
     }
 
-    #define STBIR__ROUND_INT(f)    ((int)          ((f)+0.5))
-    #define STBIR__ROUND_UINT(f)   ((stbir_uint32) ((f)+0.5))
+#define STBIR__ROUND_INT(f)    ((int)          ((f)+0.5))
+#define STBIR__ROUND_UINT(f)   ((stbir_uint32) ((f)+0.5))
 
-    #ifdef STBIR__SATURATE_INT
-    #define STBIR__ENCODE_LINEAR8(f)   stbir__saturate8 (STBIR__ROUND_INT((f) * stbir__max_uint8_as_float ))
-    #define STBIR__ENCODE_LINEAR16(f)  stbir__saturate16(STBIR__ROUND_INT((f) * stbir__max_uint16_as_float))
-    #else
-    #define STBIR__ENCODE_LINEAR8(f)   (unsigned char ) STBIR__ROUND_INT(stbir__saturate(f) * stbir__max_uint8_as_float )
-    #define STBIR__ENCODE_LINEAR16(f)  (unsigned short) STBIR__ROUND_INT(stbir__saturate(f) * stbir__max_uint16_as_float)
-    #endif
+#ifdef STBIR__SATURATE_INT
+#define STBIR__ENCODE_LINEAR8(f)   stbir__saturate8 (STBIR__ROUND_INT((f) * stbir__max_uint8_as_float ))
+#define STBIR__ENCODE_LINEAR16(f)  stbir__saturate16(STBIR__ROUND_INT((f) * stbir__max_uint16_as_float))
+#else
+#define STBIR__ENCODE_LINEAR8(f)   (unsigned char ) STBIR__ROUND_INT(stbir__saturate(f) * stbir__max_uint8_as_float )
+#define STBIR__ENCODE_LINEAR16(f)  (unsigned short) STBIR__ROUND_INT(stbir__saturate(f) * stbir__max_uint16_as_float)
+#endif
 
     switch (decode)
     {

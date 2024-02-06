@@ -3,19 +3,18 @@ package org.koishi.launcher.h2co3.core.utils;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.TimeUnit;
 
 public final class Schedulers {
+
+    private static final ExecutorService ioExecutor = createIoExecutor();
 
     private Schedulers() {
     }
 
-    private static final ExecutorService ioExecutor = createIoExecutor();
-
     /**
      * Get singleton instance of the thread pool for I/O operations,
      * usually for reading files from disk, or Internet connections.
-     *
+     * <p>
      * This thread pool has no more than 4 threads, and number of threads will get
      * reduced if concurrency is less than thread number.
      *

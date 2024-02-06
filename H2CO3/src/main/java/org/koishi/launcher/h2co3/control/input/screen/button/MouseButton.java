@@ -6,8 +6,6 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
-import org.koishi.launcher.h2co3.R;
-
 public class MouseButton extends BaseButton {
 
     String MouseName;

@@ -1,7 +1,5 @@
 package org.koishi.launcher.h2co3.core.utils;
 
-import android.util.Log;
-
 import org.apache.commons.io.IOUtils;
 
 import java.io.BufferedOutputStream;

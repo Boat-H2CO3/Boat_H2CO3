@@ -1,11 +1,9 @@
 package org.koishi.launcher.h2co3.resources.component.dialog;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -24,7 +22,7 @@ public class H2CO3ProgressDialog {
 
         // 创建一个ProgressBar并设置布局参数
         progressBar = new ProgressBar(context, null, android.R.attr.progressBarStyle);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT );
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
         progressBar.setLayoutParams(params);
 
         // 将ProgressBar和TextView添加到LinearLayout中

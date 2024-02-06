@@ -6,12 +6,17 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glFramebufferTextureLayerEXTPROC) (jint, jint, jint, jint, jint);
+typedef void (APIENTRY *glFramebufferTextureLayerEXTPROC)(jint, jint, jint, jint, jint);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTextureArray_glFramebufferTextureLayerEXT(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint texture, jint level, jint layer) {
-    glFramebufferTextureLayerEXTPROC glFramebufferTextureLayerEXT = (glFramebufferTextureLayerEXTPROC)tlsGetFunction(1754);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_EXTTextureArray_glFramebufferTextureLayerEXT(JNIEnv *__env, jclass clazz,
+                                                                   jint target, jint attachment,
+                                                                   jint texture, jint level,
+                                                                   jint layer) {
+    glFramebufferTextureLayerEXTPROC glFramebufferTextureLayerEXT = (glFramebufferTextureLayerEXTPROC) tlsGetFunction(
+            1754);
     UNUSED_PARAM(clazz)
     glFramebufferTextureLayerEXT(target, attachment, texture, level, layer);
 }

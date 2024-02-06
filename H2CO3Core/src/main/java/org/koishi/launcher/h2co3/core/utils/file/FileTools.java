@@ -20,10 +20,28 @@ import org.koishi.launcher.h2co3.core.utils.Logging;
 import org.koishi.launcher.h2co3.core.utils.StringUtils;
 import org.koishi.launcher.h2co3.core.utils.function.ExceptionalConsumer;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +57,9 @@ public final class FileTools {
 
     /**
      * 从Uri获取完整路径
+     *
      * @param context 上下文
-     * @param uri Uri对象
+     * @param uri     Uri对象
      * @return 完整路径字符串
      */
     public static String getFullPathFromUri(Context context, Uri uri) {
@@ -549,10 +568,11 @@ public final class FileTools {
 
     public static String getFileName(Context ctx, Uri uri) {
         Cursor c = ctx.getContentResolver().query(uri, null, null, null, null);
-        if(c == null) return uri.getLastPathSegment(); // idk myself but it happens on asus file manager
+        if (c == null)
+            return uri.getLastPathSegment(); // idk myself but it happens on asus file manager
         c.moveToFirst();
         int columnIndex = c.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-        if(columnIndex == -1) return uri.getLastPathSegment();
+        if (columnIndex == -1) return uri.getLastPathSegment();
         String fileName = c.getString(columnIndex);
         c.close();
         return fileName;

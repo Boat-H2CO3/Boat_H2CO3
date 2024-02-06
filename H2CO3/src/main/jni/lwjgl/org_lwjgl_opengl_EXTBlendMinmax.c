@@ -6,14 +6,18 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glBlendEquationEXTPROC) (jint);
+typedef void (APIENTRY *glBlendEquationEXTPROC)(jint);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTBlendMinmax_glBlendEquationEXT(JNIEnv *__env, jclass clazz, jint mode) {
-    glBlendEquationEXTPROC glBlendEquationEXT = (glBlendEquationEXTPROC)tlsGetFunction(1464);
-    UNUSED_PARAM(clazz)
-    glBlendEquationEXT(mode);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_EXTBlendMinmax_glBlendEquationEXT(JNIEnv
+*__env,
+jclass clazz, jint
+mode) {
+glBlendEquationEXTPROC glBlendEquationEXT = (glBlendEquationEXTPROC) tlsGetFunction(1464);
+UNUSED_PARAM(clazz)
+glBlendEquationEXT(mode);
 }
 
 EXTERN_C_EXIT

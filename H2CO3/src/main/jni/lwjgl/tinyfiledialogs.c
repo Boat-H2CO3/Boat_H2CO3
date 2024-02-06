@@ -98,10 +98,10 @@ misrepresented as being the original software.
 #include <sys/stat.h>
 
 #include "tinyfiledialogs.h"
-/* #define TINYFD_NOLIB */ 
+/* #define TINYFD_NOLIB */
 
 #ifdef _WIN32
- #ifdef __BORLANDC__
+                                                                                                                        #ifdef __BORLANDC__
   #define _getch getch
  #endif
  #ifndef _WIN32_WINNT
@@ -120,28 +120,30 @@ misrepresented as being the original software.
  #define SLASH "\\"
  int tinyfd_winUtf8 = 0 ; /* on windows string char can be 0:MBCS or 1:UTF-8 */
 #else
- #include <limits.h>
- #include <unistd.h>
- #include <dirent.h> /* on old systems try <sys/dir.h> instead */
- #include <termios.h>
- #include <sys/utsname.h>
- #include <signal.h> /* on old systems try <sys/signal.h> instead */
- #define SLASH "/"
+
+#include <limits.h>
+#include <unistd.h>
+#include <dirent.h> /* on old systems try <sys/dir.h> instead */
+#include <termios.h>
+#include <sys/utsname.h>
+#include <signal.h> /* on old systems try <sys/signal.h> instead */
+
+#define SLASH "/"
 #endif /* _WIN32 */
 
 #define MAX_PATH_OR_CMD 1024 /* _MAX_PATH or MAX_PATH */
 #define MAX_MULTIPLE_FILES 32
 
-char const tinyfd_version [8] = "3.3.9";
+char const tinyfd_version[8] = "3.3.9";
 
-int tinyfd_verbose = 0 ; /* on unix: prints the command line calls */
-int tinyfd_silent = 1 ; /* 1 (default) or 0 : on unix,
+int tinyfd_verbose = 0; /* on unix: prints the command line calls */
+int tinyfd_silent = 1; /* 1 (default) or 0 : on unix,
                         hide errors and warnings from called dialog*/
 
 #if defined(TINYFD_NOLIB) && defined(_WIN32)
 int tinyfd_forceConsole = 1 ;
 #else
-int tinyfd_forceConsole = 0 ; /* 0 (default) or 1 */
+int tinyfd_forceConsole = 0; /* 0 (default) or 1 */
 #endif
 /* for unix & windows: 0 (graphic mode) or 1 (console mode).
 0: try to use a graphic solution, if it fails then it uses console mode.
@@ -166,13 +168,13 @@ for console mode:
 #if defined(TINYFD_NOLIB) && defined(_WIN32)
 static int gWarningDisplayed = 1 ;
 #else
-static int gWarningDisplayed = 0 ;
+static int gWarningDisplayed = 0;
 #endif
 
-static char const gTitle[]="missing software! (we will try basic console input)";
+static char const gTitle[] = "missing software! (we will try basic console input)";
 
 #ifdef _WIN32
-char const tinyfd_needs[] = "\
+                                                                                                                        char const tinyfd_needs[] = "\
  ___________\n\
 /           \\ \n\
 | tiny file |\n\
@@ -204,202 +206,164 @@ char const tinyfd_needs[] = "\
 #endif
 
 #ifdef _MSC_VER
-#pragma warning(disable:4996) /* allows usage of strncpy, strcpy, strcat, sprintf, fopen */
+                                                                                                                        #pragma warning(disable:4996) /* allows usage of strncpy, strcpy, strcat, sprintf, fopen */
 #pragma warning(disable:4100) /* allows usage of strncpy, strcpy, strcat, sprintf, fopen */
 #pragma warning(disable:4706) /* allows usage of strncpy, strcpy, strcat, sprintf, fopen */
 #endif
 
-static char * getPathWithoutFinalSlash(
-        char * const aoDestination, /* make sure it is allocated, use _MAX_PATH */
-        char const * const aSource) /* aoDestination and aSource can be the same */
+static char *getPathWithoutFinalSlash(
+        char *const aoDestination, /* make sure it is allocated, use _MAX_PATH */
+        char const *const aSource) /* aoDestination and aSource can be the same */
 {
-        char const * lTmp ;
-        if ( aSource )
-        {
-                lTmp = strrchr(aSource, '/');
-                if (!lTmp)
-                {
-                        lTmp = strrchr(aSource, '\\');
-                }
-                if (lTmp)
-                {
-                        strncpy(aoDestination, aSource, lTmp - aSource );
-                        aoDestination[lTmp - aSource] = '\0';
-                }
-                else
-                {
-                        * aoDestination = '\0';
-                }
+    char const *lTmp;
+    if (aSource) {
+        lTmp = strrchr(aSource, '/');
+        if (!lTmp) {
+            lTmp = strrchr(aSource, '\\');
         }
-        else
-        {
-                * aoDestination = '\0';
+        if (lTmp) {
+            strncpy(aoDestination, aSource, lTmp - aSource);
+            aoDestination[lTmp - aSource] = '\0';
+        } else {
+            *aoDestination = '\0';
         }
-        return aoDestination;
+    } else {
+        *aoDestination = '\0';
+    }
+    return aoDestination;
 }
 
 
-static char * getLastName(
-        char * const aoDestination, /* make sure it is allocated */
-        char const * const aSource)
-{
-        /* copy the last name after '/' or '\' */
-        char const * lTmp ;
-        if ( aSource )
-        {
-                lTmp = strrchr(aSource, '/');
-                if (!lTmp)
-                {
-                        lTmp = strrchr(aSource, '\\');
-                }
-                if (lTmp)
-                {
-                        strcpy(aoDestination, lTmp + 1);
-                }
-                else
-                {
-                        strcpy(aoDestination, aSource);
-                }
+static char *getLastName(
+        char *const aoDestination, /* make sure it is allocated */
+        char const *const aSource) {
+    /* copy the last name after '/' or '\' */
+    char const *lTmp;
+    if (aSource) {
+        lTmp = strrchr(aSource, '/');
+        if (!lTmp) {
+            lTmp = strrchr(aSource, '\\');
         }
-        else
-        {
-                * aoDestination = '\0';
+        if (lTmp) {
+            strcpy(aoDestination, lTmp + 1);
+        } else {
+            strcpy(aoDestination, aSource);
         }
-        return aoDestination;
+    } else {
+        *aoDestination = '\0';
+    }
+    return aoDestination;
 }
 
 
-static void ensureFinalSlash( char * const aioString )
-{
-        if ( aioString && strlen( aioString ) )
-        {
-                char * lastcar = aioString + strlen( aioString ) - 1 ;
-                if ( strncmp( lastcar , SLASH , 1 ) )
-                {
-                        strcat( lastcar , SLASH ) ;
-                }
+static void ensureFinalSlash(char *const aioString) {
+    if (aioString && strlen(aioString)) {
+        char *lastcar = aioString + strlen(aioString) - 1;
+        if (strncmp(lastcar, SLASH, 1)) {
+            strcat(lastcar, SLASH);
         }
+    }
 }
 
 
-static void Hex2RGB( char const aHexRGB [8] ,
-                                         unsigned char aoResultRGB [3] )
-{
-        char lColorChannel [8] ;
-        if ( aoResultRGB )
-        {
-                if ( aHexRGB )
-                {
-                        strcpy(lColorChannel, aHexRGB ) ;
-                        aoResultRGB[2] = (unsigned char)strtoul(lColorChannel+5,NULL,16);
-                        lColorChannel[5] = '\0';
-                        aoResultRGB[1] = (unsigned char)strtoul(lColorChannel+3,NULL,16);
-                        lColorChannel[3] = '\0';
-                        aoResultRGB[0] = (unsigned char)strtoul(lColorChannel+1,NULL,16);
+static void Hex2RGB(char const aHexRGB[8],
+                    unsigned char aoResultRGB[3]) {
+    char lColorChannel[8];
+    if (aoResultRGB) {
+        if (aHexRGB) {
+            strcpy(lColorChannel, aHexRGB);
+            aoResultRGB[2] = (unsigned char) strtoul(lColorChannel + 5, NULL, 16);
+            lColorChannel[5] = '\0';
+            aoResultRGB[1] = (unsigned char) strtoul(lColorChannel + 3, NULL, 16);
+            lColorChannel[3] = '\0';
+            aoResultRGB[0] = (unsigned char) strtoul(lColorChannel + 1, NULL, 16);
 /* printf("%d %d %d\n", aoResultRGB[0], aoResultRGB[1], aoResultRGB[2]); */
-                }
-                else
-                {
-                        aoResultRGB[0]=0;
-                        aoResultRGB[1]=0;
-                        aoResultRGB[2]=0;
-                }
+        } else {
+            aoResultRGB[0] = 0;
+            aoResultRGB[1] = 0;
+            aoResultRGB[2] = 0;
         }
+    }
 }
 
-static void RGB2Hex( unsigned char const aRGB [3] ,
-                                         char aoResultHexRGB [8] )
-{
-        if ( aoResultHexRGB )
-        {
-                if ( aRGB )
-                {
+static void RGB2Hex(unsigned char const aRGB[3],
+                    char aoResultHexRGB[8]) {
+    if (aoResultHexRGB) {
+        if (aRGB) {
 #if defined(__GNUC__) && defined(_WIN32)
-                        sprintf(aoResultHexRGB, "#%02hx%02hx%02hx",
+            sprintf(aoResultHexRGB, "#%02hx%02hx%02hx",
 #else
-                        sprintf(aoResultHexRGB, "#%02hhx%02hhx%02hhx",
+            sprintf(aoResultHexRGB, "#%02hhx%02hhx%02hhx",
 #endif
-                                aRGB[0], aRGB[1], aRGB[2]);
-                        /* printf("aoResultHexRGB %s\n", aoResultHexRGB); */
-                }
-                else
-                {
-                        aoResultHexRGB[0]=0;
-                        aoResultHexRGB[1]=0;
-                        aoResultHexRGB[2]=0;
-                }
+                    aRGB[0], aRGB[1], aRGB[2]);
+            /* printf("aoResultHexRGB %s\n", aoResultHexRGB); */
+        } else {
+            aoResultHexRGB[0] = 0;
+            aoResultHexRGB[1] = 0;
+            aoResultHexRGB[2] = 0;
         }
+    }
 }
 
 
-static void replaceSubStr( char const * const aSource ,
-                                                   char const * const aOldSubStr ,
-                                                   char const * const aNewSubStr ,
-                                                   char * const aoDestination )
-{
-        char const * pOccurence ;
-        char const * p ;
-        char const * lNewSubStr = "" ;
-        size_t lOldSubLen = strlen( aOldSubStr ) ;
-        
-        if ( ! aSource )
-        {
-                * aoDestination = '\0' ;
-                return ;
-        }
-        if ( ! aOldSubStr )
-        {
-                strcpy( aoDestination , aSource ) ;
-                return ;
-        }
-        if ( aNewSubStr )
-        {
-                lNewSubStr = aNewSubStr ;
-        }
-        p = aSource ;
-        * aoDestination = '\0' ;
-        while ( ( pOccurence = strstr( p , aOldSubStr ) ) != NULL )
-        {
-                strncat( aoDestination , p , pOccurence - p ) ;
-                strcat( aoDestination , lNewSubStr ) ;
-                p = pOccurence + lOldSubLen ;
-        }
-        strcat( aoDestination , p ) ;
+static void replaceSubStr(char const *const aSource,
+                          char const *const aOldSubStr,
+                          char const *const aNewSubStr,
+                          char *const aoDestination) {
+    char const *pOccurence;
+    char const *p;
+    char const *lNewSubStr = "";
+    size_t lOldSubLen = strlen(aOldSubStr);
+
+    if (!aSource) {
+        *aoDestination = '\0';
+        return;
+    }
+    if (!aOldSubStr) {
+        strcpy(aoDestination, aSource);
+        return;
+    }
+    if (aNewSubStr) {
+        lNewSubStr = aNewSubStr;
+    }
+    p = aSource;
+    *aoDestination = '\0';
+    while ((pOccurence = strstr(p, aOldSubStr)) != NULL) {
+        strncat(aoDestination, p, pOccurence - p);
+        strcat(aoDestination, lNewSubStr);
+        p = pOccurence + lOldSubLen;
+    }
+    strcat(aoDestination, p);
 }
 
 
-static int filenameValid( char const * const aFileNameWithoutPath )
-{
-        if ( ! aFileNameWithoutPath
-          || ! strlen(aFileNameWithoutPath)
-          || strpbrk(aFileNameWithoutPath , "\\/:*?\"<>|") )
-        {
-                return 0 ;
-        }
-        return 1 ;
+static int filenameValid(char const *const aFileNameWithoutPath) {
+    if (!aFileNameWithoutPath
+        || !strlen(aFileNameWithoutPath)
+        || strpbrk(aFileNameWithoutPath, "\\/:*?\"<>|")) {
+        return 0;
+    }
+    return 1;
 }
 
 #ifndef _WIN32
 
-static int fileExists( char const * const aFilePathAndName )
-{
-        FILE * lIn ;
-        if ( ! aFilePathAndName || ! strlen(aFilePathAndName) )
-        {
-                return 0 ;
-        }
-        lIn = fopen( aFilePathAndName , "r" ) ;
-        if ( ! lIn )
-        {
-                return 0 ;
-        }
-        fclose( lIn ) ;
-        return 1 ;
+static int fileExists(char const *const aFilePathAndName) {
+    FILE *lIn;
+    if (!aFilePathAndName || !strlen(aFilePathAndName)) {
+        return 0;
+    }
+    lIn = fopen(aFilePathAndName, "r");
+    if (!lIn) {
+        return 0;
+    }
+    fclose(lIn);
+    return 1;
 }
 
 #elif defined(TINYFD_NOLIB)
 
-static int fileExists( char const * const aFilePathAndName )
+                                                                                                                        static int fileExists( char const * const aFilePathAndName )
 {
         FILE * lIn ;
         if ( ! aFilePathAndName || ! strlen(aFilePathAndName) )
@@ -422,29 +386,25 @@ static int fileExists( char const * const aFilePathAndName )
 #endif
 
 
-static void wipefile(char const * const aFilename)
-{
-        int i;
-        struct stat st;
-        FILE * lIn;
+static void wipefile(char const *const aFilename) {
+    int i;
+    struct stat st;
+    FILE *lIn;
 
-        if (stat(aFilename, &st) == 0)
-        {
-                if ((lIn = fopen(aFilename, "w")))
-                {
-                        for (i = 0; i < st.st_size; i++)
-                        {
-                                fputc('A', lIn);
-                        }
-                }
-                fclose(lIn);
+    if (stat(aFilename, &st) == 0) {
+        if ((lIn = fopen(aFilename, "w"))) {
+            for (i = 0; i < st.st_size; i++) {
+                fputc('A', lIn);
+            }
         }
+        fclose(lIn);
+    }
 }
 
 
 #ifdef _WIN32
 
-static int replaceChr( char * const aString ,
+                                                                                                                        static int replaceChr( char * const aString ,
                                            char const aOldChr ,
                                            char const aNewChr )
 {
@@ -478,7 +438,7 @@ static int dirExists(char const * const aDirPath)
         struct stat lInfo;
 
         if (!aDirPath || !strlen(aDirPath))
-                return 0;       
+                return 0;
         if (stat(aDirPath, &lInfo) != 0)
                 return 0;
         else if ( tinyfd_winUtf8 )
@@ -666,7 +626,7 @@ static int sizeMbcs(wchar_t const * const aMbcsString)
 static wchar_t * utf8to16(char const * const aUtf8string)
 {
         wchar_t * lUtf16string ;
-        int lSize = sizeUtf16(aUtf8string);     
+        int lSize = sizeUtf16(aUtf8string);
         lUtf16string = (wchar_t *) malloc( lSize * sizeof(wchar_t) );
         lSize = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS,
                                         aUtf8string, -1, lUtf16string, lSize);
@@ -833,56 +793,48 @@ static int replaceWchar(wchar_t * const aString,
 #endif /* _WIN32 */
 
 /* source and destination can be the same or ovelap*/
-static char const * ensureFilesExist(char * const aDestination,
-        char const * const aSourcePathsAndNames)
-{
-        char * lDestination = aDestination;
-        char const * p;
-        char const * p2;
-        size_t lLen;
+static char const *ensureFilesExist(char *const aDestination,
+                                    char const *const aSourcePathsAndNames) {
+    char *lDestination = aDestination;
+    char const *p;
+    char const *p2;
+    size_t lLen;
 
-        if (!aSourcePathsAndNames)
-        {
-                return NULL;
-        }
-        lLen = strlen(aSourcePathsAndNames);
-        if (!lLen)
-        {
-                return NULL;
-        }
+    if (!aSourcePathsAndNames) {
+        return NULL;
+    }
+    lLen = strlen(aSourcePathsAndNames);
+    if (!lLen) {
+        return NULL;
+    }
 
-        p = aSourcePathsAndNames;
-        while ((p2 = strchr(p, '|')) != NULL)
-        {
-                lLen = p2 - p;
-                memmove(lDestination, p, lLen);
-                lDestination[lLen] = '\0';
-                if (fileExists(lDestination))
-                {
-                        lDestination += lLen;
-                        *lDestination = '|';
-                        lDestination++;
-                }
-                p = p2 + 1;
+    p = aSourcePathsAndNames;
+    while ((p2 = strchr(p, '|')) != NULL) {
+        lLen = p2 - p;
+        memmove(lDestination, p, lLen);
+        lDestination[lLen] = '\0';
+        if (fileExists(lDestination)) {
+            lDestination += lLen;
+            *lDestination = '|';
+            lDestination++;
         }
-        if (fileExists(p))
-        {
-                lLen = strlen(p);
-                memmove(lDestination, p, lLen);
-                lDestination[lLen] = '\0';
-        }
-        else
-        {
-                *(lDestination - 1) = '\0';
-        }
-        return aDestination;
+        p = p2 + 1;
+    }
+    if (fileExists(p)) {
+        lLen = strlen(p);
+        memmove(lDestination, p, lLen);
+        lDestination[lLen] = '\0';
+    } else {
+        *(lDestination - 1) = '\0';
+    }
+    return aDestination;
 }
 
 #ifdef _WIN32
-#ifndef TINYFD_NOLIB
+                                                                                                                        #ifndef TINYFD_NOLIB
 
 static int __stdcall EnumThreadWndProc(HWND hwnd, LPARAM lParam)
-{ 
+{
         wchar_t lTitleName[MAX_PATH];
         GetWindowTextW(hwnd, lTitleName, MAX_PATH);
         /* wprintf(L"lTitleName %ls \n", lTitleName);  */
@@ -1096,7 +1048,7 @@ Show-BalloonTip");
 static int notifyWinGui(
         char const * const aTitle, /* NULL or "" */
         char const * const aMessage, /* NULL or "" may NOT contain \n nor \t */
-        char const * const aIconType) 
+        char const * const aIconType)
 {
         wchar_t * lTitle;
         wchar_t * lMessage;
@@ -1373,7 +1325,7 @@ name = 'txt_input' value = '' style = 'float:left;width:100%' ><BR>\n\
 #else
 		lResult = !wcsncmp(lBuff, L"1", 1);
 #endif
-        
+
         /* printf( "lResult: %d \n" , lResult ) ; */
         if (!lResult)
         {
@@ -1604,7 +1556,7 @@ wchar_t const * tinyfd_openFileDialogW(
         int const aAllowMultipleSelects) /* 0 or 1 */
 {
         static wchar_t lBuff[MAX_MULTIPLE_FILES*MAX_PATH_OR_CMD];
-                
+
         size_t lLengths[MAX_MULTIPLE_FILES];
         wchar_t lDirname[MAX_PATH_OR_CMD];
         wchar_t lFilterPatterns[MAX_PATH_OR_CMD] = L"";
@@ -1806,7 +1758,7 @@ wchar_t const * tinyfd_selectFolderDialogW(
         wchar_t const * const aDefaultPath) /* NULL or "" */
 {
         static wchar_t lBuff[MAX_PATH_OR_CMD];
-                
+
         BROWSEINFOW bInfo;
         LPITEMIDLIST lpItem;
         HRESULT lHResult;
@@ -1982,7 +1934,7 @@ static int messageBoxWinGuiA(
 {
         int lBoxReturnValue;
     UINT aCode ;
-        
+
         if ( aIconType && ! strcmp( "warning" , aIconType ) )
         {
                 aCode = MB_ICONWARNING ;
@@ -2080,7 +2032,7 @@ static char const * saveFileDialogWinGuiA(
 
         getPathWithoutFinalSlash(lDirname, aDefaultPathAndFile);
         getLastName(aoBuff, aDefaultPathAndFile);
-    
+
         if (aNumOfFilterPatterns > 0)
         {
                 if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
@@ -2108,7 +2060,7 @@ static char const * saveFileDialogWinGuiA(
                         p ++ ;
                 }
         }
-    
+
         ofn.lStructSize     = sizeof(OPENFILENAME) ;
         ofn.hwndOwner           = GetForegroundWindow();
         ofn.hInstance       = 0 ;
@@ -2135,12 +2087,12 @@ static char const * saveFileDialogWinGuiA(
         {
                 lRetval = NULL ;
         }
-        else 
-        { 
+        else
+        {
                 lRetval = aoBuff ;
         }
 
-        if (lHResult==S_OK || lHResult==S_FALSE) 
+        if (lHResult==S_OK || lHResult==S_FALSE)
         {
                 CoUninitialize();
         }
@@ -2232,7 +2184,7 @@ static char const * openFileDialogWinGuiA(
         {
                 lRetval = NULL ;
         }
-        else 
+        else
         {
                 lBuffLen = strlen(aoBuff) ;
                 lPointers[0] = aoBuff + lBuffLen + 1 ;
@@ -2240,7 +2192,7 @@ static char const * openFileDialogWinGuiA(
                 {
                         lRetval = aoBuff ;
                 }
-                else 
+                else
                 {
                         i = 0 ;
                         do
@@ -2269,7 +2221,7 @@ static char const * openFileDialogWinGuiA(
                 }
         }
 
-        if (lHResult==S_OK || lHResult==S_FALSE) 
+        if (lHResult==S_OK || lHResult==S_FALSE)
         {
                 CoUninitialize();
         }
@@ -2309,7 +2261,7 @@ static char const * selectFolderDialogWinGuiA(
 				lRetval = aoBuff;
         }
 
-        if (lHResult==S_OK || lHResult==S_FALSE) 
+        if (lHResult==S_OK || lHResult==S_FALSE)
         {
                 CoUninitialize();
         }
@@ -2415,7 +2367,7 @@ static int messageBoxWinConsole(
         char lDialogFile[MAX_PATH_OR_CMD];
         FILE * lIn;
         char lBuff [MAX_PATH_OR_CMD] = "";
-        
+
         strcpy( lDialogString , "dialog " ) ;
         if ( aTitle && strlen(aTitle) )
         {
@@ -2488,7 +2440,7 @@ static int messageBoxWinConsole(
 
         /*if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;*/
         system( lDialogString ) ;
-                
+
         if (!(lIn = fopen(lDialogFile, "r")))
         {
                 remove(lDialogFile);
@@ -2629,7 +2581,7 @@ static char const * saveFileDialogWinConsole(
                 strcat(lDialogString, aTitle) ;
                 strcat(lDialogString, "\" ") ;
         }
-        
+
         strcat(lDialogString, "--backtitle \"") ;
         strcat(lDialogString,
                 "tab: focus | /: populate | spacebar: fill text field | ok: TEXT FIELD ONLY") ;
@@ -2642,7 +2594,7 @@ static char const * saveFileDialogWinConsole(
                 strcpy(lPathAndFile, aDefaultPathAndFile);
                 replaceChr( lPathAndFile , '\\' , '/' ) ;
         }
-                
+
         /* dialog.exe needs at least one separator */
         if ( ! strchr(lPathAndFile, '/') )
         {
@@ -2707,7 +2659,7 @@ static char const * openFileDialogWinConsole(
                 strcpy(lFilterPatterns, aDefaultPathAndFile);
                 replaceChr( lFilterPatterns , '\\' , '/' ) ;
         }
-                
+
         /* dialog.exe needs at least one separator */
         if ( ! strchr(lFilterPatterns, '/') )
         {
@@ -2745,7 +2697,7 @@ static char const * selectFolderDialogWinConsole(
         char lDialogString [MAX_PATH_OR_CMD] ;
         char lString [MAX_PATH_OR_CMD] ;
         FILE * lIn ;
-        
+
         strcpy( lDialogString , "dialog " ) ;
         if ( aTitle && strlen(aTitle) )
         {
@@ -2834,7 +2786,7 @@ int tinyfd_messageBox(
                 if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"basicinput");return 0;}
                 if (!gWarningDisplayed && !tinyfd_forceConsole )
                 {
-                        gWarningDisplayed = 1; 
+                        gWarningDisplayed = 1;
                         printf("\n\n%s\n", gTitle);
                         printf("%s\n\n", tinyfd_needs);
                 }
@@ -2908,8 +2860,8 @@ int tinyfd_notifyPopup(
         char const * const aIconType ) /* "info" "warning" "error" */
 {
 #ifndef TINYFD_NOLIB
-        if ((!tinyfd_forceConsole || !( 
-                GetConsoleWindow() || 
+        if ((!tinyfd_forceConsole || !(
+                GetConsoleWindow() ||
                 dialogPresent()))
                 && ( !getenv("SSH_CLIENT") || getenv("DISPLAY") ) )
         {
@@ -2937,8 +2889,8 @@ char const * tinyfd_inputBox(
         DWORD mode = 0;
         HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
 
-        if ((!tinyfd_forceConsole || !( 
-                GetConsoleWindow() || 
+        if ((!tinyfd_forceConsole || !(
+                GetConsoleWindow() ||
                 dialogPresent()))
                 && ( !getenv("SSH_CLIENT") || getenv("DISPLAY") ) )
         {
@@ -2954,7 +2906,7 @@ char const * tinyfd_inputBox(
                 lBuff[0]='\0';
                 return inputBoxWinConsole(lBuff,aTitle,aMessage,aDefaultInput);
         }
-        else 
+        else
         {
       if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"basicinput");return (char const *)0;}
       lBuff[0]='\0';
@@ -3158,7 +3110,7 @@ char const * tinyfd_selectFolderDialog(
                 if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"basicinput");return (char const *)0;}
                 p = tinyfd_inputBox(aTitle, "Select folder","");
         }
-        
+
         if ( ! p || ! strlen( p ) || ! dirExists( p ) )
         {
                 return NULL ;
@@ -3235,3692 +3187,3222 @@ static char gPython2Name[16];
 static char gPython3Name[16];
 static char gPythonName[16];
 
-static int isDarwin( )
-{
-        static int lsIsDarwin = -1 ;
-        struct utsname lUtsname ;
-        if ( lsIsDarwin < 0 )
-        {
-                lsIsDarwin = !uname(&lUtsname) && !strcmp(lUtsname.sysname,"Darwin") ;
-        }
-        return lsIsDarwin ;
+static int isDarwin() {
+    static int lsIsDarwin = -1;
+    struct utsname lUtsname;
+    if (lsIsDarwin < 0) {
+        lsIsDarwin = !uname(&lUtsname) && !strcmp(lUtsname.sysname, "Darwin");
+    }
+    return lsIsDarwin;
 }
 
 
-static int dirExists( char const * const aDirPath )
-{
-        DIR * lDir ;
-        if ( ! aDirPath || ! strlen( aDirPath ) )
-                return 0 ;
-        lDir = opendir( aDirPath ) ;
-        if ( ! lDir )
-        {
-                return 0 ;
-        }
-        closedir( lDir ) ;
-        return 1 ;
+static int dirExists(char const *const aDirPath) {
+    DIR *lDir;
+    if (!aDirPath || !strlen(aDirPath))
+        return 0;
+    lDir = opendir(aDirPath);
+    if (!lDir) {
+        return 0;
+    }
+    closedir(lDir);
+    return 1;
 }
 
-                                                                        
-static int detectPresence( char const * const aExecutable )
-{
-        char lBuff [MAX_PATH_OR_CMD] ;
-        char lTestedString [MAX_PATH_OR_CMD] = "which " ;
-        FILE * lIn ;
 
-    strcat( lTestedString , aExecutable ) ;
-        strcat( lTestedString, " 2>/dev/null ");
-    lIn = popen( lTestedString , "r" ) ;
-    if ( ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-                && ( ! strchr( lBuff , ':' ) )
-                && ( strncmp(lBuff, "no ", 3) ) )
-    {   /* present */
-        pclose( lIn ) ;
+static int detectPresence(char const *const aExecutable) {
+    char lBuff[MAX_PATH_OR_CMD];
+    char lTestedString[MAX_PATH_OR_CMD] = "which ";
+    FILE *lIn;
+
+    strcat(lTestedString, aExecutable);
+    strcat(lTestedString, " 2>/dev/null ");
+    lIn = popen(lTestedString, "r");
+    if ((fgets(lBuff, sizeof(lBuff), lIn) != NULL)
+        && (!strchr(lBuff, ':'))
+        && (strncmp(lBuff, "no ", 3))) {   /* present */
+        pclose(lIn);
         if (tinyfd_verbose) printf("detectPresence %s %d\n", aExecutable, 1);
-        return 1 ;
-    }
-    else
-    {
-        pclose( lIn ) ;
+        return 1;
+    } else {
+        pclose(lIn);
         if (tinyfd_verbose) printf("detectPresence %s %d\n", aExecutable, 0);
-        return 0 ;
+        return 0;
     }
 }
 
 
-static char const * getVersion( char const * const aExecutable ) /*version must be first numeral*/
+static char const *getVersion(char const *const aExecutable) /*version must be first numeral*/
 {
-	static char lBuff [MAX_PATH_OR_CMD] ;
-	char lTestedString [MAX_PATH_OR_CMD] ;
-	FILE * lIn ;
-	char * lTmp ;
-		
-    strcpy( lTestedString , aExecutable ) ;
-    strcat( lTestedString , " --version" ) ;
+    static char lBuff[MAX_PATH_OR_CMD];
+    char lTestedString[MAX_PATH_OR_CMD];
+    FILE *lIn;
+    char *lTmp;
 
-    lIn = popen( lTestedString , "r" ) ;
-        lTmp = fgets( lBuff , sizeof( lBuff ) , lIn ) ;
-        pclose( lIn ) ;
-	
-	lTmp += strcspn(lTmp,"0123456789");
-	/* printf("lTmp:%s\n", lTmp); */
-	return lTmp ;
+    strcpy(lTestedString, aExecutable);
+    strcat(lTestedString, " --version");
+
+    lIn = popen(lTestedString, "r");
+    lTmp = fgets(lBuff, sizeof(lBuff), lIn);
+    pclose(lIn);
+
+    lTmp += strcspn(lTmp, "0123456789");
+    /* printf("lTmp:%s\n", lTmp); */
+    return lTmp;
 }
 
 
-static int * const getMajorMinorPatch( char const * const aExecutable )
-{
-	static int lArray [3] ;
-	char * lTmp ;
+static int *const getMajorMinorPatch(char const *const aExecutable) {
+    static int lArray[3];
+    char *lTmp;
 
-	lTmp = (char *) getVersion(aExecutable);
-	lArray[0] = atoi( strtok(lTmp," ,.-") ) ;
-	/* printf("lArray0 %d\n", lArray[0]); */
-	lArray[1] = atoi( strtok(0," ,.-") ) ;
-	/* printf("lArray1 %d\n", lArray[1]); */
-	lArray[2] = atoi( strtok(0," ,.-") ) ;
-	/* printf("lArray2 %d\n", lArray[2]); */
+    lTmp = (char *) getVersion(aExecutable);
+    lArray[0] = atoi(strtok(lTmp, " ,.-"));
+    /* printf("lArray0 %d\n", lArray[0]); */
+    lArray[1] = atoi(strtok(0, " ,.-"));
+    /* printf("lArray1 %d\n", lArray[1]); */
+    lArray[2] = atoi(strtok(0, " ,.-"));
+    /* printf("lArray2 %d\n", lArray[2]); */
 
-	if ( !lArray[0] && !lArray[1] && !lArray[2] ) return NULL;
-	return lArray ;
+    if (!lArray[0] && !lArray[1] && !lArray[2]) return NULL;
+    return lArray;
 }
 
 
-static int tryCommand( char const * const aCommand )
-{
-        char lBuff [MAX_PATH_OR_CMD] ;
-        FILE * lIn ;
+static int tryCommand(char const *const aCommand) {
+    char lBuff[MAX_PATH_OR_CMD];
+    FILE *lIn;
 
-        lIn = popen( aCommand , "r" ) ;
-        if ( fgets( lBuff , sizeof( lBuff ) , lIn ) == NULL )
-        {       /* present */
-                pclose( lIn ) ;
-                return 1 ;
+    lIn = popen(aCommand, "r");
+    if (fgets(lBuff, sizeof(lBuff), lIn) == NULL) {       /* present */
+        pclose(lIn);
+        return 1;
+    } else {
+        pclose(lIn);
+        return 0;
+    }
+
+}
+
+
+static int isTerminalRunning() {
+    static int lIsTerminalRunning = -1;
+    if (lIsTerminalRunning < 0) {
+        lIsTerminalRunning = isatty(1);
+        if (tinyfd_verbose) printf("isTerminalRunning %d\n", lIsTerminalRunning);
+    }
+    return lIsTerminalRunning;
+}
+
+
+static char const *dialogNameOnly() {
+    static char lDialogName[128] = "*";
+    if (lDialogName[0] == '*') {
+        if (isDarwin() && strcpy(lDialogName, "/opt/local/bin/dialog")
+            && detectPresence(lDialogName)) {}
+        else if (strcpy(lDialogName, "dialog")
+                 && detectPresence(lDialogName)) {}
+        else {
+            strcpy(lDialogName, "");
         }
-        else
-        {
-                pclose( lIn ) ;
-                return 0 ;
+    }
+    return lDialogName;
+}
+
+
+int isDialogVersionBetter09b() {
+    char const *lDialogName;
+    char *lVersion;
+    int lMajor;
+    int lMinor;
+    int lDate;
+    int lResult;
+    char *lMinorP;
+    char *lLetter;
+    char lBuff[128];
+
+    /*char lTest[128] = " 0.9b-20031126" ;*/
+
+    lDialogName = dialogNameOnly();
+    if (!strlen(lDialogName) || !(lVersion = (char *) getVersion(lDialogName))) return 0;
+    /*lVersion = lTest ;*/
+    /*printf("lVersion %s\n", lVersion);*/
+    strcpy(lBuff, lVersion);
+    lMajor = atoi(strtok(lVersion, " ,.-"));
+    /*printf("lMajor %d\n", lMajor);*/
+    lMinorP = strtok(0, " ,.-abcdefghijklmnopqrstuvxyz");
+    lMinor = atoi(lMinorP);
+    /*printf("lMinor %d\n", lMinor );*/
+    lDate = atoi(strtok(0, " ,.-"));
+    if (lDate < 0) lDate = -lDate;
+    /*printf("lDate %d\n", lDate);*/
+    lLetter = lMinorP + strlen(lMinorP);
+    strcpy(lVersion, lBuff);
+    strtok(lLetter, " ,.-");
+    /*printf("lLetter %s\n", lLetter);*/
+    lResult = (lMajor > 0) || ((lMinor == 9) && (*lLetter == 'b') && (lDate >= 20031126));
+    /*printf("lResult %d\n", lResult);*/
+    return lResult;
+}
+
+
+static int whiptailPresentOnly() {
+    static int lWhiptailPresent = -1;
+    if (lWhiptailPresent < 0) {
+        lWhiptailPresent = detectPresence("whiptail");
+    }
+    return lWhiptailPresent;
+}
+
+
+static char const *terminalName() {
+    static char lTerminalName[128] = "*";
+    char lShellName[64] = "*";
+    int *lArray;
+
+    if (lTerminalName[0] == '*') {
+        if (detectPresence("bash")) {
+            strcpy(lShellName, "bash -c "); /*good for basic input*/
+        } else if (strlen(dialogNameOnly()) || whiptailPresentOnly()) {
+            strcpy(lShellName, "sh -c "); /*good enough for dialog & whiptail*/
+        } else {
+            strcpy(lTerminalName, "");
+            return NULL;
         }
 
-}
-
-
-static int isTerminalRunning( )
-{
-	static int lIsTerminalRunning = -1 ;
-	if ( lIsTerminalRunning < 0 ) 
-	{
-		lIsTerminalRunning = isatty(1);
-		if (tinyfd_verbose) printf("isTerminalRunning %d\n", lIsTerminalRunning );
-	}
-	return lIsTerminalRunning;
-}
-
-
-static char const * dialogNameOnly( )
-{
-        static char lDialogName[128] = "*" ;
-        if ( lDialogName[0] == '*' )
-        {
-                if ( isDarwin() && strcpy(lDialogName , "/opt/local/bin/dialog" )
-                        && detectPresence( lDialogName ) )
-                {}
-                else if ( strcpy(lDialogName , "dialog" )
-                        && detectPresence( lDialogName ) )
-                {}
-                else
-                {
-                        strcpy(lDialogName , "" ) ;
-                }
+        if (isDarwin()) {
+            if (strcpy(lTerminalName, "/opt/X11/bin/xterm")
+                && detectPresence(lTerminalName)) {
+                strcat(lTerminalName, " -fa 'DejaVu Sans Mono' -fs 10 -title tinyfiledialogs -e ");
+                strcat(lTerminalName, lShellName);
+            } else {
+                strcpy(lTerminalName, "");
+            }
+        } else if (strcpy(lTerminalName, "xterm") /*good (small without parameters)*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -fa 'DejaVu Sans Mono' -fs 10 -title tinyfiledialogs -e ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "terminator") /*good*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -x ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "lxterminal") /*good*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -e ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "konsole") /*good*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -e ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "kterm") /*good*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -e ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "tilix") /*good*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -e ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "xfce4-terminal") /*good*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -x ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "mate-terminal") /*good*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -x ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "Eterm") /*good*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -e ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "evilvte") /*good*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -e ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "pterm") /*good (only letters)*/
+                   && detectPresence(lTerminalName)) {
+            strcat(lTerminalName, " -e ");
+            strcat(lTerminalName, lShellName);
+        } else if (strcpy(lTerminalName, "gnome-terminal")
+                   && detectPresence(lTerminalName) && (lArray = getMajorMinorPatch(lTerminalName))
+                   && ((lArray[0] < 3) || (lArray[0] == 3 && lArray[1] <= 6))) {
+            strcat(lTerminalName, " --disable-factory -x ");
+            strcat(lTerminalName, lShellName);
+        } else {
+            strcpy(lTerminalName, "");
         }
-    return lDialogName ;
-}
-
-
-int isDialogVersionBetter09b( )
-{
-        char const * lDialogName ;
-        char * lVersion ;
-        int lMajor ;
-        int lMinor ;
-        int lDate ;
-        int lResult ;
-        char * lMinorP ;
-        char * lLetter ;
-        char lBuff[128] ;
-
-        /*char lTest[128] = " 0.9b-20031126" ;*/
-
-        lDialogName = dialogNameOnly() ;
-        if ( ! strlen(lDialogName) || !(lVersion = (char *) getVersion(lDialogName)) ) return 0 ;
-        /*lVersion = lTest ;*/
-        /*printf("lVersion %s\n", lVersion);*/
-        strcpy(lBuff,lVersion);
-        lMajor = atoi( strtok(lVersion," ,.-") ) ;
-        /*printf("lMajor %d\n", lMajor);*/
-        lMinorP = strtok(0," ,.-abcdefghijklmnopqrstuvxyz");
-        lMinor = atoi( lMinorP ) ;
-        /*printf("lMinor %d\n", lMinor );*/
-        lDate = atoi( strtok(0," ,.-") ) ;
-        if (lDate<0) lDate = - lDate;
-        /*printf("lDate %d\n", lDate);*/
-        lLetter = lMinorP + strlen(lMinorP) ;
-        strcpy(lVersion,lBuff);
-        strtok(lLetter," ,.-");
-        /*printf("lLetter %s\n", lLetter);*/
-        lResult = (lMajor > 0) || ( ( lMinor == 9 ) && (*lLetter == 'b') && (lDate >= 20031126) );
-        /*printf("lResult %d\n", lResult);*/
-        return lResult;
-}
-
-
-static int whiptailPresentOnly( )
-{
-        static int lWhiptailPresent = -1 ;
-        if ( lWhiptailPresent < 0 )
-        {
-                lWhiptailPresent = detectPresence( "whiptail" ) ;
-        }
-        return lWhiptailPresent ;
-}
-
-
-static char const * terminalName( )
-{
-        static char lTerminalName[128] = "*" ;
-        char lShellName[64] = "*" ;
-        int * lArray;
-
-        if ( lTerminalName[0] == '*' )
-        {
-                if ( detectPresence( "bash" ) )
-                {
-                        strcpy(lShellName , "bash -c " ) ; /*good for basic input*/
-                }
-				else if ( strlen(dialogNameOnly()) || whiptailPresentOnly() )
-				{
-						strcpy(lShellName , "sh -c " ) ; /*good enough for dialog & whiptail*/
-				}
-				else
-				{
-					strcpy(lTerminalName , "" ) ;
-					return NULL ;
-				}
-
-                if ( isDarwin() )
-                {
-                        if ( strcpy(lTerminalName , "/opt/X11/bin/xterm" )
-                      && detectPresence( lTerminalName ) )
-                        {
-                                strcat(lTerminalName , " -fa 'DejaVu Sans Mono' -fs 10 -title tinyfiledialogs -e " ) ;
-                                strcat(lTerminalName , lShellName ) ;
-                        }
-                        else
-                        {
-                                strcpy(lTerminalName , "" ) ;
-                        }
-                }
-                else if ( strcpy(lTerminalName,"xterm") /*good (small without parameters)*/
-                        && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -fa 'DejaVu Sans Mono' -fs 10 -title tinyfiledialogs -e " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"terminator") /*good*/
-                          && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -x " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"lxterminal") /*good*/
-                          && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -e " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"konsole") /*good*/
-                          && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -e " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"kterm") /*good*/
-                          && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -e " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"tilix") /*good*/
-                          && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -e " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"xfce4-terminal") /*good*/
-                          && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -x " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"mate-terminal") /*good*/
-                          && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -x " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"Eterm") /*good*/
-                          && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -e " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"evilvte") /*good*/
-                          && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -e " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"pterm") /*good (only letters)*/
-                          && detectPresence(lTerminalName) )
-                {
-                        strcat(lTerminalName , " -e " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else if ( strcpy(lTerminalName,"gnome-terminal")
-                && detectPresence(lTerminalName) && (lArray = getMajorMinorPatch(lTerminalName))
-				&& ((lArray[0]<3) || (lArray[0]==3 && lArray[1]<=6)) )
-                {
-                        strcat(lTerminalName , " --disable-factory -x " ) ;
-                        strcat(lTerminalName , lShellName ) ;
-                }
-                else
-                {
-                        strcpy(lTerminalName , "" ) ;
-                }
-                /* bad: koi rxterm guake tilda vala-terminal qterminal
+        /* bad: koi rxterm guake tilda vala-terminal qterminal
                 aterm Terminal terminology sakura lilyterm weston-terminal
                 roxterm termit xvt rxvt mrxvt urxvt */
-        }
-        if ( strlen(lTerminalName) )
-        {
-                return lTerminalName ;
-        }
-        else
-        {
-                return NULL ;
-        }
-}
-
-
-static char const * dialogName( )
-{
-    char const * lDialogName ;
-    lDialogName = dialogNameOnly( ) ;
-        if ( strlen(lDialogName) && ( isTerminalRunning() || terminalName() ) )
-        {
-                return lDialogName ;
-        }
-        else
-        {
-                return NULL ;
-        }
-}
-
-
-static int whiptailPresent( )
-{
-        int lWhiptailPresent ;
-    lWhiptailPresent = whiptailPresentOnly( ) ;
-        if ( lWhiptailPresent && ( isTerminalRunning() || terminalName() ) )
-        {
-                return lWhiptailPresent ;
-        }
-        else
-        {
-                return 0 ;
-        }
-}
-
-
-
-static int graphicMode( )
-{
-        return !( tinyfd_forceConsole && (isTerminalRunning() || terminalName()) )
-          && ( getenv("DISPLAY")
-            || (isDarwin() && (!getenv("SSH_TTY") || getenv("DISPLAY") ) ) ) ;
-}
-
-
-static int pactlPresent( )
-{
-        static int lPactlPresent = -1 ;
-        if ( lPactlPresent < 0 )
-        {
-                lPactlPresent = detectPresence("pactl") ;
-        }
-        return lPactlPresent ;
-}
-
-
-static int speakertestPresent( )
-{
-        static int lSpeakertestPresent = -1 ;
-        if ( lSpeakertestPresent < 0 )
-        {
-                lSpeakertestPresent = detectPresence("speaker-test") ;
-        }
-        return lSpeakertestPresent ;
-}
-
-
-static int beepexePresent( )
-{
-        static int lBeepexePresent = -1 ;
-        if ( lBeepexePresent < 0 )
-        {
-                lBeepexePresent = detectPresence("beep.exe") ;
-        }
-        return lBeepexePresent ;
-}
-
-
-static int xmessagePresent( )
-{
-        static int lXmessagePresent = -1 ;
-        if ( lXmessagePresent < 0 )
-        {
-                lXmessagePresent = detectPresence("xmessage");/*if not tty,not on osxpath*/
-        }
-        return lXmessagePresent && graphicMode( ) ;
-}
-
-
-static int gxmessagePresent( )
-{
-    static int lGxmessagePresent = -1 ;
-    if ( lGxmessagePresent < 0 )
-    {
-        lGxmessagePresent = detectPresence("gxmessage") ;
     }
-    return lGxmessagePresent && graphicMode( ) ;
-}
-
-
-static int gmessagePresent( )
-{
-        static int lGmessagePresent = -1 ;
-        if ( lGmessagePresent < 0 )
-        {
-                lGmessagePresent = detectPresence("gmessage") ;
-        }
-        return lGmessagePresent && graphicMode( ) ;
-}
-
-
-static int notifysendPresent( )
-{
-    static int lNotifysendPresent = -1 ;
-    if ( lNotifysendPresent < 0 )
-    {
-        lNotifysendPresent = detectPresence("notify-send") ;
+    if (strlen(lTerminalName)) {
+        return lTerminalName;
+    } else {
+        return NULL;
     }
-    return lNotifysendPresent && graphicMode( ) ;
 }
 
 
-static int perlPresent( )
-{
-        static int lPerlPresent = -1 ;
-        char lBuff [MAX_PATH_OR_CMD] ;
-        FILE * lIn ;
+static char const *dialogName() {
+    char const *lDialogName;
+    lDialogName = dialogNameOnly();
+    if (strlen(lDialogName) && (isTerminalRunning() || terminalName())) {
+        return lDialogName;
+    } else {
+        return NULL;
+    }
+}
 
-        if ( lPerlPresent < 0 )
-        {
-                lPerlPresent = detectPresence("perl") ;
-                if ( lPerlPresent )
-                {
-                        lIn = popen( "perl -MNet::DBus -e \"Net::DBus->session->get_service('org.freedesktop.Notifications')\" 2>&1" , "r" ) ;
-                        if ( fgets( lBuff , sizeof( lBuff ) , lIn ) == NULL )
-                        {
-                                lPerlPresent = 2 ;
-                        }
-                        pclose( lIn ) ;
-                        if (tinyfd_verbose) printf("perl-dbus %d\n", lPerlPresent);
+
+static int whiptailPresent() {
+    int lWhiptailPresent;
+    lWhiptailPresent = whiptailPresentOnly();
+    if (lWhiptailPresent && (isTerminalRunning() || terminalName())) {
+        return lWhiptailPresent;
+    } else {
+        return 0;
+    }
+}
+
+
+static int graphicMode() {
+    return !(tinyfd_forceConsole && (isTerminalRunning() || terminalName()))
+           && (getenv("DISPLAY")
+               || (isDarwin() && (!getenv("SSH_TTY") || getenv("DISPLAY"))));
+}
+
+
+static int pactlPresent() {
+    static int lPactlPresent = -1;
+    if (lPactlPresent < 0) {
+        lPactlPresent = detectPresence("pactl");
+    }
+    return lPactlPresent;
+}
+
+
+static int speakertestPresent() {
+    static int lSpeakertestPresent = -1;
+    if (lSpeakertestPresent < 0) {
+        lSpeakertestPresent = detectPresence("speaker-test");
+    }
+    return lSpeakertestPresent;
+}
+
+
+static int beepexePresent() {
+    static int lBeepexePresent = -1;
+    if (lBeepexePresent < 0) {
+        lBeepexePresent = detectPresence("beep.exe");
+    }
+    return lBeepexePresent;
+}
+
+
+static int xmessagePresent() {
+    static int lXmessagePresent = -1;
+    if (lXmessagePresent < 0) {
+        lXmessagePresent = detectPresence("xmessage");/*if not tty,not on osxpath*/
+    }
+    return lXmessagePresent && graphicMode();
+}
+
+
+static int gxmessagePresent() {
+    static int lGxmessagePresent = -1;
+    if (lGxmessagePresent < 0) {
+        lGxmessagePresent = detectPresence("gxmessage");
+    }
+    return lGxmessagePresent && graphicMode();
+}
+
+
+static int gmessagePresent() {
+    static int lGmessagePresent = -1;
+    if (lGmessagePresent < 0) {
+        lGmessagePresent = detectPresence("gmessage");
+    }
+    return lGmessagePresent && graphicMode();
+}
+
+
+static int notifysendPresent() {
+    static int lNotifysendPresent = -1;
+    if (lNotifysendPresent < 0) {
+        lNotifysendPresent = detectPresence("notify-send");
+    }
+    return lNotifysendPresent && graphicMode();
+}
+
+
+static int perlPresent() {
+    static int lPerlPresent = -1;
+    char lBuff[MAX_PATH_OR_CMD];
+    FILE *lIn;
+
+    if (lPerlPresent < 0) {
+        lPerlPresent = detectPresence("perl");
+        if (lPerlPresent) {
+            lIn = popen(
+                    "perl -MNet::DBus -e \"Net::DBus->session->get_service('org.freedesktop.Notifications')\" 2>&1",
+                    "r");
+            if (fgets(lBuff, sizeof(lBuff), lIn) == NULL) {
+                lPerlPresent = 2;
+            }
+            pclose(lIn);
+            if (tinyfd_verbose) printf("perl-dbus %d\n", lPerlPresent);
+        }
+    }
+    return graphicMode() ? lPerlPresent : 0;
+}
+
+
+static int afplayPresent() {
+    static int lAfplayPresent = -1;
+    char lBuff[MAX_PATH_OR_CMD];
+    FILE *lIn;
+
+    if (lAfplayPresent < 0) {
+        lAfplayPresent = detectPresence("afplay");
+        if (lAfplayPresent) {
+            lIn = popen("test -e /System/Library/Sounds/Ping.aiff || echo Ping", "r");
+            if (fgets(lBuff, sizeof(lBuff), lIn) == NULL) {
+                lAfplayPresent = 2;
+            }
+            pclose(lIn);
+            if (tinyfd_verbose) printf("afplay %d\n", lAfplayPresent);
+        }
+    }
+    return graphicMode() ? lAfplayPresent : 0;
+}
+
+
+static int xdialogPresent() {
+    static int lXdialogPresent = -1;
+    if (lXdialogPresent < 0) {
+        lXdialogPresent = detectPresence("Xdialog");
+    }
+    return lXdialogPresent && graphicMode();
+}
+
+
+static int gdialogPresent() {
+    static int lGdialoglPresent = -1;
+    if (lGdialoglPresent < 0) {
+        lGdialoglPresent = detectPresence("gdialog");
+    }
+    return lGdialoglPresent && graphicMode();
+}
+
+
+static int osascriptPresent() {
+    static int lOsascriptPresent = -1;
+    if (lOsascriptPresent < 0) {
+        gWarningDisplayed |= !!getenv("SSH_TTY");
+        lOsascriptPresent = detectPresence("osascript");
+    }
+    return lOsascriptPresent && graphicMode() && !getenv("SSH_TTY");
+}
+
+
+static int qarmaPresent() {
+    static int lQarmaPresent = -1;
+    if (lQarmaPresent < 0) {
+        lQarmaPresent = detectPresence("qarma");
+    }
+    return lQarmaPresent && graphicMode();
+}
+
+
+static int matedialogPresent() {
+    static int lMatedialogPresent = -1;
+    if (lMatedialogPresent < 0) {
+        lMatedialogPresent = detectPresence("matedialog");
+    }
+    return lMatedialogPresent && graphicMode();
+}
+
+
+static int shellementaryPresent() {
+    static int lShellementaryPresent = -1;
+    if (lShellementaryPresent < 0) {
+        lShellementaryPresent = 0; /*detectPresence("shellementary"); shellementary is not ready yet */
+    }
+    return lShellementaryPresent && graphicMode();
+}
+
+
+static int zenityPresent() {
+    static int lZenityPresent = -1;
+    if (lZenityPresent < 0) {
+        lZenityPresent = detectPresence("zenity");
+    }
+    return lZenityPresent && graphicMode();
+}
+
+
+static int zenity3Present() {
+    static int lZenity3Present = -1;
+    char lBuff[MAX_PATH_OR_CMD];
+    FILE *lIn;
+    int lIntTmp;
+
+    if (lZenity3Present < 0) {
+        lZenity3Present = 0;
+        if (zenityPresent()) {
+            lIn = popen("zenity --version", "r");
+            if (fgets(lBuff, sizeof(lBuff), lIn) != NULL) {
+                if (atoi(lBuff) >= 3) {
+                    lZenity3Present = 3;
+                    lIntTmp = atoi(strtok(lBuff, ".") + 2);
+                    if (lIntTmp >= 18) {
+                        lZenity3Present = 5;
+                    } else if (lIntTmp >= 10) {
+                        lZenity3Present = 4;
+                    }
+                } else if ((atoi(lBuff) == 2) && (atoi(strtok(lBuff, ".") + 2) >= 32)) {
+                    lZenity3Present = 2;
                 }
+                if (tinyfd_verbose) printf("zenity %d\n", lZenity3Present);
+            }
+            pclose(lIn);
+        }
     }
-    return graphicMode() ? lPerlPresent : 0 ;
+    return graphicMode() ? lZenity3Present : 0;
 }
 
 
-static int afplayPresent( )
-{
-        static int lAfplayPresent = -1 ;
-        char lBuff [MAX_PATH_OR_CMD] ;
-        FILE * lIn ;
+static int kdialogPresent() {
+    static int lKdialogPresent = -1;
+    char lBuff[MAX_PATH_OR_CMD];
+    FILE *lIn;
+    char *lDesktop;
 
-        if ( lAfplayPresent < 0 )
-        {
-                lAfplayPresent = detectPresence("afplay") ;
-                if ( lAfplayPresent )
-                {
-                        lIn = popen( "test -e /System/Library/Sounds/Ping.aiff || echo Ping" , "r" ) ;
-                        if ( fgets( lBuff , sizeof( lBuff ) , lIn ) == NULL )
-                        {
-                                lAfplayPresent = 2 ;
-                        }
-                        pclose( lIn ) ;
-                        if (tinyfd_verbose) printf("afplay %d\n", lAfplayPresent);
+    if (lKdialogPresent < 0) {
+        if (zenityPresent()) {
+            lDesktop = getenv("XDG_SESSION_DESKTOP");
+            if (!lDesktop || (strcmp(lDesktop, "KDE") && strcmp(lDesktop, "lxqt"))) {
+                lKdialogPresent = 0;
+                return lKdialogPresent;
+            }
+        }
+
+        lKdialogPresent = detectPresence("kdialog");
+        if (lKdialogPresent && !getenv("SSH_TTY")) {
+            lIn = popen("kdialog --attach 2>&1", "r");
+            if (fgets(lBuff, sizeof(lBuff), lIn) != NULL) {
+                if (!strstr("Unknown", lBuff)) {
+                    lKdialogPresent = 2;
+                    if (tinyfd_verbose) printf("kdialog-attach %d\n", lKdialogPresent);
                 }
-        }
-        return graphicMode() ? lAfplayPresent : 0 ;
-}
+            }
+            pclose(lIn);
 
-
-static int xdialogPresent( )
-{
-    static int lXdialogPresent = -1 ;
-    if ( lXdialogPresent < 0 )
-    {
-        lXdialogPresent = detectPresence("Xdialog") ;
-    }
-    return lXdialogPresent && graphicMode( ) ;
-}
-
-
-static int gdialogPresent( )
-{
-    static int lGdialoglPresent = -1 ;
-    if ( lGdialoglPresent < 0 )
-    {
-        lGdialoglPresent = detectPresence( "gdialog" ) ;
-    }
-    return lGdialoglPresent && graphicMode( ) ;
-}
-
-
-static int osascriptPresent( )
-{
-    static int lOsascriptPresent = -1 ;
-    if ( lOsascriptPresent < 0 )
-    {
-                gWarningDisplayed |= !!getenv("SSH_TTY");
-                lOsascriptPresent = detectPresence( "osascript" ) ;
-    }
-        return lOsascriptPresent && graphicMode() && !getenv("SSH_TTY") ;
-}
-
-
-static int qarmaPresent( )
-{
-        static int lQarmaPresent = -1 ;
-        if ( lQarmaPresent < 0 )
-        {
-                lQarmaPresent = detectPresence("qarma") ;
-        }
-        return lQarmaPresent && graphicMode( ) ;
-}
-
-
-static int matedialogPresent( )
-{
-        static int lMatedialogPresent = -1 ;
-        if ( lMatedialogPresent < 0 )
-        {
-                lMatedialogPresent = detectPresence("matedialog") ;
-        }
-        return lMatedialogPresent && graphicMode( ) ;
-}
-
-
-static int shellementaryPresent( )
-{
-        static int lShellementaryPresent = -1 ;
-        if ( lShellementaryPresent < 0 )
-        {
-                lShellementaryPresent = 0 ; /*detectPresence("shellementary"); shellementary is not ready yet */
-        }
-        return lShellementaryPresent && graphicMode( ) ;
-}
-
-
-static int zenityPresent( )
-{
-        static int lZenityPresent = -1 ;
-        if ( lZenityPresent < 0 )
-        {
-                lZenityPresent = detectPresence("zenity") ;
-        }
-        return lZenityPresent && graphicMode( ) ;
-}
-
-
-static int zenity3Present()
-{
-        static int lZenity3Present = -1 ;
-        char lBuff [MAX_PATH_OR_CMD] ;
-        FILE * lIn ;
-		int lIntTmp ;
-
-        if ( lZenity3Present < 0 )
-        {
-                lZenity3Present = 0 ;
-                if ( zenityPresent() )
-                {
-                        lIn = popen( "zenity --version" , "r" ) ;
-                        if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-                        {
-                                if ( atoi(lBuff) >= 3 )
-                                {
-                                        lZenity3Present = 3 ;
-										lIntTmp = atoi(strtok(lBuff,".")+2 ) ;
-										if ( lIntTmp >= 18 )
-										{
-											lZenity3Present = 5 ;
-										}
-										else if ( lIntTmp >= 10 )
-										{
-											lZenity3Present = 4 ;
-										}
-								}
-                                else if ( ( atoi(lBuff) == 2 ) && ( atoi(strtok(lBuff,".")+2 ) >= 32 ) )
-                                {
-                                        lZenity3Present = 2 ;
-                                }
-                                if (tinyfd_verbose) printf("zenity %d\n", lZenity3Present);
-                        }
-                        pclose( lIn ) ;
+            if (lKdialogPresent == 2) {
+                lKdialogPresent = 1;
+                lIn = popen("kdialog --passivepopup 2>&1", "r");
+                if (fgets(lBuff, sizeof(lBuff), lIn) != NULL) {
+                    if (!strstr("Unknown", lBuff)) {
+                        lKdialogPresent = 2;
+                        if (tinyfd_verbose) printf("kdialog-popup %d\n", lKdialogPresent);
+                    }
                 }
+                pclose(lIn);
+            }
         }
-        return graphicMode() ? lZenity3Present : 0 ;
+    }
+    return graphicMode() ? lKdialogPresent : 0;
 }
 
 
-static int kdialogPresent( )
-{
-	static int lKdialogPresent = -1 ;
-	char lBuff [MAX_PATH_OR_CMD] ;
-	FILE * lIn ;
-	char * lDesktop;
+static int osx9orBetter() {
+    static int lOsx9orBetter = -1;
+    char lBuff[MAX_PATH_OR_CMD];
+    FILE *lIn;
+    int V, v;
 
-	if ( lKdialogPresent < 0 )
-	{
-		if ( zenityPresent() )
-		{
-			lDesktop = getenv("XDG_SESSION_DESKTOP");
-			if ( !lDesktop  || ( strcmp(lDesktop, "KDE") && strcmp(lDesktop, "lxqt") ) )
-			{
-				lKdialogPresent = 0 ;
-				return lKdialogPresent ;
-			}
-		}
-
-		lKdialogPresent = detectPresence("kdialog") ;
-		if ( lKdialogPresent && !getenv("SSH_TTY") )
-		{
-			lIn = popen( "kdialog --attach 2>&1" , "r" ) ;
-			if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-			{
-				if ( ! strstr( "Unknown" , lBuff ) )
-				{
-					lKdialogPresent = 2 ;
-					if (tinyfd_verbose) printf("kdialog-attach %d\n", lKdialogPresent);
-				}
-			}
-			pclose( lIn ) ;
-
-			if (lKdialogPresent == 2)
-			{
-				lKdialogPresent = 1 ;
-				lIn = popen( "kdialog --passivepopup 2>&1" , "r" ) ;
-				if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-				{
-					if ( ! strstr( "Unknown" , lBuff ) )
-					{
-						lKdialogPresent = 2 ;
-						if (tinyfd_verbose) printf("kdialog-popup %d\n", lKdialogPresent);
-					}
-				}
-				pclose( lIn ) ;
-			}
-		}
-	}
-	return graphicMode() ? lKdialogPresent : 0 ;
+    if (lOsx9orBetter < 0) {
+        lOsx9orBetter = 0;
+        lIn = popen("osascript -e 'set osver to system version of (system info)'", "r");
+        if ((fgets(lBuff, sizeof(lBuff), lIn) != NULL)
+            && (2 == sscanf(lBuff, "%d.%d", &V, &v))) {
+            V = V * 100 + v;
+            if (V >= 1009) {
+                lOsx9orBetter = 1;
+            }
+        }
+        pclose(lIn);
+        if (tinyfd_verbose) printf("Osx10 = %d, %d = %s\n", lOsx9orBetter, V, lBuff);
+    }
+    return lOsx9orBetter;
 }
 
 
-static int osx9orBetter( )
-{
-        static int lOsx9orBetter = -1 ;
-        char lBuff [MAX_PATH_OR_CMD] ;
-        FILE * lIn ;
-        int V,v;
+static int python2Present() {
+    static int lPython2Present = -1;
+    int i;
 
-        if ( lOsx9orBetter < 0 )
-        {
-                lOsx9orBetter = 0 ;
-                lIn = popen( "osascript -e 'set osver to system version of (system info)'" , "r" ) ;
-                if ( ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-                        && ( 2 == sscanf(lBuff, "%d.%d", &V, &v) ) )
-                {
-                        V = V * 100 + v;
-                        if ( V >= 1009 )
-                        {
-                                lOsx9orBetter = 1 ;
-                        }
+    if (lPython2Present < 0) {
+        lPython2Present = 0;
+        strcpy(gPython2Name, "python2");
+        if (detectPresence(gPython2Name)) lPython2Present = 1;
+        else {
+            for (i = 9; i >= 0; i--) {
+                sprintf(gPython2Name, "python2.%d", i);
+                if (detectPresence(gPython2Name)) {
+                    lPython2Present = 1;
+                    break;
                 }
-                pclose( lIn ) ;
-                if (tinyfd_verbose) printf("Osx10 = %d, %d = %s\n", lOsx9orBetter, V, lBuff) ; 
-        }
-        return lOsx9orBetter ;
-}
-
-
-static int python2Present( )
-{
-    static int lPython2Present = -1 ;
-        int i;
-
-        if ( lPython2Present < 0 )
-        {
-                lPython2Present = 0 ;
-                strcpy(gPython2Name , "python2" ) ;
-                if ( detectPresence(gPython2Name) ) lPython2Present = 1;
-                else
-                {
-                        for ( i = 9 ; i >= 0 ; i -- )
-                        {
-                                sprintf( gPython2Name , "python2.%d" , i ) ;
-                                if ( detectPresence(gPython2Name) )
-                                {
-                                        lPython2Present = 1;
-                                        break;
-                                }
-                        }
-                        /*if ( ! lPython2Present )
+            }
+            /*if ( ! lPython2Present )
                         {
                                 strcpy(gPython2Name , "python" ) ;
                                 if ( detectPresence(gPython2Name) ) lPython2Present = 1;
                         }*/
-                }
-                if (tinyfd_verbose) printf("lPython2Present %d\n", lPython2Present) ;
-                if (tinyfd_verbose) printf("gPython2Name %s\n", gPython2Name) ;
         }
-        return lPython2Present ;
+        if (tinyfd_verbose) printf("lPython2Present %d\n", lPython2Present);
+        if (tinyfd_verbose) printf("gPython2Name %s\n", gPython2Name);
+    }
+    return lPython2Present;
 }
 
 
-static int python3Present( )
-{
-        static int lPython3Present = -1 ;
-        int i;
+static int python3Present() {
+    static int lPython3Present = -1;
+    int i;
 
-        if ( lPython3Present < 0 )
-        {
-                lPython3Present = 0 ;
-                strcpy(gPython3Name , "python3" ) ;
-                if ( detectPresence(gPython3Name) ) lPython3Present = 1;
-                else
-                {
-                        for ( i = 9 ; i >= 0 ; i -- )
-                        {
-                                sprintf( gPython3Name , "python3.%d" , i ) ;
-                                if ( detectPresence(gPython3Name) )
-                                {
-                                        lPython3Present = 1;
-                                        break;
-                                }
-                        }
-                        /*if ( ! lPython3Present )
+    if (lPython3Present < 0) {
+        lPython3Present = 0;
+        strcpy(gPython3Name, "python3");
+        if (detectPresence(gPython3Name)) lPython3Present = 1;
+        else {
+            for (i = 9; i >= 0; i--) {
+                sprintf(gPython3Name, "python3.%d", i);
+                if (detectPresence(gPython3Name)) {
+                    lPython3Present = 1;
+                    break;
+                }
+            }
+            /*if ( ! lPython3Present )
                         {
                                 strcpy(gPython3Name , "python" ) ;
                                 if ( detectPresence(gPython3Name) ) lPython3Present = 1;
                         }*/
-                }
-                if (tinyfd_verbose) printf("lPython3Present %d\n", lPython3Present) ;
-                if (tinyfd_verbose) printf("gPython3Name %s\n", gPython3Name) ;
         }
-        return lPython3Present ;
+        if (tinyfd_verbose) printf("lPython3Present %d\n", lPython3Present);
+        if (tinyfd_verbose) printf("gPython3Name %s\n", gPython3Name);
+    }
+    return lPython3Present;
 }
 
 
-static int tkinter2Present( )
-{
-    static int lTkinter2Present = -1 ;
-        char lPythonCommand[256];
-        char lPythonParams[256] =
-"-S -c \"try:\n\timport Tkinter;\nexcept:\n\tprint 0;\"";
+static int tkinter2Present() {
+    static int lTkinter2Present = -1;
+    char lPythonCommand[256];
+    char lPythonParams[256] =
+            "-S -c \"try:\n\timport Tkinter;\nexcept:\n\tprint 0;\"";
 
 
-        if ( lTkinter2Present < 0 )
-        {
-                lTkinter2Present = 0 ;
-                if ( python2Present() )
-        {
-                    sprintf( lPythonCommand , "%s %s" , gPython2Name , lPythonParams ) ;
-                    lTkinter2Present = tryCommand(lPythonCommand) ;
-                }
-                if (tinyfd_verbose) printf("lTkinter2Present %d\n", lTkinter2Present) ;
+    if (lTkinter2Present < 0) {
+        lTkinter2Present = 0;
+        if (python2Present()) {
+            sprintf(lPythonCommand, "%s %s", gPython2Name, lPythonParams);
+            lTkinter2Present = tryCommand(lPythonCommand);
         }
-        return lTkinter2Present && graphicMode() && !(isDarwin() && getenv("SSH_TTY") );
+        if (tinyfd_verbose) printf("lTkinter2Present %d\n", lTkinter2Present);
+    }
+    return lTkinter2Present && graphicMode() && !(isDarwin() && getenv("SSH_TTY"));
 }
 
 
-static int tkinter3Present( )
-{
-        static int lTkinter3Present = -1 ;
-        char lPythonCommand[256];
-        char lPythonParams[256] =
-                "-S -c \"try:\n\timport tkinter;\nexcept:\n\tprint(0);\"";
+static int tkinter3Present() {
+    static int lTkinter3Present = -1;
+    char lPythonCommand[256];
+    char lPythonParams[256] =
+            "-S -c \"try:\n\timport tkinter;\nexcept:\n\tprint(0);\"";
 
-        if ( lTkinter3Present < 0 )
-        {
-                lTkinter3Present = 0 ;
-                if ( python3Present() )
-                {
-                        sprintf( lPythonCommand , "%s %s" , gPython3Name , lPythonParams ) ;
-                        lTkinter3Present = tryCommand(lPythonCommand) ;
-                }
-                if (tinyfd_verbose) printf("lTkinter3Present %d\n", lTkinter3Present) ;
+    if (lTkinter3Present < 0) {
+        lTkinter3Present = 0;
+        if (python3Present()) {
+            sprintf(lPythonCommand, "%s %s", gPython3Name, lPythonParams);
+            lTkinter3Present = tryCommand(lPythonCommand);
         }
-        return lTkinter3Present && graphicMode() && !(isDarwin() && getenv("SSH_TTY") );
+        if (tinyfd_verbose) printf("lTkinter3Present %d\n", lTkinter3Present);
+    }
+    return lTkinter3Present && graphicMode() && !(isDarwin() && getenv("SSH_TTY"));
 }
 
 
-static int pythonDbusPresent( )
-{
-    static int lDbusPresent = -1 ;
-        char lPythonCommand[256];
-        char lPythonParams[256] =
-"-c \"try:\n\timport dbus;bus=dbus.SessionBus();\
+static int pythonDbusPresent() {
+    static int lDbusPresent = -1;
+    char lPythonCommand[256];
+    char lPythonParams[256] =
+            "-c \"try:\n\timport dbus;bus=dbus.SessionBus();\
 notif=bus.get_object('org.freedesktop.Notifications','/org/freedesktop/Notifications');\
 notify=dbus.Interface(notif,'org.freedesktop.Notifications');\nexcept:\n\tprint(0);\"";
 
-        if ( lDbusPresent < 0 )
-        {
-                lDbusPresent = 0 ;
-                if ( python2Present() )
-                {
-                        strcpy(gPythonName , gPython2Name ) ;
-                        sprintf( lPythonCommand , "%s %s" , gPythonName , lPythonParams ) ;
-                        lDbusPresent = tryCommand(lPythonCommand) ;
-                }
-
-                if ( ! lDbusPresent && python3Present() )
-                {
-                        strcpy(gPythonName , gPython3Name ) ;
-                        sprintf( lPythonCommand , "%s %s" , gPythonName , lPythonParams ) ;
-                        lDbusPresent = tryCommand(lPythonCommand) ;
-                }
-
-                if (tinyfd_verbose) printf("lDbusPresent %d\n", lDbusPresent) ;
-                if (tinyfd_verbose) printf("gPythonName %s\n", gPythonName) ;
+    if (lDbusPresent < 0) {
+        lDbusPresent = 0;
+        if (python2Present()) {
+            strcpy(gPythonName, gPython2Name);
+            sprintf(lPythonCommand, "%s %s", gPythonName, lPythonParams);
+            lDbusPresent = tryCommand(lPythonCommand);
         }
-        return lDbusPresent && graphicMode() && !(isDarwin() && getenv("SSH_TTY") );
+
+        if (!lDbusPresent && python3Present()) {
+            strcpy(gPythonName, gPython3Name);
+            sprintf(lPythonCommand, "%s %s", gPythonName, lPythonParams);
+            lDbusPresent = tryCommand(lPythonCommand);
+        }
+
+        if (tinyfd_verbose) printf("lDbusPresent %d\n", lDbusPresent);
+        if (tinyfd_verbose) printf("gPythonName %s\n", gPythonName);
+    }
+    return lDbusPresent && graphicMode() && !(isDarwin() && getenv("SSH_TTY"));
 }
 
 
-static void sigHandler(int sig)
-{
-        FILE * lIn ;
-        if ( ( lIn = popen( "pactl unload-module module-sine" , "r" ) ) )
-        {
-                pclose( lIn ) ;
-        }
+static void sigHandler(int sig) {
+    FILE *lIn;
+    if ((lIn = popen("pactl unload-module module-sine", "r"))) {
+        pclose(lIn);
+    }
 }
 
-void tinyfd_beep()
-{
-        char lDialogString [256] ;
-        FILE * lIn ;
+void tinyfd_beep() {
+    char lDialogString[256];
+    FILE *lIn;
 
-        if ( osascriptPresent() )
-        {
-                if ( afplayPresent() >= 2 )
-                {
-                        strcpy( lDialogString , "afplay /System/Library/Sounds/Ping.aiff") ;
-                }
-                else
-                {
-                        strcpy( lDialogString , "osascript -e 'tell application \"System Events\" to beep'") ;
-                }
+    if (osascriptPresent()) {
+        if (afplayPresent() >= 2) {
+            strcpy(lDialogString, "afplay /System/Library/Sounds/Ping.aiff");
+        } else {
+            strcpy(lDialogString, "osascript -e 'tell application \"System Events\" to beep'");
         }
-        else if ( pactlPresent() ) 
-        {
-                signal(SIGINT, sigHandler);
-                /*strcpy( lDialogString , "pactl load-module module-sine frequency=440;sleep .3;pactl unload-module module-sine" ) ;*/
-                strcpy( lDialogString , "thnum=$(pactl load-module module-sine frequency=440);sleep .3;pactl unload-module $thnum" ) ;
-        }
-        else if ( speakertestPresent() ) 
-        {
-                /*strcpy( lDialogString , "timeout -k .3 .3 speaker-test --frequency 440 --test sine > /dev/tty" ) ;*/
-                strcpy( lDialogString , "( speaker-test -t sine -f 440 > /dev/tty )& pid=$!;sleep .3; kill -9 $pid" ) ;
-        }
-        else if ( beepexePresent() ) 
-        {
-                strcpy( lDialogString , "beep.exe 440 300" ) ;
-        }
-        else
-        {
-                strcpy( lDialogString , "printf '\a' > /dev/tty" ) ;
-        }
+    } else if (pactlPresent()) {
+        signal(SIGINT, sigHandler);
+        /*strcpy( lDialogString , "pactl load-module module-sine frequency=440;sleep .3;pactl unload-module module-sine" ) ;*/
+        strcpy(lDialogString,
+               "thnum=$(pactl load-module module-sine frequency=440);sleep .3;pactl unload-module $thnum");
+    } else if (speakertestPresent()) {
+        /*strcpy( lDialogString , "timeout -k .3 .3 speaker-test --frequency 440 --test sine > /dev/tty" ) ;*/
+        strcpy(lDialogString,
+               "( speaker-test -t sine -f 440 > /dev/tty )& pid=$!;sleep .3; kill -9 $pid");
+    } else if (beepexePresent()) {
+        strcpy(lDialogString, "beep.exe 440 300");
+    } else {
+        strcpy(lDialogString, "printf '\a' > /dev/tty");
+    }
 
-        if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
+    if (tinyfd_verbose) printf("lDialogString: %s\n", lDialogString);
 
-        if ( ( lIn = popen( lDialogString , "r" ) ) )
-        {
-                pclose( lIn ) ;
-        }
+    if ((lIn = popen(lDialogString, "r"))) {
+        pclose(lIn);
+    }
 
-        if ( pactlPresent() )
-        {
-                signal(SIGINT, SIG_DFL);
-        }
+    if (pactlPresent()) {
+        signal(SIGINT, SIG_DFL);
+    }
 }
 
 
 int tinyfd_messageBox(
-        char const * const aTitle , /* NULL or "" */
-        char const * const aMessage , /* NULL or ""  may contain \n and \t */
-        char const * const aDialogType , /* "ok" "okcancel" "yesno" "yesnocancel" */
-        char const * const aIconType , /* "info" "warning" "error" "question" */
-        int const aDefaultButton ) /* 0 for cancel/no , 1 for ok/yes , 2 for no in yesnocancel */
+        char const *const aTitle, /* NULL or "" */
+        char const *const aMessage, /* NULL or ""  may contain \n and \t */
+        char const *const aDialogType, /* "ok" "okcancel" "yesno" "yesnocancel" */
+        char const *const aIconType, /* "info" "warning" "error" "question" */
+        int const aDefaultButton) /* 0 for cancel/no , 1 for ok/yes , 2 for no in yesnocancel */
 {
-        char lBuff [MAX_PATH_OR_CMD] ;
-        char * lDialogString = NULL ;
-        char * lpDialogString;
-        FILE * lIn ;
-        int lWasGraphicDialog = 0 ;
-        int lWasXterm = 0 ;
-        int lResult ;
-        char lChar ;
-        struct termios infoOri;
-        struct termios info;
-        size_t lTitleLen ;
-        size_t lMessageLen ;
+    char lBuff[MAX_PATH_OR_CMD];
+    char *lDialogString = NULL;
+    char *lpDialogString;
+    FILE *lIn;
+    int lWasGraphicDialog = 0;
+    int lWasXterm = 0;
+    int lResult;
+    char lChar;
+    struct termios infoOri;
+    struct termios info;
+    size_t lTitleLen;
+    size_t lMessageLen;
 
-        lBuff[0]='\0';
+    lBuff[0] = '\0';
 
-        lTitleLen =  aTitle ? strlen(aTitle) : 0 ;
-        lMessageLen =  aMessage ? strlen(aMessage) : 0 ;
-        if ( !aTitle || strcmp(aTitle,"tinyfd_query") )
-        {
-                lDialogString = (char *) malloc( MAX_PATH_OR_CMD + lTitleLen + lMessageLen );
+    lTitleLen = aTitle ? strlen(aTitle) : 0;
+    lMessageLen = aMessage ? strlen(aMessage) : 0;
+    if (!aTitle || strcmp(aTitle, "tinyfd_query")) {
+        lDialogString = (char *) malloc(MAX_PATH_OR_CMD + lTitleLen + lMessageLen);
+    }
+
+    if (osascriptPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "applescript");
+            return 1;
         }
 
-        if ( osascriptPresent( ) )
+        strcpy(lDialogString, "osascript ");
+        if (!osx9orBetter())
+            strcat(lDialogString, " -e 'tell application \"System Events\"' -e 'Activate'");
+        strcat(lDialogString,
+               " -e 'try' -e 'set {vButton} to {button returned} of ( display dialog \"");
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, "\" ");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "with title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
+        }
+        strcat(lDialogString, "with icon ");
+        if (aIconType && !strcmp("error", aIconType)) {
+            strcat(lDialogString, "stop ");
+        } else if (aIconType && !strcmp("warning", aIconType)) {
+            strcat(lDialogString, "caution ");
+        } else /* question or info */
         {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"applescript");return 1;}
+            strcat(lDialogString, "note ");
+        }
+        if (aDialogType && !strcmp("okcancel", aDialogType)) {
+            if (!aDefaultButton) {
+                strcat(lDialogString, "default button \"Cancel\" ");
+            }
+        } else if (aDialogType && !strcmp("yesno", aDialogType)) {
+            strcat(lDialogString, "buttons {\"No\", \"Yes\"} ");
+            if (aDefaultButton) {
+                strcat(lDialogString, "default button \"Yes\" ");
+            } else {
+                strcat(lDialogString, "default button \"No\" ");
+            }
+            strcat(lDialogString, "cancel button \"No\"");
+        } else if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+            strcat(lDialogString, "buttons {\"No\", \"Yes\", \"Cancel\"} ");
+            switch (aDefaultButton) {
+                case 1:
+                    strcat(lDialogString, "default button \"Yes\" ");
+                    break;
+                case 2:
+                    strcat(lDialogString, "default button \"No\" ");
+                    break;
+                case 0:
+                    strcat(lDialogString, "default button \"Cancel\" ");
+                    break;
+            }
+            strcat(lDialogString, "cancel button \"Cancel\"");
+        } else {
+            strcat(lDialogString, "buttons {\"OK\"} ");
+            strcat(lDialogString, "default button \"OK\" ");
+        }
+        strcat(lDialogString, ")' ");
 
-                strcpy( lDialogString , "osascript ");
-                if ( ! osx9orBetter() ) strcat( lDialogString , " -e 'tell application \"System Events\"' -e 'Activate'");
-                strcat( lDialogString , " -e 'try' -e 'set {vButton} to {button returned} of ( display dialog \"") ;
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat(lDialogString, aMessage) ;
-                }
-                strcat(lDialogString, "\" ") ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "with title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\" ") ;
-                }
-                strcat(lDialogString, "with icon ") ;
-                if ( aIconType && ! strcmp( "error" , aIconType ) )
-                {
-                        strcat(lDialogString, "stop " ) ;
-                }
-                else if ( aIconType && ! strcmp( "warning" , aIconType ) )
-                {
-                        strcat(lDialogString, "caution " ) ;
-                }
-                else /* question or info */
-                {
-                        strcat(lDialogString, "note " ) ;
-                }
-                if ( aDialogType && ! strcmp( "okcancel" , aDialogType ) )
-                {
-                        if ( ! aDefaultButton )
-                        {
-                                strcat( lDialogString ,"default button \"Cancel\" " ) ;
-                        }
-                }
-                else if ( aDialogType && ! strcmp( "yesno" , aDialogType ) )
-                {
-                        strcat( lDialogString ,"buttons {\"No\", \"Yes\"} " ) ;
-                        if (aDefaultButton) 
-                        {
-                                strcat( lDialogString ,"default button \"Yes\" " ) ;
-                        }
-                        else
-                        {
-                                strcat( lDialogString ,"default button \"No\" " ) ;
-                        }
-                        strcat( lDialogString ,"cancel button \"No\"" ) ;
-                }
-                else if ( aDialogType && ! strcmp( "yesnocancel" , aDialogType ) )
-                {
-                        strcat( lDialogString ,"buttons {\"No\", \"Yes\", \"Cancel\"} " ) ;
-                        switch (aDefaultButton) 
-                        {
-                                case 1: strcat( lDialogString ,"default button \"Yes\" " ) ; break;
-                                case 2: strcat( lDialogString ,"default button \"No\" " ) ; break;
-                                case 0: strcat( lDialogString ,"default button \"Cancel\" " ) ; break;
-                        }
-                        strcat( lDialogString ,"cancel button \"Cancel\"" ) ;
-                }
-                else
-                {
-                        strcat( lDialogString ,"buttons {\"OK\"} " ) ;
-                        strcat( lDialogString ,"default button \"OK\" " ) ;
-                }
-                strcat( lDialogString, ")' ") ;
-
-                strcat( lDialogString,
-"-e 'if vButton is \"Yes\" then' -e 'return 1'\
+        strcat(lDialogString,
+               "-e 'if vButton is \"Yes\" then' -e 'return 1'\
  -e 'else if vButton is \"OK\" then' -e 'return 1'\
  -e 'else if vButton is \"No\" then' -e 'return 2'\
- -e 'else' -e 'return 0' -e 'end if' " );
+ -e 'else' -e 'return 0' -e 'end if' ");
 
-                strcat( lDialogString, "-e 'on error number -128' " ) ;
-                strcat( lDialogString, "-e '0' " );
+        strcat(lDialogString, "-e 'on error number -128' ");
+        strcat(lDialogString, "-e '0' ");
 
-                strcat( lDialogString, "-e 'end try'") ;
-                if ( ! osx9orBetter() ) strcat( lDialogString, " -e 'end tell'") ;
+        strcat(lDialogString, "-e 'end try'");
+        if (!osx9orBetter()) strcat(lDialogString, " -e 'end tell'");
+    } else if (kdialogPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "kdialog");
+            return 1;
         }
-        else if ( kdialogPresent() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"kdialog");return 1;}
 
-                strcpy( lDialogString , "kdialog" ) ;
-                if ( kdialogPresent() == 2 )
-                {
-                        strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                }
-
-                strcat( lDialogString , " --" ) ;
-                if ( aDialogType && ( ! strcmp( "okcancel" , aDialogType )
-                        || ! strcmp( "yesno" , aDialogType ) || ! strcmp( "yesnocancel" , aDialogType ) ) )
-                {
-                        if ( aIconType && ( ! strcmp( "warning" , aIconType )
-                                || ! strcmp( "error" , aIconType ) ) )
-                        {
-                                strcat( lDialogString , "warning" ) ;
-                        }
-                        if ( ! strcmp( "yesnocancel" , aDialogType ) )
-                        {
-                                strcat( lDialogString , "yesnocancel" ) ;
-                        }
-                        else
-                        {
-                                strcat( lDialogString , "yesno" ) ;
-                        }
-                }
-                else if ( aIconType && ! strcmp( "error" , aIconType ) )
-                {
-                        strcat( lDialogString , "error" ) ;
-                }
-                else if ( aIconType && ! strcmp( "warning" , aIconType ) )
-                {
-                        strcat( lDialogString , "sorry" ) ;
-                }
-                else
-                {
-                        strcat( lDialogString , "msgbox" ) ;
-                }
-                strcat( lDialogString , " \"" ) ;
-                if ( aMessage )
-                {
-                        strcat( lDialogString , aMessage ) ;
-                }
-                strcat( lDialogString , "\"" ) ;
-                if ( aDialogType && ! strcmp( "okcancel" , aDialogType ) )
-                {
-                        strcat( lDialogString ,
-                                " --yes-label Ok --no-label Cancel" ) ;
-                }
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, " --title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
-
-                if ( ! strcmp( "yesnocancel" , aDialogType ) )
-                {
-                        strcat( lDialogString , "; x=$? ;if [ $x = 0 ] ;then echo 1;elif [ $x = 1 ] ;then echo 2;else echo 0;fi");
-                }
-                else
-                {
-                        strcat( lDialogString , ";if [ $? = 0 ];then echo 1;else echo 0;fi");
-                }
+        strcpy(lDialogString, "kdialog");
+        if (kdialogPresent() == 2) {
+            strcat(lDialogString,
+                   " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
         }
-        else if ( zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent() )
-        {
-                if ( zenityPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return 1;}
-                        strcpy( lDialogString , "szAnswer=$(zenity" ) ;
-                        if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
-                        {
-                                strcat(lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                else if ( matedialogPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"matedialog");return 1;}
-                        strcpy( lDialogString , "szAnswer=$(matedialog" ) ;
-                }
-                else if ( shellementaryPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"shellementary");return 1;}
-                        strcpy( lDialogString , "szAnswer=$(shellementary" ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"qarma");return 1;}
-                        strcpy( lDialogString , "szAnswer=$(qarma" ) ;
-                        if ( !getenv("SSH_TTY") )
-                        {
-                                strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                strcat(lDialogString, " --"); 
 
-                if ( aDialogType && ! strcmp( "okcancel" , aDialogType ) )
-                {
-                                strcat( lDialogString ,
-                                                "question --ok-label=Ok --cancel-label=Cancel" ) ;
-                }
-                else if ( aDialogType && ! strcmp( "yesno" , aDialogType ) )
-                {
-                                strcat( lDialogString , "question" ) ;
-                }
-                else if ( aDialogType && ! strcmp( "yesnocancel" , aDialogType ) )
-                {
-                        strcat( lDialogString , "list --column \"\" --hide-header \"Yes\" \"No\"" ) ;
-                }
-                else if ( aIconType && ! strcmp( "error" , aIconType ) )
-                {
-                    strcat( lDialogString , "error" ) ;
-                }
-                else if ( aIconType && ! strcmp( "warning" , aIconType ) )
-                {
-                    strcat( lDialogString , "warning" ) ;
-                }
-                else
-                {
-                    strcat( lDialogString , "info" ) ;
-                }
-                if ( aTitle && strlen(aTitle) ) 
-                {
-                        strcat(lDialogString, " --title=\"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                if ( aMessage && strlen(aMessage) ) 
-                {
-                        strcat(lDialogString, " --no-wrap --text=\"") ;
-                        strcat(lDialogString, aMessage) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                if ( (zenity3Present() >= 3) || (!zenityPresent() && (shellementaryPresent() || qarmaPresent()) ) )
-                {
-                        strcat( lDialogString , " --icon-name=dialog-" ) ;
-                        if ( aIconType && (! strcmp( "question" , aIconType )
-                          || ! strcmp( "error" , aIconType )
-                          || ! strcmp( "warning" , aIconType ) ) )
-                        {
-                                strcat( lDialogString , aIconType ) ;
-                        }
-                        else
-                        {
-                                strcat( lDialogString , "information" ) ;
-                        }
-                }
-
-                if (tinyfd_silent) strcat( lDialogString , " 2>/dev/null ");
-
-                if ( ! strcmp( "yesnocancel" , aDialogType ) )
-                {
-                        strcat( lDialogString ,
-");if [ $? = 1 ];then echo 0;elif [ $szAnswer = \"No\" ];then echo 2;else echo 1;fi");
-                }
-                else
-                {
-                        strcat( lDialogString , ");if [ $? = 0 ];then echo 1;else echo 0;fi");
-                }
+        strcat(lDialogString, " --");
+        if (aDialogType && (!strcmp("okcancel", aDialogType)
+                            || !strcmp("yesno", aDialogType) ||
+                            !strcmp("yesnocancel", aDialogType))) {
+            if (aIconType && (!strcmp("warning", aIconType)
+                              || !strcmp("error", aIconType))) {
+                strcat(lDialogString, "warning");
+            }
+            if (!strcmp("yesnocancel", aDialogType)) {
+                strcat(lDialogString, "yesnocancel");
+            } else {
+                strcat(lDialogString, "yesno");
+            }
+        } else if (aIconType && !strcmp("error", aIconType)) {
+            strcat(lDialogString, "error");
+        } else if (aIconType && !strcmp("warning", aIconType)) {
+            strcat(lDialogString, "sorry");
+        } else {
+            strcat(lDialogString, "msgbox");
         }
-        else if ( !gxmessagePresent() && !gmessagePresent() && !gdialogPresent() && !xdialogPresent() && tkinter2Present() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python2-tkinter");return 1;}
+        strcat(lDialogString, " \"");
+        if (aMessage) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, "\"");
+        if (aDialogType && !strcmp("okcancel", aDialogType)) {
+            strcat(lDialogString,
+                   " --yes-label Ok --no-label Cancel");
+        }
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
+        }
 
-                strcpy( lDialogString , gPython2Name ) ;
-                if ( ! isTerminalRunning( ) && isDarwin( ) )
-                {
-                        strcat( lDialogString , " -i" ) ;  /* for osx without console */
-                }
-                
-                strcat( lDialogString ,
-" -S -c \"import Tkinter,tkMessageBox;root=Tkinter.Tk();root.withdraw();");
-                
-                if ( isDarwin( ) )
-                {
-                        strcat( lDialogString ,
-"import os;os.system('''/usr/bin/osascript -e 'tell app \\\"Finder\\\" to set \
+        if (!strcmp("yesnocancel", aDialogType)) {
+            strcat(lDialogString,
+                   "; x=$? ;if [ $x = 0 ] ;then echo 1;elif [ $x = 1 ] ;then echo 2;else echo 0;fi");
+        } else {
+            strcat(lDialogString, ";if [ $? = 0 ];then echo 1;else echo 0;fi");
+        }
+    } else if (zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent()) {
+        if (zenityPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "zenity");
+                return 1;
+            }
+            strcpy(lDialogString, "szAnswer=$(zenity");
+            if ((zenity3Present() >= 4) && !getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        } else if (matedialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "matedialog");
+                return 1;
+            }
+            strcpy(lDialogString, "szAnswer=$(matedialog");
+        } else if (shellementaryPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "shellementary");
+                return 1;
+            }
+            strcpy(lDialogString, "szAnswer=$(shellementary");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "qarma");
+                return 1;
+            }
+            strcpy(lDialogString, "szAnswer=$(qarma");
+            if (!getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        }
+        strcat(lDialogString, " --");
+
+        if (aDialogType && !strcmp("okcancel", aDialogType)) {
+            strcat(lDialogString,
+                   "question --ok-label=Ok --cancel-label=Cancel");
+        } else if (aDialogType && !strcmp("yesno", aDialogType)) {
+            strcat(lDialogString, "question");
+        } else if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+            strcat(lDialogString, "list --column \"\" --hide-header \"Yes\" \"No\"");
+        } else if (aIconType && !strcmp("error", aIconType)) {
+            strcat(lDialogString, "error");
+        } else if (aIconType && !strcmp("warning", aIconType)) {
+            strcat(lDialogString, "warning");
+        } else {
+            strcat(lDialogString, "info");
+        }
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title=\"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
+        }
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, " --no-wrap --text=\"");
+            strcat(lDialogString, aMessage);
+            strcat(lDialogString, "\"");
+        }
+        if ((zenity3Present() >= 3) ||
+            (!zenityPresent() && (shellementaryPresent() || qarmaPresent()))) {
+            strcat(lDialogString, " --icon-name=dialog-");
+            if (aIconType && (!strcmp("question", aIconType)
+                              || !strcmp("error", aIconType)
+                              || !strcmp("warning", aIconType))) {
+                strcat(lDialogString, aIconType);
+            } else {
+                strcat(lDialogString, "information");
+            }
+        }
+
+        if (tinyfd_silent) strcat(lDialogString, " 2>/dev/null ");
+
+        if (!strcmp("yesnocancel", aDialogType)) {
+            strcat(lDialogString,
+                   ");if [ $? = 1 ];then echo 0;elif [ $szAnswer = \"No\" ];then echo 2;else echo 1;fi");
+        } else {
+            strcat(lDialogString, ");if [ $? = 0 ];then echo 1;else echo 0;fi");
+        }
+    } else if (!gxmessagePresent() && !gmessagePresent() && !gdialogPresent() &&
+               !xdialogPresent() && tkinter2Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python2-tkinter");
+            return 1;
+        }
+
+        strcpy(lDialogString, gPython2Name);
+        if (!isTerminalRunning() && isDarwin()) {
+            strcat(lDialogString, " -i");  /* for osx without console */
+        }
+
+        strcat(lDialogString,
+               " -S -c \"import Tkinter,tkMessageBox;root=Tkinter.Tk();root.withdraw();");
+
+        if (isDarwin()) {
+            strcat(lDialogString,
+                   "import os;os.system('''/usr/bin/osascript -e 'tell app \\\"Finder\\\" to set \
 frontmost of process \\\"Python\\\" to true' ''');");
-                }
+        }
 
-                strcat( lDialogString ,"res=tkMessageBox." ) ;
-                if ( aDialogType && ! strcmp( "okcancel" , aDialogType ) )
-                {
-                  strcat( lDialogString , "askokcancel(" ) ;
-                  if ( aDefaultButton )
-                        {
-                                strcat( lDialogString , "default=tkMessageBox.OK," ) ;
-                        }
-                        else
-                        {
-                                strcat( lDialogString , "default=tkMessageBox.CANCEL," ) ;
-                        }
-                }
-                else if ( aDialogType && ! strcmp( "yesno" , aDialogType ) )
-                {
-                        strcat( lDialogString , "askyesno(" ) ;
-                        if ( aDefaultButton )
-                        {
-                                strcat( lDialogString , "default=tkMessageBox.YES," ) ;
-                        }
-                        else
-                        {
-                                strcat( lDialogString , "default=tkMessageBox.NO," ) ;
-                        }
-                }
-                else if ( aDialogType && ! strcmp( "yesnocancel" , aDialogType ) )
-                {
-                        strcat( lDialogString , "askyesnocancel(" ) ;
-                        switch ( aDefaultButton )
-                        {
-                                case 1: strcat( lDialogString , "default=tkMessageBox.YES," ); break;
-                                case 2: strcat( lDialogString , "default=tkMessageBox.NO," ); break;
-                                case 0: strcat( lDialogString , "default=tkMessageBox.CANCEL," ); break;
-                        }
-                }
-                else
-                {
-                                strcat( lDialogString , "showinfo(" ) ;
-                }
+        strcat(lDialogString, "res=tkMessageBox.");
+        if (aDialogType && !strcmp("okcancel", aDialogType)) {
+            strcat(lDialogString, "askokcancel(");
+            if (aDefaultButton) {
+                strcat(lDialogString, "default=tkMessageBox.OK,");
+            } else {
+                strcat(lDialogString, "default=tkMessageBox.CANCEL,");
+            }
+        } else if (aDialogType && !strcmp("yesno", aDialogType)) {
+            strcat(lDialogString, "askyesno(");
+            if (aDefaultButton) {
+                strcat(lDialogString, "default=tkMessageBox.YES,");
+            } else {
+                strcat(lDialogString, "default=tkMessageBox.NO,");
+            }
+        } else if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+            strcat(lDialogString, "askyesnocancel(");
+            switch (aDefaultButton) {
+                case 1:
+                    strcat(lDialogString, "default=tkMessageBox.YES,");
+                    break;
+                case 2:
+                    strcat(lDialogString, "default=tkMessageBox.NO,");
+                    break;
+                case 0:
+                    strcat(lDialogString, "default=tkMessageBox.CANCEL,");
+                    break;
+            }
+        } else {
+            strcat(lDialogString, "showinfo(");
+        }
 
-                strcat( lDialogString , "icon='" ) ;
-                if ( aIconType && (! strcmp( "question" , aIconType )
-                  || ! strcmp( "error" , aIconType )
-                  || ! strcmp( "warning" , aIconType ) ) )
-                {
-                                strcat( lDialogString , aIconType ) ;
-                }
-                else
-                {
-                                strcat( lDialogString , "info" ) ;
-                }
-                
-                strcat(lDialogString, "',") ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                                strcat(lDialogString, "title='") ;
-                                strcat(lDialogString, aTitle) ;
-                                strcat(lDialogString, "',") ;
-                }
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat(lDialogString, "message='") ;
-                        lpDialogString = lDialogString + strlen(lDialogString);
-                        replaceSubStr( aMessage , "\n" , "\\n" , lpDialogString ) ;
-                        strcat(lDialogString, "'") ;
-                }
+        strcat(lDialogString, "icon='");
+        if (aIconType && (!strcmp("question", aIconType)
+                          || !strcmp("error", aIconType)
+                          || !strcmp("warning", aIconType))) {
+            strcat(lDialogString, aIconType);
+        } else {
+            strcat(lDialogString, "info");
+        }
 
-                if ( aDialogType && ! strcmp( "yesnocancel" , aDialogType ) )
-                {
-                        strcat(lDialogString, ");\n\
+        strcat(lDialogString, "',");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "',");
+        }
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, "message='");
+            lpDialogString = lDialogString + strlen(lDialogString);
+            replaceSubStr(aMessage, "\n", "\\n", lpDialogString);
+            strcat(lDialogString, "'");
+        }
+
+        if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+            strcat(lDialogString, ");\n\
 if res is None :\n\tprint 0\n\
 elif res is False :\n\tprint 2\n\
-else :\n\tprint 1\n\"" ) ;
-                }
-                else
-                {
-                        strcat(lDialogString, ");\n\
+else :\n\tprint 1\n\"");
+        } else {
+            strcat(lDialogString, ");\n\
 if res is False :\n\tprint 0\n\
-else :\n\tprint 1\n\"" ) ;
-                }
-    }
-        else if ( !gxmessagePresent() && !gmessagePresent() && !gdialogPresent() && !xdialogPresent() && tkinter3Present() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python3-tkinter");return 1;}
+else :\n\tprint 1\n\"");
+        }
+    } else if (!gxmessagePresent() && !gmessagePresent() && !gdialogPresent() &&
+               !xdialogPresent() && tkinter3Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python3-tkinter");
+            return 1;
+        }
 
-                strcpy( lDialogString , gPython3Name ) ;
-                strcat( lDialogString ,
-                        " -S -c \"import tkinter;from tkinter import messagebox;root=tkinter.Tk();root.withdraw();");
+        strcpy(lDialogString, gPython3Name);
+        strcat(lDialogString,
+               " -S -c \"import tkinter;from tkinter import messagebox;root=tkinter.Tk();root.withdraw();");
 
-                strcat( lDialogString ,"res=messagebox." ) ;
-                if ( aDialogType && ! strcmp( "okcancel" , aDialogType ) )
-                {
-                        strcat( lDialogString , "askokcancel(" ) ;
-                        if ( aDefaultButton )
-                        {
-                                strcat( lDialogString , "default=messagebox.OK," ) ;
-                        }
-                        else
-                        {
-                                strcat( lDialogString , "default=messagebox.CANCEL," ) ;
-                        }
-                }
-                else if ( aDialogType && ! strcmp( "yesno" , aDialogType ) )
-                {
-                        strcat( lDialogString , "askyesno(" ) ;
-                        if ( aDefaultButton )
-                        {
-                                strcat( lDialogString , "default=messagebox.YES," ) ;
-                        }
-                        else
-                        {
-                                strcat( lDialogString , "default=messagebox.NO," ) ;
-                        }
-                }
-                else if ( aDialogType && ! strcmp( "yesnocancel" , aDialogType ) )
-                {
-                        strcat( lDialogString , "askyesnocancel(" ) ;
-                        switch ( aDefaultButton )
-                        {
-                        case 1: strcat( lDialogString , "default=messagebox.YES," ); break;
-                        case 2: strcat( lDialogString , "default=messagebox.NO," ); break;
-                        case 0: strcat( lDialogString , "default=messagebox.CANCEL," ); break;
-                        }
-                }
-                else
-                {
-                        strcat( lDialogString , "showinfo(" ) ;
-                }
+        strcat(lDialogString, "res=messagebox.");
+        if (aDialogType && !strcmp("okcancel", aDialogType)) {
+            strcat(lDialogString, "askokcancel(");
+            if (aDefaultButton) {
+                strcat(lDialogString, "default=messagebox.OK,");
+            } else {
+                strcat(lDialogString, "default=messagebox.CANCEL,");
+            }
+        } else if (aDialogType && !strcmp("yesno", aDialogType)) {
+            strcat(lDialogString, "askyesno(");
+            if (aDefaultButton) {
+                strcat(lDialogString, "default=messagebox.YES,");
+            } else {
+                strcat(lDialogString, "default=messagebox.NO,");
+            }
+        } else if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+            strcat(lDialogString, "askyesnocancel(");
+            switch (aDefaultButton) {
+                case 1:
+                    strcat(lDialogString, "default=messagebox.YES,");
+                    break;
+                case 2:
+                    strcat(lDialogString, "default=messagebox.NO,");
+                    break;
+                case 0:
+                    strcat(lDialogString, "default=messagebox.CANCEL,");
+                    break;
+            }
+        } else {
+            strcat(lDialogString, "showinfo(");
+        }
 
-                strcat( lDialogString , "icon='" ) ;
-                if ( aIconType && (! strcmp( "question" , aIconType )
-                        || ! strcmp( "error" , aIconType )
-                        || ! strcmp( "warning" , aIconType ) ) )
-                {
-                        strcat( lDialogString , aIconType ) ;
-                }
-                else
-                {
-                        strcat( lDialogString , "info" ) ;
-                }
+        strcat(lDialogString, "icon='");
+        if (aIconType && (!strcmp("question", aIconType)
+                          || !strcmp("error", aIconType)
+                          || !strcmp("warning", aIconType))) {
+            strcat(lDialogString, aIconType);
+        } else {
+            strcat(lDialogString, "info");
+        }
 
-                strcat(lDialogString, "',") ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "',") ;
-                }
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat(lDialogString, "message='") ;
-                        lpDialogString = lDialogString + strlen(lDialogString);
-                        replaceSubStr( aMessage , "\n" , "\\n" , lpDialogString ) ;
-                        strcat(lDialogString, "'") ;
-                }
+        strcat(lDialogString, "',");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "',");
+        }
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, "message='");
+            lpDialogString = lDialogString + strlen(lDialogString);
+            replaceSubStr(aMessage, "\n", "\\n", lpDialogString);
+            strcat(lDialogString, "'");
+        }
 
-                if ( aDialogType && ! strcmp( "yesnocancel" , aDialogType ) )
-                {
-                        strcat(lDialogString, ");\n\
+        if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+            strcat(lDialogString, ");\n\
 if res is None :\n\tprint(0)\n\
 elif res is False :\n\tprint(2)\n\
-else :\n\tprint 1\n\"" ) ;
-                }
-                else
-                {
-                        strcat(lDialogString, ");\n\
+else :\n\tprint 1\n\"");
+        } else {
+            strcat(lDialogString, ");\n\
 if res is False :\n\tprint(0)\n\
-else :\n\tprint(1)\n\"" ) ;
-                }
+else :\n\tprint(1)\n\"");
         }
-        else if ( gxmessagePresent() || gmessagePresent() || (!gdialogPresent() && !xdialogPresent() && xmessagePresent()) )
-        {
-                if ( gxmessagePresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"gxmessage");return 1;}
-                        strcpy( lDialogString , "gxmessage");
-                }
-                else if ( gmessagePresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"gmessage");return 1;}
-                        strcpy( lDialogString , "gmessage");
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"xmessage");return 1;}
-                        strcpy( lDialogString , "xmessage");
-                }
-
-                if ( aDialogType && ! strcmp("okcancel" , aDialogType) )
-                {
-                        strcat( lDialogString , " -buttons Ok:1,Cancel:0");
-                        switch ( aDefaultButton )
-                        {
-                                case 1: strcat( lDialogString , " -default Ok"); break;
-                                case 0: strcat( lDialogString , " -default Cancel"); break;
-                        }
-                }
-                else if ( aDialogType && ! strcmp("yesno" , aDialogType) )
-                {
-                        strcat( lDialogString , " -buttons Yes:1,No:0");
-                        switch ( aDefaultButton )
-                        {
-                                case 1: strcat( lDialogString , " -default Yes"); break;
-                                case 0: strcat( lDialogString , " -default No"); break;
-                        }
-                }
-                else if ( aDialogType && ! strcmp("yesnocancel" , aDialogType) )
-                {
-                        strcat( lDialogString , " -buttons Yes:1,No:2,Cancel:0");
-                        switch ( aDefaultButton )
-                        {
-                                case 1: strcat( lDialogString , " -default Yes"); break;
-                                case 2: strcat( lDialogString , " -default No"); break;
-                                case 0: strcat( lDialogString , " -default Cancel"); break;
-                        }
-                }
-                else
-                {
-                        strcat( lDialogString , " -buttons Ok:1");
-                        strcat( lDialogString , " -default Ok");
-                }
-
-                strcat( lDialogString , " -center \"");
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat( lDialogString , aMessage ) ;
-                }
-                strcat(lDialogString, "\"" ) ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat( lDialogString , " -title  \"");
-                        strcat( lDialogString , aTitle ) ;
-                        strcat( lDialogString, "\"" ) ;
-                }
-                strcat( lDialogString , " ; echo $? ");
+    } else if (gxmessagePresent() || gmessagePresent() ||
+               (!gdialogPresent() && !xdialogPresent() && xmessagePresent())) {
+        if (gxmessagePresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "gxmessage");
+                return 1;
+            }
+            strcpy(lDialogString, "gxmessage");
+        } else if (gmessagePresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "gmessage");
+                return 1;
+            }
+            strcpy(lDialogString, "gmessage");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "xmessage");
+                return 1;
+            }
+            strcpy(lDialogString, "xmessage");
         }
-        else if ( xdialogPresent() || gdialogPresent() || dialogName() || whiptailPresent() )
-        {
-                if ( gdialogPresent( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"gdialog");return 1;}
-                        lWasGraphicDialog = 1 ;
-                        strcpy( lDialogString , "(gdialog " ) ;
-                }
-                else if ( xdialogPresent( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"xdialog");return 1;}
-                        lWasGraphicDialog = 1 ;
-                        strcpy( lDialogString , "(Xdialog " ) ;
-                }
-                else if ( dialogName( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"dialog");return 0;}
-                        if ( isTerminalRunning( ) )
-                        {
-                                strcpy( lDialogString , "(dialog " ) ;
-                        }
-                        else
-                        {
-                                lWasXterm = 1 ;
-                                strcpy( lDialogString , terminalName() ) ;
-                                strcat( lDialogString , "'(" ) ;
-                                strcat( lDialogString , dialogName() ) ;
-                                strcat( lDialogString , " " ) ;
-                        }
-                }
-                else if ( isTerminalRunning( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"whiptail");return 0;}
-                        strcpy( lDialogString , "(whiptail " ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"whiptail");return 0;}
-                        lWasXterm = 1 ;
-                        strcpy( lDialogString , terminalName() ) ;
-                        strcat( lDialogString , "'(whiptail " ) ;
-                }
 
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "--title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\" ") ;
-                }
+        if (aDialogType && !strcmp("okcancel", aDialogType)) {
+            strcat(lDialogString, " -buttons Ok:1,Cancel:0");
+            switch (aDefaultButton) {
+                case 1:
+                    strcat(lDialogString, " -default Ok");
+                    break;
+                case 0:
+                    strcat(lDialogString, " -default Cancel");
+                    break;
+            }
+        } else if (aDialogType && !strcmp("yesno", aDialogType)) {
+            strcat(lDialogString, " -buttons Yes:1,No:0");
+            switch (aDefaultButton) {
+                case 1:
+                    strcat(lDialogString, " -default Yes");
+                    break;
+                case 0:
+                    strcat(lDialogString, " -default No");
+                    break;
+            }
+        } else if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+            strcat(lDialogString, " -buttons Yes:1,No:2,Cancel:0");
+            switch (aDefaultButton) {
+                case 1:
+                    strcat(lDialogString, " -default Yes");
+                    break;
+                case 2:
+                    strcat(lDialogString, " -default No");
+                    break;
+                case 0:
+                    strcat(lDialogString, " -default Cancel");
+                    break;
+            }
+        } else {
+            strcat(lDialogString, " -buttons Ok:1");
+            strcat(lDialogString, " -default Ok");
+        }
 
-                if ( !xdialogPresent() && !gdialogPresent() )
-                {
-                        if ( aDialogType && ( !strcmp( "okcancel" , aDialogType ) || !strcmp( "yesno" , aDialogType ) 
-                                || !strcmp( "yesnocancel" , aDialogType ) ) )
-                        {
-                                strcat(lDialogString, "--backtitle \"") ;
-                                strcat(lDialogString, "tab: move focus") ;
-                                strcat(lDialogString, "\" ") ;
-                        }
-                }
+        strcat(lDialogString, " -center \"");
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, "\"");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " -title  \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
+        }
+        strcat(lDialogString, " ; echo $? ");
+    } else if (xdialogPresent() || gdialogPresent() || dialogName() || whiptailPresent()) {
+        if (gdialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "gdialog");
+                return 1;
+            }
+            lWasGraphicDialog = 1;
+            strcpy(lDialogString, "(gdialog ");
+        } else if (xdialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "xdialog");
+                return 1;
+            }
+            lWasGraphicDialog = 1;
+            strcpy(lDialogString, "(Xdialog ");
+        } else if (dialogName()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "dialog");
+                return 0;
+            }
+            if (isTerminalRunning()) {
+                strcpy(lDialogString, "(dialog ");
+            } else {
+                lWasXterm = 1;
+                strcpy(lDialogString, terminalName());
+                strcat(lDialogString, "'(");
+                strcat(lDialogString, dialogName());
+                strcat(lDialogString, " ");
+            }
+        } else if (isTerminalRunning()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "whiptail");
+                return 0;
+            }
+            strcpy(lDialogString, "(whiptail ");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "whiptail");
+                return 0;
+            }
+            lWasXterm = 1;
+            strcpy(lDialogString, terminalName());
+            strcat(lDialogString, "'(whiptail ");
+        }
 
-                if ( aDialogType && ! strcmp( "okcancel" , aDialogType ) )
-                {
-                        if ( ! aDefaultButton )
-                        {
-                                strcat( lDialogString , "--defaultno " ) ;
-                        }
-                        strcat( lDialogString ,
-                                        "--yes-label \"Ok\" --no-label \"Cancel\" --yesno " ) ;
-                }
-                else if ( aDialogType && ! strcmp( "yesno" , aDialogType ) )
-                {
-                        if ( ! aDefaultButton )
-                        {
-                                strcat( lDialogString , "--defaultno " ) ;
-                        }
-                        strcat( lDialogString , "--yesno " ) ;
-                }
-                else if (aDialogType && !strcmp("yesnocancel", aDialogType))
-                {
-                        if (!aDefaultButton)
-                        {
-                                strcat(lDialogString, "--defaultno ");
-                        }
-                        strcat(lDialogString, "--menu ");
-                }
-                else
-                {
-                        strcat( lDialogString , "--msgbox " ) ;
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "--title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
+        }
 
-                }
-                strcat( lDialogString , "\"" ) ;
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat(lDialogString, aMessage) ;
-                }
+        if (!xdialogPresent() && !gdialogPresent()) {
+            if (aDialogType && (!strcmp("okcancel", aDialogType) || !strcmp("yesno", aDialogType)
+                                || !strcmp("yesnocancel", aDialogType))) {
+                strcat(lDialogString, "--backtitle \"");
+                strcat(lDialogString, "tab: move focus");
                 strcat(lDialogString, "\" ");
+            }
+        }
 
-                if ( lWasGraphicDialog )
-                {
-                        if (aDialogType && !strcmp("yesnocancel", aDialogType))
-                        {
-                                strcat(lDialogString,"0 60 0 Yes \"\" No \"\") 2>/tmp/tinyfd.txt;\
+        if (aDialogType && !strcmp("okcancel", aDialogType)) {
+            if (!aDefaultButton) {
+                strcat(lDialogString, "--defaultno ");
+            }
+            strcat(lDialogString,
+                   "--yes-label \"Ok\" --no-label \"Cancel\" --yesno ");
+        } else if (aDialogType && !strcmp("yesno", aDialogType)) {
+            if (!aDefaultButton) {
+                strcat(lDialogString, "--defaultno ");
+            }
+            strcat(lDialogString, "--yesno ");
+        } else if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+            if (!aDefaultButton) {
+                strcat(lDialogString, "--defaultno ");
+            }
+            strcat(lDialogString, "--menu ");
+        } else {
+            strcat(lDialogString, "--msgbox ");
+
+        }
+        strcat(lDialogString, "\"");
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, "\" ");
+
+        if (lWasGraphicDialog) {
+            if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+                strcat(lDialogString, "0 60 0 Yes \"\" No \"\") 2>/tmp/tinyfd.txt;\
 if [ $? = 0 ];then tinyfdBool=1;else tinyfdBool=0;fi;\
-tinyfdRes=$(cat /tmp/tinyfd.txt);echo $tinyfdBool$tinyfdRes") ;
-                        }
-                        else
-                        {
-                                strcat(lDialogString,
-                                   "10 60 ) 2>&1;if [ $? = 0 ];then echo 1;else echo 0;fi");
-                        }
-                }
-                else
-                {
-                        if (aDialogType && !strcmp("yesnocancel", aDialogType))
-                        {
-                                strcat(lDialogString,"0 60 0 Yes \"\" No \"\" >/dev/tty ) 2>/tmp/tinyfd.txt;\
+tinyfdRes=$(cat /tmp/tinyfd.txt);echo $tinyfdBool$tinyfdRes");
+            } else {
+                strcat(lDialogString,
+                       "10 60 ) 2>&1;if [ $? = 0 ];then echo 1;else echo 0;fi");
+            }
+        } else {
+            if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+                strcat(lDialogString, "0 60 0 Yes \"\" No \"\" >/dev/tty ) 2>/tmp/tinyfd.txt;\
                 if [ $? = 0 ];then tinyfdBool=1;else tinyfdBool=0;fi;\
-                tinyfdRes=$(cat /tmp/tinyfd.txt);echo $tinyfdBool$tinyfdRes") ;
+                tinyfdRes=$(cat /tmp/tinyfd.txt);echo $tinyfdBool$tinyfdRes");
 
-                                if ( lWasXterm )
-                                {
-                                        strcat(lDialogString," >/tmp/tinyfd0.txt';cat /tmp/tinyfd0.txt");
-                                }
-                                else
-                                {
-                                        strcat(lDialogString, "; clear >/dev/tty") ;
-                                }
-                        }
-                        else
-                        {
-                                strcat(lDialogString, "10 60 >/dev/tty) 2>&1;if [ $? = 0 ];");
-                                if ( lWasXterm )
-                                {
-                                        strcat( lDialogString ,
-"then\n\techo 1\nelse\n\techo 0\nfi >/tmp/tinyfd.txt';cat /tmp/tinyfd.txt;rm /tmp/tinyfd.txt");
-                                }
-                                else
-                                {
-                                   strcat(lDialogString,
-                                                  "then echo 1;else echo 0;fi;clear >/dev/tty");
-                                }
-                        }
+                if (lWasXterm) {
+                    strcat(lDialogString, " >/tmp/tinyfd0.txt';cat /tmp/tinyfd0.txt");
+                } else {
+                    strcat(lDialogString, "; clear >/dev/tty");
                 }
+            } else {
+                strcat(lDialogString, "10 60 >/dev/tty) 2>&1;if [ $? = 0 ];");
+                if (lWasXterm) {
+                    strcat(lDialogString,
+                           "then\n\techo 1\nelse\n\techo 0\nfi >/tmp/tinyfd.txt';cat /tmp/tinyfd.txt;rm /tmp/tinyfd.txt");
+                } else {
+                    strcat(lDialogString,
+                           "then echo 1;else echo 0;fi;clear >/dev/tty");
+                }
+            }
         }
-        else if (  !isTerminalRunning() && terminalName() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"basicinput");return 0;}
-                strcpy( lDialogString , terminalName() ) ;
-                strcat( lDialogString , "'" ) ;
-                if ( !gWarningDisplayed && !tinyfd_forceConsole)
-                {
-                        gWarningDisplayed = 1 ;
-                        strcat( lDialogString , "echo \"" ) ;
-                        strcat( lDialogString, gTitle) ;
-                        strcat( lDialogString , "\";" ) ;
-                        strcat( lDialogString , "echo \"" ) ;
-                        strcat( lDialogString, tinyfd_needs) ;
-                        strcat( lDialogString , "\";echo;echo;" ) ;
-                }
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat( lDialogString , "echo \"" ) ;
-                        strcat( lDialogString, aTitle) ;
-                        strcat( lDialogString , "\";echo;" ) ;
-                }
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat( lDialogString , "echo \"" ) ;
-                        strcat( lDialogString, aMessage) ;
-                        strcat( lDialogString , "\"; " ) ;
-                }
-                if ( aDialogType && !strcmp("yesno",aDialogType) )
-                {
-                        strcat( lDialogString , "echo -n \"y/n: \"; " ) ;
-                        strcat( lDialogString , "stty sane -echo;" ) ;
-                        strcat( lDialogString ,
-                                "answer=$( while ! head -c 1 | grep -i [ny];do true ;done);");
-                        strcat( lDialogString ,
-                                "if echo \"$answer\" | grep -iq \"^y\";then\n");
-                        strcat( lDialogString , "\techo 1\nelse\n\techo 0\nfi" ) ;
-                }
-                else if ( aDialogType && !strcmp("okcancel",aDialogType) )
-                {
-                        strcat( lDialogString , "echo -n \"[O]kay/[C]ancel: \"; " ) ;
-                        strcat( lDialogString , "stty sane -echo;" ) ;
-                        strcat( lDialogString ,
-                                "answer=$( while ! head -c 1 | grep -i [oc];do true ;done);");
-                        strcat( lDialogString ,
-                                "if echo \"$answer\" | grep -iq \"^o\";then\n");
-                        strcat( lDialogString , "\techo 1\nelse\n\techo 0\nfi" ) ;
-                }
-                else if ( aDialogType && !strcmp("yesnocancel",aDialogType) )
-                {
-                        strcat( lDialogString , "echo -n \"[Y]es/[N]o/[C]ancel: \"; " ) ;
-                        strcat( lDialogString , "stty sane -echo;" ) ;
-                        strcat( lDialogString ,
-                                "answer=$( while ! head -c 1 | grep -i [nyc];do true ;done);");
-                        strcat( lDialogString ,
-                                "if echo \"$answer\" | grep -iq \"^y\";then\n\techo 1\n");
-                        strcat( lDialogString , "elif echo \"$answer\" | grep -iq \"^n\";then\n\techo 2\n" ) ;
-                        strcat( lDialogString , "else\n\techo 0\nfi" ) ;
-                }
-                else
-                {
-                        strcat(lDialogString , "echo -n \"press enter to continue \"; ");
-                        strcat( lDialogString , "stty sane -echo;" ) ;
-                        strcat( lDialogString ,
-                                "answer=$( while ! head -c 1;do true ;done);echo 1");
-                }
-                strcat( lDialogString ,
-                        " >/tmp/tinyfd.txt';cat /tmp/tinyfd.txt;rm /tmp/tinyfd.txt");
+    } else if (!isTerminalRunning() && terminalName()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "basicinput");
+            return 0;
         }
-        else if ( !isTerminalRunning() && pythonDbusPresent() && !strcmp("ok" , aDialogType) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python-dbus");return 1;}
-                strcpy( lDialogString , gPythonName ) ;
-                strcat( lDialogString ," -c \"import dbus;bus=dbus.SessionBus();");
-                strcat( lDialogString ,"notif=bus.get_object('org.freedesktop.Notifications','/org/freedesktop/Notifications');" ) ;
-                strcat( lDialogString ,"notify=dbus.Interface(notif,'org.freedesktop.Notifications');" ) ;
-                strcat( lDialogString ,"notify.Notify('',0,'" ) ;
-                if ( aIconType && strlen(aIconType) )
-                {
-                        strcat( lDialogString , aIconType ) ;
-                }
-                strcat(lDialogString, "','") ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, aTitle) ;
-                }
-                strcat(lDialogString, "','") ;
-                if ( aMessage && strlen(aMessage) )
-                {
-                        lpDialogString = lDialogString + strlen(lDialogString);
-                        replaceSubStr( aMessage , "\n" , "\\n" , lpDialogString ) ;
-                }
-                strcat(lDialogString, "','','',5000)\"") ;
+        strcpy(lDialogString, terminalName());
+        strcat(lDialogString, "'");
+        if (!gWarningDisplayed && !tinyfd_forceConsole) {
+            gWarningDisplayed = 1;
+            strcat(lDialogString, "echo \"");
+            strcat(lDialogString, gTitle);
+            strcat(lDialogString, "\";");
+            strcat(lDialogString, "echo \"");
+            strcat(lDialogString, tinyfd_needs);
+            strcat(lDialogString, "\";echo;echo;");
         }
-        else if ( !isTerminalRunning() && (perlPresent() >= 2)  && !strcmp("ok" , aDialogType) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"perl-dbus");return 1;}
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "echo \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\";echo;");
+        }
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, "echo \"");
+            strcat(lDialogString, aMessage);
+            strcat(lDialogString, "\"; ");
+        }
+        if (aDialogType && !strcmp("yesno", aDialogType)) {
+            strcat(lDialogString, "echo -n \"y/n: \"; ");
+            strcat(lDialogString, "stty sane -echo;");
+            strcat(lDialogString,
+                   "answer=$( while ! head -c 1 | grep -i [ny];do true ;done);");
+            strcat(lDialogString,
+                   "if echo \"$answer\" | grep -iq \"^y\";then\n");
+            strcat(lDialogString, "\techo 1\nelse\n\techo 0\nfi");
+        } else if (aDialogType && !strcmp("okcancel", aDialogType)) {
+            strcat(lDialogString, "echo -n \"[O]kay/[C]ancel: \"; ");
+            strcat(lDialogString, "stty sane -echo;");
+            strcat(lDialogString,
+                   "answer=$( while ! head -c 1 | grep -i [oc];do true ;done);");
+            strcat(lDialogString,
+                   "if echo \"$answer\" | grep -iq \"^o\";then\n");
+            strcat(lDialogString, "\techo 1\nelse\n\techo 0\nfi");
+        } else if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+            strcat(lDialogString, "echo -n \"[Y]es/[N]o/[C]ancel: \"; ");
+            strcat(lDialogString, "stty sane -echo;");
+            strcat(lDialogString,
+                   "answer=$( while ! head -c 1 | grep -i [nyc];do true ;done);");
+            strcat(lDialogString,
+                   "if echo \"$answer\" | grep -iq \"^y\";then\n\techo 1\n");
+            strcat(lDialogString, "elif echo \"$answer\" | grep -iq \"^n\";then\n\techo 2\n");
+            strcat(lDialogString, "else\n\techo 0\nfi");
+        } else {
+            strcat(lDialogString, "echo -n \"press enter to continue \"; ");
+            strcat(lDialogString, "stty sane -echo;");
+            strcat(lDialogString,
+                   "answer=$( while ! head -c 1;do true ;done);echo 1");
+        }
+        strcat(lDialogString,
+               " >/tmp/tinyfd.txt';cat /tmp/tinyfd.txt;rm /tmp/tinyfd.txt");
+    } else if (!isTerminalRunning() && pythonDbusPresent() && !strcmp("ok", aDialogType)) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python-dbus");
+            return 1;
+        }
+        strcpy(lDialogString, gPythonName);
+        strcat(lDialogString, " -c \"import dbus;bus=dbus.SessionBus();");
+        strcat(lDialogString,
+               "notif=bus.get_object('org.freedesktop.Notifications','/org/freedesktop/Notifications');");
+        strcat(lDialogString, "notify=dbus.Interface(notif,'org.freedesktop.Notifications');");
+        strcat(lDialogString, "notify.Notify('',0,'");
+        if (aIconType && strlen(aIconType)) {
+            strcat(lDialogString, aIconType);
+        }
+        strcat(lDialogString, "','");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, aTitle);
+        }
+        strcat(lDialogString, "','");
+        if (aMessage && strlen(aMessage)) {
+            lpDialogString = lDialogString + strlen(lDialogString);
+            replaceSubStr(aMessage, "\n", "\\n", lpDialogString);
+        }
+        strcat(lDialogString, "','','',5000)\"");
+    } else if (!isTerminalRunning() && (perlPresent() >= 2) && !strcmp("ok", aDialogType)) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "perl-dbus");
+            return 1;
+        }
 
-                sprintf( lDialogString , "perl -e \"use Net::DBus;\
+        sprintf(lDialogString, "perl -e \"use Net::DBus;\
                                                                  my \\$sessionBus = Net::DBus->session;\
                                                                  my \\$notificationsService = \\$sessionBus->get_service('org.freedesktop.Notifications');\
                                                                  my \\$notificationsObject = \\$notificationsService->get_object('/org/freedesktop/Notifications',\
                                                                  'org.freedesktop.Notifications');\
                                                                  my \\$notificationId;\\$notificationId = \\$notificationsObject->Notify(shift, 0, '%s', '%s', '%s', [], {}, -1);\" ",
-                                                                 aIconType?aIconType:"", aTitle?aTitle:"", aMessage?aMessage:"" ) ;
-        }
-        else if ( !isTerminalRunning() && notifysendPresent() && !strcmp("ok" , aDialogType) )
-        {
+                aIconType ? aIconType : "", aTitle ? aTitle : "", aMessage ? aMessage : "");
+    } else if (!isTerminalRunning() && notifysendPresent() && !strcmp("ok", aDialogType)) {
 
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"notifysend");return 1;}
-                strcpy( lDialogString , "notify-send" ) ;
-                if ( aIconType && strlen(aIconType) )
-                {
-                        strcat( lDialogString , " -i '" ) ;
-                        strcat( lDialogString , aIconType ) ;
-                        strcat( lDialogString , "'" ) ;
-                }
-        strcat( lDialogString , " \"" ) ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, aTitle) ;
-                        strcat( lDialogString , " | " ) ;
-                }
-                if ( aMessage && strlen(aMessage) )
-                {
-            replaceSubStr( aMessage , "\n\t" , " |  " , lBuff ) ;
-            replaceSubStr( aMessage , "\n" , " | " , lBuff ) ;
-            replaceSubStr( aMessage , "\t" , "  " , lBuff ) ;
-                        strcat(lDialogString, lBuff) ;
-                }
-                strcat( lDialogString , "\"" ) ;
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "notifysend");
+            return 1;
         }
-        else
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"basicinput");return 0;}
-                if ( !gWarningDisplayed && !tinyfd_forceConsole)
-                {
-                        gWarningDisplayed = 1 ;
-                        printf("\n\n%s\n", gTitle);
-                        printf("%s\n\n", tinyfd_needs);
-                }
-                if ( aTitle && strlen(aTitle) )
-                {
-                        printf("\n%s\n", aTitle);
-                }
-
-                tcgetattr(0, &infoOri);
-                tcgetattr(0, &info);
-                info.c_lflag &= ~ICANON;
-                info.c_cc[VMIN] = 1;
-                info.c_cc[VTIME] = 0;
-                tcsetattr(0, TCSANOW, &info);
-                if ( aDialogType && !strcmp("yesno",aDialogType) )
-                {
-                        do
-                        {
-                                if ( aMessage && strlen(aMessage) )
-                                {
-                                        printf("\n%s\n",aMessage);
-                                }
-                                printf("y/n: "); fflush(stdout);
-                                lChar = tolower( getchar() ) ;
-                                printf("\n\n");
-                        }
-                        while ( lChar != 'y' && lChar != 'n' );
-                        lResult = lChar == 'y' ? 1 : 0 ;
-                }
-                else if ( aDialogType && !strcmp("okcancel",aDialogType) )
-                {
-                        do
-                        {
-                                if ( aMessage && strlen(aMessage) )
-                                {
-                                        printf("\n%s\n",aMessage);
-                                }
-                                printf("[O]kay/[C]ancel: "); fflush(stdout);
-                                lChar = tolower( getchar() ) ;
-                                printf("\n\n");
-                        }
-                        while ( lChar != 'o' && lChar != 'c' );
-                        lResult = lChar == 'o' ? 1 : 0 ;
-                }
-                else if ( aDialogType && !strcmp("yesnocancel",aDialogType) )
-                {
-                        do
-                        {
-                                if ( aMessage && strlen(aMessage) )
-                                {
-                                        printf("\n%s\n",aMessage);
-                                }
-                                printf("[Y]es/[N]o/[C]ancel: "); fflush(stdout);
-                                lChar = tolower( getchar() ) ;
-                                printf("\n\n");
-                        }
-                        while ( lChar != 'y' && lChar != 'n' && lChar != 'c' );
-                        lResult = (lChar == 'y') ? 1 : (lChar == 'n') ? 2 : 0 ;
-                }
-                else
-                {
-                        if ( aMessage && strlen(aMessage) )
-                        {
-                                printf("\n%s\n\n",aMessage);
-                        }
-                        printf("press enter to continue "); fflush(stdout);
-                        getchar() ;
-                        printf("\n\n"); 
-                        lResult = 1 ;
-                }
-                tcsetattr(0, TCSANOW, &infoOri);
-                free(lDialogString);
-                return lResult ;
+        strcpy(lDialogString, "notify-send");
+        if (aIconType && strlen(aIconType)) {
+            strcat(lDialogString, " -i '");
+            strcat(lDialogString, aIconType);
+            strcat(lDialogString, "'");
+        }
+        strcat(lDialogString, " \"");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, " | ");
+        }
+        if (aMessage && strlen(aMessage)) {
+            replaceSubStr(aMessage, "\n\t", " |  ", lBuff);
+            replaceSubStr(aMessage, "\n", " | ", lBuff);
+            replaceSubStr(aMessage, "\t", "  ", lBuff);
+            strcat(lDialogString, lBuff);
+        }
+        strcat(lDialogString, "\"");
+    } else {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "basicinput");
+            return 0;
+        }
+        if (!gWarningDisplayed && !tinyfd_forceConsole) {
+            gWarningDisplayed = 1;
+            printf("\n\n%s\n", gTitle);
+            printf("%s\n\n", tinyfd_needs);
+        }
+        if (aTitle && strlen(aTitle)) {
+            printf("\n%s\n", aTitle);
         }
 
-        if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
-
-        if ( ! ( lIn = popen( lDialogString , "r" ) ) )
-        {
-                free(lDialogString);
-                return 0 ;
-        }
-        while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-        {}
-
-        pclose( lIn ) ;
-
-        /* printf( "lBuff: %s len: %lu \n" , lBuff , strlen(lBuff) ) ; */
-        if ( lBuff[strlen( lBuff ) -1] == '\n' )
-        {
-                lBuff[strlen( lBuff ) -1] = '\0' ;
-        }
-        /* printf( "lBuff1: %s len: %lu \n" , lBuff , strlen(lBuff) ) ; */
-
-        if (aDialogType && !strcmp("yesnocancel", aDialogType)) 
-        {
-                if ( lBuff[0]=='1' )
-                { 
-                        if ( !strcmp( lBuff+1 , "Yes" )) strcpy(lBuff,"1");
-                        else if ( !strcmp( lBuff+1 , "No" )) strcpy(lBuff,"2");
+        tcgetattr(0, &infoOri);
+        tcgetattr(0, &info);
+        info.c_lflag &= ~ICANON;
+        info.c_cc[VMIN] = 1;
+        info.c_cc[VTIME] = 0;
+        tcsetattr(0, TCSANOW, &info);
+        if (aDialogType && !strcmp("yesno", aDialogType)) {
+            do {
+                if (aMessage && strlen(aMessage)) {
+                    printf("\n%s\n", aMessage);
                 }
+                printf("y/n: ");
+                fflush(stdout);
+                lChar = tolower(getchar());
+                printf("\n\n");
+            } while (lChar != 'y' && lChar != 'n');
+            lResult = lChar == 'y' ? 1 : 0;
+        } else if (aDialogType && !strcmp("okcancel", aDialogType)) {
+            do {
+                if (aMessage && strlen(aMessage)) {
+                    printf("\n%s\n", aMessage);
+                }
+                printf("[O]kay/[C]ancel: ");
+                fflush(stdout);
+                lChar = tolower(getchar());
+                printf("\n\n");
+            } while (lChar != 'o' && lChar != 'c');
+            lResult = lChar == 'o' ? 1 : 0;
+        } else if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+            do {
+                if (aMessage && strlen(aMessage)) {
+                    printf("\n%s\n", aMessage);
+                }
+                printf("[Y]es/[N]o/[C]ancel: ");
+                fflush(stdout);
+                lChar = tolower(getchar());
+                printf("\n\n");
+            } while (lChar != 'y' && lChar != 'n' && lChar != 'c');
+            lResult = (lChar == 'y') ? 1 : (lChar == 'n') ? 2 : 0;
+        } else {
+            if (aMessage && strlen(aMessage)) {
+                printf("\n%s\n\n", aMessage);
+            }
+            printf("press enter to continue ");
+            fflush(stdout);
+            getchar();
+            printf("\n\n");
+            lResult = 1;
         }
-        /* printf( "lBuff2: %s len: %lu \n" , lBuff , strlen(lBuff) ) ; */
-
-        lResult =  !strcmp( lBuff , "2" ) ? 2 : !strcmp( lBuff , "1" ) ? 1 : 0;
-
-        /* printf( "lResult: %d\n" , lResult ) ; */
+        tcsetattr(0, TCSANOW, &infoOri);
         free(lDialogString);
-        return lResult ;
+        return lResult;
+    }
+
+    if (tinyfd_verbose) printf("lDialogString: %s\n", lDialogString);
+
+    if (!(lIn = popen(lDialogString, "r"))) {
+        free(lDialogString);
+        return 0;
+    }
+    while (fgets(lBuff, sizeof(lBuff), lIn) != NULL) {}
+
+    pclose(lIn);
+
+    /* printf( "lBuff: %s len: %lu \n" , lBuff , strlen(lBuff) ) ; */
+    if (lBuff[strlen(lBuff) - 1] == '\n') {
+        lBuff[strlen(lBuff) - 1] = '\0';
+    }
+    /* printf( "lBuff1: %s len: %lu \n" , lBuff , strlen(lBuff) ) ; */
+
+    if (aDialogType && !strcmp("yesnocancel", aDialogType)) {
+        if (lBuff[0] == '1') {
+            if (!strcmp(lBuff + 1, "Yes")) strcpy(lBuff, "1");
+            else if (!strcmp(lBuff + 1, "No")) strcpy(lBuff, "2");
+        }
+    }
+    /* printf( "lBuff2: %s len: %lu \n" , lBuff , strlen(lBuff) ) ; */
+
+    lResult = !strcmp(lBuff, "2") ? 2 : !strcmp(lBuff, "1") ? 1 : 0;
+
+    /* printf( "lResult: %d\n" , lResult ) ; */
+    free(lDialogString);
+    return lResult;
 }
 
 
 /* return has only meaning for tinyfd_query */
 int tinyfd_notifyPopup(
-        char const * const aTitle , /* NULL or "" */
-        char const * const aMessage , /* NULL or ""  may contain \n and \t */
-        char const * const aIconType ) /* "info" "warning" "error" */
+        char const *const aTitle, /* NULL or "" */
+        char const *const aMessage, /* NULL or ""  may contain \n and \t */
+        char const *const aIconType) /* "info" "warning" "error" */
 {
     char lBuff[MAX_PATH_OR_CMD];
-        char * lDialogString = NULL ;
-    char * lpDialogString ;
-        FILE * lIn ;
-        size_t lTitleLen ;
-        size_t lMessageLen ;
+    char *lDialogString = NULL;
+    char *lpDialogString;
+    FILE *lIn;
+    size_t lTitleLen;
+    size_t lMessageLen;
 
-        if ( getenv("SSH_TTY") )
-        {
-                return tinyfd_messageBox(aTitle, aMessage, "ok", aIconType, 0);
+    if (getenv("SSH_TTY")) {
+        return tinyfd_messageBox(aTitle, aMessage, "ok", aIconType, 0);
+    }
+
+    lTitleLen = aTitle ? strlen(aTitle) : 0;
+    lMessageLen = aMessage ? strlen(aMessage) : 0;
+    if (!aTitle || strcmp(aTitle, "tinyfd_query")) {
+        lDialogString = (char *) malloc(MAX_PATH_OR_CMD + lTitleLen + lMessageLen);
+    }
+
+    if (osascriptPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "applescript");
+            return 1;
         }
 
-        lTitleLen =  aTitle ? strlen(aTitle) : 0 ;
-        lMessageLen =  aMessage ? strlen(aMessage) : 0 ;
-        if ( !aTitle || strcmp(aTitle,"tinyfd_query") )
-        {
-                lDialogString = (char *) malloc( MAX_PATH_OR_CMD + lTitleLen + lMessageLen );
+        strcpy(lDialogString, "osascript ");
+        if (!osx9orBetter())
+            strcat(lDialogString, " -e 'tell application \"System Events\"' -e 'Activate'");
+        strcat(lDialogString, " -e 'try' -e 'display notification \"");
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, " \" ");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "with title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
         }
 
-        if ( osascriptPresent( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"applescript");return 1;}
-
-                strcpy( lDialogString , "osascript ");
-                if ( ! osx9orBetter() ) strcat( lDialogString , " -e 'tell application \"System Events\"' -e 'Activate'");
-                strcat( lDialogString , " -e 'try' -e 'display notification \"") ;
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat(lDialogString, aMessage) ;
-                }
-                strcat(lDialogString, " \" ") ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "with title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\" ") ;
-                }
-                
-                strcat( lDialogString, "' -e 'end try'") ;
-                if ( ! osx9orBetter() ) strcat( lDialogString, " -e 'end tell'") ;
+        strcat(lDialogString, "' -e 'end try'");
+        if (!osx9orBetter()) strcat(lDialogString, " -e 'end tell'");
+    } else if (kdialogPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "kdialog");
+            return 1;
         }
-        else if ( kdialogPresent() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"kdialog");return 1;}
-                strcpy( lDialogString , "kdialog" ) ;
+        strcpy(lDialogString, "kdialog");
 
-                if ( aIconType && strlen(aIconType) )
-                {
-                        strcat( lDialogString , " --icon '" ) ;
-                        strcat( lDialogString , aIconType ) ;
-                        strcat( lDialogString , "'" ) ;
-                }
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat( lDialogString , " --title \"" ) ;
-                        strcat( lDialogString , aTitle ) ;
-                        strcat( lDialogString , "\"" ) ;
-                }
-
-                strcat( lDialogString , " --passivepopup" ) ;
-                strcat( lDialogString , " \"" ) ;
-                if ( aMessage )
-                {
-                        strcat( lDialogString , aMessage ) ;
-                }
-                strcat( lDialogString , " \" 5" ) ;
+        if (aIconType && strlen(aIconType)) {
+            strcat(lDialogString, " --icon '");
+            strcat(lDialogString, aIconType);
+            strcat(lDialogString, "'");
         }
-        else if ( (zenity3Present()>=5) || matedialogPresent() || shellementaryPresent() || qarmaPresent() )
-        {
-                /* zenity 2.32 & 3.14 has the notification but with a bug: it doesnt return from it */
-                /* zenity 3.8 show the notification as an alert ok cancel box */
-                if ( zenity3Present()>=5 )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return 1;}
-                        strcpy( lDialogString , "zenity" ) ;
-                }
-                else if ( matedialogPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"matedialog");return 1;}
-                        strcpy( lDialogString , "matedialog" ) ;
-                }
-                else if ( shellementaryPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"shellementary");return 1;}
-                        strcpy( lDialogString , "shellementary" ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"qarma");return 1;}
-                        strcpy( lDialogString , "qarma" ) ;
-                }
-
-                strcat( lDialogString , " --notification"); 
-
-                if ( aIconType && strlen( aIconType ) )
-                {
-                        strcat( lDialogString , " --window-icon '"); 
-                        strcat( lDialogString , aIconType ) ;
-                        strcat( lDialogString , "'" ) ;
-                }
-
-                strcat( lDialogString , " --text \"" ) ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\n") ;
-                }
-                if ( aMessage && strlen( aMessage ) )
-                {
-                        strcat( lDialogString , aMessage ) ;
-                }
-                strcat( lDialogString , " \"" ) ;
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
         }
-        else if ( perlPresent() >= 2 )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"perl-dbus");return 1;}
-                sprintf( lDialogString , "perl -e \"use Net::DBus;\
+
+        strcat(lDialogString, " --passivepopup");
+        strcat(lDialogString, " \"");
+        if (aMessage) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, " \" 5");
+    } else if ((zenity3Present() >= 5) || matedialogPresent() || shellementaryPresent() ||
+               qarmaPresent()) {
+        /* zenity 2.32 & 3.14 has the notification but with a bug: it doesnt return from it */
+        /* zenity 3.8 show the notification as an alert ok cancel box */
+        if (zenity3Present() >= 5) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "zenity");
+                return 1;
+            }
+            strcpy(lDialogString, "zenity");
+        } else if (matedialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "matedialog");
+                return 1;
+            }
+            strcpy(lDialogString, "matedialog");
+        } else if (shellementaryPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "shellementary");
+                return 1;
+            }
+            strcpy(lDialogString, "shellementary");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "qarma");
+                return 1;
+            }
+            strcpy(lDialogString, "qarma");
+        }
+
+        strcat(lDialogString, " --notification");
+
+        if (aIconType && strlen(aIconType)) {
+            strcat(lDialogString, " --window-icon '");
+            strcat(lDialogString, aIconType);
+            strcat(lDialogString, "'");
+        }
+
+        strcat(lDialogString, " --text \"");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\n");
+        }
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, " \"");
+    } else if (perlPresent() >= 2) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "perl-dbus");
+            return 1;
+        }
+        sprintf(lDialogString, "perl -e \"use Net::DBus;\
                                                                  my \\$sessionBus = Net::DBus->session;\
                                                                  my \\$notificationsService = \\$sessionBus->get_service('org.freedesktop.Notifications');\
                                                                  my \\$notificationsObject = \\$notificationsService->get_object('/org/freedesktop/Notifications',\
                                                                  'org.freedesktop.Notifications');\
                                                                  my \\$notificationId;\\$notificationId = \\$notificationsObject->Notify(shift, 0, '%s', '%s', '%s', [], {}, -1);\" ",
-                                                                 aIconType?aIconType:"", aTitle?aTitle:"", aMessage?aMessage:"" ) ;
+                aIconType ? aIconType : "", aTitle ? aTitle : "", aMessage ? aMessage : "");
+    } else if (pythonDbusPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python-dbus");
+            return 1;
         }
-        else if ( pythonDbusPresent( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python-dbus");return 1;}
-                strcpy( lDialogString , gPythonName ) ;
-                strcat( lDialogString ," -c \"import dbus;bus=dbus.SessionBus();");
-                strcat( lDialogString ,"notif=bus.get_object('org.freedesktop.Notifications','/org/freedesktop/Notifications');" ) ;
-                strcat( lDialogString ,"notify=dbus.Interface(notif,'org.freedesktop.Notifications');" ) ;
-                strcat( lDialogString ,"notify.Notify('',0,'" ) ;
-                if ( aIconType && strlen(aIconType) )
-                {
-                        strcat( lDialogString , aIconType ) ;
-                }
-                strcat(lDialogString, "','") ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, aTitle) ;
-                }
-                strcat(lDialogString, "','") ;
-                if ( aMessage && strlen(aMessage) )
-                {
-                        lpDialogString = lDialogString + strlen(lDialogString);
-                        replaceSubStr( aMessage , "\n" , "\\n" , lpDialogString ) ;
-                }
-                strcat(lDialogString, "','','',5000)\"") ;
+        strcpy(lDialogString, gPythonName);
+        strcat(lDialogString, " -c \"import dbus;bus=dbus.SessionBus();");
+        strcat(lDialogString,
+               "notif=bus.get_object('org.freedesktop.Notifications','/org/freedesktop/Notifications');");
+        strcat(lDialogString, "notify=dbus.Interface(notif,'org.freedesktop.Notifications');");
+        strcat(lDialogString, "notify.Notify('',0,'");
+        if (aIconType && strlen(aIconType)) {
+            strcat(lDialogString, aIconType);
         }
-        else if ( notifysendPresent() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"notifysend");return 1;}
-                strcpy( lDialogString , "notify-send" ) ;
-                if ( aIconType && strlen(aIconType) )
-                {
-                        strcat( lDialogString , " -i '" ) ;
-                        strcat( lDialogString , aIconType ) ;
-                        strcat( lDialogString , "'" ) ;
-                }
-        strcat( lDialogString , " \"" ) ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, aTitle) ;
-                        strcat( lDialogString , " | " ) ;
-                }
-                if ( aMessage && strlen(aMessage) )
-                {
-            replaceSubStr( aMessage , "\n\t" , " |  " , lBuff ) ;
-            replaceSubStr( aMessage , "\n" , " | " , lBuff ) ;
-            replaceSubStr( aMessage , "\t" , "  " , lBuff ) ;
-                        strcat(lDialogString, lBuff) ;
-                }
-                strcat( lDialogString , "\"" ) ;
+        strcat(lDialogString, "','");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, aTitle);
         }
-        else
-        {
-                return tinyfd_messageBox(aTitle, aMessage, "ok", aIconType, 0);
+        strcat(lDialogString, "','");
+        if (aMessage && strlen(aMessage)) {
+            lpDialogString = lDialogString + strlen(lDialogString);
+            replaceSubStr(aMessage, "\n", "\\n", lpDialogString);
         }
+        strcat(lDialogString, "','','',5000)\"");
+    } else if (notifysendPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "notifysend");
+            return 1;
+        }
+        strcpy(lDialogString, "notify-send");
+        if (aIconType && strlen(aIconType)) {
+            strcat(lDialogString, " -i '");
+            strcat(lDialogString, aIconType);
+            strcat(lDialogString, "'");
+        }
+        strcat(lDialogString, " \"");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, " | ");
+        }
+        if (aMessage && strlen(aMessage)) {
+            replaceSubStr(aMessage, "\n\t", " |  ", lBuff);
+            replaceSubStr(aMessage, "\n", " | ", lBuff);
+            replaceSubStr(aMessage, "\t", "  ", lBuff);
+            strcat(lDialogString, lBuff);
+        }
+        strcat(lDialogString, "\"");
+    } else {
+        return tinyfd_messageBox(aTitle, aMessage, "ok", aIconType, 0);
+    }
 
-        if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
+    if (tinyfd_verbose) printf("lDialogString: %s\n", lDialogString);
 
-        if ( ! ( lIn = popen( lDialogString , "r" ) ) )
-        {
-                free(lDialogString);
-                return 0 ;
-        }
-
-        pclose( lIn ) ;
+    if (!(lIn = popen(lDialogString, "r"))) {
         free(lDialogString);
-        return 1;
+        return 0;
+    }
+
+    pclose(lIn);
+    free(lDialogString);
+    return 1;
 }
 
 
 /* returns NULL on cancel */
-char const * tinyfd_inputBox(
-        char const * const aTitle , /* NULL or "" */
-        char const * const aMessage , /* NULL or "" may NOT contain \n nor \t */
-        char const * const aDefaultInput ) /* "" , if NULL it's a passwordBox */
+char const *tinyfd_inputBox(
+        char const *const aTitle, /* NULL or "" */
+        char const *const aMessage, /* NULL or "" may NOT contain \n nor \t */
+        char const *const aDefaultInput) /* "" , if NULL it's a passwordBox */
 {
-        static char lBuff[MAX_PATH_OR_CMD];
-        char * lDialogString = NULL;
-        char * lpDialogString;
-        FILE * lIn ;
-        int lResult ;
-        int lWasGdialog = 0 ;
-        int lWasGraphicDialog = 0 ;
-        int lWasXterm = 0 ;
-        int lWasBasicXterm = 0 ;
-        struct termios oldt ;
-        struct termios newt ;
-        char * lEOF;
-        size_t lTitleLen ;
-        size_t lMessageLen ;
+    static char lBuff[MAX_PATH_OR_CMD];
+    char *lDialogString = NULL;
+    char *lpDialogString;
+    FILE *lIn;
+    int lResult;
+    int lWasGdialog = 0;
+    int lWasGraphicDialog = 0;
+    int lWasXterm = 0;
+    int lWasBasicXterm = 0;
+    struct termios oldt;
+    struct termios newt;
+    char *lEOF;
+    size_t lTitleLen;
+    size_t lMessageLen;
 
-        lBuff[0]='\0';
+    lBuff[0] = '\0';
 
-        lTitleLen =  aTitle ? strlen(aTitle) : 0 ;
-        lMessageLen =  aMessage ? strlen(aMessage) : 0 ;
-        if ( !aTitle || strcmp(aTitle,"tinyfd_query") )
-        {
-                lDialogString = (char *) malloc( MAX_PATH_OR_CMD + lTitleLen + lMessageLen );
+    lTitleLen = aTitle ? strlen(aTitle) : 0;
+    lMessageLen = aMessage ? strlen(aMessage) : 0;
+    if (!aTitle || strcmp(aTitle, "tinyfd_query")) {
+        lDialogString = (char *) malloc(MAX_PATH_OR_CMD + lTitleLen + lMessageLen);
+    }
+
+    if (osascriptPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "applescript");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, "osascript ");
+        if (!osx9orBetter())
+            strcat(lDialogString, " -e 'tell application \"System Events\"' -e 'Activate'");
+        strcat(lDialogString, " -e 'try' -e 'display dialog \"");
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, "\" ");
+        strcat(lDialogString, "default answer \"");
+        if (aDefaultInput && strlen(aDefaultInput)) {
+            strcat(lDialogString, aDefaultInput);
+        }
+        strcat(lDialogString, "\" ");
+        if (!aDefaultInput) {
+            strcat(lDialogString, "hidden answer true ");
+        }
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "with title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
+        }
+        strcat(lDialogString, "with icon note' ");
+        strcat(lDialogString, "-e '\"1\" & text returned of result' ");
+        strcat(lDialogString, "-e 'on error number -128' ");
+        strcat(lDialogString, "-e '0' ");
+        strcat(lDialogString, "-e 'end try'");
+        if (!osx9orBetter()) strcat(lDialogString, " -e 'end tell'");
+    } else if (kdialogPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "kdialog");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, "szAnswer=$(kdialog");
+
+        if (kdialogPresent() == 2) {
+            strcat(lDialogString,
+                   " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
         }
 
-        if ( osascriptPresent( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"applescript");return (char const *)1;}
-                strcpy( lDialogString , "osascript ");
-                if ( ! osx9orBetter() ) strcat( lDialogString , " -e 'tell application \"System Events\"' -e 'Activate'");
-                strcat( lDialogString , " -e 'try' -e 'display dialog \"") ;
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat(lDialogString, aMessage) ;
-                }
-                strcat(lDialogString, "\" ") ;
-                strcat(lDialogString, "default answer \"") ;
-                if ( aDefaultInput && strlen(aDefaultInput) )
-                {
-                        strcat(lDialogString, aDefaultInput) ;
-                }
-                strcat(lDialogString, "\" ") ;
-                if ( ! aDefaultInput )
-                {
-                        strcat(lDialogString, "hidden answer true ") ;
-                }
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "with title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\" ") ;
-                }
-                strcat(lDialogString, "with icon note' ") ;
-                strcat(lDialogString, "-e '\"1\" & text returned of result' " );
-                strcat(lDialogString, "-e 'on error number -128' " ) ;
-                strcat(lDialogString, "-e '0' " );
-                strcat(lDialogString, "-e 'end try'") ;
-                if ( ! osx9orBetter() ) strcat(lDialogString, " -e 'end tell'") ;
+        if (!aDefaultInput) {
+            strcat(lDialogString, " --password ");
+        } else {
+            strcat(lDialogString, " --inputbox ");
+
         }
-        else if ( kdialogPresent() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"kdialog");return (char const *)1;}
-                strcpy( lDialogString , "szAnswer=$(kdialog" ) ;
-
-                if ( kdialogPresent() == 2 )
-                {
-                        strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                }
-
-                if ( ! aDefaultInput )
-                {
-                        strcat(lDialogString, " --password ") ;
-                }
-                else
-                {
-                        strcat(lDialogString, " --inputbox ") ;
-
-                }
-                strcat(lDialogString, "\"") ;
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat(lDialogString, aMessage ) ;
-                }
-                strcat(lDialogString , "\" \"" ) ;
-                if ( aDefaultInput && strlen(aDefaultInput) )
-                {
-                        strcat(lDialogString, aDefaultInput ) ;
-                }
-                strcat(lDialogString , "\"" ) ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, " --title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                strcat( lDialogString ,
-                        ");if [ $? = 0 ];then echo 1$szAnswer;else echo 0$szAnswer;fi");
+        strcat(lDialogString, "\"");
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, aMessage);
         }
-        else if ( zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent() )
-        {
-                if ( zenityPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return (char const *)1;}
-                        strcpy( lDialogString , "szAnswer=$(zenity" ) ;
-                        if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
-                        {
-                                strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                else if ( matedialogPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"matedialog");return (char const *)1;}
-                        strcpy( lDialogString ,  "szAnswer=$(matedialog" ) ;
-                }
-                else if ( shellementaryPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"shellementary");return (char const *)1;}
-                        strcpy( lDialogString , "szAnswer=$(shellementary" ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"qarma");return (char const *)1;}
-                        strcpy( lDialogString ,  "szAnswer=$(qarma" ) ;
-                        if ( !getenv("SSH_TTY") )
-                        {
-                                strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                strcat( lDialogString ," --entry" ) ;
-
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, " --title=\"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat(lDialogString, " --text=\"") ;
-                        strcat(lDialogString, aMessage) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                if ( aDefaultInput && strlen(aDefaultInput) )
-                {
-                        strcat(lDialogString, " --entry-text=\"") ;
-                        strcat(lDialogString, aDefaultInput) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                else
-                {
-                        strcat(lDialogString, " --hide-text") ;
-                }
-                if (tinyfd_silent) strcat( lDialogString , " 2>/dev/null ");
-                strcat( lDialogString ,
-                                ");if [ $? = 0 ];then echo 1$szAnswer;else echo 0$szAnswer;fi");
+        strcat(lDialogString, "\" \"");
+        if (aDefaultInput && strlen(aDefaultInput)) {
+            strcat(lDialogString, aDefaultInput);
         }
-        else if ( gxmessagePresent() || gmessagePresent() )
-        {
-                if ( gxmessagePresent() ) {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"gxmessage");return (char const *)1;}
-                        strcpy( lDialogString , "szAnswer=$(gxmessage -buttons Ok:1,Cancel:0 -center \"");
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"gmessage");return (char const *)1;}
-                        strcpy( lDialogString , "szAnswer=$(gmessage -buttons Ok:1,Cancel:0 -center \"");
-                }
-
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat( lDialogString , aMessage ) ;
-                }
-                strcat(lDialogString, "\"" ) ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat( lDialogString , " -title  \"");
-                        strcat( lDialogString , aTitle ) ;
-                        strcat(lDialogString, "\" " ) ;
-                }
-                strcat(lDialogString, " -entrytext \"" ) ;
-                if ( aDefaultInput && strlen(aDefaultInput) )
-                {
-                        strcat( lDialogString , aDefaultInput ) ;
-                }
-                strcat(lDialogString, "\"" ) ;
-                strcat( lDialogString , ");echo $?$szAnswer");
+        strcat(lDialogString, "\"");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
         }
-        else if ( !gdialogPresent() && !xdialogPresent() && tkinter2Present( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python2-tkinter");return (char const *)1;}
-                strcpy( lDialogString , gPython2Name ) ;
-                if ( ! isTerminalRunning( ) && isDarwin( ) )
-                {
-                strcat( lDialogString , " -i" ) ;  /* for osx without console */
-                }
-                
-                strcat( lDialogString ,
-" -S -c \"import Tkinter,tkSimpleDialog;root=Tkinter.Tk();root.withdraw();");
-                
-                if ( isDarwin( ) )
-                {
-                        strcat( lDialogString ,
-"import os;os.system('''/usr/bin/osascript -e 'tell app \\\"Finder\\\" to set \
+        strcat(lDialogString,
+               ");if [ $? = 0 ];then echo 1$szAnswer;else echo 0$szAnswer;fi");
+    } else if (zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent()) {
+        if (zenityPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "zenity");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "szAnswer=$(zenity");
+            if ((zenity3Present() >= 4) && !getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        } else if (matedialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "matedialog");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "szAnswer=$(matedialog");
+        } else if (shellementaryPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "shellementary");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "szAnswer=$(shellementary");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "qarma");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "szAnswer=$(qarma");
+            if (!getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        }
+        strcat(lDialogString, " --entry");
+
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title=\"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
+        }
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, " --text=\"");
+            strcat(lDialogString, aMessage);
+            strcat(lDialogString, "\"");
+        }
+        if (aDefaultInput && strlen(aDefaultInput)) {
+            strcat(lDialogString, " --entry-text=\"");
+            strcat(lDialogString, aDefaultInput);
+            strcat(lDialogString, "\"");
+        } else {
+            strcat(lDialogString, " --hide-text");
+        }
+        if (tinyfd_silent) strcat(lDialogString, " 2>/dev/null ");
+        strcat(lDialogString,
+               ");if [ $? = 0 ];then echo 1$szAnswer;else echo 0$szAnswer;fi");
+    } else if (gxmessagePresent() || gmessagePresent()) {
+        if (gxmessagePresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "gxmessage");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "szAnswer=$(gxmessage -buttons Ok:1,Cancel:0 -center \"");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "gmessage");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "szAnswer=$(gmessage -buttons Ok:1,Cancel:0 -center \"");
+        }
+
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, "\"");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " -title  \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
+        }
+        strcat(lDialogString, " -entrytext \"");
+        if (aDefaultInput && strlen(aDefaultInput)) {
+            strcat(lDialogString, aDefaultInput);
+        }
+        strcat(lDialogString, "\"");
+        strcat(lDialogString, ");echo $?$szAnswer");
+    } else if (!gdialogPresent() && !xdialogPresent() && tkinter2Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python2-tkinter");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, gPython2Name);
+        if (!isTerminalRunning() && isDarwin()) {
+            strcat(lDialogString, " -i");  /* for osx without console */
+        }
+
+        strcat(lDialogString,
+               " -S -c \"import Tkinter,tkSimpleDialog;root=Tkinter.Tk();root.withdraw();");
+
+        if (isDarwin()) {
+            strcat(lDialogString,
+                   "import os;os.system('''/usr/bin/osascript -e 'tell app \\\"Finder\\\" to set \
 frontmost of process \\\"Python\\\" to true' ''');");
-                }
-                
-                strcat( lDialogString ,"res=tkSimpleDialog.askstring(" ) ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "',") ;
-                }
-                if ( aMessage && strlen(aMessage) )
-                {
-
-                        strcat(lDialogString, "prompt='") ;
-                        lpDialogString = lDialogString + strlen(lDialogString);
-                        replaceSubStr( aMessage , "\n" , "\\n" , lpDialogString ) ;
-                        strcat(lDialogString, "',") ;
-                }
-                if ( aDefaultInput )
-                {
-                        if ( strlen(aDefaultInput) )
-                        {
-                                strcat(lDialogString, "initialvalue='") ;
-                                strcat(lDialogString, aDefaultInput) ;
-                                strcat(lDialogString, "',") ;
-                        }
-                }
-                else
-                {
-                        strcat(lDialogString, "show='*'") ;
-                }
-                strcat(lDialogString, ");\nif res is None :\n\tprint 0");
-                strcat(lDialogString, "\nelse :\n\tprint '1'+res\n\"" ) ;
         }
-        else if ( !gdialogPresent() && !xdialogPresent() && tkinter3Present( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python3-tkinter");return (char const *)1;}
-                strcpy( lDialogString , gPython3Name ) ;
-                strcat( lDialogString ,
-                        " -S -c \"import tkinter; from tkinter import simpledialog;root=tkinter.Tk();root.withdraw();");
-                strcat( lDialogString ,"res=simpledialog.askstring(" ) ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "',") ;
-                }
-                if ( aMessage && strlen(aMessage) )
-                {
 
-                        strcat(lDialogString, "prompt='") ;
-                        lpDialogString = lDialogString + strlen(lDialogString);
-                        replaceSubStr( aMessage , "\n" , "\\n" , lpDialogString ) ;
-                        strcat(lDialogString, "',") ;
-                }
-                if ( aDefaultInput )
-                {
-                        if ( strlen(aDefaultInput) )
-                        {
-                                strcat(lDialogString, "initialvalue='") ;
-                                strcat(lDialogString, aDefaultInput) ;
-                                strcat(lDialogString, "',") ;
-                        }
-                }
-                else
-                {
-                        strcat(lDialogString, "show='*'") ;
-                }
-                strcat(lDialogString, ");\nif res is None :\n\tprint(0)");
-                strcat(lDialogString, "\nelse :\n\tprint('1'+res)\n\"" ) ;
+        strcat(lDialogString, "res=tkSimpleDialog.askstring(");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "',");
         }
-        else if ( gdialogPresent() || xdialogPresent() || dialogName() || whiptailPresent() )
-        {
-                if ( gdialogPresent( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"gdialog");return (char const *)1;}
-                        lWasGraphicDialog = 1 ;
-                        lWasGdialog = 1 ;
-                        strcpy( lDialogString , "(gdialog " ) ;
-                }
-                else if ( xdialogPresent( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"xdialog");return (char const *)1;}
-                        lWasGraphicDialog = 1 ;
-                        strcpy( lDialogString , "(Xdialog " ) ;
-                }
-                else if ( dialogName( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"dialog");return (char const *)0;}
-                        if ( isTerminalRunning( ) )
-                        {
-                                strcpy( lDialogString , "(dialog " ) ;
-                        }
-                        else
-                        {
-                                lWasXterm = 1 ;
-                                strcpy( lDialogString , terminalName() ) ;
-                                strcat( lDialogString , "'(" ) ;
-                                strcat( lDialogString , dialogName() ) ;
-                                strcat( lDialogString , " " ) ;
-                        }
-                }
-                else if ( isTerminalRunning( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"whiptail");return (char const *)0;}
-                        strcpy( lDialogString , "(whiptail " ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"whiptail");return (char const *)0;}
-                        lWasXterm = 1 ;
-                        strcpy( lDialogString , terminalName() ) ;
-                        strcat( lDialogString , "'(whiptail " ) ;
-                }
+        if (aMessage && strlen(aMessage)) {
 
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "--title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\" ") ;
-                }
+            strcat(lDialogString, "prompt='");
+            lpDialogString = lDialogString + strlen(lDialogString);
+            replaceSubStr(aMessage, "\n", "\\n", lpDialogString);
+            strcat(lDialogString, "',");
+        }
+        if (aDefaultInput) {
+            if (strlen(aDefaultInput)) {
+                strcat(lDialogString, "initialvalue='");
+                strcat(lDialogString, aDefaultInput);
+                strcat(lDialogString, "',");
+            }
+        } else {
+            strcat(lDialogString, "show='*'");
+        }
+        strcat(lDialogString, ");\nif res is None :\n\tprint 0");
+        strcat(lDialogString, "\nelse :\n\tprint '1'+res\n\"");
+    } else if (!gdialogPresent() && !xdialogPresent() && tkinter3Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python3-tkinter");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, gPython3Name);
+        strcat(lDialogString,
+               " -S -c \"import tkinter; from tkinter import simpledialog;root=tkinter.Tk();root.withdraw();");
+        strcat(lDialogString, "res=simpledialog.askstring(");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "',");
+        }
+        if (aMessage && strlen(aMessage)) {
 
-                if ( !xdialogPresent() && !gdialogPresent() )
-                {
-                        strcat(lDialogString, "--backtitle \"") ;
-                        strcat(lDialogString, "tab: move focus") ;
-                        if ( ! aDefaultInput && !lWasGdialog )
-                        {
-                                strcat(lDialogString, " (sometimes nothing, no blink nor star, is shown in text field)") ;
-                        }
-                        strcat(lDialogString, "\" ") ;
-                }
+            strcat(lDialogString, "prompt='");
+            lpDialogString = lDialogString + strlen(lDialogString);
+            replaceSubStr(aMessage, "\n", "\\n", lpDialogString);
+            strcat(lDialogString, "',");
+        }
+        if (aDefaultInput) {
+            if (strlen(aDefaultInput)) {
+                strcat(lDialogString, "initialvalue='");
+                strcat(lDialogString, aDefaultInput);
+                strcat(lDialogString, "',");
+            }
+        } else {
+            strcat(lDialogString, "show='*'");
+        }
+        strcat(lDialogString, ");\nif res is None :\n\tprint(0)");
+        strcat(lDialogString, "\nelse :\n\tprint('1'+res)\n\"");
+    } else if (gdialogPresent() || xdialogPresent() || dialogName() || whiptailPresent()) {
+        if (gdialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "gdialog");
+                return (char const *) 1;
+            }
+            lWasGraphicDialog = 1;
+            lWasGdialog = 1;
+            strcpy(lDialogString, "(gdialog ");
+        } else if (xdialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "xdialog");
+                return (char const *) 1;
+            }
+            lWasGraphicDialog = 1;
+            strcpy(lDialogString, "(Xdialog ");
+        } else if (dialogName()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "dialog");
+                return (char const *) 0;
+            }
+            if (isTerminalRunning()) {
+                strcpy(lDialogString, "(dialog ");
+            } else {
+                lWasXterm = 1;
+                strcpy(lDialogString, terminalName());
+                strcat(lDialogString, "'(");
+                strcat(lDialogString, dialogName());
+                strcat(lDialogString, " ");
+            }
+        } else if (isTerminalRunning()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "whiptail");
+                return (char const *) 0;
+            }
+            strcpy(lDialogString, "(whiptail ");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "whiptail");
+                return (char const *) 0;
+            }
+            lWasXterm = 1;
+            strcpy(lDialogString, terminalName());
+            strcat(lDialogString, "'(whiptail ");
+        }
 
-                if ( aDefaultInput || lWasGdialog )
-                {
-                        strcat( lDialogString , "--inputbox" ) ;
-                }
-                else
-                {
-                        if ( !lWasGraphicDialog && dialogName() && isDialogVersionBetter09b() )
-                        {
-                                strcat( lDialogString , "--insecure " ) ;
-                        }
-                        strcat( lDialogString , "--passwordbox" ) ;
-                }
-                strcat( lDialogString , " \"" ) ;
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat(lDialogString, aMessage) ;
-                }
-                strcat(lDialogString,"\" 10 60 ") ;
-                if ( aDefaultInput && strlen(aDefaultInput) )
-                {
-                        strcat(lDialogString, "\"") ;
-                        strcat(lDialogString, aDefaultInput) ;
-                        strcat(lDialogString, "\" ") ;
-                }
-                if ( lWasGraphicDialog )
-                {
-                        strcat(lDialogString,") 2>/tmp/tinyfd.txt;\
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "--title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
+        }
+
+        if (!xdialogPresent() && !gdialogPresent()) {
+            strcat(lDialogString, "--backtitle \"");
+            strcat(lDialogString, "tab: move focus");
+            if (!aDefaultInput && !lWasGdialog) {
+                strcat(lDialogString,
+                       " (sometimes nothing, no blink nor star, is shown in text field)");
+            }
+            strcat(lDialogString, "\" ");
+        }
+
+        if (aDefaultInput || lWasGdialog) {
+            strcat(lDialogString, "--inputbox");
+        } else {
+            if (!lWasGraphicDialog && dialogName() && isDialogVersionBetter09b()) {
+                strcat(lDialogString, "--insecure ");
+            }
+            strcat(lDialogString, "--passwordbox");
+        }
+        strcat(lDialogString, " \"");
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, "\" 10 60 ");
+        if (aDefaultInput && strlen(aDefaultInput)) {
+            strcat(lDialogString, "\"");
+            strcat(lDialogString, aDefaultInput);
+            strcat(lDialogString, "\" ");
+        }
+        if (lWasGraphicDialog) {
+            strcat(lDialogString, ") 2>/tmp/tinyfd.txt;\
         if [ $? = 0 ];then tinyfdBool=1;else tinyfdBool=0;fi;\
-        tinyfdRes=$(cat /tmp/tinyfd.txt);echo $tinyfdBool$tinyfdRes") ;
-                }
-                else
-                {
-                        strcat(lDialogString,">/dev/tty ) 2>/tmp/tinyfd.txt;\
+        tinyfdRes=$(cat /tmp/tinyfd.txt);echo $tinyfdBool$tinyfdRes");
+        } else {
+            strcat(lDialogString, ">/dev/tty ) 2>/tmp/tinyfd.txt;\
         if [ $? = 0 ];then tinyfdBool=1;else tinyfdBool=0;fi;\
-        tinyfdRes=$(cat /tmp/tinyfd.txt);echo $tinyfdBool$tinyfdRes") ;
+        tinyfdRes=$(cat /tmp/tinyfd.txt);echo $tinyfdBool$tinyfdRes");
 
-                        if ( lWasXterm )
-                        {
-                strcat(lDialogString," >/tmp/tinyfd0.txt';cat /tmp/tinyfd0.txt");
-                        }
-                        else
-                        {
-                                strcat(lDialogString, "; clear >/dev/tty") ;
-                        }
-                }
+            if (lWasXterm) {
+                strcat(lDialogString, " >/tmp/tinyfd0.txt';cat /tmp/tinyfd0.txt");
+            } else {
+                strcat(lDialogString, "; clear >/dev/tty");
+            }
         }
-        else if ( ! isTerminalRunning( ) && terminalName() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"basicinput");return (char const *)0;}
-                lWasBasicXterm = 1 ;
-                strcpy( lDialogString , terminalName() ) ;
-                strcat( lDialogString , "'" ) ;
-                if ( !gWarningDisplayed && !tinyfd_forceConsole)
-                {
-					gWarningDisplayed = 1 ;
-					tinyfd_messageBox(gTitle,tinyfd_needs,"ok","warning",0);
-                }
-                if ( aTitle && strlen(aTitle) && !tinyfd_forceConsole)
-                {
-                        strcat( lDialogString , "echo \"" ) ;
-                        strcat( lDialogString, aTitle) ;
-                        strcat( lDialogString , "\";echo;" ) ;
-                }
-                
-                strcat( lDialogString , "echo \"" ) ;
-                if ( aMessage && strlen(aMessage) )
-                {
-                        strcat( lDialogString, aMessage) ;
-                }
-                strcat( lDialogString , "\";read " ) ;
-                if ( ! aDefaultInput )
-                {
-                        strcat( lDialogString , "-s " ) ;
-                }
-                strcat( lDialogString , "-p \"" ) ;
-                strcat( lDialogString , "(esc+enter to cancel): \" ANSWER " ) ;
-                strcat( lDialogString , ";echo 1$ANSWER >/tmp/tinyfd.txt';" ) ;
-                strcat( lDialogString , "cat -v /tmp/tinyfd.txt");
+    } else if (!isTerminalRunning() && terminalName()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "basicinput");
+            return (char const *) 0;
         }
-        else if ( !gWarningDisplayed && ! isTerminalRunning( ) && ! terminalName() ) {
-			gWarningDisplayed = 1 ;
-			tinyfd_messageBox(gTitle,tinyfd_needs,"ok","warning",0);
-			if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"no_solution");return (char const *)0;}
-			return NULL;
+        lWasBasicXterm = 1;
+        strcpy(lDialogString, terminalName());
+        strcat(lDialogString, "'");
+        if (!gWarningDisplayed && !tinyfd_forceConsole) {
+            gWarningDisplayed = 1;
+            tinyfd_messageBox(gTitle, tinyfd_needs, "ok", "warning", 0);
         }
-        else
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"basicinput");return (char const *)0;}
-                if ( !gWarningDisplayed && !tinyfd_forceConsole)
-                {
-                        gWarningDisplayed = 1 ;
-                        tinyfd_messageBox(gTitle,tinyfd_needs,"ok","warning",0);
-                }
-                if ( aTitle && strlen(aTitle) )
-                {
-                        printf("\n%s\n", aTitle);
-                }
-                if ( aMessage && strlen(aMessage) )
-                {
-                        printf("\n%s\n",aMessage);
-                }
-                printf("(esc+enter to cancel): "); fflush(stdout);
-                if ( ! aDefaultInput )
-                {
-                        tcgetattr(STDIN_FILENO, & oldt) ;
-                        newt = oldt ;
-                        newt.c_lflag &= ~ECHO ;
-                        tcsetattr(STDIN_FILENO, TCSANOW, & newt);
-                }
+        if (aTitle && strlen(aTitle) && !tinyfd_forceConsole) {
+            strcat(lDialogString, "echo \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\";echo;");
+        }
 
-                lEOF = fgets(lBuff, MAX_PATH_OR_CMD, stdin);
-                /* printf("lbuff<%c><%d>\n",lBuff[0],lBuff[0]); */
-                if ( ! lEOF  || (lBuff[0] == '\0') )
-                {
-                        free(lDialogString);
-                        return NULL;
-                }
+        strcat(lDialogString, "echo \"");
+        if (aMessage && strlen(aMessage)) {
+            strcat(lDialogString, aMessage);
+        }
+        strcat(lDialogString, "\";read ");
+        if (!aDefaultInput) {
+            strcat(lDialogString, "-s ");
+        }
+        strcat(lDialogString, "-p \"");
+        strcat(lDialogString, "(esc+enter to cancel): \" ANSWER ");
+        strcat(lDialogString, ";echo 1$ANSWER >/tmp/tinyfd.txt';");
+        strcat(lDialogString, "cat -v /tmp/tinyfd.txt");
+    } else if (!gWarningDisplayed && !isTerminalRunning() && !terminalName()) {
+        gWarningDisplayed = 1;
+        tinyfd_messageBox(gTitle, tinyfd_needs, "ok", "warning", 0);
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "no_solution");
+            return (char const *) 0;
+        }
+        return NULL;
+    } else {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "basicinput");
+            return (char const *) 0;
+        }
+        if (!gWarningDisplayed && !tinyfd_forceConsole) {
+            gWarningDisplayed = 1;
+            tinyfd_messageBox(gTitle, tinyfd_needs, "ok", "warning", 0);
+        }
+        if (aTitle && strlen(aTitle)) {
+            printf("\n%s\n", aTitle);
+        }
+        if (aMessage && strlen(aMessage)) {
+            printf("\n%s\n", aMessage);
+        }
+        printf("(esc+enter to cancel): ");
+        fflush(stdout);
+        if (!aDefaultInput) {
+            tcgetattr(STDIN_FILENO, &oldt);
+            newt = oldt;
+            newt.c_lflag &= ~ECHO;
+            tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+        }
 
-                if ( lBuff[0] == '\n' )
-                {
-                        lEOF = fgets(lBuff, MAX_PATH_OR_CMD, stdin);
-                        /* printf("lbuff<%c><%d>\n",lBuff[0],lBuff[0]); */
-                        if ( ! lEOF  || (lBuff[0] == '\0') )
-                        {
-                                free(lDialogString);
-                                return NULL;
-                        }
-                }
+        lEOF = fgets(lBuff, MAX_PATH_OR_CMD, stdin);
+        /* printf("lbuff<%c><%d>\n",lBuff[0],lBuff[0]); */
+        if (!lEOF || (lBuff[0] == '\0')) {
+            free(lDialogString);
+            return NULL;
+        }
 
-                if ( ! aDefaultInput )
-                {
-                        tcsetattr(STDIN_FILENO, TCSANOW, & oldt);
-                        printf("\n");
-                }
-                printf("\n");
-                if ( strchr(lBuff,27) )
-                {
-                        free(lDialogString);
-                        return NULL ;
-                }
-                if ( lBuff[strlen( lBuff ) -1] == '\n' )
-                {
-                        lBuff[strlen( lBuff ) -1] = '\0' ;
-                }
+        if (lBuff[0] == '\n') {
+            lEOF = fgets(lBuff, MAX_PATH_OR_CMD, stdin);
+            /* printf("lbuff<%c><%d>\n",lBuff[0],lBuff[0]); */
+            if (!lEOF || (lBuff[0] == '\0')) {
                 free(lDialogString);
-                return lBuff ;
+                return NULL;
+            }
         }
 
-        if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
-        lIn = popen( lDialogString , "r" );
-        if ( ! lIn  )
-        {
-                if ( fileExists("/tmp/tinyfd.txt") )
-                {
-                        wipefile("/tmp/tinyfd.txt");
-                        remove("/tmp/tinyfd.txt");
-                }
-                if ( fileExists("/tmp/tinyfd0.txt") )
-                {
-                        wipefile("/tmp/tinyfd0.txt");
-                        remove("/tmp/tinyfd0.txt");
-                }
-                free(lDialogString);
-                return NULL ;
+        if (!aDefaultInput) {
+            tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+            printf("\n");
         }
-        while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-        {}
-
-        pclose( lIn ) ;
-
-        if ( fileExists("/tmp/tinyfd.txt") )
-        {
-                wipefile("/tmp/tinyfd.txt");
-                remove("/tmp/tinyfd.txt");
+        printf("\n");
+        if (strchr(lBuff, 27)) {
+            free(lDialogString);
+            return NULL;
         }
-        if ( fileExists("/tmp/tinyfd0.txt") )
-        {
-                wipefile("/tmp/tinyfd0.txt");
-                remove("/tmp/tinyfd0.txt");
+        if (lBuff[strlen(lBuff) - 1] == '\n') {
+            lBuff[strlen(lBuff) - 1] = '\0';
         }
-
-        /* printf( "len Buff: %lu\n" , strlen(lBuff) ) ; */
-        /* printf( "lBuff0: %s\n" , lBuff ) ; */
-        if ( lBuff[strlen( lBuff ) -1] == '\n' )
-        {
-                lBuff[strlen( lBuff ) -1] = '\0' ;
-        }
-        /* printf( "lBuff1: %s len: %lu \n" , lBuff , strlen(lBuff) ) ; */
-        if ( lWasBasicXterm )
-        {
-                if ( strstr(lBuff,"^[") ) /* esc was pressed */
-                {
-                        free(lDialogString);
-                        return NULL ;
-                }
-        }
-
-        lResult =  strncmp( lBuff , "1" , 1) ? 0 : 1 ;
-        /* printf( "lResult: %d \n" , lResult ) ; */
-        if ( ! lResult )
-        {
-                free(lDialogString);
-                return NULL ;
-        }
-        /* printf( "lBuff+1: %s\n" , lBuff+1 ) ; */
         free(lDialogString);
+        return lBuff;
+    }
 
-        return lBuff+1 ;
+    if (tinyfd_verbose) printf("lDialogString: %s\n", lDialogString);
+    lIn = popen(lDialogString, "r");
+    if (!lIn) {
+        if (fileExists("/tmp/tinyfd.txt")) {
+            wipefile("/tmp/tinyfd.txt");
+            remove("/tmp/tinyfd.txt");
+        }
+        if (fileExists("/tmp/tinyfd0.txt")) {
+            wipefile("/tmp/tinyfd0.txt");
+            remove("/tmp/tinyfd0.txt");
+        }
+        free(lDialogString);
+        return NULL;
+    }
+    while (fgets(lBuff, sizeof(lBuff), lIn) != NULL) {}
+
+    pclose(lIn);
+
+    if (fileExists("/tmp/tinyfd.txt")) {
+        wipefile("/tmp/tinyfd.txt");
+        remove("/tmp/tinyfd.txt");
+    }
+    if (fileExists("/tmp/tinyfd0.txt")) {
+        wipefile("/tmp/tinyfd0.txt");
+        remove("/tmp/tinyfd0.txt");
+    }
+
+    /* printf( "len Buff: %lu\n" , strlen(lBuff) ) ; */
+    /* printf( "lBuff0: %s\n" , lBuff ) ; */
+    if (lBuff[strlen(lBuff) - 1] == '\n') {
+        lBuff[strlen(lBuff) - 1] = '\0';
+    }
+    /* printf( "lBuff1: %s len: %lu \n" , lBuff , strlen(lBuff) ) ; */
+    if (lWasBasicXterm) {
+        if (strstr(lBuff, "^[")) /* esc was pressed */
+        {
+            free(lDialogString);
+            return NULL;
+        }
+    }
+
+    lResult = strncmp(lBuff, "1", 1) ? 0 : 1;
+    /* printf( "lResult: %d \n" , lResult ) ; */
+    if (!lResult) {
+        free(lDialogString);
+        return NULL;
+    }
+    /* printf( "lBuff+1: %s\n" , lBuff+1 ) ; */
+    free(lDialogString);
+
+    return lBuff + 1;
 }
 
 
-char const * tinyfd_saveFileDialog(
-    char const * const aTitle , /* NULL or "" */
-    char const * const aDefaultPathAndFile , /* NULL or "" */
-    int const aNumOfFilterPatterns , /* 0 */
-    char const * const * const aFilterPatterns , /* NULL or {"*.jpg","*.png"} */
-    char const * const aSingleFilterDescription ) /* NULL or "image files" */
+char const *tinyfd_saveFileDialog(
+        char const *const aTitle, /* NULL or "" */
+        char const *const aDefaultPathAndFile, /* NULL or "" */
+        int const aNumOfFilterPatterns, /* 0 */
+        char const *const *const aFilterPatterns, /* NULL or {"*.jpg","*.png"} */
+        char const *const aSingleFilterDescription) /* NULL or "image files" */
 {
 
-        static char lBuff [MAX_PATH_OR_CMD] ;
-        char lDialogString [MAX_PATH_OR_CMD] ;
-        char lString [MAX_PATH_OR_CMD] ;
-        int i ;
-        int lWasGraphicDialog = 0 ;
-        int lWasXterm = 0 ;
-        char const * p ;
-        FILE * lIn ;
-        lBuff[0]='\0';
+    static char lBuff[MAX_PATH_OR_CMD];
+    char lDialogString[MAX_PATH_OR_CMD];
+    char lString[MAX_PATH_OR_CMD];
+    int i;
+    int lWasGraphicDialog = 0;
+    int lWasXterm = 0;
+    char const *p;
+    FILE *lIn;
+    lBuff[0] = '\0';
 
-        if ( osascriptPresent( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"applescript");return (char const *)1;}
-                strcpy( lDialogString , "osascript ");
-                if ( ! osx9orBetter() ) strcat( lDialogString , " -e 'tell application \"Finder\"' -e 'Activate'");
-                strcat( lDialogString , " -e 'try' -e 'POSIX path of ( choose file name " );
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "with prompt \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\" ") ;
-                }
-                getPathWithoutFinalSlash( lString , aDefaultPathAndFile ) ;
-                if ( strlen(lString) )
-                {
-                        strcat(lDialogString, "default location \"") ;
-                        strcat(lDialogString, lString ) ;
-                        strcat(lDialogString , "\" " ) ;
-                }
-                getLastName( lString , aDefaultPathAndFile ) ;
-                if ( strlen(lString) )
-                {
-                        strcat(lDialogString, "default name \"") ;
-                        strcat(lDialogString, lString ) ;
-                        strcat(lDialogString , "\" " ) ;
-                }
-                strcat( lDialogString , ")' " ) ;
-                strcat(lDialogString, "-e 'on error number -128' " ) ;
-                strcat(lDialogString, "-e 'end try'") ;
-                if ( ! osx9orBetter() ) strcat( lDialogString, " -e 'end tell'") ;
+    if (osascriptPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "applescript");
+            return (char const *) 1;
         }
-        else if ( kdialogPresent() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"kdialog");return (char const *)1;}
-
-                strcpy( lDialogString , "kdialog" ) ;
-                if ( kdialogPresent() == 2 )
-                {
-                        strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                }
-                strcat( lDialogString , " --getsavefilename " ) ;
-
-                if ( aDefaultPathAndFile && strlen(aDefaultPathAndFile) )
-                {
-                        if ( aDefaultPathAndFile[0] != '/' )
-                        {
-                                strcat(lDialogString, "$PWD/") ;
-                        }
-                        strcat(lDialogString, "\"") ;
-                        strcat(lDialogString, aDefaultPathAndFile ) ;
-                        strcat(lDialogString , "\"" ) ;
-                }
-                else
-                {
-                        strcat(lDialogString, "$PWD/") ;
-                }
-
-                if ( aNumOfFilterPatterns > 0 )
-                {
-                        strcat(lDialogString , " \"" ) ;
-                        for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
-                        {
-                                strcat( lDialogString , aFilterPatterns [i] ) ;
-                                strcat( lDialogString , " " ) ;
-                        }
-                        if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
-                        {
-                                strcat( lDialogString , " | " ) ;
-                                strcat( lDialogString , aSingleFilterDescription ) ;
-                        }
-                        strcat( lDialogString , "\"" ) ;
-                }
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, " --title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
+        strcpy(lDialogString, "osascript ");
+        if (!osx9orBetter())
+            strcat(lDialogString, " -e 'tell application \"Finder\"' -e 'Activate'");
+        strcat(lDialogString, " -e 'try' -e 'POSIX path of ( choose file name ");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "with prompt \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
         }
-        else if ( zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent() )
-        {
-                if ( zenityPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return (char const *)1;}
-                        strcpy( lDialogString , "zenity" ) ;
-                        if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
-                        {
-                                strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                else if ( matedialogPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"matedialog");return (char const *)1;}
-                        strcpy( lDialogString , "matedialog" ) ;
-                }
-                else if ( shellementaryPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"shellementary");return (char const *)1;}
-                        strcpy( lDialogString , "shellementary" ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"qarma");return (char const *)1;}
-                        strcpy( lDialogString , "qarma" ) ;
-                        if ( !getenv("SSH_TTY") )
-                        {
-                                strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                strcat(lDialogString, " --file-selection --save --confirm-overwrite" ) ;
-
-                if ( aTitle && strlen(aTitle) ) 
-                {
-                        strcat(lDialogString, " --title=\"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                if ( aDefaultPathAndFile && strlen(aDefaultPathAndFile) ) 
-                {
-                        strcat(lDialogString, " --filename=\"") ;
-                        strcat(lDialogString, aDefaultPathAndFile) ;
-                        strcat(lDialogString, "\"") ;
-                }               
-                if ( aNumOfFilterPatterns > 0 )
-                {
-                        strcat( lDialogString , " --file-filter='" ) ;
-                        if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
-                        {
-                                strcat( lDialogString , aSingleFilterDescription ) ;
-                                strcat( lDialogString , " | " ) ;
-                        }
-                        for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
-                        {
-                                strcat( lDialogString , aFilterPatterns [i] ) ;
-                                strcat( lDialogString , " " ) ;
-                        }
-                        strcat( lDialogString , "' --file-filter='All files | *'" ) ;
-                }
-                if (tinyfd_silent) strcat( lDialogString , " 2>/dev/null ");
+        getPathWithoutFinalSlash(lString, aDefaultPathAndFile);
+        if (strlen(lString)) {
+            strcat(lDialogString, "default location \"");
+            strcat(lDialogString, lString);
+            strcat(lDialogString, "\" ");
         }
-        else if ( !xdialogPresent() && tkinter2Present( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python2-tkinter");return (char const *)1;}
-                strcpy( lDialogString , gPython2Name ) ;
-                if ( ! isTerminalRunning( ) && isDarwin( ))
-                {
-                strcat( lDialogString , " -i" ) ;  /* for osx without console */
-                }
-            strcat( lDialogString ,
-" -S -c \"import Tkinter,tkFileDialog;root=Tkinter.Tk();root.withdraw();");
+        getLastName(lString, aDefaultPathAndFile);
+        if (strlen(lString)) {
+            strcat(lDialogString, "default name \"");
+            strcat(lDialogString, lString);
+            strcat(lDialogString, "\" ");
+        }
+        strcat(lDialogString, ")' ");
+        strcat(lDialogString, "-e 'on error number -128' ");
+        strcat(lDialogString, "-e 'end try'");
+        if (!osx9orBetter()) strcat(lDialogString, " -e 'end tell'");
+    } else if (kdialogPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "kdialog");
+            return (char const *) 1;
+        }
 
-        if ( isDarwin( ) )
-        {
-                        strcat( lDialogString ,
-"import os;os.system('''/usr/bin/osascript -e 'tell app \\\"Finder\\\" to set\
+        strcpy(lDialogString, "kdialog");
+        if (kdialogPresent() == 2) {
+            strcat(lDialogString,
+                   " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+        }
+        strcat(lDialogString, " --getsavefilename ");
+
+        if (aDefaultPathAndFile && strlen(aDefaultPathAndFile)) {
+            if (aDefaultPathAndFile[0] != '/') {
+                strcat(lDialogString, "$PWD/");
+            }
+            strcat(lDialogString, "\"");
+            strcat(lDialogString, aDefaultPathAndFile);
+            strcat(lDialogString, "\"");
+        } else {
+            strcat(lDialogString, "$PWD/");
+        }
+
+        if (aNumOfFilterPatterns > 0) {
+            strcat(lDialogString, " \"");
+            for (i = 0; i < aNumOfFilterPatterns; i++) {
+                strcat(lDialogString, aFilterPatterns[i]);
+                strcat(lDialogString, " ");
+            }
+            if (aSingleFilterDescription && strlen(aSingleFilterDescription)) {
+                strcat(lDialogString, " | ");
+                strcat(lDialogString, aSingleFilterDescription);
+            }
+            strcat(lDialogString, "\"");
+        }
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
+        }
+    } else if (zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent()) {
+        if (zenityPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "zenity");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "zenity");
+            if ((zenity3Present() >= 4) && !getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        } else if (matedialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "matedialog");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "matedialog");
+        } else if (shellementaryPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "shellementary");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "shellementary");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "qarma");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "qarma");
+            if (!getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        }
+        strcat(lDialogString, " --file-selection --save --confirm-overwrite");
+
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title=\"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
+        }
+        if (aDefaultPathAndFile && strlen(aDefaultPathAndFile)) {
+            strcat(lDialogString, " --filename=\"");
+            strcat(lDialogString, aDefaultPathAndFile);
+            strcat(lDialogString, "\"");
+        }
+        if (aNumOfFilterPatterns > 0) {
+            strcat(lDialogString, " --file-filter='");
+            if (aSingleFilterDescription && strlen(aSingleFilterDescription)) {
+                strcat(lDialogString, aSingleFilterDescription);
+                strcat(lDialogString, " | ");
+            }
+            for (i = 0; i < aNumOfFilterPatterns; i++) {
+                strcat(lDialogString, aFilterPatterns[i]);
+                strcat(lDialogString, " ");
+            }
+            strcat(lDialogString, "' --file-filter='All files | *'");
+        }
+        if (tinyfd_silent) strcat(lDialogString, " 2>/dev/null ");
+    } else if (!xdialogPresent() && tkinter2Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python2-tkinter");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, gPython2Name);
+        if (!isTerminalRunning() && isDarwin()) {
+            strcat(lDialogString, " -i");  /* for osx without console */
+        }
+        strcat(lDialogString,
+               " -S -c \"import Tkinter,tkFileDialog;root=Tkinter.Tk();root.withdraw();");
+
+        if (isDarwin()) {
+            strcat(lDialogString,
+                   "import os;os.system('''/usr/bin/osascript -e 'tell app \\\"Finder\\\" to set\
  frontmost of process \\\"Python\\\" to true' ''');");
-                }
+        }
 
-                strcat( lDialogString , "print tkFileDialog.asksaveasfilename(");
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "',") ;
-                }
-            if ( aDefaultPathAndFile && strlen(aDefaultPathAndFile) )
-            {
-                        getPathWithoutFinalSlash( lString , aDefaultPathAndFile ) ;
-                        if ( strlen(lString) )
-                        {
-                                strcat(lDialogString, "initialdir='") ;
-                                strcat(lDialogString, lString ) ;
-                                strcat(lDialogString , "'," ) ;
-                        }
-                        getLastName( lString , aDefaultPathAndFile ) ;
-                        if ( strlen(lString) )
-                        {
-                                strcat(lDialogString, "initialfile='") ;
-                                strcat(lDialogString, lString ) ;
-                                strcat(lDialogString , "'," ) ;
-                        }
-                }
-            if ( ( aNumOfFilterPatterns > 1 )
-                  || ( (aNumOfFilterPatterns == 1) /* test because poor osx behaviour */
-                        && ( aFilterPatterns[0][strlen(aFilterPatterns[0])-1] != '*' ) ) )
-            {
-                        strcat(lDialogString , "filetypes=(" ) ;
-                        strcat( lDialogString , "('" ) ;
-                        if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
-                        {
-                                strcat( lDialogString , aSingleFilterDescription ) ;
-                        }
-                        strcat( lDialogString , "',(" ) ;
-                        for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
-                        {
-                                strcat( lDialogString , "'" ) ;
-                                strcat( lDialogString , aFilterPatterns [i] ) ;
-                                strcat( lDialogString , "'," ) ;
-                        }
-                        strcat( lDialogString , "))," ) ;
-                        strcat( lDialogString , "('All files','*'))" ) ;
+        strcat(lDialogString, "print tkFileDialog.asksaveasfilename(");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "',");
+        }
+        if (aDefaultPathAndFile && strlen(aDefaultPathAndFile)) {
+            getPathWithoutFinalSlash(lString, aDefaultPathAndFile);
+            if (strlen(lString)) {
+                strcat(lDialogString, "initialdir='");
+                strcat(lDialogString, lString);
+                strcat(lDialogString, "',");
             }
-                strcat( lDialogString , ")\"" ) ;
-        }
-        else if ( !xdialogPresent() && tkinter3Present( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python3-tkinter");return (char const *)1;}
-                strcpy( lDialogString , gPython3Name ) ;
-                strcat( lDialogString ,
-                        " -S -c \"import tkinter;from tkinter import filedialog;root=tkinter.Tk();root.withdraw();");
-                strcat( lDialogString , "print( filedialog.asksaveasfilename(");
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "',") ;
-                }
-                if ( aDefaultPathAndFile && strlen(aDefaultPathAndFile) )
-                {
-                        getPathWithoutFinalSlash( lString , aDefaultPathAndFile ) ;
-                        if ( strlen(lString) )
-                        {
-                                strcat(lDialogString, "initialdir='") ;
-                                strcat(lDialogString, lString ) ;
-                                strcat(lDialogString , "'," ) ;
-                        }
-                        getLastName( lString , aDefaultPathAndFile ) ;
-                        if ( strlen(lString) )
-                        {
-                                strcat(lDialogString, "initialfile='") ;
-                                strcat(lDialogString, lString ) ;
-                                strcat(lDialogString , "'," ) ;
-                        }
-                }
-                if ( ( aNumOfFilterPatterns > 1 )
-                        || ( (aNumOfFilterPatterns == 1) /* test because poor osx behaviour */
-                        && ( aFilterPatterns[0][strlen(aFilterPatterns[0])-1] != '*' ) ) )
-                {
-                        strcat(lDialogString , "filetypes=(" ) ;
-                        strcat( lDialogString , "('" ) ;
-                        if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
-                        {
-                                strcat( lDialogString , aSingleFilterDescription ) ;
-                        }
-                        strcat( lDialogString , "',(" ) ;
-                        for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
-                        {
-                                strcat( lDialogString , "'" ) ;
-                                strcat( lDialogString , aFilterPatterns [i] ) ;
-                                strcat( lDialogString , "'," ) ;
-                        }
-                        strcat( lDialogString , "))," ) ;
-                        strcat( lDialogString , "('All files','*'))" ) ;
-                }
-                strcat( lDialogString , "))\"" ) ;
-        }
-        else if ( xdialogPresent() || dialogName() )
-        {
-                if ( xdialogPresent( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"xdialog");return (char const *)1;}
-                        lWasGraphicDialog = 1 ;
-                        strcpy( lDialogString , "(Xdialog " ) ;
-                }
-                else if ( isTerminalRunning( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"dialog");return (char const *)0;}
-                        strcpy( lDialogString , "(dialog " ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"dialog");return (char const *)0;}
-                        lWasXterm = 1 ;
-                        strcpy( lDialogString , terminalName() ) ;
-                        strcat( lDialogString , "'(" ) ;
-                        strcat( lDialogString , dialogName() ) ;
-                        strcat( lDialogString , " " ) ;
-                }
-
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "--title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\" ") ;
-                }
-
-                if ( !xdialogPresent() && !gdialogPresent() )
-                {
-                        strcat(lDialogString, "--backtitle \"") ;
-                        strcat(lDialogString,
-                                "tab: focus | /: populate | spacebar: fill text field | ok: TEXT FIELD ONLY") ;
-                        strcat(lDialogString, "\" ") ;
-                }
-
-                strcat( lDialogString , "--fselect \"" ) ;
-                if ( aDefaultPathAndFile && strlen(aDefaultPathAndFile) )
-                {
-                        if ( ! strchr(aDefaultPathAndFile, '/') )
-                        {
-                                strcat(lDialogString, "./") ;
-                        }
-                        strcat(lDialogString, aDefaultPathAndFile) ;
-                }
-                else if ( ! isTerminalRunning( ) && !lWasGraphicDialog )
-                {
-                        strcat(lDialogString, getenv("HOME")) ;
-                        strcat(lDialogString, "/") ;
-                }
-                else
-                {
-                        strcat(lDialogString, "./") ;
-                }
-
-                if ( lWasGraphicDialog )
-                {
-                        strcat(lDialogString, "\" 0 60 ) 2>&1 ") ;
-                }
-                else
-                {
-                        strcat(lDialogString, "\" 0 60  >/dev/tty) ") ;
-                        if ( lWasXterm )
-                        {
-                          strcat( lDialogString ,
-                                "2>/tmp/tinyfd.txt';cat /tmp/tinyfd.txt;rm /tmp/tinyfd.txt");
-                        }
-                        else
-                        {
-                                strcat(lDialogString, "2>&1 ; clear >/dev/tty") ;
-                        }
-                }
-        }
-        else
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){return tinyfd_inputBox(aTitle,NULL,NULL);}
-                p = tinyfd_inputBox( aTitle , "Save file" , "" ) ;
-                getPathWithoutFinalSlash( lString , p ) ;
-                if ( strlen( lString ) && ! dirExists( lString ) )
-                {
-                        return NULL ;
-                }
-                getLastName(lString,p);
-                if ( ! strlen(lString) )
-                {
-                        return NULL;
-                }
-                return p ;
-        }
-
-        if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
-    if ( ! ( lIn = popen( lDialogString , "r" ) ) )
-    {
-        return NULL ;
-    }
-    while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-    {}
-    pclose( lIn ) ;
-    if ( lBuff[strlen( lBuff ) -1] == '\n' )
-    {
-        lBuff[strlen( lBuff ) -1] = '\0' ;
-    }
-        /* printf( "lBuff: %s\n" , lBuff ) ; */
-        if ( ! strlen(lBuff) )
-        {
-                return NULL;
-        }
-    getPathWithoutFinalSlash( lString , lBuff ) ;
-    if ( strlen( lString ) && ! dirExists( lString ) )
-    {
-        return NULL ;
-    }
-        getLastName(lString,lBuff);
-        if ( ! filenameValid(lString) )
-        {
-                return NULL;
-        }
-    return lBuff ;
-}
-
-                 
-/* in case of multiple files, the separator is | */
-char const * tinyfd_openFileDialog(
-    char const * const aTitle , /* NULL or "" */
-    char const * const aDefaultPathAndFile , /* NULL or "" */
-    int const aNumOfFilterPatterns , /* 0 */
-    char const * const * const aFilterPatterns , /* NULL or {"*.jpg","*.png"} */
-    char const * const aSingleFilterDescription , /* NULL or "image files" */
-    int const aAllowMultipleSelects ) /* 0 or 1 */
-{
-        static char lBuff [MAX_MULTIPLE_FILES*MAX_PATH_OR_CMD] ;
-        char lDialogString [MAX_PATH_OR_CMD] ;
-        char lString [MAX_PATH_OR_CMD] ;
-        int i ;
-        FILE * lIn ;
-        char * p ;
-        char const * p2 ;
-        int lWasKdialog = 0 ;
-        int lWasGraphicDialog = 0 ;
-        int lWasXterm = 0 ;
-        lBuff[0]='\0';
-
-        if ( osascriptPresent( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"applescript");return (char const *)1;}
-                strcpy( lDialogString , "osascript ");
-                if ( ! osx9orBetter() ) strcat( lDialogString , " -e 'tell application \"System Events\"' -e 'Activate'");
-                strcat( lDialogString , " -e 'try' -e '" );
-    if ( ! aAllowMultipleSelects )
-    {
-
-
-                        strcat( lDialogString , "POSIX path of ( " );
-                }
-                else
-                {
-                        strcat( lDialogString , "set mylist to " );
-                }
-                strcat( lDialogString , "choose file " );
-            if ( aTitle && strlen(aTitle) )
-            {
-                        strcat(lDialogString, "with prompt \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\" ") ;
+            getLastName(lString, aDefaultPathAndFile);
+            if (strlen(lString)) {
+                strcat(lDialogString, "initialfile='");
+                strcat(lDialogString, lString);
+                strcat(lDialogString, "',");
             }
-                getPathWithoutFinalSlash( lString , aDefaultPathAndFile ) ;
-                if ( strlen(lString) )
-                {
-                        strcat(lDialogString, "default location \"") ;
-                        strcat(lDialogString, lString ) ;
-                        strcat(lDialogString , "\" " ) ;
-                }
-                if ( aNumOfFilterPatterns > 0 )
-                {
-                        strcat(lDialogString , "of type {\"" );
-                        strcat( lDialogString , aFilterPatterns [0] + 2 ) ;
-                        strcat( lDialogString , "\"" ) ;
-                        for ( i = 1 ; i < aNumOfFilterPatterns ; i ++ )
-                        {
-                                strcat( lDialogString , ",\"" ) ;
-                                strcat( lDialogString , aFilterPatterns [i] + 2) ;
-                                strcat( lDialogString , "\"" ) ;
-                        }
-                        strcat( lDialogString , "} " ) ;
-                }
-                if ( aAllowMultipleSelects )
-                {
-                        strcat( lDialogString , "multiple selections allowed true ' " ) ;
-                        strcat( lDialogString ,
-                                        "-e 'set mystring to POSIX path of item 1 of mylist' " );
-                        strcat( lDialogString ,
-                                        "-e 'repeat with  i from 2 to the count of mylist' " );
-                        strcat( lDialogString , "-e 'set mystring to mystring & \"|\"' " );
-                        strcat( lDialogString ,
-                        "-e 'set mystring to mystring & POSIX path of item i of mylist' " );
-                        strcat( lDialogString , "-e 'end repeat' " );
-                        strcat( lDialogString , "-e 'mystring' " );
-                }
-                else
-                {
-                        strcat( lDialogString , ")' " ) ;
-                }
-                strcat(lDialogString, "-e 'on error number -128' " ) ;
-                strcat(lDialogString, "-e 'end try'") ;
-                if ( ! osx9orBetter() ) strcat( lDialogString, " -e 'end tell'") ;
         }
-        else if ( kdialogPresent() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"kdialog");return (char const *)1;}
-                lWasKdialog = 1 ;
-
-                strcpy( lDialogString , "kdialog" ) ;
-                if ( kdialogPresent() == 2 )
-                {
-                        strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                }
-                strcat( lDialogString , " --getopenfilename " ) ;
-
-                if ( aDefaultPathAndFile && strlen(aDefaultPathAndFile) )
-                {
-                        if ( aDefaultPathAndFile[0] != '/' )
-                        {
-                                strcat(lDialogString, "$PWD/") ;
-                        }
-                        strcat(lDialogString, "\"") ;
-                        strcat(lDialogString, aDefaultPathAndFile ) ;
-                        strcat(lDialogString , "\"" ) ;
-                }
-                else
-                {
-                        strcat(lDialogString, "$PWD/") ;
-                }
-
-                if ( aNumOfFilterPatterns > 0 )
-                {
-                        strcat(lDialogString , " \"" ) ;
-                        for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
-                        {
-                                strcat( lDialogString , aFilterPatterns [i] ) ;
-                                strcat( lDialogString , " " ) ;
-                        }
-                        if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
-                        {
-                                strcat( lDialogString , " | " ) ;
-                                strcat( lDialogString , aSingleFilterDescription ) ;
-                        }
-                        strcat( lDialogString , "\"" ) ;
-                }
-                if ( aAllowMultipleSelects )
-                {
-                        strcat( lDialogString , " --multiple --separate-output" ) ;
-                }
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, " --title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
+        if ((aNumOfFilterPatterns > 1)
+            || ((aNumOfFilterPatterns == 1) /* test because poor osx behaviour */
+                && (aFilterPatterns[0][strlen(aFilterPatterns[0]) - 1] != '*'))) {
+            strcat(lDialogString, "filetypes=(");
+            strcat(lDialogString, "('");
+            if (aSingleFilterDescription && strlen(aSingleFilterDescription)) {
+                strcat(lDialogString, aSingleFilterDescription);
+            }
+            strcat(lDialogString, "',(");
+            for (i = 0; i < aNumOfFilterPatterns; i++) {
+                strcat(lDialogString, "'");
+                strcat(lDialogString, aFilterPatterns[i]);
+                strcat(lDialogString, "',");
+            }
+            strcat(lDialogString, ")),");
+            strcat(lDialogString, "('All files','*'))");
         }
-        else if ( zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent() )
-        {
-                if ( zenityPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return (char const *)1;}
-                        strcpy( lDialogString , "zenity" ) ;
-                        if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
-                        {
-                                strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                else if ( matedialogPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"matedialog");return (char const *)1;}
-                        strcpy( lDialogString , "matedialog" ) ;
-                }
-                else if ( shellementaryPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"shellementary");return (char const *)1;}
-                        strcpy( lDialogString , "shellementary" ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"qarma");return (char const *)1;}
-                        strcpy( lDialogString , "qarma" ) ;
-                        if ( !getenv("SSH_TTY") )
-                        {
-                                strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                strcat( lDialogString , " --file-selection" ) ;
-
-                if ( aAllowMultipleSelects )
-                {
-                        strcat( lDialogString , " --multiple" ) ;
-                }
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, " --title=\"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                if ( aDefaultPathAndFile && strlen(aDefaultPathAndFile) )
-                {
-                        strcat(lDialogString, " --filename=\"") ;
-                        strcat(lDialogString, aDefaultPathAndFile) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                if ( aNumOfFilterPatterns > 0 )
-                {
-                        strcat( lDialogString , " --file-filter='" ) ; 
-                        if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
-                        {
-                                strcat( lDialogString , aSingleFilterDescription ) ;
-                                strcat( lDialogString , " | " ) ;
-                        }
-                        for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
-                        {
-                                strcat( lDialogString , aFilterPatterns [i] ) ;
-                                strcat( lDialogString , " " ) ;
-                        }
-                        strcat( lDialogString , "' --file-filter='All files | *'" ) ;
-                }
-                if (tinyfd_silent) strcat( lDialogString , " 2>/dev/null ");
+        strcat(lDialogString, ")\"");
+    } else if (!xdialogPresent() && tkinter3Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python3-tkinter");
+            return (char const *) 1;
         }
-        else if ( tkinter2Present( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python2-tkinter");return (char const *)1;}
-                strcpy( lDialogString , gPython2Name ) ;
-                if ( ! isTerminalRunning( ) && isDarwin( ) )
-                {
-                strcat( lDialogString , " -i" ) ;  /* for osx without console */
-                }
-                strcat( lDialogString ,
-" -S -c \"import Tkinter,tkFileDialog;root=Tkinter.Tk();root.withdraw();");
+        strcpy(lDialogString, gPython3Name);
+        strcat(lDialogString,
+               " -S -c \"import tkinter;from tkinter import filedialog;root=tkinter.Tk();root.withdraw();");
+        strcat(lDialogString, "print( filedialog.asksaveasfilename(");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "',");
+        }
+        if (aDefaultPathAndFile && strlen(aDefaultPathAndFile)) {
+            getPathWithoutFinalSlash(lString, aDefaultPathAndFile);
+            if (strlen(lString)) {
+                strcat(lDialogString, "initialdir='");
+                strcat(lDialogString, lString);
+                strcat(lDialogString, "',");
+            }
+            getLastName(lString, aDefaultPathAndFile);
+            if (strlen(lString)) {
+                strcat(lDialogString, "initialfile='");
+                strcat(lDialogString, lString);
+                strcat(lDialogString, "',");
+            }
+        }
+        if ((aNumOfFilterPatterns > 1)
+            || ((aNumOfFilterPatterns == 1) /* test because poor osx behaviour */
+                && (aFilterPatterns[0][strlen(aFilterPatterns[0]) - 1] != '*'))) {
+            strcat(lDialogString, "filetypes=(");
+            strcat(lDialogString, "('");
+            if (aSingleFilterDescription && strlen(aSingleFilterDescription)) {
+                strcat(lDialogString, aSingleFilterDescription);
+            }
+            strcat(lDialogString, "',(");
+            for (i = 0; i < aNumOfFilterPatterns; i++) {
+                strcat(lDialogString, "'");
+                strcat(lDialogString, aFilterPatterns[i]);
+                strcat(lDialogString, "',");
+            }
+            strcat(lDialogString, ")),");
+            strcat(lDialogString, "('All files','*'))");
+        }
+        strcat(lDialogString, "))\"");
+    } else if (xdialogPresent() || dialogName()) {
+        if (xdialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "xdialog");
+                return (char const *) 1;
+            }
+            lWasGraphicDialog = 1;
+            strcpy(lDialogString, "(Xdialog ");
+        } else if (isTerminalRunning()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "dialog");
+                return (char const *) 0;
+            }
+            strcpy(lDialogString, "(dialog ");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "dialog");
+                return (char const *) 0;
+            }
+            lWasXterm = 1;
+            strcpy(lDialogString, terminalName());
+            strcat(lDialogString, "'(");
+            strcat(lDialogString, dialogName());
+            strcat(lDialogString, " ");
+        }
 
-        if ( isDarwin( ) )
-        {
-                        strcat( lDialogString ,
-"import os;os.system('''/usr/bin/osascript -e 'tell app \\\"Finder\\\" to set \
-frontmost of process \\\"Python\\\" to true' ''');");
-                }
-                strcat( lDialogString , "lFiles=tkFileDialog.askopenfilename(");
-    if ( aAllowMultipleSelects )
-    {
-                        strcat( lDialogString , "multiple=1," ) ;
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "--title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
+        }
+
+        if (!xdialogPresent() && !gdialogPresent()) {
+            strcat(lDialogString, "--backtitle \"");
+            strcat(lDialogString,
+                   "tab: focus | /: populate | spacebar: fill text field | ok: TEXT FIELD ONLY");
+            strcat(lDialogString, "\" ");
+        }
+
+        strcat(lDialogString, "--fselect \"");
+        if (aDefaultPathAndFile && strlen(aDefaultPathAndFile)) {
+            if (!strchr(aDefaultPathAndFile, '/')) {
+                strcat(lDialogString, "./");
+            }
+            strcat(lDialogString, aDefaultPathAndFile);
+        } else if (!isTerminalRunning() && !lWasGraphicDialog) {
+            strcat(lDialogString, getenv("HOME"));
+            strcat(lDialogString, "/");
+        } else {
+            strcat(lDialogString, "./");
+        }
+
+        if (lWasGraphicDialog) {
+            strcat(lDialogString, "\" 0 60 ) 2>&1 ");
+        } else {
+            strcat(lDialogString, "\" 0 60  >/dev/tty) ");
+            if (lWasXterm) {
+                strcat(lDialogString,
+                       "2>/tmp/tinyfd.txt';cat /tmp/tinyfd.txt;rm /tmp/tinyfd.txt");
+            } else {
+                strcat(lDialogString, "2>&1 ; clear >/dev/tty");
+            }
+        }
+    } else {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            return tinyfd_inputBox(aTitle, NULL, NULL);
+        }
+        p = tinyfd_inputBox(aTitle, "Save file", "");
+        getPathWithoutFinalSlash(lString, p);
+        if (strlen(lString) && !dirExists(lString)) {
+            return NULL;
+        }
+        getLastName(lString, p);
+        if (!strlen(lString)) {
+            return NULL;
+        }
+        return p;
     }
-    if ( aTitle && strlen(aTitle) )
-    {
-                        strcat(lDialogString, "title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "',") ;
+
+    if (tinyfd_verbose) printf("lDialogString: %s\n", lDialogString);
+    if (!(lIn = popen(lDialogString, "r"))) {
+        return NULL;
     }
-    if ( aDefaultPathAndFile && strlen(aDefaultPathAndFile) )
-    {
-                        getPathWithoutFinalSlash( lString , aDefaultPathAndFile ) ;
-                        if ( strlen(lString) )
-                        {
-                                strcat(lDialogString, "initialdir='") ;
-                                strcat(lDialogString, lString ) ;
-                                strcat(lDialogString , "'," ) ;
-                        }
-                        getLastName( lString , aDefaultPathAndFile ) ;
-                        if ( strlen(lString) )
-                        {
-                                strcat(lDialogString, "initialfile='") ;
-                                strcat(lDialogString, lString ) ;
-                                strcat(lDialogString , "'," ) ;
-                        }
-                }
-                if ( ( aNumOfFilterPatterns > 1 )
-                        || ( ( aNumOfFilterPatterns == 1 ) /*test because poor osx behaviour*/
-                                && ( aFilterPatterns[0][strlen(aFilterPatterns[0])-1] != '*' ) ) )
-                {
-                        strcat(lDialogString , "filetypes=(" ) ;
-                        strcat( lDialogString , "('" ) ;
-                        if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
-                        {
-                                strcat( lDialogString , aSingleFilterDescription ) ;
-                        }
-                        strcat( lDialogString , "',(" ) ;
-                        for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
-                        {
-                                strcat( lDialogString , "'" ) ;
-                                strcat( lDialogString , aFilterPatterns [i] ) ;
-                                strcat( lDialogString , "'," ) ;
-                        }
-                        strcat( lDialogString , "))," ) ;
-                        strcat( lDialogString , "('All files','*'))" ) ;
-                }
-                strcat( lDialogString , ");\
-\nif not isinstance(lFiles, tuple):\n\tprint lFiles\nelse:\
-\n\tlFilesString=''\n\tfor lFile in lFiles:\n\t\tlFilesString+=str(lFile)+'|'\
-\n\tprint lFilesString[:-1]\n\"" ) ;
-        }
-        else if ( tkinter3Present( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python3-tkinter");return (char const *)1;}
-                strcpy( lDialogString , gPython3Name ) ;
-                strcat( lDialogString ,
-                        " -S -c \"import tkinter;from tkinter import filedialog;root=tkinter.Tk();root.withdraw();");
-                strcat( lDialogString , "lFiles=filedialog.askopenfilename(");
-                if ( aAllowMultipleSelects )
-                {
-                        strcat( lDialogString , "multiple=1," ) ;
-                }
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "',") ;
-                }
-                if ( aDefaultPathAndFile && strlen(aDefaultPathAndFile) )
-                {
-                        getPathWithoutFinalSlash( lString , aDefaultPathAndFile ) ;
-                        if ( strlen(lString) )
-                        {
-                                strcat(lDialogString, "initialdir='") ;
-                                strcat(lDialogString, lString ) ;
-                                strcat(lDialogString , "'," ) ;
-                        }
-                        getLastName( lString , aDefaultPathAndFile ) ;
-                        if ( strlen(lString) )
-                        {
-                                strcat(lDialogString, "initialfile='") ;
-                                strcat(lDialogString, lString ) ;
-                                strcat(lDialogString , "'," ) ;
-                        }
-                }
-                if ( ( aNumOfFilterPatterns > 1 )
-                        || ( ( aNumOfFilterPatterns == 1 ) /*test because poor osx behaviour*/
-                        && ( aFilterPatterns[0][strlen(aFilterPatterns[0])-1] != '*' ) ) )
-                {
-                        strcat(lDialogString , "filetypes=(" ) ;
-                        strcat( lDialogString , "('" ) ;
-                        if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
-                        {
-                                strcat( lDialogString , aSingleFilterDescription ) ;
-                        }
-                        strcat( lDialogString , "',(" ) ;
-                        for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
-                        {
-                                strcat( lDialogString , "'" ) ;
-                                strcat( lDialogString , aFilterPatterns [i] ) ;
-                                strcat( lDialogString , "'," ) ;
-                        }
-                        strcat( lDialogString , "))," ) ;
-                        strcat( lDialogString , "('All files','*'))" ) ;
-                }
-                strcat( lDialogString , ");\
-\nif not isinstance(lFiles, tuple):\n\tprint(lFiles)\nelse:\
-\n\tlFilesString=''\n\tfor lFile in lFiles:\n\t\tlFilesString+=str(lFile)+'|'\
-\n\tprint(lFilesString[:-1])\n\"" ) ;
-        }
-        else if ( xdialogPresent() || dialogName() )
-        {
-                if ( xdialogPresent( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"xdialog");return (char const *)1;}
-                        lWasGraphicDialog = 1 ;
-                        strcpy( lDialogString , "(Xdialog " ) ;
-                }
-                else if ( isTerminalRunning( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"dialog");return (char const *)0;}
-                        strcpy( lDialogString , "(dialog " ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"dialog");return (char const *)0;}
-                        lWasXterm = 1 ;
-                        strcpy( lDialogString , terminalName() ) ;
-                        strcat( lDialogString , "'(" ) ;
-                        strcat( lDialogString , dialogName() ) ;
-                        strcat( lDialogString , " " ) ;
-                }
-
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "--title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\" ") ;
-                }
-
-                if ( !xdialogPresent() && !gdialogPresent() )
-                {
-                        strcat(lDialogString, "--backtitle \"") ;
-                        strcat(lDialogString,
-                                "tab: focus | /: populate | spacebar: fill text field | ok: TEXT FIELD ONLY") ;
-                        strcat(lDialogString, "\" ") ;
-                }
-
-                strcat( lDialogString , "--fselect \"" ) ;
-                if ( aDefaultPathAndFile && strlen(aDefaultPathAndFile) )
-                {
-                        if ( ! strchr(aDefaultPathAndFile, '/') )
-                        {
-                                strcat(lDialogString, "./") ;
-                        }
-                        strcat(lDialogString, aDefaultPathAndFile) ;
-                }
-                else if ( ! isTerminalRunning( ) && !lWasGraphicDialog )
-                {
-                        strcat(lDialogString, getenv("HOME")) ;
-                        strcat(lDialogString, "/");
-                }
-                else
-                {
-                        strcat(lDialogString, "./") ;
-                }
-
-                if ( lWasGraphicDialog )
-                {
-                        strcat(lDialogString, "\" 0 60 ) 2>&1 ") ;
-                }
-                else
-                {
-                        strcat(lDialogString, "\" 0 60  >/dev/tty) ") ;
-                        if ( lWasXterm )
-                        {
-                                strcat( lDialogString ,
-                                "2>/tmp/tinyfd.txt';cat /tmp/tinyfd.txt;rm /tmp/tinyfd.txt");
-                        }
-                        else
-                        {
-                                strcat(lDialogString, "2>&1 ; clear >/dev/tty") ;
-                        }
-                }
-        }
-        else
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){return tinyfd_inputBox(aTitle,NULL,NULL);}
-                p2 = tinyfd_inputBox(aTitle, "Open file","");
-                if ( ! fileExists(p2) )
-                {
-                        return NULL ;
-                }
-                return p2 ;
-        }
-
-    if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
-    if ( ! ( lIn = popen( lDialogString , "r" ) ) )
-    {
-        return NULL ;
-    }
-        lBuff[0]='\0';
-        p=lBuff;
-        while ( fgets( p , sizeof( lBuff ) , lIn ) != NULL )
-        {
-                p += strlen( p );
-        }
-    pclose( lIn ) ;
-    if ( lBuff[strlen( lBuff ) -1] == '\n' )
-    {
-        lBuff[strlen( lBuff ) -1] = '\0' ;
+    while (fgets(lBuff, sizeof(lBuff), lIn) != NULL) {}
+    pclose(lIn);
+    if (lBuff[strlen(lBuff) - 1] == '\n') {
+        lBuff[strlen(lBuff) - 1] = '\0';
     }
     /* printf( "lBuff: %s\n" , lBuff ) ; */
-        if ( lWasKdialog && aAllowMultipleSelects )
-        {
-                p = lBuff ;
-                while ( ( p = strchr( p , '\n' ) ) )
-                        * p = '|' ;
-        }
-        /* printf( "lBuff2: %s\n" , lBuff ) ; */
-        if ( ! strlen( lBuff )  )
-        {
-                return NULL;
-        }
-        if ( aAllowMultipleSelects && strchr(lBuff, '|') )
-        {
-                p2 = ensureFilesExist( lBuff , lBuff ) ;
-        }
-        else if ( fileExists(lBuff) )
-        {
-                p2 = lBuff ;
-        }
-        else
-        {
-                return NULL ;
-        }
-        /* printf( "lBuff3: %s\n" , p2 ) ; */
-
-        return p2 ;
+    if (!strlen(lBuff)) {
+        return NULL;
+    }
+    getPathWithoutFinalSlash(lString, lBuff);
+    if (strlen(lString) && !dirExists(lString)) {
+        return NULL;
+    }
+    getLastName(lString, lBuff);
+    if (!filenameValid(lString)) {
+        return NULL;
+    }
+    return lBuff;
 }
 
 
-char const * tinyfd_selectFolderDialog(
-        char const * const aTitle , /* "" */
-        char const * const aDefaultPath ) /* "" */
+/* in case of multiple files, the separator is | */
+char const *tinyfd_openFileDialog(
+        char const *const aTitle, /* NULL or "" */
+        char const *const aDefaultPathAndFile, /* NULL or "" */
+        int const aNumOfFilterPatterns, /* 0 */
+        char const *const *const aFilterPatterns, /* NULL or {"*.jpg","*.png"} */
+        char const *const aSingleFilterDescription, /* NULL or "image files" */
+        int const aAllowMultipleSelects) /* 0 or 1 */
 {
-        static char lBuff [MAX_PATH_OR_CMD] ;
-        char lDialogString [MAX_PATH_OR_CMD] ;
-        FILE * lIn ;
-        char const * p ;
-        int lWasGraphicDialog = 0 ;
-        int lWasXterm = 0 ;
-        lBuff[0]='\0';
+    static char lBuff[MAX_MULTIPLE_FILES * MAX_PATH_OR_CMD];
+    char lDialogString[MAX_PATH_OR_CMD];
+    char lString[MAX_PATH_OR_CMD];
+    int i;
+    FILE *lIn;
+    char *p;
+    char const *p2;
+    int lWasKdialog = 0;
+    int lWasGraphicDialog = 0;
+    int lWasXterm = 0;
+    lBuff[0] = '\0';
 
-        if ( osascriptPresent( ))
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"applescript");return (char const *)1;}
-                strcpy( lDialogString , "osascript ");
-                if ( ! osx9orBetter() ) strcat( lDialogString , " -e 'tell application \"System Events\"' -e 'Activate'");
-                strcat( lDialogString , " -e 'try' -e 'POSIX path of ( choose folder ");
-                if ( aTitle && strlen(aTitle) )
-                {
-                strcat(lDialogString, "with prompt \"") ;
-                strcat(lDialogString, aTitle) ;
-                strcat(lDialogString, "\" ") ;
-                }
-                if ( aDefaultPath && strlen(aDefaultPath) )
-                {
-                        strcat(lDialogString, "default location \"") ;
-                        strcat(lDialogString, aDefaultPath ) ;
-                        strcat(lDialogString , "\" " ) ;
-                }
-                strcat( lDialogString , ")' " ) ;
-                strcat(lDialogString, "-e 'on error number -128' " ) ;
-                strcat(lDialogString, "-e 'end try'") ;
-                if ( ! osx9orBetter() ) strcat( lDialogString, " -e 'end tell'") ;
+    if (osascriptPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "applescript");
+            return (char const *) 1;
         }
-        else if ( kdialogPresent() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"kdialog");return (char const *)1;}
-                strcpy( lDialogString , "kdialog" ) ;
-                if ( kdialogPresent() == 2 )
-                {
-                        strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                }
-                strcat( lDialogString , " --getexistingdirectory " ) ;
+        strcpy(lDialogString, "osascript ");
+        if (!osx9orBetter())
+            strcat(lDialogString, " -e 'tell application \"System Events\"' -e 'Activate'");
+        strcat(lDialogString, " -e 'try' -e '");
+        if (!aAllowMultipleSelects) {
 
-                if ( aDefaultPath && strlen(aDefaultPath) )
-                {
-                        if ( aDefaultPath[0] != '/' )
-                        {
-                                strcat(lDialogString, "$PWD/") ;
-                        }
-                        strcat(lDialogString, "\"") ;
-                        strcat(lDialogString, aDefaultPath ) ;
-                        strcat(lDialogString , "\"" ) ;
-                }
-                else
-                {
-                        strcat(lDialogString, "$PWD/") ;
-                }
 
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, " --title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
+            strcat(lDialogString, "POSIX path of ( ");
+        } else {
+            strcat(lDialogString, "set mylist to ");
         }
-        else if ( zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent() )
-        {
-                if ( zenityPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return (char const *)1;}
-                        strcpy( lDialogString , "zenity" ) ;
-                        if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
-                        {
-                                strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                else if ( matedialogPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"matedialog");return (char const *)1;}
-                        strcpy( lDialogString , "matedialog" ) ;
-                }
-                else if ( shellementaryPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"shellementary");return (char const *)1;}
-                        strcpy( lDialogString , "shellementary" ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"qarma");return (char const *)1;}
-                        strcpy( lDialogString , "qarma" ) ;
-                        if ( !getenv("SSH_TTY") )
-                        {
-                                strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                strcat( lDialogString , " --file-selection --directory" ) ;
-
-                if ( aTitle && strlen(aTitle) ) 
-                {
-                        strcat(lDialogString, " --title=\"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                if ( aDefaultPath && strlen(aDefaultPath) ) 
-                {
-                        strcat(lDialogString, " --filename=\"") ;
-                        strcat(lDialogString, aDefaultPath) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                if (tinyfd_silent) strcat( lDialogString , " 2>/dev/null ");
+        strcat(lDialogString, "choose file ");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "with prompt \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
         }
-        else if ( !xdialogPresent() && tkinter2Present( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python2-tkinter");return (char const *)1;}
-                strcpy( lDialogString , gPython2Name ) ;
-                if ( ! isTerminalRunning( ) && isDarwin( ) )
-                {
-                strcat( lDialogString , " -i" ) ;  /* for osx without console */
-                }
-        strcat( lDialogString ,
-" -S -c \"import Tkinter,tkFileDialog;root=Tkinter.Tk();root.withdraw();");
-
-        if ( isDarwin( ) )
-        {
-                        strcat( lDialogString ,
-"import os;os.system('''/usr/bin/osascript -e 'tell app \\\"Finder\\\" to set \
-frontmost of process \\\"Python\\\" to true' ''');");
-                }
-
-                strcat( lDialogString , "print tkFileDialog.askdirectory(");
-            if ( aTitle && strlen(aTitle) )
-            {
-                        strcat(lDialogString, "title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "',") ;
+        getPathWithoutFinalSlash(lString, aDefaultPathAndFile);
+        if (strlen(lString)) {
+            strcat(lDialogString, "default location \"");
+            strcat(lDialogString, lString);
+            strcat(lDialogString, "\" ");
+        }
+        if (aNumOfFilterPatterns > 0) {
+            strcat(lDialogString, "of type {\"");
+            strcat(lDialogString, aFilterPatterns[0] + 2);
+            strcat(lDialogString, "\"");
+            for (i = 1; i < aNumOfFilterPatterns; i++) {
+                strcat(lDialogString, ",\"");
+                strcat(lDialogString, aFilterPatterns[i] + 2);
+                strcat(lDialogString, "\"");
             }
-        if ( aDefaultPath && strlen(aDefaultPath) )
-        {
-                                strcat(lDialogString, "initialdir='") ;
-                                strcat(lDialogString, aDefaultPath ) ;
-                                strcat(lDialogString , "'" ) ;
-                }
-                strcat( lDialogString , ")\"" ) ;
+            strcat(lDialogString, "} ");
         }
-        else if ( !xdialogPresent() && tkinter3Present( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python3-tkinter");return (char const *)1;}
-                strcpy( lDialogString , gPython3Name ) ;
-                strcat( lDialogString ,
-                        " -S -c \"import tkinter;from tkinter import filedialog;root=tkinter.Tk();root.withdraw();");
-                strcat( lDialogString , "print( filedialog.askdirectory(");
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "',") ;
-                }
-                if ( aDefaultPath && strlen(aDefaultPath) )
-                {
-                        strcat(lDialogString, "initialdir='") ;
-                        strcat(lDialogString, aDefaultPath ) ;
-                        strcat(lDialogString , "'" ) ;
-                }
-                strcat( lDialogString , ") )\"" ) ;
+        if (aAllowMultipleSelects) {
+            strcat(lDialogString, "multiple selections allowed true ' ");
+            strcat(lDialogString,
+                   "-e 'set mystring to POSIX path of item 1 of mylist' ");
+            strcat(lDialogString,
+                   "-e 'repeat with  i from 2 to the count of mylist' ");
+            strcat(lDialogString, "-e 'set mystring to mystring & \"|\"' ");
+            strcat(lDialogString,
+                   "-e 'set mystring to mystring & POSIX path of item i of mylist' ");
+            strcat(lDialogString, "-e 'end repeat' ");
+            strcat(lDialogString, "-e 'mystring' ");
+        } else {
+            strcat(lDialogString, ")' ");
         }
-        else if ( xdialogPresent() || dialogName() )
-        {
-                if ( xdialogPresent( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"xdialog");return (char const *)1;}
-                        lWasGraphicDialog = 1 ;
-                        strcpy( lDialogString , "(Xdialog " ) ;
-                }
-                else if ( isTerminalRunning( ) )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"dialog");return (char const *)0;}
-                        strcpy( lDialogString , "(dialog " ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"dialog");return (char const *)0;}
-                        lWasXterm = 1 ;
-                        strcpy( lDialogString , terminalName() ) ;
-                        strcat( lDialogString , "'(" ) ;
-                        strcat( lDialogString , dialogName() ) ;
-                        strcat( lDialogString , " " ) ;
-                }
+        strcat(lDialogString, "-e 'on error number -128' ");
+        strcat(lDialogString, "-e 'end try'");
+        if (!osx9orBetter()) strcat(lDialogString, " -e 'end tell'");
+    } else if (kdialogPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "kdialog");
+            return (char const *) 1;
+        }
+        lWasKdialog = 1;
 
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, "--title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\" ") ;
-                }
-
-                if ( !xdialogPresent() && !gdialogPresent() )
-                {
-                        strcat(lDialogString, "--backtitle \"") ;
-                        strcat(lDialogString,
-                                "tab: focus | /: populate | spacebar: fill text field | ok: TEXT FIELD ONLY") ;
-                        strcat(lDialogString, "\" ") ;
-                }
-
-                strcat( lDialogString , "--dselect \"" ) ;
-                if ( aDefaultPath && strlen(aDefaultPath) )
-                {
-                        strcat(lDialogString, aDefaultPath) ;
-                        ensureFinalSlash(lDialogString);
-                }
-                else if ( ! isTerminalRunning( ) && !lWasGraphicDialog )
-                {
-                        strcat(lDialogString, getenv("HOME")) ;
-                        strcat(lDialogString, "/");
-                }
-                else
-                {
-                        strcat(lDialogString, "./") ;
-                }
-                
-                if ( lWasGraphicDialog )
-                {
-                        strcat(lDialogString, "\" 0 60 ) 2>&1 ") ;
-                }
-                else
-                {
-                        strcat(lDialogString, "\" 0 60  >/dev/tty) ") ;
-                        if ( lWasXterm )
-                        {
-                          strcat( lDialogString ,
-                                "2>/tmp/tinyfd.txt';cat /tmp/tinyfd.txt;rm /tmp/tinyfd.txt");
-                        }
-                        else
-                        {
-                                strcat(lDialogString, "2>&1 ; clear >/dev/tty") ;
-                        }
-                }
+        strcpy(lDialogString, "kdialog");
+        if (kdialogPresent() == 2) {
+            strcat(lDialogString,
+                   " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
         }
-        else
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){return tinyfd_inputBox(aTitle,NULL,NULL);}
-                p = tinyfd_inputBox(aTitle, "Select folder","");
-                if ( !p || ! strlen( p ) || ! dirExists( p ) )
-                {
-                        return NULL ;
-                }
-                return p ;
+        strcat(lDialogString, " --getopenfilename ");
+
+        if (aDefaultPathAndFile && strlen(aDefaultPathAndFile)) {
+            if (aDefaultPathAndFile[0] != '/') {
+                strcat(lDialogString, "$PWD/");
+            }
+            strcat(lDialogString, "\"");
+            strcat(lDialogString, aDefaultPathAndFile);
+            strcat(lDialogString, "\"");
+        } else {
+            strcat(lDialogString, "$PWD/");
         }
-    if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
-    if ( ! ( lIn = popen( lDialogString , "r" ) ) )
-    {
-        return NULL ;
+
+        if (aNumOfFilterPatterns > 0) {
+            strcat(lDialogString, " \"");
+            for (i = 0; i < aNumOfFilterPatterns; i++) {
+                strcat(lDialogString, aFilterPatterns[i]);
+                strcat(lDialogString, " ");
+            }
+            if (aSingleFilterDescription && strlen(aSingleFilterDescription)) {
+                strcat(lDialogString, " | ");
+                strcat(lDialogString, aSingleFilterDescription);
+            }
+            strcat(lDialogString, "\"");
+        }
+        if (aAllowMultipleSelects) {
+            strcat(lDialogString, " --multiple --separate-output");
+        }
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
+        }
+    } else if (zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent()) {
+        if (zenityPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "zenity");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "zenity");
+            if ((zenity3Present() >= 4) && !getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        } else if (matedialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "matedialog");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "matedialog");
+        } else if (shellementaryPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "shellementary");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "shellementary");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "qarma");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "qarma");
+            if (!getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        }
+        strcat(lDialogString, " --file-selection");
+
+        if (aAllowMultipleSelects) {
+            strcat(lDialogString, " --multiple");
+        }
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title=\"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
+        }
+        if (aDefaultPathAndFile && strlen(aDefaultPathAndFile)) {
+            strcat(lDialogString, " --filename=\"");
+            strcat(lDialogString, aDefaultPathAndFile);
+            strcat(lDialogString, "\"");
+        }
+        if (aNumOfFilterPatterns > 0) {
+            strcat(lDialogString, " --file-filter='");
+            if (aSingleFilterDescription && strlen(aSingleFilterDescription)) {
+                strcat(lDialogString, aSingleFilterDescription);
+                strcat(lDialogString, " | ");
+            }
+            for (i = 0; i < aNumOfFilterPatterns; i++) {
+                strcat(lDialogString, aFilterPatterns[i]);
+                strcat(lDialogString, " ");
+            }
+            strcat(lDialogString, "' --file-filter='All files | *'");
+        }
+        if (tinyfd_silent) strcat(lDialogString, " 2>/dev/null ");
+    } else if (tkinter2Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python2-tkinter");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, gPython2Name);
+        if (!isTerminalRunning() && isDarwin()) {
+            strcat(lDialogString, " -i");  /* for osx without console */
+        }
+        strcat(lDialogString,
+               " -S -c \"import Tkinter,tkFileDialog;root=Tkinter.Tk();root.withdraw();");
+
+        if (isDarwin()) {
+            strcat(lDialogString,
+                   "import os;os.system('''/usr/bin/osascript -e 'tell app \\\"Finder\\\" to set \
+frontmost of process \\\"Python\\\" to true' ''');");
+        }
+        strcat(lDialogString, "lFiles=tkFileDialog.askopenfilename(");
+        if (aAllowMultipleSelects) {
+            strcat(lDialogString, "multiple=1,");
+        }
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "',");
+        }
+        if (aDefaultPathAndFile && strlen(aDefaultPathAndFile)) {
+            getPathWithoutFinalSlash(lString, aDefaultPathAndFile);
+            if (strlen(lString)) {
+                strcat(lDialogString, "initialdir='");
+                strcat(lDialogString, lString);
+                strcat(lDialogString, "',");
+            }
+            getLastName(lString, aDefaultPathAndFile);
+            if (strlen(lString)) {
+                strcat(lDialogString, "initialfile='");
+                strcat(lDialogString, lString);
+                strcat(lDialogString, "',");
+            }
+        }
+        if ((aNumOfFilterPatterns > 1)
+            || ((aNumOfFilterPatterns == 1) /*test because poor osx behaviour*/
+                && (aFilterPatterns[0][strlen(aFilterPatterns[0]) - 1] != '*'))) {
+            strcat(lDialogString, "filetypes=(");
+            strcat(lDialogString, "('");
+            if (aSingleFilterDescription && strlen(aSingleFilterDescription)) {
+                strcat(lDialogString, aSingleFilterDescription);
+            }
+            strcat(lDialogString, "',(");
+            for (i = 0; i < aNumOfFilterPatterns; i++) {
+                strcat(lDialogString, "'");
+                strcat(lDialogString, aFilterPatterns[i]);
+                strcat(lDialogString, "',");
+            }
+            strcat(lDialogString, ")),");
+            strcat(lDialogString, "('All files','*'))");
+        }
+        strcat(lDialogString, ");\
+\nif not isinstance(lFiles, tuple):\n\tprint lFiles\nelse:\
+\n\tlFilesString=''\n\tfor lFile in lFiles:\n\t\tlFilesString+=str(lFile)+'|'\
+\n\tprint lFilesString[:-1]\n\"");
+    } else if (tkinter3Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python3-tkinter");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, gPython3Name);
+        strcat(lDialogString,
+               " -S -c \"import tkinter;from tkinter import filedialog;root=tkinter.Tk();root.withdraw();");
+        strcat(lDialogString, "lFiles=filedialog.askopenfilename(");
+        if (aAllowMultipleSelects) {
+            strcat(lDialogString, "multiple=1,");
+        }
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "',");
+        }
+        if (aDefaultPathAndFile && strlen(aDefaultPathAndFile)) {
+            getPathWithoutFinalSlash(lString, aDefaultPathAndFile);
+            if (strlen(lString)) {
+                strcat(lDialogString, "initialdir='");
+                strcat(lDialogString, lString);
+                strcat(lDialogString, "',");
+            }
+            getLastName(lString, aDefaultPathAndFile);
+            if (strlen(lString)) {
+                strcat(lDialogString, "initialfile='");
+                strcat(lDialogString, lString);
+                strcat(lDialogString, "',");
+            }
+        }
+        if ((aNumOfFilterPatterns > 1)
+            || ((aNumOfFilterPatterns == 1) /*test because poor osx behaviour*/
+                && (aFilterPatterns[0][strlen(aFilterPatterns[0]) - 1] != '*'))) {
+            strcat(lDialogString, "filetypes=(");
+            strcat(lDialogString, "('");
+            if (aSingleFilterDescription && strlen(aSingleFilterDescription)) {
+                strcat(lDialogString, aSingleFilterDescription);
+            }
+            strcat(lDialogString, "',(");
+            for (i = 0; i < aNumOfFilterPatterns; i++) {
+                strcat(lDialogString, "'");
+                strcat(lDialogString, aFilterPatterns[i]);
+                strcat(lDialogString, "',");
+            }
+            strcat(lDialogString, ")),");
+            strcat(lDialogString, "('All files','*'))");
+        }
+        strcat(lDialogString, ");\
+\nif not isinstance(lFiles, tuple):\n\tprint(lFiles)\nelse:\
+\n\tlFilesString=''\n\tfor lFile in lFiles:\n\t\tlFilesString+=str(lFile)+'|'\
+\n\tprint(lFilesString[:-1])\n\"");
+    } else if (xdialogPresent() || dialogName()) {
+        if (xdialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "xdialog");
+                return (char const *) 1;
+            }
+            lWasGraphicDialog = 1;
+            strcpy(lDialogString, "(Xdialog ");
+        } else if (isTerminalRunning()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "dialog");
+                return (char const *) 0;
+            }
+            strcpy(lDialogString, "(dialog ");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "dialog");
+                return (char const *) 0;
+            }
+            lWasXterm = 1;
+            strcpy(lDialogString, terminalName());
+            strcat(lDialogString, "'(");
+            strcat(lDialogString, dialogName());
+            strcat(lDialogString, " ");
+        }
+
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "--title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
+        }
+
+        if (!xdialogPresent() && !gdialogPresent()) {
+            strcat(lDialogString, "--backtitle \"");
+            strcat(lDialogString,
+                   "tab: focus | /: populate | spacebar: fill text field | ok: TEXT FIELD ONLY");
+            strcat(lDialogString, "\" ");
+        }
+
+        strcat(lDialogString, "--fselect \"");
+        if (aDefaultPathAndFile && strlen(aDefaultPathAndFile)) {
+            if (!strchr(aDefaultPathAndFile, '/')) {
+                strcat(lDialogString, "./");
+            }
+            strcat(lDialogString, aDefaultPathAndFile);
+        } else if (!isTerminalRunning() && !lWasGraphicDialog) {
+            strcat(lDialogString, getenv("HOME"));
+            strcat(lDialogString, "/");
+        } else {
+            strcat(lDialogString, "./");
+        }
+
+        if (lWasGraphicDialog) {
+            strcat(lDialogString, "\" 0 60 ) 2>&1 ");
+        } else {
+            strcat(lDialogString, "\" 0 60  >/dev/tty) ");
+            if (lWasXterm) {
+                strcat(lDialogString,
+                       "2>/tmp/tinyfd.txt';cat /tmp/tinyfd.txt;rm /tmp/tinyfd.txt");
+            } else {
+                strcat(lDialogString, "2>&1 ; clear >/dev/tty");
+            }
+        }
+    } else {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            return tinyfd_inputBox(aTitle, NULL, NULL);
+        }
+        p2 = tinyfd_inputBox(aTitle, "Open file", "");
+        if (!fileExists(p2)) {
+            return NULL;
+        }
+        return p2;
     }
-        while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-        {}
-        pclose( lIn ) ;
-    if ( lBuff[strlen( lBuff ) -1] == '\n' )
-    {
-        lBuff[strlen( lBuff ) -1] = '\0' ;
+
+    if (tinyfd_verbose) printf("lDialogString: %s\n", lDialogString);
+    if (!(lIn = popen(lDialogString, "r"))) {
+        return NULL;
     }
-        /* printf( "lBuff: %s\n" , lBuff ) ; */
-        if ( ! strlen( lBuff ) || ! dirExists( lBuff ) )
-        {
-                return NULL ;
+    lBuff[0] = '\0';
+    p = lBuff;
+    while (fgets(p, sizeof(lBuff), lIn) != NULL) {
+        p += strlen(p);
+    }
+    pclose(lIn);
+    if (lBuff[strlen(lBuff) - 1] == '\n') {
+        lBuff[strlen(lBuff) - 1] = '\0';
+    }
+    /* printf( "lBuff: %s\n" , lBuff ) ; */
+    if (lWasKdialog && aAllowMultipleSelects) {
+        p = lBuff;
+        while ((p = strchr(p, '\n')))
+            *p = '|';
+    }
+    /* printf( "lBuff2: %s\n" , lBuff ) ; */
+    if (!strlen(lBuff)) {
+        return NULL;
+    }
+    if (aAllowMultipleSelects && strchr(lBuff, '|')) {
+        p2 = ensureFilesExist(lBuff, lBuff);
+    } else if (fileExists(lBuff)) {
+        p2 = lBuff;
+    } else {
+        return NULL;
+    }
+    /* printf( "lBuff3: %s\n" , p2 ) ; */
+
+    return p2;
+}
+
+
+char const *tinyfd_selectFolderDialog(
+        char const *const aTitle, /* "" */
+        char const *const aDefaultPath) /* "" */
+{
+    static char lBuff[MAX_PATH_OR_CMD];
+    char lDialogString[MAX_PATH_OR_CMD];
+    FILE *lIn;
+    char const *p;
+    int lWasGraphicDialog = 0;
+    int lWasXterm = 0;
+    lBuff[0] = '\0';
+
+    if (osascriptPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "applescript");
+            return (char const *) 1;
         }
-        return lBuff ;
+        strcpy(lDialogString, "osascript ");
+        if (!osx9orBetter())
+            strcat(lDialogString, " -e 'tell application \"System Events\"' -e 'Activate'");
+        strcat(lDialogString, " -e 'try' -e 'POSIX path of ( choose folder ");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "with prompt \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
+        }
+        if (aDefaultPath && strlen(aDefaultPath)) {
+            strcat(lDialogString, "default location \"");
+            strcat(lDialogString, aDefaultPath);
+            strcat(lDialogString, "\" ");
+        }
+        strcat(lDialogString, ")' ");
+        strcat(lDialogString, "-e 'on error number -128' ");
+        strcat(lDialogString, "-e 'end try'");
+        if (!osx9orBetter()) strcat(lDialogString, " -e 'end tell'");
+    } else if (kdialogPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "kdialog");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, "kdialog");
+        if (kdialogPresent() == 2) {
+            strcat(lDialogString,
+                   " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+        }
+        strcat(lDialogString, " --getexistingdirectory ");
+
+        if (aDefaultPath && strlen(aDefaultPath)) {
+            if (aDefaultPath[0] != '/') {
+                strcat(lDialogString, "$PWD/");
+            }
+            strcat(lDialogString, "\"");
+            strcat(lDialogString, aDefaultPath);
+            strcat(lDialogString, "\"");
+        } else {
+            strcat(lDialogString, "$PWD/");
+        }
+
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
+        }
+    } else if (zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent()) {
+        if (zenityPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "zenity");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "zenity");
+            if ((zenity3Present() >= 4) && !getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        } else if (matedialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "matedialog");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "matedialog");
+        } else if (shellementaryPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "shellementary");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "shellementary");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "qarma");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "qarma");
+            if (!getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        }
+        strcat(lDialogString, " --file-selection --directory");
+
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title=\"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
+        }
+        if (aDefaultPath && strlen(aDefaultPath)) {
+            strcat(lDialogString, " --filename=\"");
+            strcat(lDialogString, aDefaultPath);
+            strcat(lDialogString, "\"");
+        }
+        if (tinyfd_silent) strcat(lDialogString, " 2>/dev/null ");
+    } else if (!xdialogPresent() && tkinter2Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python2-tkinter");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, gPython2Name);
+        if (!isTerminalRunning() && isDarwin()) {
+            strcat(lDialogString, " -i");  /* for osx without console */
+        }
+        strcat(lDialogString,
+               " -S -c \"import Tkinter,tkFileDialog;root=Tkinter.Tk();root.withdraw();");
+
+        if (isDarwin()) {
+            strcat(lDialogString,
+                   "import os;os.system('''/usr/bin/osascript -e 'tell app \\\"Finder\\\" to set \
+frontmost of process \\\"Python\\\" to true' ''');");
+        }
+
+        strcat(lDialogString, "print tkFileDialog.askdirectory(");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "',");
+        }
+        if (aDefaultPath && strlen(aDefaultPath)) {
+            strcat(lDialogString, "initialdir='");
+            strcat(lDialogString, aDefaultPath);
+            strcat(lDialogString, "'");
+        }
+        strcat(lDialogString, ")\"");
+    } else if (!xdialogPresent() && tkinter3Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python3-tkinter");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, gPython3Name);
+        strcat(lDialogString,
+               " -S -c \"import tkinter;from tkinter import filedialog;root=tkinter.Tk();root.withdraw();");
+        strcat(lDialogString, "print( filedialog.askdirectory(");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "',");
+        }
+        if (aDefaultPath && strlen(aDefaultPath)) {
+            strcat(lDialogString, "initialdir='");
+            strcat(lDialogString, aDefaultPath);
+            strcat(lDialogString, "'");
+        }
+        strcat(lDialogString, ") )\"");
+    } else if (xdialogPresent() || dialogName()) {
+        if (xdialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "xdialog");
+                return (char const *) 1;
+            }
+            lWasGraphicDialog = 1;
+            strcpy(lDialogString, "(Xdialog ");
+        } else if (isTerminalRunning()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "dialog");
+                return (char const *) 0;
+            }
+            strcpy(lDialogString, "(dialog ");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "dialog");
+                return (char const *) 0;
+            }
+            lWasXterm = 1;
+            strcpy(lDialogString, terminalName());
+            strcat(lDialogString, "'(");
+            strcat(lDialogString, dialogName());
+            strcat(lDialogString, " ");
+        }
+
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, "--title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\" ");
+        }
+
+        if (!xdialogPresent() && !gdialogPresent()) {
+            strcat(lDialogString, "--backtitle \"");
+            strcat(lDialogString,
+                   "tab: focus | /: populate | spacebar: fill text field | ok: TEXT FIELD ONLY");
+            strcat(lDialogString, "\" ");
+        }
+
+        strcat(lDialogString, "--dselect \"");
+        if (aDefaultPath && strlen(aDefaultPath)) {
+            strcat(lDialogString, aDefaultPath);
+            ensureFinalSlash(lDialogString);
+        } else if (!isTerminalRunning() && !lWasGraphicDialog) {
+            strcat(lDialogString, getenv("HOME"));
+            strcat(lDialogString, "/");
+        } else {
+            strcat(lDialogString, "./");
+        }
+
+        if (lWasGraphicDialog) {
+            strcat(lDialogString, "\" 0 60 ) 2>&1 ");
+        } else {
+            strcat(lDialogString, "\" 0 60  >/dev/tty) ");
+            if (lWasXterm) {
+                strcat(lDialogString,
+                       "2>/tmp/tinyfd.txt';cat /tmp/tinyfd.txt;rm /tmp/tinyfd.txt");
+            } else {
+                strcat(lDialogString, "2>&1 ; clear >/dev/tty");
+            }
+        }
+    } else {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            return tinyfd_inputBox(aTitle, NULL, NULL);
+        }
+        p = tinyfd_inputBox(aTitle, "Select folder", "");
+        if (!p || !strlen(p) || !dirExists(p)) {
+            return NULL;
+        }
+        return p;
+    }
+    if (tinyfd_verbose) printf("lDialogString: %s\n", lDialogString);
+    if (!(lIn = popen(lDialogString, "r"))) {
+        return NULL;
+    }
+    while (fgets(lBuff, sizeof(lBuff), lIn) != NULL) {}
+    pclose(lIn);
+    if (lBuff[strlen(lBuff) - 1] == '\n') {
+        lBuff[strlen(lBuff) - 1] = '\0';
+    }
+    /* printf( "lBuff: %s\n" , lBuff ) ; */
+    if (!strlen(lBuff) || !dirExists(lBuff)) {
+        return NULL;
+    }
+    return lBuff;
 }
 
 
@@ -6928,389 +6410,368 @@ frontmost of process \\\"Python\\\" to true' ''');");
 /* aoResultRGB also contains the result */
 /* aDefaultRGB is used only if aDefaultHexRGB is NULL */
 /* aDefaultRGB and aoResultRGB can be the same array */
-char const * tinyfd_colorChooser(
-        char const * const aTitle , /* NULL or "" */
-        char const * const aDefaultHexRGB , /* NULL or "#FF0000"*/
-        unsigned char const aDefaultRGB[3] , /* { 0 , 255 , 255 } */
-        unsigned char aoResultRGB[3] ) /* { 0 , 0 , 0 } */
+char const *tinyfd_colorChooser(
+        char const *const aTitle, /* NULL or "" */
+        char const *const aDefaultHexRGB, /* NULL or "#FF0000"*/
+        unsigned char const aDefaultRGB[3], /* { 0 , 255 , 255 } */
+        unsigned char aoResultRGB[3]) /* { 0 , 0 , 0 } */
 {
-        static char lBuff [128] ;
-        char lTmp [128] ;
-        char lDialogString [MAX_PATH_OR_CMD] ;
-        char lDefaultHexRGB[8];
-        char * lpDefaultHexRGB;
-        unsigned char lDefaultRGB[3];
-        char const * p;
-        FILE * lIn ;
-        int i ;
-        int lWasZenity3 = 0 ;
-        int lWasOsascript = 0 ;
-        int lWasXdialog = 0 ;
-        lBuff[0]='\0';
+    static char lBuff[128];
+    char lTmp[128];
+    char lDialogString[MAX_PATH_OR_CMD];
+    char lDefaultHexRGB[8];
+    char *lpDefaultHexRGB;
+    unsigned char lDefaultRGB[3];
+    char const *p;
+    FILE *lIn;
+    int i;
+    int lWasZenity3 = 0;
+    int lWasOsascript = 0;
+    int lWasXdialog = 0;
+    lBuff[0] = '\0';
 
-        if ( aDefaultHexRGB )
-        {
-                Hex2RGB( aDefaultHexRGB , lDefaultRGB ) ;
-                lpDefaultHexRGB = (char *) aDefaultHexRGB ;
-        }
-        else
-        {
-                lDefaultRGB[0]=aDefaultRGB[0];
-                lDefaultRGB[1]=aDefaultRGB[1];
-                lDefaultRGB[2]=aDefaultRGB[2];
-                RGB2Hex( aDefaultRGB , lDefaultHexRGB ) ;
-                lpDefaultHexRGB = (char *) lDefaultHexRGB ;
-        }
+    if (aDefaultHexRGB) {
+        Hex2RGB(aDefaultHexRGB, lDefaultRGB);
+        lpDefaultHexRGB = (char *) aDefaultHexRGB;
+    } else {
+        lDefaultRGB[0] = aDefaultRGB[0];
+        lDefaultRGB[1] = aDefaultRGB[1];
+        lDefaultRGB[2] = aDefaultRGB[2];
+        RGB2Hex(aDefaultRGB, lDefaultHexRGB);
+        lpDefaultHexRGB = (char *) lDefaultHexRGB;
+    }
 
-        if ( osascriptPresent( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"applescript");return (char const *)1;}
-                lWasOsascript = 1 ;
-                strcpy( lDialogString , "osascript");
-                                
-                if ( ! osx9orBetter() ) 
-                {
-                        strcat( lDialogString , " -e 'tell application \"System Events\"' -e 'Activate'");
-                        strcat( lDialogString , " -e 'try' -e 'set mycolor to choose color default color {");
-                }
-                else 
-                {
-                        strcat( lDialogString ,
-" -e 'try' -e 'tell app (path to frontmost application as Unicode text) \
+    if (osascriptPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "applescript");
+            return (char const *) 1;
+        }
+        lWasOsascript = 1;
+        strcpy(lDialogString, "osascript");
+
+        if (!osx9orBetter()) {
+            strcat(lDialogString, " -e 'tell application \"System Events\"' -e 'Activate'");
+            strcat(lDialogString, " -e 'try' -e 'set mycolor to choose color default color {");
+        } else {
+            strcat(lDialogString,
+                   " -e 'try' -e 'tell app (path to frontmost application as Unicode text) \
 to set mycolor to choose color default color {");
-                }
-
-                sprintf(lTmp, "%d", 256 * lDefaultRGB[0] ) ;
-                strcat(lDialogString, lTmp ) ;
-                strcat(lDialogString, "," ) ;
-                sprintf(lTmp, "%d", 256 * lDefaultRGB[1] ) ;
-                strcat(lDialogString, lTmp ) ;
-                strcat(lDialogString, "," ) ;
-                sprintf(lTmp, "%d", 256 * lDefaultRGB[2] ) ;
-                strcat(lDialogString, lTmp ) ;
-                strcat(lDialogString, "}' " ) ;
-                strcat( lDialogString ,
-"-e 'set mystring to ((item 1 of mycolor) div 256 as integer) as string' " );
-                strcat( lDialogString ,
-"-e 'repeat with i from 2 to the count of mycolor' " );
-                strcat( lDialogString ,
-"-e 'set mystring to mystring & \" \" & ((item i of mycolor) div 256 as integer) as string' " );
-                strcat( lDialogString , "-e 'end repeat' " );
-                strcat( lDialogString , "-e 'mystring' ");
-                strcat(lDialogString, "-e 'on error number -128' " ) ;
-                strcat(lDialogString, "-e 'end try'") ;
-                if ( ! osx9orBetter() ) strcat( lDialogString, " -e 'end tell'") ;
         }
-        else if ( kdialogPresent() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"kdialog");return (char const *)1;}
-                strcpy( lDialogString , "kdialog" ) ;
-                if ( kdialogPresent() == 2 )
-                {
-                        strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                }
-                sprintf( lDialogString + strlen(lDialogString) , " --getcolor --default '%s'" , lpDefaultHexRGB ) ;
 
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, " --title \"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
+        sprintf(lTmp, "%d", 256 * lDefaultRGB[0]);
+        strcat(lDialogString, lTmp);
+        strcat(lDialogString, ",");
+        sprintf(lTmp, "%d", 256 * lDefaultRGB[1]);
+        strcat(lDialogString, lTmp);
+        strcat(lDialogString, ",");
+        sprintf(lTmp, "%d", 256 * lDefaultRGB[2]);
+        strcat(lDialogString, lTmp);
+        strcat(lDialogString, "}' ");
+        strcat(lDialogString,
+               "-e 'set mystring to ((item 1 of mycolor) div 256 as integer) as string' ");
+        strcat(lDialogString,
+               "-e 'repeat with i from 2 to the count of mycolor' ");
+        strcat(lDialogString,
+               "-e 'set mystring to mystring & \" \" & ((item i of mycolor) div 256 as integer) as string' ");
+        strcat(lDialogString, "-e 'end repeat' ");
+        strcat(lDialogString, "-e 'mystring' ");
+        strcat(lDialogString, "-e 'on error number -128' ");
+        strcat(lDialogString, "-e 'end try'");
+        if (!osx9orBetter()) strcat(lDialogString, " -e 'end tell'");
+    } else if (kdialogPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "kdialog");
+            return (char const *) 1;
         }
-        else if ( zenity3Present() || matedialogPresent() || shellementaryPresent() || qarmaPresent() )
-        {
-                lWasZenity3 = 1 ;
-                if ( zenity3Present() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity3");return (char const *)1;}
-                        strcpy( lDialogString , "zenity" );
-                        if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
-                        {
-                                strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                else if ( matedialogPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"matedialog");return (char const *)1;}
-                        strcpy( lDialogString , "matedialog" ) ;
-                }
-                else if ( shellementaryPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"shellementary");return (char const *)1;}
-                        strcpy( lDialogString , "shellementary" ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"qarma");return (char const *)1;}
-                        strcpy( lDialogString , "qarma" ) ;
-                        if ( !getenv("SSH_TTY") )
-                        {
-                                strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                strcat( lDialogString , " --color-selection --show-palette" ) ;
-                sprintf( lDialogString + strlen(lDialogString), " --color=%s" , lpDefaultHexRGB ) ;
-
-                if ( aTitle && strlen(aTitle) ) 
-                {
-                        strcat(lDialogString, " --title=\"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
-                if (tinyfd_silent) strcat( lDialogString , " 2>/dev/null ");
+        strcpy(lDialogString, "kdialog");
+        if (kdialogPresent() == 2) {
+            strcat(lDialogString,
+                   " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
         }
-        else if ( xdialogPresent() )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"xdialog");return (char const *)1;}
-                lWasXdialog = 1 ;
-                strcpy( lDialogString , "Xdialog --colorsel \"" ) ;
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, aTitle) ;
-                }
-                strcat(lDialogString, "\" 0 60 ") ;
-                sprintf(lTmp,"%hhu %hhu %hhu",lDefaultRGB[0],
-                        lDefaultRGB[1],lDefaultRGB[2]);
-                strcat(lDialogString, lTmp) ;
-                strcat(lDialogString, " 2>&1");
+        sprintf(lDialogString + strlen(lDialogString), " --getcolor --default '%s'",
+                lpDefaultHexRGB);
+
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title \"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
         }
-        else if ( tkinter2Present( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python2-tkinter");return (char const *)1;}
-                strcpy( lDialogString , gPython2Name ) ;
-                if ( ! isTerminalRunning( ) && isDarwin( ) )
-                {
-                strcat( lDialogString , " -i" ) ;  /* for osx without console */
-                }
-                
-                strcat( lDialogString ,
-" -S -c \"import Tkinter,tkColorChooser;root=Tkinter.Tk();root.withdraw();");
-
-                if ( isDarwin( ) )
-                {
-                        strcat( lDialogString ,
-"import os;os.system('''osascript -e 'tell app \\\"Finder\\\" to set \
-frontmost of process \\\"Python\\\" to true' ''');");
-                }
-
-                strcat( lDialogString , "res=tkColorChooser.askcolor(color='" ) ;
-                strcat(lDialogString, lpDefaultHexRGB ) ;
-                strcat(lDialogString, "'") ;
-
-
-            if ( aTitle && strlen(aTitle) )
-            {
-                        strcat(lDialogString, ",title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "'") ;
+    } else if (zenity3Present() || matedialogPresent() || shellementaryPresent() ||
+               qarmaPresent()) {
+        lWasZenity3 = 1;
+        if (zenity3Present()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "zenity3");
+                return (char const *) 1;
             }
-                strcat( lDialogString , ");\
-\nif res[1] is not None:\n\tprint res[1]\"" ) ;
+            strcpy(lDialogString, "zenity");
+            if ((zenity3Present() >= 4) && !getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        } else if (matedialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "matedialog");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "matedialog");
+        } else if (shellementaryPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "shellementary");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "shellementary");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "qarma");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "qarma");
+            if (!getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
         }
-        else if ( tkinter3Present( ) )
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python3-tkinter");return (char const *)1;}
-                strcpy( lDialogString , gPython3Name ) ;
-                strcat( lDialogString ,
-                        " -S -c \"import tkinter;from tkinter import colorchooser;root=tkinter.Tk();root.withdraw();");
-                strcat( lDialogString , "res=colorchooser.askcolor(color='" ) ;
-                strcat(lDialogString, lpDefaultHexRGB ) ;
-                strcat(lDialogString, "'") ;
+        strcat(lDialogString, " --color-selection --show-palette");
+        sprintf(lDialogString + strlen(lDialogString), " --color=%s", lpDefaultHexRGB);
 
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, ",title='") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "'") ;
-                }
-                strcat( lDialogString , ");\
-\nif res[1] is not None:\n\tprint(res[1])\"" ) ;
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title=\"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
         }
-        else
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){return tinyfd_inputBox(aTitle,NULL,NULL);}
-                p = tinyfd_inputBox(aTitle,
-                                "Enter hex rgb color (i.e. #f5ca20)",lpDefaultHexRGB);
-                if ( !p || (strlen(p) != 7) || (p[0] != '#') )
-                {
-                        return NULL ;
-                }
-                for ( i = 1 ; i < 7 ; i ++ )
-                {
-                        if ( ! isxdigit( p[i] ) )
-                        {
-                                return NULL ;
-                        }
-                }
-                Hex2RGB(p,aoResultRGB);
-                return p ;
+        if (tinyfd_silent) strcat(lDialogString, " 2>/dev/null ");
+    } else if (xdialogPresent()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "xdialog");
+            return (char const *) 1;
+        }
+        lWasXdialog = 1;
+        strcpy(lDialogString, "Xdialog --colorsel \"");
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, aTitle);
+        }
+        strcat(lDialogString, "\" 0 60 ");
+        sprintf(lTmp, "%hhu %hhu %hhu", lDefaultRGB[0],
+                lDefaultRGB[1], lDefaultRGB[2]);
+        strcat(lDialogString, lTmp);
+        strcat(lDialogString, " 2>&1");
+    } else if (tkinter2Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python2-tkinter");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, gPython2Name);
+        if (!isTerminalRunning() && isDarwin()) {
+            strcat(lDialogString, " -i");  /* for osx without console */
         }
 
-        if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
-        if ( ! ( lIn = popen( lDialogString , "r" ) ) )
-        {
-                return NULL ;
-    }
-        while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-        {
+        strcat(lDialogString,
+               " -S -c \"import Tkinter,tkColorChooser;root=Tkinter.Tk();root.withdraw();");
+
+        if (isDarwin()) {
+            strcat(lDialogString,
+                   "import os;os.system('''osascript -e 'tell app \\\"Finder\\\" to set \
+frontmost of process \\\"Python\\\" to true' ''');");
         }
-        pclose( lIn ) ;
-    if ( ! strlen( lBuff ) )
-    {
-        return NULL ;
-    }
-        /* printf( "len Buff: %lu\n" , strlen(lBuff) ) ; */
-        /* printf( "lBuff0: %s\n" , lBuff ) ; */
-    if ( lBuff[strlen( lBuff ) -1] == '\n' )
-    {
-        lBuff[strlen( lBuff ) -1] = '\0' ;
-    }
-    
-        if ( lWasZenity3 )
-    {
-                if ( lBuff[0] == '#' )
-                {
-                        if ( strlen(lBuff)>7 )
-                        {
-                                lBuff[3]=lBuff[5];
-                                lBuff[4]=lBuff[6];
-                                lBuff[5]=lBuff[9];
-                                lBuff[6]=lBuff[10];
-                                lBuff[7]='\0';
-                        }
-                Hex2RGB(lBuff,aoResultRGB);
-                }
-                else if ( lBuff[3] == '(' ) {
-                        sscanf(lBuff,"rgb(%hhu,%hhu,%hhu",
-                                        & aoResultRGB[0], & aoResultRGB[1],& aoResultRGB[2]);
-                        RGB2Hex(aoResultRGB,lBuff);
-                }
-                else if ( lBuff[4] == '(' ) {
-                        sscanf(lBuff,"rgba(%hhu,%hhu,%hhu",
-                                        & aoResultRGB[0], & aoResultRGB[1],& aoResultRGB[2]);
-                        RGB2Hex(aoResultRGB,lBuff);
-                }
-    }
-    else if ( lWasOsascript || lWasXdialog )
-    {
-                /* printf( "lBuff: %s\n" , lBuff ) ; */
-        sscanf(lBuff,"%hhu %hhu %hhu",
-                           & aoResultRGB[0], & aoResultRGB[1],& aoResultRGB[2]);
-        RGB2Hex(aoResultRGB,lBuff);
-    }
-    else
-    {
-                Hex2RGB(lBuff,aoResultRGB);
+
+        strcat(lDialogString, "res=tkColorChooser.askcolor(color='");
+        strcat(lDialogString, lpDefaultHexRGB);
+        strcat(lDialogString, "'");
+
+
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, ",title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "'");
         }
-        /* printf("%d %d %d\n", aoResultRGB[0],aoResultRGB[1],aoResultRGB[2]); */
+        strcat(lDialogString, ");\
+\nif res[1] is not None:\n\tprint res[1]\"");
+    } else if (tkinter3Present()) {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "python3-tkinter");
+            return (char const *) 1;
+        }
+        strcpy(lDialogString, gPython3Name);
+        strcat(lDialogString,
+               " -S -c \"import tkinter;from tkinter import colorchooser;root=tkinter.Tk();root.withdraw();");
+        strcat(lDialogString, "res=colorchooser.askcolor(color='");
+        strcat(lDialogString, lpDefaultHexRGB);
+        strcat(lDialogString, "'");
+
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, ",title='");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "'");
+        }
+        strcat(lDialogString, ");\
+\nif res[1] is not None:\n\tprint(res[1])\"");
+    } else {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            return tinyfd_inputBox(aTitle, NULL, NULL);
+        }
+        p = tinyfd_inputBox(aTitle,
+                            "Enter hex rgb color (i.e. #f5ca20)", lpDefaultHexRGB);
+        if (!p || (strlen(p) != 7) || (p[0] != '#')) {
+            return NULL;
+        }
+        for (i = 1; i < 7; i++) {
+            if (!isxdigit(p[i])) {
+                return NULL;
+            }
+        }
+        Hex2RGB(p, aoResultRGB);
+        return p;
+    }
+
+    if (tinyfd_verbose) printf("lDialogString: %s\n", lDialogString);
+    if (!(lIn = popen(lDialogString, "r"))) {
+        return NULL;
+    }
+    while (fgets(lBuff, sizeof(lBuff), lIn) != NULL) {
+    }
+    pclose(lIn);
+    if (!strlen(lBuff)) {
+        return NULL;
+    }
+    /* printf( "len Buff: %lu\n" , strlen(lBuff) ) ; */
+    /* printf( "lBuff0: %s\n" , lBuff ) ; */
+    if (lBuff[strlen(lBuff) - 1] == '\n') {
+        lBuff[strlen(lBuff) - 1] = '\0';
+    }
+
+    if (lWasZenity3) {
+        if (lBuff[0] == '#') {
+            if (strlen(lBuff) > 7) {
+                lBuff[3] = lBuff[5];
+                lBuff[4] = lBuff[6];
+                lBuff[5] = lBuff[9];
+                lBuff[6] = lBuff[10];
+                lBuff[7] = '\0';
+            }
+            Hex2RGB(lBuff, aoResultRGB);
+        } else if (lBuff[3] == '(') {
+            sscanf(lBuff, "rgb(%hhu,%hhu,%hhu",
+                   &aoResultRGB[0], &aoResultRGB[1], &aoResultRGB[2]);
+            RGB2Hex(aoResultRGB, lBuff);
+        } else if (lBuff[4] == '(') {
+            sscanf(lBuff, "rgba(%hhu,%hhu,%hhu",
+                   &aoResultRGB[0], &aoResultRGB[1], &aoResultRGB[2]);
+            RGB2Hex(aoResultRGB, lBuff);
+        }
+    } else if (lWasOsascript || lWasXdialog) {
         /* printf( "lBuff: %s\n" , lBuff ) ; */
-        return lBuff ;
+        sscanf(lBuff, "%hhu %hhu %hhu",
+               &aoResultRGB[0], &aoResultRGB[1], &aoResultRGB[2]);
+        RGB2Hex(aoResultRGB, lBuff);
+    } else {
+        Hex2RGB(lBuff, aoResultRGB);
+    }
+    /* printf("%d %d %d\n", aoResultRGB[0],aoResultRGB[1],aoResultRGB[2]); */
+    /* printf( "lBuff: %s\n" , lBuff ) ; */
+    return lBuff;
 }
 
 
 /* not cross platform - zenity only */
 /* contributed by Attila Dusnoki */
-char const * tinyfd_arrayDialog(
-        char const * const aTitle , /* "" */
-        int const aNumOfColumns , /* 2 */
-        char const * const * const aColumns , /* {"Column 1","Column 2"} */
-        int const aNumOfRows , /* 2 */
-        char const * const * const aCells ) 
-                /* {"Row1 Col1","Row1 Col2","Row2 Col1","Row2 Col2"} */
+char const *tinyfd_arrayDialog(
+        char const *const aTitle, /* "" */
+        int const aNumOfColumns, /* 2 */
+        char const *const *const aColumns, /* {"Column 1","Column 2"} */
+        int const aNumOfRows, /* 2 */
+        char const *const *const aCells)
+/* {"Row1 Col1","Row1 Col2","Row2 Col1","Row2 Col2"} */
 {
-        static char lBuff [MAX_PATH_OR_CMD] ;
-        char lDialogString [MAX_PATH_OR_CMD] ;
-        FILE * lIn ;
-        int i ;
+    static char lBuff[MAX_PATH_OR_CMD];
+    char lDialogString[MAX_PATH_OR_CMD];
+    FILE *lIn;
+    int i;
 
-        lBuff[0]='\0';
+    lBuff[0] = '\0';
 
-        if ( zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent() )
-        {
-                if ( zenityPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"zenity");return (char const *)1;}
-                        strcpy( lDialogString , "zenity" ) ;
-                        if ( (zenity3Present() >= 4) && !getenv("SSH_TTY") )
-                        {
-                                strcat( lDialogString, " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                else if ( matedialogPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"matedialog");return (char const *)1;}
-                        strcpy( lDialogString , "matedialog" ) ;
-                }
-                else if ( shellementaryPresent() )
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"shellementary");return (char const *)1;}
-                        strcpy( lDialogString , "shellementary" ) ;
-                }
-                else
-                {
-                        if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"qarma");return (char const *)1;}
-                        strcpy( lDialogString , "qarma" ) ;
-                        if ( !getenv("SSH_TTY") )
-                        {
-                                strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
-                        }
-                }
-                strcat( lDialogString , " --list --print-column=ALL" ) ;
-
-                if ( aTitle && strlen(aTitle) )
-                {
-                        strcat(lDialogString, " --title=\"") ;
-                        strcat(lDialogString, aTitle) ;
-                        strcat(lDialogString, "\"") ;
-                }
-
-                if ( aColumns && (aNumOfColumns > 0) )
-                {
-                        for ( i = 0 ; i < aNumOfColumns ; i ++ )
-                        {
-                                strcat( lDialogString , " --column=\"" ) ;
-                                strcat( lDialogString , aColumns [i] ) ;
-                                strcat( lDialogString , "\"" ) ;
-                        }
-                }
-
-                if ( aCells && (aNumOfRows > 0) )
-                {
-                        strcat( lDialogString , " " ) ;
-                        for ( i = 0 ; i < aNumOfRows*aNumOfColumns ; i ++ )
-                        {
-                                strcat( lDialogString , "\"" ) ;
-                                strcat( lDialogString , aCells [i] ) ;
-                                strcat( lDialogString , "\" " ) ;
-                        }
-                }
+    if (zenityPresent() || matedialogPresent() || shellementaryPresent() || qarmaPresent()) {
+        if (zenityPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "zenity");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "zenity");
+            if ((zenity3Present() >= 4) && !getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(sleep .01;xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
+        } else if (matedialogPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "matedialog");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "matedialog");
+        } else if (shellementaryPresent()) {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "shellementary");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "shellementary");
+        } else {
+            if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+                strcpy(tinyfd_response, "qarma");
+                return (char const *) 1;
+            }
+            strcpy(lDialogString, "qarma");
+            if (!getenv("SSH_TTY")) {
+                strcat(lDialogString,
+                       " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
+            }
         }
-        else
-        {
-                if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"");return (char const *)0;}
-                return NULL ;
+        strcat(lDialogString, " --list --print-column=ALL");
+
+        if (aTitle && strlen(aTitle)) {
+            strcat(lDialogString, " --title=\"");
+            strcat(lDialogString, aTitle);
+            strcat(lDialogString, "\"");
         }
 
-        if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
-        if ( ! ( lIn = popen( lDialogString , "r" ) ) )
-        {
-                return NULL ;
+        if (aColumns && (aNumOfColumns > 0)) {
+            for (i = 0; i < aNumOfColumns; i++) {
+                strcat(lDialogString, " --column=\"");
+                strcat(lDialogString, aColumns[i]);
+                strcat(lDialogString, "\"");
+            }
         }
-        while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-        {}
-        pclose( lIn ) ;
-        if ( lBuff[strlen( lBuff ) -1] == '\n' )
-        {
-                lBuff[strlen( lBuff ) -1] = '\0' ;
+
+        if (aCells && (aNumOfRows > 0)) {
+            strcat(lDialogString, " ");
+            for (i = 0; i < aNumOfRows * aNumOfColumns; i++) {
+                strcat(lDialogString, "\"");
+                strcat(lDialogString, aCells[i]);
+                strcat(lDialogString, "\" ");
+            }
         }
-        /* printf( "lBuff: %s\n" , lBuff ) ; */
-        if ( ! strlen( lBuff ) )
-        {
-                return NULL ;
+    } else {
+        if (aTitle && !strcmp(aTitle, "tinyfd_query")) {
+            strcpy(tinyfd_response, "");
+            return (char const *) 0;
         }
-        return lBuff ;
+        return NULL;
+    }
+
+    if (tinyfd_verbose) printf("lDialogString: %s\n", lDialogString);
+    if (!(lIn = popen(lDialogString, "r"))) {
+        return NULL;
+    }
+    while (fgets(lBuff, sizeof(lBuff), lIn) != NULL) {}
+    pclose(lIn);
+    if (lBuff[strlen(lBuff) - 1] == '\n') {
+        lBuff[strlen(lBuff) - 1] = '\0';
+    }
+    /* printf( "lBuff: %s\n" , lBuff ) ; */
+    if (!strlen(lBuff)) {
+        return NULL;
+    }
+    return lBuff;
 }
+
 #endif /* _WIN32 */
 
 
@@ -7480,7 +6941,7 @@ tinyfd_messageBox("The selected hexcolor is",
 */
 
 #ifdef _MSC_VER
-#pragma warning(default:4996)
+                                                                                                                        #pragma warning(default:4996)
 #pragma warning(default:4100)
 #pragma warning(default:4706)
 #endif

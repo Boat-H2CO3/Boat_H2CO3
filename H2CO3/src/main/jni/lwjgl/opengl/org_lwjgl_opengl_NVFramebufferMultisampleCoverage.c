@@ -6,14 +6,20 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glRenderbufferStorageMultisampleCoverageNVPROC) (jint, jint, jint, jint, jint, jint);
+typedef void (APIENTRY *glRenderbufferStorageMultisampleCoverageNVPROC)(jint, jint, jint, jint,
+                                                                        jint, jint);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVFramebufferMultisampleCoverage_glRenderbufferStorageMultisampleCoverageNV(JNIEnv *__env, jclass clazz, jint target, jint coverageSamples, jint colorSamples, jint internalformat, jint width, jint height) {
-    glRenderbufferStorageMultisampleCoverageNVPROC glRenderbufferStorageMultisampleCoverageNV = (glRenderbufferStorageMultisampleCoverageNVPROC)tlsGetFunction(1974);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_NVFramebufferMultisampleCoverage_glRenderbufferStorageMultisampleCoverageNV(
+        JNIEnv *__env, jclass clazz, jint target, jint coverageSamples, jint colorSamples,
+        jint internalformat, jint width, jint height) {
+    glRenderbufferStorageMultisampleCoverageNVPROC glRenderbufferStorageMultisampleCoverageNV = (glRenderbufferStorageMultisampleCoverageNVPROC) tlsGetFunction(
+            1974);
     UNUSED_PARAM(clazz)
-    glRenderbufferStorageMultisampleCoverageNV(target, coverageSamples, colorSamples, internalformat, width, height);
+    glRenderbufferStorageMultisampleCoverageNV(target, coverageSamples, colorSamples,
+                                               internalformat, width, height);
 }
 
 EXTERN_C_EXIT

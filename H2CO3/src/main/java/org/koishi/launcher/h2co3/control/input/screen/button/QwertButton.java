@@ -6,13 +6,12 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
-import org.koishi.launcher.h2co3.R;
-
 public class QwertButton extends BaseButton {
 
     private String char_none;
     private String char_shift;
     private String char_capslock;
+
     public QwertButton(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         TypedArray array = context.obtainStyledAttributes(attrs, org.koishi.launcher.h2co3.resources.R.styleable.QwertButton);

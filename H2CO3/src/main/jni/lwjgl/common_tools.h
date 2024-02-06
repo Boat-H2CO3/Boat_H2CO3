@@ -7,16 +7,18 @@
 #include <jni.h>
 
 #ifdef LWJGL_WINDOWS
-    #include "WindowsConfig.h"
+#include "WindowsConfig.h"
 #endif
 #ifdef LWJGL_LINUX
-    #include "LinuxConfig.h"
+#include "LinuxConfig.h"
 #endif
 #ifdef LWJGL_H2CO3Launcher
-    #include "H2CO3LauncherConfig.h"
+
+#include "H2CO3LauncherConfig.h"
+
 #endif
 #ifdef LWJGL_MACOS
-    #include "macOSConfig.h"
+#include "macOSConfig.h"
 #endif
 
 // Per-thread data, stored in a platform-specific thread-local.
@@ -28,7 +30,7 @@ typedef struct EnvData_ {
     char padding[sizeof(void *) - sizeof(jboolean)];
     // Cached JNIEnv* for the current thread. Faster than calling jvm->GetEnv.
     // NOTE: points to JavaThread::_jni_environment (jdk/src/hotspot/share/runtime/thread.hpp), which is itself a pointer to the JNINativeInterface struct.
-    JNIEnv* env;
+    JNIEnv *env;
     // The JNIEnv copy for the current thread.
     // Not NULL in threads where saveErrno/saveLastError has been called, or an OpenGL(ES) context has been made current.
     //   * env->reserved2 points to this EnvData instance.
@@ -45,7 +47,7 @@ typedef struct EnvData_ {
 } EnvData;
 
 // Cached JNIEnv, using TLS. Will use attachCurrentThreadAsDaemon in foreign threads.
-extern JNIEnv* getEnv(jboolean* async);
+extern JNIEnv *getEnv(jboolean *async);
 
 // Upcalls are used to create EnvData, because these macros will be used in non-core modules too.
 /*
@@ -63,7 +65,7 @@ extern JNIEnv* getEnv(jboolean* async);
     envData->errnum = errnum;
 
 #ifdef LWJGL_WINDOWS
-    #define saveLastError() \
+#define saveLastError() \
         jint LastError = (jint)GetLastError(); \
         EnvData *envData = (EnvData *)(*__env)->reserved2; \
         if (envData == (*__env)->reserved0) { \
@@ -72,19 +74,19 @@ extern JNIEnv* getEnv(jboolean* async);
         } \
         envData->LastError = LastError;
 
-    #define VA_LIST_CAST &(va_list)
+#define VA_LIST_CAST &(va_list)
 #else
-    #define VA_LIST_CAST (va_list *)
+#define VA_LIST_CAST (va_list *)
 #endif
 
 // -----------------------------------------------------
 
 #ifdef __cplusplus
-    #define EXTERN_C_ENTER extern "C" {
-    #define EXTERN_C_EXIT }
+#define EXTERN_C_ENTER extern "C" {
+#define EXTERN_C_EXIT }
 #else
-    #define EXTERN_C_ENTER
-    #define EXTERN_C_EXIT
+#define EXTERN_C_ENTER
+#define EXTERN_C_EXIT
 #endif
 
 // -----------------------------------------------------

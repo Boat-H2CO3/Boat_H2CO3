@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -184,6 +183,11 @@ public class H2CO3MarkdownView extends FastScrollNestedScrollView {
         webView.setWebViewClient(new WebViewClient());
     }
 
+    private boolean isDarkModeEnabled() {
+        int nightModeFlags = getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+    }
+
     private static class WebViewClient extends androidx.webkit.WebViewClientCompat {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -207,10 +211,5 @@ public class H2CO3MarkdownView extends FastScrollNestedScrollView {
             view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
             return true;
         }
-    }
-
-    private boolean isDarkModeEnabled() {
-        int nightModeFlags = getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
     }
 }

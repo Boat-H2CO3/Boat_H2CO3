@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/app_3dp">
 
     <org.koishi.launcher.h2co3.resources.component.H2CO3CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,10 +10,10 @@
         style="@style/Theme.H2CO3.CardViewElevated.NoPadding"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:contentPadding="@dimen/app_10dp"
+        android:layout_marginHorizontal="0dp"
         android:layout_marginTop="0dp"
-        android:layout_marginHorizontal="0dp">
+        android:orientation="vertical"
+        app:contentPadding="@dimen/app_10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,10 +40,10 @@
                     style="@style/Theme.H2CO3.CardTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:maxLines="1"
                     android:ellipsize="end"
-                    android:textSize="16sp"
-                    android:text="@string/user_add" />
+                    android:maxLines="1"
+                    android:text="@string/user_add"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

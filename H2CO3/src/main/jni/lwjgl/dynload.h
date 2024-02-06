@@ -43,10 +43,13 @@ extern "C" {
 
 typedef struct DLLib_ DLLib;
 
-DL_API DLLib* dlLoadLibrary   (const char* libPath);
-DL_API void   dlFreeLibrary   (DLLib* pLib);
-DL_API void*  dlFindSymbol    (DLLib* pLib, const char* pSymbolName);
-DL_API int    dlGetLibraryPath(DLLib* pLib, char* sOut, int bufSize);
+DL_API DLLib *dlLoadLibrary(const char *libPath);
+
+DL_API void dlFreeLibrary(DLLib *pLib);
+
+DL_API void *dlFindSymbol(DLLib *pLib, const char *pSymbolName);
+
+DL_API int dlGetLibraryPath(DLLib *pLib, char *sOut, int bufSize);
 
 
 /* symbol table enumeration - only for symbol lookup, not resolve */
@@ -54,12 +57,15 @@ DL_API int    dlGetLibraryPath(DLLib* pLib, char* sOut, int bufSize);
 
 typedef struct DLSyms_ DLSyms;
 
-DL_API DLSyms*     dlSymsInit   (const char* libPath);
-DL_API void        dlSymsCleanup(DLSyms* pSyms);
+DL_API DLSyms *dlSymsInit(const char *libPath);
 
-DL_API int         dlSymsCount        (DLSyms* pSyms);
-DL_API const char* dlSymsName         (DLSyms* pSyms, int index);
-DL_API const char* dlSymsNameFromValue(DLSyms* pSyms, void* value); /* symbol must be loaded */
+DL_API void dlSymsCleanup(DLSyms *pSyms);
+
+DL_API int dlSymsCount(DLSyms *pSyms);
+
+DL_API const char *dlSymsName(DLSyms *pSyms, int index);
+
+DL_API const char *dlSymsNameFromValue(DLSyms *pSyms, void *value); /* symbol must be loaded */
 
 
 #ifdef __cplusplus

@@ -44,9 +44,12 @@ hooked_ProcessImpl_forkAndExec(JNIEnv *env, jobject process, jint mode, jbyteArr
     if (!androidEnv) {
         H2CO3_INTERNAL_LOG("forkAndExec error:androidEnv in null");
     }
-    jmethodID method_OpenLink = (*androidEnv)->GetStaticMethodID(androidEnv, h2co3launcher->class_H2CO3LauncherLib, "openLink",
-                                                          "(Ljava/lang/String;)V");
-    (*androidEnv)->CallStaticVoidMethod(androidEnv, h2co3launcher->class_H2CO3LauncherLib, method_OpenLink,
+    jmethodID method_OpenLink = (*androidEnv)->GetStaticMethodID(androidEnv,
+                                                                 h2co3launcher->class_H2CO3LauncherLib,
+                                                                 "openLink",
+                                                                 "(Ljava/lang/String;)V");
+    (*androidEnv)->CallStaticVoidMethod(androidEnv, h2co3launcher->class_H2CO3LauncherLib,
+                                        method_OpenLink,
                                         (*androidEnv)->NewStringUTF(androidEnv, cs));
     if (detachable) (*androidVm)->DetachCurrentThread(androidVm);
 

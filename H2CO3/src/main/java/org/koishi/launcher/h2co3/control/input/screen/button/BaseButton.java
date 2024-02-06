@@ -7,8 +7,6 @@ import android.util.AttributeSet;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 
-import org.koishi.launcher.h2co3.R;
-
 public class BaseButton extends AppCompatButton {
 
     private String button_name;

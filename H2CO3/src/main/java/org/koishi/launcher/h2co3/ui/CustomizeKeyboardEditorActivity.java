@@ -1,7 +1,6 @@
 package org.koishi.launcher.h2co3.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -10,21 +9,17 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatToggleButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import org.koishi.launcher.h2co3.R;
-import org.koishi.launcher.h2co3.control.ckb.achieve.CkbManager;
-import org.koishi.launcher.h2co3.control.ckb.achieve.CkbManagerDialog;
 import org.koishi.launcher.h2co3.control.ckb.support.CallCustomizeKeyboard;
 import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.controller.Controller;
 import org.koishi.launcher.h2co3.control.controller.H2CO3VirtualController;
 import org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent;
-import org.koishi.launcher.h2co3.control.input.screen.CustomizeKeyboard;
 import org.koishi.launcher.h2co3.core.utils.PicUtils;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 

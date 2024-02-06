@@ -7,17 +7,17 @@
     android:fitsSystemWindows="true"
     app:liftOnScroll="true">
 
-        <org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@null"
-            android:elevation="0dp"
-            android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
-            app:layout_collapseMode="pin"
-            tools:title="Title">
+    <org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@null"
+        android:elevation="0dp"
+        android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+        app:layout_collapseMode="pin"
+        tools:title="Title">
 
-        </org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar>
+    </org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar>
 
 </com.google.android.material.appbar.AppBarLayout>

@@ -16,6 +16,13 @@ import java.io.ByteArrayOutputStream;
 
 public class Avatar {
 
+    static final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+        }
+    };
+
     public static void setAvatar(String texture, ImageView face) {
         if (texture == null || face == null) {
             return;
@@ -66,11 +73,4 @@ public class Avatar {
         options.inScaled = false;
         return BitmapFactory.decodeResource(context.getResources(), id, options);
     }
-
-    static final Handler handler = new Handler() {
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-        }
-    };
 }

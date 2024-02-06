@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.control.ckb.button.GameButton;
 import org.koishi.launcher.h2co3.control.ckb.support.CallCustomizeKeyboard;
 import org.koishi.launcher.h2co3.control.ckb.support.GameButtonArray;

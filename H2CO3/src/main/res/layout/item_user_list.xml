@@ -20,9 +20,9 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_toStartOf="@+id/item_listview_user_remove"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/item_listview_user_remove"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -43,8 +43,8 @@
                         style="@style/Theme.H2CO3.CardTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
                         android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="aaaaaaaaavvxvxvxcvxvxcvxvxcvaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
 
                     <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
@@ -52,8 +52,8 @@
                         style="@style/Theme.H2CO3.CardContent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
                         android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="@string/user_state_offline" />
 
                 </LinearLayout>

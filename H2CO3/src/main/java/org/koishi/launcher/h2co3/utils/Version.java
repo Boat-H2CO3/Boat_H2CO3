@@ -21,6 +21,7 @@ public class Version {
     public String getVersionType() {
         return versionType;
     }
+
     public String getVersionUrl() {
         return versionUrl;
     }

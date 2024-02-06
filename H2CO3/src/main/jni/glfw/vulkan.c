@@ -16,10 +16,9 @@
 //////                       GLFW internal API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-GLFWbool _glfwInitVulkan(int mode)
-{
+GLFWbool _glfwInitVulkan(int mode) {
     VkResult err;
-    VkExtensionProperties* ep;
+    VkExtensionProperties *ep;
     uint32_t i, count;
 
     if (_glfw.vk.available)
@@ -39,8 +38,7 @@ GLFWbool _glfwInitVulkan(int mode)
 #else
     _glfw.vk.handle = _glfw_dlopen("libvulkan.so.1");
 #endif
-    if (!_glfw.vk.handle)
-    {
+    if (!_glfw.vk.handle) {
         if (mode == _GLFW_REQUIRE_LOADER)
             _glfwInputError(GLFW_API_UNAVAILABLE, "Vulkan: Loader not found");
 
@@ -48,9 +46,8 @@ GLFWbool _glfwInitVulkan(int mode)
     }
 
     _glfw.vk.GetInstanceProcAddr = (PFN_vkGetInstanceProcAddr)
-        _glfw_dlsym(_glfw.vk.handle, "vkGetInstanceProcAddr");
-    if (!_glfw.vk.GetInstanceProcAddr)
-    {
+            _glfw_dlsym(_glfw.vk.handle, "vkGetInstanceProcAddr");
+    if (!_glfw.vk.GetInstanceProcAddr) {
         _glfwInputError(GLFW_API_UNAVAILABLE,
                         "Vulkan: Loader does not export vkGetInstanceProcAddr");
 
@@ -59,9 +56,8 @@ GLFWbool _glfwInitVulkan(int mode)
     }
 
     _glfw.vk.EnumerateInstanceExtensionProperties = (PFN_vkEnumerateInstanceExtensionProperties)
-        vkGetInstanceProcAddr(NULL, "vkEnumerateInstanceExtensionProperties");
-    if (!_glfw.vk.EnumerateInstanceExtensionProperties)
-    {
+            vkGetInstanceProcAddr(NULL, "vkEnumerateInstanceExtensionProperties");
+    if (!_glfw.vk.EnumerateInstanceExtensionProperties) {
         _glfwInputError(GLFW_API_UNAVAILABLE,
                         "Vulkan: Failed to retrieve vkEnumerateInstanceExtensionProperties");
 
@@ -71,11 +67,9 @@ GLFWbool _glfwInitVulkan(int mode)
 #endif // _GLFW_VULKAN_STATIC
 
     err = vkEnumerateInstanceExtensionProperties(NULL, &count, NULL);
-    if (err)
-    {
+    if (err) {
         // NOTE: This happens on systems with a loader but without any Vulkan ICD
-        if (mode == _GLFW_REQUIRE_LOADER)
-        {
+        if (mode == _GLFW_REQUIRE_LOADER) {
             _glfwInputError(GLFW_API_UNAVAILABLE,
                             "Vulkan: Failed to query instance extension count: %s",
                             _glfwGetVulkanResultString(err));
@@ -88,8 +82,7 @@ GLFWbool _glfwInitVulkan(int mode)
     ep = calloc(count, sizeof(VkExtensionProperties));
 
     err = vkEnumerateInstanceExtensionProperties(NULL, &count, ep);
-    if (err)
-    {
+    if (err) {
         _glfwInputError(GLFW_API_UNAVAILABLE,
                         "Vulkan: Failed to query instance extensions: %s",
                         _glfwGetVulkanResultString(err));
@@ -99,8 +92,7 @@ GLFWbool _glfwInitVulkan(int mode)
         return GLFW_FALSE;
     }
 
-    for (i = 0;  i < count;  i++)
-    {
+    for (i = 0; i < count; i++) {
         if (strcmp(ep[i].extensionName, "VK_KHR_surface") == 0)
             _glfw.vk.KHR_surface = GLFW_TRUE;
 #if defined(_GLFW_WIN32)
@@ -134,18 +126,15 @@ GLFWbool _glfwInitVulkan(int mode)
     return GLFW_TRUE;
 }
 
-void _glfwTerminateVulkan(void)
-{
+void _glfwTerminateVulkan(void) {
 #if !defined(_GLFW_VULKAN_STATIC)
     if (_glfw.vk.handle)
         _glfw_dlclose(_glfw.vk.handle);
 #endif
 }
 
-const char* _glfwGetVulkanResultString(VkResult result)
-{
-    switch (result)
-    {
+const char *_glfwGetVulkanResultString(VkResult result) {
+    switch (result) {
         case VK_SUCCESS:
             return "Success";
         case VK_NOT_READY:
@@ -202,14 +191,12 @@ const char* _glfwGetVulkanResultString(VkResult result)
 //////                        GLFW public API                       //////
 //////////////////////////////////////////////////////////////////////////
 
-GLFWAPI int glfwVulkanSupported(void)
-{
+GLFWAPI int glfwVulkanSupported(void) {
     _GLFW_REQUIRE_INIT_OR_RETURN(GLFW_FALSE);
     return _glfwInitVulkan(_GLFW_FIND_LOADER);
 }
 
-GLFWAPI const char** glfwGetRequiredInstanceExtensions(uint32_t* count)
-{
+GLFWAPI const char **glfwGetRequiredInstanceExtensions(uint32_t *count) {
     assert(count != NULL);
 
     *count = 0;
@@ -223,12 +210,11 @@ GLFWAPI const char** glfwGetRequiredInstanceExtensions(uint32_t* count)
         return NULL;
 
     *count = 2;
-    return (const char**) _glfw.vk.extensions;
+    return (const char **) _glfw.vk.extensions;
 }
 
 GLFWAPI GLFWvkproc glfwGetInstanceProcAddress(VkInstance instance,
-                                              const char* procname)
-{
+                                              const char *procname) {
     GLFWvkproc proc;
     assert(procname != NULL);
 
@@ -254,8 +240,7 @@ GLFWAPI GLFWvkproc glfwGetInstanceProcAddress(VkInstance instance,
 
 GLFWAPI int glfwGetPhysicalDevicePresentationSupport(VkInstance instance,
                                                      VkPhysicalDevice device,
-                                                     uint32_t queuefamily)
-{
+                                                     uint32_t queuefamily) {
     assert(instance != VK_NULL_HANDLE);
     assert(device != VK_NULL_HANDLE);
 
@@ -264,8 +249,7 @@ GLFWAPI int glfwGetPhysicalDevicePresentationSupport(VkInstance instance,
     if (!_glfwInitVulkan(_GLFW_REQUIRE_LOADER))
         return GLFW_FALSE;
 
-    if (!_glfw.vk.extensions[0])
-    {
+    if (!_glfw.vk.extensions[0]) {
         _glfwInputError(GLFW_API_UNAVAILABLE,
                         "Vulkan: Window surface creation extensions not found");
         return GLFW_FALSE;
@@ -277,11 +261,10 @@ GLFWAPI int glfwGetPhysicalDevicePresentationSupport(VkInstance instance,
 }
 
 GLFWAPI VkResult glfwCreateWindowSurface(VkInstance instance,
-                                         GLFWwindow* handle,
-                                         const VkAllocationCallbacks* allocator,
-                                         VkSurfaceKHR* surface)
-{
-    _GLFWwindow* window = (_GLFWwindow*) handle;
+                                         GLFWwindow *handle,
+                                         const VkAllocationCallbacks *allocator,
+                                         VkSurfaceKHR *surface) {
+    _GLFWwindow *window = (_GLFWwindow *) handle;
     assert(instance != VK_NULL_HANDLE);
     assert(window != NULL);
     assert(surface != NULL);
@@ -293,15 +276,13 @@ GLFWAPI VkResult glfwCreateWindowSurface(VkInstance instance,
     if (!_glfwInitVulkan(_GLFW_REQUIRE_LOADER))
         return VK_ERROR_INITIALIZATION_FAILED;
 
-    if (!_glfw.vk.extensions[0])
-    {
+    if (!_glfw.vk.extensions[0]) {
         _glfwInputError(GLFW_API_UNAVAILABLE,
                         "Vulkan: Window surface creation extensions not found");
         return VK_ERROR_EXTENSION_NOT_PRESENT;
     }
 
-    if (window->context.client != GLFW_NO_API)
-    {
+    if (window->context.client != GLFW_NO_API) {
         _glfwInputError(GLFW_INVALID_VALUE,
                         "Vulkan: Window surface creation requires the window to have the client API set to GLFW_NO_API");
         return VK_ERROR_NATIVE_WINDOW_IN_USE_KHR;

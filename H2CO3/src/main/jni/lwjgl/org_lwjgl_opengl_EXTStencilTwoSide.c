@@ -6,14 +6,19 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glActiveStencilFaceEXTPROC) (jint);
+typedef void (APIENTRY *glActiveStencilFaceEXTPROC)(jint);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTStencilTwoSide_glActiveStencilFaceEXT(JNIEnv *__env, jclass clazz, jint face) {
-    glActiveStencilFaceEXTPROC glActiveStencilFaceEXT = (glActiveStencilFaceEXTPROC)tlsGetFunction(1816);
-    UNUSED_PARAM(clazz)
-    glActiveStencilFaceEXT(face);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_EXTStencilTwoSide_glActiveStencilFaceEXT(JNIEnv
+*__env,
+jclass clazz, jint
+face) {
+glActiveStencilFaceEXTPROC glActiveStencilFaceEXT = (glActiveStencilFaceEXTPROC) tlsGetFunction(
+        1816);
+UNUSED_PARAM(clazz)
+glActiveStencilFaceEXT(face);
 }
 
 EXTERN_C_EXIT

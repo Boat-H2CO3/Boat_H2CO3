@@ -4,8 +4,6 @@ package org.koishi.launcher.h2co3.core.utils.function;
  * @author huangyuhui
  */
 public interface ExceptionalConsumer<T, E extends Exception> {
-    void accept(T t) throws E;
-
     static <T, E extends Exception> ExceptionalConsumer<T, E> fromRunnable(ExceptionalRunnable<E> runnable) {
         return new ExceptionalConsumer<T, E>() {
             @Override
@@ -24,4 +22,6 @@ public interface ExceptionalConsumer<T, E extends Exception> {
         return s -> {
         };
     }
+
+    void accept(T t) throws E;
 }

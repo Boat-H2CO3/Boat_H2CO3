@@ -41,8 +41,7 @@ typedef unsigned long ffi_arg;
 typedef signed long ffi_sarg;
 #endif
 
-typedef enum ffi_abi
-  {
+typedef enum ffi_abi {
     FFI_FIRST_ABI = 0,
     FFI_SYSV,
     FFI_WIN64,
@@ -53,20 +52,20 @@ typedef enum ffi_abi
     FFI_DEFAULT_ABI = FFI_SYSV,
 #endif
 
-  // LWJGL
-  //FFI_WIN64 = -1,
-  FFI_GNUW64 = -1,
-  FFI_UNIX64 = -1,
-  FFI_EFI64 = -1,
-  //FFI_SYSV = -1,
-  FFI_STDCALL = -1,
-  FFI_THISCALL = -1,
-  FFI_FASTCALL = -1,
-  FFI_MS_CDECL = -1,
-  FFI_PASCAL = -1,
-  FFI_REGISTER = -1,
-  FFI_VFP = -1,
-  } ffi_abi;
+    // LWJGL
+    //FFI_WIN64 = -1,
+    FFI_GNUW64 = -1,
+    FFI_UNIX64 = -1,
+    FFI_EFI64 = -1,
+    //FFI_SYSV = -1,
+    FFI_STDCALL = -1,
+    FFI_THISCALL = -1,
+    FFI_FASTCALL = -1,
+    FFI_MS_CDECL = -1,
+    FFI_PASCAL = -1,
+    FFI_REGISTER = -1,
+    FFI_VFP = -1,
+} ffi_abi;
 #endif
 
 /* ---- Definitions for closures ----------------------------------------- */

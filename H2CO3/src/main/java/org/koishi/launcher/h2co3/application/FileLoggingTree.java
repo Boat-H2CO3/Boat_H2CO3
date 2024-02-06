@@ -1,6 +1,5 @@
 package org.koishi.launcher.h2co3.application;
 
-import android.app.Application;
 import android.os.Environment;
 import android.util.Log;
 

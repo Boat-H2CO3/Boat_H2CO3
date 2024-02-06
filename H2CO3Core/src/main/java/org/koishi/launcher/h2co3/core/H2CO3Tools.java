@@ -83,9 +83,7 @@ public class H2CO3Tools {
     public static String GL_VIRGL;
 
 
-
     public static int DEVICE_ARCHITECTURE = Architecture.getDeviceArchitecture();
-
 
 
     @SuppressLint("SdCardPath")
@@ -170,10 +168,10 @@ public class H2CO3Tools {
     }
 
     public static void setBoatValue(String key, java.io.Serializable value) {
-        if (getBoatValue("usesGlobal", false,Boolean.class)) {
-            setValue(getH2CO3Value("currentVersion", H2CO3_SETTING_DIR,String.class) + "/"+ H2CO3_LAUNCHER_CONFIG_NAME, key, value);
+        if (getBoatValue("usesGlobal", false, Boolean.class)) {
+            setValue(getH2CO3Value("currentVersion", H2CO3_SETTING_DIR, String.class) + "/" + H2CO3_LAUNCHER_CONFIG_NAME, key, value);
         } else {
-            setValue(H2CO3_SETTING_DIR + "/"+ H2CO3_LAUNCHER_CONFIG_NAME, key, value);
+            setValue(H2CO3_SETTING_DIR + "/" + H2CO3_LAUNCHER_CONFIG_NAME, key, value);
         }
     }
 
@@ -182,7 +180,7 @@ public class H2CO3Tools {
     }
 
     public static void setH2CO3Value(String key, java.io.Serializable value) {
-        setValue(H2CO3_SETTING_DIR + "/"+H2CO3_CONFIG_NAME, key, value);
+        setValue(H2CO3_SETTING_DIR + "/" + H2CO3_CONFIG_NAME, key, value);
     }
 
     private static <T> T getValue(String configFile, String key, T defaultValue, Class<T> type) {
@@ -252,10 +250,10 @@ public class H2CO3Tools {
     public static void write(String path, String content) throws IOException {
         File file = new File(path);
         File parent = file.getParentFile();
-        if(parent != null && !parent.exists()) {
-            if(!parent.mkdirs()) throw new IOException("Failed to create parent directory");
+        if (parent != null && !parent.exists()) {
+            if (!parent.mkdirs()) throw new IOException("Failed to create parent directory");
         }
-        try(FileOutputStream outStream = new FileOutputStream(file)) {
+        try (FileOutputStream outStream = new FileOutputStream(file)) {
             IOUtils.write(content, outStream);
         }
     }

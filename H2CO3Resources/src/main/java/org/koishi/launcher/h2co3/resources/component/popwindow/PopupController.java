@@ -19,25 +19,21 @@ import android.widget.PopupWindow;
 public class PopupController {
 
     /**
-     * 布局id
-     */
-    private int layoutResId;
-
-    /**
      * 上下文
      */
     private final Context context;
-
-    /**
-     * PopupWindow
-     */
-    private PopupWindow popupWindow;
-
     /**
      * 弹窗布局View
      */
     View mPopupView;
-
+    /**
+     * 布局id
+     */
+    private int layoutResId;
+    /**
+     * PopupWindow
+     */
+    private PopupWindow popupWindow;
     /**
      * View
      */

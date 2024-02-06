@@ -59,11 +59,11 @@
 
         <activity
             android:name=".ui.H2CO3LauncherClientActivity"
-            android:process=":game"
-            android:launchMode="standard"
-            android:multiprocess="true"
             android:alwaysRetainTaskState="true"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
+            android:launchMode="standard"
+            android:multiprocess="true"
+            android:process=":game"
             android:screenOrientation="sensorLandscape"
             android:theme="@style/FullScreen">
             <meta-data

@@ -10,10 +10,6 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
-import org.koishi.launcher.h2co3.resources.R;
-
 public class H2CO3CustomViewDialog extends H2CO3MaterialDialog {
     private View customView;
 

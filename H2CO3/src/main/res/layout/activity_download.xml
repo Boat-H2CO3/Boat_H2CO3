@@ -11,8 +11,8 @@
         android:layout_height="wrap_content" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        style="?attr/listPopupWindowStyle"
         android:id="@+id/sp_download_source_mode"
+        style="?attr/listPopupWindowStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/app_10dp"

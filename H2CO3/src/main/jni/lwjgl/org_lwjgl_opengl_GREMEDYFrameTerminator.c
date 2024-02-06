@@ -6,14 +6,21 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glFrameTerminatorGREMEDYPROC) (void);
+typedef void (APIENTRY *glFrameTerminatorGREMEDYPROC)(void);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GREMEDYFrameTerminator_glFrameTerminatorGREMEDY(JNIEnv *__env, jclass clazz) {
-    glFrameTerminatorGREMEDYPROC glFrameTerminatorGREMEDY = (glFrameTerminatorGREMEDYPROC)tlsGetFunction(1848);
-    UNUSED_PARAM(clazz)
-    glFrameTerminatorGREMEDY();
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_GREMEDYFrameTerminator_glFrameTerminatorGREMEDY(JNIEnv
+*__env,
+jclass clazz
+) {
+glFrameTerminatorGREMEDYPROC glFrameTerminatorGREMEDY = (glFrameTerminatorGREMEDYPROC) tlsGetFunction(
+        1848);
+UNUSED_PARAM(clazz)
+
+glFrameTerminatorGREMEDY();
+
 }
 
 EXTERN_C_EXIT

@@ -417,19 +417,23 @@ typedef struct UIvec2 {
 #if OUI_USE_UNION_VECTORS || defined(OUI_IMPLEMENTATION)
     union {
         int v[2];
-        struct { int x, y; };
+        struct {
+            int x, y;
+        };
     };
 #else
     int x, y;
-#endif    
+#endif
 } UIvec2;
 
 // layout rectangle
 typedef struct UIrect {
-#if OUI_USE_UNION_VECTORS || defined(OUI_IMPLEMENTATION)    
+#if OUI_USE_UNION_VECTORS || defined(OUI_IMPLEMENTATION)
     union {
         int v[4];
-        struct { int x, y, w, h; };
+        struct {
+            int x, y, w, h;
+        };
     };
 #else
     int x, y, w, h;
@@ -685,7 +689,7 @@ OUI_EXPORT int uiGetFocusedItem();
 // you may combine box, layout, event and user flags.
 // frozen items will always be ignored.
 OUI_EXPORT int uiFindItem(int item, int x, int y,
-        unsigned int flags, unsigned int mask);
+                          unsigned int flags, unsigned int mask);
 
 // return the handler callback as passed to uiSetHandler()
 OUI_EXPORT UIhandler uiGetHandler();
@@ -756,18 +760,18 @@ OUI_EXPORT int uiGetLastItemCount();
 #include <assert.h>
 
 #ifdef _MSC_VER
-    #pragma warning (disable: 4996) // Switch off security warnings
-    #pragma warning (disable: 4100) // Switch off unreferenced formal parameter warnings
-    #pragma warning (disable: 4244)
-    #pragma warning (disable: 4305)
+#pragma warning (disable: 4996) // Switch off security warnings
+#pragma warning (disable: 4100) // Switch off unreferenced formal parameter warnings
+#pragma warning (disable: 4244)
+#pragma warning (disable: 4305)
 
-    #ifdef __cplusplus
-    #define UI_INLINE inline
-    #else
-    #define UI_INLINE static inline
-    #endif
+#ifdef __cplusplus
+#define UI_INLINE inline
 #else
-    #define UI_INLINE static inline
+#define UI_INLINE static inline
+#endif
+#else
+#define UI_INLINE static inline
 #endif
 
 #define UI_MAX_KIND 16
@@ -795,29 +799,29 @@ enum {
     // bit 0-2
     UI_ITEM_BOX_MODEL_MASK = 0x000007,
     // bit 0-4
-    UI_ITEM_BOX_MASK       = 0x00001F,
+    UI_ITEM_BOX_MASK = 0x00001F,
     // bit 5-8
     UI_ITEM_LAYOUT_MASK = 0x0003E0,
     // bit 9-18
-    UI_ITEM_EVENT_MASK  = 0x07FC00,
+    UI_ITEM_EVENT_MASK = 0x07FC00,
     // item is frozen (bit 19)
-    UI_ITEM_FROZEN      = 0x080000,
+    UI_ITEM_FROZEN = 0x080000,
     // item handle is pointer to data (bit 20)
-    UI_ITEM_DATA	    = 0x100000,
+    UI_ITEM_DATA = 0x100000,
     // item has been inserted (bit 21)
-    UI_ITEM_INSERTED	= 0x200000,
+    UI_ITEM_INSERTED = 0x200000,
     // horizontal size has been explicitly set (bit 22)
-    UI_ITEM_HFIXED      = 0x400000,
+    UI_ITEM_HFIXED = 0x400000,
     // vertical size has been explicitly set (bit 23)
-    UI_ITEM_VFIXED      = 0x800000,
+    UI_ITEM_VFIXED = 0x800000,
     // bit 22-23
-    UI_ITEM_FIXED_MASK  = 0xC00000,
+    UI_ITEM_FIXED_MASK = 0xC00000,
 
     // which flag bits will be compared
     UI_ITEM_COMPARE_MASK = UI_ITEM_BOX_MODEL_MASK
-        | (UI_ITEM_LAYOUT_MASK & ~UI_BREAK)
-        | UI_ITEM_EVENT_MASK
-        | UI_USERMASK,
+                           | (UI_ITEM_LAYOUT_MASK & ~UI_BREAK)
+                           | UI_ITEM_EVENT_MASK
+                           | UI_USERMASK,
 };
 
 typedef struct UIitem {
@@ -898,7 +902,7 @@ struct UIcontext {
     int last_click_timestamp;
     int clicks;
 
-    int count;    
+    int count;
     int last_count;
     int eventcount;
     unsigned int datasize;
@@ -911,19 +915,19 @@ struct UIcontext {
 };
 
 UI_INLINE int ui_max(int a, int b) {
-    return (a>b)?a:b;
+    return (a > b) ? a : b;
 }
 
 UI_INLINE int ui_min(int a, int b) {
-    return (a<b)?a:b;
+    return (a < b) ? a : b;
 }
 
 UI_INLINE float ui_maxf(float a, float b) {
-    return (a>b)?a:b;
+    return (a > b) ? a : b;
 }
 
 UI_INLINE float ui_minf(float a, float b) {
-    return (a<b)?a:b;
+    return (a < b) ? a : b;
 }
 
 static UIcontext *ui_context = NULL;
@@ -946,16 +950,16 @@ UIcontext *uiCreateContext(
         unsigned int item_capacity,
         unsigned int buffer_capacity) {
     assert(item_capacity);
-    UIcontext *ctx = (UIcontext *)org_lwjgl_malloc(sizeof(UIcontext));
+    UIcontext *ctx = (UIcontext *) org_lwjgl_malloc(sizeof(UIcontext));
     memset(ctx, 0, sizeof(UIcontext));
     ctx->item_capacity = item_capacity;
     ctx->buffer_capacity = buffer_capacity;
     ctx->stage = UI_STAGE_PROCESS;
-    ctx->items = (UIitem *)org_lwjgl_malloc(sizeof(UIitem) * item_capacity);
-    ctx->last_items = (UIitem *)org_lwjgl_malloc(sizeof(UIitem) * item_capacity);
-    ctx->item_map = (int *)org_lwjgl_malloc(sizeof(int) * item_capacity);
+    ctx->items = (UIitem *) org_lwjgl_malloc(sizeof(UIitem) * item_capacity);
+    ctx->last_items = (UIitem *) org_lwjgl_malloc(sizeof(UIitem) * item_capacity);
+    ctx->item_map = (int *) org_lwjgl_malloc(sizeof(int) * item_capacity);
     if (buffer_capacity) {
-        ctx->data = (unsigned char *)org_lwjgl_malloc(buffer_capacity);
+        ctx->data = (unsigned char *) org_lwjgl_malloc(buffer_capacity);
     }
 
     UIcontext *oldctx = ui_context;
@@ -986,11 +990,11 @@ OUI_EXPORT UIcontext *uiGetContext() {
 
 void uiSetButton(unsigned int button, unsigned int mod, int enabled) {
     assert(ui_context);
-    unsigned long long mask = 1ull<<button;
+    unsigned long long mask = 1ull << button;
     // set new bit
-    ui_context->buttons = (enabled)?
-            (ui_context->buttons | mask):
-            (ui_context->buttons & ~mask);
+    ui_context->buttons = (enabled) ?
+                          (ui_context->buttons | mask) :
+                          (ui_context->buttons & ~mask);
     ui_context->active_button_modifier = mod;
 }
 
@@ -1009,13 +1013,13 @@ static void uiClearInputEvents() {
 
 void uiSetKey(unsigned int key, unsigned int mod, int enabled) {
     assert(ui_context);
-    UIinputEvent event = { key, mod, enabled?UI_KEY_DOWN:UI_KEY_UP };
+    UIinputEvent event = {key, mod, enabled ? UI_KEY_DOWN : UI_KEY_UP};
     uiAddInputEvent(event);
 }
 
 void uiSetChar(unsigned int value) {
     assert(ui_context);
-    UIinputEvent event = { value, 0, UI_CHAR };
+    UIinputEvent event = {value, 0, UI_CHAR};
     uiAddInputEvent(event);
 }
 
@@ -1032,12 +1036,12 @@ UIvec2 uiGetScroll() {
 
 int uiGetLastButton(int button) {
     assert(ui_context);
-    return (ui_context->last_buttons & (1ull<<button))?1:0;
+    return (ui_context->last_buttons & (1ull << button)) ? 1 : 0;
 }
 
 int uiGetButton(unsigned int button) {
     assert(ui_context);
-    return (ui_context->buttons & (1ull<<button))?1:0;
+    return (ui_context->buttons & (1ull << button)) ? 1 : 0;
 }
 
 int uiButtonPressed(int button) {
@@ -1069,18 +1073,18 @@ UIvec2 uiGetCursorStart() {
 UIvec2 uiGetCursorDelta() {
     assert(ui_context);
     UIvec2 result = {{{
-            ui_context->cursor.x - ui_context->last_cursor.x,
-            ui_context->cursor.y - ui_context->last_cursor.y
-    }}};
+                              ui_context->cursor.x - ui_context->last_cursor.x,
+                              ui_context->cursor.y - ui_context->last_cursor.y
+                      }}};
     return result;
 }
 
 UIvec2 uiGetCursorStartDelta() {
     assert(ui_context);
     UIvec2 result = {{{
-            ui_context->cursor.x - ui_context->start_cursor.x,
-            ui_context->cursor.y - ui_context->start_cursor.y
-    }}};
+                              ui_context->cursor.x - ui_context->start_cursor.x,
+                              ui_context->cursor.y - ui_context->start_cursor.y
+                      }}};
     return result;
 }
 
@@ -1161,8 +1165,9 @@ void uiClearState() {
 
 int uiItem() {
     assert(ui_context);
-    assert(ui_context->stage == UI_STAGE_LAYOUT); // must run between uiBeginLayout() and uiEndLayout()
-    assert(ui_context->count < (int)ui_context->item_capacity);
+    assert(ui_context->stage ==
+           UI_STAGE_LAYOUT); // must run between uiBeginLayout() and uiEndLayout()
+    assert(ui_context->count < (int) ui_context->item_capacity);
     int idx = ui_context->count++;
     UIitem *item = uiItemPtr(idx);
     memset(item, 0, sizeof(UIitem));
@@ -1266,7 +1271,7 @@ int uiGetHeight(int item) {
 
 void uiSetLayout(int item, unsigned int flags) {
     UIitem *pitem = uiItemPtr(item);
-    assert((flags & UI_ITEM_LAYOUT_MASK) == (unsigned int)flags);
+    assert((flags & UI_ITEM_LAYOUT_MASK) == (unsigned int) flags);
     pitem->flags &= ~UI_ITEM_LAYOUT_MASK;
     pitem->flags |= flags & UI_ITEM_LAYOUT_MASK;
 }
@@ -1277,7 +1282,7 @@ unsigned int uiGetLayout(int item) {
 
 void uiSetBox(int item, unsigned int flags) {
     UIitem *pitem = uiItemPtr(item);
-    assert((flags & UI_ITEM_BOX_MASK) == (unsigned int)flags);
+    assert((flags & UI_ITEM_BOX_MASK) == (unsigned int) flags);
     pitem->flags &= ~UI_ITEM_BOX_MASK;
     pitem->flags |= flags & UI_ITEM_BOX_MASK;
 }
@@ -1297,19 +1302,22 @@ void uiSetMargins(int item, short l, short t, short r, short b) {
 short uiGetMarginLeft(int item) {
     return uiItemPtr(item)->margins[0];
 }
+
 short uiGetMarginTop(int item) {
     return uiItemPtr(item)->margins[1];
 }
+
 short uiGetMarginRight(int item) {
     return uiItemPtr(item)->margins[2];
 }
+
 short uiGetMarginDown(int item) {
     return uiItemPtr(item)->margins[3];
 }
 
 // compute bounding box of all items super-imposed
 UI_INLINE void uiComputeImposedSize(UIitem *pitem, int dim) {
-    int wdim = dim+2;
+    int wdim = dim + 2;
     // largest size is required size
     short need_size = 0;
     int kid = pitem->firstkid;
@@ -1326,7 +1334,7 @@ UI_INLINE void uiComputeImposedSize(UIitem *pitem, int dim) {
 
 // compute bounding box of all items stacked
 UI_INLINE void uiComputeStackedSize(UIitem *pitem, int dim) {
-    int wdim = dim+2;
+    int wdim = dim + 2;
     short need_size = 0;
     int kid = pitem->firstkid;
     while (kid >= 0) {
@@ -1340,7 +1348,7 @@ UI_INLINE void uiComputeStackedSize(UIitem *pitem, int dim) {
 
 // compute bounding box of all items stacked, repeating when breaking
 UI_INLINE void uiComputeWrappedStackedSize(UIitem *pitem, int dim) {
-    int wdim = dim+2;
+    int wdim = dim + 2;
 
     short need_size = 0;
     short need_size2 = 0;
@@ -1364,7 +1372,7 @@ UI_INLINE void uiComputeWrappedStackedSize(UIitem *pitem, int dim) {
 
 // compute bounding box of all items stacked + wrapped
 UI_INLINE void uiComputeWrappedSize(UIitem *pitem, int dim) {
-    int wdim = dim+2;
+    int wdim = dim + 2;
 
     short need_size = 0;
     short need_size2 = 0;
@@ -1399,42 +1407,46 @@ static void uiComputeSize(int item, int dim) {
 
     if (pitem->size[dim])
         return;
-    switch(pitem->flags & UI_ITEM_BOX_MODEL_MASK) {
-    case UI_COLUMN|UI_WRAP: {
-        // flex model
-        if (dim) // direction
-            uiComputeStackedSize(pitem, 1);
-        else
-            uiComputeImposedSize(pitem, 0);
-    } break;
-    case UI_ROW|UI_WRAP: {
-        // flex model
-        if (!dim) // direction
-            uiComputeWrappedStackedSize(pitem, 0);
-        else
-            uiComputeWrappedSize(pitem, 1);
-    } break;
-    case UI_COLUMN:
-    case UI_ROW: {
-        // flex model
-        if ((pitem->flags & 1) == (unsigned int)dim) // direction
-            uiComputeStackedSize(pitem, dim);
-        else
+    switch (pitem->flags & UI_ITEM_BOX_MODEL_MASK) {
+        case UI_COLUMN | UI_WRAP: {
+            // flex model
+            if (dim) // direction
+                uiComputeStackedSize(pitem, 1);
+            else
+                uiComputeImposedSize(pitem, 0);
+        }
+            break;
+        case UI_ROW | UI_WRAP: {
+            // flex model
+            if (!dim) // direction
+                uiComputeWrappedStackedSize(pitem, 0);
+            else
+                uiComputeWrappedSize(pitem, 1);
+        }
+            break;
+        case UI_COLUMN:
+        case UI_ROW: {
+            // flex model
+            if ((pitem->flags & 1) == (unsigned int) dim) // direction
+                uiComputeStackedSize(pitem, dim);
+            else
+                uiComputeImposedSize(pitem, dim);
+        }
+            break;
+        default: {
+            // layout model
             uiComputeImposedSize(pitem, dim);
-    } break;
-    default: {
-        // layout model
-        uiComputeImposedSize(pitem, dim);
-    } break;
+        }
+            break;
     }
 }
 
 // stack all items according to their alignment
 UI_INLINE void uiArrangeStacked(UIitem *pitem, int dim, bool wrap) {
-    int wdim = dim+2;
+    int wdim = dim + 2;
 
     short space = pitem->size[dim];
-    float max_x2 = (float)pitem->margins[dim] + (float)space;
+    float max_x2 = (float) pitem->margins[dim] + (float) space;
 
     int start_kid = pitem->firstkid;
     while (start_kid >= 0) {
@@ -1483,57 +1495,61 @@ UI_INLINE void uiArrangeStacked(UIitem *pitem, int dim, bool wrap) {
 
         if (extra_space > 0) {
             if (count) {
-                filler = (float)extra_space / (float)count;
+                filler = (float) extra_space / (float) count;
             } else if (total) {
-                switch(pitem->flags & UI_JUSTIFY) {
-                default: {
-                    extra_margin = extra_space / 2.0f;
-                } break;
-                case UI_JUSTIFY: {
-                    // justify when not wrapping or not in last line,
-                    // or not manually breaking
-                    if (!wrap || ((end_kid != -1) && !hardbreak))
-                        spacer = (float)extra_space / (float)(total-1);
-                } break;
-                case UI_START: {
-                } break;
-                case UI_END: {
-                    extra_margin = extra_space;
-                } break;
+                switch (pitem->flags & UI_JUSTIFY) {
+                    default: {
+                        extra_margin = extra_space / 2.0f;
+                    }
+                        break;
+                    case UI_JUSTIFY: {
+                        // justify when not wrapping or not in last line,
+                        // or not manually breaking
+                        if (!wrap || ((end_kid != -1) && !hardbreak))
+                            spacer = (float) extra_space / (float) (total - 1);
+                    }
+                        break;
+                    case UI_START: {
+                    }
+                        break;
+                    case UI_END: {
+                        extra_margin = extra_space;
+                    }
+                        break;
                 }
             }
         } else if (!wrap && (extra_space < 0)) {
-           eater = (float)extra_space / (float)squeezed_count;
+            eater = (float) extra_space / (float) squeezed_count;
         }
 
         // distribute width among items
-        float x = (float)pitem->margins[dim];
+        float x = (float) pitem->margins[dim];
         float x1;
         // second pass: distribute and rescale
         kid = start_kid;
         while (kid != end_kid) {
-            short ix0,ix1;
+            short ix0, ix1;
             UIitem *pkid = uiItemPtr(kid);
             int flags = (pkid->flags & UI_ITEM_LAYOUT_MASK) >> dim;
             int fflags = (pkid->flags & UI_ITEM_FIXED_MASK) >> dim;
 
-            x += (float)pkid->margins[dim] + extra_margin;
+            x += (float) pkid->margins[dim] + extra_margin;
             if ((flags & UI_HFILL) == UI_HFILL) { // grow
-                x1 = x+filler;
+                x1 = x + filler;
             } else if ((fflags & UI_ITEM_HFIXED) == UI_ITEM_HFIXED) {
-                x1 = x+(float)pkid->size[dim];
+                x1 = x + (float) pkid->size[dim];
             } else {
                 // squeeze
-                x1 = x+ui_maxf(0.0f,(float)pkid->size[dim]+eater);
+                x1 = x + ui_maxf(0.0f, (float) pkid->size[dim] + eater);
             }
-            ix0 = (short)x;
+            ix0 = (short) x;
             if (wrap)
-                ix1 = (short)ui_minf(max_x2-(float)pkid->margins[wdim], x1);
+                ix1 = (short) ui_minf(max_x2 - (float) pkid->margins[wdim], x1);
             else
-                ix1 = (short)x1;
+                ix1 = (short) x1;
             pkid->margins[dim] = ix0;
-            pkid->size[dim] = ix1-ix0;
-            x = x1 + (float)pkid->margins[wdim];
+            pkid->size[dim] = ix1 - ix0;
+            x = x1 + (float) pkid->margins[wdim];
 
             kid = uiNextSibling(kid);
             extra_margin = spacer;
@@ -1545,8 +1561,8 @@ UI_INLINE void uiArrangeStacked(UIitem *pitem, int dim, bool wrap) {
 
 // superimpose all items according to their alignment
 UI_INLINE void uiArrangeImposedRange(UIitem *pitem, int dim,
-        int start_kid, int end_kid, short offset, short space) {
-    int wdim = dim+2;
+                                     int start_kid, int end_kid, short offset, short space) {
+    int wdim = dim + 2;
 
     int kid = start_kid;
     while (kid != end_kid) {
@@ -1554,17 +1570,21 @@ UI_INLINE void uiArrangeImposedRange(UIitem *pitem, int dim,
 
         int flags = (pkid->flags & UI_ITEM_LAYOUT_MASK) >> dim;
 
-        switch(flags & UI_HFILL) {
-        default: break;
-        case UI_HCENTER: {
-            pkid->margins[dim] += (space-pkid->size[dim])/2 - pkid->margins[wdim];
-        } break;
-        case UI_RIGHT: {
-            pkid->margins[dim] = space-pkid->size[dim]-pkid->margins[wdim];
-        } break;
-        case UI_HFILL: {
-            pkid->size[dim] = ui_max(0,space-pkid->margins[dim]-pkid->margins[wdim]);
-        } break;
+        switch (flags & UI_HFILL) {
+            default:
+                break;
+            case UI_HCENTER: {
+                pkid->margins[dim] += (space - pkid->size[dim]) / 2 - pkid->margins[wdim];
+            }
+                break;
+            case UI_RIGHT: {
+                pkid->margins[dim] = space - pkid->size[dim] - pkid->margins[wdim];
+            }
+                break;
+            case UI_HFILL: {
+                pkid->size[dim] = ui_max(0, space - pkid->margins[dim] - pkid->margins[wdim]);
+            }
+                break;
         }
         pkid->margins[dim] += offset;
 
@@ -1579,8 +1599,9 @@ UI_INLINE void uiArrangeImposed(UIitem *pitem, int dim) {
 // superimpose all items according to their alignment,
 // squeeze items that expand the available space
 UI_INLINE void uiArrangeImposedSqueezedRange(UIitem *pitem, int dim,
-        int start_kid, int end_kid, short offset, short space) {
-    int wdim = dim+2;
+                                             int start_kid, int end_kid, short offset,
+                                             short space) {
+    int wdim = dim + 2;
 
     int kid = start_kid;
     while (kid != end_kid) {
@@ -1588,22 +1609,26 @@ UI_INLINE void uiArrangeImposedSqueezedRange(UIitem *pitem, int dim,
 
         int flags = (pkid->flags & UI_ITEM_LAYOUT_MASK) >> dim;
 
-        short min_size = ui_max(0,space-pkid->margins[dim]-pkid->margins[wdim]);
-        switch(flags & UI_HFILL) {
-        default: {
-            pkid->size[dim] = ui_min(pkid->size[dim], min_size);
-        } break;
-        case UI_HCENTER: {
-            pkid->size[dim] = ui_min(pkid->size[dim], min_size);
-            pkid->margins[dim] += (space-pkid->size[dim])/2 - pkid->margins[wdim];
-        } break;
-        case UI_RIGHT: {
-            pkid->size[dim] = ui_min(pkid->size[dim], min_size);
-            pkid->margins[dim] = space-pkid->size[dim]-pkid->margins[wdim];
-        } break;
-        case UI_HFILL: {
-            pkid->size[dim] = min_size;
-        } break;
+        short min_size = ui_max(0, space - pkid->margins[dim] - pkid->margins[wdim]);
+        switch (flags & UI_HFILL) {
+            default: {
+                pkid->size[dim] = ui_min(pkid->size[dim], min_size);
+            }
+                break;
+            case UI_HCENTER: {
+                pkid->size[dim] = ui_min(pkid->size[dim], min_size);
+                pkid->margins[dim] += (space - pkid->size[dim]) / 2 - pkid->margins[wdim];
+            }
+                break;
+            case UI_RIGHT: {
+                pkid->size[dim] = ui_min(pkid->size[dim], min_size);
+                pkid->margins[dim] = space - pkid->size[dim] - pkid->margins[wdim];
+            }
+                break;
+            case UI_HFILL: {
+                pkid->size[dim] = min_size;
+            }
+                break;
         }
         pkid->margins[dim] += offset;
 
@@ -1612,12 +1637,13 @@ UI_INLINE void uiArrangeImposedSqueezedRange(UIitem *pitem, int dim,
 }
 
 UI_INLINE void uiArrangeImposedSqueezed(UIitem *pitem, int dim) {
-    uiArrangeImposedSqueezedRange(pitem, dim, pitem->firstkid, -1, pitem->margins[dim], pitem->size[dim]);
+    uiArrangeImposedSqueezedRange(pitem, dim, pitem->firstkid, -1, pitem->margins[dim],
+                                  pitem->size[dim]);
 }
 
 // superimpose all items according to their alignment
 UI_INLINE short uiArrangeWrappedImposedSqueezed(UIitem *pitem, int dim) {
-    int wdim = dim+2;
+    int wdim = dim + 2;
 
     short offset = pitem->margins[dim];
 
@@ -1649,36 +1675,40 @@ UI_INLINE short uiArrangeWrappedImposedSqueezed(UIitem *pitem, int dim) {
 static void uiArrange(int item, int dim) {
     UIitem *pitem = uiItemPtr(item);
 
-    switch(pitem->flags & UI_ITEM_BOX_MODEL_MASK) {
-    case UI_COLUMN|UI_WRAP: {
-        // flex model, wrapping
-        if (dim) { // direction
-            uiArrangeStacked(pitem, 1, true);
-            // this retroactive resize will not effect parent widths
-            short offset = uiArrangeWrappedImposedSqueezed(pitem, 0);
-            pitem->size[0] = offset - pitem->margins[0];
+    switch (pitem->flags & UI_ITEM_BOX_MODEL_MASK) {
+        case UI_COLUMN | UI_WRAP: {
+            // flex model, wrapping
+            if (dim) { // direction
+                uiArrangeStacked(pitem, 1, true);
+                // this retroactive resize will not effect parent widths
+                short offset = uiArrangeWrappedImposedSqueezed(pitem, 0);
+                pitem->size[0] = offset - pitem->margins[0];
+            }
         }
-    } break;
-    case UI_ROW|UI_WRAP: {
-        // flex model, wrapping
-        if (!dim) { // direction
-            uiArrangeStacked(pitem, 0, true);
-        } else {
-            uiArrangeWrappedImposedSqueezed(pitem, 1);
+            break;
+        case UI_ROW | UI_WRAP: {
+            // flex model, wrapping
+            if (!dim) { // direction
+                uiArrangeStacked(pitem, 0, true);
+            } else {
+                uiArrangeWrappedImposedSqueezed(pitem, 1);
+            }
         }
-    } break;
-    case UI_COLUMN:
-    case UI_ROW: {
-        // flex model
-        if ((pitem->flags & 1) == (unsigned int)dim) // direction
-            uiArrangeStacked(pitem, dim, false);
-        else
-            uiArrangeImposedSqueezed(pitem, dim);
-    } break;
-    default: {
-        // layout model
-        uiArrangeImposed(pitem, dim);
-    } break;
+            break;
+        case UI_COLUMN:
+        case UI_ROW: {
+            // flex model
+            if ((pitem->flags & 1) == (unsigned int) dim) // direction
+                uiArrangeStacked(pitem, dim, false);
+            else
+                uiArrangeImposedSqueezed(pitem, dim);
+        }
+            break;
+        default: {
+            // layout model
+            uiArrangeImposed(pitem, dim);
+        }
+            break;
     }
 
     int kid = uiFirstChild(item);
@@ -1748,14 +1778,14 @@ void uiEndLayout() {
     assert(ui_context->stage == UI_STAGE_LAYOUT); // must run uiBeginLayout() first
 
     if (ui_context->count) {
-        uiComputeSize(0,0);
-        uiArrange(0,0);
-        uiComputeSize(0,1);
-        uiArrange(0,1);
+        uiComputeSize(0, 0);
+        uiArrange(0, 0);
+        uiComputeSize(0, 1);
+        uiArrange(0, 1);
 
         if (ui_context->last_count) {
             // map old item id to new item id
-            uiMapItems(0,0);
+            uiMapItems(0, 0);
         }
     }
 
@@ -1771,9 +1801,9 @@ void uiEndLayout() {
 UIrect uiGetRect(int item) {
     UIitem *pitem = uiItemPtr(item);
     UIrect rc = {{{
-            pitem->margins[0], pitem->margins[1],
-            pitem->size[0], pitem->size[1]
-    }}};
+                          pitem->margins[0], pitem->margins[1],
+                          pitem->size[0], pitem->size[1]
+                  }}};
     return rc;
 }
 
@@ -1789,7 +1819,7 @@ void *uiAllocHandle(int item, unsigned int size) {
     assert((size > 0) && (size < UI_MAX_DATASIZE));
     UIitem *pitem = uiItemPtr(item);
     assert(pitem->handle == NULL);
-    assert((ui_context->datasize+size) <= ui_context->buffer_capacity);
+    assert((ui_context->datasize + size) <= ui_context->buffer_capacity);
     pitem->handle = ui_context->data + ui_context->datasize;
     pitem->flags |= UI_ITEM_DATA;
     ui_context->datasize += size;
@@ -1840,10 +1870,11 @@ int uiContains(int item, int x, int y) {
     UIrect rect = uiGetRect(item);
     x -= rect.x;
     y -= rect.y;
-    if ((x>=0)
-            && (y>=0)
-            && (x<rect.w)
-            && (y<rect.h)) return 1;
+    if ((x >= 0)
+        && (y >= 0)
+        && (x < rect.w)
+        && (y < rect.h))
+        return 1;
     return 0;
 }
 
@@ -1864,7 +1895,7 @@ int uiFindItem(int item, int x, int y, unsigned int flags, unsigned int mask) {
             return best_hit;
         }
         if (((mask == UI_ANY) && ((flags == UI_ANY)
-            || (pitem->flags & flags)))
+                                  || (pitem->flags & flags)))
             || ((pitem->flags & flags) == mask)) {
             return item;
         }
@@ -1876,8 +1907,8 @@ void uiUpdateHotItem() {
     assert(ui_context);
     if (!ui_context->count) return;
     ui_context->hot_item = uiFindItem(0,
-            ui_context->cursor.x, ui_context->cursor.y,
-            UI_ANY_MOUSE_INPUT, UI_ANY);
+                                      ui_context->cursor.x, ui_context->cursor.y,
+                                      UI_ANY_MOUSE_INPUT, UI_ANY);
 }
 
 int uiGetClicks() {
@@ -1908,16 +1939,16 @@ void uiProcess(int timestamp) {
         for (int i = 0; i < ui_context->eventcount; ++i) {
             ui_context->active_key = ui_context->events[i].key;
             ui_context->active_modifier = ui_context->events[i].mod;
-            uiNotifyItem(focus_item, 
-                    ui_context->events[i].event);
+            uiNotifyItem(focus_item,
+                         ui_context->events[i].event);
         }
     } else {
         ui_context->focus_item = -1;
     }
     if (ui_context->scroll.x || ui_context->scroll.y) {
         int scroll_item = uiFindItem(0,
-                ui_context->cursor.x, ui_context->cursor.y,
-                UI_SCROLL, UI_ANY);
+                                     ui_context->cursor.x, ui_context->cursor.y,
+                                     UI_SCROLL, UI_ANY);
         if (scroll_item >= 0) {
             uiNotifyItem(scroll_item, UI_SCROLL);
         }
@@ -1927,67 +1958,69 @@ void uiProcess(int timestamp) {
 
     int hot = ui_context->hot_item;
 
-    switch(ui_context->state) {
-    default:
-    case UI_STATE_IDLE: {
-        ui_context->start_cursor = ui_context->cursor;
-        if (uiGetButton(0)) {
-            hot_item = -1;
-            active_item = hot;
-
-            if (active_item != focus_item) {
-                focus_item = -1;
-                ui_context->focus_item = -1;
-            }
-
-            if (active_item >= 0) {
-                if (
-                        ((timestamp - ui_context->last_click_timestamp) > UI_CLICK_THRESHOLD)
-                        || (ui_context->last_click_item != active_item)) {
-                    ui_context->clicks = 0;
-                }
-                ui_context->clicks++;
-
-                ui_context->last_click_timestamp = timestamp;
-                ui_context->last_click_item = active_item;
-                ui_context->active_modifier = ui_context->active_button_modifier;
-                uiNotifyItem(active_item, UI_BUTTON0_DOWN);
-            }            
-            ui_context->state = UI_STATE_CAPTURE;            
-        } else if (uiGetButton(2) && !uiGetLastButton(2)) {
-            hot_item = -1;
-            hot = uiFindItem(0, ui_context->cursor.x, ui_context->cursor.y,
-                    UI_BUTTON2_DOWN, UI_ANY);
-            if (hot >= 0) {
-                ui_context->active_modifier = ui_context->active_button_modifier;
-                uiNotifyItem(hot, UI_BUTTON2_DOWN);
-            }
-        } else {
-            hot_item = hot;
-        }
-    } break;
-    case UI_STATE_CAPTURE: {
-        if (!uiGetButton(0)) {
-            if (active_item >= 0) {
-                ui_context->active_modifier = ui_context->active_button_modifier;
-                uiNotifyItem(active_item, UI_BUTTON0_UP);
-                if (active_item == hot) {
-                    uiNotifyItem(active_item, UI_BUTTON0_HOT_UP);
-                }
-            }
-            active_item = -1;
-            ui_context->state = UI_STATE_IDLE;
-        } else {
-            if (active_item >= 0) {
-                ui_context->active_modifier = ui_context->active_button_modifier;
-                uiNotifyItem(active_item, UI_BUTTON0_CAPTURE);
-            }            
-            if (hot == active_item)
-                hot_item = hot;
-            else
+    switch (ui_context->state) {
+        default:
+        case UI_STATE_IDLE: {
+            ui_context->start_cursor = ui_context->cursor;
+            if (uiGetButton(0)) {
                 hot_item = -1;
+                active_item = hot;
+
+                if (active_item != focus_item) {
+                    focus_item = -1;
+                    ui_context->focus_item = -1;
+                }
+
+                if (active_item >= 0) {
+                    if (
+                            ((timestamp - ui_context->last_click_timestamp) > UI_CLICK_THRESHOLD)
+                            || (ui_context->last_click_item != active_item)) {
+                        ui_context->clicks = 0;
+                    }
+                    ui_context->clicks++;
+
+                    ui_context->last_click_timestamp = timestamp;
+                    ui_context->last_click_item = active_item;
+                    ui_context->active_modifier = ui_context->active_button_modifier;
+                    uiNotifyItem(active_item, UI_BUTTON0_DOWN);
+                }
+                ui_context->state = UI_STATE_CAPTURE;
+            } else if (uiGetButton(2) && !uiGetLastButton(2)) {
+                hot_item = -1;
+                hot = uiFindItem(0, ui_context->cursor.x, ui_context->cursor.y,
+                                 UI_BUTTON2_DOWN, UI_ANY);
+                if (hot >= 0) {
+                    ui_context->active_modifier = ui_context->active_button_modifier;
+                    uiNotifyItem(hot, UI_BUTTON2_DOWN);
+                }
+            } else {
+                hot_item = hot;
+            }
         }
-    } break;
+            break;
+        case UI_STATE_CAPTURE: {
+            if (!uiGetButton(0)) {
+                if (active_item >= 0) {
+                    ui_context->active_modifier = ui_context->active_button_modifier;
+                    uiNotifyItem(active_item, UI_BUTTON0_UP);
+                    if (active_item == hot) {
+                        uiNotifyItem(active_item, UI_BUTTON0_HOT_UP);
+                    }
+                }
+                active_item = -1;
+                ui_context->state = UI_STATE_IDLE;
+            } else {
+                if (active_item >= 0) {
+                    ui_context->active_modifier = ui_context->active_button_modifier;
+                    uiNotifyItem(active_item, UI_BUTTON0_CAPTURE);
+                }
+                if (hot == active_item)
+                    hot_item = hot;
+                else
+                    hot_item = -1;
+            }
+        }
+            break;
     }
 
     ui_context->last_cursor = ui_context->cursor;
@@ -2017,12 +2050,13 @@ UIitemState uiGetState(int item) {
     UIitem *pitem = uiItemPtr(item);
     if (pitem->flags & UI_ITEM_FROZEN) return UI_FROZEN;
     if (uiIsFocused(item)) {
-        if (pitem->flags & (UI_KEY_DOWN|UI_CHAR|UI_KEY_UP)) return UI_ACTIVE;
+        if (pitem->flags & (UI_KEY_DOWN | UI_CHAR | UI_KEY_UP)) return UI_ACTIVE;
     }
     if (uiIsActive(item)) {
-        if (pitem->flags & (UI_BUTTON0_CAPTURE|UI_BUTTON0_UP)) return UI_ACTIVE;
+        if (pitem->flags & (UI_BUTTON0_CAPTURE | UI_BUTTON0_UP)) return UI_ACTIVE;
         if ((pitem->flags & UI_BUTTON0_HOT_UP)
-                && uiIsHot(item)) return UI_ACTIVE;
+            && uiIsHot(item))
+            return UI_ACTIVE;
         return UI_COLD;
     } else if (uiIsHot(item)) {
         return UI_HOT;

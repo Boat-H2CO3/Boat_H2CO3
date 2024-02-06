@@ -15,8 +15,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical"
         tools:context=".ui.CrashActivity">
 
         <org.koishi.launcher.h2co3.resources.component.H2CO3CardView

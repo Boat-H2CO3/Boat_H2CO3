@@ -6,14 +6,21 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glTextureBufferRangeEXTPROC) (jint, jint, jint, jint, uintptr_t, uintptr_t);
+typedef void (APIENTRY *glTextureBufferRangeEXTPROC)(jint, jint, jint, jint, uintptr_t, uintptr_t);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBTextureBufferRange_glTextureBufferRangeEXT(JNIEnv *__env, jclass clazz, jint texture, jint target, jint internalformat, jint buffer, jlong offset, jlong size) {
-    glTextureBufferRangeEXTPROC glTextureBufferRangeEXT = (glTextureBufferRangeEXTPROC)tlsGetFunction(1366);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_ARBTextureBufferRange_glTextureBufferRangeEXT(JNIEnv *__env, jclass clazz,
+                                                                    jint texture, jint target,
+                                                                    jint internalformat,
+                                                                    jint buffer, jlong offset,
+                                                                    jlong size) {
+    glTextureBufferRangeEXTPROC glTextureBufferRangeEXT = (glTextureBufferRangeEXTPROC) tlsGetFunction(
+            1366);
     UNUSED_PARAM(clazz)
-    glTextureBufferRangeEXT(texture, target, internalformat, buffer, (uintptr_t)offset, (uintptr_t)size);
+    glTextureBufferRangeEXT(texture, target, internalformat, buffer, (uintptr_t) offset,
+                            (uintptr_t) size);
 }
 
 EXTERN_C_EXIT

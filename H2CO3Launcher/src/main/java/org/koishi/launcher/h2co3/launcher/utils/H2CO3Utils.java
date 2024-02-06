@@ -28,7 +28,7 @@ public class H2CO3Utils implements Runnable {
     public static final String H2CO3_ENV_WINDOW_WIDTH = "window_width";
     public static final String H2CO3_ENV_WINDOW_HEIGHT = "window_height";
     public static final String H2CO3_ENV_TMPDIR = "tmpdir";
-
+    public static final String H2CO3_TASK_SCRIPT_PATH = "h2co3_script_path";
     private static final Pattern variablePattern;
 
     static {
@@ -38,38 +38,7 @@ public class H2CO3Utils implements Runnable {
     private final Map<String, String> variables;
     private final List<String[]> commands;
     private String scriptFile;
-    public static final String H2CO3_TASK_SCRIPT_PATH = "h2co3_script_path";
     private H2CO3Utils script;
-
-    public static LinkedList<String[]> parseJson(String filePath) throws IOException {
-        File file = new File(filePath);
-        FileInputStream fis = new FileInputStream(file);
-        byte[] buffer = new byte[(int) fis.available()];
-        fis.read(buffer);
-        fis.close();
-        String json = new String(buffer, StandardCharsets.UTF_8);
-
-        Type type = new TypeToken<LinkedList<String[]>>() {
-        }.getType();
-        return new Gson().fromJson(json, type);
-    }
-
-    private String replaceVariables(String str) {
-        if (str == null) {
-            str = "";
-        }
-        Matcher m = variablePattern.matcher(str);
-        while (m.find()) {
-            String varRef = m.group();
-            String varName = varRef.substring(2, varRef.length() - 1);
-            String varValue = this.variables.get(varName);
-            if (varValue == null) {
-                varValue = "";
-            }
-            str = str.replace(varRef, varValue);
-        }
-        return str;
-    }
     private Thread thread;
 
     public H2CO3Utils(Map<String, String> envvars, boolean priv, List<String[]> cmds, String file) {
@@ -99,6 +68,36 @@ public class H2CO3Utils implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static LinkedList<String[]> parseJson(String filePath) throws IOException {
+        File file = new File(filePath);
+        FileInputStream fis = new FileInputStream(file);
+        byte[] buffer = new byte[(int) fis.available()];
+        fis.read(buffer);
+        fis.close();
+        String json = new String(buffer, StandardCharsets.UTF_8);
+
+        Type type = new TypeToken<LinkedList<String[]>>() {
+        }.getType();
+        return new Gson().fromJson(json, type);
+    }
+
+    private String replaceVariables(String str) {
+        if (str == null) {
+            str = "";
+        }
+        Matcher m = variablePattern.matcher(str);
+        while (m.find()) {
+            String varRef = m.group();
+            String varName = varRef.substring(2, varRef.length() - 1);
+            String varValue = this.variables.get(varName);
+            if (varValue == null) {
+                varValue = "";
+            }
+            str = str.replace(varRef, varValue);
+        }
+        return str;
     }
 
     public void execute() {

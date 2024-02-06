@@ -96,6 +96,7 @@ public class H2CO3Loader {
     private static void showErrorToast(String errorMessage) {
         Log.d("Error", errorMessage);
     }
+
     public static void setDir(String dir) {
         H2CO3Game.setGameDirectory(dir);
         H2CO3Game.setGameAssets(dir + "/assets/virtual/legacy");

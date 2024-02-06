@@ -1,7 +1,5 @@
 package org.koishi.launcher.h2co3.core.game;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 
 import org.koishi.launcher.h2co3.core.H2CO3Auth;
@@ -11,7 +9,6 @@ import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

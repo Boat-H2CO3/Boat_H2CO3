@@ -5,8 +5,8 @@
     android:id="@+id/nested"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.H2CO3MainActivity"
-    android:padding="@dimen/app_15dp">
+    android:padding="@dimen/app_15dp"
+    tools:context=".ui.H2CO3MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
@@ -99,17 +99,18 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_password_layout"
+            android:id="@+id/server_selector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/app_15dp"
             android:visibility="gone"
-            android:id="@+id/server_selector"
-            android:layout_marginTop="@dimen/app_15dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_password_layout">
+
             <androidx.appcompat.widget.AppCompatSpinner
-                style="?attr/listPopupWindowStyle"
                 android:id="@+id/server_spinner"
+                style="?attr/listPopupWindowStyle"
                 android:layout_width="0dp"
                 android:layout_height="?actionBarSize"
                 android:layout_marginEnd="10dp"

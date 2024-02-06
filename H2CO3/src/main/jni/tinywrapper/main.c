@@ -17,13 +17,18 @@
 
 int proxy_width, proxy_height, proxy_intformat, maxTextureSize;
 
-void glBindFragDataLocationEXT(GLuint program, GLuint colorNumber, const char * name);
+void glBindFragDataLocationEXT(GLuint program, GLuint colorNumber, const char *name);
 
-void(*gles_glGetTexLevelParameteriv)(GLenum target, GLint level, GLenum pname, GLint *params);
-void(*gles_glShaderSource)(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length);
-void(*gles_glTexImage2D)(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *data);
+void (*gles_glGetTexLevelParameteriv)(GLenum target, GLint level, GLenum pname, GLint *params);
 
-void glBindFragDataLocation(GLuint program, GLuint colorNumber, const char * name) {
+void (*gles_glShaderSource)(GLuint shader, GLsizei count, const GLchar *const *string,
+                            const GLint *length);
+
+void (*gles_glTexImage2D)(GLenum target, GLint level, GLint internalformat, GLsizei width,
+                          GLsizei height, GLint border, GLenum format, GLenum type,
+                          const GLvoid *data);
+
+void glBindFragDataLocation(GLuint program, GLuint colorNumber, const char *name) {
     glBindFragDataLocationEXT(program, colorNumber, name);
 }
 
@@ -43,7 +48,7 @@ void *glMapBuffer(GLenum target, GLenum access) {
 
             // GL 4.3
         case GL_DISPATCH_INDIRECT_BUFFER:
-        case GL_SHADER_STORAGE_BUFFER	:
+        case GL_SHADER_STORAGE_BUFFER    :
 
             // GL 4.4
         case GL_QUERY_BUFFER:
@@ -74,7 +79,8 @@ void *glMapBuffer(GLenum target, GLenum access) {
     return glMapBufferRange(target, 0, length, access_range);
 }
 
-void glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length) {
+void
+glShaderSource(GLuint shader, GLsizei count, const GLchar *const *string, const GLint *length) {
     LOOKUP_FUNC(glShaderSource)
 
     // DBG(printf("glShaderSource(%d, %d, %p, %p)\n", shader, count, string, length);)
@@ -86,7 +92,7 @@ void glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, 
     for (int i = 0; i < count; i++) {
         l += (length && length[i] >= 0) ? length[i] : strlen(string[i]);
     }
-    source = (char *)malloc(l + 1);
+    source = (char *) malloc(l + 1);
     if (source) {
         source[0] = '\0';
         if (length) {
@@ -124,7 +130,7 @@ void glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, 
                 strncpy(&converted[13], "\n//c", 4);
             }
         } else {
-            converted = (char *)malloc(strlen(source) + 13);
+            converted = (char *) malloc(strlen(source) + 13);
             if (converted) {
                 strcpy(converted, "#version 120\n");
                 strcpy(&converted[13], strdup(source));
@@ -135,13 +141,15 @@ void glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, 
             int convertedLen = strlen(converted);
 
             // some needed exts
-            const char* extensions =
+            const char *extensions =
                     "#extension GL_EXT_blend_func_extended : enable\n"
                     // For OptiFine (see patch above)
                     "#extension GL_EXT_shader_non_constant_global_initializers : enable\n";
             converted = InplaceInsert(GetLine(converted, 1), extensions, converted, &convertedLen);
 
-            gles_glShaderSource(shader, 1, (const GLchar * const*)((converted) ? (&converted) : (&source)), NULL);
+            gles_glShaderSource(shader, 1,
+                                (const GLchar *const *) ((converted) ? (&converted) : (&source)),
+                                NULL);
 
             free(converted);
         }
@@ -189,7 +197,8 @@ void glGetTexLevelParameteriv(GLenum target, GLint level, GLenum pname, GLint *p
     }
 }
 
-void glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *data) {
+void glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height,
+                  GLint border, GLenum format, GLenum type, const GLvoid *data) {
     LOOKUP_FUNC(glTexImage2D)
     if (isProxyTexture(target)) {
         if (!maxTextureSize) {

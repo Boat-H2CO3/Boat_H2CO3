@@ -17,9 +17,10 @@ public class ManageFragment extends H2CO3Fragment implements View.OnClickListene
     H2CO3CardView open_1;
 
     View view;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_manage, container, false);
-        open_1 = findViewById(view,R.id.open_1);
+        open_1 = findViewById(view, R.id.open_1);
         open_1.setOnClickListener(this);
         return view;
     }
@@ -36,7 +37,7 @@ public class ManageFragment extends H2CO3Fragment implements View.OnClickListene
      */
     @Override
     public void onClick(View v) {
-        if(v==open_1){
+        if (v == open_1) {
             H2CO3LauncherRuntimeDialog runtime = new H2CO3LauncherRuntimeDialog(requireActivity());
             runtime.show();
         }

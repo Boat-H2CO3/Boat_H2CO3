@@ -20,7 +20,7 @@ public class LogcatUtils {
      * @param context Current context.
      *                当前上下文。
      * @return Flag whether it's a main process.
-     *         标志是否是主进程。
+     * 标志是否是主进程。
      */
     public static boolean isMainProcess(/*@NonNull*/ Context context) {
         final int pid = Process.myPid();
@@ -45,7 +45,7 @@ public class LogcatUtils {
      * @param serviceClass Class of background crash reporting service.
      *                     后台崩溃报告服务的类。
      * @return Flag whether a current process is a background crash service process.
-     *         标志当前进程是否是后台崩溃服务进程。
+     * 标志当前进程是否是后台崩溃服务进程。
      */
     public static boolean isLogcatServiceProcess(/*@NonNull */Context context,/* @NonNull */Class<? extends LogcatService> serviceClass) {
         final ServiceInfo serviceInfo;

@@ -13,12 +13,15 @@ import java.util.HashMap;
 import java.util.Locale;
 
 /**
- *
  * @author huangyuhui
  */
 public final class LowerCaseEnumTypeAdapterFactory implements TypeAdapterFactory {
 
     public static final LowerCaseEnumTypeAdapterFactory INSTANCE = new LowerCaseEnumTypeAdapterFactory();
+
+    private static String toLowercase(Object o) {
+        return o.toString().toLowerCase(Locale.US);
+    }
 
     @Override
     @SuppressWarnings("unchecked")
@@ -49,9 +52,5 @@ public final class LowerCaseEnumTypeAdapterFactory implements TypeAdapterFactory
                 return lowercaseToConstant.get(reader.nextString().toLowerCase());
             }
         };
-    }
-
-    private static String toLowercase(Object o) {
-        return o.toString().toLowerCase(Locale.US);
     }
 }

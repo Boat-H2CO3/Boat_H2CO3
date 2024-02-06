@@ -6,12 +6,16 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glViewportPositionWScaleNVPROC) (jint, jfloat, jfloat);
+typedef void (APIENTRY *glViewportPositionWScaleNVPROC)(jint, jfloat, jfloat);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVClipSpaceWScaling_glViewportPositionWScaleNV(JNIEnv *__env, jclass clazz, jint index, jfloat xcoeff, jfloat ycoeff) {
-    glViewportPositionWScaleNVPROC glViewportPositionWScaleNV = (glViewportPositionWScaleNVPROC)tlsGetFunction(1927);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_NVClipSpaceWScaling_glViewportPositionWScaleNV(JNIEnv *__env, jclass clazz,
+                                                                     jint index, jfloat xcoeff,
+                                                                     jfloat ycoeff) {
+    glViewportPositionWScaleNVPROC glViewportPositionWScaleNV = (glViewportPositionWScaleNVPROC) tlsGetFunction(
+            1927);
     UNUSED_PARAM(clazz)
     glViewportPositionWScaleNV(index, xcoeff, ycoeff);
 }

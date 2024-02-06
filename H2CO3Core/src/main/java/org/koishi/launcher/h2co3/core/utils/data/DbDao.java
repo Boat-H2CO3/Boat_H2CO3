@@ -18,7 +18,7 @@ public class DbDao {
     private RecordSQLiteOpenHelper helper;
     private SQLiteDatabase db;
 
-    public DbDao(Context context,String name) {
+    public DbDao(Context context, String name) {
         this.context = context;
         init(name);
     }
@@ -26,7 +26,7 @@ public class DbDao {
     private void init(String name) {
 
         //实例化数据库SQLiteOpenHelper子类对象
-        helper = new RecordSQLiteOpenHelper(context,name);
+        helper = new RecordSQLiteOpenHelper(context, name);
         // 第一次进入时查询所有的历史记录
         queryData("");
     }

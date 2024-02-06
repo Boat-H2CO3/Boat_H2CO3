@@ -5,9 +5,7 @@ import static org.koishi.launcher.h2co3.core.H2CO3Auth.usersFile;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -64,7 +62,6 @@ import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3ProgressDialog;
 import org.koishi.launcher.h2co3.utils.HomeLoginHandler;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -73,12 +70,15 @@ import java.util.Optional;
 
 public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickListener {
     private static final int MICROSOFT_LOGIN_REQUEST_CODE = 1001;
-
+    private final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
+    private final HomeLoginHandler loginHandler = new HomeLoginHandler(this);
     public H2CO3TextView homeTopbarUserName;
     public H2CO3TextView homeTopbarUserState;
     public AppCompatImageView homeTopbarUserIcon;
-    private LinearLayoutCompat homeTopbarUser;
     public PopupWindow popView;
+    public AlertDialog loginDialogAlert;
+    public H2CO3ProgressDialog progressDialog;
+    private LinearLayoutCompat homeTopbarUser;
     private HomeAdapterListUser adapterUser;
     private List<UserBean> userList = new ArrayList<>();
     private H2CO3ToolBar toolbar;
@@ -88,9 +88,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
     private TextInputLayout loginPasswordLayout;
     private H2CO3Button login;
     private H2CO3CustomViewDialog loginDialog;
-    public AlertDialog loginDialogAlert;
     private NavController navController;
-    public H2CO3ProgressDialog progressDialog;
     private Spinner serverSpinner;
     private EditText userEditText;
     private EditText passEditText;
@@ -100,8 +98,6 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
     private String currentBaseUrl;
     private String currentRegisterUrl;
     private ArrayAdapter<String> serverSpinnerAdapter;
-    private final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
-    private final HomeLoginHandler loginHandler = new HomeLoginHandler(this);
     private MaterialAlertDialogBuilder alertDialogBuilder;
     private boolean isServersFileExists;
 
@@ -110,7 +106,51 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
 
     private String user;
     private String pass;
+    private final LoginUtils.Listener loginUtilsListener = new LoginUtils.Listener() {
 
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void onSuccess(AuthResult authResult) {
+            runOnUiThread(() -> {
+                progressDialog.dismiss();
+                if (authResult.getSelectedProfile() != null) {
+                    H2CO3Auth.addUserToJson(authResult.getSelectedProfile().getName(), user, pass, "2", currentBaseUrl, authResult.getSelectedProfile().getId(), "", "", authResult.getAccessToken(), "", "", true, false);
+                    adapterUser.notifyDataSetChanged();
+                    popView.dismiss();
+                    loginDialogAlert.dismiss();
+                } else {
+                    String[] items = authResult.getAvailableProfiles().stream().map(AuthResult.AvailableProfiles::getName).toArray(String[]::new);
+                    alertDialogBuilder = new MaterialAlertDialogBuilder(H2CO3MainActivity.this);
+                    alertDialogBuilder.setTitle("请选择角色");
+                    alertDialogBuilder.setItems(items, (dialog, which) -> {
+                        AuthResult.AvailableProfiles selectedProfile = authResult.getAvailableProfiles().get(which);
+                        H2CO3Auth.addUserToJson(selectedProfile.getName(), user, pass, "2", currentBaseUrl, selectedProfile.getId(), "", "", authResult.getAccessToken(), "", "", true, false);
+                        adapterUser.notifyDataSetChanged();
+                        popView.dismiss();
+                        loginDialogAlert.dismiss();
+                    });
+                    alertDialogBuilder.setNegativeButton(H2CO3MainActivity.this.getString(org.koishi.launcher.h2co3.resources.R.string.button_cancel), null);
+                    alertDialogBuilder.show();
+                }
+            });
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void onFailed(String error) {
+            runOnUiThread(() -> {
+                progressDialog.dismiss();
+                adapterUser.notifyDataSetChanged();
+                popView.dismiss();
+                loginDialogAlert.dismiss();
+                alertDialogBuilder = new MaterialAlertDialogBuilder(H2CO3MainActivity.this);
+                alertDialogBuilder.setTitle(org.koishi.launcher.h2co3.resources.R.string.title_warn);
+                alertDialogBuilder.setMessage(error);
+                alertDialogBuilder.setPositiveButton(H2CO3MainActivity.this.getString(org.koishi.launcher.h2co3.resources.R.string.button_ok), null);
+                alertDialogBuilder.show();
+            });
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -390,53 +430,6 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
             alertDialogBuilder.show();
         });
     }
-
-
-    private final LoginUtils.Listener loginUtilsListener = new LoginUtils.Listener() {
-
-        @SuppressLint("NotifyDataSetChanged")
-        @Override
-        public void onSuccess(AuthResult authResult) {
-            runOnUiThread(() -> {
-                progressDialog.dismiss();
-                if (authResult.getSelectedProfile() != null) {
-                    H2CO3Auth.addUserToJson(authResult.getSelectedProfile().getName(), user, pass, "2", currentBaseUrl, authResult.getSelectedProfile().getId(), "", "", authResult.getAccessToken(), "", "", true, false);
-                    adapterUser.notifyDataSetChanged();
-                    popView.dismiss();
-                    loginDialogAlert.dismiss();
-                } else {
-                    String[] items = authResult.getAvailableProfiles().stream().map(AuthResult.AvailableProfiles::getName).toArray(String[]::new);
-                    alertDialogBuilder = new MaterialAlertDialogBuilder(H2CO3MainActivity.this);
-                    alertDialogBuilder.setTitle("请选择角色");
-                    alertDialogBuilder.setItems(items, (dialog, which) -> {
-                        AuthResult.AvailableProfiles selectedProfile = authResult.getAvailableProfiles().get(which);
-                        H2CO3Auth.addUserToJson(selectedProfile.getName(), user, pass, "2", currentBaseUrl, selectedProfile.getId(), "", "", authResult.getAccessToken(), "", "", true, false);
-                        adapterUser.notifyDataSetChanged();
-                        popView.dismiss();
-                        loginDialogAlert.dismiss();
-                    });
-                    alertDialogBuilder.setNegativeButton(H2CO3MainActivity.this.getString(org.koishi.launcher.h2co3.resources.R.string.button_cancel), null);
-                    alertDialogBuilder.show();
-                }
-            });
-        }
-
-        @SuppressLint("NotifyDataSetChanged")
-        @Override
-        public void onFailed(String error) {
-            runOnUiThread(() -> {
-                progressDialog.dismiss();
-                adapterUser.notifyDataSetChanged();
-                popView.dismiss();
-                loginDialogAlert.dismiss();
-                alertDialogBuilder = new MaterialAlertDialogBuilder(H2CO3MainActivity.this);
-                alertDialogBuilder.setTitle(org.koishi.launcher.h2co3.resources.R.string.title_warn);
-                alertDialogBuilder.setMessage(error);
-                alertDialogBuilder.setPositiveButton(H2CO3MainActivity.this.getString(org.koishi.launcher.h2co3.resources.R.string.button_ok), null);
-                alertDialogBuilder.show();
-            });
-        }
-    };
 
     public void refreshServer() {
         List<String> serverList = new ArrayList<>();

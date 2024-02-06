@@ -65,7 +65,8 @@ void h2co3launcherSetCursorMode(int mode) {
         return;
     }
     JNIEnv *env = 0;
-    jint result = (*h2co3launcher->android_jvm)->AttachCurrentThread(h2co3launcher->android_jvm, &env, 0);
+    jint result = (*h2co3launcher->android_jvm)->AttachCurrentThread(h2co3launcher->android_jvm,
+                                                                     &env, 0);
     if (result != JNI_OK || env == 0) {
         H2CO3_INTERNAL_LOG("h2co3launcherSetCursorMode:Failed to attach thread");
         abort();
@@ -74,17 +75,18 @@ void h2co3launcherSetCursorMode(int mode) {
     jclass class_H2CO3LauncherActivity = h2co3launcher->class_H2CO3LauncherActivity;
 
     if (class_H2CO3LauncherActivity == 0) {
-        H2CO3_INTERNAL_LOG( "h2co3launcherSetCursorMode:class_H2CO3LauncherActivity is null");
+        H2CO3_INTERNAL_LOG("h2co3launcherSetCursorMode:class_H2CO3LauncherActivity is null");
         abort();
     }
 
     jmethodID H2CO3LauncherActivity_setCursorMode = h2co3launcher->setCursorMode;
 
     if (H2CO3LauncherActivity_setCursorMode == 0) {
-        H2CO3_INTERNAL_LOG( "h2co3SetCursorMode:H2CO3LauncherActivity_setCursorMode is null");
+        H2CO3_INTERNAL_LOG("h2co3SetCursorMode:H2CO3LauncherActivity_setCursorMode is null");
         abort();
     }
-    (*env)->CallVoidMethod(env, h2co3launcher->h2co3launcherActivity, H2CO3LauncherActivity_setCursorMode, mode);
+    (*env)->CallVoidMethod(env, h2co3launcher->h2co3launcherActivity,
+                           H2CO3LauncherActivity_setCursorMode, mode);
     (*h2co3launcher->android_jvm)->DetachCurrentThread(h2co3launcher->android_jvm);
 }
 
@@ -112,7 +114,7 @@ int h2co3launcherPollEvent(H2CO3LauncherEvent *event) {
         return 0;
     }
     if (pthread_mutex_lock(&h2co3launcher->event_queue_mutex) != 0) {
-        H2CO3_INTERNAL_LOG( "h2co3launcherPollEvent:Failed to acquire mutex");
+        H2CO3_INTERNAL_LOG("h2co3launcherPollEvent:Failed to acquire mutex");
         return 0;
     }
     char c;
@@ -136,7 +138,8 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_getPointer(JNIEnv *env,
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent(JNIEnv *env, jclass clazz, jlong time,
+Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent(JNIEnv *env, jclass clazz,
+                                                                   jlong time,
                                                                    jint type, jint p1,
                                                                    jint p2) {
     if (!h2co3launcher->has_event_pipe) {
@@ -180,7 +183,8 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent(JNIEnv *env, 
     }
 
     if (pthread_mutex_lock(&h2co3launcher->event_queue_mutex) != 0) {
-        H2CO3_INTERNAL_LOG("Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent:Failed to acquire mutex");
+        H2CO3_INTERNAL_LOG(
+                "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent:Failed to acquire mutex");
         return;
     }
 
@@ -189,32 +193,41 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent(JNIEnv *env, 
     write(h2co3launcher->event_pipe_fd[1], "E", 1);
 
     if (pthread_mutex_unlock(&h2co3launcher->event_queue_mutex) != 0) {
-        H2CO3_INTERNAL_LOG("Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent:Failed to release mutex");
+        H2CO3_INTERNAL_LOG(
+                "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent:Failed to release mutex");
     }
 }
 
 JNIEXPORT void JNICALL
 Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe(JNIEnv *env, jclass clazz) {
     if (pipe(h2co3launcher->event_pipe_fd) == -1) {
-        H2CO3_INTERNAL_LOG("Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to create event pipe : %s", strerror(errno));
+        H2CO3_INTERNAL_LOG(
+                "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to create event pipe : %s",
+                strerror(errno));
         return;
     }
     h2co3launcher->epoll_fd = epoll_create(3);
     if (h2co3launcher->epoll_fd == -1) {
-        H2CO3_INTERNAL_LOG("Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to get epoll fd : %s", strerror(errno));
+        H2CO3_INTERNAL_LOG(
+                "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to get epoll fd : %s",
+                strerror(errno));
         return;
     }
     struct epoll_event ev;
     ev.events = EPOLLIN;
     ev.data.fd = h2co3launcher->event_pipe_fd[0];
-    if (epoll_ctl(h2co3launcher->epoll_fd, EPOLL_CTL_ADD, h2co3launcher->event_pipe_fd[0], &ev) == -1) {
-        H2CO3_INTERNAL_LOG("Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to add epoll event : %s", strerror(errno));
+    if (epoll_ctl(h2co3launcher->epoll_fd, EPOLL_CTL_ADD, h2co3launcher->event_pipe_fd[0], &ev) ==
+        -1) {
+        H2CO3_INTERNAL_LOG(
+                "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to add epoll event : %s",
+                strerror(errno));
         return;
     }
     EventQueue_init(&h2co3launcher->event_queue);
     pthread_mutex_init(&h2co3launcher->event_queue_mutex, NULL);
     h2co3launcher->has_event_pipe = 1;
-    H2CO3_INTERNAL_LOG("Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Succeeded to set event pipe");
+    H2CO3_INTERNAL_LOG(
+            "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Succeeded to set event pipe");
 }
 
 int injector_mode = 0;

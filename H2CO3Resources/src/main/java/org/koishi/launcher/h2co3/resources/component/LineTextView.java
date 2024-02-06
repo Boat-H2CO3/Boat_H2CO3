@@ -1,6 +1,5 @@
 package org.koishi.launcher.h2co3.resources.component;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;

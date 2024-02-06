@@ -28,7 +28,6 @@ import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MaterialDialog;
 import org.koishi.launcher.h2co3.ui.H2CO3MainActivity;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -36,10 +35,10 @@ public class HomeAdapterListUser extends RecyclerView.Adapter<HomeAdapterListUse
 
     private final Context context;
     private final List<UserBean> list;
-    private int selectedPosition;
     private final boolean hasFooter;
     private final Map<String, Drawable> userIconCache = new HashMap<>();
     private final H2CO3MainActivity activity;
+    private int selectedPosition;
     private boolean isRemoveUserDialogShowing = false;
 
     public HomeAdapterListUser(H2CO3MainActivity activity, List<UserBean> list) {
@@ -196,9 +195,12 @@ public class HomeAdapterListUser extends RecyclerView.Adapter<HomeAdapterListUse
 
     private String getUserStateText(UserBean user) {
         return switch (user.getUserType()) {
-            case "1" -> context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_microsoft);
-            case "2" -> context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_other) + user.getApiUrl();
-            default -> context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_offline);
+            case "1" ->
+                    context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_microsoft);
+            case "2" ->
+                    context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_other) + user.getApiUrl();
+            default ->
+                    context.getString(org.koishi.launcher.h2co3.resources.R.string.user_state_offline);
         };
     }
 

@@ -18,7 +18,7 @@ import org.koishi.launcher.h2co3.resources.component.H2CO3MarkdownView;
 import org.koishi.launcher.h2co3.resources.component.H2CO3TextView;
 import org.koishi.launcher.h2co3.ui.H2CO3LauncherClientActivity;
 
-public class HomeFragment extends H2CO3Fragment implements View.OnClickListener{
+public class HomeFragment extends H2CO3Fragment implements View.OnClickListener {
 
     H2CO3CardView home_file_check;
     H2CO3TextView home_file_check_title, home_file_check_message;
@@ -38,9 +38,9 @@ public class HomeFragment extends H2CO3Fragment implements View.OnClickListener{
     }
 
     private void findView() {
-        home_game_play_button = findViewById(view,R.id.home_game_play_button);
+        home_game_play_button = findViewById(view, R.id.home_game_play_button);
         home_game_play_button.setOnClickListener(this);
-        markdownView = findViewById(view,R.id.h2co3_test);
+        markdownView = findViewById(view, R.id.h2co3_test);
         markdownView.setMarkdownFilePath("/sdcard/games/com.koishi.launcher/h2o2/markdown/info.md");
     }
 
@@ -56,7 +56,7 @@ public class HomeFragment extends H2CO3Fragment implements View.OnClickListener{
      */
     @Override
     public void onClick(View v) {
-        if (v == home_game_play_button){
+        if (v == home_game_play_button) {
             startActivity(new Intent(requireActivity(), H2CO3LauncherClientActivity.class));
             attachControllerInterface();
         }

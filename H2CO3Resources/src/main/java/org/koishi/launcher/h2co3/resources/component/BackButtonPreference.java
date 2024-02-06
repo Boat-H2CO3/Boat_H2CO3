@@ -14,15 +14,16 @@ public class BackButtonPreference extends Preference {
         init();
     }
 
-    @SuppressWarnings("unused") public BackButtonPreference(Context context) {
+    @SuppressWarnings("unused")
+    public BackButtonPreference(Context context) {
         this(context, null);
     }
 
-    private void init(){
-        if(getTitle() == null){
+    private void init() {
+        if (getTitle() == null) {
             setTitle(R.string.title_action);
         }
-        if(getIcon() == null){
+        if (getIcon() == null) {
             setIcon(rikka.material.R.drawable.ic_expand_less_24dp);
         }
     }
@@ -31,6 +32,6 @@ public class BackButtonPreference extends Preference {
     @Override
     protected void onClick() {
         // It is caught by an ExtraListener in the LauncherActivity
-       // ExtraCore.setValue(ExtraConstants.BACK_PREFERENCE, "true");
+        // ExtraCore.setValue(ExtraConstants.BACK_PREFERENCE, "true");
     }
 }

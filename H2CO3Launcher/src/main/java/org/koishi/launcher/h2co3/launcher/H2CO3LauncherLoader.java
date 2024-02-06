@@ -12,7 +12,6 @@ import org.koishi.launcher.h2co3.launcher.function.H2CO3LauncherCallback;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 public class H2CO3LauncherLoader {

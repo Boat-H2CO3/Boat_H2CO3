@@ -35,8 +35,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.adapter.BaseRecycleAdapter;
-import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.H2CO3Game;
+import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.utils.data.DbDao;
 import org.koishi.launcher.h2co3.core.utils.file.AssetsUtils;
 import org.koishi.launcher.h2co3.resources.component.H2CO3Fragment;
@@ -55,12 +55,12 @@ import java.util.Objects;
 public class DirectoryFragment extends H2CO3Fragment {
 
     private final String h2co3Dir = MINECRAFT_DIR;
+    VersionRecyclerAdapter versionRecyclerAdapter;
     private MaterialAlertDialogBuilder mDialog;
     private LinearLayout page;
     private FloatingActionButton dir, ver;
     private SearchDirAdapter mAdapter;
     private String getBoatDir;
-
     private DbDao mDbDao;
     @SuppressLint("HandlerLeak")
     private final Handler han = new Handler(Looper.getMainLooper()) {
@@ -82,7 +82,6 @@ public class DirectoryFragment extends H2CO3Fragment {
             }
         }
     };
-
     private RecyclerView mRecyclerView, mVerRecyclerView;
 
     @Override
@@ -141,7 +140,7 @@ public class DirectoryFragment extends H2CO3Fragment {
     }
 
     public void initViews() {
-        mDbDao = new DbDao(requireActivity(),"Dir.db");
+        mDbDao = new DbDao(requireActivity(), "Dir.db");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         mAdapter = new SearchDirAdapter(mDbDao.queryData(""), requireActivity());
         mAdapter.setRvItemOnclickListener(position -> {
@@ -155,8 +154,6 @@ public class DirectoryFragment extends H2CO3Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    VersionRecyclerAdapter versionRecyclerAdapter;
-
     public void initVer() {
         File versionlist = new File(H2CO3Game.getGameDirectory() + "/versions");
         if (versionlist.isDirectory() && versionlist.exists()) {
@@ -165,7 +162,7 @@ public class DirectoryFragment extends H2CO3Fragment {
             List<String> verList = Arrays.asList(Objects.requireNonNull(getVer));  //此集合无法操作添加元素
             verList.sort(cp);
             mVerRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));//设置布局管理
-            versionRecyclerAdapter =  new VersionRecyclerAdapter(requireActivity(), verList);
+            versionRecyclerAdapter = new VersionRecyclerAdapter(requireActivity(), verList);
             mVerRecyclerView.setAdapter(versionRecyclerAdapter);
         } else {
             mVerRecyclerView.setAdapter(null);

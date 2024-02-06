@@ -10,10 +10,9 @@
 
 // POSIX-specific global timer data
 //
-typedef struct _GLFWtimerPOSIX
-{
-    GLFWbool    monotonic;
-    uint64_t    frequency;
+typedef struct _GLFWtimerPOSIX {
+    GLFWbool monotonic;
+    uint64_t frequency;
 
 } _GLFWtimerPOSIX;
 

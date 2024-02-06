@@ -35,7 +35,9 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_h2co3launcherSetNativeW
                                                                                       jclass clazz,
                                                                                       jobject surface) {
     h2co3launcher->window = ANativeWindow_fromSurface(env, surface);
-    H2CO3_INTERNAL_LOG("setH2CO3LauncherNativeWindow : %p, size : %dx%d", h2co3launcher->window, ANativeWindow_getWidth(h2co3launcher->window), ANativeWindow_getHeight(h2co3launcher->window));
+    H2CO3_INTERNAL_LOG("setH2CO3LauncherNativeWindow : %p, size : %dx%d", h2co3launcher->window,
+                       ANativeWindow_getWidth(h2co3launcher->window),
+                       ANativeWindow_getHeight(h2co3launcher->window));
 }
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
@@ -46,7 +48,8 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     memset(h2co3launcher, 0, sizeof(struct H2CO3LauncherInternal));
     h2co3launcher->android_jvm = vm;
     JNIEnv *env = NULL;
-    jint result = (*h2co3launcher->android_jvm)->AttachCurrentThread(h2co3launcher->android_jvm, &env, NULL);
+    jint result = (*h2co3launcher->android_jvm)->AttachCurrentThread(h2co3launcher->android_jvm,
+                                                                     &env, NULL);
     if (result != JNI_OK || env == NULL) {
         H2CO3_INTERNAL_LOG("Failed to attach thread to JavaVM.");
         return JNI_ERR;
@@ -80,7 +83,9 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherActivity_nOnCreate(JNIEnv *
     setGlobalRef(env, &h2co3launcher->class_H2CO3LauncherActivity, class_H2CO3LauncherActivity);
 
     // Get the setCursorMode function from the H2CO3LauncherActivity class
-    h2co3launcher->setCursorMode = (*env)->GetMethodID(env, h2co3launcher->class_H2CO3LauncherActivity, "setCursorMode", "(I)V");
+    h2co3launcher->setCursorMode = (*env)->GetMethodID(env,
+                                                       h2co3launcher->class_H2CO3LauncherActivity,
+                                                       "setCursorMode", "(I)V");
     if (h2co3launcher->setCursorMode == NULL) {
         H2CO3_INTERNAL_LOG("Failed to get method: setCursorMode.");
         return;

@@ -6,20 +6,27 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glPointParameterfARBPROC) (jint, jfloat);
-typedef void (APIENTRY *glPointParameterfvARBPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glPointParameterfARBPROC)(jint, jfloat);
+
+typedef void (APIENTRY *glPointParameterfvARBPROC)(jint, uintptr_t);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBPointParameters_glPointParameterfARB(JNIEnv *__env, jclass clazz, jint pname, jfloat param) {
-    glPointParameterfARBPROC glPointParameterfARB = (glPointParameterfARBPROC)tlsGetFunction(1289);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_ARBPointParameters_glPointParameterfARB(JNIEnv *__env, jclass clazz,
+                                                              jint pname, jfloat param) {
+    glPointParameterfARBPROC glPointParameterfARB = (glPointParameterfARBPROC) tlsGetFunction(1289);
     UNUSED_PARAM(clazz)
     glPointParameterfARB(pname, param);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBPointParameters_nglPointParameterfvARB__IJ(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
-    glPointParameterfvARBPROC glPointParameterfvARB = (glPointParameterfvARBPROC)tlsGetFunction(1290);
-    uintptr_t params = (uintptr_t)paramsAddress;
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_ARBPointParameters_nglPointParameterfvARB__IJ(JNIEnv *__env, jclass clazz,
+                                                                    jint pname,
+                                                                    jlong paramsAddress) {
+    glPointParameterfvARBPROC glPointParameterfvARB = (glPointParameterfvARBPROC) tlsGetFunction(
+            1290);
+    uintptr_t params = (uintptr_t) paramsAddress;
     UNUSED_PARAM(clazz)
     glPointParameterfvARB(pname, params);
 }

@@ -30,6 +30,7 @@ public class MCOptionUtils {
 
     /**
      * 加载选项
+     *
      * @param gameDir 游戏目录
      */
     public static void loadOptions(String gameDir) {
@@ -55,7 +56,8 @@ public class MCOptionUtils {
 
     /**
      * 设置选项值
-     * @param key 选项键
+     *
+     * @param key   选项键
      * @param value 选项值
      */
     public static void setOption(String key, String value) {
@@ -64,7 +66,8 @@ public class MCOptionUtils {
 
     /**
      * 设置选项值
-     * @param key 选项键
+     *
+     * @param key    选项键
      * @param values 选项值列表
      */
     public static void setOption(String key, List<String> values) {
@@ -73,6 +76,7 @@ public class MCOptionUtils {
 
     /**
      * 获取选项值
+     *
      * @param key 选项键
      * @return 选项值
      */
@@ -82,6 +86,7 @@ public class MCOptionUtils {
 
     /**
      * 获取选项值列表
+     *
      * @param key 选项键
      * @return 选项值列表
      */
@@ -100,6 +105,7 @@ public class MCOptionUtils {
 
     /**
      * 保存选项
+     *
      * @param gameDir 游戏目录
      */
     public static void saveOptions(String gameDir) {
@@ -120,6 +126,7 @@ public class MCOptionUtils {
 
     /**
      * 获取Minecraft GUI缩放比例
+     *
      * @param gameDir 游戏目录
      * @return GUI缩放比例
      */
@@ -138,6 +145,7 @@ public class MCOptionUtils {
 
     /**
      * 设置文件观察者，当文件发生变化时重新加载选项
+     *
      * @param gameDir 游戏目录
      */
     private static void setupFileObserver(String gameDir) {
@@ -176,6 +184,7 @@ public class MCOptionUtils {
 
     /**
      * 添加选项监听器
+     *
      * @param listener 选项监听器
      */
     public static void addOptionListener(MCOptionListener listener) {
@@ -184,6 +193,7 @@ public class MCOptionUtils {
 
     /**
      * 移除选项监听器
+     *
      * @param listener 选项监听器
      */
     public static void removeOptionListener(MCOptionListener listener) {

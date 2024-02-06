@@ -2,11 +2,9 @@ package org.koishi.launcher.h2co3.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.PreferenceManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,9 +16,9 @@ import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 
 import org.koishi.launcher.h2co3.R;
+import org.koishi.launcher.h2co3.core.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
-import org.koishi.launcher.h2co3.core.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
@@ -35,9 +33,9 @@ import java.util.Locale;
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends H2CO3Activity {
 
+    private final Handler handler = new Handler(Looper.getMainLooper());
     public LinearLayout splash;
     public TextView splashCheck;
-
     private boolean boat = false;
     private boolean h2co3_app = false;
     private boolean java8 = false;
@@ -46,20 +44,18 @@ public class SplashActivity extends H2CO3Activity {
     private H2CO3MessageDialog permissionDialog;
     private AlertDialog permissionDialogAlert;
 
-    private final Handler handler = new Handler(Looper.getMainLooper());
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setTheme(R.style.Theme_Boat_H2O2_Custom_GREEN);
         setContentView(R.layout.activity_splash);
 
-        boolean isFirstLaunch = H2CO3Tools.getH2CO3Value("isFirstLaunch",true, Boolean.class);
+        boolean isFirstLaunch = H2CO3Tools.getH2CO3Value("isFirstLaunch", true, Boolean.class);
 
         if (isFirstLaunch) {
             H2CO3Auth.resetUserState();
             H2CO3Loader.setDir(H2CO3Tools.MINECRAFT_DIR);
-            H2CO3Tools.setH2CO3Value("isFirstLaunch",false);
+            H2CO3Tools.setH2CO3Value("isFirstLaunch", false);
             checkPermission();
         } else {
             checkPermission();

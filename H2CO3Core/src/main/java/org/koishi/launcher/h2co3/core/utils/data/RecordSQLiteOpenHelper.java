@@ -12,7 +12,7 @@ public class RecordSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final Integer version = 1;
 
 
-    public RecordSQLiteOpenHelper(Context context ,String name) {
+    public RecordSQLiteOpenHelper(Context context, String name) {
         super(context, name, null, version);
     }
 

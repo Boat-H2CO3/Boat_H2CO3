@@ -143,12 +143,11 @@
 
 
 /* helper copying string if buffer big enough, returning length (without \0) */
-static int dl_strlen_strcpy(char* dst, const char* src, int dstSize)
-{
-  int l = strlen(src);
-  if(l < dstSize) /* l+'\0' <= bufSize */
-    strcpy(dst, src);
-  return l;
+static int dl_strlen_strcpy(char *dst, const char *src, int dstSize) {
+    int l = strlen(src);
+    if (l < dstSize) /* l+'\0' <= bufSize */
+        strcpy(dst, src);
+    return l;
 }
 
 /* code for dlGetLibraryPath() is platform specific */
@@ -244,64 +243,64 @@ EXTERN_C_EXIT
 #include <link.h>
 
 typedef struct {
-  void* pLib;
-  char*  sOut;
-  int    bufSize;
+    void *pLib;
+    char *sOut;
+    int bufSize;
 } iter_phdr_data;
 
-static int iter_phdr_cb(struct dl_phdr_info* info, size_t size, void* data)
-{
-  UNUSED_PARAM(size);
-  int l = -1;
-  iter_phdr_data* d = (iter_phdr_data*)data;
-  void* lib = NULL;
+static int iter_phdr_cb(struct dl_phdr_info *info, size_t size, void *data) {
+    UNUSED_PARAM(size);
+    int l = -1;
+    iter_phdr_data *d = (iter_phdr_data *) data;
+    void *lib = NULL;
 
-  /* get loaded object's handle if not requesting info about process itself */
-  if(d->pLib != NULL) {
-    /* unable to relate info->dlpi_addr directly to our dlopen handle, let's
-     * do what we do on macOS above, re-dlopen the already loaded lib (just
-     * increases ref count) and compare handles */
-    /* @@@ might be b/c it's the reloc addr... see below */
-    lib = dlopen(info->dlpi_name, RTLD_LIGHTEST);
-    if(lib)
-      dlclose(lib);
-  }
-
-  /* compare handles and get name if found; if d->pLib == NULL this will
-     enter info on first iterated object, which is the process itself */
-  if(lib == (void*)d->pLib) {
-    l = dl_strlen_strcpy(d->sOut, info->dlpi_name, d->bufSize);
-
-    /* if dlpi_name is empty, lookup name via dladdr(proc_load_addr, ...) */
-    if(l == 0 && d->pLib == NULL) {
-      /* dlpi_addr is the reloc base (0 if PIE), find real virtual load addr */
-      void* vladdr = (void*)info->dlpi_addr;
-      int i = 0;
-      for(; i < info->dlpi_phnum; ++i) {
-        if(info->dlpi_phdr[i].p_type == PT_LOAD) {
-          vladdr = (void*)(info->dlpi_addr + info->dlpi_phdr[i].p_vaddr);
-          break;
-        }
-      }
-      Dl_info di;
-      if(dladdr(vladdr, &di) != 0)
-        l = dl_strlen_strcpy(d->sOut, di.dli_fname, d->bufSize);
+    /* get loaded object's handle if not requesting info about process itself */
+    if (d->pLib != NULL) {
+        /* unable to relate info->dlpi_addr directly to our dlopen handle, let's
+         * do what we do on macOS above, re-dlopen the already loaded lib (just
+         * increases ref count) and compare handles */
+        /* @@@ might be b/c it's the reloc addr... see below */
+        lib = dlopen(info->dlpi_name, RTLD_LIGHTEST);
+        if (lib)
+            dlclose(lib);
     }
-  }
 
-  return l+1; /* strlen + '\0'; is 0 if lib not found, which continues iter */
+    /* compare handles and get name if found; if d->pLib == NULL this will
+       enter info on first iterated object, which is the process itself */
+    if (lib == (void *) d->pLib) {
+        l = dl_strlen_strcpy(d->sOut, info->dlpi_name, d->bufSize);
+
+        /* if dlpi_name is empty, lookup name via dladdr(proc_load_addr, ...) */
+        if (l == 0 && d->pLib == NULL) {
+            /* dlpi_addr is the reloc base (0 if PIE), find real virtual load addr */
+            void *vladdr = (void *) info->dlpi_addr;
+            int i = 0;
+            for (; i < info->dlpi_phnum; ++i) {
+                if (info->dlpi_phdr[i].p_type == PT_LOAD) {
+                    vladdr = (void *) (info->dlpi_addr + info->dlpi_phdr[i].p_vaddr);
+                    break;
+                }
+            }
+            Dl_info di;
+            if (dladdr(vladdr, &di) != 0)
+                l = dl_strlen_strcpy(d->sOut, di.dli_fname, d->bufSize);
+        }
+    }
+
+    return l + 1; /* strlen + '\0'; is 0 if lib not found, which continues iter */
 }
 
 EXTERN_C_ENTER
 
-JNIEXPORT int JNICALL Java_org_lwjgl_system_SharedLibraryUtil_getLibraryPath(JNIEnv *env, jclass clazz, jlong pLibAddress, jlong sOutAddress, jint bufSize)
-{
-  UNUSED_PARAMS(env, clazz)
-  void *pLib = (void *)(uintptr_t)pLibAddress;
-  char *sOut = (char *)(uintptr_t)sOutAddress;
+JNIEXPORT int JNICALL
+Java_org_lwjgl_system_SharedLibraryUtil_getLibraryPath(JNIEnv *env, jclass clazz, jlong pLibAddress,
+                                                       jlong sOutAddress, jint bufSize) {
+    UNUSED_PARAMS(env, clazz)
+    void *pLib = (void *) (uintptr_t) pLibAddress;
+    char *sOut = (char *) (uintptr_t) sOutAddress;
 
-  iter_phdr_data d = { pLib, sOut, bufSize };
-  return dl_iterate_phdr(iter_phdr_cb, &d);
+    iter_phdr_data d = {pLib, sOut, bufSize};
+    return dl_iterate_phdr(iter_phdr_cb, &d);
 }
 
 EXTERN_C_EXIT

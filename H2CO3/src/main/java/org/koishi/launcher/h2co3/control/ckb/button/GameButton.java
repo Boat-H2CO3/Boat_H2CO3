@@ -8,14 +8,12 @@ import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.MOUS
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import org.apache.commons.lang3.StringEscapeUtils;

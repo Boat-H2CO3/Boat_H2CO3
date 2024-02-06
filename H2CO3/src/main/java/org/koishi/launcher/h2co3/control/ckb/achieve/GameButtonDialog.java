@@ -98,6 +98,7 @@ public class GameButtonDialog extends Dialog implements View.OnClickListener, Se
     private int originalShow;
     private String originalChars;
     private boolean originalIsChars;
+
     public GameButtonDialog(@NonNull Context context, GameButton gamebutton, CkbManager manager) {
         super(context);
         setContentView(R.layout.dialog_gamebutton_config);

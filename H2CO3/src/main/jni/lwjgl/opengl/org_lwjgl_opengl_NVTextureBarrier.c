@@ -6,12 +6,13 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glTextureBarrierNVPROC) (void);
+typedef void (APIENTRY *glTextureBarrierNVPROC)(void);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVTextureBarrier_glTextureBarrierNV(JNIEnv *__env, jclass clazz) {
-    glTextureBarrierNVPROC glTextureBarrierNV = (glTextureBarrierNVPROC)tlsGetFunction(2147);
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_NVTextureBarrier_glTextureBarrierNV(JNIEnv *__env, jclass clazz) {
+    glTextureBarrierNVPROC glTextureBarrierNV = (glTextureBarrierNVPROC) tlsGetFunction(2147);
     UNUSED_PARAM(clazz)
     glTextureBarrierNV();
 }

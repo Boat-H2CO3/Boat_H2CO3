@@ -10,8 +10,8 @@
         android:id="@+id/logTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
         android:maxLines="100"
+        android:scrollbars="vertical"
         tools:text="Log output" />
 
 </LinearLayout>

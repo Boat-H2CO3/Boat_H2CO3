@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/splash_view"
     tools:context=".ui.SplashActivity">
 
     <com.google.android.material.circularreveal.CircularRevealRelativeLayout
@@ -58,7 +58,7 @@
                 android:layout_below="@+id/progressBar2"
                 android:text="Loading"
                 android:textSize="18sp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                 android:id="@+id/splash_check"

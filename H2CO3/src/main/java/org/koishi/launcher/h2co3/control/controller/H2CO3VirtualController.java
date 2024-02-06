@@ -1,6 +1,5 @@
 package org.koishi.launcher.h2co3.control.controller;
 
-import static android.opengl.ETC1.getWidth;
 import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.KEYBOARD_BUTTON;
 import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.MARK_KEYNAME_SPLIT;
 import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.MOUSE_BUTTON;
@@ -8,14 +7,12 @@ import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.MOUS
 import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.MOUSE_POINTER_INC;
 import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.TYPE_WORDS;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 
@@ -38,21 +35,19 @@ import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
 import java.util.HashMap;
 import java.util.Objects;
 
-import rikka.material.app.MaterialDialog;
 import timber.log.Timber;
 
 
 public class H2CO3VirtualController extends BaseController implements View.OnClickListener, MaterialSwitch.OnCheckedChangeListener {
 
+    static SharedPreferences sharedPreferences;
     private final Translation mTranslation;
     private final int screenWidth;
     private final int screenHeight;
+    DragFloatActionButton dButton;
     private VirtualControllerSetting settingDialog;
-    static SharedPreferences sharedPreferences;
     //绑定
     private HashMap<View, Input> bindingViews;
-
-    DragFloatActionButton dButton;
 
     public H2CO3VirtualController(H2CO3ControlClient h2CO3ControlClient, int transType) {
         super(h2CO3ControlClient, true);
@@ -87,7 +82,7 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         dButton.setLayoutParams(new ViewGroup.LayoutParams(DisplayUtils.getPxFromDp(context, 30), DisplayUtils.getPxFromDp(context, 30)));
         dButton.setBackground(ContextCompat.getDrawable(context, org.koishi.launcher.h2co3.resources.R.drawable.background_floatbutton));
 
-        float x = H2CO3Tools.getH2CO3Value("controller_float_position_x",114f,Float.class);
+        float x = H2CO3Tools.getH2CO3Value("controller_float_position_x", 114f, Float.class);
         float y = sharedPreferences.getFloat("y", -1);
         if (x != -1 && y != -1) {
             dButton.setX(x);
@@ -264,7 +259,6 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         private float initialY;
 
 
-
         public DragFloatActionButton(Context context) {
             super(context);
             this.setOnTouchListener(this);
@@ -353,8 +347,8 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         }
 
         public void savePosition() {
-            H2CO3Tools.setH2CO3Value("controller_float_position_x",getX());
-            H2CO3Tools.setH2CO3Value("controller_float_position_y",getY());
+            H2CO3Tools.setH2CO3Value("controller_float_position_x", getX());
+            H2CO3Tools.setH2CO3Value("controller_float_position_y", getY());
         }
     }
 
