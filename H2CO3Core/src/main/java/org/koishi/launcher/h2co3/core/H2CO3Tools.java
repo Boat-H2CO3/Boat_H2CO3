@@ -21,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import rikka.material.app.MaterialActivity;
 
@@ -30,6 +31,7 @@ public class H2CO3Tools {
     public static final int FILE_SELECTED_CODE_OK = 11450;
     public static String H2CO3_CONTROL_DIR;
     public static String CACIOCAVALLO_8_DIR;
+    public static String CACIOCAVALLO_11_DIR;
     public static String CACIOCAVALLO_17_DIR;
 
 
@@ -44,7 +46,9 @@ public class H2CO3Tools {
     public static String RUNTIME_DIR;
     public static String JAVA_PATH;
     public static String JAVA_8_PATH;
+    public static String JAVA_11_PATH;
     public static String JAVA_17_PATH;
+    public static String JAVA_21_PATH;
     public static String BOAT_LIBRARY_DIR;
 
     public static String FILES_DIR;
@@ -101,10 +105,13 @@ public class H2CO3Tools {
         RUNTIME_DIR = APP_DATA_PATH + "/app_runtime";
         JAVA_PATH = RUNTIME_DIR + "/java";
         JAVA_8_PATH = JAVA_PATH + "/jre_8";
+        JAVA_11_PATH = JAVA_PATH + "/jre_11";
         JAVA_17_PATH = JAVA_PATH + "/jre_17";
+        JAVA_21_PATH = JAVA_PATH + "/jre_21";
         BOAT_LIBRARY_DIR = RUNTIME_DIR + "/boat";
         PLUGIN_DIR = RUNTIME_DIR + "/boat/plugin";
         CACIOCAVALLO_8_DIR = PLUGIN_DIR + "/caciocavallo";
+        CACIOCAVALLO_11_DIR = PLUGIN_DIR + "/caciocavallo11";
         CACIOCAVALLO_17_DIR = PLUGIN_DIR + "/caciocavallo17";
         H2CO3_LIBRARY_DIR = APP_DATA_PATH + "/h2co3";
         H2CO3_SETTING_DIR = APP_DATA_PATH + "/h2co3_setting";
@@ -144,6 +151,9 @@ public class H2CO3Tools {
         init(CACHE_DIR);
         init(RUNTIME_DIR);
         init(JAVA_8_PATH);
+        init(JAVA_11_PATH);
+        init(JAVA_17_PATH);
+        init(JAVA_21_PATH);
         init(BOAT_LIBRARY_DIR);
         init(FILES_DIR);
         init(PLUGIN_DIR);
@@ -158,8 +168,9 @@ public class H2CO3Tools {
     }
 
     private static void init(String path) {
-        if (!new File(path).exists()) {
-            new File(path).mkdirs();
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
         }
     }
 
@@ -168,11 +179,8 @@ public class H2CO3Tools {
     }
 
     public static void setBoatValue(String key, java.io.Serializable value) {
-        if (getBoatValue("usesGlobal", false, Boolean.class)) {
-            setValue(getH2CO3Value("currentVersion", H2CO3_SETTING_DIR, String.class) + "/" + H2CO3_LAUNCHER_CONFIG_NAME, key, value);
-        } else {
-            setValue(H2CO3_SETTING_DIR + "/" + H2CO3_LAUNCHER_CONFIG_NAME, key, value);
-        }
+        String configFile = getBoatValue("usesGlobal", false, Boolean.class) ? getH2CO3Value("currentVersion", H2CO3_SETTING_DIR, String.class) + "/" + H2CO3_LAUNCHER_CONFIG_NAME : H2CO3_SETTING_DIR + "/" + H2CO3_LAUNCHER_CONFIG_NAME;
+        setValue(configFile, key, value);
     }
 
     public static <T> T getH2CO3Value(String key, T defaultValue, Class<T> type) {
@@ -190,7 +198,8 @@ public class H2CO3Tools {
                 return defaultValue;
             }
 
-            String configContent = new String(Files.readAllBytes(configPath));
+            List<String> configLines = Files.readAllLines(configPath);
+            String configContent = String.join("", configLines);
             JSONObject configJson = new JSONObject(configContent);
 
             if (configJson.has(key)) {
@@ -213,7 +222,8 @@ public class H2CO3Tools {
                 return;
             }
 
-            String configContent = new String(Files.readAllBytes(configPath));
+            List<String> configLines = Files.readAllLines(configPath);
+            String configContent = String.join("", configLines);
             JSONObject configJson = new JSONObject(configContent);
 
             configJson.put(key, value);
@@ -238,9 +248,8 @@ public class H2CO3Tools {
     }
 
     public static String read(InputStream is) throws IOException {
-        String readResult = IOUtils.toString(is, StandardCharsets.UTF_8);
-        is.close();
-        return readResult;
+        List<String> lines = IOUtils.readLines(is, StandardCharsets.UTF_8);
+        return String.join("", lines);
     }
 
     public static String read(String path) throws IOException {
@@ -254,7 +263,7 @@ public class H2CO3Tools {
             if (!parent.mkdirs()) throw new IOException("Failed to create parent directory");
         }
         try (FileOutputStream outStream = new FileOutputStream(file)) {
-            IOUtils.write(content, outStream);
+            IOUtils.write(content, outStream, StandardCharsets.UTF_8);
         }
     }
 
@@ -268,16 +277,16 @@ public class H2CO3Tools {
         }
 
         // 根据type的类型进行相应的转换操作
-        if (type == String.class) {
-            return type.cast(value.toString());
-        } else if (type == Integer.class) {
-            return type.cast(Integer.parseInt(value.toString()));
-        } else if (type == Boolean.class) {
-            return type.cast(Boolean.parseBoolean(value.toString()));
+        switch (type.getSimpleName()) {
+            case "String":
+                return type.cast(value.toString());
+            case "Integer":
+                return type.cast(Integer.parseInt(value.toString()));
+            case "Boolean":
+                return type.cast(Boolean.parseBoolean(value.toString()));
+            default:
+                return null;
         }
-
-        // 如果无法转换，则返回默认值
-        return null;
     }
 
     public static void showError(Context context, String message) {

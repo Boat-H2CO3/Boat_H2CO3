@@ -92,7 +92,7 @@ final class LWJGLMouse extends Mouse {
 			button.setValue(org.lwjgl.input.Mouse.isButtonDown(lwjgl_button) ? 1 : 0);
 	}
 
-	private synchronized boolean getNextDeviceEvent(Event event) throws IOException {
+	protected synchronized boolean getNextDeviceEvent(Event event) throws IOException {
 		if (!org.lwjgl.input.Mouse.isCreated())
 			return false;
 		while (true) {

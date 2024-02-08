@@ -6,6 +6,9 @@ import static org.koishi.launcher.h2co3.core.utils.StringUtils.substringAfter;
 import static org.koishi.launcher.h2co3.core.utils.StringUtils.substringAfterLast;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import android.os.Build;
+
+import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.utils.Pair;
 import org.koishi.launcher.h2co3.core.utils.io.IOUtils;
 
@@ -36,11 +39,12 @@ import java.util.Scanner;
 public final class NetworkUtils {
     public static final String PARAMETER_SEPARATOR = "&";
     public static final String NAME_VALUE_SEPARATOR = "=";
+    private static final int TIME_OUT = 8000;
 
     private NetworkUtils() {
     }
 
-    public static String withQuery(String baseUrl, Map<String, String> params) throws UnsupportedEncodingException {
+    public static String withQuery(String baseUrl, Map<String, String> params) {
         StringBuilder sb = new StringBuilder(baseUrl);
         boolean first = true;
         for (Entry<String, String> param : params.entrySet()) {
@@ -74,7 +78,7 @@ public final class NetworkUtils {
             scanner.useDelimiter("&");
             while (scanner.hasNext()) {
                 String[] nameValue = scanner.next().split(NAME_VALUE_SEPARATOR);
-                if (nameValue.length == 0 || nameValue.length > 2) {
+                if (nameValue.length <= 0 || nameValue.length > 2) {
                     throw new IllegalArgumentException("bad query string");
                 }
 
@@ -86,11 +90,22 @@ public final class NetworkUtils {
         return result;
     }
 
+    private static boolean endsWithDomainSuffix(String host, String domainSuffix) {
+        return host.endsWith(domainSuffix.toLowerCase());
+    }
+
     public static URLConnection createConnection(URL url) throws IOException {
         URLConnection connection = url.openConnection();
+        String host = url.getHost().toLowerCase();
+        if (endsWithDomainSuffix(host, "d.pcs.baidu.com") || endsWithDomainSuffix(host, "baidupcs.com")) {
+            // Docs: https://alist.nn.ci/zh/guide/drivers/baidu.html
+            connection.setRequestProperty("User-Agent", "pan.baidu.com");
+        } else {
+            connection.setRequestProperty("User-Agent", "Boat_H2CO3/" + Build.getRadioVersion());
+        }
         connection.setUseCaches(false);
-        connection.setConnectTimeout(5000);
-        connection.setReadTimeout(5000);
+        connection.setConnectTimeout(TIME_OUT);
+        connection.setReadTimeout(TIME_OUT);
         connection.setRequestProperty("Accept-Language", Locale.getDefault().toString());
         return connection;
     }
@@ -100,10 +115,10 @@ public final class NetworkUtils {
     }
 
     /**
+     * @see <a href=
+     *      "https://github.com/curl/curl/blob/3f7b1bb89f92c13e69ee51b710ac54f775aab320/lib/transfer.c#L1427-L1461">Curl</a>
      * @param location the url to be URL encoded
      * @return encoded URL
-     * @see <a href=
-     * "https://github.com/curl/curl/blob/3f7b1bb89f92c13e69ee51b710ac54f775aab320/lib/transfer.c#L1427-L1461">Curl</a>
      */
     public static String encodeLocation(String location) {
         StringBuilder sb = new StringBuilder();
@@ -120,13 +135,9 @@ public final class NetworkUtils {
                     left = false;
                     // fallthrough
                 default:
-                    if (ch >= 0x80) {
-                        try {
-                            sb.append(encodeURL(Character.toString(ch)));
-                        } catch (UnsupportedEncodingException e) {
-                            throw new RuntimeException(e);
-                        }
-                    } else
+                    if (ch >= 0x80)
+                        sb.append(encodeURL(Character.toString(ch)));
+                    else
                         sb.append(ch);
                     break;
             }
@@ -139,18 +150,18 @@ public final class NetworkUtils {
      * This method is a work-around that aims to solve problem when "Location" in
      * stupid server's response is not encoded.
      *
+     * @see <a href="https://github.com/curl/curl/issues/473">Issue with libcurl</a>
      * @param conn the stupid http connection.
      * @return manually redirected http connection.
      * @throws IOException if an I/O error occurs.
-     * @see <a href="https://github.com/curl/curl/issues/473">Issue with libcurl</a>
      */
     public static HttpURLConnection resolveConnection(HttpURLConnection conn) throws IOException {
         int redirect = 0;
         while (true) {
 
             conn.setUseCaches(false);
-            conn.setConnectTimeout(5000);
-            conn.setReadTimeout(5000);
+            conn.setConnectTimeout(TIME_OUT);
+            conn.setReadTimeout(TIME_OUT);
             conn.setInstanceFollowRedirects(false);
             Map<String, List<String>> properties = conn.getRequestProperties();
             String method = conn.getRequestMethod();
@@ -180,14 +191,7 @@ public final class NetworkUtils {
     public static String doGet(URL url) throws IOException {
         HttpURLConnection con = createHttpConnection(url);
         con = resolveConnection(con);
-        return IOUtils.readFullyAsString(con.getInputStream(), StandardCharsets.UTF_8);
-    }
-
-    public static String doGetCF(URL url) throws IOException {
-        HttpURLConnection con = createHttpConnection(url);
-        con.setRequestProperty("x-api-key", "$2a$10$qqJ3zZFG5CDsVHk8eV5ft.2ywg2edBtHwS3gzFnw7CDe3X2cKpWZG");
-        con = resolveConnection(con);
-        return IOUtils.readFullyAsString(con.getInputStream(), StandardCharsets.UTF_8);
+        return IOUtils.readFullyAsString(con.getInputStream());
     }
 
     public static String doPost(URL u, Map<String, String> params) throws IOException {
@@ -221,13 +225,13 @@ public final class NetworkUtils {
     public static String readData(HttpURLConnection con) throws IOException {
         try {
             try (InputStream stdout = con.getInputStream()) {
-                return IOUtils.readFullyAsString(stdout, UTF_8);
+                return IOUtils.readFullyAsString("gzip".equals(con.getContentEncoding()) ? IOUtils.wrapFromGZip(stdout) : stdout);
             }
         } catch (IOException e) {
             try (InputStream stderr = con.getErrorStream()) {
                 if (stderr == null)
                     throw e;
-                return IOUtils.readFullyAsString(stderr, UTF_8);
+                return IOUtils.readFullyAsString("gzip".equals(con.getContentEncoding()) ? IOUtils.wrapFromGZip(stderr) : stderr);
             }
         }
     }
@@ -279,11 +283,12 @@ public final class NetworkUtils {
     }
 
     // ==== Shortcut methods for encoding/decoding URLs in UTF-8 ====
-    public static String encodeURL(String toEncode) throws UnsupportedEncodingException {
+    public static String encodeURL(String toEncode) {
         return URLEncoder.encode(toEncode, UTF_8);
     }
 
     public static String decodeURL(String toDecode) {
         return URLDecoder.decode(toDecode, UTF_8);
     }
+    // ====
 }

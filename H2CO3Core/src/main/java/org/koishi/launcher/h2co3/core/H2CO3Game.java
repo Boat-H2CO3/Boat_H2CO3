@@ -1,9 +1,6 @@
 package org.koishi.launcher.h2co3.core;
 
-import static org.koishi.launcher.h2co3.core.H2CO3Tools.getBoatValue;
-import static org.koishi.launcher.h2co3.core.H2CO3Tools.getH2CO3Value;
-import static org.koishi.launcher.h2co3.core.H2CO3Tools.setBoatValue;
-import static org.koishi.launcher.h2co3.core.H2CO3Tools.setH2CO3Value;
+import static org.koishi.launcher.h2co3.core.H2CO3Tools.*;
 
 import android.content.Context;
 import android.os.Build;
@@ -31,7 +28,7 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     public static String getRender() {
-        return getH2CO3Value("h2co3_launcher_render", H2CO3Tools.GL_GL114, String.class);
+        return getH2CO3Value("h2co3_launcher_render", GL_GL114, String.class);
     }
 
     public void setRender(String path) {
@@ -39,7 +36,7 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     public static String getJavaPath() {
-        return getBoatValue("h2co3_launcher_java", H2CO3Tools.JAVA_8_PATH, String.class);
+        return getBoatValue("h2co3_launcher_java", JAVA_8_PATH, String.class);
     }
 
     public static void setJavaPath(String path) {
@@ -47,7 +44,7 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     public static String getGameDirectory() {
-        return getH2CO3Value("game_directory", H2CO3Tools.MINECRAFT_DIR, String.class);
+        return getH2CO3Value("game_directory", MINECRAFT_DIR, String.class);
     }
 
     public static void setGameDirectory(String directory) {
@@ -55,7 +52,7 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     public static String getGameAssetsRoot() {
-        return getH2CO3Value("game_assets_root", H2CO3Tools.MINECRAFT_DIR + "/assets/", String.class);
+        return getH2CO3Value("game_assets_root", MINECRAFT_DIR + "/assets/", String.class);
     }
 
     public static void setGameAssetsRoot(String assetsRoot) {
@@ -81,16 +78,16 @@ public class H2CO3Game extends HashMap<String, String> {
     public static Vector<String> getMcArgs(H2CO3Game config, Context context, int width, int height) {
         try {
             MinecraftVersion version = MinecraftVersion.fromDirectory(new File(getGameCurrentVersion()));
-            String lwjglPath = H2CO3Tools.RUNTIME_DIR + "/boat/lwjgl";
+            String lwjglPath = RUNTIME_DIR + "/boat/lwjgl";
             String javaPath = getJavaPath();
             boolean highVersion = version.minimumLauncherVersion >= 21;
             String libraryPath;
             String classPath;
-            boolean isJava17 = javaPath.equals(H2CO3Tools.JAVA_17_PATH);
+            boolean isJava8 = javaPath.equals(JAVA_8_PATH);
             if (!highVersion) {
-                classPath = lwjglPath + "/lwjgl.jar:" + version.getClassPath(false, isJava17);
+                classPath = lwjglPath + "/lwjgl.jar:" + version.getClassPath(false, isJava8);
             } else {
-                classPath = lwjglPath + "/lwjgl.jar:" + version.getClassPath(true, isJava17);
+                classPath = lwjglPath + "/lwjgl.jar:" + version.getClassPath(true, isJava8);
             }
 
             String nativeDir = context.getApplicationInfo().nativeLibraryDir;
@@ -99,15 +96,15 @@ public class H2CO3Game extends HashMap<String, String> {
             String split = ":";
 
             libraryPath = javaPath +
-                    "/lib/" + (isJava17 ? "" : getArchitectureString(Architecture.getDeviceArchitecture())) +
+                    "/lib/" + (isJava8 ? getArchitectureString(Architecture.getDeviceArchitecture()) : "") +
                     split +
 
                     javaPath +
-                    "/lib/" + (isJava17 ? jliLibDir : getArchitectureString(Architecture.getDeviceArchitecture()) + "/" + jliLibDir) +
+                    "/lib/" + (isJava8 ? getArchitectureString(Architecture.getDeviceArchitecture()) + "/" + jliLibDir : jliLibDir) +
                     split +
 
                     javaPath +
-                    "/lib/" + (isJava17 ? "server" : getArchitectureString(Architecture.getDeviceArchitecture()) + "/server") +
+                    "/lib/" + (isJava8 ? getArchitectureString(Architecture.getDeviceArchitecture()) + "/server" : "server") +
                     split +
 
                     "/system/" +
@@ -130,11 +127,11 @@ public class H2CO3Game extends HashMap<String, String> {
 
             Vector<String> args = new Vector<>();
             args.add(javaPath + "/bin/java");
-            addCacioOptions(args, isJava17, width, height);
+            //addCacioOptions(args, javaPath, width, height);
             args.add("-cp");
             args.add(classPath);
             args.add("-Djava.library.path=" + libraryPath);
-            args.add("-Djna.boot.library.path=" + H2CO3Tools.NATIVE_LIB_DIR);
+            args.add("-Djna.boot.library.path=" + NATIVE_LIB_DIR);
             args.add("-Dfml.earlyprogresswindow=false");
             args.add("-Dorg.lwjgl.util.DebugLoader=true");
             args.add("-Dorg.lwjgl.util.Debug=true");
@@ -155,14 +152,13 @@ public class H2CO3Game extends HashMap<String, String> {
             args.add("-Duser.timezone=" + TimeZone.getDefault().getID());
             args.add("-Duser.home=" + getGameDirectory());
 
-
-            if (getRender().equals(H2CO3Tools.GL_VIRGL)) {
+            if (getRender().equals(GL_VIRGL)) {
                 args.add("-Dorg.lwjgl.opengl.libname=libGL.so.1");
             } else {
                 args.add("-Dorg.lwjgl.opengl.libname=libgl4es.so");
             }
-            args.add("-Djava.io.tmpdir=" + H2CO3Tools.CACHE_DIR);
-            H2CO3Tools.loadPaths(context);
+            args.add("-Djava.io.tmpdir=" + CACHE_DIR);
+            loadPaths(context);
             String[] accountArgs = new String[0];
             Collections.addAll(args, accountArgs);
             String[] JVMArgs = version.getJVMArguments();
@@ -197,10 +193,17 @@ public class H2CO3Game extends HashMap<String, String> {
         };
     }
 
-    private static void addCacioOptions(Vector<String> args, boolean isJava17, int width, int height) {
+    private static void addCacioOptions(Vector<String> args, String javaPath, int width, int height) {
         StringBuilder cacioClasspath = new StringBuilder();
-        cacioClasspath.append("-Xbootclasspath/").append(!isJava17 ? "p" : "a");
-        File cacioDir = new File(!isJava17 ? H2CO3Tools.CACIOCAVALLO_8_DIR : H2CO3Tools.CACIOCAVALLO_17_DIR);
+        cacioClasspath.append("-Xbootclasspath/").append(javaPath.equals(JAVA_11_PATH) || javaPath.equals(JAVA_17_PATH) || javaPath.equals(JAVA_21_PATH) ? "a" : "p");
+        File cacioDir = new File(CACIOCAVALLO_8_DIR);
+        if (javaPath.equals(JAVA_8_PATH)){
+            cacioDir = new File(CACIOCAVALLO_8_DIR);
+        } else if (javaPath.equals(JAVA_11_PATH)) {
+            cacioDir = new File(CACIOCAVALLO_11_DIR);
+        }else if (javaPath.equals(JAVA_17_PATH) || javaPath.equals(JAVA_21_PATH)) {
+            cacioDir = new File(CACIOCAVALLO_17_DIR);
+        }
         if (cacioDir.exists() && cacioDir.isDirectory()) {
             for (File file : Objects.requireNonNull(cacioDir.listFiles())) {
                 if (file.getName().endsWith(".jar")) {
@@ -214,7 +217,7 @@ public class H2CO3Game extends HashMap<String, String> {
         args.add("-Dcacio.font.fontmanager=sun.awt.X11FontManager");
         args.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
         args.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
-        if (!isJava17) {
+        if (javaPath.equals(JAVA_8_PATH) || javaPath.equals(JAVA_11_PATH)) {
             args.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
             args.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
         } else {
@@ -231,7 +234,6 @@ public class H2CO3Game extends HashMap<String, String> {
             args.add("--add-exports=java.desktop/sun.awt.event=ALL-UNNAMED");
             args.add("--add-exports=java.desktop/sun.awt.datatransfer=ALL-UNNAMED");
             args.add("--add-exports=java.desktop/sun.font=ALL-UNNAMED");
-            args.add("--add-exports=java.base/sun.security.action=ALL-UNNAMED");
             args.add("--add-opens=java.base/java.util=ALL-UNNAMED");
             args.add("--add-opens=java.desktop/java.awt=ALL-UNNAMED");
             args.add("--add-opens=java.desktop/sun.font=ALL-UNNAMED");
@@ -243,7 +245,7 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     public String getRuntimePath() {
-        return getH2CO3Value("runtime_path", H2CO3Tools.RUNTIME_DIR, String.class);
+        return getH2CO3Value("runtime_path", RUNTIME_DIR, String.class);
     }
 
     public void setRuntimePath(String path) {
@@ -251,7 +253,7 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     public String getH2CO3Home() {
-        return getH2CO3Value("h2co3_home", H2CO3Tools.PUBLIC_FILE_PATH, String.class);
+        return getH2CO3Value("h2co3_home", PUBLIC_FILE_PATH, String.class);
     }
 
     public void setH2CO3Home(String home) {
@@ -267,7 +269,7 @@ public class H2CO3Game extends HashMap<String, String> {
     }
 
     public String getGameAssets() {
-        return getH2CO3Value("game_assets", H2CO3Tools.MINECRAFT_DIR + "/assets/virtual/legacy/", String.class);
+        return getH2CO3Value("game_assets", MINECRAFT_DIR + "/assets/virtual/legacy/", String.class);
     }
 
     public static void setGameAssets(String assets) {

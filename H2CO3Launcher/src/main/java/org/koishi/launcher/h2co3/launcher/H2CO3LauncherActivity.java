@@ -26,7 +26,7 @@ import java.util.concurrent.Executors;
 
 public abstract class H2CO3LauncherActivity extends H2CO3Activity implements TextureView.SurfaceTextureListener {
 
-    public static final ExecutorService executorService = Executors.newFixedThreadPool(4);
+    public static final ExecutorService executorService = Executors.newFixedThreadPool(1);
     private static final int SYSTEM_UI_HIDE_DELAY_MS = 3000;
     public static IBoat boatInterface;
 
@@ -58,10 +58,8 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         }
     };
 
-    public static native void setupExitTrap(Context context);
-
     public static void onExit(Context ctx, int code) {
-        ((H2CO3LauncherActivity) ctx).h2co3LauncherCallback.onExit(code);
+        //((H2CO3LauncherActivity) ctx).h2co3LauncherCallback.onExit(code);
     }
 
     public void init() {
@@ -99,7 +97,9 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
     }
 
     public void startGame(Context context, final String javaPath, final String home, final boolean highVersion, final Vector<String> args, String renderer, String gameDir) {
-        setupExitTrap(this);
+        int exitTrapResult = H2CO3LauncherLoader.setupExitTrap(context);
+        String logMessage = "Hook exit " + (exitTrapResult == 0 ? "success" : "failed");
+        Log.e("H2CO3Launcher",logMessage);
         executorService.execute(() -> {
             Handler handler = new Handler(Looper.getMainLooper());
             H2CO3LauncherLoader.launchMinecraft(handler, context, javaPath, home, highVersion, args, renderer, gameDir, new H2CO3LauncherCallback() {
@@ -135,7 +135,6 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
                 @Override
                 public void onExit(int code) {
-
                 }
             });
         });
@@ -238,6 +237,9 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         h2co3LauncherCallback.onCursorModeChange(mode);
     }
 
+    public void exit(Context context,int code) {
+    }
+
     public interface IBoat {
 
         void onActivityCreate(H2CO3LauncherActivity boatActivity);
@@ -254,5 +256,6 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
         boolean dispatchGenericMotionEvent(MotionEvent event);
     }
+
 
 }

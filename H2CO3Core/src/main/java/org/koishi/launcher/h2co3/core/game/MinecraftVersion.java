@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class MinecraftVersion {
     public AssetsIndex assetIndex;
@@ -86,12 +87,12 @@ public class MinecraftVersion {
         return result;
     }
 
-    public String getClassPath(boolean high, boolean isJava17) {
-        StringBuilder cp = new StringBuilder();
-        String librariesPath = H2CO3Game.getGameDirectory() + "/libraries/";
+    public String getClassPath(boolean high, boolean isJava8) {
+        String librariesPath = H2CO3Game.getGameDirectory() + File.separator + "libraries";
+        StringJoiner cp = new StringJoiner(":");
 
         for (Library lib : libraries) {
-            if (lib.name == null || lib.name.isEmpty() || lib.name.contains("org.lwjgl") || lib.name.contains("natives") || (isJava17 && lib.name.contains("java-objc-bridge"))) {
+            if (lib.name == null || lib.name.isEmpty() || lib.name.contains("org.lwjgl") || lib.name.contains("natives") || (isJava8 && lib.name.contains("java-objc-bridge"))) {
                 continue;
             }
 
@@ -100,24 +101,12 @@ public class MinecraftVersion {
             String mainName = names[1];
             String versionName = names[2];
 
-            String path = String.format("%s%s/%s/%s/%s-%s.jar", librariesPath, packageName.replaceAll("\\.", "/"), mainName, versionName, mainName, versionName);
+            String path = String.format("%s%s%s%s%s%s%s%s%s-%s.jar", librariesPath, File.separator, packageName.replaceAll("\\.", File.separator), File.separator, mainName, File.separator, versionName, File.separator, mainName, versionName);
 
-            cp.append(path).append(":");
+            cp.add(path);
         }
 
-        if (cp.length() > 0) {
-            cp.setLength(cp.length() - 1);
-        }
-
-        String split = cp.length() > 0 ? ":" : "";
-
-        if (high) {
-            cp.append(split).append(minecraftPath);
-        } else {
-            cp.insert(0, minecraftPath + split);
-        }
-
-        return cp.toString();
+        return high ? cp + ":" + (high ? cp + ":" + minecraftPath : minecraftPath + (cp.length() > 0 ? ":" : "") + cp.toString()) : (high ? cp.toString() + ":" + (high ? cp.toString() + ":" + minecraftPath : minecraftPath + (cp.length() > 0 ? ":" : "") + cp.toString()) : minecraftPath + (cp.length() > 0 ? ":" : "") + cp) + (cp.length() > 0 ? ":" : "") + cp;
     }
 
     public String[] getJVMArguments() {

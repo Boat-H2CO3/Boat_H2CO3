@@ -40,7 +40,6 @@ import timber.log.Timber;
 
 public class H2CO3VirtualController extends BaseController implements View.OnClickListener, MaterialSwitch.OnCheckedChangeListener {
 
-    static SharedPreferences sharedPreferences;
     private final Translation mTranslation;
     private final int screenWidth;
     private final int screenHeight;
@@ -51,8 +50,6 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
 
     public H2CO3VirtualController(H2CO3ControlClient h2CO3ControlClient, int transType) {
         super(h2CO3ControlClient, true);
-
-        sharedPreferences = context.getSharedPreferences("controller_float_position", Context.MODE_PRIVATE);
 
         //初始化键值翻译器
         this.mTranslation = new Translation(transType);
@@ -82,11 +79,11 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         dButton.setLayoutParams(new ViewGroup.LayoutParams(DisplayUtils.getPxFromDp(context, 30), DisplayUtils.getPxFromDp(context, 30)));
         dButton.setBackground(ContextCompat.getDrawable(context, org.koishi.launcher.h2co3.resources.R.drawable.background_floatbutton));
 
-        float x = H2CO3Tools.getH2CO3Value("controller_float_position_x", 114f, Float.class);
-        float y = sharedPreferences.getFloat("y", -1);
+        double x = H2CO3Tools.getH2CO3Value("controller_float_position_x", (double) screenWidth / 2, Double.class).doubleValue();
+        double y = H2CO3Tools.getH2CO3Value("controller_float_position_y", (double) screenHeight / 2, Double.class).doubleValue();
         if (x != -1 && y != -1) {
-            dButton.setX(x);
-            dButton.setY(y);
+            dButton.setX((float) x);
+            dButton.setY((float) y);
         } else {
             // 如果没有保存的位置，则将其移动到屏幕中间
             dButton.setX((float) screenWidth / 2);
@@ -177,45 +174,6 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         if (v instanceof ImageButton && bindingViews.containsKey(v)) {
             Objects.requireNonNull(bindingViews.get(v)).runConfigure();
         }
-    }
-
-    //根据X,Y的比例，计算Input主控件中心位置在Activity的主View中的位置
-    private int[] calculateMarginsOnScreen(OnscreenInput i, float leftScale, float topScale) {
-        int viewWidth;
-        int viewHeight;
-        int leftMargin;
-        int topMargin;
-
-        if (i.getSize() == null) {
-            return null;
-        } else {
-            viewWidth = i.getSize()[0];
-            viewHeight = i.getSize()[1];
-        }
-
-        leftMargin = (int) (screenWidth * leftScale - viewWidth / 2);
-        topMargin = (int) (screenHeight * topScale - viewHeight / 2);
-
-        //超出右边界
-        if (leftMargin + viewWidth > screenWidth) {
-            leftMargin = screenWidth - viewWidth;
-        }
-        //超出下边界
-        if (topMargin + viewHeight > screenHeight) {
-            topMargin = screenHeight - viewHeight;
-        }
-        //超出左边界
-        if (leftMargin < 0) {
-            leftMargin = 0;
-        }
-        //超出上边界
-        if (topMargin < 0) {
-            topMargin = 0;
-        }
-
-        //Log.e(TAG,"屏幕宽度 " + screenWidth + " 屏幕高度 " + screenHeight + '\n' + "左侧比例 " + leftScale + " 顶部比例 " + topScale + '\n' + "左侧边距大小 " + leftMargin + " 顶部边距大小 " +topMargin);
-
-        return new int[]{leftMargin, topMargin};
     }
 
     @Override
@@ -347,7 +305,7 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         }
 
         public void savePosition() {
-            H2CO3Tools.setH2CO3Value("controller_float_position_x", getX());
+            H2CO3Tools.setH2CO3Value("controller_float_po sition_x", getX());
             H2CO3Tools.setH2CO3Value("controller_float_position_y", getY());
         }
     }

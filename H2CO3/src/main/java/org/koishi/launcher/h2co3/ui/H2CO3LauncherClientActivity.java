@@ -1,6 +1,10 @@
 package org.koishi.launcher.h2co3.ui;
 
+import static org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader.LOG_FILE_PATH;
+import static org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader.saveLogToPath;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.SurfaceTexture;
@@ -20,6 +24,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.controller.H2CO3VirtualController;
 import org.koishi.launcher.h2co3.control.controller.HardwareController;
+import org.koishi.launcher.h2co3.control.input.log.DebugInfo;
 import org.koishi.launcher.h2co3.core.H2CO3Game;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.game.MinecraftVersion;
@@ -28,10 +33,12 @@ import org.koishi.launcher.h2co3.launcher.H2CO3LauncherActivity;
 import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLib;
 import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader;
 import org.koishi.launcher.h2co3.launcher.function.H2CO3LauncherCallback;
+import org.koishi.launcher.h2co3.resources.component.LogView;
 import org.koishi.launcher.h2co3.utils.launch.MCOptionUtils;
 import org.koishi.launcher.h2co3.utils.launch.boat.VirGLService;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.Timer;
 import java.util.Vector;
 
@@ -43,6 +50,7 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
     H2CO3LauncherLib launcherLib = new H2CO3LauncherLib();
     private boolean grabbed = false;
     private ImageView cursorIcon;
+    private LogView mLogView;
     private int screenWidth;
     private int screenHeight;
 
@@ -105,6 +113,9 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
         cursorIcon = new ImageView(this);
         cursorIcon.setLayoutParams(new ViewGroup.LayoutParams(DisplayUtils.getPxFromDp(this, CURSOR_SIZE), DisplayUtils.getPxFromDp(this, CURSOR_SIZE)));
         cursorIcon.setImageResource(org.koishi.launcher.h2co3.resources.R.drawable.cursor5);
+        mLogView = new LogView(this);
+        mLogView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        baseLayout.addView(mLogView);
         this.addView(cursorIcon);
         initUI();
         new Thread(H2CO3LauncherLoader::redirectStdio).start();
@@ -115,9 +126,28 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
         init();
         boatInterface.onActivityCreate(this);
         dialog = new MaterialAlertDialogBuilder(H2CO3LauncherClientActivity.this);
+        saveLogToPath(LOG_FILE_PATH);
+        if (H2CO3LauncherLoader.logReceiver == null || H2CO3LauncherLoader.logReceiver.getLogs() == null) {
+            H2CO3LauncherLoader.LogReceiver mReceiver = new H2CO3LauncherLoader.LogReceiver() {
+                final StringBuilder stringBuilder = new StringBuilder();
+
+                @Override
+                public void pushLog(String log) {
+                    mLogView.appendLog(log);
+                    stringBuilder.append(log);
+                }
+
+                @Override
+                public String getLogs() {
+                    return stringBuilder.toString();
+                }
+            };
+            H2CO3LauncherLoader.logReceiver = new WeakReference<>(mReceiver).get();
+        }
     }
 
     private void handleCallback() {
+        new Thread(H2CO3LauncherLoader::redirectStdio).start();
         setH2CO3LauncherCallback(new H2CO3LauncherCallback() {
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -164,7 +194,6 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
 
             @Override
             public void onExit(int code) {
-                startActivity(new Intent(H2CO3LauncherClientActivity.this, ExitActivity.class));
                 ExitActivity.showExitMessage(H2CO3LauncherClientActivity.this, code);
                 stopVirGLService();
             }
@@ -233,6 +262,12 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void exit(Context context, int code) {
+        super.exit(context, code);
+        ExitActivity.showExitMessage(context,code);
     }
 
     @Override

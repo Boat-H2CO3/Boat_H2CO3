@@ -8,7 +8,6 @@
 
 struct H2CO3LauncherInternal *h2co3launcher = NULL;
 
-
 void deleteGlobalRef(JNIEnv *env, jclass *globalRef);
 
 ANativeWindow *h2co3launcherGetNativeWindow() {
@@ -34,7 +33,14 @@ JNIEXPORT void JNICALL
 Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_h2co3launcherSetNativeWindow(JNIEnv *env,
                                                                                       jclass clazz,
                                                                                       jobject surface) {
+    if (h2co3launcher == NULL) {
+        return;
+    }
     h2co3launcher->window = ANativeWindow_fromSurface(env, surface);
+    if (h2co3launcher->window == NULL) {
+        H2CO3_INTERNAL_LOG("Failed to get native window.");
+        return;
+    }
     H2CO3_INTERNAL_LOG("setH2CO3LauncherNativeWindow : %p, size : %dx%d", h2co3launcher->window,
                        ANativeWindow_getWidth(h2co3launcher->window),
                        ANativeWindow_getHeight(h2co3launcher->window));

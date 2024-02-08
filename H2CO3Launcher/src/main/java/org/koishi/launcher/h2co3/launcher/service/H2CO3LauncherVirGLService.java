@@ -54,7 +54,7 @@ public class H2CO3LauncherVirGLService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startForeground(this, "VirGLService", "VirGL service is running", "H2CO3", "VirGL service is running");
-        new Thread(() -> H2CO3LauncherLoader.startVirGLService(this, Objects.requireNonNull(getExternalFilesDir("debug")).getAbsolutePath(), getCacheDir().getAbsolutePath())).start();
+        new Thread(() -> H2CO3LauncherLoader.startVirGLService(Objects.requireNonNull(getExternalFilesDir("debug")).getAbsolutePath(), getCacheDir().getAbsolutePath())).start();
         return Service.START_NOT_STICKY;
     }
 

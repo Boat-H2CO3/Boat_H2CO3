@@ -10,6 +10,7 @@
 #include "h2co3launcher_internal.h"
 
 #define BUFFER_SIZE 1024
+#define LOG_TAG "H2CO3Launcher"
 
 static volatile jobject exitTrap_ctx;
 static volatile jclass exitTrap_exitClass;
@@ -18,23 +19,22 @@ static JavaVM *exitTrap_jvm;
 
 jstring CStr2Jstring(JNIEnv *env, const char *buffer);
 
-void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(JNIEnv *env,
-                                                                               jclass clazz) {
+void redirectStdio(JNIEnv *env, jclass clazz) {
     int boatPipe[2];
 
     if (pipe(boatPipe) < 0) {
-        H2CO3_INTERNAL_LOG("failed to create log pipe!");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "failed to create log pipe!");
         return;
     } else {
-        H2CO3_INTERNAL_LOG("succeed to create log pipe!");
+        __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, "succeed to create log pipe!");
     }
 
     if (dup2(boatPipe[1], STDOUT_FILENO) != STDOUT_FILENO &&
         dup2(boatPipe[1], STDERR_FILENO) != STDERR_FILENO) {
-        H2CO3_INTERNAL_LOG("failed to redirect stdio !");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "failed to redirect stdio !");
         return;
     } else {
-        H2CO3_INTERNAL_LOG("succeed to redirect stdio !");
+        __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, "succeed to redirect stdio !");
     }
 
     char buffer[BUFFER_SIZE];
@@ -44,7 +44,7 @@ void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(J
     jmethodID loadme_static_method_receiveLog = (*env)->GetStaticMethodID(env, loadme, "receiveLog",
                                                                           "(Ljava/lang/String;)V");
     if (loadme_static_method_receiveLog == NULL) {
-        H2CO3_INTERNAL_LOG("failed to find receive method !");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "failed to find receive method !");
         return;
     }
 
@@ -52,7 +52,7 @@ void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(J
         memset(buffer, '\0', sizeof(buffer));
         ssize_t _s = read(boatPipe[0], buffer, sizeof(buffer) - 1);
         if (_s < 0) {
-            H2CO3_INTERNAL_LOG("failed to read log !");
+            __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "failed to read log !");
             close(boatPipe[0]);
             close(boatPipe[1]);
             return;
@@ -62,7 +62,7 @@ void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(J
         if (buffer[0] == '\0') {
             continue;
         } else {
-            H2CO3_INTERNAL_LOG("%s", buffer);
+            __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, "%s", buffer);
             (*env)->CallStaticVoidMethod(env, clazz, loadme_static_method_receiveLog,
                                          CStr2Jstring(env, buffer));
         }
@@ -71,11 +71,11 @@ void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(J
 
 jstring CStr2Jstring(JNIEnv *env, const char *buffer) {
     jsize len = strlen(buffer);
-    jclass strClass = (*env)->FindClass(env, "java/lang/String");
-    jstring encoding = (*env)->NewStringUTF(env, "UTF-8");
-    jmethodID ctorID = (*env)->GetMethodID(env, strClass, "<init>", "([BLjava/lang/String;)V");
     jbyteArray bytes = (*env)->NewByteArray(env, len);
     (*env)->SetByteArrayRegion(env, bytes, 0, len, (jbyte *) buffer);
+    jstring encoding = (*env)->NewStringUTF(env, "UTF-8");
+    jclass strClass = (*env)->FindClass(env, "java/lang/String");
+    jmethodID ctorID = (*env)->GetMethodID(env, strClass, "<init>", "([BLjava/lang/String;)V");
     return (jstring) (*env)->NewObject(env, strClass, ctorID, bytes, encoding);
 }
 
@@ -91,8 +91,12 @@ void custom_exit(int code) {
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_saveLogToPath(JNIEnv *env, jclass clazz,
-                                                                          jstring path) {
+Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_redirectStdio(JNIEnv *env, jclass clazz) {
+    redirectStdio(env, clazz);
+}
+
+JNIEXPORT void JNICALL
+Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_saveLogToPath(JNIEnv *env, jclass clazz, jstring path) {
     const char *file = (*env)->GetStringUTFChars(env, path, NULL);
 
     int fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
@@ -102,6 +106,34 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_saveLogToPath(JNIEnv
     }
 
     (*env)->ReleaseStringUTFChars(env, path, file);
+
+    // 调用 receiveLog 方法，并将日志字符串作为参数传递
+    jclass loadme = (*env)->FindClass(env, "org/koishi/launcher/h2co3/launcher/H2CO3LauncherLoader");
+    jmethodID loadme_static_method_receiveLog = (*env)->GetStaticMethodID(env, loadme, "receiveLog", "(Ljava/lang/String;)V");
+    if (loadme_static_method_receiveLog == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "failed to find receiveLog method !");
+        return;
+    }
+
+    char buffer[BUFFER_SIZE];
+    while (1) {
+        ssize_t _s = read(fd, buffer, sizeof(buffer) - 1);
+        if (_s < 0) {
+            __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "failed to read log !");
+            close(fd);
+            return;
+        } else {
+            buffer[_s] = '\0';
+        }
+        if (buffer[0] == '\0') {
+            continue;
+        } else {
+            __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, "%s", buffer);
+            jstring logString = CStr2Jstring(env, buffer);
+            (*env)->CallStaticVoidMethod(env, loadme, loadme_static_method_receiveLog, logString);
+            (*env)->DeleteLocalRef(env, logString);
+        }
+    }
 }
 
 JNIEXPORT jint JNICALL
@@ -128,19 +160,24 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_setenv(JNIEnv *env, 
 }
 
 JNIEXPORT jint JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_dlopen(JNIEnv *env, jclass clazz,
-                                                                   jstring str1) {
-    const char *lib_name = (*env)->GetStringUTFChars(env, str1, NULL);
+Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_dlopen(JNIEnv *env, jclass clazz,jstring str1) {
+    dlerror();
 
-    void *handle = dlopen(lib_name, RTLD_GLOBAL);
+    int ret = 0;
+    char const* lib_name = (*env)->GetStringUTFChars(env, str1, 0);
+
+    void* handle;
+    dlerror();
+    handle = dlopen(lib_name, RTLD_GLOBAL);
+    __android_log_print(ANDROID_LOG_ERROR, "H2CO3DLOpen", "loading %s (error = %s)", lib_name, dlerror());
+
     if (handle == NULL) {
-        H2CO3_INTERNAL_LOG("loading %s (error = %s)", lib_name, dlerror());
-        (*env)->ReleaseStringUTFChars(env, str1, lib_name);
-        return -1;
+        ret = -1;
     }
 
     (*env)->ReleaseStringUTFChars(env, str1, lib_name);
-    return 0;
+    return ret;
+
 }
 
 void stub() {
@@ -151,64 +188,64 @@ void stub() {
 
 void (*old_exit)(int code);
 
-void Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherActivity_setupExitTrap(JNIEnv *env,
-                                                                                 jclass clazz,
-                                                                                 jobject context) {
-    exitTrap_ctx = (*env)->NewGlobalRef(env, context);
+JNIEXPORT jint JNICALL Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_setupExitTrap(JNIEnv *env, jobject jobject1, jobject bridge) {
+    exitTrap_ctx = (*env)->NewGlobalRef(env, bridge);
     (*env)->GetJavaVM(env, &exitTrap_jvm);
-    exitTrap_exitClass = (*env)->NewGlobalRef(env, (*env)->FindClass(env,
-                                                                     "org/koishi/launcher/h2co3/launcher/H2CO3LauncherActivity"));
-    exitTrap_staticMethod = (*env)->GetStaticMethodID(env, exitTrap_exitClass, "onExit",
-                                                      "(Landroid/content/Context;I)V");
-
-    if (exitTrap_exitClass == NULL || exitTrap_staticMethod == NULL) {
-        H2CO3_INTERNAL_LOG("NO CLASS");
-        return;
-    }
-
-    xhook_enable_debug(1);
+    exitTrap_exitClass = (*env)->NewGlobalRef(env,(*env)->FindClass(env, "org/koishi/launcher/h2co3/launcher/H2CO3LauncherActivity"));
+    exitTrap_staticMethod = (*env)->GetStaticMethodID(env, exitTrap_exitClass, "onExit","(Landroid/content/Context;I)V");
+    (*env)->DeleteGlobalRef(env, exitTrap_exitClass);
+    // Enable xhook debug mode here
+    // xhook_enable_debug(1);
     xhook_register(".*\\.so$", "exit", custom_exit, (void **) &old_exit);
-    xhook_refresh(1);
+    return xhook_refresh(1);
 }
 
 JNIEXPORT int JNICALL
 Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_dlexec(JNIEnv *env, jclass clazz,
                                                                    jobjectArray argsArray) {
+    dlerror();
+
     int argc = (*env)->GetArrayLength(env, argsArray);
-    char *argv[argc];
+    char* argv[argc];
     for (int i = 0; i < argc; i++) {
-        jstring str = (*env)->GetObjectArrayElement(env, argsArray, i);
-        const char *arg = (*env)->GetStringUTFChars(env, str, NULL);
-        argv[i] = strdup(arg);
-        (*env)->ReleaseStringUTFChars(env, str, arg);
-        (*env)->DeleteLocalRef(env, str);  // 释放局部引用
+        jstring str = (jstring)(*env)->GetObjectArrayElement(env, argsArray, i);
+        const char* utfChars = (*env)->GetStringUTFChars(env, str, NULL);
+        argv[i] = strdup(utfChars);
+        (*env)->ReleaseStringUTFChars(env, str, utfChars);
     }
-    char **envp = environ;
+    char** envp = environ;
 
-    jstring str0 = (*env)->GetObjectArrayElement(env, argsArray, 0);
-    const char *lib_name = (*env)->GetStringUTFChars(env, str0, NULL);
+    jstring str0 = (jstring)(*env)->GetObjectArrayElement(env, argsArray, 0);
+    const char* lib_name = (*env)->GetStringUTFChars(env, str0, NULL);
 
-    void *handle = dlopen(lib_name, RTLD_GLOBAL);
+    void* handle = dlopen(lib_name, RTLD_GLOBAL);
+    __android_log_print(ANDROID_LOG_ERROR, "H2CO3DLExec", "loading %s (error = %s)", lib_name, dlerror());
     if (handle == NULL) {
-        H2CO3_INTERNAL_LOG("loading %s (error = %s)", lib_name, dlerror());
+        for (int i = 0; i < argc; i++) {
+            free(argv[i]);
+        }
         (*env)->ReleaseStringUTFChars(env, str0, lib_name);
         return -1;
     }
 
-    int (*main_func)(int, char **, char **) = (int (*)()) dlsym(handle, "main");
+    int (*main_func)(int, char**, char**) = (int (*)(int, char**, char**))dlsym(handle, "main");
+    __android_log_print(ANDROID_LOG_ERROR, "H2CO3DLExec", "getting main() in %s (error = %s)", lib_name, dlerror());
     if (main_func == NULL) {
-        H2CO3_INTERNAL_LOG("getting main() in %s (error = %s)", lib_name, dlerror());
+        dlclose(handle);
+        for (int i = 0; i < argc; i++) {
+            free(argv[i]);
+        }
         (*env)->ReleaseStringUTFChars(env, str0, lib_name);
         return -2;
     }
-    int ret = main_func(argc, argv, envp);
-    (*env)->ReleaseStringUTFChars(env, str0, lib_name);
 
-    // 释放argv数组中的内存
+    int ret = main_func(argc, argv, envp);
+
+    dlclose(handle);
     for (int i = 0; i < argc; i++) {
         free(argv[i]);
     }
-
+    (*env)->ReleaseStringUTFChars(env, str0, lib_name);
     return ret;
 }
 
@@ -278,7 +315,7 @@ unsigned gen_mov_imm(unsigned tr, signed short imm) {
 void patchLinker(JNIEnv *env, jclass clazz) {
     void *libdl_handle = dlopen("libdl.so", RTLD_GLOBAL);
     if (libdl_handle == NULL) {
-        H2CO3_INTERNAL_LOG("Failed to open libdl.so");
+        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Failed to open libdl.so");
         return;
     }
 
@@ -287,7 +324,7 @@ void patchLinker(JNIEnv *env, jclass clazz) {
     unsigned *dlvsym_addr = (unsigned *) dlsym(libdl_handle, "dlvsym");
     unsigned *buffer = (unsigned *) dlsym(libdl_handle, "android_get_LD_LIBRARY_PATH");
     if (dlopen_addr == NULL || dlsym_addr == NULL || dlvsym_addr == NULL || buffer == NULL) {
-        H2CO3_INTERNAL_LOG("Failed to find symbols");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to find symbols");
         dlclose(libdl_handle);
         return;
     }
@@ -338,13 +375,13 @@ void patchLinker(JNIEnv *env, jclass clazz) {
     }
 
     if (dlopen_hooked == 0) {
-        H2CO3_INTERNAL_LOG("dlopen() not patched");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "dlopen() not patched");
     }
     if (dlsym_hooked == 0) {
-        H2CO3_INTERNAL_LOG("dlsym() not patched");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "dlsym() not patched");
     }
     if (dlvsym_hooked == 0) {
-        H2CO3_INTERNAL_LOG("dlvsym() not patched");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "dlvsym() not patched");
     }
 
     dlclose(libdl_handle);
@@ -354,4 +391,3 @@ JNIEXPORT void JNICALL
 Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLoader_patchLinker(JNIEnv *env, jclass clazz) {
     patchLinker(env, clazz);
 }
-

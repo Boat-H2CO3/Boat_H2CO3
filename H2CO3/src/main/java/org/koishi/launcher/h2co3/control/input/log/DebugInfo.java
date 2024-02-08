@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 public class DebugInfo implements Input, View.OnClickListener {
-    private Context mContext;
+    private static Context mContext;
     private Controller mController;
     private boolean isEnabled;
 
@@ -39,7 +39,7 @@ public class DebugInfo implements Input, View.OnClickListener {
 
     @Override
     public boolean load(Context context, Controller controller) {
-        this.mContext = context;
+        mContext = context;
         this.mController = controller;
 
         mLogView = new LogView(mContext);
@@ -144,7 +144,7 @@ public class DebugInfo implements Input, View.OnClickListener {
         }
     }
 
-    public class LogView extends NestedScrollView {
+    public static class LogView extends NestedScrollView {
 
         private final TextView mTextView;
 

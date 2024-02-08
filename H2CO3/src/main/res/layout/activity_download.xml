@@ -19,7 +19,7 @@
         android:layout_marginEnd="100dp"
         android:spinnerMode="dropdown"
         android:textSize="@dimen/text_mid"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        />
 
     <RadioGroup
         android:id="@+id/typeRadioGroup"

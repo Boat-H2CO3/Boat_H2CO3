@@ -315,7 +315,7 @@ public class MappedObjectTransformer {
 		final ClassWriter cw = new ClassWriter(COMPUTE_FRAMES) {
 
 			@Override
-            private String getCommonSuperClass(String a, String b) {
+			protected String getCommonSuperClass(String a, String b) {
 				// HACK: prevent user-code static-initialization-blocks to be executed
 				if ( is_currently_computing_frames && !a.startsWith("java/") || !b.startsWith("java/") )
 					return "java/lang/Object";

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.orhanobut.logger.Logger;
 
+import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader;
 import org.koishi.launcher.h2co3.resources.R;
 import org.koishi.launcher.h2co3.ui.CrashActivity;
 
@@ -51,11 +52,6 @@ public class H2CO3Application extends Application implements Application.Activit
                 .errorActivity(CrashActivity.class)
                 .eventListener(new CustomEventListener())
                 .apply();
-    }
-
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
     }
 
     @Override

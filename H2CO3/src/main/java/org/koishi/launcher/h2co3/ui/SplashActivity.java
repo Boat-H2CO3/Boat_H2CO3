@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
@@ -22,6 +23,7 @@ import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
+import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MessageDialog;
 
@@ -29,6 +31,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicReference;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends H2CO3Activity {
@@ -39,17 +45,20 @@ public class SplashActivity extends H2CO3Activity {
     private boolean boat = false;
     private boolean h2co3_app = false;
     private boolean java8 = false;
+    private boolean java11 = false;
     private boolean java17 = false;
+    private boolean java21 = false;
     private boolean installing = false;
     private H2CO3MessageDialog permissionDialog;
     private AlertDialog permissionDialogAlert;
-
+    private boolean hasJumped = false;
+    private boolean hasEnteredLauncher = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setTheme(R.style.Theme_Boat_H2O2_Custom_GREEN);
         setContentView(R.layout.activity_splash);
-
+        splash = findViewById(R.id.splash_view);
+        splashCheck = findViewById(R.id.splash_check);
         boolean isFirstLaunch = H2CO3Tools.getH2CO3Value("isFirstLaunch", true, Boolean.class);
 
         if (isFirstLaunch) {
@@ -67,16 +76,19 @@ public class SplashActivity extends H2CO3Activity {
     }
 
     public void startApp() {
-        splash = findViewById(R.id.splash_view);
-        splashCheck = findViewById(R.id.splash_check);
         initState();
         check();
         install();
     }
 
     private void enterLauncher() {
-        startActivity(new Intent(this, H2CO3MainActivity.class));
-        finish();
+
+        if (!hasEnteredLauncher) {
+            hasEnteredLauncher = true;
+            Intent intent = new Intent(SplashActivity.this, H2CO3MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void checkPermission() {
@@ -118,7 +130,7 @@ public class SplashActivity extends H2CO3Activity {
     }
 
     private boolean isLatest() {
-        return boat && java8 && java17 && h2co3_app;
+        return boat && h2co3_app && java8 && java11 && java17 && java21 ;
     }
 
     private void check() {
@@ -134,7 +146,17 @@ public class SplashActivity extends H2CO3Activity {
             e.printStackTrace();
         }
         try {
+            h2co3_app = RuntimeUtils.isLatest(H2CO3Tools.H2CO3_LIBRARY_DIR, "/assets/h2co3");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
             java8 = RuntimeUtils.isLatest(H2CO3Tools.JAVA_8_PATH, "/assets/app_runtime/java/jre_8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            java11 = RuntimeUtils.isLatest(H2CO3Tools.JAVA_11_PATH, "/assets/app_runtime/java/jre_11");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -144,10 +166,11 @@ public class SplashActivity extends H2CO3Activity {
             e.printStackTrace();
         }
         try {
-            h2co3_app = RuntimeUtils.isLatest(H2CO3Tools.H2CO3_LIBRARY_DIR, "/assets/h2co3");
+            java21 = RuntimeUtils.isLatest(H2CO3Tools.JAVA_21_PATH, "/assets/app_runtime/java/jre_21");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private void install() {
@@ -189,6 +212,22 @@ public class SplashActivity extends H2CO3Activity {
                 handler.post(this::check);
             }).start();
         }
+        if (!java11) {
+            new Thread(() -> {
+                try {
+                    RuntimeUtils.installJava(SplashActivity.this, H2CO3Tools.JAVA_11_PATH, "app_runtime/java/jre_11");
+                    if (!LocaleUtils.getSystemLocale().getDisplayName().equals(Locale.CHINA.getDisplayName())) {
+                        FileTools.writeText(new File(H2CO3Tools.JAVA_11_PATH + "/resolv.conf"), "nameserver 1.1.1.1\n" + "nameserver 1.0.0.1");
+                    } else {
+                        FileTools.writeText(new File(H2CO3Tools.JAVA_11_PATH + "/resolv.conf"), "nameserver 8.8.8.8\n" + "nameserver 8.8.4.4");
+                    }
+                    java11 = true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                handler.post(this::check);
+            }).start();
+        }
         if (!java17) {
             new Thread(() -> {
                 try {
@@ -205,6 +244,22 @@ public class SplashActivity extends H2CO3Activity {
                 handler.post(this::check);
             }).start();
         }
+        if (!java21) {
+            new Thread(() -> {
+                try {
+                    RuntimeUtils.installJava(SplashActivity.this, H2CO3Tools.JAVA_21_PATH, "app_runtime/java/jre_21");
+                    if (!LocaleUtils.getSystemLocale().getDisplayName().equals(Locale.CHINA.getDisplayName())) {
+                        FileTools.writeText(new File(H2CO3Tools.JAVA_21_PATH + "/resolv.conf"), "nameserver 1.1.1.1\n" + "nameserver 1.0.0.1");
+                    } else {
+                        FileTools.writeText(new File(H2CO3Tools.JAVA_21_PATH + "/resolv.conf"), "nameserver 8.8.8.8\n" + "nameserver 8.8.4.4");
+                    }
+                    java21 = true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                handler.post(this::check);
+            }).start();
+        }
     }
 
     @Override
@@ -212,6 +267,12 @@ public class SplashActivity extends H2CO3Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == XXPermissions.REQUEST_CODE) {
             checkPermission();
+        }
+        if (!hasJumped) {
+            hasJumped = true;
+            Intent intent = new Intent(SplashActivity.this, H2CO3MainActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

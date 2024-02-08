@@ -32,6 +32,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileVisitResult;
@@ -1145,5 +1146,35 @@ public final class FileTools {
             tarEntry = tarIn.getNextTarEntry();
         }
         tarIn.close();
+    }
+
+    public static void forceReleaseFile(File file) {
+        try {
+            RandomAccessFile raf = new RandomAccessFile(file, "rw");
+            FileChannel channel = raf.getChannel();
+            channel.lock().close();
+            channel.close();
+            raf.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 强制解除文件和文件夹的占用
+    private void forceReleaseFiles(File dir) {
+        if (dir.isDirectory()) {
+            File[] files = dir.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        forceReleaseFiles(file); // 递归调用，处理子文件夹
+                    } else {
+                        forceReleaseFile(file); // 强制解除文件的占用
+                    }
+                }
+            }
+        } else {
+            forceReleaseFile(dir); // 强制解除文件的占用
+        }
     }
 }
