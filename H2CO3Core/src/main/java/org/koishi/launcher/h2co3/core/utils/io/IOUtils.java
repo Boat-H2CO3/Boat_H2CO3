@@ -61,7 +61,8 @@ public final class IOUtils {
     }
 
     public static String readFullyAsString(InputStream stream) throws IOException {
-        return readFully(stream).toString(StandardCharsets.UTF_8);
+        ByteArrayOutputStream byteArrayOutputStream = readFully(stream);
+        return new String(byteArrayOutputStream.toByteArray(), StandardCharsets.UTF_8);
     }
 
     public static void copyTo(InputStream src, OutputStream dest) throws IOException {
