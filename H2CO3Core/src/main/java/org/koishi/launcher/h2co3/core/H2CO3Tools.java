@@ -84,10 +84,17 @@ public class H2CO3Tools {
     public static String LOGIN_ERROR;
     public static String LOGIN_INFO;
     public static String GL_GL114;
+    public static String GL_ANGLE;
+    public static String GL_VGPU;
+    public static String GL_ZINK;
     public static String GL_VIRGL;
-
-
-    public static int DEVICE_ARCHITECTURE = Architecture.getDeviceArchitecture();
+    private static final String H2CO3_LIB_DIR = H2CO3Tools.RUNTIME_DIR + "/h2co3_launcher";
+    public static final String LOG_FILE_PATH = H2CO3Tools.LOG_DIR + "/minecraft_log.log";
+    private static final String ARGS_FILE_PATH = H2CO3Tools.LOG_DIR + "/boat_args.txt";
+    private static final String SERVICE_LOG_FILE_PATH = H2CO3Tools.LOG_DIR + "/h2co3_service_log.txt";
+    private static final String API_INSTALLER_LOG_FILE_PATH = H2CO3Tools.LOG_DIR + "/h2co3_api_installer_log.txt";
+    private static final String VIRGL_TEST_SOCKET_NAME = ".virgl_test";
+    private static final String VIRGL_TEST_SOCKET_PATH = H2CO3Tools.CACHE_DIR + "/" + VIRGL_TEST_SOCKET_NAME;
 
 
     @SuppressLint("SdCardPath")
@@ -145,6 +152,9 @@ public class H2CO3Tools {
         LOGIN_INFO = "h2co3_users_info";
 
         GL_GL114 = "gl4es";
+        GL_ANGLE = "angle";
+        GL_VGPU = "vgpu";
+        GL_ZINK = "zink";
         GL_VIRGL = "virgl";
 
         init(LOG_DIR);
@@ -277,16 +287,21 @@ public class H2CO3Tools {
         }
 
         // 根据type的类型进行相应的转换操作
-        switch (type.getSimpleName()) {
-            case "String":
-                return type.cast(value.toString());
-            case "Integer":
-                return type.cast(Integer.parseInt(value.toString()));
-            case "Boolean":
-                return type.cast(Boolean.parseBoolean(value.toString()));
-            default:
-                return null;
-        }
+        return switch (type.getSimpleName()) {
+            case "String" -> type.cast(value.toString());
+            case "Integer" -> type.cast(Integer.parseInt(value.toString()));
+            case "Boolean" -> type.cast(Boolean.parseBoolean(value.toString()));
+            default -> null;
+        };
+    }
+
+    public static String getArchitectureString(int architecture) {
+        return switch (architecture) {
+            case Architecture.ARCH_ARM -> "aarch32";
+            case Architecture.ARCH_X86 -> "i386";
+            case Architecture.ARCH_X86_64 -> "amd64";
+            default -> "aarch64";
+        };
     }
 
     public static void showError(Context context, String message) {

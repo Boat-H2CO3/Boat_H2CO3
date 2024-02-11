@@ -2,12 +2,9 @@ package org.koishi.launcher.h2co3.launcher;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,38 +12,42 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
-import org.koishi.launcher.h2co3.launcher.function.H2CO3LauncherCallback;
+import org.koishi.launcher.h2co3.core.H2CO3Tools;
+import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridge;
+import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridgeCallBack;
+import org.koishi.launcher.h2co3.core.utils.CommandBuilder;
+import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public abstract class H2CO3LauncherActivity extends H2CO3Activity implements TextureView.SurfaceTextureListener {
 
-    public static final ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private static final String TAG = "H2CO3LauncherActivity";
     private static final int SYSTEM_UI_HIDE_DELAY_MS = 3000;
-    public static IBoat boatInterface;
+    private static final int THREAD_POOL_SIZE = 1;
 
-    static {
-        System.loadLibrary("h2co3launcher");
-    }
+    private final ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
 
-    public final float scaleFactor = 1.0F;
     public TextureView mainTextureView;
     public RelativeLayout baseLayout;
-    public H2CO3LauncherCallback h2co3LauncherCallback;
-    public Timer timer;
-    int output = 0;
+    public H2CO3LauncherBridgeCallBack h2co3LauncherCallback;
+    private Timer timer;
+    private int output = 0;
     private TimerTask systemUiTimerTask;
-    private final View.OnSystemUiVisibilityChangeListener onSystemUiVisibilityChangeListener
-            = new View.OnSystemUiVisibilityChangeListener() {
+    public static IBoat boatInterface;
+
+    private final View.OnSystemUiVisibilityChangeListener onSystemUiVisibilityChangeListener = new View.OnSystemUiVisibilityChangeListener() {
         @Override
         public void onSystemUiVisibilityChange(int visibility) {
             if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                if (systemUiTimerTask != null) systemUiTimerTask.cancel();
+                if (systemUiTimerTask != null) {
+                    systemUiTimerTask.cancel();
+                }
                 systemUiTimerTask = new TimerTask() {
                     @Override
                     public void run() {
@@ -58,8 +59,8 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         }
     };
 
-    public static void onExit(Context ctx, int code) {
-        //((H2CO3LauncherActivity) ctx).h2co3LauncherCallback.onExit(code);
+    static {
+        System.loadLibrary("h2co3launcher");
     }
 
     public void init() {
@@ -71,7 +72,7 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
     public native void nOnCreate();
 
     public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
-        Log.d("H2CO3LauncherActivity", "SurfaceTexture is available!");
+        Log.d(TAG, "SurfaceTexture is available!");
         h2co3LauncherCallback.onSurfaceTextureAvailable(surface, width, height);
     }
 
@@ -96,51 +97,13 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         }
     }
 
-    public void startGame(Context context, final String javaPath, final String home, final boolean highVersion, final Vector<String> args, String renderer, String gameDir) {
-        int exitTrapResult = H2CO3LauncherLoader.setupExitTrap(context);
-        String logMessage = "Hook exit " + (exitTrapResult == 0 ? "success" : "failed");
-        Log.e("H2CO3Launcher",logMessage);
+    public void startGame(Context context, final String javaPath, final String home, final boolean highVersion, final CommandBuilder args, String renderer, String gameDir) {
         executorService.execute(() -> {
-            Handler handler = new Handler(Looper.getMainLooper());
-            H2CO3LauncherLoader.launchMinecraft(handler, context, javaPath, home, highVersion, args, renderer, gameDir, new H2CO3LauncherCallback() {
-                @Override
-                public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-                    H2CO3LauncherLib.h2co3launcherSetNativeWindow(new Surface(surface));
-                    H2CO3LauncherLib.setEventPipe();
-                }
-
-                @Override
-                public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-                    H2CO3LauncherLib.pushEventWindow(width, height);
-                }
-
-                @Override
-                public void onCursorModeChange(int mode) {
-
-                }
-
-                @Override
-                public void onStart() {
-                    h2co3LauncherCallback.onStart();
-                }
-
-                @Override
-                public void onPicOutput() {
-                }
-
-                @Override
-                public void onError(Exception e) {
-                    h2co3LauncherCallback.onError(e);
-                }
-
-                @Override
-                public void onExit(int code) {
-                }
-            });
+            //H2CO3LauncherHelper.launchMinecraft(context,);
         });
     }
 
-    public void setH2CO3LauncherCallback(H2CO3LauncherCallback callback) {
+    public void setH2CO3LauncherCallback(H2CO3LauncherBridgeCallBack callback) {
         this.h2co3LauncherCallback = callback;
     }
 
@@ -187,19 +150,19 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
     }
 
     public int[] getPointer() {
-        return H2CO3LauncherLib.getPointer();
+        return H2CO3LauncherBridge.getPointer();
     }
 
     public void setKey(int keyCode, int keyChar, boolean isPressed) {
-        H2CO3LauncherLib.setKey(keyCode, keyChar, isPressed);
+        H2CO3LauncherBridge.setKey(keyCode, keyChar, isPressed);
     }
 
     public void setMouseButton(int button, boolean isPressed) {
-        H2CO3LauncherLib.setMouseButton(button, isPressed);
+        H2CO3LauncherBridge.setMouseButton(button, isPressed);
     }
 
     public void setPointer(int x, int y) {
-        H2CO3LauncherLib.setPointer(x, y);
+        H2CO3LauncherBridge.setPointer(x, y);
     }
 
     @Override
@@ -211,7 +174,9 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
             hideSystemUI(decorView);
         } else {
             decorView.setOnSystemUiVisibilityChangeListener(null);
-            if (systemUiTimerTask != null) systemUiTimerTask.cancel();
+            if (systemUiTimerTask != null) {
+                systemUiTimerTask.cancel();
+            }
         }
         if (hasFocus) {
             getWindow().getDecorView().setSystemUiVisibility(
@@ -237,7 +202,11 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         h2co3LauncherCallback.onCursorModeChange(mode);
     }
 
-    public void exit(Context context,int code) {
+    public void exit(Context context, int code) {
+    }
+
+    public static void onExit(Context ctx, int code) {
+        ((H2CO3LauncherActivity) ctx).h2co3LauncherCallback.onExit(code);
     }
 
     public interface IBoat {
@@ -256,6 +225,4 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
         boolean dispatchGenericMotionEvent(MotionEvent event);
     }
-
-
 }

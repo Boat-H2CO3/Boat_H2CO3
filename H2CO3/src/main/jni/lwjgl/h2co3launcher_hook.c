@@ -34,7 +34,7 @@ hooked_ProcessImpl_forkAndExec(JNIEnv *env, jobject process, jint mode, jbyteArr
     (*env)->DeleteLocalRef(env, argBlock);
 
     H2CO3_INTERNAL_LOG("forkAndExec:%s", cs);
-    JavaVM *androidVm = h2co3launcher->android_jvm;
+    JavaVM *androidVm = h2co3Launcher->android_jvm;
     JNIEnv *androidEnv = NULL;
     char detachable = 0;
     if ((*androidVm)->GetEnv(androidVm, (void **) &androidEnv, JNI_VERSION_1_2) == JNI_EDETACHED) {
@@ -45,10 +45,10 @@ hooked_ProcessImpl_forkAndExec(JNIEnv *env, jobject process, jint mode, jbyteArr
         H2CO3_INTERNAL_LOG("forkAndExec error:androidEnv in null");
     }
     jmethodID method_OpenLink = (*androidEnv)->GetStaticMethodID(androidEnv,
-                                                                 h2co3launcher->class_H2CO3LauncherLib,
+                                                                 h2co3Launcher->class_H2CO3LauncherBridge,
                                                                  "openLink",
                                                                  "(Ljava/lang/String;)V");
-    (*androidEnv)->CallStaticVoidMethod(androidEnv, h2co3launcher->class_H2CO3LauncherLib,
+    (*androidEnv)->CallStaticVoidMethod(androidEnv, h2co3Launcher->class_H2CO3LauncherBridge,
                                         method_OpenLink,
                                         (*androidEnv)->NewStringUTF(androidEnv, cs));
     if (detachable) (*androidVm)->DetachCurrentThread(androidVm);

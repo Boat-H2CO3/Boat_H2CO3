@@ -1,6 +1,6 @@
 package org.koishi.launcher.h2co3.adapter;
 
-import static org.koishi.launcher.h2co3.core.H2CO3Auth.setUserState;
+import static org.koishi.launcher.h2co3.core.game.H2CO3Auth.setUserState;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.R;
-import org.koishi.launcher.h2co3.core.H2CO3Auth;
+import org.koishi.launcher.h2co3.core.game.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.login.bean.UserBean;

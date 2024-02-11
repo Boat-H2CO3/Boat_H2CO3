@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
+import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 import org.koishi.launcher.h2co3.resources.component.H2CO3ToolBar;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 
@@ -70,8 +71,6 @@ public class CrashActivity extends H2CO3Activity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            //Utils.writeFile("/sdcard/boat/err.log",i.toString());
         });
     }
 

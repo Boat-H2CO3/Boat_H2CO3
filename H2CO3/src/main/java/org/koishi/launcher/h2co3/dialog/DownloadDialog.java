@@ -21,7 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.R;
-import org.koishi.launcher.h2co3.core.H2CO3Game;
+import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
 import org.koishi.launcher.h2co3.download.DownloadItem;
 
 import java.io.BufferedInputStream;
@@ -39,7 +39,7 @@ import java.util.concurrent.Future;
 
 public class DownloadDialog extends MaterialAlertDialogBuilder {
     private static final int BUFFER_SIZE = 1024;
-    private static final String DOWNLOAD_PATH = H2CO3Game.getGameDirectory() + "/libraries";
+    private static final String DOWNLOAD_PATH = H2CO3GameHelper.getGameDirectory() + "/libraries";
     private static final String LIBRARY_URL_PREFIX = "https://libraries.minecraft.net/";
     private static final String LIBRARY_URL_REPLACE = "https://bmclapi2.bangbang93.com/maven/";
 

@@ -1,118 +1,162 @@
 package org.koishi.launcher.h2co3.core.game;
 
-import org.koishi.launcher.h2co3.core.H2CO3Game;
+import org.koishi.launcher.h2co3.core.utils.CommandBuilder;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 
 import java.util.HashSet;
-import java.util.Vector;
+import java.util.List;
 
 public class TouchInjector {
 
-    public static Vector<String> rebaseArguments(Vector<String> args) {
-        H2CO3Game gameLaunchSetting = new H2CO3Game();
+    private static final String TOUCH_INJECTOR_JAR_PATH = H2CO3Tools.APP_DATA_PATH + "/h2co3Launcher" + "/plugin/touch/TouchInjector.jar";
+    private static final String TOUCH_INJECTOR_FORGE_JAR_PATH = H2CO3Tools.APP_DATA_PATH + "/h2co3Launcher" + "/plugin/touch/TouchInjector-forge.jar";
+
+    public static CommandBuilder rebaseArguments(CommandBuilder args) {
+        H2CO3GameHelper gameLaunchSetting = new H2CO3GameHelper();
         if (!gameLaunchSetting.touchInjector) {
             return args;
         }
-        Vector<String> newArgs = new Vector<>();
-        HashSet<String> argSet = new HashSet<>(args);
 
-        if (argSet.contains("Forge") || argSet.contains("cpw.mods.fml.common.launcher.FMLTweaker") || argSet.contains("fmlclient") || argSet.contains("forgeclient")) {
-            if (argSet.contains("cpw.mods.bootstraplauncher.BootstrapLauncher")) {
-                String version = "unknown";
-                boolean hit = false;
-                for (String arg : args) {
-                    if (hit) {
-                        if (arg.startsWith("--")) {
-                            // arg doesn't seem to be a value
-                            // maybe the previous argument is a value, but we wrongly recognized it as an option
-                            hit = false;
-                        } else {
-                            if (arg.startsWith("1.17")) {
-                                version = "1.17";
-                            } else if (arg.startsWith("1.18")) {
-                                version = "1.18";
-                            } else if (arg.startsWith("1.19")) {
-                                version = "1.19";
-                            }
-                            break;
-                        }
-                    }
-                    if ("--assetIndex".equals(arg)) {
-                        hit = true;
-                    }
-                }
-                hit = false;
-                for (int i = 0; i < args.size(); i++) {
-                    if (hit) {
-                        newArgs.add(args.get(i) + ":" + H2CO3Tools.APP_DATA_PATH + "/boat" + "/plugin/touch/TouchInjector-forge.jar");
-                        hit = false;
-                    } else if (args.get(i).startsWith("-Xms")) {
-                        newArgs.add("-Dtouchinjector.version=" + version);
-                        newArgs.add(args.get(i));
-                    } else if (args.get(i).equals("-cp")) {
-                        hit = true;
-                        newArgs.add(args.get(i));
-                    } else {
-                        newArgs.add(args.get(i));
-                    }
-                }
+        CommandBuilder newArgs = new CommandBuilder();
+        HashSet<String> argSet = new HashSet<>(args.asList());
+
+        if (isForge(argSet)) {
+            if (isBootstrapLauncher(argSet)) {
+                String version = getVersion(args.asList());
+                addTouchInjectorVersionArg(newArgs.asList(), version);
+                addTouchInjectorForgeJarArg(newArgs.asList());
             } else {
-                for (int i = 0; i < args.size(); i++) {
-                    if (args.get(i).startsWith("-Xms")) {
-                        newArgs.add("-javaagent:" + H2CO3Tools.APP_DATA_PATH + "/boat" + "/plugin/touch/TouchInjector.jar=forge");
-                    }
-                    newArgs.add(args.get(i));
-                }
+                addTouchInjectorForgeArg(newArgs.asList());
             }
-            return newArgs;
-        } else if (argSet.contains("optifine.OptiFineTweaker") || argSet.contains("com.mumfrey.liteloader.launch.LiteLoaderTweaker")) {
-            for (int i = 0; i < args.size(); i++) {
-                if (args.get(i).startsWith("-Xms")) {
-                    newArgs.add("-javaagent:" + H2CO3Tools.APP_DATA_PATH + "/boat" + "/plugin/touch/TouchInjector.jar=optifine");
-                }
-                newArgs.add(args.get(i));
-            }
-            return newArgs;
-        } else if (argSet.contains("net.fabricmc.loader.impl.launch.knot.KnotClient")) {
-            boolean hit = false;
-            for (int i = 0; i < args.size(); i++) {
-                if (hit) {
-                    newArgs.add(args.get(i) + ":" + H2CO3Tools.APP_DATA_PATH + "/boat" + "/plugin/touch/TouchInjector.jar");
-                    hit = false;
-                } else if (args.get(i).equals("net.fabricmc.loader.impl.launch.knot.KnotClient")) {
-                    newArgs.add("com.tungsten.touchinjector.launch.FabricKnotClient");
-                } else if (args.get(i).equals("-cp")) {
-                    hit = true;
-                    newArgs.add(args.get(i));
-                } else {
-                    newArgs.add(args.get(i));
-                }
-            }
-            return newArgs;
-        } else if (argSet.contains("org.quiltmc.loader.impl.launch.knot.KnotClient")) {
-            boolean hit = false;
-            for (int i = 0; i < args.size(); i++) {
-                if (hit) {
-                    newArgs.add(args.get(i) + ":" + H2CO3Tools.APP_DATA_PATH + "/boat" + "/plugin/touch/TouchInjector.jar");
-                    hit = false;
-                } else if (args.get(i).equals("org.quiltmc.loader.impl.launch.knot.KnotClient")) {
-                    newArgs.add("com.tungsten.touchinjector.launch.QuiltKnotClient");
-                } else if (args.get(i).equals("-cp")) {
-                    hit = true;
-                    newArgs.add(args.get(i));
-                } else {
-                    newArgs.add(args.get(i));
-                }
-            }
-            return newArgs;
+        } else if (isOptiFine(argSet) || isLiteLoader(argSet)) {
+            addTouchInjectorOptiFineArg(newArgs.asList());
+        } else if (isFabricKnotClient(argSet)) {
+            addTouchInjectorFabricKnotClientArg(newArgs.asList());
+        } else if (isQuiltKnotClient(argSet)) {
+            addTouchInjectorQuiltKnotClientArg(newArgs.asList());
         } else {
-            for (int i = 0; i < args.size(); i++) {
-                if (args.get(i).startsWith("-Xms")) {
-                    newArgs.add("-javaagent:" + H2CO3Tools.APP_DATA_PATH + "/boat" + "/plugin/touch/TouchInjector.jar=vanilla");
+            addTouchInjectorVanillaArg(newArgs.asList());
+        }
+
+        return newArgs;
+    }
+
+    private static boolean isForge(HashSet<String> argSet) {
+        return argSet.contains("Forge") || argSet.contains("cpw.mods.fml.common.launcher.FMLTweaker") ||
+                argSet.contains("fmlclient") || argSet.contains("forgeclient");
+    }
+
+    private static boolean isBootstrapLauncher(HashSet<String> argSet) {
+        return argSet.contains("cpw.mods.bootstraplauncher.BootstrapLauncher");
+    }
+
+    private static String getVersion(List<String> args) {
+        String version = "unknown";
+        boolean hit = false;
+        for (String arg : args) {
+            if (hit) {
+                if (arg.startsWith("--")) {
+                    hit = false;
+                } else {
+                    if (arg.startsWith("1.17")) {
+                        version = "1.17";
+                    } else if (arg.startsWith("1.18")) {
+                        version = "1.18";
+                    } else if (arg.startsWith("1.19")) {
+                        version = "1.19";
+                    }
+                    break;
                 }
-                newArgs.add(args.get(i));
             }
-            return newArgs;
+            if ("--assetIndex".equals(arg)) {
+                hit = true;
+            }
+        }
+        return version;
+    }
+
+    private static void addTouchInjectorVersionArg(List<String> newArgs, String version) {
+        newArgs.add("-Dtouchinjector.version=" + version);
+    }
+
+    private static void addTouchInjectorForgeJarArg(List<String> newArgs) {
+        for (int i = 0; i < newArgs.size(); i++) {
+            if (newArgs.get(i).startsWith("-Xms")) {
+                newArgs.add(i, TOUCH_INJECTOR_FORGE_JAR_PATH);
+                break;
+            }
+        }
+    }
+
+    private static void addTouchInjectorForgeArg(List<String> newArgs) {
+        for (String arg : newArgs) {
+            if (arg.startsWith("-Xms")) {
+                newArgs.add(0, "-javaagent:" + TOUCH_INJECTOR_JAR_PATH + "=forge");
+                break;
+            }
+        }
+    }
+
+    private static boolean isOptiFine(HashSet<String> argSet) {
+        return argSet.contains("optifine.OptiFineTweaker");
+    }
+
+    private static boolean isLiteLoader(HashSet<String> argSet) {
+        return argSet.contains("com.mumfrey.liteloader.launch.LiteLoaderTweaker");
+    }
+
+    private static void addTouchInjectorOptiFineArg(List<String> newArgs) {
+        for (String arg : newArgs) {
+            if (arg.startsWith("-Xms")) {
+                newArgs.add(0, "-javaagent:" + TOUCH_INJECTOR_JAR_PATH + "=optifine");
+                break;
+            }
+        }
+    }
+
+    private static boolean isFabricKnotClient(HashSet<String> argSet) {
+        return argSet.contains("net.fabricmc.loader.impl.launch.knot.KnotClient");
+    }
+
+    private static void addTouchInjectorFabricKnotClientArg(List<String> newArgs) {
+        for (int i = 0; i < newArgs.size(); i++) {
+            if (newArgs.get(i).equals("net.fabricmc.loader.impl.launch.knot.KnotClient")) {
+                newArgs.set(i, "com.tungsten.touchinjector.launch.FabricKnotClient");
+                break;
+            }
+        }
+        addTouchInjectorJarArg(newArgs);
+    }
+
+    private static boolean isQuiltKnotClient(HashSet<String> argSet) {
+        return argSet.contains("org.quiltmc.loader.impl.launch.knot.KnotClient");
+    }
+
+    private static void addTouchInjectorQuiltKnotClientArg(List<String> newArgs) {
+        for (int i = 0; i < newArgs.size(); i++) {
+            if (newArgs.get(i).equals("org.quiltmc.loader.impl.launch.knot.KnotClient")) {
+                newArgs.set(i, "com.tungsten.touchinjector.launch.QuiltKnotClient");
+                break;
+            }
+        }
+        addTouchInjectorJarArg(newArgs);
+    }
+
+    private static void addTouchInjectorJarArg(List<String> newArgs) {
+        for (int i = 0; i < newArgs.size(); i++) {
+            if (newArgs.get(i).equals("-cp")) {
+                newArgs.add(i + 1, TOUCH_INJECTOR_JAR_PATH);
+                break;
+            }
+        }
+    }
+
+    private static void addTouchInjectorVanillaArg(List<String> newArgs) {
+        for (String arg : newArgs) {
+            if (arg.startsWith("-Xms")) {
+                newArgs.add(0, "-javaagent:" + TOUCH_INJECTOR_JAR_PATH + "=vanilla");
+                break;
+            }
         }
     }
 }

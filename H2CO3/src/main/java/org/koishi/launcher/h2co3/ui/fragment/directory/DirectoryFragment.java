@@ -35,7 +35,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.adapter.BaseRecycleAdapter;
-import org.koishi.launcher.h2co3.core.H2CO3Game;
+import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.utils.data.DbDao;
 import org.koishi.launcher.h2co3.core.utils.file.AssetsUtils;
@@ -155,7 +155,7 @@ public class DirectoryFragment extends H2CO3Fragment {
     }
 
     public void initVer() {
-        File versionlist = new File(H2CO3Game.getGameDirectory() + "/versions");
+        File versionlist = new File(H2CO3GameHelper.getGameDirectory() + "/versions");
         if (versionlist.isDirectory() && versionlist.exists()) {
             Comparator<Object> cp = Collator.getInstance(Locale.CHINA);
             String[] getVer = versionlist.list();
@@ -254,7 +254,7 @@ public class DirectoryFragment extends H2CO3Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        String currentDir = H2CO3Game.getGameDirectory();
+        String currentDir = H2CO3GameHelper.getGameDirectory();
         File f = new File(currentDir);
         if (f.exists() && f.isDirectory()) {
             initVer();
@@ -269,10 +269,10 @@ public class DirectoryFragment extends H2CO3Fragment {
     }
 
     public void setDir(String dir) {
-        H2CO3Game.setGameDirectory(dir);
-        H2CO3Game.setGameAssets(dir + "/assets/virtual/legacy");
-        H2CO3Game.setGameAssetsRoot(dir + "/assets");
-        H2CO3Game.setGameCurrentVersion(dir + "/versions");
+        H2CO3GameHelper.setGameDirectory(dir);
+        H2CO3GameHelper.setGameAssets(dir + "/assets/virtual/legacy");
+        H2CO3GameHelper.setGameAssetsRoot(dir + "/assets");
+        H2CO3GameHelper.setGameCurrentVersion(dir + "/versions");
     }
 
     class SearchDirAdapter extends BaseRecycleAdapter<String> {
@@ -291,7 +291,7 @@ public class DirectoryFragment extends H2CO3Fragment {
             MaterialButton del = (MaterialButton) holder.getView(R.id.tv_remove_dir);
             MaterialButton delDir = (MaterialButton) holder.getView(R.id.tv_del_dir);
             textView.setText(datas.get(position));
-            if (datas.get(position).equals(H2CO3Game.getGameDirectory())) {
+            if (datas.get(position).equals(H2CO3GameHelper.getGameDirectory())) {
                 lay.setStrokeWidth(13);
                 lay.setStrokeColor(getResources().getColor(android.R.color.darker_gray));
             } else {
@@ -345,7 +345,7 @@ public class DirectoryFragment extends H2CO3Fragment {
 
             delDir.setOnClickListener(view -> {
                 if (null != mRvItemOnclickListener) {
-                    if (datas.get(position).equals(H2CO3Game.getGameDirectory())) {
+                    if (datas.get(position).equals(H2CO3GameHelper.getGameDirectory())) {
                         setDir(h2co3Dir);
                     }
                     //添加"Yes"按钮
@@ -394,10 +394,10 @@ public class DirectoryFragment extends H2CO3Fragment {
         }
 
         public void setDir(String dir) {
-            H2CO3Game.setGameDirectory(dir);
-            H2CO3Game.setGameAssets(dir + "/assets/virtual/legacy");
-            H2CO3Game.setGameAssetsRoot(dir + "/assets");
-            H2CO3Game.setGameCurrentVersion(dir + "/versions");
+            H2CO3GameHelper.setGameDirectory(dir);
+            H2CO3GameHelper.setGameAssets(dir + "/assets/virtual/legacy");
+            H2CO3GameHelper.setGameAssetsRoot(dir + "/assets");
+            H2CO3GameHelper.setGameCurrentVersion(dir + "/versions");
         }
     }
 
@@ -424,9 +424,9 @@ public class DirectoryFragment extends H2CO3Fragment {
         @Override
         public void onBindViewHolder(MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
             holder.textview.setText(datas.get(position));
-            File f = new File(H2CO3Game.getGameDirectory() + "/versions/" + datas.get(position));
-            String verF = H2CO3Game.getGameDirectory() + "/versions/" + datas.get(position);
-            if (verF.equals(H2CO3Game.getGameCurrentVersion())) {
+            File f = new File(H2CO3GameHelper.getGameDirectory() + "/versions/" + datas.get(position));
+            String verF = H2CO3GameHelper.getGameDirectory() + "/versions/" + datas.get(position);
+            if (verF.equals(H2CO3GameHelper.getGameCurrentVersion())) {
                 holder.rl.setStrokeWidth(13);
                 holder.rl.setStrokeColor(getResources().getColor(android.R.color.darker_gray));
             } else {
@@ -447,9 +447,9 @@ public class DirectoryFragment extends H2CO3Fragment {
                 holder.rl.setOnClickListener(v -> {
                     if (f.exists() && f.isDirectory()) {
                         versionRecyclerAdapter.notifyDataSetChanged();
-                        H2CO3Game.setGameCurrentVersion(verF);
+                        H2CO3GameHelper.setGameCurrentVersion(verF);
                         mVerRecyclerView.setAdapter(versionRecyclerAdapter);
-                        if (verF.equals(H2CO3Game.getGameCurrentVersion())) {
+                        if (verF.equals(H2CO3GameHelper.getGameCurrentVersion())) {
                             holder.rl.setStrokeWidth(15);
                             holder.rl.setStrokeColor(getResources().getColor(android.R.color.darker_gray));
                             holder.rl.setElevation(5);
@@ -470,12 +470,12 @@ public class DirectoryFragment extends H2CO3Fragment {
                     holder.btn.setVisibility(View.INVISIBLE);
                     holder.textview.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
                     holder.rl.setEnabled(false);
-                    File f1 = new File(H2CO3Game.getGameDirectory() + "/versions/" + datas.get(position));
+                    File f1 = new File(H2CO3GameHelper.getGameDirectory() + "/versions/" + datas.get(position));
                     new Thread(() -> {
                         if (f1.isDirectory()) {
                             deleteDirWihtFile(f1);
                         } else {
-                            deleteFile(H2CO3Game.getGameDirectory() + "/versions/" + datas.get(position));
+                            deleteFile(H2CO3GameHelper.getGameDirectory() + "/versions/" + datas.get(position));
                         }
                         han.sendEmptyMessage(2);
                     }).start();
@@ -495,9 +495,9 @@ public class DirectoryFragment extends H2CO3Fragment {
             String load = CHTools.getAppCfg("allVerLoad", "false");
             String loadDir;
             if (load.equals("true")) {
-                loadDir = H2CO3Game.getGameDirectory() + "/versions/" + dir;
+                loadDir = H2CO3GameHelper.getGameDirectory() + "/versions/" + dir;
             } else {
-                loadDir = H2CO3Game.getGameDirectory();
+                loadDir = H2CO3GameHelper.getGameDirectory();
             }
             LinearLayout lay = dialogView.findViewById(R.id.ver_exec_mod);
             lay.setOnClickListener(v -> {

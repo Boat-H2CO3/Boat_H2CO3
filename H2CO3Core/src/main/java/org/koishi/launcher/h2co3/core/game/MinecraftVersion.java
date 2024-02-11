@@ -2,8 +2,6 @@ package org.koishi.launcher.h2co3.core.game;
 
 import com.google.gson.Gson;
 
-import org.koishi.launcher.h2co3.core.H2CO3Auth;
-import org.koishi.launcher.h2co3.core.H2CO3Game;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 
 import java.io.File;
@@ -88,7 +86,7 @@ public class MinecraftVersion {
     }
 
     public String getClassPath(boolean high, boolean isJava8) {
-        String librariesPath = H2CO3Game.getGameDirectory() + File.separator + "libraries";
+        String librariesPath = H2CO3GameHelper.getGameDirectory() + File.separator + "libraries";
         StringJoiner cp = new StringJoiner(":");
 
         for (Library lib : libraries) {
@@ -147,8 +145,8 @@ public class MinecraftVersion {
                         case "launcher_version" -> "1.0.0";
                         case "version_type" -> type;
                         case "assets_index_name" -> assetIndex != null ? assetIndex.id : assets;
-                        case "game_directory" -> H2CO3Game.getGameDirectory();
-                        case "assets_root" -> H2CO3Game.getGameAssetsRoot();
+                        case "game_directory" -> H2CO3GameHelper.getGameDirectory();
+                        case "assets_root" -> H2CO3GameHelper.getGameAssetsRoot();
                         case "user_properties" -> H2CO3Auth.getUserProperties();
                         case "auth_player_name" -> H2CO3Auth.getPlayerName();
                         case "auth_session" -> H2CO3Auth.getAuthSession();
@@ -156,8 +154,8 @@ public class MinecraftVersion {
                         case "auth_access_token" -> H2CO3Auth.getAuthAccessToken();
                         case "user_type" -> H2CO3Auth.getUserType();
                         case "primary_jar_name" ->
-                                H2CO3Game.getGameCurrentVersion() + "/" + id + ".jar";
-                        case "library_directory" -> H2CO3Game.getGameDirectory() + "/libraries";
+                                H2CO3GameHelper.getGameCurrentVersion() + "/" + id + ".jar";
+                        case "library_directory" -> H2CO3GameHelper.getGameDirectory() + "/libraries";
                         case "classpath_separator" -> ":";
                         default -> "";
                     };
@@ -169,7 +167,7 @@ public class MinecraftVersion {
         return result.toString().split(" ");
     }
 
-    public String[] getMinecraftArguments(H2CO3Game gameLaunchSetting, boolean isHighVer) {
+    public String[] getMinecraftArguments(boolean isHighVer) {
         StringBuilder test = new StringBuilder();
         if (isHighVer) {
             for (Object obj : this.arguments.game) {
@@ -207,8 +205,8 @@ public class MinecraftVersion {
                         case "launcher_version" -> "1.0.0";
                         case "version_type" -> type;
                         case "assets_index_name" -> assetIndex != null ? assetIndex.id : assets;
-                        case "game_directory" -> H2CO3Game.getGameDirectory();
-                        case "assets_root" -> H2CO3Game.getGameAssetsRoot();
+                        case "game_directory" -> H2CO3GameHelper.getGameDirectory();
+                        case "assets_root" -> H2CO3GameHelper.getGameAssetsRoot();
                         case "user_properties" -> H2CO3Auth.getUserProperties();
                         case "auth_player_name" -> H2CO3Auth.getPlayerName();
                         case "auth_session" -> H2CO3Auth.getAuthSession();
@@ -216,8 +214,8 @@ public class MinecraftVersion {
                         case "auth_access_token" -> H2CO3Auth.getAuthAccessToken();
                         case "user_type" -> H2CO3Auth.getUserType();
                         case "primary_jar_name" ->
-                                H2CO3Game.getGameCurrentVersion() + "/" + id + ".jar";
-                        case "library_directory" -> H2CO3Game.getGameDirectory() + "/libraries";
+                                H2CO3GameHelper.getGameCurrentVersion() + "/" + id + ".jar";
+                        case "library_directory" -> H2CO3GameHelper.getGameDirectory() + "/libraries";
                         case "classpath_separator" -> ":";
                         default -> "";
                     };

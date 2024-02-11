@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import org.koishi.launcher.h2co3.core.H2CO3Auth;
+import org.koishi.launcher.h2co3.core.game.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.login.Texture.Texture;
 import org.koishi.launcher.h2co3.core.login.Texture.TextureType;
 import org.koishi.launcher.h2co3.core.login.microsoft.MicrosoftLoginUtils;

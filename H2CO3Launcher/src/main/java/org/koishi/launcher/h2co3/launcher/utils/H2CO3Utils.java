@@ -1,14 +1,9 @@
 package org.koishi.launcher.h2co3.launcher.utils;
 
-import static org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader.chdir;
-import static org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader.dlexec;
-import static org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader.dlopen;
-import static org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader.patchLinker;
-import static org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader.saveLogToPath;
-import static org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader.setenv;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridge;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,8 +35,9 @@ public class H2CO3Utils implements Runnable {
     private String scriptFile;
     private H2CO3Utils script;
     private Thread thread;
+    private H2CO3LauncherBridge bridge;
 
-    public H2CO3Utils(Map<String, String> envvars, boolean priv, List<String[]> cmds, String file) {
+    public H2CO3Utils(Map<String, String> envvars, boolean priv, List<String[]> cmds, String file, H2CO3LauncherBridge bridge) {
         if (priv) {
             this.variables = new HashMap<>();
             this.variables.putAll(envvars);
@@ -51,19 +47,20 @@ public class H2CO3Utils implements Runnable {
         this.commands = new LinkedList<>();
         this.commands.addAll(cmds);
         this.scriptFile = file;
+        this.bridge = bridge;
         if (this.scriptFile == null) {
             this.scriptFile = "";
         }
     }
 
-    public H2CO3Utils(Map<String, String> variables, Map<String, String> envvars, String scriptPath) {
+    public H2CO3Utils(Map<String, String> variables, Map<String, String> envvars, String scriptPath, H2CO3LauncherBridge bridge) {
         this.variables = variables;
         this.commands = new LinkedList<>();
 
         try {
             List<String[]> cmds = H2CO3Utils.parseJson(scriptPath);
             this.commands.addAll(cmds);
-            this.script = new H2CO3Utils(envvars, false, cmds, scriptPath);
+            this.script = new H2CO3Utils(envvars, false, cmds, scriptPath,bridge);
             this.thread = new Thread(this);
         } catch (IOException e) {
             e.printStackTrace();
@@ -100,7 +97,7 @@ public class H2CO3Utils implements Runnable {
         return str;
     }
 
-    public void execute() {
+    public void execute(H2CO3LauncherBridge bridge) {
         int line = 0;
         try {
             for (; line < this.commands.size(); line++) {
@@ -112,25 +109,14 @@ public class H2CO3Utils implements Runnable {
                     args[i] = replaceVariables(args[i]);
                 }
                 switch (args[0]) {
-                    case "patchLinker" -> {
-                        patchLinker();
-                    }
                     case "setenv" -> {
-                        setenv(args[1], args[2]);
+                        bridge.setenv(args[1], args[2]);
                     }
                     case "chdir" -> {
-                        chdir(args[1]);
-                    }
-                    case "saveLogToPath" -> {
-                        saveLogToPath(args[1]);
+                        bridge.chdir(args[1]);
                     }
                     case "dlopen" -> {
-                        dlopen(args[1]);
-                    }
-                    case "dlexec" -> {
-                        String[] finalArgs = new String[args.length - 1];
-                        System.arraycopy(args, 1, finalArgs, 0, args.length - 1);
-                        dlexec(finalArgs);
+                        bridge.dlopen(args[1]);
                     }
                     case "strdef" -> {
                         String value = args[2];
@@ -157,7 +143,7 @@ public class H2CO3Utils implements Runnable {
                             throw new Exception("Recursive script!");
                         }
                         LinkedList<String[]> includes = parseJson(args[1]);
-                        new H2CO3Utils(this.variables, false, includes, args[1]).execute();
+                        new H2CO3Utils(this.variables, false, includes, args[1], bridge).execute(bridge);
                     }
                     default -> {
                     }
@@ -185,7 +171,7 @@ public class H2CO3Utils implements Runnable {
     @Override
     public void run() {
         beforeExecute();
-        this.script.execute();
+        this.script.execute(this.bridge);
         afterExecute();
     }
 }

@@ -11,19 +11,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 
 import org.koishi.launcher.h2co3.R;
-import org.koishi.launcher.h2co3.core.H2CO3Auth;
+import org.koishi.launcher.h2co3.core.game.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
+import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
-import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 import org.koishi.launcher.h2co3.resources.component.dialog.H2CO3MessageDialog;
 
@@ -31,10 +30,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicReference;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends H2CO3Activity {
@@ -63,7 +58,7 @@ public class SplashActivity extends H2CO3Activity {
 
         if (isFirstLaunch) {
             H2CO3Auth.resetUserState();
-            H2CO3Loader.setDir(H2CO3Tools.MINECRAFT_DIR);
+            H2CO3GameHelper.setDir(H2CO3Tools.MINECRAFT_DIR);
             H2CO3Tools.setH2CO3Value("isFirstLaunch", false);
             checkPermission();
         } else {

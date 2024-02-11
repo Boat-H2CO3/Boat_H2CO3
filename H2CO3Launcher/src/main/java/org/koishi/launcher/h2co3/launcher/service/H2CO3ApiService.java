@@ -7,7 +7,7 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
-import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader;
+import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridge;
 import org.koishi.launcher.h2co3.launcher.function.ApiInstallerCallback;
 
 import java.util.ArrayList;
@@ -25,14 +25,6 @@ public class H2CO3ApiService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
-
-    public void startApiInstaller(String javaPath, ArrayList<String> commands, String debugDir, ApiInstallerCallback callback) {
-        this.callback = callback;
-        new Thread(() -> {
-            int exitCode = H2CO3LauncherLoader.launchJVM(javaPath, commands, debugDir);
-            onExit(H2CO3ApiService.this, exitCode);
-        }).start();
     }
 
     @Override

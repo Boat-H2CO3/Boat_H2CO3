@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 
 import com.orhanobut.logger.Logger;
 
-import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader;
 import org.koishi.launcher.h2co3.resources.R;
 import org.koishi.launcher.h2co3.ui.CrashActivity;
 

@@ -1,6 +1,7 @@
 package org.koishi.launcher.h2co3.resources.component;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -20,51 +21,53 @@ import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
 
 public class LogView extends NestedScrollView {
 
-        private final TextView mTextView;
+    private static final int RADIUS_SIZE = 0;
+    private static final int MAIN_COLOR = Color.parseColor("#7f5B5B5B");
 
-        public LogView(@NonNull Context context) {
-            super(context);
-            this.setBackground(getViewBackground());
-            this.mTextView = new LineTextView(context);
+    public final TextView mTextView;
 
-            mTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            addView(mTextView);
-            mTextView.setTextColor(Color.WHITE);
-            mTextView.setTextIsSelectable(true);
-            mTextView.setTextSize(DisplayUtils.getPxFromSp(context, 3.2F));
-            mTextView.setLineSpacing(0, 1f);
-        }
+    public LogView(@NonNull Context context) {
+        super(context);
+        this.setBackground(getViewBackground());
 
-        public void appendLog(String str) {
-            this.post(() -> {
-                if (mTextView != null) {
-                    mTextView.append(str);
-                    new Handler(Looper.getMainLooper()).postDelayed(() -> toBottom(this, mTextView), 50);
-                }
-            });
-        }
+        mTextView = new LineTextView(context);
+        mTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        addView(mTextView);
 
-        private void toBottom(final NestedScrollView scrollView, final View view) {
-            int offset = view.getHeight() - scrollView.getHeight();
-            if (offset < 0) {
-                offset = 0;
-            }
-            scrollView.scrollTo(0, offset);
-        }
-
-        private Drawable getViewBackground() {
-            int radiusSize = 0;
-            int mainColor = Color.parseColor("#7f5B5B5B");
-
-            float[] outerR = new float[]{radiusSize, radiusSize, radiusSize, radiusSize, radiusSize, radiusSize, radiusSize, radiusSize};
-            RoundRectShape rectShape = new RoundRectShape(outerR, null, null);
-            ShapeDrawable shapeDrawable = new ShapeDrawable();
-            shapeDrawable.setShape(rectShape);
-            shapeDrawable.getPaint().setStyle(Paint.Style.FILL);
-            shapeDrawable.getPaint().setColor(mainColor);
-
-            Drawable[] layers = new Drawable[]{shapeDrawable};
-
-            return new LayerDrawable(layers);
-        }
+        Resources resources = context.getResources();
+        mTextView.setTextColor(resources.getColor(android.R.color.white));
+        mTextView.setTextIsSelectable(true);
+        mTextView.setTextSize(DisplayUtils.getPxFromSp(context, 3.2F));
+        mTextView.setLineSpacing(0, 1f);
     }
+
+    public void appendLog(String str) {
+        this.post(() -> {
+            if (mTextView != null) {
+                mTextView.append(str);
+                new Handler(Looper.getMainLooper()).postDelayed(() -> toBottom(this, mTextView), 50);
+            }
+        });
+    }
+
+    private void toBottom(final NestedScrollView scrollView, final View view) {
+        int offset = view.getHeight() - scrollView.getHeight();
+        if (offset < 0) {
+            offset = 0;
+        }
+        scrollView.scrollTo(0, offset);
+    }
+
+    private Drawable getViewBackground() {
+        float[] outerR = new float[]{RADIUS_SIZE, RADIUS_SIZE, RADIUS_SIZE, RADIUS_SIZE, RADIUS_SIZE, RADIUS_SIZE, RADIUS_SIZE, RADIUS_SIZE};
+        RoundRectShape rectShape = new RoundRectShape(outerR, null, null);
+        ShapeDrawable shapeDrawable = new ShapeDrawable();
+        shapeDrawable.setShape(rectShape);
+        shapeDrawable.getPaint().setStyle(Paint.Style.FILL);
+        shapeDrawable.getPaint().setColor(MAIN_COLOR);
+
+        Drawable[] layers = new Drawable[]{shapeDrawable};
+
+        return new LayerDrawable(layers);
+    }
+}

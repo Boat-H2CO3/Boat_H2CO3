@@ -33,13 +33,13 @@ typedef VkResult (APIENTRY
 #define _glfw_dlclose(handle) dlclose(handle)
 #define _glfw_dlsym(handle, name) dlsym(handle, name)
 
-#define _GLFW_EGL_NATIVE_WINDOW  ((EGLNativeWindowType) window->h2co3launcher.handle)
+#define _GLFW_EGL_NATIVE_WINDOW  ((EGLNativeWindowType) window->h2co3Launcher.handle)
 #define _GLFW_EGL_NATIVE_DISPLAY EGL_DEFAULT_DISPLAY
 
-#define _GLFW_PLATFORM_WINDOW_STATE         _GLFWwindowH2CO3Launcher  h2co3launcher
-#define _GLFW_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryH2CO3Launcher h2co3launcher
-#define _GLFW_PLATFORM_MONITOR_STATE        _GLFWmonitorH2CO3Launcher h2co3launcher
-#define _GLFW_PLATFORM_CURSOR_STATE         _GLFWcursorH2CO3Launcher  h2co3launcher
+#define _GLFW_PLATFORM_WINDOW_STATE         _GLFWwindowH2CO3Launcher  h2co3Launcher
+#define _GLFW_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryH2CO3Launcher h2co3Launcher
+#define _GLFW_PLATFORM_MONITOR_STATE        _GLFWmonitorH2CO3Launcher h2co3Launcher
+#define _GLFW_PLATFORM_CURSOR_STATE         _GLFWcursorH2CO3Launcher  h2co3Launcher
 
 #define _GLFW_PLATFORM_CONTEXT_STATE         struct { int dummyContext; }
 #define _GLFW_PLATFORM_LIBRARY_CONTEXT_STATE struct { int dummyLibraryContext; }

@@ -42,7 +42,7 @@
 #define _GLFW_COCOA
 // Define this to 1 if building GLFW for Wayland
 #define _GLFW_WAYLAND
-// Define this to 1 if building GLFW for Boat
+// Define this to 1 if building GLFW for H2CO3Launcher
 #define _GLFW_H2CO3Launcher
 // Define this to 1 if building GLFW for OSMesa
 #define _GLFW_OSMESA

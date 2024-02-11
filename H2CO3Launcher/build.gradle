@@ -80,4 +80,5 @@ dependencies {
     implementation "org.greenrobot:eventbus:3.3.1"
 
     implementation 'org.apache.commons:commons-compress:1.25.0'
+    implementation 'com.jaredrummler:android-device-names:2.1.0'
 }

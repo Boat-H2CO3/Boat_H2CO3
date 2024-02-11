@@ -1,12 +1,12 @@
-#ifndef h2co3launcher_KEYCODES_H
-#define h2co3launcher_KEYCODES_H
+#ifndef h2co3Launcher_KEYCODES_H
+#define h2co3Launcher_KEYCODES_H
 
 /*
  * from linux/input-event-codes.h
 **/
 
-#define Boat_MAX_SCANCODE 240
-#define Boat_MIN_SCANCODE 0
+#define H2CO3Launcher_MAX_SCANCODE 240
+#define H2CO3Launcher_MIN_SCANCODE 0
 
 #define KEY_RESERVED     0
 

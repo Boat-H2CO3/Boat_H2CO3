@@ -8,7 +8,7 @@ configurations.default.setCanBeResolved(true)
 
 project.setArchivesBaseName('lwjgl')
 
-def libsDir = "${rootDir}/H2CO3/src/main/assets/app_runtime/boat/lwjgl"
+def libsDir = "${rootDir}/H2CO3/src/main/assets/app_runtime/h2co3Launcher/lwjgl"
 
 project.setLibsDirName(libsDir)
 

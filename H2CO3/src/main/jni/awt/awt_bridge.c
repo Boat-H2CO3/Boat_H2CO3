@@ -9,7 +9,7 @@ static JavaVM *runtimeJavaVMPtr;
 static JNIEnv *runtimeJNIEnvPtr_GRAPHICS;
 static JNIEnv *runtimeJNIEnvPtr_INPUT;
 
-jclass class_FCLBridge;
+jclass class_H2CO3LauncherBridge;
 jclass class_CTCScreen;
 jclass class_CTCAndroidInput;
 jclass class_Frame;
@@ -30,8 +30,8 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
         dalvikJavaVMPtr = vm;
         JNIEnv *env = NULL;
         (*vm)->GetEnv(vm, (void **) &env, JNI_VERSION_1_4);
-        class_FCLBridge = h2co3launcher->class_H2CO3LauncherLib;
-        method_OpenLink = (*env)->GetStaticMethodID(env, class_FCLBridge, "openLink",
+        class_H2CO3LauncherBridge = h2co3Launcher->class_H2CO3LauncherBridge;
+        method_OpenLink = (*env)->GetStaticMethodID(env, class_H2CO3LauncherBridge, "openLink",
                                                     "(Ljava/lang/String;)V");
     } else if (dalvikJavaVMPtr != vm) {
         runtimeJavaVMPtr = vm;
@@ -50,7 +50,7 @@ Java_net_java_openjdk_cacio_ctc_CTCDesktopPeer_openFile(JNIEnv *env, jclass claz
         detachable = 1;
     }
     const char *stringChars = (*env)->GetStringUTFChars(env, filePath, NULL);
-    (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, class_FCLBridge, method_OpenLink,
+    (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, class_H2CO3LauncherBridge, method_OpenLink,
                                        (*dalvikEnv)->NewStringUTF(dalvikEnv, stringChars));
     (*env)->ReleaseStringUTFChars(env, filePath, stringChars);
     if (detachable) (*dalvikJavaVMPtr)->DetachCurrentThread(dalvikJavaVMPtr);
@@ -66,21 +66,21 @@ Java_net_java_openjdk_cacio_ctc_CTCDesktopPeer_openUri(JNIEnv *env, jclass clazz
         detachable = 1;
     }
     const char *stringChars = (*env)->GetStringUTFChars(env, uri, NULL);
-    (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, class_FCLBridge, method_OpenLink,
+    (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, class_H2CO3LauncherBridge, method_OpenLink,
                                        (*dalvikEnv)->NewStringUTF(dalvikEnv, stringChars));
     (*env)->ReleaseStringUTFChars(env, uri, stringChars);
     if (detachable) (*dalvikJavaVMPtr)->DetachCurrentThread(dalvikJavaVMPtr);
 }
 
 JNIEXPORT void JNICALL
-Java_sun_awt_peer_cacio_FCLClipboard_clipboardCopy(JNIEnv *env, jclass clazz, jstring str) {
+Java_sun_awt_peer_cacio_H2CO3LauncherClipboard_clipboardCopy(JNIEnv *env, jclass clazz, jstring str) {
     const char *stringChars = (*env)->GetStringUTFChars(env, str, NULL);
-    h2co3launcherSetPrimaryClipString(stringChars);
+    h2co3LauncherSetPrimaryClipString(stringChars);
     (*env)->ReleaseStringUTFChars(env, str, stringChars);
 }
 
 JNIEXPORT jintArray JNICALL JNIEXPORT
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_renderAWTScreenFrame(JNIEnv *env,
+Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_renderAWTScreenFrame(JNIEnv *env,
                                                                               jclass clazz) {
     if (runtimeJNIEnvPtr_GRAPHICS == NULL) {
         if (runtimeJavaVMPtr == NULL) {
@@ -136,7 +136,7 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_renderAWTScreenFrame(JN
 }
 
 JNIEXPORT void JNICALL
-Java_com_tungsten_fclauncher_bridge_FCLBridge_nativeSendData(JNIEnv *env, jclass clazz, jint type,
+Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_nativeSendData(JNIEnv *env, jclass clazz, jint type,
                                                              jint i1, jint i2, jint i3, jint i4) {
     if (runtimeJNIEnvPtr_INPUT == NULL) {
         if (runtimeJavaVMPtr == NULL) {
@@ -171,7 +171,7 @@ Java_com_tungsten_fclauncher_bridge_FCLBridge_nativeSendData(JNIEnv *env, jclass
 }
 
 JNIEXPORT void JNICALL
-Java_com_tungsten_fclauncher_bridge_FCLBridge_nativeMoveWindow(JNIEnv *env, jclass clazz, jint x,
+Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_nativeMoveWindow(JNIEnv *env, jclass clazz, jint x,
                                                                jint y) {
     if (runtimeJNIEnvPtr_INPUT == NULL) {
         if (runtimeJavaVMPtr == NULL) {

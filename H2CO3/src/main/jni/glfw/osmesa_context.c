@@ -70,7 +70,7 @@ static void makeContextCurrentOSMesa(_GLFWwindow *window) {
         }
 
         if (strcmp(getenv("LIBGL_STRING"), "VirGLRenderer") != 0) {
-            ANativeWindow_lock(window->h2co3launcher.handle, &buf, NULL);
+            ANativeWindow_lock(window->h2co3Launcher.handle, &buf, NULL);
             OSMesaPixelStore(OSMESA_ROW_LENGTH, buf.stride);
             stride = buf.stride;
             OSMesaPixelStore(OSMESA_Y_UP, 0);
@@ -133,8 +133,8 @@ static void swapBuffersOSMesa(_GLFWwindow *window) {
         OSMesaMakeCurrent(context, buf.bits, GL_UNSIGNED_BYTE, window->context.osmesa.width,
                           window->context.osmesa.height);
         window->context.Finish();
-        ANativeWindow_unlockAndPost(window->h2co3launcher.handle);
-        ANativeWindow_lock(window->h2co3launcher.handle, &buf, NULL);
+        ANativeWindow_unlockAndPost(window->h2co3Launcher.handle);
+        ANativeWindow_lock(window->h2co3Launcher.handle, &buf, NULL);
     }
 }
 
@@ -302,7 +302,7 @@ GLFWbool _glfwCreateContextOSMesa(_GLFWwindow *window,
             return GLFW_FALSE;
         }
 
-        ANativeWindow_setBuffersGeometry(window->h2co3launcher.handle, 0, 0, vid);
+        ANativeWindow_setBuffersGeometry(window->h2co3Launcher.handle, 0, 0, vid);
 
         eglBindAPI(EGL_OPENGL_ES_API);
 

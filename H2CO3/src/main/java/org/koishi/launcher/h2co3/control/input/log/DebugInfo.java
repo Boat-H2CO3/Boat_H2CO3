@@ -21,7 +21,6 @@ import org.koishi.launcher.h2co3.control.input.Input;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
-import org.koishi.launcher.h2co3.launcher.H2CO3LauncherLoader;
 import org.koishi.launcher.h2co3.resources.component.LineTextView;
 
 import java.io.File;
@@ -48,7 +47,7 @@ public class DebugInfo implements Input, View.OnClickListener {
         mLogView.setX(0);
         mLogView.setY(mController.getConfig().getScreenHeight() - mLogView.getLayoutParams().height);
 
-        if (H2CO3LauncherLoader.logReceiver == null || H2CO3LauncherLoader.logReceiver.getLogs() == null) {
+        /*if (H2CO3LauncherLoader.logReceiver == null || H2CO3LauncherLoader.logReceiver.getLogs() == null) {
             H2CO3LauncherLoader.LogReceiver mReceiver = new H2CO3LauncherLoader.LogReceiver() {
                 final StringBuilder stringBuilder = new StringBuilder();
 
@@ -65,7 +64,7 @@ public class DebugInfo implements Input, View.OnClickListener {
                 }
             };
             H2CO3LauncherLoader.logReceiver = new WeakReference<>(mReceiver).get();
-        }
+        }*/
 
         return true;
     }
@@ -74,7 +73,7 @@ public class DebugInfo implements Input, View.OnClickListener {
     public boolean unload() {
         ViewGroup vg = (ViewGroup) mLogView.getParent();
         vg.removeView(mLogView);
-        H2CO3LauncherLoader.logReceiver = null;
+        //H2CO3LauncherLoader.logReceiver = null;
         return true;
     }
 

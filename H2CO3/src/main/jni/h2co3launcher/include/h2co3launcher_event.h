@@ -1,5 +1,5 @@
-#ifndef h2co3launcher_EVENT_H
-#define h2co3launcher_EVENT_H
+#ifndef h2co3Launcher_EVENT_H
+#define h2co3Launcher_EVENT_H
 
 #define KeyPress              2
 #define KeyRelease            3
@@ -47,4 +47,4 @@ typedef struct {
     int height;
 } H2CO3LauncherEvent;
 
-#endif // h2co3launcher_EVENT_H
+#endif // h2co3Launcher_EVENT_H

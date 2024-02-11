@@ -1,5 +1,5 @@
-#ifndef h2co3launcher_INTERNAL_H
-#define h2co3launcher_INTERNAL_H
+#ifndef h2co3Launcher_INTERNAL_H
+#define h2co3Launcher_INTERNAL_H
 
 #include <stdlib.h>
 #include <pthread.h>
@@ -9,7 +9,7 @@
 #include <sys/epoll.h>
 #include <errno.h>
 
-#include "h2co3launcher.h"
+#include "h2co3launcher_bridge.h"
 #include "h2co3launcher_keycodes.h"
 
 typedef struct _QueueElement {
@@ -25,11 +25,11 @@ typedef struct {
 } EventQueue;
 
 struct H2CO3LauncherInternal {
-    uint8_t isLoaded;
+    FILE *logFile;
     JavaVM *android_jvm;
-    jclass class_H2CO3LauncherLib;
+    jclass class_H2CO3LauncherBridge;
     jclass class_H2CO3LauncherActivity;
-    jobject h2co3launcherActivity;
+    jobject object_H2CO3LauncherBridge;
     jmethodID setCursorMode;
     ANativeWindow *window;
     char *clipboard_string;
@@ -40,7 +40,7 @@ struct H2CO3LauncherInternal {
     int epoll_fd;
 };
 
-extern struct H2CO3LauncherInternal *h2co3launcher;
+extern struct H2CO3LauncherInternal *h2co3Launcher;
 
 #define H2CO3_INTERNAL_LOG(x...) do { \
     fprintf(stderr, "[H2CO3Launcher Internal] %s:%d\n", __FILE__, __LINE__); \
@@ -49,8 +49,8 @@ extern struct H2CO3LauncherInternal *h2co3launcher;
     fflush(stderr); \
     } while (0)
 
-#define PrepareH2CO3LauncherLibJNI() \
-    JavaVM* vm = h2co3launcher->android_jvm; \
+#define PrepareH2CO3LauncherBridgeJNI() \
+    JavaVM* vm = h2co3Launcher->android_jvm; \
     JNIEnv* env = NULL; \
     jint attached = (*vm)->GetEnv(vm, (void**)&env, JNI_VERSION_1_2); \
     if (attached == JNI_EDETACHED) { \
@@ -61,12 +61,12 @@ extern struct H2CO3LauncherInternal *h2co3launcher;
     } \
     do {} while(0)
 
-#define CallH2CO3LauncherLibJNIFunc(return_exp, func_type, func_name, signature, args...) \
-    jmethodID H2CO3LauncherLib_##func_name = (*env)->GetStaticMethodID(env, h2co3launcher->class_H2CO3LauncherLib, #func_name, signature); \
-    if (H2CO3LauncherLib_##func_name == NULL) { \
-        H2CO3_INTERNAL_LOG("Failed to find static method H2CO3LauncherLib"#func_name ); \
+#define CallH2CO3LauncherBridgeJNIFunc(return_exp, func_type, func_name, signature, args...) \
+    jmethodID H2CO3LauncherBridge_##func_name = (*env)->GetStaticMethodID(env, h2co3Launcher->class_H2CO3LauncherBridge, #func_name, signature); \
+    if (H2CO3LauncherBridge_##func_name == NULL) { \
+        H2CO3_INTERNAL_LOG("Failed to find static method H2CO3LauncherBridge"#func_name ); \
     } \
-    return_exp (*env)->CallStatic##func_type##Method(env, h2co3launcher->class_H2CO3LauncherLib, H2CO3LauncherLib_##func_name, ##args); \
+    return_exp (*env)->CallStatic##func_type##Method(env, h2co3Launcher->class_H2CO3LauncherBridge, H2CO3LauncherBridge_##func_name, ##args); \
     do {} while(0)
 
-#endif // h2co3launcher_INTERNAL_H
+#endif // h2co3Launcher_INTERNAL_H

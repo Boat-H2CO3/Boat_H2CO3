@@ -1,9 +1,3 @@
-//
-// Created by Tungsten on 2022/10/11.
-//
-//========================================================================
-// This file is derived from x11_window.c
-//========================================================================
 
 #include <internal.h>
 
@@ -13,8 +7,9 @@
 #include <limits.h>
 #include <errno.h>
 #include <assert.h>
-#include <h2co3launcher_event.h>
-#include <h2co3launcher.h>
+#include <h2co3Launcher_event.h>
+#include <h2co3Launcher_bridge.h>
+#include <h2co3launcher_internal.h>
 
 static int translateState(int state) {
     int mods = 0;
@@ -40,29 +35,29 @@ static int translateKey(int scancode) {
     if (scancode < 0 || scancode > 255)
         return GLFW_KEY_UNKNOWN;
 
-    return _glfw.h2co3launcher.keycodes[scancode];
+    return _glfw.h2co3Launcher.keycodes[scancode];
 }
 
 // Apply disabled cursor mode to a focused window
 //
 static void disableCursor(_GLFWwindow *window) {
-    _glfw.h2co3launcher.disabledCursorWindow = window;
+    _glfw.h2co3Launcher.disabledCursorWindow = window;
     _glfwPlatformGetCursorPos(window,
-                              &_glfw.h2co3launcher.restoreCursorPosX,
-                              &_glfw.h2co3launcher.restoreCursorPosY);
+                              &_glfw.h2co3Launcher.restoreCursorPosX,
+                              &_glfw.h2co3Launcher.restoreCursorPosY);
     // updateCursorImage(window);
     _glfwCenterCursorInContentArea(window);
-    h2co3launcherSetCursorMode(CursorDisabled);
+    h2co3LauncherSetCursorMode(CursorDisabled);
 }
 
 // Exit disabled cursor mode for the specified window
 //
 static void enableCursor(_GLFWwindow *window) {
-    _glfw.h2co3launcher.disabledCursorWindow = NULL;
-    h2co3launcherSetCursorMode(CursorEnabled);
+    _glfw.h2co3Launcher.disabledCursorWindow = NULL;
+    h2co3LauncherSetCursorMode(CursorEnabled);
     _glfwPlatformSetCursorPos(window,
-                              _glfw.h2co3launcher.restoreCursorPosX,
-                              _glfw.h2co3launcher.restoreCursorPosY);
+                              _glfw.h2co3Launcher.restoreCursorPosX,
+                              _glfw.h2co3Launcher.restoreCursorPosY);
     // updateCursorImage(window);
 }
 
@@ -71,24 +66,24 @@ static void enableCursor(_GLFWwindow *window) {
 static GLFWbool createNativeWindow(_GLFWwindow *window,
                                    const _GLFWwndconfig *wndconfig) {
     // window width and height requirements ignored
-    window->h2co3launcher.handle = h2co3launcherGetNativeWindow();
-    ANativeWindow_acquire(window->h2co3launcher.handle);
+    window->h2co3Launcher.handle = h2co3LauncherGetNativeWindow();
+    ANativeWindow_acquire(window->h2co3Launcher.handle);
 
-    if (!window->h2co3launcher.handle) {
+    if (!window->h2co3Launcher.handle) {
         _glfwInputError(GLFW_PLATFORM_ERROR,
                         "H2CO3Launcher: Failed to get window");
         return GLFW_FALSE;
     }
 
-    _glfw.h2co3launcher.eventCurrent = window;
+    _glfw.h2co3Launcher.eventCurrent = window;
 
     if (!wndconfig->decorated)
         _glfwPlatformSetWindowDecorated(window, GLFW_FALSE);
 
-    window->h2co3launcher.maximized = GLFW_TRUE;
+    window->h2co3Launcher.maximized = GLFW_TRUE;
     _glfwPlatformSetWindowTitle(window, wndconfig->title);
-    _glfwPlatformGetWindowPos(window, &window->h2co3launcher.xpos, &window->h2co3launcher.ypos);
-    _glfwPlatformGetWindowSize(window, &window->h2co3launcher.width, &window->h2co3launcher.height);
+    _glfwPlatformGetWindowPos(window, &window->h2co3Launcher.xpos, &window->h2co3Launcher.ypos);
+    _glfwPlatformGetWindowSize(window, &window->h2co3Launcher.width, &window->h2co3Launcher.height);
 
     return GLFW_TRUE;
 }
@@ -109,7 +104,7 @@ static void releaseMonitor(_GLFWwindow *window) {
 }
 
 static void processEvent(H2CO3LauncherEvent *event) {
-    _GLFWwindow *window = _glfw.h2co3launcher.eventCurrent;
+    _GLFWwindow *window = _glfw.h2co3Launcher.eventCurrent;
 
     switch (event->type) {
         case KeyPress: {
@@ -201,18 +196,18 @@ static void processEvent(H2CO3LauncherEvent *event) {
             const int x = event->x;
             const int y = event->y;
 
-            if (x != window->h2co3launcher.warpCursorPosX ||
-                y != window->h2co3launcher.warpCursorPosY) {
+            if (x != window->h2co3Launcher.warpCursorPosX ||
+                y != window->h2co3Launcher.warpCursorPosY) {
                 // The cursor was moved by something other than GLFW
 
                 if (window->cursorMode == GLFW_CURSOR_DISABLED) {
-                    if (_glfw.h2co3launcher.disabledCursorWindow != window)
+                    if (_glfw.h2co3Launcher.disabledCursorWindow != window)
                         return;
                     if (window->rawMouseMotion)
                         return;
 
-                    const int dx = x - window->h2co3launcher.lastCursorPosX;
-                    const int dy = y - window->h2co3launcher.lastCursorPosY;
+                    const int dx = x - window->h2co3Launcher.lastCursorPosX;
+                    const int dy = y - window->h2co3Launcher.lastCursorPosY;
 
                     _glfwInputCursorPos(window,
                                         window->virtualCursorPosX + dx,
@@ -221,8 +216,8 @@ static void processEvent(H2CO3LauncherEvent *event) {
                     _glfwInputCursorPos(window, x, y);
             }
 
-            window->h2co3launcher.lastCursorPosX = x;
-            window->h2co3launcher.lastCursorPosY = y;
+            window->h2co3Launcher.lastCursorPosX = x;
+            window->h2co3Launcher.lastCursorPosY = y;
             return;
         }
 
@@ -240,8 +235,8 @@ static void processEvent(H2CO3LauncherEvent *event) {
         case ConfigureNotify: {
             const int width = event->width;
             const int height = event->height;
-            if (width != window->h2co3launcher.width ||
-                height != window->h2co3launcher.height) {
+            if (width != window->h2co3Launcher.width ||
+                height != window->h2co3Launcher.height) {
                 _glfwInputFramebufferSize(window,
                                           width,
                                           height);
@@ -250,8 +245,8 @@ static void processEvent(H2CO3LauncherEvent *event) {
                                      width,
                                      height);
 
-                window->h2co3launcher.width = width;
-                window->h2co3launcher.height = height;
+                window->h2co3Launcher.width = width;
+                window->h2co3Launcher.height = height;
             }
 
             return;
@@ -268,13 +263,13 @@ static void processEvent(H2CO3LauncherEvent *event) {
 }
 
 static void handleEvents(int timeout) {
-    if (h2co3launcherWaitForEvent(timeout) == 0) {
+    if (h2co3LauncherWaitForEvent(timeout) == 0) {
         return;
     }
     H2CO3LauncherEvent event;
-    while (h2co3launcherPollEvent(&event)) {
+    while (h2co3LauncherPollEvent(&event)) {
         processEvent(&event);
-        if (h2co3launcherWaitForEvent(0) == 0) {
+        if (h2co3LauncherWaitForEvent(0) == 0) {
             break;
         }
     }
@@ -325,8 +320,8 @@ int _glfwPlatformCreateWindow(_GLFWwindow *window,
 }
 
 void _glfwPlatformDestroyWindow(_GLFWwindow *window) {
-    if (_glfw.h2co3launcher.disabledCursorWindow == window)
-        _glfw.h2co3launcher.disabledCursorWindow = NULL;
+    if (_glfw.h2co3Launcher.disabledCursorWindow == window)
+        _glfw.h2co3Launcher.disabledCursorWindow = NULL;
 
     if (window->monitor)
         releaseMonitor(window);
@@ -334,9 +329,9 @@ void _glfwPlatformDestroyWindow(_GLFWwindow *window) {
     if (window->context.destroy)
         window->context.destroy(window);
 
-    if (window->h2co3launcher.handle) {
-        ANativeWindow_release(window->h2co3launcher.handle);
-        window->h2co3launcher.handle = NULL;
+    if (window->h2co3Launcher.handle) {
+        ANativeWindow_release(window->h2co3Launcher.handle);
+        window->h2co3Launcher.handle = NULL;
     }
 }
 
@@ -359,9 +354,9 @@ void _glfwPlatformSetWindowPos(_GLFWwindow *window, int xpos, int ypos) {
 
 void _glfwPlatformGetWindowSize(_GLFWwindow *window, int *width, int *height) {
     if (width)
-        *width = ANativeWindow_getWidth(window->h2co3launcher.handle);
+        *width = ANativeWindow_getWidth(window->h2co3Launcher.handle);
     if (height)
-        *height = ANativeWindow_getHeight(window->h2co3launcher.handle);
+        *height = ANativeWindow_getHeight(window->h2co3Launcher.handle);
 }
 
 void _glfwPlatformSetWindowSize(_GLFWwindow *window, int width, int height) {
@@ -399,9 +394,9 @@ void _glfwPlatformGetWindowFrameSize(_GLFWwindow *window,
 void _glfwPlatformGetWindowContentScale(_GLFWwindow *window,
                                         float *xscale, float *yscale) {
     if (xscale)
-        *xscale = _glfw.h2co3launcher.contentScaleX;
+        *xscale = _glfw.h2co3Launcher.contentScaleX;
     if (yscale)
-        *yscale = _glfw.h2co3launcher.contentScaleY;
+        *yscale = _glfw.h2co3Launcher.contentScaleY;
 }
 
 void _glfwPlatformIconifyWindow(_GLFWwindow *window) {
@@ -530,28 +525,28 @@ void _glfwPlatformGetCursorPos(_GLFWwindow *window, double *xpos, double *ypos) 
 
 void _glfwPlatformSetCursorPos(_GLFWwindow *window, double x, double y) {
     // Store the new position so it can be recognized later
-    window->h2co3launcher.warpCursorPosX = (int) x;
-    window->h2co3launcher.warpCursorPosY = (int) y;
+    window->h2co3Launcher.warpCursorPosX = (int) x;
+    window->h2co3Launcher.warpCursorPosY = (int) y;
     // h2co3SetCursorPos(x, y);
 }
 
 void _glfwPlatformSetInjectorMode(int mode) {
-    h2co3launcherSetInjectorMode(mode);
+    h2co3LauncherSetInjectorMode(mode);
 }
 
 int _glfwPlatformGetInjectorMode() {
-    return h2co3launcherGetInjectorMode();
+    return h2co3LauncherGetInjectorMode();
 }
 
 void _glfwPlatformSetHitResultType(int type) {
-    h2co3launcherSetHitResultType(type);
+    h2co3LauncherSetHitResultType(type);
 }
 
 void _glfwPlatformSetCursorMode(_GLFWwindow *window, int mode) {
     if (mode == GLFW_CURSOR_DISABLED) {
         if (_glfwPlatformWindowFocused(window))
             disableCursor(window);
-    } else if (_glfw.h2co3launcher.disabledCursorWindow == window)
+    } else if (_glfw.h2co3Launcher.disabledCursorWindow == window)
         enableCursor(window);
     // else
     // updateCursorImage(window);
@@ -559,17 +554,17 @@ void _glfwPlatformSetCursorMode(_GLFWwindow *window, int mode) {
 
 const char *_glfwPlatformGetScancodeName(int scancode) {
     if (scancode < 0 || scancode > 0xff ||
-        _glfw.h2co3launcher.keycodes[scancode] == GLFW_KEY_UNKNOWN) {
+        _glfw.h2co3Launcher.keycodes[scancode] == GLFW_KEY_UNKNOWN) {
 //        _glfwInputError(GLFW_INVALID_VALUE, "Invalid scancode:%d",scancode);
         return NULL;
     }
 
-    const int key = _glfw.h2co3launcher.keycodes[scancode];
-    return _glfw.h2co3launcher.keynames[key];
+    const int key = _glfw.h2co3Launcher.keycodes[scancode];
+    return _glfw.h2co3Launcher.keynames[key];
 }
 
 int _glfwPlatformGetKeyScancode(int key) {
-    return _glfw.h2co3launcher.scancodes[key];
+    return _glfw.h2co3Launcher.scancodes[key];
 }
 
 int _glfwPlatformCreateCursor(_GLFWcursor *cursor,
@@ -592,11 +587,11 @@ void _glfwPlatformSetCursor(_GLFWwindow *window, _GLFWcursor *cursor) {
 }
 
 void _glfwPlatformSetClipboardString(const char *string) {
-    h2co3launcherSetPrimaryClipString(string);
+    h2co3LauncherSetPrimaryClipString(string);
 }
 
 const char *_glfwPlatformGetClipboardString(void) {
-    return h2co3launcherGetPrimaryClipString();
+    return h2co3LauncherGetPrimaryClipString();
 }
 
 void _glfwPlatformGetRequiredInstanceExtensions(char **extensions) {
@@ -631,7 +626,7 @@ VkResult _glfwPlatformCreateWindowSurface(VkInstance instance,
 
     memset(&sci, 0, sizeof(sci));
     sci.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
-    sci.window = window->h2co3launcher.handle;
+    sci.window = window->h2co3Launcher.handle;
 
     err = vkCreateAndroidSurfaceKHR(instance, &sci, allocator, surface);
     if (err) {
@@ -651,6 +646,6 @@ VkResult _glfwPlatformCreateWindowSurface(VkInstance instance,
 GLFWAPI struct ANativeWindow *glfwGetH2CO3LauncherWindow(GLFWwindow *handle) {
     _GLFWwindow *window = (_GLFWwindow *) handle;
     _GLFW_REQUIRE_INIT_OR_RETURN(NULL);
-    return window->h2co3launcher.handle;
+    return window->h2co3Launcher.handle;
 }
 

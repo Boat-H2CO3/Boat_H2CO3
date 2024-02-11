@@ -9,7 +9,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <h2co3launcher.h>
+#include <h2co3Launcher_bridge.h>
 
 
 static void modeChangeHandle(int width, int height, void *data) {
@@ -28,7 +28,7 @@ static void modeChangeHandle(int width, int height, void *data) {
             realloc(monitor->modes, monitor->modeCount * sizeof(GLFWvidmode));
     monitor->modes[monitor->modeCount - 1] = mode;
 
-    monitor->h2co3launcher.currentMode = monitor->modeCount - 1;
+    monitor->h2co3Launcher.currentMode = monitor->modeCount - 1;
 }
 
 
@@ -37,7 +37,7 @@ static void modeChangeHandle(int width, int height, void *data) {
 //////////////////////////////////////////////////////////////////////////
 
 void _glfwPollMonitorsH2CO3Launcher(void) {
-    struct ANativeWindow *window = h2co3launcherGetNativeWindow();
+    struct ANativeWindow *window = h2co3LauncherGetNativeWindow();
     const float dpi = 141.f;
     _GLFWmonitor *monitor = _glfwAllocMonitor("H2CO3Launcher Monitor 0",
                                               (int) (ANativeWindow_getWidth(window) * 25.4f / dpi),
@@ -64,9 +64,9 @@ void _glfwPlatformGetMonitorPos(_GLFWmonitor *monitor, int *xpos, int *ypos) {
 void _glfwPlatformGetMonitorContentScale(_GLFWmonitor *monitor,
                                          float *xscale, float *yscale) {
     if (xscale)
-        *xscale = _glfw.h2co3launcher.contentScaleX;
+        *xscale = _glfw.h2co3Launcher.contentScaleX;
     if (yscale)
-        *yscale = _glfw.h2co3launcher.contentScaleY;
+        *yscale = _glfw.h2co3Launcher.contentScaleY;
 }
 
 void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor *monitor, int *xpos, int *ypos, int *width,
@@ -76,14 +76,14 @@ void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor *monitor, int *xpos, int *ypos
     if (ypos)
         *ypos = 0;
     if (width)
-        *width = monitor->modes[monitor->h2co3launcher.currentMode].width;
+        *width = monitor->modes[monitor->h2co3Launcher.currentMode].width;
     if (height)
-        *height = monitor->modes[monitor->h2co3launcher.currentMode].height;
+        *height = monitor->modes[monitor->h2co3Launcher.currentMode].height;
 }
 
 GLFWvidmode *_glfwPlatformGetVideoModes(_GLFWmonitor *monitor, int *count) {
     if (monitor->modes == NULL || monitor->modeCount == 0) {
-        struct ANativeWindow *window = h2co3launcherGetNativeWindow();
+        struct ANativeWindow *window = h2co3LauncherGetNativeWindow();
         modeChangeHandle(ANativeWindow_getWidth(window),
                          ANativeWindow_getHeight(window),
                          monitor);
@@ -94,12 +94,12 @@ GLFWvidmode *_glfwPlatformGetVideoModes(_GLFWmonitor *monitor, int *count) {
 
 void _glfwPlatformGetVideoMode(_GLFWmonitor *monitor, GLFWvidmode *mode) {
     if (monitor->modes == NULL || monitor->modeCount == 0) {
-        struct ANativeWindow *window = h2co3launcherGetNativeWindow();
+        struct ANativeWindow *window = h2co3LauncherGetNativeWindow();
         modeChangeHandle(ANativeWindow_getWidth(window),
                          ANativeWindow_getHeight(window),
                          monitor);
     }
-    *mode = monitor->modes[monitor->h2co3launcher.currentMode];
+    *mode = monitor->modes[monitor->h2co3Launcher.currentMode];
 }
 
 GLFWbool _glfwPlatformGetGammaRamp(_GLFWmonitor *monitor, GLFWgammaramp *ramp) {

@@ -64,7 +64,7 @@ public class LWJGLUtil {
 	public static final String PLATFORM_LINUX_NAME 		= "linux";
 	public static final String PLATFORM_MACOSX_NAME 	= "macosx";
 	public static final String PLATFORM_WINDOWS_NAME	= "windows";
-	public static final String PLATFORM_H2CO3Launcher_NAME = "h2co3launcher";
+	public static final String PLATFORM_H2CO3Launcher_NAME = "h2co3Launcher";
 
 	private static final String LWJGL_ICON_DATA_16x16 =
 		"\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377" +

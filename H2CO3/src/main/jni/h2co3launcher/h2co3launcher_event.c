@@ -59,78 +59,78 @@ void EventQueue_clear(EventQueue *queue) {
     }
 }
 
-void h2co3launcherSetCursorMode(int mode) {
-    if (h2co3launcher == NULL || h2co3launcher->android_jvm == 0) {
-        H2CO3_INTERNAL_LOG("h2co3launcherSetCursorMode:h2co3launcher or android_jvm is null");
+void h2co3LauncherSetCursorMode(int mode) {
+    if (h2co3Launcher == NULL || h2co3Launcher->android_jvm == 0) {
+        H2CO3_INTERNAL_LOG("h2co3LauncherSetCursorMode:h2co3Launcher or android_jvm is null");
         return;
     }
     JNIEnv *env = 0;
-    jint result = (*h2co3launcher->android_jvm)->AttachCurrentThread(h2co3launcher->android_jvm,
+    jint result = (*h2co3Launcher->android_jvm)->AttachCurrentThread(h2co3Launcher->android_jvm,
                                                                      &env, 0);
     if (result != JNI_OK || env == 0) {
-        H2CO3_INTERNAL_LOG("h2co3launcherSetCursorMode:Failed to attach thread");
+        H2CO3_INTERNAL_LOG("h2co3LauncherSetCursorMode:Failed to attach thread");
         abort();
     }
 
-    jclass class_H2CO3LauncherActivity = h2co3launcher->class_H2CO3LauncherActivity;
+    jclass class_H2CO3LauncherActivity = h2co3Launcher->class_H2CO3LauncherActivity;
 
     if (class_H2CO3LauncherActivity == 0) {
-        H2CO3_INTERNAL_LOG("h2co3launcherSetCursorMode:class_H2CO3LauncherActivity is null");
+        H2CO3_INTERNAL_LOG("h2co3LauncherSetCursorMode:class_H2CO3LauncherActivity is null");
         abort();
     }
 
-    jmethodID H2CO3LauncherActivity_setCursorMode = h2co3launcher->setCursorMode;
+    jmethodID H2CO3LauncherActivity_setCursorMode = h2co3Launcher->setCursorMode;
 
     if (H2CO3LauncherActivity_setCursorMode == 0) {
         H2CO3_INTERNAL_LOG("h2co3SetCursorMode:H2CO3LauncherActivity_setCursorMode is null");
         abort();
     }
-    (*env)->CallVoidMethod(env, h2co3launcher->h2co3launcherActivity,
+    (*env)->CallVoidMethod(env, h2co3Launcher->class_H2CO3LauncherActivity,
                            H2CO3LauncherActivity_setCursorMode, mode);
-    (*h2co3launcher->android_jvm)->DetachCurrentThread(h2co3launcher->android_jvm);
+    (*h2co3Launcher->android_jvm)->DetachCurrentThread(h2co3Launcher->android_jvm);
 }
 
-int h2co3launcherGetEventFd() {
-    if (!h2co3launcher->has_event_pipe) {
+int h2co3LauncherGetEventFd() {
+    if (!h2co3Launcher->has_event_pipe) {
         return -1;
     }
-    return h2co3launcher->event_pipe_fd[0];
+    return h2co3Launcher->event_pipe_fd[0];
 }
 
-int h2co3launcherWaitForEvent(int timeout) {
-    if (!h2co3launcher->has_event_pipe) {
+int h2co3LauncherWaitForEvent(int timeout) {
+    if (!h2co3Launcher->has_event_pipe) {
         return 0;
     }
     struct epoll_event ev;
-    int ret = epoll_wait(h2co3launcher->epoll_fd, &ev, 1, timeout);
+    int ret = epoll_wait(h2co3Launcher->epoll_fd, &ev, 1, timeout);
     if (ret > 0 && (ev.events & EPOLLIN)) {
         return 1;
     }
     return 0;
 }
 
-int h2co3launcherPollEvent(H2CO3LauncherEvent *event) {
-    if (!h2co3launcher->has_event_pipe) {
+int h2co3LauncherPollEvent(H2CO3LauncherEvent *event) {
+    if (!h2co3Launcher->has_event_pipe) {
         return 0;
     }
-    if (pthread_mutex_lock(&h2co3launcher->event_queue_mutex) != 0) {
-        H2CO3_INTERNAL_LOG("h2co3launcherPollEvent:Failed to acquire mutex");
+    if (pthread_mutex_lock(&h2co3Launcher->event_queue_mutex) != 0) {
+        H2CO3_INTERNAL_LOG("h2co3LauncherPollEvent:Failed to acquire mutex");
         return 0;
     }
     char c;
     int ret = 0;
-    if (read(h2co3launcher->event_pipe_fd[0], &c, 1) > 0) {
-        ret = EventQueue_take(&h2co3launcher->event_queue, event);
+    if (read(h2co3Launcher->event_pipe_fd[0], &c, 1) > 0) {
+        ret = EventQueue_take(&h2co3Launcher->event_queue, event);
     }
-    if (pthread_mutex_unlock(&h2co3launcher->event_queue_mutex) != 0) {
-        H2CO3_INTERNAL_LOG("h2co3launcherPollEvent:Failed to release mutex");
+    if (pthread_mutex_unlock(&h2co3Launcher->event_queue_mutex) != 0) {
+        H2CO3_INTERNAL_LOG("h2co3LauncherPollEvent:Failed to release mutex");
         return 0;
     }
     return ret;
 }
 
 JNIEXPORT jintArray JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_getPointer(JNIEnv *env, jclass thiz) {
+Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_getPointer(JNIEnv *env, jclass thiz) {
     jintArray ja = (*env)->NewIntArray(env, 2);
     int arr[2] = {current_event.x, current_event.y};
     (*env)->SetIntArrayRegion(env, ja, 0, 2, arr);
@@ -138,11 +138,11 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_getPointer(JNIEnv *env,
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent(JNIEnv *env, jclass clazz,
+Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_pushEvent(JNIEnv *env, jclass clazz,
                                                                    jlong time,
                                                                    jint type, jint p1,
                                                                    jint p2) {
-    if (!h2co3launcher->has_event_pipe) {
+    if (!h2co3Launcher->has_event_pipe) {
         return;
     }
 
@@ -182,32 +182,32 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent(JNIEnv *env, 
             break;
     }
 
-    if (pthread_mutex_lock(&h2co3launcher->event_queue_mutex) != 0) {
+    if (pthread_mutex_lock(&h2co3Launcher->event_queue_mutex) != 0) {
         H2CO3_INTERNAL_LOG(
                 "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent:Failed to acquire mutex");
         return;
     }
 
-    EventQueue_add(&h2co3launcher->event_queue, &event);
+    EventQueue_add(&h2co3Launcher->event_queue, &event);
 
-    write(h2co3launcher->event_pipe_fd[1], "E", 1);
+    write(h2co3Launcher->event_pipe_fd[1], "E", 1);
 
-    if (pthread_mutex_unlock(&h2co3launcher->event_queue_mutex) != 0) {
+    if (pthread_mutex_unlock(&h2co3Launcher->event_queue_mutex) != 0) {
         H2CO3_INTERNAL_LOG(
                 "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent:Failed to release mutex");
     }
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe(JNIEnv *env, jclass clazz) {
-    if (pipe(h2co3launcher->event_pipe_fd) == -1) {
+Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_setEventPipe(JNIEnv *env, jclass clazz) {
+    if (pipe(h2co3Launcher->event_pipe_fd) == -1) {
         H2CO3_INTERNAL_LOG(
                 "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to create event pipe : %s",
                 strerror(errno));
         return;
     }
-    h2co3launcher->epoll_fd = epoll_create(3);
-    if (h2co3launcher->epoll_fd == -1) {
+    h2co3Launcher->epoll_fd = epoll_create(3);
+    if (h2co3Launcher->epoll_fd == -1) {
         H2CO3_INTERNAL_LOG(
                 "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to get epoll fd : %s",
                 strerror(errno));
@@ -215,35 +215,35 @@ Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe(JNIEnv *en
     }
     struct epoll_event ev;
     ev.events = EPOLLIN;
-    ev.data.fd = h2co3launcher->event_pipe_fd[0];
-    if (epoll_ctl(h2co3launcher->epoll_fd, EPOLL_CTL_ADD, h2co3launcher->event_pipe_fd[0], &ev) ==
+    ev.data.fd = h2co3Launcher->event_pipe_fd[0];
+    if (epoll_ctl(h2co3Launcher->epoll_fd, EPOLL_CTL_ADD, h2co3Launcher->event_pipe_fd[0], &ev) ==
         -1) {
         H2CO3_INTERNAL_LOG(
                 "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to add epoll event : %s",
                 strerror(errno));
         return;
     }
-    EventQueue_init(&h2co3launcher->event_queue);
-    pthread_mutex_init(&h2co3launcher->event_queue_mutex, NULL);
-    h2co3launcher->has_event_pipe = 1;
+    EventQueue_init(&h2co3Launcher->event_queue);
+    pthread_mutex_init(&h2co3Launcher->event_queue_mutex, NULL);
+    h2co3Launcher->has_event_pipe = 1;
     H2CO3_INTERNAL_LOG(
             "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Succeeded to set event pipe");
 }
 
 int injector_mode = 0;
 
-void h2co3launcherSetInjectorMode(int mode) {
+void h2co3LauncherSetInjectorMode(int mode) {
     injector_mode = mode;
 }
 
-int h2co3launcherGetInjectorMode() {
+int h2co3LauncherGetInjectorMode() {
     return injector_mode;
 }
 
-void h2co3launcherSetHitResultType(int type) {
-    if (!h2co3launcher->has_event_pipe) {
+void h2co3LauncherSetHitResultType(int type) {
+    if (!h2co3Launcher->has_event_pipe) {
         return;
     }
-    PrepareH2CO3LauncherLibJNI();
-    CallH2CO3LauncherLibJNIFunc(, Void, setHitResultType, "(I)V", type);
+    PrepareH2CO3LauncherBridgeJNI();
+    CallH2CO3LauncherBridgeJNIFunc(, Void, setHitResultType, "(I)V", type);
 }

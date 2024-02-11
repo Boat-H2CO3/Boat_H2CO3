@@ -41,17 +41,9 @@ public final class IOUtils {
      * @throws IOException if an I/O error occurs.
      */
     public static ByteArrayOutputStream readFully(InputStream stream) throws IOException {
-        if (stream == null) {
-            throw new IllegalArgumentException("Input stream cannot be null");
-        }
-
         try (InputStream is = stream) {
-            ByteArrayOutputStream result = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = is.read(buffer)) != -1) {
-                result.write(buffer, 0, length);
-            }
+            ByteArrayOutputStream result = new ByteArrayOutputStream(Math.max(is.available(), 32));
+            copyTo(is, result);
             return result;
         }
     }
@@ -61,8 +53,7 @@ public final class IOUtils {
     }
 
     public static String readFullyAsString(InputStream stream) throws IOException {
-        ByteArrayOutputStream byteArrayOutputStream = readFully(stream);
-        return new String(byteArrayOutputStream.toByteArray(), StandardCharsets.UTF_8);
+        return readFully(stream).toString(StandardCharsets.UTF_8);
     }
 
     public static void copyTo(InputStream src, OutputStream dest) throws IOException {

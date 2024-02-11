@@ -25,7 +25,7 @@ public enum Platform {
             return System.mapLibraryName(name);
         }
     },
-    H2CO3Launcher("H2CO3Launcher", "h2co3launcher") {
+    H2CO3Launcher("H2CO3Launcher", "h2co3Launcher") {
         private final Pattern SO = Pattern.compile("(?:^|/)lib\\w+[.]so(?:[.]\\d+)*$");
 
         @Override

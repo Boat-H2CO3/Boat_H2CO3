@@ -1,7 +1,7 @@
 package org.koishi.launcher.h2co3.ui;
 
-import static org.koishi.launcher.h2co3.core.H2CO3Auth.serversFile;
-import static org.koishi.launcher.h2co3.core.H2CO3Auth.usersFile;
+import static org.koishi.launcher.h2co3.core.game.H2CO3Auth.serversFile;
+import static org.koishi.launcher.h2co3.core.game.H2CO3Auth.usersFile;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -44,7 +44,7 @@ import org.json.JSONObject;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.adapter.HomeAdapterListUser;
 import org.koishi.launcher.h2co3.application.H2CO3Application;
-import org.koishi.launcher.h2co3.core.H2CO3Auth;
+import org.koishi.launcher.h2co3.core.game.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.login.bean.UserBean;

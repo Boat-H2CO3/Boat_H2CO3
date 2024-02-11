@@ -1,5 +1,7 @@
 package org.koishi.launcher.h2co3.core;
 
+import static org.koishi.launcher.h2co3.core.H2CO3Tools.showError;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
+
 public class H2CO3Loader {
 
     private static final int HEAD_SIZE = 5000;
@@ -28,58 +32,60 @@ public class H2CO3Loader {
 
     public static Drawable getHeadDrawable(Context context, String texture) {
         if (context == null || texture == null) {
-            showErrorToast("Error");
+            showError(context,"Error");
             return null;
         }
 
         try {
-            byte[] decodedBytes = Base64.decode(texture, Base64.DEFAULT);
-            Bitmap skinBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
-
-            if (skinBitmap != null) {
-                Bitmap headBitmap = cropHeadFromSkin(skinBitmap);
+            Bitmap headBitmap = decodeAndCropHeadBitmap(texture);
+            if (headBitmap != null) {
                 return new BitmapDrawable(context.getResources(), headBitmap);
             } else {
-                showErrorToast("Error");
+                showError(context,"Error");
                 return null;
             }
         } catch (Exception | OutOfMemoryError e) {
-            showErrorToast(String.valueOf(e));
+            showError(context,String.valueOf(e));
             return null;
         }
     }
 
     public static void getHead(Context context, String texture, ImageView imageView) {
         if (context == null || texture == null || imageView == null) {
-            showErrorToast("Error");
+            showError(context,"Error");
             return;
         }
 
         try {
-            byte[] decodedBytes = Base64.decode(texture, Base64.DEFAULT);
-            Bitmap skinBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
-
-            if (skinBitmap != null) {
-                Bitmap headBitmap = cropHeadFromSkin(skinBitmap);
+            Bitmap headBitmap = decodeAndCropHeadBitmap(texture);
+            if (headBitmap != null) {
                 Glide.with(context)
                         .load(headBitmap)
                         .apply(requestOptions)
                         .into(imageView);
             } else {
-                showErrorToast("Error");
+                showError(context,"Error");
             }
         } catch (Exception | OutOfMemoryError e) {
-            showErrorToast(String.valueOf(e));
+            showError(context,String.valueOf(e));
         }
     }
 
     public static Bitmap parseHeadTexture(String texture) {
         try {
-            byte[] decodedBytes = Base64.decode(texture, Base64.DEFAULT);
-            Bitmap skinBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
-            return cropHeadFromSkin(skinBitmap);
+            return decodeAndCropHeadBitmap(texture);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static Bitmap decodeAndCropHeadBitmap(String texture) {
+        byte[] decodedBytes = Base64.decode(texture, Base64.DEFAULT);
+        Bitmap skinBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+        if (skinBitmap != null) {
+            return cropHeadFromSkin(skinBitmap);
+        } else {
             return null;
         }
     }
@@ -91,16 +97,5 @@ public class H2CO3Loader {
         Rect dstRect = new Rect(0, 0, HEAD_SIZE, HEAD_SIZE);
         canvas.drawBitmap(skinBitmap, srcRect, dstRect, null);
         return headBitmap;
-    }
-
-    private static void showErrorToast(String errorMessage) {
-        Log.d("Error", errorMessage);
-    }
-
-    public static void setDir(String dir) {
-        H2CO3Game.setGameDirectory(dir);
-        H2CO3Game.setGameAssets(dir + "/assets/virtual/legacy");
-        H2CO3Game.setGameAssetsRoot(dir + "/assets");
-        H2CO3Game.setGameCurrentVersion(dir + "/versions");
     }
 }

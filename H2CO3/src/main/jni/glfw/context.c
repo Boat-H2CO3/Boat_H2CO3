@@ -9,7 +9,7 @@
 #include <string.h>
 #include <limits.h>
 #include <stdio.h>
-#include "h2co3launcher.h"
+#include "h2co3launcher_bridge.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -346,12 +346,12 @@ GLFWbool _glfwStringInExtensionString(const char *string, const char *extensions
 //////////////////////////////////////////////////////////////////////////
 
 GLFWAPI int glfwGetOSMesaWidth() {
-    struct ANativeWindow *window = h2co3launcherGetNativeWindow();
+    struct ANativeWindow *window = h2co3LauncherGetNativeWindow();
     return ANativeWindow_getWidth(window);
 }
 
 GLFWAPI int glfwGetOSMesaHeight() {
-    struct ANativeWindow *window = h2co3launcherGetNativeWindow();
+    struct ANativeWindow *window = h2co3LauncherGetNativeWindow();
     return ANativeWindow_getHeight(window);
 }
 
