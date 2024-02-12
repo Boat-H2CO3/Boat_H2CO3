@@ -1,6 +1,6 @@
 package org.koishi.launcher.h2co3.launcher;
 
-import static org.koishi.launcher.h2co3.core.game.H2CO3GameHelper.*;
+import static org.koishi.launcher.h2co3.core.game.H2CO3GameHelper.getJavaPath;
 
 import android.content.Context;
 import android.os.Build;
@@ -35,15 +35,22 @@ import java.util.logging.Level;
 public class H2CO3LauncherHelper {
 
     private static final String TAG = H2CO3LauncherHelper.class.getSimpleName();
+    private static final String TASK_TITLE_FORMAT = "==================== %s ====================";
+    private static final String ARCHITECTURE_FORMAT = "Architecture: %s";
+    private static final String CPU_FORMAT = "CPU: %s";
+    private static final String UNSUPPORTED_ARCHITECTURE_ERROR = "Unsupported architecture!";
+    private static final String ENV_FORMAT = "Env: %s=%s";
+    private static final String WORKING_DIRECTORY_FORMAT = "Working directory: %s";
+    private static final String JVM_EXITED_WITH_CODE_FORMAT = "Jvm Exited With Code: %d";
 
     public static void printTaskTitle(H2CO3LauncherBridge bridge, String task) {
-        bridge.getCallback().onLog("==================== " + task + " ====================");
+        bridge.getCallback().onLog(String.format(TASK_TITLE_FORMAT, task));
     }
 
     public static void logStartInfo(H2CO3LauncherBridge bridge, String task) {
         printTaskTitle(bridge, "Start " + task);
-        bridge.getCallback().onLog("Architecture: " + Architecture.archAsString(Architecture.getDeviceArchitecture()));
-        bridge.getCallback().onLog("CPU:" + Build.HARDWARE);
+        bridge.getCallback().onLog(String.format(ARCHITECTURE_FORMAT, Architecture.archAsString(Architecture.getDeviceArchitecture())));
+        bridge.getCallback().onLog(String.format(CPU_FORMAT, Build.HARDWARE));
     }
 
     public static Map<String, String> readJREReleaseProperties(String javaPath) throws IOException {
@@ -67,7 +74,7 @@ public class H2CO3LauncherHelper {
         }
         String jreLibDir = "/lib";
         if (jreArchitecture == null) {
-            throw new IOException("Unsupported architecture!");
+            throw new IOException(UNSUPPORTED_ARCHITECTURE_ERROR);
         }
         for (String arch : jreArchitecture.split("/")) {
             File file = new File(javaPath, "lib/" + arch);
@@ -198,7 +205,7 @@ public class H2CO3LauncherHelper {
         addRendererEnv(context, envMap, H2CO3GameHelper.getRender());
         printTaskTitle(bridge, "Env Map");
         for (String key : envMap.keySet()) {
-            bridge.getCallback().onLog("Env: " + key + "=" + envMap.get(key));
+            bridge.getCallback().onLog(String.format(ENV_FORMAT, key, envMap.get(key)));
             bridge.setenv(key, envMap.get(key));
         }
         printTaskTitle(bridge, "Env Map");
@@ -269,7 +276,7 @@ public class H2CO3LauncherHelper {
         bridge.setLdLibraryPath(getLibraryPath(context, getJavaPath()));
         bridge.getCallback().onLog("Hook exit " + (bridge.setupExitTrap(bridge) == 0 ? "success" : "failed"));
         int exitCode = bridge.jliLaunch(args);
-        Log.e(TAG, "Jvm Exited With Code:" + exitCode);
+        Log.e(TAG, String.format(JVM_EXITED_WITH_CODE_FORMAT, exitCode));
         bridge.onExit(exitCode);
     }
 
@@ -291,7 +298,7 @@ public class H2CO3LauncherHelper {
                 setupGraphicAndSoundEngine(context, bridge);
 
                 // set working directory
-                bridge.getCallback().onLog("Working directory: " + H2CO3GameHelper.getGameDirectory());
+                bridge.getCallback().onLog(String.format(WORKING_DIRECTORY_FORMAT, H2CO3GameHelper.getGameDirectory()));
                 bridge.chdir(H2CO3GameHelper.getGameDirectory());
 
                 // launch game
@@ -327,7 +334,7 @@ public class H2CO3LauncherHelper {
                 setupGraphicAndSoundEngine(context, bridge);
 
                 // set working directory
-                bridge.getCallback().onLog("Working directory: " + H2CO3GameHelper.getGameDirectory());
+                bridge.getCallback().onLog(String.format(WORKING_DIRECTORY_FORMAT, H2CO3GameHelper.getGameDirectory()));
                 bridge.chdir(H2CO3GameHelper.getGameDirectory());
 
                 // launch jar executor
@@ -359,7 +366,7 @@ public class H2CO3LauncherHelper {
                 setUpJavaRuntime(context, bridge);
 
                 // set working directory
-                bridge.getCallback().onLog("Working directory: " + H2CO3GameHelper.getGameDirectory());
+                bridge.getCallback().onLog(String.format(WORKING_DIRECTORY_FORMAT, H2CO3GameHelper.getGameDirectory()));
                 bridge.chdir(H2CO3GameHelper.getGameDirectory());
 
                 // launch api installer
