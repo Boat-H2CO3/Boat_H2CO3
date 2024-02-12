@@ -35,7 +35,7 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
     private Timer timer;
     private int output = 0;
     private TimerTask systemUiTimerTask;
-    public static IBoat boatInterface;
+    public static IH2CO3Launcher h2co3LauncherInterface;
 
     private final View.OnSystemUiVisibilityChangeListener onSystemUiVisibilityChangeListener = new View.OnSystemUiVisibilityChangeListener() {
         @Override
@@ -108,7 +108,7 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
     }
 
     public void setGrabCursor(boolean isGrabbed) {
-        runOnUiThread(() -> boatInterface.setGrabCursor(isGrabbed));
+        runOnUiThread(() -> h2co3LauncherInterface.setGrabCursor(isGrabbed));
     }
 
     @Override
@@ -123,7 +123,7 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if (boatInterface.dispatchKeyEvent(event)) {
+        if (h2co3LauncherInterface.dispatchKeyEvent(event)) {
             return true;
         }
 
@@ -132,7 +132,7 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
     @Override
     public boolean dispatchGenericMotionEvent(MotionEvent event) {
-        if (boatInterface.dispatchGenericMotionEvent(event)) {
+        if (h2co3LauncherInterface.dispatchGenericMotionEvent(event)) {
             return true;
         }
 
@@ -199,9 +199,9 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         ((H2CO3LauncherActivity) ctx).h2co3LauncherCallback.onExit(code);
     }
 
-    public interface IBoat {
+    public interface IH2CO3Launcher {
 
-        void onActivityCreate(H2CO3LauncherActivity boatActivity);
+        void onActivityCreate(H2CO3LauncherActivity H2CO3LauncherActivity);
 
         void setGrabCursor(boolean isGrabbed);
 

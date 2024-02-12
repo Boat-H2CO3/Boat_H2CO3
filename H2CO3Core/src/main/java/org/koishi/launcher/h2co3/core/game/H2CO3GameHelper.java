@@ -1,8 +1,8 @@
 package org.koishi.launcher.h2co3.core.game;
 
-import static org.koishi.launcher.h2co3.core.H2CO3Tools.getBoatValue;
+import static org.koishi.launcher.h2co3.core.H2CO3Tools.getH2CO3LauncherValue;
 import static org.koishi.launcher.h2co3.core.H2CO3Tools.getH2CO3Value;
-import static org.koishi.launcher.h2co3.core.H2CO3Tools.setBoatValue;
+import static org.koishi.launcher.h2co3.core.H2CO3Tools.setH2CO3LauncherValue;
 import static org.koishi.launcher.h2co3.core.H2CO3Tools.setH2CO3Value;
 
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
@@ -29,11 +29,11 @@ public class H2CO3GameHelper extends HashMap<String, String> {
     }
 
     public static String getJavaPath() {
-        return getBoatValue("h2co3_launcher_java", H2CO3Tools.JAVA_8_PATH, String.class);
+        return getH2CO3LauncherValue("h2co3_launcher_java", H2CO3Tools.JAVA_8_PATH, String.class);
     }
 
     public static void setJavaPath(String path) {
-        setBoatValue("h2co3_launcher_java", path);
+        setH2CO3LauncherValue("h2co3_launcher_java", path);
     }
 
     public static String getGameDirectory() {
@@ -41,7 +41,7 @@ public class H2CO3GameHelper extends HashMap<String, String> {
     }
 
     public static void setGameDirectory(String directory) {
-        setBoatValue("game_directory", directory);
+        setH2CO3Value("game_directory", directory);
     }
 
     public static String getGameAssetsRoot() {
@@ -49,23 +49,23 @@ public class H2CO3GameHelper extends HashMap<String, String> {
     }
 
     public static void setGameAssetsRoot(String assetsRoot) {
-        setBoatValue("game_assets_root", assetsRoot);
+        setH2CO3Value("game_assets_root", assetsRoot);
     }
 
     public static String[] getExtraMinecraftFlags() {
-        return new String[]{getBoatValue("extra_minecraft_flags", "", String.class)};
+        return new String[]{getH2CO3LauncherValue("extra_minecraft_flags", "", String.class)};
     }
 
     public void setExtraMinecraftFlags(String[] minecraftFlags) {
-        setBoatValue("extra_minecraft_flags", minecraftFlags);
+        setH2CO3LauncherValue("extra_minecraft_flags", minecraftFlags);
     }
 
     public static String getGameCurrentVersion() {
-        return getBoatValue("current_version", "null", String.class);
+        return getH2CO3Value("current_version", "null", String.class);
     }
 
     public static void setGameCurrentVersion(String version) {
-        setBoatValue("current_version", version);
+        setH2CO3Value("current_version", version);
     }
 
     public String getRuntimePath() {
@@ -80,32 +80,32 @@ public class H2CO3GameHelper extends HashMap<String, String> {
         return getH2CO3Value("h2co3_home", H2CO3Tools.PUBLIC_FILE_PATH, String.class);
     }
 
-    public void setH2CO3Home(String home) {
-        setBoatValue("h2co3_home", home);
+    public static void setGameAssets(String assets) {
+        setH2CO3Value("game_assets", assets);
     }
 
     public String getBackground() {
         return getH2CO3Value("background", "", String.class);
     }
 
-    public void setBackground(String background) {
-        setBoatValue("background", background);
+    public void setH2CO3Home(String home) {
+        setH2CO3Value("h2co3_home", home);
     }
 
     public String getGameAssets() {
         return getH2CO3Value("game_assets", H2CO3Tools.MINECRAFT_DIR + "/assets/virtual/legacy/", String.class);
     }
 
-    public static void setGameAssets(String assets) {
-        setBoatValue("game_assets", assets);
+    public void setBackground(String background) {
+        setH2CO3Value("background", background);
     }
 
     public String[] getExtraJavaFlags() {
-        return new String[]{getBoatValue("extra_java_flags", "", String.class)};
+        return new String[]{getH2CO3LauncherValue("extra_java_flags", "", String.class)};
     }
 
     public void setExtraJavaFlags(String[] javaFlags) {
-        setBoatValue("extra_java_flags", javaFlags);
+        setH2CO3LauncherValue("extra_java_flags", javaFlags);
     }
 
     public static void setDir(String dir) {

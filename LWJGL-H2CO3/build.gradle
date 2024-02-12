@@ -8,8 +8,8 @@ configurations.default.setCanBeResolved(true)
 
 project.setArchivesBaseName('lwjgl')
 
-def libsDir = "${rootDir}/H2CO3/src/main/assets/app_runtime/boat/lwjgl"
-def boatDir = "${rootDir}/H2CO3/src/main/assets/app_runtime/boat/"
+def libsDir = "${rootDir}/H2CO3/src/main/assets/app_runtime/h2co3Launcher/lwjgl"
+def h2co3LauncherDir = "${rootDir}/H2CO3/src/main/assets/app_runtime/h2co3Launcher/"
 
 project.setLibsDirName(libsDir)
 
@@ -28,7 +28,7 @@ jar {
             attributes 'Manifest-Version': '3.2.4'
         }
         destinationDirectory.set(file(libsDir))
-        File versionFile = file("$boatDir/version")
+        File versionFile = file("$h2co3LauncherDir/version")
         versionFile.write(String.valueOf(new Date().getTime()))
     }
 }

@@ -49,7 +49,7 @@ public class H2CO3Tools {
     public static String JAVA_11_PATH;
     public static String JAVA_17_PATH;
     public static String JAVA_21_PATH;
-    public static String BOAT_LIBRARY_DIR;
+    private static final String ARGS_FILE_PATH = H2CO3Tools.LOG_DIR + "/h2co3Launcher_args.txt";
 
     public static String FILES_DIR;
     public static String PLUGIN_DIR;
@@ -90,12 +90,11 @@ public class H2CO3Tools {
     public static String GL_VIRGL;
     private static final String H2CO3_LIB_DIR = H2CO3Tools.RUNTIME_DIR + "/h2co3_launcher";
     public static final String LOG_FILE_PATH = H2CO3Tools.LOG_DIR + "/minecraft_log.log";
-    private static final String ARGS_FILE_PATH = H2CO3Tools.LOG_DIR + "/boat_args.txt";
+    public static String H2CO3LAUNCHER_LIBRARY_DIR;
     private static final String SERVICE_LOG_FILE_PATH = H2CO3Tools.LOG_DIR + "/h2co3_service_log.txt";
     private static final String API_INSTALLER_LOG_FILE_PATH = H2CO3Tools.LOG_DIR + "/h2co3_api_installer_log.txt";
     private static final String VIRGL_TEST_SOCKET_NAME = ".virgl_test";
     private static final String VIRGL_TEST_SOCKET_PATH = H2CO3Tools.CACHE_DIR + "/" + VIRGL_TEST_SOCKET_NAME;
-
 
     @SuppressLint("SdCardPath")
     public static void loadPaths(Context context) {
@@ -115,8 +114,8 @@ public class H2CO3Tools {
         JAVA_11_PATH = JAVA_PATH + "/jre_11";
         JAVA_17_PATH = JAVA_PATH + "/jre_17";
         JAVA_21_PATH = JAVA_PATH + "/jre_21";
-        BOAT_LIBRARY_DIR = RUNTIME_DIR + "/boat";
-        PLUGIN_DIR = RUNTIME_DIR + "/boat/plugin";
+        H2CO3LAUNCHER_LIBRARY_DIR = RUNTIME_DIR + "/h2co3Launcher";
+        PLUGIN_DIR = RUNTIME_DIR + "/h2co3Launcher/plugin";
         CACIOCAVALLO_8_DIR = PLUGIN_DIR + "/caciocavallo";
         CACIOCAVALLO_11_DIR = PLUGIN_DIR + "/caciocavallo11";
         CACIOCAVALLO_17_DIR = PLUGIN_DIR + "/caciocavallo17";
@@ -164,7 +163,7 @@ public class H2CO3Tools {
         init(JAVA_11_PATH);
         init(JAVA_17_PATH);
         init(JAVA_21_PATH);
-        init(BOAT_LIBRARY_DIR);
+        init(H2CO3LAUNCHER_LIBRARY_DIR);
         init(FILES_DIR);
         init(PLUGIN_DIR);
         init(H2CO3_LIBRARY_DIR);
@@ -184,12 +183,12 @@ public class H2CO3Tools {
         }
     }
 
-    public static <T> T getBoatValue(String key, T defaultValue, Class<T> type) {
+    public static <T> T getH2CO3LauncherValue(String key, T defaultValue, Class<T> type) {
         return getValue(H2CO3_SETTING_DIR + "/" + H2CO3_LAUNCHER_CONFIG_NAME, key, defaultValue, type);
     }
 
-    public static void setBoatValue(String key, java.io.Serializable value) {
-        String configFile = getBoatValue("usesGlobal", false, Boolean.class) ? getH2CO3Value("currentVersion", H2CO3_SETTING_DIR, String.class) + "/" + H2CO3_LAUNCHER_CONFIG_NAME : H2CO3_SETTING_DIR + "/" + H2CO3_LAUNCHER_CONFIG_NAME;
+    public static void setH2CO3LauncherValue(String key, java.io.Serializable value) {
+        String configFile = getH2CO3Value("usesGlobal", false, Boolean.class) ? getH2CO3Value("currentVersion", H2CO3_SETTING_DIR, String.class) + "/" + H2CO3_LAUNCHER_CONFIG_NAME : H2CO3_SETTING_DIR + "/" + H2CO3_LAUNCHER_CONFIG_NAME;
         setValue(configFile, key, value);
     }
 

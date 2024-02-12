@@ -38,7 +38,6 @@ import org.koishi.launcher.h2co3.launcher.H2CO3LauncherHelper;
 import org.koishi.launcher.h2co3.launcher.R;
 import org.koishi.launcher.h2co3.resources.component.LogView;
 import org.koishi.launcher.h2co3.utils.launch.MCOptionUtils;
-import org.koishi.launcher.h2co3.utils.launch.boat.VirGLService;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,15 +59,15 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
     public static H2CO3LauncherHelper.LogReceiver logReceiver;
 
     public static void attachControllerInterface() {
-        H2CO3LauncherClientActivity.boatInterface = new H2CO3LauncherClientActivity.IBoat() {
+        H2CO3LauncherClientActivity.h2co3LauncherInterface = new IH2CO3Launcher() {
             private H2CO3VirtualController virtualController;
             private HardwareController hardwareController;
             private Timer timer;
 
             @Override
-            public void onActivityCreate(H2CO3LauncherActivity boatActivity) {
-                virtualController = new H2CO3VirtualController((H2CO3ControlClient) boatActivity, KEYMAP_TO_X);
-                hardwareController = new HardwareController((H2CO3ControlClient) boatActivity, KEYMAP_TO_X);
+            public void onActivityCreate(H2CO3LauncherActivity H2CO3LauncherActivity) {
+                virtualController = new H2CO3VirtualController((H2CO3ControlClient) H2CO3LauncherActivity, KEYMAP_TO_X);
+                hardwareController = new HardwareController((H2CO3ControlClient) H2CO3LauncherActivity, KEYMAP_TO_X);
             }
 
             @Override
@@ -194,7 +193,7 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
 
     private void initUI() {
         init();
-        boatInterface.onActivityCreate(this);
+        h2co3LauncherInterface.onActivityCreate(this);
         dialog = new MaterialAlertDialogBuilder(H2CO3LauncherClientActivity.this);
     }
 
@@ -250,15 +249,10 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
 
     private void startGame(CommandBuilder args) {
         String javaPath = H2CO3GameHelper.getJavaPath();
-        String boatRenderer = H2CO3Tools.GL_GL114;
+        String h2co3LauncherRenderer = H2CO3Tools.GL_GL114;
 
         MinecraftVersion mcVersion = MinecraftVersion.fromDirectory(new File(H2CO3GameHelper.getGameCurrentVersion()));
         boolean isHighVersion = mcVersion.minimumLauncherVersion >= 21;
-    }
-
-    private void stopVirGLService() {
-        Intent virGLService = new Intent(H2CO3LauncherClientActivity.this, VirGLService.class);
-        stopService(virGLService);
     }
 
     @Override

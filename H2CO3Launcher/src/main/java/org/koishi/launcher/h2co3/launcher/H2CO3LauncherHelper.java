@@ -353,7 +353,7 @@ public class H2CO3LauncherHelper {
         H2CO3Tools.loadPaths(context);
         H2CO3GameHelper.setRender(H2CO3Tools.GL_GL114);
         MinecraftVersion version = MinecraftVersion.fromDirectory(new File(H2CO3GameHelper.getGameCurrentVersion()));
-        String lwjglPath = H2CO3Tools.RUNTIME_DIR + "/boat/lwjgl";
+        String lwjglPath = H2CO3Tools.RUNTIME_DIR + "/h2co3Launcher/lwjgl";
         String javaPath = getJavaPath();
         boolean highVersion = version.minimumLauncherVersion >= 21;
         String classPath;

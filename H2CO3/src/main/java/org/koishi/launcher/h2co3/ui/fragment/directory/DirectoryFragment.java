@@ -35,8 +35,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.adapter.BaseRecycleAdapter;
-import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
+import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
 import org.koishi.launcher.h2co3.core.utils.data.DbDao;
 import org.koishi.launcher.h2co3.core.utils.file.AssetsUtils;
 import org.koishi.launcher.h2co3.resources.component.H2CO3Fragment;
@@ -60,7 +60,7 @@ public class DirectoryFragment extends H2CO3Fragment {
     private LinearLayout page;
     private FloatingActionButton dir, ver;
     private SearchDirAdapter mAdapter;
-    private String getBoatDir;
+    private String getH2CO3Dir;
     private DbDao mDbDao;
     @SuppressLint("HandlerLeak")
     private final Handler han = new Handler(Looper.getMainLooper()) {
@@ -71,7 +71,7 @@ public class DirectoryFragment extends H2CO3Fragment {
                 case 0 -> mDialog.create().dismiss();
                 case 1 -> {
                     mDialog.create().dismiss();
-                    mDbDao.insertData(getBoatDir);
+                    mDbDao.insertData(getH2CO3Dir);
                     mAdapter.updata(mDbDao.queryData(""));
                     Snackbar.make(page, getResources().getString(org.koishi.launcher.h2co3.resources.R.string.ver_add_done), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
@@ -213,14 +213,14 @@ public class DirectoryFragment extends H2CO3Fragment {
                     File f = new File(et.getText().toString().trim());
                     if (f.exists()) {
                         if (f.isDirectory()) {
-                            getBoatDir = et.getText().toString();
+                            getH2CO3Dir = et.getText().toString();
                             newDir();
                         } else {
                             Snackbar.make(page, getResources().getString(org.koishi.launcher.h2co3.resources.R.string.ver_not_dir), Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
                     } else {
-                        getBoatDir = et.getText().toString();
+                        getH2CO3Dir = et.getText().toString();
                         newDir();
                     }
                 } else {
@@ -241,7 +241,7 @@ public class DirectoryFragment extends H2CO3Fragment {
     public void newDir() {
         new Thread(() -> {
             try {
-                AssetsUtils.extractZipFromAssets(requireActivity(), "pack.zip", getBoatDir);
+                AssetsUtils.extractZipFromAssets(requireActivity(), "pack.zip", getH2CO3Dir);
                 han.sendEmptyMessage(1);
             } catch (IOException e) {
                 Snackbar.make(page, getResources().getString(org.koishi.launcher.h2co3.resources.R.string.ver_not_right_dir) + e, Snackbar.LENGTH_LONG)

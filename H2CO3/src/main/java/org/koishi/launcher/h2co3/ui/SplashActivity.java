@@ -16,9 +16,8 @@ import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 
 import org.koishi.launcher.h2co3.R;
-import org.koishi.launcher.h2co3.core.game.H2CO3Auth;
-import org.koishi.launcher.h2co3.core.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
+import org.koishi.launcher.h2co3.core.game.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
@@ -37,7 +36,7 @@ public class SplashActivity extends H2CO3Activity {
     private final Handler handler = new Handler(Looper.getMainLooper());
     public LinearLayout splash;
     public TextView splashCheck;
-    private boolean boat = false;
+    private boolean h2co3Launcher = false;
     private boolean h2co3_app = false;
     private boolean java8 = false;
     private boolean java11 = false;
@@ -125,7 +124,7 @@ public class SplashActivity extends H2CO3Activity {
     }
 
     private boolean isLatest() {
-        return boat && h2co3_app && java8 && java11 && java17 && java21 ;
+        return h2co3Launcher && h2co3_app && java8 && java11 && java17 && java21;
     }
 
     private void check() {
@@ -136,7 +135,7 @@ public class SplashActivity extends H2CO3Activity {
 
     private void initState() {
         try {
-            boat = RuntimeUtils.isLatest(H2CO3Tools.BOAT_LIBRARY_DIR, "/assets/app_runtime/boat");
+            h2co3Launcher = RuntimeUtils.isLatest(H2CO3Tools.H2CO3LAUNCHER_LIBRARY_DIR, "/assets/app_runtime/h2co3Launcher");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -174,11 +173,11 @@ public class SplashActivity extends H2CO3Activity {
         }
 
         installing = true;
-        if (!boat) {
+        if (!h2co3Launcher) {
             new Thread(() -> {
                 try {
-                    RuntimeUtils.install(SplashActivity.this, H2CO3Tools.BOAT_LIBRARY_DIR, "app_runtime/boat");
-                    boat = true;
+                    RuntimeUtils.install(SplashActivity.this, H2CO3Tools.H2CO3LAUNCHER_LIBRARY_DIR, "app_runtime/h2co3Launcher");
+                    h2co3Launcher = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
