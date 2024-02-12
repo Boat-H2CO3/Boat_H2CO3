@@ -160,19 +160,19 @@ public class H2CO3LauncherBridge implements Serializable {
     }
 
     public static void pushEventMouseButton(int button, boolean press) {
-        H2CO3LauncherBridge.pushEvent(System.nanoTime(), press ? ButtonPress : ButtonRelease, button, 0);
+        pushEvent(System.nanoTime(), press ? ButtonPress : ButtonRelease, button, 0);
     }
 
     public static void pushEventPointer(int x, int y) {
-        H2CO3LauncherBridge.pushEvent(System.nanoTime(), MotionNotify, x, y);
+        pushEvent(System.nanoTime(), MotionNotify, x, y);
     }
 
     public static void pushEventKey(int keyCode, int keyChar, boolean press) {
-        H2CO3LauncherBridge.pushEvent(System.nanoTime(), press ? KeyPress : KeyRelease, keyCode, keyChar);
+        pushEvent(System.nanoTime(), press ? KeyPress : KeyRelease, keyCode, keyChar);
     }
 
     public void pushEventWindow(int width, int height) {
-        H2CO3LauncherBridge.pushEvent(System.nanoTime(), ConfigureNotify, width, height);
+        pushEvent(System.nanoTime(), ConfigureNotify, width, height);
     }
 
     public void handleWindow() {

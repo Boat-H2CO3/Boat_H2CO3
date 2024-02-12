@@ -12,14 +12,10 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
-import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridge;
 import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridgeCallBack;
-import org.koishi.launcher.h2co3.core.utils.CommandBuilder;
-import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 
-import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
@@ -97,17 +93,11 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         }
     }
 
-    public void startGame(Context context, final String javaPath, final String home, final boolean highVersion, final CommandBuilder args, String renderer, String gameDir) {
-        executorService.execute(() -> {
-            //H2CO3LauncherHelper.launchMinecraft(context,);
-        });
-    }
-
     public void setH2CO3LauncherCallback(H2CO3LauncherBridgeCallBack callback) {
         this.h2co3LauncherCallback = callback;
     }
 
-    public abstract void onClick(View p1);
+    public abstract void onClick(View view);
 
     @Override
     protected void onPostResume() {

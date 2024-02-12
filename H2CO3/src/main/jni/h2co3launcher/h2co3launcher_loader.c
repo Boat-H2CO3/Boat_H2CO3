@@ -1,7 +1,3 @@
-//
-// Created by Tungsten on 2022/10/12.
-//
-
 #include <fcntl.h>
 #include <unistd.h>
 #include <jni.h>

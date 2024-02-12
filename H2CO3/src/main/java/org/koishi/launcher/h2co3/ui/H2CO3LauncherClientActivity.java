@@ -44,14 +44,13 @@ import org.koishi.launcher.h2co3.utils.launch.boat.VirGLService;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.logging.Level;
 
 public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implements H2CO3ControlClient, TextureView.SurfaceTextureListener {
 
-    private final static int CURSOR_SIZE = 16; //dp
-    private final int[] grabbedPointer = new int[]{999, 89999};
+    private static final int CURSOR_SIZE = 16; //dp
+    private static final int[] grabbedPointer = new int[]{999, 89999};
     private MaterialAlertDialogBuilder dialog;
     private H2CO3LauncherBridge launcherLib;
     private boolean grabbed = false;
@@ -59,7 +58,7 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
     private LogView mLogView;
     private int screenWidth;
     private int screenHeight;
-    int scaleFactor = 1;
+    private int scaleFactor = 1;
     public static H2CO3LauncherHelper.LogReceiver logReceiver;
 
     public static void attachControllerInterface() {
@@ -126,7 +125,7 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
         baseLayout.addView(mLogView);
         this.addView(cursorIcon);
         initUI();
-        launcherLib = launchMinecraft(this,screenWidth,screenHeight);
+        launcherLib = launchMinecraft(this, screenWidth, screenHeight);
         h2co3LauncherCallback = launcherLib.getCallback();
         h2co3LauncherCallback = new H2CO3LauncherBridgeCallBack() {
             @Override
@@ -212,7 +211,7 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
         launcherLib.setSurfaceDestroyed(false);
         int width = screenWidth;
         int height = screenHeight;
-        configureSurfaceTexture(surfaceTexture,width,height);
+        configureSurfaceTexture(surfaceTexture, width, height);
         surfaceTexture.setDefaultBufferSize(width, height);
         launcherLib.execute(new Surface(surfaceTexture), h2co3LauncherCallback);
         launcherLib.pushEventWindow(width, height);
@@ -312,9 +311,8 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
     @Override
     public void setPointerInc(int xInc, int yInc) {
         if (!grabbed) {
-            int x, y;
-            x = grabbedPointer[0] + xInc;
-            y = grabbedPointer[1] + yInc;
+            int x = grabbedPointer[0] + xInc;
+            int y = grabbedPointer[1] + yInc;
             if (x >= 0 && x <= screenWidth)
                 grabbedPointer[0] += xInc;
             if (y >= 0 && y <= screenHeight)
@@ -359,12 +357,12 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
 
     @Override
     public int[] getGrabbedPointer() {
-        return this.grabbedPointer;
+        return grabbedPointer.clone();
     }
 
     @Override
     public int[] getLoosenPointer() {
-        return this.getPointer();
+        return getPointer().clone();
     }
 
     @Override
@@ -379,13 +377,13 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
 
     @Override
     public boolean isGrabbed() {
-        return this.grabbed;
+        return grabbed;
     }
 
     @Override
     public void setGrabCursor(boolean isGrabbed) {
         super.setGrabCursor(isGrabbed);
-        this.grabbed = isGrabbed;
+        grabbed = isGrabbed;
         if (!isGrabbed) {
             setPointer(grabbedPointer[0], grabbedPointer[1]);
             cursorIcon.setVisibility(View.VISIBLE);
