@@ -422,13 +422,13 @@ GLFWbool _glfwCreateContextEGL(_GLFWwindow *window,
 //////////////////////////////////////////////////////////////////////////
 
 GLFWAPI EGLDisplay glfwGetEGLDisplay(void) {
-    _GLFW_REQUIRE_INIT_OR_RETURN(EGL_NO_DISPLAY);
+    _GLFW_REQUIRE_INIT_OR_RETURN(EGL_NO_DISPLAY)
     return _glfw.egl.display;
 }
 
 GLFWAPI EGLContext glfwGetEGLContext(GLFWwindow *handle) {
     _GLFWwindow *window = (_GLFWwindow *) handle;
-    _GLFW_REQUIRE_INIT_OR_RETURN(EGL_NO_CONTEXT);
+    _GLFW_REQUIRE_INIT_OR_RETURN(EGL_NO_CONTEXT)
 
     if (window->context.client == GLFW_NO_API) {
         _glfwInputError(GLFW_NO_WINDOW_CONTEXT, NULL);
@@ -440,7 +440,7 @@ GLFWAPI EGLContext glfwGetEGLContext(GLFWwindow *handle) {
 
 GLFWAPI EGLSurface glfwGetEGLSurface(GLFWwindow *handle) {
     _GLFWwindow *window = (_GLFWwindow *) handle;
-    _GLFW_REQUIRE_INIT_OR_RETURN(EGL_NO_SURFACE);
+    _GLFW_REQUIRE_INIT_OR_RETURN(EGL_NO_SURFACE)
 
     if (window->context.client == GLFW_NO_API) {
         _glfwInputError(GLFW_NO_WINDOW_CONTEXT, NULL);

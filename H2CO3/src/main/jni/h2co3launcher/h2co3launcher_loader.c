@@ -15,6 +15,8 @@
 #define PROGNAME "java"
 #define LAUNCHER_NAME "openjdk"
 
+#define LOG_TAG "H2CO3Launcher"
+
 static char *const_progname = PROGNAME;
 static const char *const_launcher = LAUNCHER_NAME;
 static const char **const_jargs = NULL;
@@ -97,7 +99,7 @@ static void *logger_thread() {
         memset(buffer, '\0', sizeof(buffer));
         _s = read(h2co3LauncherFd[0], buffer, sizeof(buffer) - 1);
         if (_s < 0) {
-            __android_log_print(ANDROID_LOG_ERROR, "H2CO3Launcher", "Failed to read log!");
+            __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to read log!");
             close(h2co3LauncherFd[0]);
             close(h2co3LauncherFd[1]);
             (*vm)->DetachCurrentThread(vm);
@@ -124,23 +126,23 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_redirectStdio(JNIEn
     setvbuf(stdout, 0, _IOLBF, 0);
     setvbuf(stderr, 0, _IONBF, 0);
     if (pipe(h2co3LauncherFd) < 0) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3Launcher", "Failed to create log pipe!");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to create log pipe!");
         return 1;
     }
     if (dup2(h2co3LauncherFd[1], STDOUT_FILENO) != STDOUT_FILENO &&
         dup2(h2co3LauncherFd[1], STDERR_FILENO) != STDERR_FILENO) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3Launcher", "failed to redirect stdio!");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "failed to redirect stdio!");
         return 2;
     }
     jclass bridge = (*env)->FindClass(env,
                                       "org/koishi/launcher/h2co3/core/game/H2CO3LauncherBridge");
     log_method = (*env)->GetMethodID(env, bridge, "receiveLog", "(Ljava/lang/String;)V");
     if (!log_method) {
-        __android_log_print(ANDROID_LOG_ERROR, "H2CO3Launcher", "Failed to find receive method!");
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to find receive method!");
         return 4;
     }
     h2co3Launcher->logFile = fdopen(h2co3LauncherFd[1], "a");
-    H2CO3_INTERNAL_LOG("Log pipe ready.");
+    __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, "Log pipe ready.");
     (*env)->GetJavaVM(env, &log_pipe_jvm);
     int result = pthread_create(&logger, 0, logger_thread, 0);
     if (result != 0) {
@@ -153,14 +155,13 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_redirectStdio(JNIEn
 JNIEXPORT jint JNICALL
 Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_chdir(JNIEnv *env, jobject jobject,
                                                                    jstring path) {
-    char const *dir = (*env)->GetStringUTFChars(env, path, 0);
+    const char *dir = (*env)->GetStringUTFChars(env, path, 0);
 
     int b = chdir(dir);
 
     (*env)->ReleaseStringUTFChars(env, path, dir);
 
-    // 添加日志输出语句
-    __android_log_print(ANDROID_LOG_DEBUG, "H2CO3LauncherBridge", "chdir: %s, result: %d", dir, b);
+    __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, "chdir: %s, result: %d", dir, b);
 
     return b;
 }
@@ -168,10 +169,10 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_chdir(JNIEnv *env, 
 JNIEXPORT void JNICALL
 Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_setenv(JNIEnv *env, jobject jobject,
                                                                     jstring str1, jstring str2) {
-    char const *name = (*env)->GetStringUTFChars(env, str1, 0);
-    char const *value = (*env)->GetStringUTFChars(env, str2, 0);
+    const char *name = (*env)->GetStringUTFChars(env, str1, 0);
+    const char *value = (*env)->GetStringUTFChars(env, str2, 0);
 
-    __android_log_print(ANDROID_LOG_DEBUG, "H2CO3LauncherBridge",
+    __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG,
                         "Setting environment variable: %s=%s", name, value);
 
     setenv(name, value, 1);
@@ -186,14 +187,14 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_dlopen(JNIEnv *env,
     dlerror();
 
     int ret = 0;
-    char const *lib_name = (*env)->GetStringUTFChars(env, str, 0);
+    const char *lib_name = (*env)->GetStringUTFChars(env, str, 0);
 
     void *handle;
     dlerror();
     handle = dlopen(lib_name, RTLD_GLOBAL | RTLD_LAZY);
 
     char *error = dlerror();
-    __android_log_print(error == NULL ? ANDROID_LOG_INFO : ANDROID_LOG_ERROR, "H2CO3Launcher",
+    __android_log_print(error == NULL ? ANDROID_LOG_INFO : ANDROID_LOG_ERROR, LOG_TAG,
                         "loading %s (error = %s)", lib_name, error);
 
     if (handle == NULL) {
@@ -214,13 +215,13 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_setLdLibraryPath(JN
     if (updateLdLibPath == NULL) {
         updateLdLibPath = dlsym(libdl_handle, "__loader_android_update_LD_LIBRARY_PATH");
         char *error = dlerror();
-        __android_log_print(error == NULL ? ANDROID_LOG_INFO : ANDROID_LOG_ERROR, "H2CO3Launcher",
+        __android_log_print(error == NULL ? ANDROID_LOG_INFO : ANDROID_LOG_ERROR, LOG_TAG,
                             "loading %s (error = %s)", "libdl.so", error);
     }
     android_update_LD_LIBRARY_PATH = (android_update_LD_LIBRARY_PATH_t) updateLdLibPath;
     const char *ldLibPathUtf = (*env)->GetStringUTFChars(env, ldLibraryPath, 0);
 
-    __android_log_print(ANDROID_LOG_DEBUG, "H2CO3LauncherBridge",
+    __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG,
                         "setLdLibraryPath: ldLibraryPath=%s", ldLibPathUtf);
 
     android_update_LD_LIBRARY_PATH(ldLibPathUtf);
@@ -230,7 +231,7 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_setLdLibraryPath(JN
 void (*old_exit)(int code);
 
 void custom_exit(int code) {
-    __android_log_print(code == 0 ? ANDROID_LOG_INFO : ANDROID_LOG_ERROR, "H2CO3Launcher",
+    __android_log_print(code == 0 ? ANDROID_LOG_INFO : ANDROID_LOG_ERROR, LOG_TAG,
                         "JVM exit with code %d.", code);
     JNIEnv *env;
     (*exitTrap_jvm)->AttachCurrentThread(exitTrap_jvm, &env, NULL);
@@ -280,7 +281,7 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_setupJLI(JNIEnv *en
                           const char *, const char *, const char *, jboolean, jboolean, jboolean,
                           jint)) dlsym(handle, "JLI_Launch");
 
-    __android_log_print(ANDROID_LOG_DEBUG, "H2CO3LauncherBridge",
+    __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG,
                         "setupJLI: handle=%p, JLI_Launch=%p", handle, JLI_Launch);
 }
 
@@ -298,7 +299,7 @@ JNIEXPORT jint JNICALL Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBri
     }
 
     for (int i = 0; i < argc; i++) {
-        __android_log_print(ANDROID_LOG_DEBUG, "H2CO3LauncherBridge", "jliLaunch: argv[%d]=%s", i, argv[i]);
+        __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, "jliLaunch: argv[%d]=%s", i, argv[i]);
     }
 
     return JLI_Launch(argc, argv,

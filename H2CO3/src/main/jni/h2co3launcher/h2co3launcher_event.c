@@ -20,6 +20,7 @@ void EventQueue_add(EventQueue *queue, H2CO3LauncherEvent *event) {
     if (e == NULL) {
         return;
     }
+    memset(e, 0, sizeof(QueueElement));
     if (queue->count > 0) {
         queue->tail->next = e;
         queue->tail = e;
@@ -139,9 +140,9 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_getPointer(JNIEnv *
 
 JNIEXPORT void JNICALL
 Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_pushEvent(JNIEnv *env, jclass clazz,
-                                                                   jlong time,
-                                                                   jint type, jint p1,
-                                                                   jint p2) {
+                                                                       jlong time,
+                                                                       jint type, jint p1,
+                                                                       jint p2) {
     if (!h2co3Launcher->has_event_pipe) {
         return;
     }
