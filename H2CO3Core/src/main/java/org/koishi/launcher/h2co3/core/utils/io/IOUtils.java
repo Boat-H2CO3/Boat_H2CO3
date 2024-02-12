@@ -1,7 +1,9 @@
 package org.koishi.launcher.h2co3.core.utils.io;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -30,7 +32,7 @@ public final class IOUtils {
     public static String readFullyAsStringWithClosing(InputStream stream) throws IOException {
         ByteArrayOutputStream result = new ByteArrayOutputStream(Math.max(stream.available(), 32));
         copyTo(stream, result);
-        return result.toString(StandardCharsets.UTF_8);
+        return result.toString("UTF-8");
     }
 
     /**
@@ -53,7 +55,7 @@ public final class IOUtils {
     }
 
     public static String readFullyAsString(InputStream stream) throws IOException {
-        return readFully(stream).toString(StandardCharsets.UTF_8);
+        return readFully(stream).toString("UTF-8");
     }
 
     public static void copyTo(InputStream src, OutputStream dest) throws IOException {
