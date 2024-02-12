@@ -1,7 +1,9 @@
 package org.koishi.launcher.h2co3.resources.component;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -14,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.MotionEventCompat;
@@ -21,6 +24,7 @@ import androidx.core.widget.NestedScrollView;
 
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
 import org.koishi.launcher.h2co3.resources.R;
+import org.koishi.launcher.h2co3.resources.component.LineTextView;
 
 public class LogView extends NestedScrollView {
 
@@ -33,7 +37,10 @@ public class LogView extends NestedScrollView {
     private float mScaleFactor = 1f;
     private float mLastTouchX;
     private float mLastTouchY;
+    private float mLastRawX;
+    private float mLastRawY;
 
+    @SuppressLint("ClickableViewAccessibility")
     public LogView(@NonNull Context context) {
         super(context);
         this.setBackground(getViewBackground(context));
@@ -54,75 +61,48 @@ public class LogView extends NestedScrollView {
         mTextView.setTextSize(DisplayUtils.getPxFromSp(context, 3.2F));
         mTextView.setLineSpacing(0, 1f);
 
-        setOnTouchListener(new OnTouchListener() {
-            private float mLastRawX;
-            private float mLastRawY;
-            private boolean mIsSingleTouch = true;
+        setOnTouchListener((v, event) -> {
+            mScaleGestureDetector.onTouchEvent(event);
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mScaleGestureDetector.onTouchEvent(event);
-
-                int action = MotionEventCompat.getActionMasked(event);
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN: {
-                        mLastTouchX = event.getX();
-                        mLastTouchY = event.getY();
-                        mLastRawX = event.getRawX();
-                        mLastRawY = event.getRawY();
-                        mIsSingleTouch = true;
-
-                        // 阻止父级ScrollView拦截滑动事件
-                        requestDisallowInterceptTouchEvent(true);
-                        break;
-                    }
-
-                    case MotionEvent.ACTION_MOVE: {
-                        if (event.getPointerCount() > 1) {
-                            mIsSingleTouch = false;
-                            break;
-                        }
-
-                        if (!mIsSingleTouch) {
-                            break;
-                        }
-
-                        final float x = event.getX();
-                        final float y = event.getY();
-                        final float rawX = event.getRawX();
-                        final float rawY = event.getRawY();
-
-                        final float dx = (rawX - mLastRawX) / mScaleFactor;
-                        final float dy = (rawY - mLastRawY) / mScaleFactor;
-
-                        mMatrix.postTranslate(dx, dy);
-
-                        mLastTouchX = x;
-                        mLastTouchY = y;
-                        mLastRawX = rawX;
-                        mLastRawY = rawY;
-
-                        float[] matrixValues = new float[9];
-                        mMatrix.getValues(matrixValues);
-                        float translateX = matrixValues[Matrix.MTRANS_X];
-                        float translateY = matrixValues[Matrix.MTRANS_Y];
-
-                        mTextView.setTranslationX(translateX);
-                        mTextView.setTranslationY(translateY);
-                        break;
-                    }
-
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL: {
-                        requestDisallowInterceptTouchEvent(false);
-                        break;
-                    }
+            int action = MotionEventCompat.getActionMasked(event);
+            switch (action) {
+                case MotionEvent.ACTION_DOWN: {
+                    mLastTouchX = event.getX();
+                    mLastTouchY = event.getY();
+                    mLastRawX = event.getRawX();
+                    mLastRawY = event.getRawY();
+                    break;
                 }
 
-                return true;
-            }
-        });
+                case MotionEvent.ACTION_MOVE: {
+                    final float x = event.getX();
+                    final float y = event.getY();
+                    final float rawX = event.getRawX();
+                    final float rawY = event.getRawY();
 
+                    final float dx = rawX - mLastRawX;
+                    final float dy = rawY - mLastRawY;
+
+                    mMatrix.postTranslate(dx, dy);
+
+                    mLastTouchX = x;
+                    mLastTouchY = y;
+                    mLastRawX = rawX;
+                    mLastRawY = rawY;
+
+                    float[] matrixValues = new float[9];
+                    mMatrix.getValues(matrixValues);
+                    float translateX = matrixValues[Matrix.MTRANS_X];
+                    float translateY = matrixValues[Matrix.MTRANS_Y];
+
+                    mTextView.setTranslationX(translateX);
+                    mTextView.setTranslationY(translateY);
+                    break;
+                }
+            }
+
+            return true;
+        });
     }
 
     public void appendLog(String str) {

@@ -1,6 +1,4 @@
-//
-// Created by mio on 2023/7/9.
-//
+
 
 #include "h2co3Launcher_hook.h"
 #include <dlfcn.h>
@@ -21,16 +19,15 @@ hooked_ProcessImpl_forkAndExec(JNIEnv *env, jobject process, jint mode, jbyteArr
                                jboolean redirectErrorStream) {
     char *pProg = (char *) ((*env)->GetByteArrayElements(env, prog, NULL));
 
-    if (strcmp(basename(pProg), "xdg-open") != 0) {
+    if (basename(pProg) != "xdg-open") {
         (*env)->ReleaseByteArrayElements(env, prog, (jbyte *) pProg, 0);
         return orig_ProcessImpl_forkAndExec(env, process, mode, helperpath, prog, argBlock, argc,
                                             envBlock, envc, dir, std_fds, redirectErrorStream);
     }
     (*env)->ReleaseByteArrayElements(env, prog, (jbyte *) pProg, 0);
 
-    long len = (*env)->GetArrayLength(env, argBlock);
-    const char *cs[len];
-    (*env)->GetByteArrayRegion(env, argBlock, 0, len, (jbyte *) cs);
+    jsize len = (*env)->GetArrayLength(env, argBlock);
+    jbyte *cs = (*env)->GetByteArrayElements(env, argBlock, NULL);
     (*env)->DeleteLocalRef(env, argBlock);
 
     H2CO3_INTERNAL_LOG("forkAndExec:%s", cs);

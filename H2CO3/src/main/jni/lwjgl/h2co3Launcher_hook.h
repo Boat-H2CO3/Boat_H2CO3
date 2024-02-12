@@ -1,6 +1,4 @@
-//
-// Created by mio on 2023/7/9.
-//
+
 
 #ifndef H2CO3Launcher_HOOK_H
 #define H2CO3Launcher_HOOK_H

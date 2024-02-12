@@ -34,7 +34,7 @@ import java.util.logging.Level;
 public class H2CO3LauncherHelper {
 
     private static final String TAG = H2CO3LauncherHelper.class.getSimpleName();
-    private static final String TASK_TITLE_FORMAT = "==================== %s ====================";
+    private static final String TASK_TITLE_FORMAT = "------------------- %s -------------------";
     private static final String ARCHITECTURE_FORMAT = "Architecture: %s";
     private static final String CPU_FORMAT = "CPU: %s";
     private static final String UNSUPPORTED_ARCHITECTURE_ERROR = "Unsupported architecture!";
