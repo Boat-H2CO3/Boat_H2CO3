@@ -23,7 +23,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -511,7 +510,6 @@ public class H2CO3LauncherHelper {
 
     public interface LogReceiver {
         void pushLog(String log);
-
         String getLogs();
     }
 

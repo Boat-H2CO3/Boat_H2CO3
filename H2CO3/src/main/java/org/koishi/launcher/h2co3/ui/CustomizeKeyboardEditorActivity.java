@@ -29,15 +29,17 @@ import java.util.TimerTask;
 
 public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements View.OnSystemUiVisibilityChangeListener, View.OnClickListener, DrawerLayout.DrawerListener, CallCustomizeKeyboard, H2CO3ControlClient {
 
-    private final static int SYSTEM_UI_HIDE_DELAY_MS = 3000;
-    private final int[] pointer = new int[]{0, 0};
+    private static final int SYSTEM_UI_HIDE_DELAY_MS = 3000;
+    private static final int BLUR_RADIUS = 10;
+
     private Toolbar mToolbar;
-    private ViewGroup mLayout_main;
+    private final int[] pointer = new int[]{0, 0};
     private Controller mController;
     private boolean isGrabbed;
     private TimerTask systemUiTimerTask;
     private Timer mTimer;
     private Float viewPosY;
+    private ViewGroup mLayoutMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,6 @@ public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements Vi
         setContentView(R.layout.activity_ckbe);
 
         //初始化
-        int screenWidth = this.getResources().getDisplayMetrics().widthPixels;
-        int screenHeight = this.getResources().getDisplayMetrics().heightPixels;
         initUI();
 
         //窗口
@@ -87,9 +87,8 @@ public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements Vi
     }
 
     private void initUI() {
-
         mToolbar = findViewById(R.id.ckbe_toolbar);
-        mLayout_main = findViewById(R.id.ckbe_layout_main);
+        mLayoutMain = findViewById(R.id.ckbe_layout_main);
         DrawerLayout mDrawerLayout = findViewById(R.id.ckbe_drawerlayout);
         AppCompatToggleButton toggleButtonMode = findViewById(R.id.activity_ckbe_toggle_mode);
 
@@ -97,7 +96,7 @@ public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements Vi
         setSupportActionBar(mToolbar);
 
         //设定监听
-        mLayout_main.setOnClickListener(this);
+        mLayoutMain.setOnClickListener(this);
         mDrawerLayout.addDrawerListener(this);
         toggleButtonMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (mController != null) {
@@ -107,36 +106,13 @@ public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements Vi
         });
 
         //设置背景
-        mLayout_main.setBackground(new BitmapDrawable(getResources(), PicUtils.blur(this, 10, ((BitmapDrawable) Objects.requireNonNull(ContextCompat.getDrawable(this, org.koishi.launcher.h2co3.resources.R.drawable.background))).getBitmap())));
+        mLayoutMain.setBackground(new BitmapDrawable(getResources(), PicUtils.blur(this, BLUR_RADIUS, ((BitmapDrawable) Objects.requireNonNull(ContextCompat.getDrawable(this, org.koishi.launcher.h2co3.resources.R.drawable.background))).getBitmap())));
 
         //初始化控制器
         mController = new H2CO3VirtualController(this, KeyEvent.KEYMAP_TO_X) {
             @Override
             public void init() {
                 super.init();
-                /*//移除屏幕触摸板
-                this.removeInput(onscreenTouchpad);
-                //禁用自定义键盘
-                this.custmoizeKeyboard.setEnabled(false);
-                //先保存键盘文件
-                ((CustomizeKeyboard) this.custmoizeKeyboard).mManager.autoSaveKeyboard();
-                //卸载自定义键盘
-                this.removeInput(custmoizeKeyboard);
-                //重写自定义键盘，并创建新的自定义键盘
-                this.custmoizeKeyboard = new CustomizeKeyboard() {
-                    @Override
-                    public boolean load(Context context, Controller controller) {
-                        //将编辑活动回调设置为当前活动，控制器设置为空对象
-                        this.mManager = new CkbManager(context, CustomizeKeyboardEditorActivity.this, null);
-                        this.mDialog = new CkbManagerDialog(context, mManager);
-                        return true;
-                    }
-                };
-                //加载新的自定义键盘
-                this.addInput(custmoizeKeyboard);
-                //启用新的自定义键盘
-                this.custmoizeKeyboard.setEnabled(true);
-                //重新绑定一级界面的控件与输入器*/
                 bindViewWithInput();
             }
         };
@@ -144,7 +120,7 @@ public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements Vi
 
     @Override
     public void onClick(View v) {
-        if (v == mLayout_main) {
+        if (v == mLayoutMain) {
             switchToolbar();
         }
     }
@@ -157,38 +133,27 @@ public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements Vi
         int viewHeight = mToolbar.getHeight();
         float slideSize = viewHeight * slideOffset;
         mToolbar.setY(viewPosY - slideSize);
-
     }
 
     @Override
     public void onDrawerOpened(@NonNull View drawerView) {
-
+        // Do nothing
     }
 
     @Override
     public void onDrawerClosed(@NonNull View drawerView) {
-
+        // Do nothing
     }
 
     @Override
     public void onDrawerStateChanged(int newState) {
-
+        // Do nothing
     }
 
     private void switchToolbar() {
-        int v = View.VISIBLE;
-        switch (mToolbar.getVisibility()) {
-            case View.INVISIBLE:
-            case View.GONE:
-                v = View.VISIBLE;
-                break;
-            case View.VISIBLE:
-                v = View.GONE;
-                break;
-            default:
-                break;
-        }
-        mToolbar.setVisibility(v);
+        int visibility = mToolbar.getVisibility();
+        int newVisibility = visibility == View.VISIBLE ? View.GONE : View.VISIBLE;
+        mToolbar.setVisibility(newVisibility);
     }
 
     @Override
@@ -218,14 +183,11 @@ public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements Vi
 
     @Override
     public void addView(View view) {
-        if (view.getLayoutParams() == null) {
-            return;
-        }
-        if (!(view.getLayoutParams() instanceof RelativeLayout.LayoutParams)) {
+        if (view.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(view.getLayoutParams().width, view.getLayoutParams().height);
             view.setLayoutParams(params);
         }
-        this.mLayout_main.addView(view);
+        this.mLayoutMain.addView(view);
     }
 
     @Override
@@ -245,12 +207,12 @@ public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements Vi
 
     @Override
     public ViewGroup getViewsParent() {
-        return mLayout_main;
+        return mLayoutMain;
     }
 
     @Override
     public View getSurfaceLayerView() {
-        return mLayout_main;
+        return mLayoutMain;
     }
 
     @Override
@@ -261,7 +223,6 @@ public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements Vi
     @Override
     public void onStop() {
         super.onStop();
-        //当Activity停止的时候自动保存键盘配置
         mController.onStop();
     }
 
@@ -279,12 +240,9 @@ public class CustomizeKeyboardEditorActivity extends H2CO3Activity implements Vi
 
     private void hideSystemUI(View decorView) {
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE
-                // Set the content to appear under the system bars so that the
-                // content doesn't resize when the system bars hide and show.
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                // Hide the nav bar and status bar
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Surface;
@@ -19,7 +18,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.BuildConfig;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -153,17 +151,13 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
                 }
                 logReceiver.pushLog(log);
 
-
-                if (BuildConfig.DEBUG) {
-                    Log.d("H2CO3 Debug", log);
-                }
                 try {
                     if (firstLog) {
+                        mLogView.setLog(log + "\n");
                         FileTools.writeText(new File(launcherLib.getLogPath()), log + "\n");
                         firstLog = false;
                     } else {
-                        runOnUiThread(() -> mLogView.mTextView.setText(logReceiver.getLogs()));
-
+                        mLogView.appendLog(log + "\n");
                         FileTools.writeTextWithAppendMode(new File(launcherLib.getLogPath()), log + "\n");
                     }
                 } catch (IOException e) {
@@ -188,7 +182,7 @@ public class H2CO3LauncherClientActivity extends H2CO3LauncherActivity implement
 
             @Override
             public void onExit(int code) {
-
+                ExitActivity.showExitMessage(H2CO3LauncherClientActivity.this, code);
             }
 
             @Override

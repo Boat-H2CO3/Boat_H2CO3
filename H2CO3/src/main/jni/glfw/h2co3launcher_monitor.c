@@ -9,7 +9,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <h2co3Launcher_bridge.h>
+#include <h2co3launcher_bridge.h>
 
 
 static void modeChangeHandle(int width, int height, void *data) {

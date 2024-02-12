@@ -50,6 +50,15 @@ public class LogView extends NestedScrollView {
         });
     }
 
+    public void setLog(String str) {
+        this.post(() -> {
+            if (mTextView != null) {
+                mTextView.setText(str);
+                new Handler(Looper.getMainLooper()).postDelayed(() -> toBottom(this, mTextView), 50);
+            }
+        });
+    }
+
     private void toBottom(final NestedScrollView scrollView, final View view) {
         int offset = view.getHeight() - scrollView.getHeight();
         if (offset < 0) {
