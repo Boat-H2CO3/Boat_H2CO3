@@ -1,7 +1,3 @@
-//
-// Created by Tungsten on 2022/10/11.
-//
-
 #include <sys/time.h>
 #include <time.h>
 

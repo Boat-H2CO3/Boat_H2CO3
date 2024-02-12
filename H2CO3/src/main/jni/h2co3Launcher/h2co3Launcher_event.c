@@ -1,5 +1,5 @@
 #include <android/log.h>
-#include "h2co3launcher_internal.h"
+#include "h2co3Launcher_internal.h"
 
 H2CO3LauncherEvent current_event;
 

@@ -1,13 +1,10 @@
-//
-// Created by Tungsten on 2022/10/11.
-//
 //========================================================================
 // This file is derived from x11_init.c
 //========================================================================
 
 #include <internal.h>
 
-#include <h2co3launcher_keycodes.h>
+#include <h2co3Launcher_keycodes.h>
 
 #include <string.h>
 #include <stdio.h>

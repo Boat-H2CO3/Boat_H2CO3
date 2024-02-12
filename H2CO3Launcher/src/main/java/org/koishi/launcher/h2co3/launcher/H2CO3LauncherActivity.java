@@ -56,7 +56,7 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
     };
 
     static {
-        System.loadLibrary("h2co3launcher");
+        System.loadLibrary("h2co3Launcher");
     }
 
     public void init() {

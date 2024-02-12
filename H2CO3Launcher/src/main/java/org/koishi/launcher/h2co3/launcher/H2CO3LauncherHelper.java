@@ -91,40 +91,15 @@ public class H2CO3LauncherHelper {
     }
 
     public static String getLibraryPath(Context context, String javaPath) throws IOException {
-        String nativeDir = context.getApplicationInfo().nativeLibraryDir;
-        String libDirName = Architecture.is64BitsDevice() ? "lib64" : "lib";
-        String jreLibDir = getJreLibDir(javaPath);
-        String jvmLibDir = getJvmLibDir(javaPath);
-        String jliLibDir = "/jli";
-        String split = ":";
-        return javaPath +
-                jreLibDir +
-                split +
-
-                javaPath +
-                jreLibDir +
-                jliLibDir +
-                split +
-
-                javaPath +
-                jreLibDir +
-                jvmLibDir +
-                split +
-
-                "/system/" +
-                libDirName +
-                split +
-
-                "/vendor/" +
-                libDirName +
-                split +
-
-                "/vendor/" +
-                libDirName +
-                "/hw" +
-                split +
-
-                nativeDir;
+        StringBuilder libraryPath = new StringBuilder();
+        libraryPath.append(javaPath).append(getJreLibDir(javaPath)).append(":")
+                .append(javaPath).append(getJreLibDir(javaPath)).append("/jli:")
+                .append(javaPath).append(getJreLibDir(javaPath)).append(getJvmLibDir(javaPath)).append(":")
+                .append("/system/").append(Architecture.is64BitsDevice() ? "lib64" : "lib").append(":")
+                .append("/vendor/").append(Architecture.is64BitsDevice() ? "lib64" : "lib").append(":")
+                .append("/vendor/").append(Architecture.is64BitsDevice() ? "lib64" : "lib").append("/hw").append(":")
+                .append(context.getApplicationInfo().nativeLibraryDir);
+        return libraryPath.toString();
     }
 
     public static String[] rebaseArgs(Context context, int width, int height) throws IOException {
@@ -198,7 +173,7 @@ public class H2CO3LauncherHelper {
         envMap.put("LIBGL_NOERROR", libglNoerror);
     }
 
-    public static void setEnv(Context context, H2CO3LauncherBridge bridge, String render) {
+    public static void setEnv(Context context, H2CO3LauncherBridge bridge) {
         HashMap<String, String> envMap = new HashMap<>(8);
         addCommonEnv(context, envMap);
         addRendererEnv(context, envMap, H2CO3GameHelper.getRender());
@@ -208,12 +183,6 @@ public class H2CO3LauncherHelper {
             bridge.setenv(key, envMap.get(key));
         }
         printTaskTitle(bridge, "Env Map");
-    }
-
-    public static void setGLLib(Context context, H2CO3LauncherBridge bridge, String render) {
-        if (render.equals(H2CO3Tools.GL_GL114)) {
-            bridge.dlopen(context.getApplicationInfo().nativeLibraryDir + "/libgl4es.so");
-        }
     }
 
     public static void setUpJavaRuntime(Context context, H2CO3LauncherBridge bridge) throws IOException {
@@ -288,7 +257,7 @@ public class H2CO3LauncherHelper {
                 logStartInfo(bridge, "Minecraft");
 
                 // env
-                setEnv(context, bridge, H2CO3GameHelper.getRender());
+                setEnv(context, bridge);
 
                 // setup java runtime
                 setUpJavaRuntime(context, bridge);
@@ -324,7 +293,7 @@ public class H2CO3LauncherHelper {
                 logStartInfo(bridge, "Jar Executor");
 
                 // env
-                setEnv(context, bridge, H2CO3GameHelper.getRender());
+                setEnv(context, bridge);
 
                 // setup java runtime
                 setUpJavaRuntime(context, bridge);
@@ -359,7 +328,7 @@ public class H2CO3LauncherHelper {
                 logStartInfo(bridge, "API Installer");
 
                 // env
-                setEnv(context, bridge, H2CO3GameHelper.getRender());
+                setEnv(context, bridge);
 
                 // setup java runtime
                 setUpJavaRuntime(context, bridge);
@@ -423,6 +392,9 @@ public class H2CO3LauncherHelper {
                 Logging.LOG.log(Level.WARNING, "Bad file encoding", ex);
             }
         }
+
+        args.addDefault("-Dsun.stdout.encoding=", encoding.name());
+        args.addDefault("-Dsun.stderr.encoding=", encoding.name());
 
         args.addDefault("-Dfml.ignoreInvalidMinecraftCertificates=", "true");
         args.addDefault("-Dfml.ignorePatchDiscrepancies=", "true");
@@ -517,12 +489,12 @@ public class H2CO3LauncherHelper {
         private final List<String> logs = new ArrayList<>();
 
         @Override
-        public void pushLog(String log) {
+        public synchronized void pushLog(String log) {
             logs.add(log);
         }
 
         @Override
-        public String getLogs() {
+        public synchronized String getLogs() {
             List<String> logsCopy = new ArrayList<>(logs);
             return String.join("\n", logsCopy);
         }

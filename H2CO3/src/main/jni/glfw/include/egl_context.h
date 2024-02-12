@@ -1,6 +1,4 @@
-//
-// Created by Tungsten on 2022/10/11.
-//
+
 
 #define EGLAPIENTRY
 typedef void *EGLNativeDisplayType;

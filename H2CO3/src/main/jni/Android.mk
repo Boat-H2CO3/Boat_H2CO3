@@ -24,7 +24,7 @@ LOCAL_LDLIBS            := -llog
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE     := h2co3launcher
+LOCAL_MODULE     := h2co3Launcher
 LOCAL_SRC_FILES  := xhook/xh_core.c \
                     xhook/xh_elf.c \
                     xhook/xh_jni.c \
@@ -32,11 +32,11 @@ LOCAL_SRC_FILES  := xhook/xh_core.c \
                     xhook/xh_util.c \
                     xhook/xh_version.c \
                     xhook/xhook.c\
-                    h2co3launcher/h2co3launcher_loader.c \
-                    h2co3launcher/h2co3launcher.c \
-                    h2co3launcher/h2co3launcher_bridge.c \
-                    h2co3launcher/h2co3launcher_event.c
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/h2co3launcher/include \
+                    h2co3Launcher/h2co3Launcher_loader.c \
+                    h2co3Launcher/h2co3Launcher.c \
+                    h2co3Launcher/h2co3Launcher_bridge.c \
+                    h2co3Launcher/h2co3Launcher_event.c
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/h2co3Launcher/include \
                     $(LOCAL_PATH)/xhook
 LOCAL_CFLAGS     := -Wall -Wall -Werror
 LOCAL_LDLIBS     := -llog -ldl -landroid
@@ -60,16 +60,16 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE            := glfw
-LOCAL_SHARED_LIBRARIES  := h2co3launcher
+LOCAL_SHARED_LIBRARIES  := h2co3Launcher
 LOCAL_SRC_FILES         := glfw/context.c \
                            glfw/init.c \
                            glfw/input.c \
                            glfw/monitor.c \
                            glfw/vulkan.c \
                            glfw/window.c \
-                           glfw/h2co3launcher_init.c \
-                           glfw/h2co3launcher_monitor.c \
-                           glfw/h2co3launcher_window.c \
+                           glfw/h2co3Launcher_init.c \
+                           glfw/h2co3Launcher_monitor.c \
+                           glfw/h2co3Launcher_window.c \
                            glfw/egl_context.c \
                            glfw/osmesa_context.c \
                            glfw/platform.c \
@@ -77,7 +77,7 @@ LOCAL_SRC_FILES         := glfw/context.c \
                            glfw/posix_time.c \
                            glfw/driver_helper.c \
                            driver_helper/nsbypass.c
-LOCAL_C_INCLUDES        := $(LOCAL_PATH)/h2co3launcher/include \
+LOCAL_C_INCLUDES        := $(LOCAL_PATH)/h2co3Launcher/include \
                            $(LOCAL_PATH)/glfw/include
 LOCAL_CFLAGS            := -Wall
 LOCAL_LDLIBS            := -llog -ldl -landroid
@@ -126,14 +126,14 @@ LOCAL_STATIC_LIBRARIES  := dyncall \
 						   dyncallback \
 						   dynload \
 						   libffi
-LOCAL_SHARED_LIBRARIES  := h2co3launcher
-LOCAL_SRC_FILES         := lwjgl/h2co3launcher_hook.c \
+LOCAL_SHARED_LIBRARIES  := h2co3Launcher
+LOCAL_SRC_FILES         := lwjgl/h2co3Launcher_hook.c \
 						   lwjgl/common_tools.c \
                            lwjgl/org_lwjgl_system_Callback.c \
                            lwjgl/org_lwjgl_system_dyncall_DynCall.c \
                            lwjgl/org_lwjgl_system_dyncall_DynCallback.c \
                            lwjgl/org_lwjgl_system_dyncall_DynLoad.c \
-                           lwjgl/org_lwjgl_system_h2co3launcher_DynamicLinkLoader.c \
+                           lwjgl/org_lwjgl_system_h2co3Launcher_DynamicLinkLoader.c \
                            lwjgl/org_lwjgl_system_JNI.c \
                            lwjgl/org_lwjgl_system_jni_JNINativeInterface.c \
                            lwjgl/org_lwjgl_system_libc_LibCErrno.c \
@@ -379,9 +379,9 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := h2co3_exec_awt
-LOCAL_SHARED_LIBRARIES  := h2co3launcher
+LOCAL_SHARED_LIBRARIES  := h2co3Launcher
 LOCAL_SRC_FILES := awt/awt_bridge.c
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/h2co3launcher/include
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/h2co3Launcher/include
 include $(BUILD_SHARED_LIBRARY)
 
 # Helper to get current thread

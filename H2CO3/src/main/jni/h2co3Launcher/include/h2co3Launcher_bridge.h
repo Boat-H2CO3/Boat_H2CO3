@@ -2,7 +2,7 @@
 #define H2CO3LAUNCHER_BRIDGE_H
 
 #include <android/native_window.h>
-#include "h2co3launcher_event.h"
+#include "h2co3Launcher_event.h"
 
 ANativeWindow *h2co3LauncherGetNativeWindow(void);
 

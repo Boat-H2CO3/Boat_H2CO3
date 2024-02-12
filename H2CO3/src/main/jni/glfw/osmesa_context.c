@@ -1,6 +1,4 @@
-//
-// Created by Tungsten on 2022/10/11.
-//
+
 
 #include <stdlib.h>
 #include <string.h>

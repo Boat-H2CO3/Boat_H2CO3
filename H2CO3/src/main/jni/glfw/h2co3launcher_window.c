@@ -9,7 +9,7 @@
 #include <assert.h>
 #include <h2co3Launcher_event.h>
 #include <h2co3Launcher_bridge.h>
-#include <h2co3launcher_internal.h>
+#include <h2co3Launcher_internal.h>
 
 static int translateState(int state) {
     int mods = 0;
@@ -31,7 +31,7 @@ static int translateState(int state) {
 }
 
 static int translateKey(int scancode) {
-    // Use the pre-filled LUT (see createKeyTables() in h2co3launcher_init.c)
+    // Use the pre-filled LUT (see createKeyTables() in h2co3Launcher_init.c)
     if (scancode < 0 || scancode > 255)
         return GLFW_KEY_UNKNOWN;
 

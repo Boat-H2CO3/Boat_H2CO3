@@ -68,7 +68,7 @@
             android:theme="@style/FullScreen">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="h2co3launcher" />
+                android:value="h2co3Launcher" />
         </activity>
 
         <provider

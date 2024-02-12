@@ -1,7 +1,4 @@
-//
-// Created by Tungsten on 2022/10/11.
-//
-//========================================================================
+///========================================================================
 // This file is derived from x11_monitor.c
 //========================================================================
 
@@ -9,7 +6,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <h2co3launcher_bridge.h>
+#include <h2co3Launcher_bridge.h>
 
 
 static void modeChangeHandle(int width, int height, void *data) {

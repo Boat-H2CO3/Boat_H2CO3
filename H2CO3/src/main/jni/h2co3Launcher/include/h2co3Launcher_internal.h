@@ -9,8 +9,8 @@
 #include <sys/epoll.h>
 #include <errno.h>
 
-#include "h2co3launcher_bridge.h"
-#include "h2co3launcher_keycodes.h"
+#include "h2co3Launcher_bridge.h"
+#include "h2co3Launcher_keycodes.h"
 
 typedef struct _QueueElement {
     struct _QueueElement *next;

@@ -142,4 +142,4 @@
 
 #define KEY_UNKNOWN      240
 
-#endif // h2co3launcher_KEYCODES_H
+#endif // h2co3Launcher_KEYCODES_H

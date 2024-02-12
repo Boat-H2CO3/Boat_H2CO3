@@ -2,12 +2,12 @@
 // Created by mio on 2023/7/9.
 //
 
-#include "h2co3launcher_hook.h"
+#include "h2co3Launcher_hook.h"
 #include <dlfcn.h>
 #include <stdio.h>
 #include <string.h>
 #include <libgen.h>
-#include "h2co3launcher/include/h2co3launcher_internal.h"
+#include "h2co3Launcher/include/h2co3Launcher_internal.h"
 
 jint (*orig_ProcessImpl_forkAndExec)(JNIEnv *env, jobject process, jint mode, jbyteArray helperpath,
                                      jbyteArray prog, jbyteArray argBlock, jint argc,

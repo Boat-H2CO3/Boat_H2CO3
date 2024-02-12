@@ -8,7 +8,7 @@
 #include <string.h>
 #include <sys/mman.h>
 #include <pthread.h>
-#include <h2co3launcher_internal.h>
+#include <h2co3Launcher_internal.h>
 
 #define FULL_VERSION "1.8.0-internal"
 #define DOT_VERSION "1.8"

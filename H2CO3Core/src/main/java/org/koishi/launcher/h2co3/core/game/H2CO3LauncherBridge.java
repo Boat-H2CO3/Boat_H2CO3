@@ -24,7 +24,7 @@ import java.io.Serializable;
 public class H2CO3LauncherBridge implements Serializable {
 
     static {
-        System.loadLibrary("h2co3launcher");
+        System.loadLibrary("h2co3Launcher");
     }
 
     public H2CO3LauncherBridge() {

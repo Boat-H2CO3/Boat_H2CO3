@@ -2,7 +2,7 @@
 #include <assert.h>
 #include <string.h>
 #include <stdio.h>
-#include "h2co3launcher_internal.h"
+#include "h2co3Launcher_internal.h"
 
 static JavaVM *dalvikJavaVMPtr;
 static JavaVM *runtimeJavaVMPtr;

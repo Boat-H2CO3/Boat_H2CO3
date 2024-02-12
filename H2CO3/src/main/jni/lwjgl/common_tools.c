@@ -7,7 +7,7 @@ __pragma(warning(disable : 4710))
 #endif
 
 #include "common_tools.h"
-#include "h2co3launcher_hook.h"
+#include "h2co3Launcher_hook.h"
 #include <stdlib.h>
 #include <errno.h>
 
