@@ -59,12 +59,12 @@ import java.util.StringTokenizer;
 public class LWJGLUtil {
 	public static final int PLATFORM_LINUX 				= 1;
 	public static final int PLATFORM_MACOSX 			= 2;
-	public static final int PLATFORM_WINDOWS 			= 3;
-	public static final int PLATFORM_H2CO3Launcher = 1728;
-	public static final String PLATFORM_LINUX_NAME 		= "linux";
+	public static final int PLATFORM_WINDOWS = 3;
+	public static final int PLATFORM_H2CO3LAUNCHER = 1728;
+	public static final String PLATFORM_LINUX_NAME = "linux";
 	public static final String PLATFORM_MACOSX_NAME 	= "macosx";
-	public static final String PLATFORM_WINDOWS_NAME	= "windows";
-	public static final String PLATFORM_H2CO3Launcher_NAME = "h2co3Launcher";
+	public static final String PLATFORM_WINDOWS_NAME = "windows";
+	public static final String PLATFORM_H2CO3LAUNCHER_NAME = "h2co3Launcher";
 
 	private static final String LWJGL_ICON_DATA_16x16 =
 		"\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377" +
@@ -280,7 +280,7 @@ public class LWJGLUtil {
 		if ( osName.startsWith("Windows") )
 			PLATFORM = PLATFORM_WINDOWS;
 		else if ( osName.startsWith("Linux") || osName.startsWith("FreeBSD") || osName.startsWith("OpenBSD") || osName.startsWith("SunOS") || osName.startsWith("Unix") ) {
-			PLATFORM = PLATFORM_H2CO3Launcher;
+			PLATFORM = PLATFORM_H2CO3LAUNCHER;
 		}
 		else if ( osName.startsWith("Mac OS X") || osName.startsWith("Darwin") )
 			PLATFORM = PLATFORM_MACOSX;
@@ -298,11 +298,11 @@ public class LWJGLUtil {
 	}
 
 	/**
+	 * @return the current platform type
 	 * @see #PLATFORM_WINDOWS
 	 * @see #PLATFORM_LINUX
 	 * @see #PLATFORM_MACOSX
-	 * @see #PLATFORM_H2CO3Launcher
-	 * @return the current platform type
+	 * @see #PLATFORM_H2CO3LAUNCHER
 	 */
 	public static int getPlatform() {
 		return PLATFORM;
@@ -313,19 +313,18 @@ public class LWJGLUtil {
 	 * @see #PLATFORM_WINDOWS_NAME
 	 * @see #PLATFORM_LINUX_NAME
 	 * @see #PLATFORM_MACOSX_NAME
-	 * @see #PLATFORM_H2CO3Launcher_NAME
+	 * @see #PLATFORM_H2CO3LAUNCHER_NAME
 	 * @return current platform name
 	 */
 	public static String getPlatformName() {
 		switch (LWJGLUtil.getPlatform()) {
 			case LWJGLUtil.PLATFORM_LINUX:
-				return PLATFORM_LINUX_NAME;
+			case LWJGLUtil.PLATFORM_H2CO3LAUNCHER:
+				return PLATFORM_H2CO3LAUNCHER_NAME;
 			case LWJGLUtil.PLATFORM_MACOSX:
 				return PLATFORM_MACOSX_NAME;
 			case LWJGLUtil.PLATFORM_WINDOWS:
 				return PLATFORM_WINDOWS_NAME;
-			case LWJGLUtil.PLATFORM_H2CO3Launcher:
-				return PLATFORM_H2CO3Launcher_NAME;
 			default:
 				return "unknown";
 		}

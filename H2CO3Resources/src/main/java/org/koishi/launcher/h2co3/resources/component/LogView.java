@@ -3,7 +3,6 @@ package org.koishi.launcher.h2co3.resources.component;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -16,7 +15,6 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.MotionEventCompat;
@@ -24,7 +22,6 @@ import androidx.core.widget.NestedScrollView;
 
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
 import org.koishi.launcher.h2co3.resources.R;
-import org.koishi.launcher.h2co3.resources.component.LineTextView;
 
 public class LogView extends NestedScrollView {
 
@@ -60,6 +57,7 @@ public class LogView extends NestedScrollView {
         mTextView.setTextIsSelectable(true);
         mTextView.setTextSize(DisplayUtils.getPxFromSp(context, 3.2F));
         mTextView.setLineSpacing(0, 1f);
+        mTextView.setOnTouchListener(null);
 
         setOnTouchListener((v, event) -> {
             mScaleGestureDetector.onTouchEvent(event);
