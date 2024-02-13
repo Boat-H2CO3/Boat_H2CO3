@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.webkit.WebViewClientCompat;
 
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -92,21 +93,17 @@ public class H2CO3MarkdownView extends FastScrollNestedScrollView {
 
     private void loadMarkdownFile(String filePath) {
         if (!isValidFilePath(filePath)) {
-            webView.loadData(ERROR_MESSAGE_INVALID_FILE, "text/html", "UTF-8");
+            loadErrorMessage(ERROR_MESSAGE_INVALID_FILE);
             return;
         }
 
         String markdownContent = readMarkdownFile(filePath);
         if (markdownContent != null) {
             Spanned spanned = convertMarkdownToSpanned(markdownContent);
-            if (isDarkModeEnabled()) {
-                setWebViewDarkMode();
-            } else {
-                setWebViewLightMode();
-            }
+            setWebViewMode();
             webView.loadDataWithBaseURL(null, String.valueOf(spanned), "text/html", "UTF-8", null);
         } else {
-            webView.loadData(ERROR_MESSAGE_READ_FILE, "text/html", "UTF-8");
+            loadErrorMessage(ERROR_MESSAGE_READ_FILE);
         }
     }
 
@@ -173,6 +170,14 @@ public class H2CO3MarkdownView extends FastScrollNestedScrollView {
         getContext().startActivity(intent);
     }
 
+    private void setWebViewMode() {
+        if (isDarkModeEnabled()) {
+            setWebViewDarkMode();
+        } else {
+            setWebViewLightMode();
+        }
+    }
+
     private void setWebViewDarkMode() {
         webView.setBackgroundColor(Color.BLACK);
         webView.setWebViewClient(new DarkModeWebViewClient());
@@ -188,7 +193,11 @@ public class H2CO3MarkdownView extends FastScrollNestedScrollView {
         return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
     }
 
-    private static class WebViewClient extends androidx.webkit.WebViewClientCompat {
+    private void loadErrorMessage(String errorMessage) {
+        webView.loadData(errorMessage, "text/html", "UTF-8");
+    }
+
+    private static class WebViewClient extends WebViewClientCompat {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
@@ -196,7 +205,7 @@ public class H2CO3MarkdownView extends FastScrollNestedScrollView {
         }
     }
 
-    private class DarkModeWebViewClient extends androidx.webkit.WebViewClientCompat {
+    private class DarkModeWebViewClient extends WebViewClientCompat {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);

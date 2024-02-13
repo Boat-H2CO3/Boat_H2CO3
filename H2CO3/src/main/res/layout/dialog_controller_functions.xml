@@ -250,7 +250,7 @@
                     android:text="@string/title_touchpad"
                     android:textSize="@dimen/text_mid" />
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -277,7 +277,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -285,7 +285,7 @@
                     android:text="@string/title_inputbox"
                     android:textSize="@dimen/text_mid" />
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -312,7 +312,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -320,7 +320,7 @@
                     android:text="@string/title_console"
                     android:textSize="@dimen/text_mid" />
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />

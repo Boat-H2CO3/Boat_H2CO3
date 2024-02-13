@@ -617,7 +617,7 @@
                     android:text="@string/title_hide"
                     android:textSize="@dimen/text_big" />
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -639,14 +639,14 @@
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/title_sight_follow"
                     android:textSize="@dimen/text_big" />
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -667,7 +667,7 @@
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -700,14 +700,14 @@
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/title_show"
                     android:textSize="@dimen/text_big" />
 
-                <TextView
+                <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

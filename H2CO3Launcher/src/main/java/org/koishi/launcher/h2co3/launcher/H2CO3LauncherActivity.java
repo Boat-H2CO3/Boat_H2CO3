@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 
 import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridge;
 import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridgeCallBack;
+import org.koishi.launcher.h2co3.resources.component.ControlLayout;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 
 import java.util.Timer;
@@ -29,7 +30,7 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
 
-    public TextureView mainTextureView;
+    public ControlLayout mainTextureView;
     public RelativeLayout baseLayout;
     public H2CO3LauncherBridgeCallBack h2co3LauncherCallback;
     private Timer timer;
@@ -60,12 +61,9 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
     }
 
     public void init() {
-        nOnCreate();
         timer = new Timer();
         mainTextureView.setSurfaceTextureListener(this);
     }
-
-    public native void nOnCreate();
 
     public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
         Log.d(TAG, "SurfaceTexture is available!");

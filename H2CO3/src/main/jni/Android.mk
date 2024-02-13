@@ -83,7 +83,7 @@ LOCAL_CFLAGS            := -Wall
 LOCAL_LDLIBS            := -llog -ldl -landroid
 ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
 LOCAL_CFLAGS            += -DADRENO_POSSIBLE
-LOCAL_LDLIBS            += -lEGL -lGLESv2
+LOCAL_LDLIBS            += -lEGL -lGLESv2 -lEGL
 endif
 include $(BUILD_SHARED_LIBRARY)
 

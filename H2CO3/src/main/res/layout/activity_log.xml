@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
+    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
         android:id="@+id/logTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

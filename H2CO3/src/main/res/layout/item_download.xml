@@ -3,7 +3,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
         android:id="@+id/fileNameText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
