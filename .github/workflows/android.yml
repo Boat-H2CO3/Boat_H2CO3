@@ -1,6 +1,5 @@
 name: Android CI
 
-# 触发器
 on:
   push:
     tags:
@@ -12,7 +11,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
   
     steps:
       - uses: actions/checkout@v3

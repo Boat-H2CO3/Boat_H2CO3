@@ -42,6 +42,20 @@ public class H2CO3LauncherHelper {
     private static final String WORKING_DIRECTORY_FORMAT = "Working directory: %s";
     private static final String JVM_EXITED_WITH_CODE_FORMAT = "Jvm Exited With Code: %d";
 
+    private static final String JAVA_HOME = "JAVA_HOME";
+    private static final String H2CO3Launcher_NATIVEDIR = "H2CO3Launcher_NATIVEDIR";
+    private static final String TMPDIR = "TMPDIR";
+    private static final String HOME = "HOME";
+    private static final String LIBGL_STRING = "LIBGL_STRING";
+    private static final String LIBGL_ES = "LIBGL_ES";
+    private static final String LIBGL_MIPMAP = "LIBGL_MIPMAP";
+    private static final String LIBGL_NORMALIZE = "LIBGL_NORMALIZE";
+    private static final String LIBGL_VSYNC = "LIBGL_VSYNC";
+    private static final String LIBGL_NOINTOVLHACK = "LIBGL_NOINTOVLHACK";
+    private static final String LIBGL_NOERROR = "LIBGL_NOERROR";
+    private static final String LIBGL_NAME = "LIBGL_NAME";
+    private static final String LIBEGL_NAME = "LIBEGL_NAME";
+
     public static void printTaskTitle(H2CO3LauncherBridge bridge, String task) {
         bridge.getCallback().onLog(String.format(TASK_TITLE_FORMAT, task));
     }
@@ -114,25 +128,25 @@ public class H2CO3LauncherHelper {
     }
 
     public static void addCommonEnv(Context context, HashMap<String, String> envMap) {
-        envMap.put("HOME", H2CO3Tools.LOG_DIR);
-        envMap.put("JAVA_HOME", getJavaPath());
-        envMap.put("H2CO3Launcher_NATIVEDIR", context.getApplicationInfo().nativeLibraryDir);
-        envMap.put("TMPDIR", context.getCacheDir().getAbsolutePath());
+        envMap.put(HOME, H2CO3Tools.LOG_DIR);
+        envMap.put(JAVA_HOME, getJavaPath());
+        envMap.put(H2CO3Launcher_NATIVEDIR, context.getApplicationInfo().nativeLibraryDir);
+        envMap.put(TMPDIR, context.getCacheDir().getAbsolutePath());
     }
 
     public static void addRendererEnv(Context context, HashMap<String, String> envMap, String render) {
-        envMap.put("LIBGL_STRING", render);
+        envMap.put(LIBGL_STRING, render);
         if (render.equals(H2CO3Tools.GL_GL114)) {
-            envMap.put("LIBGL_NAME", "libgl4es.so");
-            envMap.put("LIBEGL_NAME", "libEGL.so");
+            envMap.put(LIBGL_NAME, "libgl4es.so");
+            envMap.put(LIBEGL_NAME, "libEGL.so");
             setGLValues(envMap, "2", "3", "1", "1", "1", "1");
         } else if (render.equals(H2CO3Tools.GL_VGPU)) {
-            envMap.put("LIBGL_NAME", "libvgpu.so");
-            envMap.put("LIBEGL_NAME", "libEGL.so");
+            envMap.put(LIBGL_NAME, "libvgpu.so");
+            envMap.put(LIBEGL_NAME, "libEGL.so");
             setGLValues(envMap, "2", "3", "1", "1", "1", "1");
         } else if (render.equals(H2CO3Tools.GL_VIRGL)) {
-            envMap.put("LIBGL_NAME", "libOSMesa_81.so");
-            envMap.put("LIBEGL_NAME", "libEGL.so");
+            envMap.put(LIBGL_NAME, "libOSMesa_81.so");
+            envMap.put(LIBEGL_NAME, "libEGL.so");
             setGLValues(envMap, "2", "3", "1", "1", "1", "1");
             envMap.put("MESA_GLSL_CACHE_DIR", context.getCacheDir().getAbsolutePath());
             envMap.put("MESA_GL_VERSION_OVERRIDE", "4.3");
@@ -145,8 +159,8 @@ public class H2CO3LauncherHelper {
             envMap.put("GALLIUM_DRIVER", "virpipe");
             envMap.put("OSMESA_NO_FLUSH_FRONTBUFFER", "1");
         } else if (render.equals(H2CO3Tools.GL_ZINK)) {
-            envMap.put("LIBGL_NAME", "libOSMesa_8.so");
-            envMap.put("LIBEGL_NAME", "libEGL.so");
+            envMap.put(LIBGL_NAME, "libOSMesa_8.so");
+            envMap.put(LIBEGL_NAME, "libEGL.so");
             setGLValues(envMap, "2", "3", "1", "1", "1", "1");
             envMap.put("MESA_GLSL_CACHE_DIR", context.getCacheDir().getAbsolutePath());
             envMap.put("MESA_GL_VERSION_OVERRIDE", "4.6");
@@ -158,19 +172,19 @@ public class H2CO3LauncherHelper {
             envMap.put("VTEST_SOCKET_NAME", new File(context.getCacheDir().getAbsolutePath(), ".virgl_test").getAbsolutePath());
             envMap.put("GALLIUM_DRIVER", "zink");
         } else if (render.equals(H2CO3Tools.GL_ANGLE)) {
-            envMap.put("LIBGL_NAME", "libtinywrapper.so");
-            envMap.put("LIBEGL_NAME", "libEGL_angle.so");
-            envMap.put("LIBGL_ES", "3");
+            envMap.put(LIBGL_NAME, "libtinywrapper.so");
+            envMap.put(LIBEGL_NAME, "libEGL_angle.so");
+            envMap.put(LIBGL_ES, "3");
         }
     }
 
     public static void setGLValues(HashMap<String, String> envMap, String libglEs, String libglMipmap, String libglNormalize, String libglVsync, String libglNointovlhack, String libglNoerror) {
-        envMap.put("LIBGL_ES", libglEs);
-        envMap.put("LIBGL_MIPMAP", libglMipmap);
-        envMap.put("LIBGL_NORMALIZE", libglNormalize);
-        envMap.put("LIBGL_VSYNC", libglVsync);
-        envMap.put("LIBGL_NOINTOVLHACK", libglNointovlhack);
-        envMap.put("LIBGL_NOERROR", libglNoerror);
+        envMap.put(LIBGL_ES, libglEs);
+        envMap.put(LIBGL_MIPMAP, libglMipmap);
+        envMap.put(LIBGL_NORMALIZE, libglNormalize);
+        envMap.put(LIBGL_VSYNC, libglVsync);
+        envMap.put(LIBGL_NOINTOVLHACK, libglNointovlhack);
+        envMap.put(LIBGL_NOERROR, libglNoerror);
     }
 
     public static void setEnv(Context context, H2CO3LauncherBridge bridge) {
