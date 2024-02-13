@@ -544,8 +544,7 @@ void _glfwPlatformSetHitResultType(int type) {
 
 void _glfwPlatformSetCursorMode(_GLFWwindow *window, int mode) {
     if (mode == GLFW_CURSOR_DISABLED) {
-        if (_glfwPlatformWindowFocused(window))
-            disableCursor(window);
+        disableCursor(window);
     } else if (_glfw.h2co3Launcher.disabledCursorWindow == window)
         enableCursor(window);
     // else

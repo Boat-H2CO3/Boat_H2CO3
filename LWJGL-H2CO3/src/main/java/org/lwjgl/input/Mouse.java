@@ -599,7 +599,7 @@ public class Mouse {
             }
             else if (!grab && grabbed) {
                 // move mouse back to location it was grabbed before ungrabbing
-                if ((Cursor.getCapabilities() & Cursor.CURSOR_ONE_BIT_TRANSPARENCY) != 0)
+                if ((Cursor.getCapabilities() & Cursor.CursorType.ONE_BIT_TRANSPARENCY.getValue()) != 0)
                     implementation.setCursorPosition(grab_x, grab_y);
             }
 

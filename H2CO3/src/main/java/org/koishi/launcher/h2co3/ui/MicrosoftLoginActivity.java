@@ -33,23 +33,35 @@ public class MicrosoftLoginActivity extends H2CO3Activity {
 
         progressBar = findViewById(R.id.web_loading_progress);
         webView = findViewById(R.id.microsoft_login_webview);
-        webView.setWebViewClient(new WebViewTrackClient());
+        initWebView();
+        loadMicrosoftLoginUrl();
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private void initWebView() {
+        webView.setWebViewClient(new MicrosoftLoginWebViewClient());
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webView.loadUrl("https://login.live.com/oauth20_authorize.srf" +
+    }
+
+    private void loadMicrosoftLoginUrl() {
+        String microsoftLoginUrl = "https://login.live.com/oauth20_authorize.srf" +
                 "?client_id=00000000402b5328" +
                 "&response_type=code" +
                 "&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL" +
-                "&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
+                "&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf";
+        webView.loadUrl(microsoftLoginUrl);
     }
 
-    class WebViewTrackClient extends WebViewClient {
+    class MicrosoftLoginWebViewClient extends WebViewClient {
+
+        private static final String MICROSOFT_LOGIN_PREFIX = "ms-xal-00000000402b5328";
+        private static final String CANCEL_URL = "res=cancel";
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-            if (url.startsWith("ms-xal-00000000402b5328")) {
+            if (url.startsWith(MICROSOFT_LOGIN_PREFIX)) {
                 Intent data = new Intent();
                 data.setData(Uri.parse(url));
                 progressBar.setVisibility(View.GONE);
@@ -60,12 +72,10 @@ public class MicrosoftLoginActivity extends H2CO3Activity {
                     throw new RuntimeException(e);
                 }
                 finish();
-
                 return true;
             }
 
-            // Sometimes, the user just clicked cancel
-            if (url.contains("res=cancel")) {
+            if (url.contains(CANCEL_URL)) {
                 setResult(Activity.RESULT_CANCELED);
                 finish();
                 return true;
@@ -76,7 +86,7 @@ public class MicrosoftLoginActivity extends H2CO3Activity {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            //super.onPageStarted(view, url, favicon);
+            super.onPageStarted(view, url, favicon);
             progressBar.setVisibility(View.VISIBLE);
         }
 
@@ -85,5 +95,4 @@ public class MicrosoftLoginActivity extends H2CO3Activity {
             progressBar.setVisibility(View.GONE);
         }
     }
-
 }

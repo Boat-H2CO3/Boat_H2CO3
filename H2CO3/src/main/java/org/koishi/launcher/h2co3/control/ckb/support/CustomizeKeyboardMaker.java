@@ -99,7 +99,7 @@ public class CustomizeKeyboardMaker {
                 .setKeyMap(MouseMap.MOUSEMAP_WHEEL_UP)
                 .setKeyTypes(MOUSE_BUTTON)
                 .setTheme(2, 2, 15, 70, "#FFFFFF", "#FFFFFF")
-                .setAttribute("WHEELP.UP")
+                .setAttribute("UP")
                 .build());
         defGBRs.add(new GameButtonBuilder(mContext)
                 .setSize()
@@ -107,7 +107,7 @@ public class CustomizeKeyboardMaker {
                 .setKeyMap(MouseMap.MOUSEMAP_WHEEL_DOWN)
                 .setKeyTypes(MOUSE_BUTTON)
                 .setTheme(2, 2, 15, 70, "#FFFFFF", "#FFFFFF")
-                .setAttribute("WHEELP.DOWN")
+                .setAttribute("DOWN")
                 .build());
         defGBRs.add(new GameButtonBuilder(mContext)
                 .setSize()
@@ -204,8 +204,6 @@ public class CustomizeKeyboardMaker {
             gbr.alphaSize = alphaSize;
             gbr.textColor = textColor;
             String[] Colors = new String[CkbThemeRecorder.COLOR_INDEX_LENGTH];
-            for (String str : Colors) {
-            }
             System.arraycopy(colors, 0, Colors, 0, colors.length);
             gbr.themeColors = Colors;
             return this;

@@ -48,7 +48,8 @@
             <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/progressBar2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
             <org.koishi.launcher.h2co3.resources.component.H2CO3TextView
                 android:id="@+id/splash_check"

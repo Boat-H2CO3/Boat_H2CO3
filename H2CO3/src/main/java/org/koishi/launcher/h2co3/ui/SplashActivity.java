@@ -43,7 +43,6 @@ public class SplashActivity extends H2CO3Activity {
     private boolean java17 = false;
     private boolean java21 = false;
     private boolean installing = false;
-    private H2CO3MessageDialog permissionDialog;
     private AlertDialog permissionDialogAlert;
     private boolean hasJumped = false;
     private boolean hasEnteredLauncher = false;
@@ -106,7 +105,7 @@ public class SplashActivity extends H2CO3Activity {
     }
 
     private void showDialog(List<String> permissions) {
-        permissionDialog = new H2CO3MessageDialog(SplashActivity.this);
+        H2CO3MessageDialog permissionDialog = new H2CO3MessageDialog(SplashActivity.this);
         permissionDialog.setTitle(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.title_warn));
         permissionDialog.setMessage(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.welcome_permission_hint));
         permissionDialog.setNeutralButton(getResources().getString(org.koishi.launcher.h2co3.resources.R.string.button_ok), (dialog, which) -> {

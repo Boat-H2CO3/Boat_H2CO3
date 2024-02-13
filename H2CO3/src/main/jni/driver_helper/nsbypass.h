@@ -1,8 +1,3 @@
-
-//
-// Created by maks on 05.06.2023.
-//
-
 #ifndef H2CO3LAUNCHER_NSBYPASS_H
 #define H2CO3LAUNCHER_NSBYPASS_H
 

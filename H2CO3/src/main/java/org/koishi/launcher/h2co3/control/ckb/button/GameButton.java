@@ -306,32 +306,29 @@ public class GameButton extends AppCompatButton implements View.OnTouchListener 
     }
 
     private void sendKey(String keyName, boolean pressed, int type) {
+        boolean isKeyStateTrue = stateMap.containsKey(keyName) && Boolean.TRUE.equals(stateMap.get(keyName));
+        boolean isKeyStateFalse = stateMap.containsKey(keyName) && Boolean.FALSE.equals(stateMap.get(keyName));
 
-        //该算法可以保证CustomizeKeyboard不会造成clientinput的setkey()方法堵塞;
         if (pressed) {
-
-            if (stateMap.containsKey(keyName) && Boolean.TRUE.equals(stateMap.get(keyName))) {
+            if (isKeyStateTrue) {
                 return;
             }
-            if (!stateMap.containsKey(keyName)) {
-                stateMap.put(keyName, true);
-            }
-            if (stateMap.containsKey(keyName) && Boolean.FALSE.equals(stateMap.get(keyName))) {
-                stateMap.remove(keyName);
-                stateMap.put(keyName, true);
-            }
-            mController.sendKey(new BaseKeyEvent(TAG, keyName, true, type, null));
-
+            stateMap.put(keyName, true);
         } else {
-
-            if (stateMap.containsKey(keyName) && Boolean.TRUE.equals(stateMap.get(keyName))) {
-                stateMap.remove(keyName);
+            if (isKeyStateTrue) {
                 stateMap.put(keyName, false);
                 mController.sendKey(new BaseKeyEvent(TAG, keyName, false, type, null));
             }
-
         }
 
+        if (isKeyStateFalse) {
+            stateMap.remove(keyName);
+            stateMap.put(keyName, true);
+        }
+
+        if (pressed) {
+            mController.sendKey(new BaseKeyEvent(TAG, keyName, true, type, null));
+        }
     }
 
     public GameButton setFirstAdded() {

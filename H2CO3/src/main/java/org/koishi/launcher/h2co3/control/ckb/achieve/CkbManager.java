@@ -57,7 +57,7 @@ public class CkbManager {
         init();
     }
 
-    public static boolean outputFile(KeyboardRecorder kr, String fileName) {
+    public static void outputFile(KeyboardRecorder kr, String fileName) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(kr);
         try {
@@ -73,10 +73,8 @@ public class CkbManager {
             BufferedWriter out = new BufferedWriter(jsonWriter);
             out.write(jsonString);
             out.close();
-            return true;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
@@ -114,14 +112,8 @@ public class CkbManager {
 
     public void removeGameButton(GameButton button) {
         if (containGameButton(button)) {
-            GameButtonArray<GameButton> gl = new GameButtonArray<>();
-            for (GameButton gb : buttonList) {
-                if (gb != button) {
-                    gl.add(gb);
-                }
-            }
+            buttonList.remove(button);
             removeView(button);
-            buttonList = gl;
         }
     }
 
@@ -212,7 +204,7 @@ public class CkbManager {
                 @Override
                 public void runWhenPositive() {
                     super.runWhenPositive();
-                    if (new GameButtonConverter(mContext).output(file)) {
+                    if (new GameButtonConverter(mContext).convertAndOutput(file)) {
                         DialogUtils.createSingleChoiceDialog(mContext, mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_note), String.format(mContext.getString(org.koishi.launcher.h2co3.resources.R.string.tips_successed_to_convert_keyboard_file), file.getName() + "-new.json"), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_ok), null);
                     } else {
                         DialogUtils.createSingleChoiceDialog(mContext, mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_note), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.tips_failed_to_convert_keyboard_file), mContext.getString(org.koishi.launcher.h2co3.resources.R.string.title_ok), null);
@@ -254,27 +246,27 @@ public class CkbManager {
         for (GameButton button : buttonList) {
             removeView(button);
         }
-        buttonList = new GameButtonArray<>();
+        buttonList.clear();
     }
 
     public void showOrHideGameButtons(int i) {
         switch (i) {
-            case SHOW_BUTTON -> {
+            case SHOW_BUTTON:
                 if (hasHide) {
                     for (GameButton button : buttonList) {
                         addView(button);
                     }
                     hasHide = false;
                 }
-            }
-            case HIDE_BUTTON -> {
+                break;
+            case HIDE_BUTTON:
                 if (!hasHide) {
                     for (GameButton button : buttonList) {
                         removeView(button);
                     }
                     hasHide = true;
                 }
-            }
+                break;
         }
     }
 }

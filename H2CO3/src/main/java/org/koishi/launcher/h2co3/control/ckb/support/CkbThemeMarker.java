@@ -19,18 +19,13 @@ public class CkbThemeMarker {
 
     public static LayerDrawable getDesign(final CkbThemeRecorder recorder) {
 
-        switch (recorder.getDesignIndex()) {
-            case DESIGN_SIGNLE_FILL:
-                return getDesign_signle_fill(recorder);
-            case DESIGN_SIGNLE_RING:
-                return getDesign_signle_ring(recorder);
-            case DESIGN_DOUBLE_RING:
-                return getDesign_double_ring(recorder);
-            case DESIGN_BLACK_SHADOW:
-                return getDesign_black_shadow(recorder);
-            default:
-                return null;
-        }
+        return switch (recorder.getDesignIndex()) {
+            case DESIGN_SIGNLE_FILL -> getDesign_signle_fill(recorder);
+            case DESIGN_SIGNLE_RING -> getDesign_signle_ring(recorder);
+            case DESIGN_DOUBLE_RING -> getDesign_double_ring(recorder);
+            case DESIGN_BLACK_SHADOW -> getDesign_black_shadow(recorder);
+            default -> null;
+        };
     }
 
     private static LayerDrawable getDesign_signle_fill(CkbThemeRecorder recorder) {

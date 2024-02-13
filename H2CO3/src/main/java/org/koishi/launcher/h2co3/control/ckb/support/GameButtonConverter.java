@@ -18,7 +18,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Arrays;
-import java.util.List;
 
 public class GameButtonConverter {
 
@@ -29,21 +28,35 @@ public class GameButtonConverter {
         this.mContext = context;
     }
 
-    public boolean output(File file) {
-        StringBuilder fileName = new StringBuilder();
-        for (int i = 0; i < file.getName().length() - 5; i++) {
-            fileName.append(file.getName().charAt(i));
-        }
+    /**
+     * 将旧版游戏按钮转换为新版游戏按钮并输出到文件
+     *
+     * @param file 旧版游戏按钮的文件
+     * @return 是否成功输出
+     */
+    public boolean convertAndOutput(File file) {
         try {
-            CkbManager.outputFile(getNewKeyboardFromOldKeyboard(getOldKeyboardFormJson(file)), fileName + "-new");
+            GameButtonOld[] oldButtons = getOldButtonsFromJson(file);
+            if (oldButtons == null) {
+                return false;
+            }
+            KeyboardRecorder keyboardRecorder = getNewKeyboardFromOldKeyboard(oldButtons);
+            String newFileName = getNewFileName(file);
+            CkbManager.outputFile(keyboardRecorder, newFileName);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return true;
     }
 
-    public GameButtonOld[] getOldKeyboardFormJson(File file) {
+    /**
+     * 从Json文件中获取旧版游戏按钮
+     *
+     * @param file Json文件
+     * @return 旧版游戏按钮数组
+     */
+    private GameButtonOld[] getOldButtonsFromJson(File file) {
         InputStream inputStream;
         Gson gson = new Gson();
         if (!file.exists()) {
@@ -52,98 +65,115 @@ public class GameButtonConverter {
         try {
             inputStream = new FileInputStream(file);
             Reader reader = new InputStreamReader(inputStream);
-            GameButtonOld[] jsonArray = new Gson().fromJson(reader, GameButtonOld[].class);
-            List<GameButtonOld> tempList1 = Arrays.asList(jsonArray);
-            if (tempList1.size() != 0) {
-                return (GameButtonOld[]) tempList1.toArray();
-            } else {
-                return new GameButtonOld[]{};
-            }
+            return gson.fromJson(reader, GameButtonOld[].class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public KeyboardRecorder getNewKeyboardFromOldKeyboard(GameButtonOld[] gbos) {
-        KeyboardRecorder kr = new KeyboardRecorder();
-        GameButtonRecorder[] gbrs = new GameButtonRecorder[gbos.length];
-        for (int i = 0; i < gbrs.length; i++) {
-            gbrs[i] = getGameButtonRecoderFromOldKeyboardModel(gbos[i]);
+    /**
+     * 将旧版游戏按钮转换为新版游戏按钮
+     *
+     * @param oldButtons 旧版游戏按钮数组
+     * @return 新版游戏按钮
+     */
+    private KeyboardRecorder getNewKeyboardFromOldKeyboard(GameButtonOld[] oldButtons) {
+        KeyboardRecorder keyboardRecorder = new KeyboardRecorder();
+        GameButtonRecorder[] gameButtonRecorders = new GameButtonRecorder[oldButtons.length];
+        for (int i = 0; i < gameButtonRecorders.length; i++) {
+            gameButtonRecorders[i] = getGameButtonRecorderFromOldButtonModel(oldButtons[i]);
         }
-        kr.setRecorderDatas(gbrs);
-        kr.setVersionCode(KeyboardRecorder.VERSION_THIS);
-        kr.setScreenArgs(mContext.getResources().getDisplayMetrics().widthPixels, mContext.getResources().getDisplayMetrics().heightPixels);
-
-        return kr;
+        keyboardRecorder.setRecorderDatas(gameButtonRecorders);
+        keyboardRecorder.setVersionCode(KeyboardRecorder.VERSION_THIS);
+        keyboardRecorder.setScreenArgs(mContext.getResources().getDisplayMetrics().widthPixels, mContext.getResources().getDisplayMetrics().heightPixels);
+        return keyboardRecorder;
     }
 
-    private GameButtonRecorder getGameButtonRecoderFromOldKeyboardModel(GameButtonOld gbo) {
+    /**
+     * 从旧版游戏按钮模型中获取新版游戏按钮模型
+     *
+     * @param oldButton 旧版游戏按钮模型
+     * @return 新版游戏按钮模型
+     */
+    private GameButtonRecorder getGameButtonRecorderFromOldButtonModel(GameButtonOld oldButton) {
         final String OLD_MOUSE_PRI = "MOUSE_Pri";
         final String OLD_MOUSE_SEC = "MOUSE_Sec";
 
-        GameButtonRecorder gbr = new GameButtonRecorder();
-        gbr.keyPos = new float[]{gbo.getKeyLX(), gbo.getKeyLY()}; //KeyLx -> Dp
-        gbr.keyChars = "";
-        gbr.keySize = new float[]{gbo.getKeySizeW(), gbo.getKeySizeH()};
-        gbr.isChars = false;
-        Log.e(TAG, "透明度" + ColorUtils.int2rgba(ColorUtils.hex2Int(gbo.getColorhex()))[3]);
-        gbr.alphaSize = (int) ((ColorUtils.int2rgba(ColorUtils.hex2Int(gbo.getColorhex()))[3]) / 255f * 100); //透明度从颜色值Hex中取出，然后转为不透明度的百分比
-        gbr.cornerRadius = (gbo.getCornerRadius() / 180) * 100; //圆角值转化为百分比
-        gbr.designIndex = GameButton.DEFAULT_DESIGN_INDEX; //主题采用默认值
-        gbr.isHide = gbo.isHide();
-        gbr.isKeep = gbo.isAutoKeep();
-        gbr.isViewerFollow = false; //视角跟随默认关闭
+        GameButtonRecorder gameButtonRecorder = new GameButtonRecorder();
+        gameButtonRecorder.keyPos = new float[]{oldButton.getKeyLX(), oldButton.getKeyLY()};
+        gameButtonRecorder.keyChars = "";
+        gameButtonRecorder.keySize = new float[]{oldButton.getKeySizeW(), oldButton.getKeySizeH()};
+        gameButtonRecorder.isChars = false;
+        Log.e(TAG, "透明度" + ColorUtils.int2rgba(ColorUtils.hex2Int(oldButton.getColorhex()))[3]);
+        gameButtonRecorder.alphaSize = (int) ((ColorUtils.int2rgba(ColorUtils.hex2Int(oldButton.getColorhex()))[3]) / 255f * 100);
+        gameButtonRecorder.cornerRadius = (oldButton.getCornerRadius() / 180) * 100;
+        gameButtonRecorder.designIndex = GameButton.DEFAULT_DESIGN_INDEX;
+        gameButtonRecorder.isHide = oldButton.isHide();
+        gameButtonRecorder.isKeep = oldButton.isAutoKeep();
+        gameButtonRecorder.isViewerFollow = false;
 
         String[] keyMap = new String[GameButton.MAX_KEYMAP_SIZE];
         Arrays.fill(keyMap, "");
 
         int[] keyTypes = new int[GameButton.MAX_KEYMAP_SIZE];
-        if (gbo.getKeyMain().equals(OLD_MOUSE_PRI)) {
+        if (oldButton.getKeyMain().equals(OLD_MOUSE_PRI)) {
             keyMap[0] = MouseMap.MOUSEMAP_BUTTON_LEFT;
             keyTypes[0] = GameButton.MOUSE_TYPE;
-        } else if (gbo.getKeyMain().equals(OLD_MOUSE_SEC)) {
+        } else if (oldButton.getKeyMain().equals(OLD_MOUSE_SEC)) {
             keyMap[0] = MouseMap.MOUSEMAP_BUTTON_RIGHT;
             keyTypes[0] = GameButton.MOUSE_TYPE;
-        } else if (!gbo.getKeyMain().equals("空")) {
-            keyMap[0] = gbo.getKeyMain();
+        } else if (!oldButton.getKeyMain().equals("空")) {
+            keyMap[0] = oldButton.getKeyMain();
             keyTypes[0] = GameButton.KEY_TYPE;
         }
-        if (gbo.isMult()) {
-            if (gbo.getSpecialOne().equals(OLD_MOUSE_PRI)) {
+        if (oldButton.isMult()) {
+            if (oldButton.getSpecialOne().equals(OLD_MOUSE_PRI)) {
                 keyMap[1] = MouseMap.MOUSEMAP_BUTTON_LEFT;
                 keyTypes[1] = GameButton.MOUSE_TYPE;
-            } else if (gbo.getSpecialOne().equals(OLD_MOUSE_SEC)) {
+            } else if (oldButton.getSpecialOne().equals(OLD_MOUSE_SEC)) {
                 keyMap[1] = MouseMap.MOUSEMAP_BUTTON_RIGHT;
                 keyTypes[1] = GameButton.MOUSE_TYPE;
-            } else if (!gbo.getSpecialOne().equals("空")) {
-                keyMap[1] = gbo.getKeyMain();
+            } else if (!oldButton.getSpecialOne().equals("空")) {
+                keyMap[1] = oldButton.getKeyMain();
                 keyTypes[1] = GameButton.KEY_TYPE;
             }
 
-            if (gbo.getSpecialTwo().equals(OLD_MOUSE_PRI)) {
+            if (oldButton.getSpecialTwo().equals(OLD_MOUSE_PRI)) {
                 keyMap[2] = MouseMap.MOUSEMAP_BUTTON_LEFT;
                 keyTypes[2] = GameButton.MOUSE_TYPE;
-            } else if (gbo.getSpecialOne().equals(OLD_MOUSE_SEC)) {
+            } else if (oldButton.getSpecialOne().equals(OLD_MOUSE_SEC)) {
                 keyMap[2] = MouseMap.MOUSEMAP_BUTTON_RIGHT;
                 keyTypes[2] = GameButton.MOUSE_TYPE;
-            } else if (!gbo.getSpecialTwo().equals("空")) {
-                keyMap[2] = gbo.getKeyMain();
+            } else if (!oldButton.getSpecialTwo().equals("空")) {
+                keyMap[2] = oldButton.getKeyMain();
                 keyTypes[2] = GameButton.KEY_TYPE;
             }
         }
-        gbr.keyTypes = keyTypes;
-        gbr.keyMaps = keyMap;
+        gameButtonRecorder.keyTypes = keyTypes;
+        gameButtonRecorder.keyMaps = keyMap;
 
-        gbr.keyName = gbo.getKeyName();
-        gbr.show = GameButton.SHOW_ALL; //默认全局显示
-        gbr.textColor = gbo.getTextColorHex();
-        gbr.themeColors = new String[CkbThemeRecorder.COLOR_INDEX_LENGTH];
-        gbr.themeColors[0] = new StringBuilder(gbo.getColorhex().substring(3)).insert(0, '#').toString(); //截掉原来的透明度
-        gbr.textSize = GameButton.DEFAULT_TEXT_SIZE_SP; //文字大小采用默认值
+        gameButtonRecorder.keyName = oldButton.getKeyName();
+        gameButtonRecorder.show = GameButton.SHOW_ALL;
+        gameButtonRecorder.textColor = oldButton.getTextColorHex();
+        gameButtonRecorder.themeColors = new String[CkbThemeRecorder.COLOR_INDEX_LENGTH];
+        gameButtonRecorder.themeColors[0] = new StringBuilder(oldButton.getColorhex().substring(3)).insert(0, '#').toString();
+        gameButtonRecorder.textSize = GameButton.DEFAULT_TEXT_SIZE_SP;
 
-        return gbr;
+        return gameButtonRecorder;
     }
 
-
+    /**
+     * 获取新文件名
+     *
+     * @param file 旧文件
+     * @return 新文件名
+     */
+    private String getNewFileName(File file) {
+        StringBuilder fileName = new StringBuilder();
+        for (int i = 0; i < file.getName().length() - 5; i++) {
+            fileName.append(file.getName().charAt(i));
+        }
+        return fileName + "-new";
+    }
 }
