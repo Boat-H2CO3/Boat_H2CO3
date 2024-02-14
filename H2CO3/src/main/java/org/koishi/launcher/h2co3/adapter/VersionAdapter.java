@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.koishi.launcher.h2co3.R;
+import org.koishi.launcher.h2co3.core.utils.Version;
 import org.koishi.launcher.h2co3.dialog.DownloadDialog;
-import org.koishi.launcher.h2co3.utils.Version;
 
 import java.io.BufferedReader;
 import java.io.IOException;

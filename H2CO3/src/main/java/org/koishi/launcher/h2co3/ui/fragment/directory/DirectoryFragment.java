@@ -292,7 +292,7 @@ public class DirectoryFragment extends H2CO3Fragment {
             MaterialButton delDir = (MaterialButton) holder.getView(R.id.tv_del_dir);
             textView.setText(datas.get(position));
             if (datas.get(position).equals(H2CO3GameHelper.getGameDirectory())) {
-                lay.setStrokeWidth(13);
+                lay.setStrokeWidth(11);
                 lay.setStrokeColor(getResources().getColor(android.R.color.darker_gray));
             } else {
                 lay.setStrokeWidth(0);
@@ -427,7 +427,7 @@ public class DirectoryFragment extends H2CO3Fragment {
             File f = new File(H2CO3GameHelper.getGameDirectory() + "/versions/" + datas.get(position));
             String verF = H2CO3GameHelper.getGameDirectory() + "/versions/" + datas.get(position);
             if (verF.equals(H2CO3GameHelper.getGameCurrentVersion())) {
-                holder.rl.setStrokeWidth(13);
+                holder.rl.setStrokeWidth(11);
                 holder.rl.setStrokeColor(getResources().getColor(android.R.color.darker_gray));
             } else {
                 holder.rl.setStrokeWidth(0);

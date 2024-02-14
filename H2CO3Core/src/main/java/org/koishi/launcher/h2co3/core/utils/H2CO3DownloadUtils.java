@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 public class H2CO3DownloadUtils {
 
@@ -46,7 +45,7 @@ public class H2CO3DownloadUtils {
     public static String downloadString(String url) throws IOException {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             download(url, bos);
-            return bos.toString(StandardCharsets.UTF_8);
+            return bos.toString("UTF-8");
         }
     }
 

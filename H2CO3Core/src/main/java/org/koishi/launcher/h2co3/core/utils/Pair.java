@@ -1,5 +1,7 @@
 package org.koishi.launcher.h2co3.core.utils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Map;
 import java.util.Objects;
 
@@ -59,7 +61,7 @@ public final class Pair<K, V> implements Map.Entry<K, V> {
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return "(" + key + ", " + value + ")";
     }
 }

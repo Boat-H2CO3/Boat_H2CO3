@@ -50,16 +50,12 @@ public class LocaleUtils {
     }
 
     public static Locale getLocale(int lang) {
-        switch (lang) {
-            case 1:
-                return Locale.ENGLISH;
-            case 2:
-                return Locale.CHINA;
-            case 3:
-                return Locale.TAIWAN;
-            default:
-                return getSystemLocale();
-        }
+        return switch (lang) {
+            case 1 -> Locale.ENGLISH;
+            case 2 -> Locale.CHINA;
+            case 3 -> Locale.TAIWAN;
+            default -> getSystemLocale();
+        };
     }
 
     public static Locale getSystemLocale() {

@@ -18,8 +18,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.adapter.VersionAdapter;
+import org.koishi.launcher.h2co3.core.utils.Version;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
-import org.koishi.launcher.h2co3.utils.Version;
 
 import java.io.BufferedReader;
 import java.io.IOException;

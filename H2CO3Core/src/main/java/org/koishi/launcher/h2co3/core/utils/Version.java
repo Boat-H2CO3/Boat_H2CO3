@@ -1,4 +1,4 @@
-package org.koishi.launcher.h2co3.utils;
+package org.koishi.launcher.h2co3.core.utils;
 
 public class Version {
     private final String versionName;

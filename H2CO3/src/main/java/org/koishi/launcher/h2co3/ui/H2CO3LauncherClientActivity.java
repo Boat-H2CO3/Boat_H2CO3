@@ -28,6 +28,7 @@ import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
 import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridge;
 import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridgeCallBack;
+import org.koishi.launcher.h2co3.core.game.MCOptionUtils;
 import org.koishi.launcher.h2co3.core.game.MinecraftVersion;
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
 import org.koishi.launcher.h2co3.core.utils.CommandBuilder;
@@ -37,7 +38,6 @@ import org.koishi.launcher.h2co3.launcher.H2CO3LauncherActivity;
 import org.koishi.launcher.h2co3.launcher.H2CO3LauncherHelper;
 import org.koishi.launcher.h2co3.launcher.R;
 import org.koishi.launcher.h2co3.resources.component.LogView;
-import org.koishi.launcher.h2co3.utils.launch.MCOptionUtils;
 
 import java.io.File;
 import java.io.IOException;
