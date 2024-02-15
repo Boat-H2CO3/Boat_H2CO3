@@ -14,22 +14,26 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public class MinecraftVersion {
-    public AssetsIndex assetIndex;
-    public String assets;
-    public HashMap<String, Download> downloads;
-    public String id;
-    public Library[] libraries;
+    private static final String LIBRARIES_PATH = H2CO3GameHelper.getGameDirectory() + File.separator + "libraries";
+    private static final String CLASSPATH_SEPARATOR = ":";
+    private static final String APP_NAME = "Boat_H2CO3";
+    private static final String LAUNCHER_VERSION = "1.0.0";
+    private static final String DEFAULT_VALUE = "0";
     public String mainClass;
-    public String minecraftArguments;
+    private AssetsIndex assetIndex;
     public int minimumLauncherVersion;
-    public String releaseTime;
-    public String time;
-    public String type;
-    public Arguments arguments;
-    // forge
-    public String inheritsFrom;
-    public String minecraftPath;
+    private String assets;
+    private HashMap<String, Download> downloads;
+    private String id;
+    private Library[] libraries;
+    private String minecraftArguments;
+    private String releaseTime;
     private Map<String, String> SHAs;
+    private String time;
+    private String type;
+    private Arguments arguments;
+    private String inheritsFrom;
+    private String minecraftPath;
 
     public static MinecraftVersion fromDirectory(File file) {
         String json = new String(FileTools.readFile(new File(file, file.getName() + ".json")), StandardCharsets.UTF_8);
@@ -86,25 +90,22 @@ public class MinecraftVersion {
     }
 
     public String getClassPath(boolean high, boolean isJava8) {
-        String librariesPath = H2CO3GameHelper.getGameDirectory() + File.separator + "libraries";
-        StringJoiner cp = new StringJoiner(":");
+        StringJoiner cp = new StringJoiner(CLASSPATH_SEPARATOR);
 
         for (Library lib : libraries) {
-            if (lib.name == null || lib.name.isEmpty() || lib.name.contains("org.lwjgl") || lib.name.contains("natives") || (isJava8 && lib.name.contains("java-objc-bridge"))) {
+            if (shouldSkipLibrary(lib, isJava8)) {
                 continue;
             }
 
-            String[] names = lib.name.split(":");
-            String packageName = names[0];
-            String mainName = names[1];
-            String versionName = names[2];
-
-            String path = String.format("%s%s%s%s%s%s%s%s%s-%s.jar", librariesPath, File.separator, packageName.replaceAll("\\.", File.separator), File.separator, mainName, File.separator, versionName, File.separator, mainName, versionName);
-
+            String path = parseLibNameToPath(lib.name);
             cp.add(path);
         }
 
-        return high ? cp + ":" + (high ? cp + ":" + minecraftPath : minecraftPath + (cp.length() > 0 ? ":" : "") + cp.toString()) : (high ? cp.toString() + ":" + (high ? cp.toString() + ":" + minecraftPath : minecraftPath + (cp.length() > 0 ? ":" : "") + cp.toString()) : minecraftPath + (cp.length() > 0 ? ":" : "") + cp) + (cp.length() > 0 ? ":" : "") + cp;
+        return high ? cp + CLASSPATH_SEPARATOR + minecraftPath : minecraftPath + (cp.length() > 0 ? CLASSPATH_SEPARATOR : "") + cp;
+    }
+
+    private boolean shouldSkipLibrary(Library lib, boolean isJava8) {
+        return lib.name == null || lib.name.isEmpty() || lib.name.contains("org.lwjgl") || lib.name.contains("natives") || (isJava8 && lib.name.contains("java-objc-bridge"));
     }
 
     public String[] getJVMArguments() {
@@ -157,7 +158,7 @@ public class MinecraftVersion {
                                 H2CO3GameHelper.getGameCurrentVersion() + "/" + id + ".jar";
                         case "library_directory" -> H2CO3GameHelper.getGameDirectory() + "/libraries";
                         case "classpath_separator" -> ":";
-                        default -> "";
+                        default -> "0";
                     };
                     result.append(value);
                     state = 0;
@@ -217,7 +218,7 @@ public class MinecraftVersion {
                                 H2CO3GameHelper.getGameCurrentVersion() + "/" + id + ".jar";
                         case "library_directory" -> H2CO3GameHelper.getGameDirectory() + "/libraries";
                         case "classpath_separator" -> ":";
-                        default -> "";
+                        default -> "0";
                     };
                     result.append(value);
                     state = 0;
@@ -264,9 +265,9 @@ public class MinecraftVersion {
         return SHAs.get(libName);
     }
 
-    public String parseLibNameToPath(String libName) {
-        String[] tmp = libName.split(":");
-        return tmp[0].replace(".", "/") + "/" + tmp[1] + "/" + tmp[2] + "/" + tmp[1] + "-" + tmp[2] + ".jar";
+    private String parseLibNameToPath(String libName) {
+        String[] parts = libName.split(":");
+        return String.format("%s%s%s%s%s%s%s%s%s-%s.jar", LIBRARIES_PATH, File.separator, parts[0].replaceAll("\\.", File.separator), File.separator, parts[1], File.separator, parts[2], File.separator, parts[1], parts[2]);
     }
 
     public static class AssetsIndex {

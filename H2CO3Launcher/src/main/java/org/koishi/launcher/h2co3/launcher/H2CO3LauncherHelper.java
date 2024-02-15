@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -30,6 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TimeZone;
 import java.util.logging.Level;
+import java.util.stream.Stream;
 
 public class H2CO3LauncherHelper {
 
@@ -85,14 +88,14 @@ public class H2CO3LauncherHelper {
         if (Architecture.archAsInt(jreArchitecture) == Architecture.ARCH_X86) {
             jreArchitecture = "i386/i486/i586";
         }
-        String jreLibDir = "/lib";
+        String jreLibDir = File.separator + "lib";
         if (jreArchitecture == null) {
             throw new IOException(UNSUPPORTED_ARCHITECTURE_ERROR);
         }
         for (String arch : jreArchitecture.split("/")) {
-            File file = new File(javaPath, "lib/" + arch);
+            File file = new File(javaPath, "lib" + File.separator + arch);
             if (file.exists() && file.isDirectory()) {
-                jreLibDir = "/lib/" + arch;
+                jreLibDir = File.separator + "lib" + File.separator + arch;
             }
         }
         return jreLibDir;
@@ -105,16 +108,17 @@ public class H2CO3LauncherHelper {
     }
 
     public static String getLibraryPath(Context context, String javaPath) throws IOException {
-        StringBuilder libraryPath = new StringBuilder();
-        libraryPath.append(javaPath).append(getJreLibDir(javaPath)).append(":")
-                .append(javaPath).append(getJreLibDir(javaPath)).append("/jli:")
-                .append(javaPath).append(getJreLibDir(javaPath)).append(getJvmLibDir(javaPath)).append(":")
-                .append("/system/").append(Architecture.is64BitsDevice() ? "lib64" : "lib").append(":")
-                .append("/vendor/").append(Architecture.is64BitsDevice() ? "lib64" : "lib").append(":")
-                .append("/vendor/").append(Architecture.is64BitsDevice() ? "lib64" : "lib").append("/hw").append(":")
-                .append(context.getApplicationInfo().nativeLibraryDir);
-        return libraryPath.toString();
+        String jreLibDir = getJreLibDir(javaPath);
+        String jvmLibDir = getJvmLibDir(javaPath);
+        return javaPath + jreLibDir + ":" +
+                javaPath + jreLibDir + File.separator + "jli:" +
+                javaPath + jreLibDir + jvmLibDir + ":" +
+                "/system/" + (Architecture.is64BitsDevice() ? "lib64" : "lib") + ":" +
+                "/vendor/" + (Architecture.is64BitsDevice() ? "lib64" : "lib") + ":" +
+                "/vendor/" + (Architecture.is64BitsDevice() ? "lib64" : "lib") + "/hw" + ":" +
+                context.getApplicationInfo().nativeLibraryDir;
     }
+
 
     public static String[] rebaseArgs(Context context, int width, int height) throws IOException {
         final CommandBuilder command = getMcArgs(context, width, height);
@@ -192,9 +196,9 @@ public class H2CO3LauncherHelper {
         addCommonEnv(context, envMap);
         addRendererEnv(context, envMap, H2CO3GameHelper.getRender());
         printTaskTitle(bridge, "Env Map");
-        for (String key : envMap.keySet()) {
-            bridge.getCallback().onLog(String.format(ENV_FORMAT, key, envMap.get(key)));
-            bridge.setenv(key, envMap.get(key));
+        for (Map.Entry<String, String> entry : envMap.entrySet()) {
+            bridge.getCallback().onLog(String.format(ENV_FORMAT, entry.getKey(), entry.getValue()));
+            bridge.setenv(entry.getKey(), entry.getValue());
         }
         printTaskTitle(bridge, "Env Map");
     }
@@ -225,20 +229,12 @@ public class H2CO3LauncherHelper {
         }
     }
 
-    public static ArrayList<File> locateLibs(File path) {
+    public static ArrayList<File> locateLibs(File path) throws IOException {
         ArrayList<File> returnValue = new ArrayList<>();
-        ArrayList<File> stack = new ArrayList<>();
-        stack.add(path);
-        while (!stack.isEmpty()) {
-            File file = stack.remove(stack.size() - 1);
-            if (file.isFile() && file.getName().endsWith(".so")) {
-                returnValue.add(file);
-            } else if (file.isDirectory()) {
-                File[] files = file.listFiles();
-                if (files != null) {
-                    Collections.addAll(stack, files);
-                }
-            }
+        try (Stream<Path> paths = Files.walk(path.toPath())) {
+            paths.filter(Files::isRegularFile)
+                    .filter(p -> p.toString().endsWith(".so"))
+                    .forEach(p -> returnValue.add(p.toFile()));
         }
         return returnValue;
     }

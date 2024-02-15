@@ -44,9 +44,9 @@ import org.json.JSONObject;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.adapter.HomeAdapterListUser;
 import org.koishi.launcher.h2co3.application.H2CO3Application;
-import org.koishi.launcher.h2co3.core.game.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.H2CO3Loader;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
+import org.koishi.launcher.h2co3.core.game.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.login.bean.UserBean;
 import org.koishi.launcher.h2co3.core.login.other.AuthResult;
 import org.koishi.launcher.h2co3.core.login.other.LoginUtils;
@@ -114,7 +114,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
             runOnUiThread(() -> {
                 progressDialog.dismiss();
                 if (authResult.getSelectedProfile() != null) {
-                    H2CO3Auth.addUserToJson(authResult.getSelectedProfile().getName(), user, pass, "2", currentBaseUrl, authResult.getSelectedProfile().getId(), "", "", authResult.getAccessToken(), "", "", true, false);
+                    H2CO3Auth.addUserToJson(authResult.getSelectedProfile().getName(), user, pass, "2", currentBaseUrl, authResult.getSelectedProfile().getId(), "0", "0", authResult.getAccessToken(), "0", "0", true, false);
                     adapterUser.notifyDataSetChanged();
                     popView.dismiss();
                     loginDialogAlert.dismiss();
@@ -124,7 +124,7 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
                     alertDialogBuilder.setTitle("请选择角色");
                     alertDialogBuilder.setItems(items, (dialog, which) -> {
                         AuthResult.AvailableProfiles selectedProfile = authResult.getAvailableProfiles().get(which);
-                        H2CO3Auth.addUserToJson(selectedProfile.getName(), user, pass, "2", currentBaseUrl, selectedProfile.getId(), "", "", authResult.getAccessToken(), "", "", true, false);
+                        H2CO3Auth.addUserToJson(selectedProfile.getName(), user, pass, "2", currentBaseUrl, selectedProfile.getId(), "0", "0", authResult.getAccessToken(), "0", "0", true, false);
                         adapterUser.notifyDataSetChanged();
                         popView.dismiss();
                         loginDialogAlert.dismiss();

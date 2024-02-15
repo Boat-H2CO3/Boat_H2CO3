@@ -17,7 +17,7 @@
 
 #define LOG_TAG "H2CO3Launcher"
 
-static char *const_progname = PROGNAME;
+static const char *const_progname = PROGNAME;
 static const char *const_launcher = LAUNCHER_NAME;
 static const char **const_jargs = NULL;
 static const char **const_appclasspath = NULL;
