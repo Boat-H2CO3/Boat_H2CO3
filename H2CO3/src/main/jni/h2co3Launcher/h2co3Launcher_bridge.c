@@ -3,63 +3,52 @@
 #include <android/native_window_jni.h>
 #include <jni.h>
 #include <android/log.h>
-#include <stdlib.h>
-#include <string.h>
+#include <assert.h>
 
-struct H2CO3LauncherInternal *h2co3Launcher = NULL;
+struct H2CO3LauncherInternal *h2co3Launcher;
 
-__attribute__((constructor))
-void env_init() {
-    h2co3Launcher = calloc(1, sizeof(struct H2CO3LauncherInternal));
-    if (!h2co3Launcher) {
-        __android_log_print(ANDROID_LOG_ERROR, "Environ",
-                            "Failed to allocate memory for h2co3Launcher.");
-        abort();
+__attribute__((constructor)) void env_init() {
+    char *strptr_env = getenv("H2CO3LAUNCHER_ENVIRON");
+    if (strptr_env == NULL) {
+        __android_log_print(ANDROID_LOG_INFO, "Environ", "No environ found, creating...");
+        h2co3Launcher = malloc(sizeof(struct H2CO3LauncherInternal));
+        assert(h2co3Launcher);
+        memset(h2co3Launcher, 0, sizeof(struct H2CO3LauncherInternal));
+        if (asprintf(&strptr_env, "%p", h2co3Launcher) == -1)
+            abort();
+        setenv("H2CO3LAUNCHER_ENVIRON", strptr_env, 1);
+        free(strptr_env);
+    } else {
+        __android_log_print(ANDROID_LOG_INFO, "Environ", "Found existing environ: %s", strptr_env);
+        h2co3Launcher = (void *) strtoul(strptr_env, NULL, 0x10);
     }
-    __android_log_print(ANDROID_LOG_INFO, "Environ", "h2co3Launcher initialized: %p",
-                        h2co3Launcher);
+    __android_log_print(ANDROID_LOG_INFO, "Environ", "%p", h2co3Launcher);
 }
 
 ANativeWindow *h2co3LauncherGetNativeWindow() {
-    if (h2co3Launcher) {
-        return h2co3Launcher->window;
-    }
-    return NULL;
+    return h2co3Launcher->window;
 }
 
 void h2co3LauncherSetPrimaryClipString(const char *string) {
-    if (!h2co3Launcher) {
-        __android_log_print(ANDROID_LOG_ERROR, "h2co3Launcher",
-                            "h2co3Launcher is not initialized.");
-        return;
-    }
     PrepareH2CO3LauncherBridgeJNI();
-    jstring jstr = (*env)->NewStringUTF(env, string);
-    CallH2CO3LauncherBridgeJNIFunc(, Void, setPrimaryClipString, "(Ljava/lang/String;)V", jstr);
-    (*env)->DeleteLocalRef(env, jstr);
+    CallH2CO3LauncherBridgeJNIFunc(, Void, setPrimaryClipString, "(Ljava/lang/String;)V",
+                                     (*env)->NewStringUTF(env, string));
 }
 
 const char *h2co3LauncherGetPrimaryClipString() {
-    if (!h2co3Launcher) {
-        __android_log_print(ANDROID_LOG_ERROR, "h2co3Launcher",
-                            "h2co3Launcher is not initialized.");
-        return NULL;
-    }
     PrepareH2CO3LauncherBridgeJNI();
-    if (h2co3Launcher->clipboard_string) {
+    if (h2co3Launcher->clipboard_string != NULL) {
         free(h2co3Launcher->clipboard_string);
         h2co3Launcher->clipboard_string = NULL;
     }
     CallH2CO3LauncherBridgeJNIFunc(jstring clipstr =, Object, getPrimaryClipString,
                                    "()Ljava/lang/String;");
     const char *string = NULL;
-    if (clipstr) {
+    if (clipstr != NULL) {
         string = (*env)->GetStringUTFChars(env, clipstr, NULL);
-        if (string) {
+        if (string != NULL) {
             h2co3Launcher->clipboard_string = strdup(string);
-            (*env)->ReleaseStringUTFChars(env, clipstr, string);
         }
-        (*env)->DeleteLocalRef(env, clipstr);
     }
     return h2co3Launcher->clipboard_string;
 }
@@ -67,13 +56,8 @@ const char *h2co3LauncherGetPrimaryClipString() {
 JNIEXPORT void JNICALL
 Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_h2co3LauncherSetNativeWindow(
         JNIEnv *env, jclass clazz, jobject surface) {
-    if (!surface || !h2co3Launcher) {
-        __android_log_print(ANDROID_LOG_ERROR, "h2co3Launcher",
-                            "Surface or h2co3Launcher is NULL.");
-        return;
-    }
     h2co3Launcher->window = ANativeWindow_fromSurface(env, surface);
-    H2CO3_INTERNAL_LOG("setH2CO3LauncherNativeWindow : %p, size : %dx%d", h2co3Launcher->window,
+    H2CO3_INTERNAL_LOG("setFCLNativeWindow : %p, size : %dx%d", h2co3Launcher->window,
                        ANativeWindow_getWidth(h2co3Launcher->window),
                        ANativeWindow_getHeight(h2co3Launcher->window));
 }
@@ -82,32 +66,29 @@ JNIEXPORT void JNICALL
 Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_setH2CO3LauncherBridge(JNIEnv *env,
                                                                                     jobject thiz,
                                                                                     jobject h2co3Launcher_bridge) {
-    if (!thiz) {
-        __android_log_print(ANDROID_LOG_ERROR, "h2co3Launcher", "thiz is NULL.");
-        return;
-    }
-    h2co3Launcher->object_H2CO3LauncherBridge = (*env)->NewGlobalRef(env, thiz);
+    h2co3Launcher->object_H2CO3LauncherBridge = (jclass) (*env)->NewGlobalRef(env, thiz);
 }
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     env_init();
-
-    if (!h2co3Launcher->android_jvm) {
+    if (h2co3Launcher->android_jvm == NULL) {
         h2co3Launcher->android_jvm = vm;
-        JNIEnv *env = NULL;
-        jint result = (*vm)->AttachCurrentThread(vm, &env, NULL);
-        if (result != JNI_OK || !env) {
+        JNIEnv *env = 0;
+        jint result = (*h2co3Launcher->android_jvm)->AttachCurrentThread(h2co3Launcher->android_jvm,
+                                                                         &env, 0);
+        if (result != JNI_OK || env == 0) {
             H2CO3_INTERNAL_LOG("Failed to attach thread to JavaVM.");
             abort();
         }
-        jclass class_H2CO3LauncherBridge = (*env)->FindClass(env,
-                                                             "org/koishi/launcher/h2co3/core/game/H2CO3LauncherBridge");
-        if (!class_H2CO3LauncherBridge) {
+        jclass class_FCLBridge = (*env)->FindClass(env,
+                                                   "org/koishi/launcher/h2co3/core/game/H2CO3LauncherBridge");
+        if (class_FCLBridge == 0) {
             H2CO3_INTERNAL_LOG(
                     "Failed to find class: org/koishi/launcher/h2co3/core/game/H2CO3LauncherBridge.");
             abort();
         }
-        h2co3Launcher->class_H2CO3LauncherBridge = (*env)->NewGlobalRef(env, class_H2CO3LauncherBridge);
+        h2co3Launcher->class_H2CO3LauncherBridge = (jclass) (*env)->NewGlobalRef(env,
+                                                                                 class_FCLBridge);
     }
     return JNI_VERSION_1_2;
 }

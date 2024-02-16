@@ -8,17 +8,11 @@ on:
   pull_request:
     tags:
       - v*
-  workflow_dispatch:
-    inputs:
-      reason:
-        description: 'Reason for manual trigger'
-        required: false
-
 jobs:
   build:
 
     runs-on: ubuntu-latest
-  
+
     steps:
       - uses: actions/checkout@v4
       - name: set-on JDK 17
@@ -27,7 +21,7 @@ jobs:
           java-version: '17'
           distribution: 'dragonwell'
           cache: gradle
-          
+
       - name: Build Debug .apk
         run: |
           # Build the launcher
