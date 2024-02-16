@@ -290,6 +290,7 @@ public class H2CO3Tools {
             case "String" -> type.cast(value.toString());
             case "Integer" -> type.cast(Integer.parseInt(value.toString()));
             case "Boolean" -> type.cast(Boolean.parseBoolean(value.toString()));
+            case "Double" -> type.cast(Double.parseDouble(value.toString()));
             default -> null;
         };
     }

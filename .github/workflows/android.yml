@@ -7,6 +7,11 @@ on:
   pull_request:
     tags:
       - v*
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual trigger'
+        required: false
 
 jobs:
   build:
@@ -27,7 +32,6 @@ jobs:
           # Build the launcher
           gradle :H2CO3:assembleDebug
 
-    
       - name: Get Version Name
         id: get-version
         run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
