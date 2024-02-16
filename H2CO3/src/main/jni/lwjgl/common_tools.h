@@ -10,7 +10,7 @@
 #include "WindowsConfig.h"
 #endif
 #ifdef LWJGL_LINUX
-#include "LinuxConfig.h"
+#include "H2CO3LauncherConfig.h"
 #endif
 #ifdef LWJGL_H2CO3Launcher
 

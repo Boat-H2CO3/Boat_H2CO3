@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import java.nio.*;
+import org.lwjgl.system.NativeType;
 
-import org.lwjgl.system.*;
+import java.nio.IntBuffer;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_transform_feedback3.txt">ARB_transform_feedback3</a> extension.

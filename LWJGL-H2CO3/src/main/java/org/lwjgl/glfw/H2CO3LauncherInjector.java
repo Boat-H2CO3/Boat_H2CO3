@@ -10,6 +10,9 @@ import java.lang.reflect.Method;
 import static org.lwjgl.system.APIUtil.apiGetFunctionAddress;
 import static org.lwjgl.system.APIUtil.apiLog;
 
+/**
+ * By Tungsten
+ */
 public class H2CO3LauncherInjector {
 
     public static final long GetInjectorMode = apiGetFunctionAddress(GLFW.GLFW, "glfwGetInjectorMode");
@@ -45,7 +48,7 @@ public class H2CO3LauncherInjector {
     private static String param3 = null;
 
     public static void setClassLoader(ClassLoader classLoader) {
-        String prop = System.getProperty("h2co3Launcher.injector");
+        String prop = System.getProperty("h2co3launcher.injector");
         if (!get && prop != null && !prop.isEmpty()) {
             H2CO3LauncherInjector.classLoader = classLoader;
             String[] props = prop.split(":");

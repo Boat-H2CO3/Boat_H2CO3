@@ -221,26 +221,16 @@ public class Util {
 
 		switch ( type ) {
 			case GL_UNSIGNED_BYTE:
-				m = 1;
-				break;
-			case GL_BYTE:
-				m = 1;
-				break;
 			case GL_BITMAP:
+            case GL_BYTE:
 				m = 1;
 				break;
 			case GL_UNSIGNED_SHORT:
-				m = 2;
-				break;
 			case GL_SHORT:
 				m = 2;
 				break;
 			case GL_UNSIGNED_INT:
-				m = 4;
-				break;
 			case GL_INT:
-				m = 4;
-				break;
 			case GL_FLOAT:
 				m = 4;
 				break;

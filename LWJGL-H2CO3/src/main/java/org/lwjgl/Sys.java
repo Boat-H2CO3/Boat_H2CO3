@@ -156,8 +156,7 @@ public final class Sys {
 				}
 			});
 			try {
-				Boolean ret = (Boolean) showDocumentMethod.invoke(basicService, new URL(url));
-				return ret;
+				return (Boolean) showDocumentMethod.invoke(basicService, new URL(url));
 			} catch (MalformedURLException e) {
 				e.printStackTrace(System.err);
 				return false;

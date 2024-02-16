@@ -5,9 +5,9 @@
  */
 package org.lwjgl.opengl;
 
-import java.nio.*;
+import org.lwjgl.system.NativeType;
 
-import org.lwjgl.system.*;
+import java.nio.LongBuffer;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_gpu_shader_int64.txt">AMD_gpu_shader_int64</a> extension.

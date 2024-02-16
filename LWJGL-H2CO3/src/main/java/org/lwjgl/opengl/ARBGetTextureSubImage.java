@@ -5,9 +5,13 @@
  */
 package org.lwjgl.opengl;
 
-import java.nio.*;
+import org.lwjgl.system.NativeType;
 
-import org.lwjgl.system.*;
+import java.nio.ByteBuffer;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_get_texture_sub_image.txt">ARB_get_texture_sub_image</a> extension.

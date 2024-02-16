@@ -5,16 +5,24 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import static org.lwjgl.system.Checks.CHECKS;
+import static org.lwjgl.system.Checks.DEBUG;
+import static org.lwjgl.system.Checks.check;
+import static org.lwjgl.system.JNI.callPV;
+import static org.lwjgl.system.MemoryStack.stackGet;
+import static org.lwjgl.system.MemoryUtil.memAddress;
+import static org.lwjgl.system.MemoryUtil.memAddressSafe;
 
-import java.nio.*;
+import org.lwjgl.system.MemoryStack;
+import org.lwjgl.system.NativeType;
 
-import org.lwjgl.system.*;
+import java.nio.ByteBuffer;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 
-import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import javax.annotation.Nullable;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_robustness.txt">ARB_robustness</a> extension.

@@ -4,23 +4,16 @@
  */
 package org.lwjgl.system.linux;
 
-import static org.lwjgl.system.MemoryStack.stackPush;
-import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjgl.system.linux.DynamicLinkLoader.RTLD_GLOBAL;
-import static org.lwjgl.system.linux.DynamicLinkLoader.RTLD_LAZY;
-import static org.lwjgl.system.linux.DynamicLinkLoader.dlclose;
-import static org.lwjgl.system.linux.DynamicLinkLoader.dlerror;
-import static org.lwjgl.system.linux.DynamicLinkLoader.dlopen;
-import static org.lwjgl.system.linux.DynamicLinkLoader.dlsym;
-
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.SharedLibrary;
+import org.lwjgl.system.*;
 import org.lwjgl.system.h2co3.H2CO3LauncherLibrary;
 
-import java.nio.ByteBuffer;
+import javax.annotation.*;
 
-import javax.annotation.Nullable;
+import java.nio.*;
+
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.h2co3.DynamicLinkLoader.*;
 
 /**
  * Implements a {@link SharedLibrary} on the Linux OS.
@@ -38,7 +31,7 @@ public class LinuxLibrary extends H2CO3LauncherLibrary {
     private static long loadLibrary(String name) {
         long handle;
         try (MemoryStack stack = stackPush()) {
-            handle = dlopen(stack.UTF8(name), RTLD_LAZY | (PointerBuffer.is64Bit() ? RTLD_GLOBAL : 2));
+            handle = dlopen(stack.UTF8(name), RTLD_LAZY | RTLD_LOCAL);
         }
         if (handle == NULL) {
             throw new UnsatisfiedLinkError("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
@@ -54,12 +47,12 @@ public class LinuxLibrary extends H2CO3LauncherLibrary {
 
     @Override
     public long getFunctionAddress(ByteBuffer functionName) {
-        return dlsym(address(), functionName);
+        return super.getFunctionAddress(functionName);
     }
 
     @Override
     public void free() {
-        dlclose(address());
+        super.free();
     }
 
 }

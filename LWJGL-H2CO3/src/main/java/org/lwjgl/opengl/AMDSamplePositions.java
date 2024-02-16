@@ -5,13 +5,14 @@
  */
 package org.lwjgl.opengl;
 
-import java.nio.*;
+import static org.lwjgl.system.Checks.CHECKS;
+import static org.lwjgl.system.Checks.check;
+import static org.lwjgl.system.JNI.callPV;
+import static org.lwjgl.system.MemoryUtil.memAddress;
 
-import org.lwjgl.system.*;
+import org.lwjgl.system.NativeType;
 
-import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import java.nio.FloatBuffer;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_sample_positions.txt">AMD_sample_positions</a> extension.

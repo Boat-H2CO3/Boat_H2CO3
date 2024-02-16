@@ -5,12 +5,15 @@
  */
 package org.lwjgl.openal;
 
-import org.lwjgl.system.*;
-import java.util.Set;
-import org.lwjgl.*;
-import java.util.function.IntFunction;
+import static org.lwjgl.system.Checks.checkFunctions;
+import static org.lwjgl.system.Checks.reportMissing;
 
-import static org.lwjgl.system.Checks.*;
+import org.lwjgl.PointerBuffer;
+import org.lwjgl.system.FunctionProviderLocal;
+import org.lwjgl.system.ThreadLocalUtil;
+
+import java.util.Set;
+import java.util.function.IntFunction;
 
 /** Defines the capabilities of the OpenAL Context API. */
 public final class ALCCapabilities {

@@ -196,17 +196,16 @@ public final class Display {
 							int absf2 = Math.abs(f2 - accessor.preferred);
 							if ( absf1 < absf2 )
 								return -1;
-							else if ( absf1 > absf2 )
-								return 1;
-							else
-								continue;
+							else if (absf1 > absf2)
+                                return 1;
+                            else {
+                            }
 						}
-					} else if ( f1 < f2 )
-						return accessor.order;
-					else if ( f1 == f2 )
-						continue;
-					else
-						return -accessor.order;
+					} else if (f1 < f2)
+                        return accessor.order;
+                    else if (f1 == f2) {
+                    } else
+                        return -accessor.order;
 				}
 
 				return 0;

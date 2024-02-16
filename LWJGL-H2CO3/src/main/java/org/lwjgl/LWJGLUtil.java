@@ -57,24 +57,24 @@ import java.util.StringTokenizer;
  * $Id$
  */
 public class LWJGLUtil {
-	public static final int PLATFORM_LINUX 				= 1;
-	public static final int PLATFORM_MACOSX 			= 2;
-	public static final int PLATFORM_WINDOWS = 3;
-	public static final int PLATFORM_H2CO3LAUNCHER = 1728;
-	public static final String PLATFORM_LINUX_NAME = "linux";
-	public static final String PLATFORM_MACOSX_NAME 	= "macosx";
-	public static final String PLATFORM_WINDOWS_NAME = "windows";
-	public static final String PLATFORM_H2CO3LAUNCHER_NAME = "h2co3Launcher";
+    public static final int PLATFORM_LINUX = 1;
+    public static final int PLATFORM_MACOSX = 2;
+    public static final int PLATFORM_WINDOWS = 3;
+    public static final int PLATFORM_H2CO3Launcher = 1728;
+    public static final String PLATFORM_LINUX_NAME = "linux";
+    public static final String PLATFORM_MACOSX_NAME = "macosx";
+    public static final String PLATFORM_WINDOWS_NAME = "windows";
+    public static final String PLATFORM_H2CO3Launcher_NAME = "h2co3launcher";
 
-	private static final String LWJGL_ICON_DATA_16x16 =
-		"\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377" +
-		"\377\377\377\377\377\377\377\377\376\377\377\377\302\327\350\377" +
-		"\164\244\313\377\120\213\275\377\124\216\277\377\206\257\322\377" +
-		"\347\357\366\377\377\377\377\377\377\377\377\377\377\377\377\377" +
-		"\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377" +
-		"\377\377\377\377\365\365\365\377\215\217\221\377\166\202\215\377" +
-		"\175\215\233\377\204\231\252\377\224\267\325\377\072\175\265\377" +
-		"\110\206\272\377\332\347\361\377\377\377\377\377\377\377\377\377" +
+    private static final String LWJGL_ICON_DATA_16x16 =
+            "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377" +
+                    "\377\377\377\377\377\377\377\377\376\377\377\377\302\327\350\377" +
+                    "\164\244\313\377\120\213\275\377\124\216\277\377\206\257\322\377" +
+                    "\347\357\366\377\377\377\377\377\377\377\377\377\377\377\377\377" +
+                    "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377" +
+                    "\377\377\377\377\365\365\365\377\215\217\221\377\166\202\215\377" +
+                    "\175\215\233\377\204\231\252\377\224\267\325\377\072\175\265\377" +
+                    "\110\206\272\377\332\347\361\377\377\377\377\377\377\377\377\377" +
 		"\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377" +
 		"\364\370\373\377\234\236\240\377\000\000\000\377\000\000\000\377" +
 		"\000\000\000\377\000\000\000\377\344\344\344\377\204\255\320\377" +
@@ -280,7 +280,7 @@ public class LWJGLUtil {
 		if ( osName.startsWith("Windows") )
 			PLATFORM = PLATFORM_WINDOWS;
 		else if ( osName.startsWith("Linux") || osName.startsWith("FreeBSD") || osName.startsWith("OpenBSD") || osName.startsWith("SunOS") || osName.startsWith("Unix") ) {
-			PLATFORM = PLATFORM_H2CO3LAUNCHER;
+            PLATFORM = PLATFORM_H2CO3Launcher;
 		}
 		else if ( osName.startsWith("Mac OS X") || osName.startsWith("Darwin") )
 			PLATFORM = PLATFORM_MACOSX;
@@ -297,36 +297,37 @@ public class LWJGLUtil {
 		return bb.asReadOnlyBuffer();
 	}
 
-	/**
-	 * @return the current platform type
-	 * @see #PLATFORM_WINDOWS
-	 * @see #PLATFORM_LINUX
-	 * @see #PLATFORM_MACOSX
-	 * @see #PLATFORM_H2CO3LAUNCHER
-	 */
+    /**
+     * @return the current platform type
+     * @see #PLATFORM_WINDOWS
+     * @see #PLATFORM_LINUX
+     * @see #PLATFORM_MACOSX
+     * @see #PLATFORM_H2CO3Launcher
+     */
 	public static int getPlatform() {
 		return PLATFORM;
-	}
+    }
 
 
-	/**
-	 * @see #PLATFORM_WINDOWS_NAME
-	 * @see #PLATFORM_LINUX_NAME
-	 * @see #PLATFORM_MACOSX_NAME
-	 * @see #PLATFORM_H2CO3LAUNCHER_NAME
-	 * @return current platform name
+    /**
+     * @see #PLATFORM_WINDOWS_NAME
+     * @see #PLATFORM_LINUX_NAME
+     * @see #PLATFORM_MACOSX_NAME
+     * @see #PLATFORM_H2CO3Launcher_NAME
+     * @return current platform name
 	 */
 	public static String getPlatformName() {
 		switch (LWJGLUtil.getPlatform()) {
-			case LWJGLUtil.PLATFORM_LINUX:
-			case LWJGLUtil.PLATFORM_H2CO3LAUNCHER:
-				return PLATFORM_H2CO3LAUNCHER_NAME;
-			case LWJGLUtil.PLATFORM_MACOSX:
-				return PLATFORM_MACOSX_NAME;
-			case LWJGLUtil.PLATFORM_WINDOWS:
-				return PLATFORM_WINDOWS_NAME;
-			default:
-				return "unknown";
+            case LWJGLUtil.PLATFORM_LINUX:
+                return PLATFORM_LINUX_NAME;
+            case LWJGLUtil.PLATFORM_MACOSX:
+                return PLATFORM_MACOSX_NAME;
+            case LWJGLUtil.PLATFORM_WINDOWS:
+                return PLATFORM_WINDOWS_NAME;
+            case LWJGLUtil.PLATFORM_H2CO3Launcher:
+                return PLATFORM_H2CO3Launcher_NAME;
+            default:
+                return "unknown";
 		}
 	}
 
@@ -407,7 +408,7 @@ public class LWJGLUtil {
 		}
 
 		//create needed string array
-		return possible_paths.toArray(new String[possible_paths.size()]);
+        return possible_paths.toArray(new String[0]);
 	}
 
 	static void execPrivileged(final String[] cmd_array) throws Exception {
@@ -458,8 +459,7 @@ public class LWJGLUtil {
 						public String run() throws Exception {
 							Method findLibrary = clazz.getDeclaredMethod("findLibrary", String.class);
 							findLibrary.setAccessible(true);
-							String path = (String)findLibrary.invoke(classloader, libname);
-							return path;
+                            return (String) findLibrary.invoke(classloader, libname);
 						}
 					});
 				} catch (PrivilegedActionException e) {

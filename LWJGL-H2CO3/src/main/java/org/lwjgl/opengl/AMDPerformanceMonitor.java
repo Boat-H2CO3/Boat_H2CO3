@@ -5,16 +5,26 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import static org.lwjgl.system.Checks.CHECKS;
+import static org.lwjgl.system.Checks.check;
+import static org.lwjgl.system.Checks.checkSafe;
+import static org.lwjgl.system.Checks.lengthSafe;
+import static org.lwjgl.system.Checks.remainingSafe;
+import static org.lwjgl.system.JNI.callPPPV;
+import static org.lwjgl.system.JNI.callPPV;
+import static org.lwjgl.system.JNI.callPV;
+import static org.lwjgl.system.MemoryStack.stackGet;
+import static org.lwjgl.system.MemoryUtil.memAddress;
+import static org.lwjgl.system.MemoryUtil.memAddressSafe;
 
-import java.nio.*;
+import org.lwjgl.system.MemoryStack;
+import org.lwjgl.system.NativeType;
 
-import org.lwjgl.system.*;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
-import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import javax.annotation.Nullable;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_performance_monitor.txt">AMD_performance_monitor</a> extension.

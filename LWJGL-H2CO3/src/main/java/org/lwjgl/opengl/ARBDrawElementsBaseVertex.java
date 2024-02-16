@@ -5,11 +5,12 @@
  */
 package org.lwjgl.opengl;
 
-import java.nio.*;
+import org.lwjgl.PointerBuffer;
+import org.lwjgl.system.NativeType;
 
-import org.lwjgl.*;
-
-import org.lwjgl.system.*;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_draw_elements_base_vertex.txt">ARB_draw_elements_base_vertex</a> extension.

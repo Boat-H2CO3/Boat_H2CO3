@@ -5,11 +5,12 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.lwjgl.system.NativeType;
 
-import java.nio.*;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 
-import org.lwjgl.system.*;
+import javax.annotation.Nullable;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_get_program_binary.txt">ARB_get_program_binary</a> extension.

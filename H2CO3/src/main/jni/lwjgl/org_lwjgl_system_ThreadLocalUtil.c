@@ -4,6 +4,8 @@
  */
 #include "common_tools.h"
 #include <string.h>
+#include <stdio.h>
+#include <malloc.h>
 
 static void JNICALL functionMissingAbort(void) {
     jboolean async;

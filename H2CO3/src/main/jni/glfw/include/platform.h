@@ -98,7 +98,7 @@
 #endif
 
 #if defined(GLFW_BUILD_LINUX_JOYSTICK)
-#include "linux_joystick.h"
+#include "win32_joystick.h"
 #else
 #define GLFW_LINUX_JOYSTICK_STATE
 #define GLFW_LINUX_LIBRARY_JOYSTICK_STATE

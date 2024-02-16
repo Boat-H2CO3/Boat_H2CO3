@@ -13,7 +13,7 @@ import static org.lwjgl.system.APIUtil.*;
 /** The platforms supported by LWJGL. */
 public enum Platform {
 
-    LINUX("Linux", "linux") {
+    LINUX("H2CO3Launcher", "h2co3launcher") {
         private final Pattern SO = Pattern.compile("(?:^|/)lib\\w+[.]so(?:[.]\\d+)*$");
 
         @Override
@@ -25,7 +25,7 @@ public enum Platform {
             return System.mapLibraryName(name);
         }
     },
-    H2CO3Launcher("H2CO3Launcher", "h2co3Launcher") {
+    H2CO3Launcher("H2CO3Launcher", "h2co3launcher") {
         private final Pattern SO = Pattern.compile("(?:^|/)lib\\w+[.]so(?:[.]\\d+)*$");
 
         @Override

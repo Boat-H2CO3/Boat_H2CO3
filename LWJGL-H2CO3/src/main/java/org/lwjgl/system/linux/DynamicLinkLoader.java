@@ -15,18 +15,22 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to &lt;dlfcn.h&gt;. */
-public class DynamicLinkLoader {
-
-    static { Library.initialize(); }
+/**
+ * Native bindings to &lt;dlfcn.h&gt;.
+ */
+public class DynamicLinkLoader extends org.lwjgl.system.h2co3.DynamicLinkLoader {
 
     /** The {@code mode} argument to {@link #dlopen} contains one of the following. */
     public static final int
-        RTLD_LAZY         = 0x1,
-        RTLD_NOW          = 0x2,
-        RTLD_BINDING_MASK = 0x3,
-        RTLD_NOLOAD       = 0x4,
-        RTLD_DEEPBIND     = 0x8;
+            RTLD_LAZY = 0x1,
+            RTLD_NOW = 0x2,
+            RTLD_BINDING_MASK = 0x3,
+            RTLD_NOLOAD = 0x4,
+            RTLD_DEEPBIND = 0x8;
+
+    static {
+        Library.initialize();
+    }
 
     /**
      * If the following bit is set in the {@code mode} argument to {@link #dlopen}, the symbols of the loaded object and its dependencies are made visible as

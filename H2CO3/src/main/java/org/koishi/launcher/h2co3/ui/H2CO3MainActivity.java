@@ -435,12 +435,12 @@ public class H2CO3MainActivity extends H2CO3Activity implements View.OnClickList
         List<String> serverList = new ArrayList<>();
         if (serversFile.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(serversFile))) {
-                String json = "";
+                StringBuilder json = new StringBuilder();
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    json += line;
+                    json.append(line);
                 }
-                servers = new Gson().fromJson(json, Servers.class);
+                servers = new Gson().fromJson(json.toString(), Servers.class);
                 if (servers != null) {
                     currentBaseUrl = servers.getServer().get(0).getBaseUrl();
                     for (Servers.Server server : servers.getServer()) {

@@ -42,11 +42,11 @@ public abstract class HttpRequest {
     }
 
     @SafeVarargs
-    public static HttpGetRequest GET(String url, Pair<String, String>... query) throws UnsupportedEncodingException {
+    public static HttpGetRequest GET(String url, Pair<String, String>... query) {
         return GET(NetworkUtils.withQuery(url, mapOf(query)));
     }
 
-    public static HttpPostRequest POST(String url) throws MalformedURLException {
+    public static HttpPostRequest POST(String url) {
         return new HttpPostRequest(url);
     }
 
@@ -157,7 +157,7 @@ public abstract class HttpRequest {
             return string(payload instanceof String ? (String) payload : JsonUtils.GSON.toJson(payload), "application/json");
         }
 
-        public HttpPostRequest form(Map<String, String> params) throws UnsupportedEncodingException {
+        public HttpPostRequest form(Map<String, String> params) {
             return string(NetworkUtils.withQuery("", params), "application/x-www-form-urlencoded");
         }
 

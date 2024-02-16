@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import org.lwjgl.system.*;
+import org.lwjgl.system.NativeType;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_occlusion_query_event.txt">AMD_occlusion_query_event</a> extension.

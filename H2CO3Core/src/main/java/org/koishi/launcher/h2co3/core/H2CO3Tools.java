@@ -110,10 +110,10 @@ public class H2CO3Tools {
         APP_DATA_PATH = "/data/data/org.koishi.launcher.h2co3";
         RUNTIME_DIR = APP_DATA_PATH + "/app_runtime";
         JAVA_PATH = RUNTIME_DIR + "/java";
-        JAVA_8_PATH = JAVA_PATH + "/jre_8";
-        JAVA_11_PATH = JAVA_PATH + "/jre_11";
-        JAVA_17_PATH = JAVA_PATH + "/jre_17";
-        JAVA_21_PATH = JAVA_PATH + "/jre_21";
+        JAVA_8_PATH = JAVA_PATH + "/jre8";
+        JAVA_11_PATH = JAVA_PATH + "/jre11";
+        JAVA_17_PATH = JAVA_PATH + "/jre17";
+        JAVA_21_PATH = JAVA_PATH + "/jre21";
         H2CO3LAUNCHER_LIBRARY_DIR = RUNTIME_DIR + "/h2co3Launcher";
         PLUGIN_DIR = RUNTIME_DIR + "/h2co3Launcher/plugin";
         CACIOCAVALLO_8_DIR = PLUGIN_DIR + "/caciocavallo";

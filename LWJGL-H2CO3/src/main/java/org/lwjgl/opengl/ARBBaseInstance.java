@@ -5,9 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import java.nio.*;
+import org.lwjgl.system.NativeType;
 
-import org.lwjgl.system.*;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_base_instance.txt">ARB_base_instance</a> extension.

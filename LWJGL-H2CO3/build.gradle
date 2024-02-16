@@ -25,7 +25,7 @@ jar {
     doLast {
         archiveFileName = 'lwjgl.jar'
         manifest {
-            attributes 'Manifest-Version': '3.2.4'
+            attributes 'Manifest-Version': '3.3.3'
         }
         destinationDirectory.set(file(libsDir))
         File versionFile = file("$h2co3LauncherDir/version")

@@ -201,15 +201,13 @@ public final class Library {
 
     /**
      * Loads a shared library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
-     * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
+     * {@link org.lwjgl.system.h2co3.DynamicLinkLoader#dlopen dlopen}).
      *
      * @param context the class to use to discover the shared library in the classpath
      * @param module  the module to which the shared library belongs
      * @param name    the library name. OS-specific prefixes and file extensions are optional (e.g. both {@code "GL"} and {@code "libGL.so.1"} are
      *                valid on Linux)
-     *
      * @return the shared library
-     *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
     @SuppressWarnings("try")
@@ -219,7 +217,7 @@ public final class Library {
 
     /**
      * Loads a shared library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
-     * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
+     * {@link org.lwjgl.system.h2co3.DynamicLinkLoader#dlopen dlopen}).
      *
      * @param context          the class to use to discover the shared library in the classpath
      * @param module           the module to which the shared library belongs
@@ -427,7 +425,7 @@ public final class Library {
             }
         }
 
-        if (fallback == null && defaultNames.length <= 1) {
+        if (fallback == null && defaultNames.length == 1) {
             return loadNative(context, module, defaultNames[0]);
         }
 

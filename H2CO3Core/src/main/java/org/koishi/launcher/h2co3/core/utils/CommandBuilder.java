@@ -179,7 +179,7 @@ public final class CommandBuilder {
 
     @Override
     public String toString() {
-        return raw.stream().collect(Collectors.joining(" "));
+        return String.join(" ", raw);
     }
 
     public List<String> asList() {

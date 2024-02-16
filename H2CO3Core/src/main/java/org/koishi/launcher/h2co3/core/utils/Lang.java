@@ -293,7 +293,7 @@ public final class Lang {
     }
 
     public static <T> Stream<T> toStream(Optional<T> optional) {
-        return optional.map(Stream::of).orElseGet(Stream::empty);
+        return optional.stream();
     }
 
     public static <T> Iterable<T> toIterable(Enumeration<T> enumeration) {

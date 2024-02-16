@@ -5,7 +5,7 @@
  */
 package org.lwjgl.opengl;
 
-import org.lwjgl.system.*;
+import org.lwjgl.system.NativeType;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_stencil_operation_extended.txt">AMD_stencil_operation_extended</a> extension.

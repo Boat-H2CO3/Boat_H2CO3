@@ -320,7 +320,6 @@ public class GLUtessellatorImpl implements GLUtessellator {
                 value[value_offset] = windingRule;
                 break;
             case GLU_TESS_BOUNDARY_ONLY:
-                assert (boundaryOnly || !boundaryOnly);
                 value[value_offset] = boundaryOnly ? 1 : 0;
                 break;
             default:
@@ -395,16 +394,16 @@ public class GLUtessellatorImpl implements GLUtessellator {
 
         e = lastEdge;
         if (e == null) {
-/* Make a self-loop (one vertex, one edge). */
+            /* Make a self-loop (one vertex, one edge). */
 
             e = Mesh.__gl_meshMakeEdge(mesh);
-            if (e == null) return false;
-            if (!Mesh.__gl_meshSplice(e, e.Sym)) return false;
+            if (e == null) return true;
+            if (Mesh.__gl_meshSplice(e, e.Sym)) return true;
         } else {
 /* Create a new vertex and edge which immediately follow e
  * in the ordering around the left face.
  */
-            if (Mesh.__gl_meshSplitEdge(e) == null) return false;
+            if (Mesh.__gl_meshSplitEdge(e) == null) return true;
             e = e.Lnext;
         }
 
@@ -424,7 +423,7 @@ public class GLUtessellatorImpl implements GLUtessellator {
 
         lastEdge = e;
 
-        return true;
+        return false;
     }
 
     private void cacheVertex(double[] coords, Object vertexData) {
@@ -446,16 +445,16 @@ public class GLUtessellatorImpl implements GLUtessellator {
         CachedVertex[] v = cache;
 
         mesh = Mesh.__gl_meshNewMesh();
-        if (mesh == null) return false;
+        if (mesh == null) return true;
 
         for (int i = 0; i < cacheCount; i++) {
             CachedVertex vertex = v[i];
-            if (!addVertex(vertex.coords, vertex.data)) return false;
+            if (addVertex(vertex.coords, vertex.data)) return true;
         }
         cacheCount = 0;
         flushCacheOnNextVertex = false;
 
-        return true;
+        return false;
     }
 
     public void gluTessVertex(double[] coords, int coords_offset, Object vertexData) {
@@ -467,7 +466,7 @@ public class GLUtessellatorImpl implements GLUtessellator {
         requireState(TessState.T_IN_CONTOUR);
 
         if (flushCacheOnNextVertex) {
-            if (!flushCache()) {
+            if (flushCache()) {
                 callErrorOrErrorData(GLU_OUT_OF_MEMORY);
                 return;
             }
@@ -494,13 +493,13 @@ public class GLUtessellatorImpl implements GLUtessellator {
                 cacheVertex(clamped, vertexData);
                 return;
             }
-            if (!flushCache()) {
+            if (flushCache()) {
                 callErrorOrErrorData(GLU_OUT_OF_MEMORY);
                 return;
             }
         }
 
-        if (!addVertex(clamped, vertexData)) {
+        if (addVertex(clamped, vertexData)) {
             callErrorOrErrorData(GLU_OUT_OF_MEMORY);
         }
     }
@@ -548,17 +547,17 @@ public class GLUtessellatorImpl implements GLUtessellator {
             if (this.mesh == null) {
                 if (!flagBoundary /*&& callMesh == NULL_CB*/) {
 
-/* Try some special code to make the easy cases go quickly
- * (eg. convex polygons).  This code does NOT handle multiple contours,
- * intersections, edge flags, and of course it does not generate
- * an explicit mesh either.
- */
+                    /* Try some special code to make the easy cases go quickly
+                     * (eg. convex polygons).  This code does NOT handle multiple contours,
+                     * intersections, edge flags, and of course it does not generate
+                     * an explicit mesh either.
+                     */
                     if (Render.__gl_renderCache(this)) {
                         polygonData = null;
                         return;
                     }
                 }
-                if (!flushCache()) throw new RuntimeException(); /* could've used a label*/
+                if (flushCache()) throw new RuntimeException(); /* could've used a label*/
             }
 
 /* Determine the polygon normal and project vertices onto the plane

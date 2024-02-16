@@ -8,7 +8,7 @@
     <PreferenceCategory android:title="string/preference_category_main_categories">
 
         <Preference
-            android:fragment="org.koishi.launcher.h2co3.ui.fragment.HomeFragmentr"
+            android:fragment="org.koishi.launcher.h2co3.ui.fragment.home.HomeFragment"
             android:icon="@drawable/ic_lang"
             android:key="video_screen_setting"
             android:summary="string/preference_video_description"

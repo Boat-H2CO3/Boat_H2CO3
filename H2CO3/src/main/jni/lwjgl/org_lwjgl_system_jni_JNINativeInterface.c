@@ -62,7 +62,7 @@ Java_org_lwjgl_system_jni_JNINativeInterface_nDeleteGlobalRef(JNIEnv *__env, jcl
 
 JNIEXPORT jlong JNICALL
 Java_org_lwjgl_system_jni_JNINativeInterface_nGetBooleanArrayElements(JNIEnv *__env, jclass clazz,
-                                                                      jbooleanArray array,
+                                                                      jbyteArray array,
                                                                       jlong isCopyAddress) {
     jboolean *isCopy = (jboolean *) (uintptr_t) isCopyAddress;
     UNUSED_PARAM(clazz)
@@ -72,7 +72,7 @@ Java_org_lwjgl_system_jni_JNINativeInterface_nGetBooleanArrayElements(JNIEnv *__
 JNIEXPORT void JNICALL
 Java_org_lwjgl_system_jni_JNINativeInterface_nReleaseBooleanArrayElements(JNIEnv *__env,
                                                                           jclass clazz,
-                                                                          jbooleanArray array,
+                                                                          jbyteArray array,
                                                                           jlong elemsAddress,
                                                                           jint mode) {
     jboolean *elems = (jboolean *) (uintptr_t) elemsAddress;
@@ -216,7 +216,7 @@ Java_org_lwjgl_system_jni_JNINativeInterface_nReleaseDoubleArrayElements(JNIEnv 
 
 JNIEXPORT void JNICALL
 Java_org_lwjgl_system_jni_JNINativeInterface_nGetBooleanArrayRegion(JNIEnv *__env, jclass clazz,
-                                                                    jbooleanArray array, jint start,
+                                                                    jbyteArray array, jint start,
                                                                     jint len, jlong bufAddress) {
     jboolean *buf = (jboolean *) (uintptr_t) bufAddress;
     UNUSED_PARAM(clazz)
@@ -225,7 +225,7 @@ Java_org_lwjgl_system_jni_JNINativeInterface_nGetBooleanArrayRegion(JNIEnv *__en
 
 JNIEXPORT void JNICALL
 Java_org_lwjgl_system_jni_JNINativeInterface_nSetBooleanArrayRegion(JNIEnv *__env, jclass clazz,
-                                                                    jbooleanArray array, jint start,
+                                                                    jbyteArray array, jint start,
                                                                     jint len, jlong bufAddress) {
     jboolean const *buf = (jboolean const *) (uintptr_t) bufAddress;
     UNUSED_PARAM(clazz)

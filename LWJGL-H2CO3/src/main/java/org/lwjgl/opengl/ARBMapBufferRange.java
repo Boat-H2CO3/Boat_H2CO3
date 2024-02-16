@@ -5,11 +5,11 @@
  */
 package org.lwjgl.opengl;
 
-import javax.annotation.*;
+import org.lwjgl.system.NativeType;
 
-import java.nio.*;
+import java.nio.ByteBuffer;
 
-import org.lwjgl.system.*;
+import javax.annotation.Nullable;
 
 /**
  * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_map_buffer_range.txt">ARB_map_buffer_range</a> extension.

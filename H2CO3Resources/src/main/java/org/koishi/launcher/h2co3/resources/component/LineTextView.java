@@ -31,7 +31,7 @@ public class LineTextView extends H2CO3TextView {
             int lineHeight = getLineHeight();
             int lineCount = getLineCount();
             for (int l = 0; l < lineCount; l++) {
-                float y = (l + 1) * lineHeight - lineHeight / 4;
+                float y = (l + 1) * lineHeight - (float) lineHeight / 4;
                 canvas.drawText(String.valueOf(l + 1), 0, y, textPaint);
             }
         }

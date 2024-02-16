@@ -1,6 +1,6 @@
 package org.koishi.launcher.h2co3.launcher;
 
-import static org.koishi.launcher.h2co3.core.game.H2CO3GameHelper.getJavaPath;
+import static org.koishi.launcher.h2co3.core.game.H2CO3GameHelper.*;
 
 import android.content.Context;
 import android.os.Build;
@@ -22,9 +22,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -32,41 +31,19 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TimeZone;
 import java.util.logging.Level;
-import java.util.stream.Stream;
 
 public class H2CO3LauncherHelper {
 
     private static final String TAG = H2CO3LauncherHelper.class.getSimpleName();
-    private static final String TASK_TITLE_FORMAT = "------------------- %s -------------------";
-    private static final String ARCHITECTURE_FORMAT = "Architecture: %s";
-    private static final String CPU_FORMAT = "CPU: %s";
-    private static final String UNSUPPORTED_ARCHITECTURE_ERROR = "Unsupported architecture!";
-    private static final String ENV_FORMAT = "Env: %s=%s";
-    private static final String WORKING_DIRECTORY_FORMAT = "Working directory: %s";
-    private static final String JVM_EXITED_WITH_CODE_FORMAT = "Jvm Exited With Code: %d";
-
-    private static final String JAVA_HOME = "JAVA_HOME";
-    private static final String H2CO3Launcher_NATIVEDIR = "H2CO3Launcher_NATIVEDIR";
-    private static final String TMPDIR = "TMPDIR";
-    private static final String HOME = "HOME";
-    private static final String LIBGL_STRING = "LIBGL_STRING";
-    private static final String LIBGL_ES = "LIBGL_ES";
-    private static final String LIBGL_MIPMAP = "LIBGL_MIPMAP";
-    private static final String LIBGL_NORMALIZE = "LIBGL_NORMALIZE";
-    private static final String LIBGL_VSYNC = "LIBGL_VSYNC";
-    private static final String LIBGL_NOINTOVLHACK = "LIBGL_NOINTOVLHACK";
-    private static final String LIBGL_NOERROR = "LIBGL_NOERROR";
-    private static final String LIBGL_NAME = "LIBGL_NAME";
-    private static final String LIBEGL_NAME = "LIBEGL_NAME";
 
     public static void printTaskTitle(H2CO3LauncherBridge bridge, String task) {
-        bridge.getCallback().onLog(String.format(TASK_TITLE_FORMAT, task));
+        bridge.getCallback().onLog("==================== " + task + " ====================");
     }
 
     public static void logStartInfo(H2CO3LauncherBridge bridge, String task) {
         printTaskTitle(bridge, "Start " + task);
-        bridge.getCallback().onLog(String.format(ARCHITECTURE_FORMAT, Architecture.archAsString(Architecture.getDeviceArchitecture())));
-        bridge.getCallback().onLog(String.format(CPU_FORMAT, Build.HARDWARE));
+        bridge.getCallback().onLog("Architecture: " + Architecture.archAsString(Architecture.getDeviceArchitecture()));
+        bridge.getCallback().onLog("CPU:" + Build.HARDWARE);
     }
 
     public static Map<String, String> readJREReleaseProperties(String javaPath) throws IOException {
@@ -88,14 +65,14 @@ public class H2CO3LauncherHelper {
         if (Architecture.archAsInt(jreArchitecture) == Architecture.ARCH_X86) {
             jreArchitecture = "i386/i486/i586";
         }
-        String jreLibDir = File.separator + "lib";
+        String jreLibDir = "/lib";
         if (jreArchitecture == null) {
-            throw new IOException(UNSUPPORTED_ARCHITECTURE_ERROR);
+            throw new IOException("Unsupported architecture!");
         }
         for (String arch : jreArchitecture.split("/")) {
-            File file = new File(javaPath, "lib" + File.separator + arch);
+            File file = new File(javaPath, "lib/" + arch);
             if (file.exists() && file.isDirectory()) {
-                jreLibDir = File.separator + "lib" + File.separator + arch;
+                jreLibDir = "/lib/" + arch;
             }
         }
         return jreLibDir;
@@ -108,17 +85,41 @@ public class H2CO3LauncherHelper {
     }
 
     public static String getLibraryPath(Context context, String javaPath) throws IOException {
+        String nativeDir = context.getApplicationInfo().nativeLibraryDir;
+        String libDirName = Architecture.is64BitsDevice() ? "lib64" : "lib";
         String jreLibDir = getJreLibDir(javaPath);
         String jvmLibDir = getJvmLibDir(javaPath);
-        return javaPath + jreLibDir + ":" +
-                javaPath + jreLibDir + File.separator + "jli:" +
-                javaPath + jreLibDir + jvmLibDir + ":" +
-                "/system/" + (Architecture.is64BitsDevice() ? "lib64" : "lib") + ":" +
-                "/vendor/" + (Architecture.is64BitsDevice() ? "lib64" : "lib") + ":" +
-                "/vendor/" + (Architecture.is64BitsDevice() ? "lib64" : "lib") + "/hw" + ":" +
-                context.getApplicationInfo().nativeLibraryDir;
-    }
+        String jliLibDir = "/jli";
+        String split = ":";
+        return javaPath +
+                jreLibDir +
+                split +
 
+                javaPath +
+                jreLibDir +
+                jliLibDir +
+                split +
+
+                javaPath +
+                jreLibDir +
+                jvmLibDir +
+                split +
+
+                "/system/" +
+                libDirName +
+                split +
+
+                "/vendor/" +
+                libDirName +
+                split +
+
+                "/vendor/" +
+                libDirName +
+                "/hw" +
+                split +
+
+                nativeDir;
+    }
 
     public static String[] rebaseArgs(Context context, int width, int height) throws IOException {
         final CommandBuilder command = getMcArgs(context, width, height);
@@ -132,25 +133,25 @@ public class H2CO3LauncherHelper {
     }
 
     public static void addCommonEnv(Context context, HashMap<String, String> envMap) {
-        envMap.put(HOME, H2CO3Tools.LOG_DIR);
-        envMap.put(JAVA_HOME, getJavaPath());
-        envMap.put(H2CO3Launcher_NATIVEDIR, context.getApplicationInfo().nativeLibraryDir);
-        envMap.put(TMPDIR, context.getCacheDir().getAbsolutePath());
+        envMap.put("HOME", H2CO3Tools.LOG_DIR);
+        envMap.put("JAVA_HOME", getJavaPath());
+        envMap.put("H2CO3Launcher_NATIVEDIR", context.getApplicationInfo().nativeLibraryDir);
+        envMap.put("TMPDIR", context.getCacheDir().getAbsolutePath());
     }
 
     public static void addRendererEnv(Context context, HashMap<String, String> envMap, String render) {
-        envMap.put(LIBGL_STRING, render);
+        envMap.put("LIBGL_STRING", render);
         if (render.equals(H2CO3Tools.GL_GL114)) {
-            envMap.put(LIBGL_NAME, "libgl4es.so");
-            envMap.put(LIBEGL_NAME, "libEGL.so");
+            envMap.put("LIBGL_NAME", "libgl4es.so");
+            envMap.put("LIBEGL_NAME", "libEGL.so");
             setGLValues(envMap, "2", "3", "1", "1", "1", "1");
         } else if (render.equals(H2CO3Tools.GL_VGPU)) {
-            envMap.put(LIBGL_NAME, "libvgpu.so");
-            envMap.put(LIBEGL_NAME, "libEGL.so");
+            envMap.put("LIBGL_NAME", "libvgpu.so");
+            envMap.put("LIBEGL_NAME", "libEGL.so");
             setGLValues(envMap, "2", "3", "1", "1", "1", "1");
         } else if (render.equals(H2CO3Tools.GL_VIRGL)) {
-            envMap.put(LIBGL_NAME, "libOSMesa_81.so");
-            envMap.put(LIBEGL_NAME, "libEGL.so");
+            envMap.put("LIBGL_NAME", "libOSMesa_81.so");
+            envMap.put("LIBEGL_NAME", "libEGL.so");
             setGLValues(envMap, "2", "3", "1", "1", "1", "1");
             envMap.put("MESA_GLSL_CACHE_DIR", context.getCacheDir().getAbsolutePath());
             envMap.put("MESA_GL_VERSION_OVERRIDE", "4.3");
@@ -163,8 +164,8 @@ public class H2CO3LauncherHelper {
             envMap.put("GALLIUM_DRIVER", "virpipe");
             envMap.put("OSMESA_NO_FLUSH_FRONTBUFFER", "1");
         } else if (render.equals(H2CO3Tools.GL_ZINK)) {
-            envMap.put(LIBGL_NAME, "libOSMesa_8.so");
-            envMap.put(LIBEGL_NAME, "libEGL.so");
+            envMap.put("LIBGL_NAME", "libOSMesa_8.so");
+            envMap.put("LIBEGL_NAME", "libEGL.so");
             setGLValues(envMap, "2", "3", "1", "1", "1", "1");
             envMap.put("MESA_GLSL_CACHE_DIR", context.getCacheDir().getAbsolutePath());
             envMap.put("MESA_GL_VERSION_OVERRIDE", "4.6");
@@ -176,31 +177,37 @@ public class H2CO3LauncherHelper {
             envMap.put("VTEST_SOCKET_NAME", new File(context.getCacheDir().getAbsolutePath(), ".virgl_test").getAbsolutePath());
             envMap.put("GALLIUM_DRIVER", "zink");
         } else if (render.equals(H2CO3Tools.GL_ANGLE)) {
-            envMap.put(LIBGL_NAME, "libtinywrapper.so");
-            envMap.put(LIBEGL_NAME, "libEGL_angle.so");
-            envMap.put(LIBGL_ES, "3");
+            envMap.put("LIBGL_NAME", "libtinywrapper.so");
+            envMap.put("LIBEGL_NAME", "libEGL_angle.so");
+            envMap.put("LIBGL_ES", "3");
         }
     }
 
     public static void setGLValues(HashMap<String, String> envMap, String libglEs, String libglMipmap, String libglNormalize, String libglVsync, String libglNointovlhack, String libglNoerror) {
-        envMap.put(LIBGL_ES, libglEs);
-        envMap.put(LIBGL_MIPMAP, libglMipmap);
-        envMap.put(LIBGL_NORMALIZE, libglNormalize);
-        envMap.put(LIBGL_VSYNC, libglVsync);
-        envMap.put(LIBGL_NOINTOVLHACK, libglNointovlhack);
-        envMap.put(LIBGL_NOERROR, libglNoerror);
+        envMap.put("LIBGL_ES", libglEs);
+        envMap.put("LIBGL_MIPMAP", libglMipmap);
+        envMap.put("LIBGL_NORMALIZE", libglNormalize);
+        envMap.put("LIBGL_VSYNC", libglVsync);
+        envMap.put("LIBGL_NOINTOVLHACK", libglNointovlhack);
+        envMap.put("LIBGL_NOERROR", libglNoerror);
     }
 
-    public static void setEnv(Context context, H2CO3LauncherBridge bridge) {
+    public static void setEnv(Context context, H2CO3LauncherBridge bridge, String render) {
         HashMap<String, String> envMap = new HashMap<>(8);
         addCommonEnv(context, envMap);
         addRendererEnv(context, envMap, H2CO3GameHelper.getRender());
         printTaskTitle(bridge, "Env Map");
-        for (Map.Entry<String, String> entry : envMap.entrySet()) {
-            bridge.getCallback().onLog(String.format(ENV_FORMAT, entry.getKey(), entry.getValue()));
-            bridge.setenv(entry.getKey(), entry.getValue());
+        for (String key : envMap.keySet()) {
+            bridge.getCallback().onLog("Env: " + key + "=" + envMap.get(key));
+            bridge.setenv(key, envMap.get(key));
         }
         printTaskTitle(bridge, "Env Map");
+    }
+
+    public static void setGLLib(Context context, H2CO3LauncherBridge bridge, String render) {
+        if (render.equals(H2CO3Tools.GL_GL114)) {
+            bridge.dlopen(context.getApplicationInfo().nativeLibraryDir + "/libgl4es.so");
+        }
     }
 
     public static void setUpJavaRuntime(Context context, H2CO3LauncherBridge bridge) throws IOException {
@@ -229,12 +236,20 @@ public class H2CO3LauncherHelper {
         }
     }
 
-    public static ArrayList<File> locateLibs(File path) throws IOException {
+    public static ArrayList<File> locateLibs(File path) {
         ArrayList<File> returnValue = new ArrayList<>();
-        try (Stream<Path> paths = Files.walk(path.toPath())) {
-            paths.filter(Files::isRegularFile)
-                    .filter(p -> p.toString().endsWith(".so"))
-                    .forEach(p -> returnValue.add(p.toFile()));
+        ArrayList<File> stack = new ArrayList<>();
+        stack.add(path);
+        while (!stack.isEmpty()) {
+            File file = stack.remove(stack.size() - 1);
+            if (file.isFile() && file.getName().endsWith(".so")) {
+                returnValue.add(file);
+            } else if (file.isDirectory()) {
+                File[] files = file.listFiles();
+                if (files != null) {
+                    Collections.addAll(stack, files);
+                }
+            }
         }
         return returnValue;
     }
@@ -254,7 +269,7 @@ public class H2CO3LauncherHelper {
         bridge.setLdLibraryPath(getLibraryPath(context, getJavaPath()));
         bridge.getCallback().onLog("Hook exit " + (bridge.setupExitTrap(bridge) == 0 ? "success" : "failed"));
         int exitCode = bridge.jliLaunch(args);
-        Log.e(TAG, String.format(JVM_EXITED_WITH_CODE_FORMAT, exitCode));
+        Log.e(TAG, "Jvm Exited With Code:" + exitCode);
         bridge.onExit(exitCode);
     }
 
@@ -267,7 +282,7 @@ public class H2CO3LauncherHelper {
                 logStartInfo(bridge, "Minecraft");
 
                 // env
-                setEnv(context, bridge);
+                setEnv(context, bridge, H2CO3GameHelper.getRender());
 
                 // setup java runtime
                 setUpJavaRuntime(context, bridge);
@@ -276,7 +291,7 @@ public class H2CO3LauncherHelper {
                 setupGraphicAndSoundEngine(context, bridge);
 
                 // set working directory
-                bridge.getCallback().onLog(String.format(WORKING_DIRECTORY_FORMAT, H2CO3GameHelper.getGameDirectory()));
+                bridge.getCallback().onLog("Working directory: " + H2CO3GameHelper.getGameDirectory());
                 bridge.chdir(H2CO3GameHelper.getGameDirectory());
 
                 // launch game
@@ -303,7 +318,7 @@ public class H2CO3LauncherHelper {
                 logStartInfo(bridge, "Jar Executor");
 
                 // env
-                setEnv(context, bridge);
+                setEnv(context, bridge, H2CO3GameHelper.getRender());
 
                 // setup java runtime
                 setUpJavaRuntime(context, bridge);
@@ -312,7 +327,7 @@ public class H2CO3LauncherHelper {
                 setupGraphicAndSoundEngine(context, bridge);
 
                 // set working directory
-                bridge.getCallback().onLog(String.format(WORKING_DIRECTORY_FORMAT, H2CO3GameHelper.getGameDirectory()));
+                bridge.getCallback().onLog("Working directory: " + H2CO3GameHelper.getGameDirectory());
                 bridge.chdir(H2CO3GameHelper.getGameDirectory());
 
                 // launch jar executor
@@ -338,13 +353,13 @@ public class H2CO3LauncherHelper {
                 logStartInfo(bridge, "API Installer");
 
                 // env
-                setEnv(context, bridge);
+                setEnv(context, bridge, H2CO3GameHelper.getRender());
 
                 // setup java runtime
                 setUpJavaRuntime(context, bridge);
 
                 // set working directory
-                bridge.getCallback().onLog(String.format(WORKING_DIRECTORY_FORMAT, H2CO3GameHelper.getGameDirectory()));
+                bridge.getCallback().onLog("Working directory: " + H2CO3GameHelper.getGameDirectory());
                 bridge.chdir(H2CO3GameHelper.getGameDirectory());
 
                 // launch api installer
@@ -363,7 +378,7 @@ public class H2CO3LauncherHelper {
         H2CO3Tools.loadPaths(context);
         H2CO3GameHelper.setRender(H2CO3Tools.GL_GL114);
         MinecraftVersion version = MinecraftVersion.fromDirectory(new File(H2CO3GameHelper.getGameCurrentVersion()));
-        String lwjglPath = H2CO3Tools.RUNTIME_DIR + "/h2co3Launcher/lwjgl";
+        String lwjglPath = H2CO3Tools.RUNTIME_DIR + "/boat/lwjgl";
         String javaPath = getJavaPath();
         boolean highVersion = version.minimumLauncherVersion >= 21;
         String classPath;
@@ -402,9 +417,6 @@ public class H2CO3LauncherHelper {
                 Logging.LOG.log(Level.WARNING, "Bad file encoding", ex);
             }
         }
-
-        args.addDefault("-Dsun.stdout.encoding=", encoding.name());
-        args.addDefault("-Dsun.stderr.encoding=", encoding.name());
 
         args.addDefault("-Dfml.ignoreInvalidMinecraftCertificates=", "true");
         args.addDefault("-Dfml.ignorePatchDiscrepancies=", "true");
@@ -492,6 +504,7 @@ public class H2CO3LauncherHelper {
 
     public interface LogReceiver {
         void pushLog(String log);
+
         String getLogs();
     }
 
@@ -499,12 +512,12 @@ public class H2CO3LauncherHelper {
         private final List<String> logs = new ArrayList<>();
 
         @Override
-        public synchronized void pushLog(String log) {
+        public void pushLog(String log) {
             logs.add(log);
         }
 
         @Override
-        public synchronized String getLogs() {
+        public String getLogs() {
             List<String> logsCopy = new ArrayList<>(logs);
             return String.join("\n", logsCopy);
         }

@@ -376,8 +376,6 @@ public class GameButton extends AppCompatButton implements View.OnTouchListener 
                     }
                 }
                 break;
-            case MotionEvent.ACTION_MOVE:
-                break;
             case MotionEvent.ACTION_UP:
                 if (isKeep && !isChars) {
                     if (isBeingPressed) {
@@ -400,6 +398,7 @@ public class GameButton extends AppCompatButton implements View.OnTouchListener 
                     }
                 }
                 break;
+            case MotionEvent.ACTION_MOVE:
             default:
                 break;
         }
