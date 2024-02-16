@@ -159,7 +159,7 @@ public class GLFWNativeEGL {
      * @param path the EGL shared library path, or {@code null} to remove the override.
      */
     public static void setEGLPath(@Nullable String path) {
-        if (override("_glfw_egl_library", path)) {
+        if (!override("_glfw_egl_library", path)) {
             apiLog("GLFW EGL path override not set: Could not resolve override symbol.");
         }
     }
@@ -198,7 +198,7 @@ public class GLFWNativeEGL {
      * @param path the OpenGL ES shared library path, or {@code null} to remove the override.
      */
     public static void setGLESPath(@Nullable String path) {
-        if (override("_glfw_opengles_library", path)) {
+        if (!override("_glfw_opengles_library", path)) {
             apiLog("GLFW OpenGL ES path override not set: Could not resolve override symbol.");
         }
     }
@@ -206,7 +206,7 @@ public class GLFWNativeEGL {
     private static boolean override(String symbol, @Nullable String path) {
         long override = GLFW.getLibrary().getFunctionAddress(symbol);
         if (override == NULL) {
-            return true;
+            return false;
         }
 
         long a = memGetAddress(override);
@@ -214,7 +214,7 @@ public class GLFWNativeEGL {
             nmemFree(a);
         }
         memPutAddress(override, path == null ? NULL : memAddress(memUTF8(path)));
-        return false;
+        return true;
     }
 
 }

@@ -19,7 +19,7 @@
 #define NANOVG_GL_UTILS_H
 
 #if defined NANOVG_GL2
-#define EXT(name) name##GL2
+	#define EXT(name) name##GL2
 #elif defined NANOVG_GL3
 #define EXT(name) name##GL3
 #elif defined NANOVG_GLES2

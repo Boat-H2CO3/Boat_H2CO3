@@ -102,7 +102,7 @@ public abstract class Callback implements Pointer, NativeResource {
         MemoryUtil.getAllocator();
     }
 
-    private final long address;
+    private long address;
 
     /**
      * Creates a callback instance using the specified libffi CIF.

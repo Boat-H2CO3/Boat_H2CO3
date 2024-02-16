@@ -276,6 +276,6 @@ public class Cursor {
             this.cursorHandle = GLFW.glfwCreateCursor(image, xHotspot, yHotspot);
             if (cursorHandle == MemoryUtil.NULL)
                 throw new RuntimeException("Error creating GLFW cursor");
-		}
-	}
+        }
+    }
 }

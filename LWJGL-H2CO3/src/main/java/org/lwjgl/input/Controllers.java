@@ -43,15 +43,23 @@ import java.util.ArrayList;
  * @author Kevin Glass
  */
 public class Controllers {
-	/** The controllers available */
-	private static final ArrayList<JInputController> controllers = new ArrayList<JInputController>();
-	/** The number of controllers */
-	private static int controllerCount;
+	/**
+     * The controllers available
+     */
+    private static ArrayList<JInputController> controllers = new ArrayList<JInputController>();
+    /**
+     * The number of controllers
+     */
+    private static int controllerCount;
 
-	/** The current list of events */
-	private static final ArrayList<ControllerEvent> events = new ArrayList<ControllerEvent>();
-	/** The current event */
-	private static ControllerEvent event;
+    /**
+     * The current list of events
+     */
+    private static ArrayList<ControllerEvent> events = new ArrayList<ControllerEvent>();
+    /**
+     * The current event
+     */
+    private static ControllerEvent event;
 
 	/** Whether controllers were created */
 	private static boolean created;

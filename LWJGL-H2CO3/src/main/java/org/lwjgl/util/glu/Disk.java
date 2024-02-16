@@ -210,16 +210,17 @@ public class Disk extends Quadric {
 		 {
 		    float a;
 		    glBegin(GL_LINE_LOOP);
-		    for (a = 0; a < 2.0f * PI; a += da) {
-		       float x = outerRadius * sin(a);
-		       float y = outerRadius * cos(a);
-		       glVertex2f(x, y);
-		    }
-		    glEnd();
-		 }
-		 break;
-	      }
-	   default:
+             for (a = 0; a < 2.0f * PI; a += da) {
+                 float x = outerRadius * sin(a);
+                 float y = outerRadius * cos(a);
+                 glVertex2f(x, y);
+             }
+             glEnd();
+         }
+              break;
+          }
+           default:
+               return;
        }
 	}
 

@@ -73,7 +73,7 @@ public abstract class GLFWDropCallback extends Callback implements GLFWDropCallb
      * @return the name at the specified index as a String
      */
     public static String getName(long names, int index) {
-        return memUTF8(memGetAddress(names + (long) Pointer.POINTER_SIZE * index));
+        return memUTF8(memGetAddress(names + Pointer.POINTER_SIZE * index));
     }
 
     /** See {@link GLFW#glfwSetDropCallback SetDropCallback}. */

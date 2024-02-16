@@ -44,7 +44,7 @@ public interface GLFWDropCallbackI extends CallbackI {
         invoke(
             memGetAddress(memGetAddress(args)),
             memGetInt(memGetAddress(args + POINTER_SIZE)),
-            memGetAddress(memGetAddress(args + 2L * POINTER_SIZE))
+            memGetAddress(memGetAddress(args + 2 * POINTER_SIZE))
         );
     }
 

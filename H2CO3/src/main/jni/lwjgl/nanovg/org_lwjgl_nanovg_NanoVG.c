@@ -5,13 +5,11 @@
  */
 #include "lwjgl/common_tools.h"
 #include "lwjgl/lwjgl_malloc.h"
-
 #define NVG_MALLOC(sz)     org_lwjgl_malloc(sz)
 #define NVG_REALLOC(p, sz)  org_lwjgl_realloc(p,sz)
 #define NVG_FREE(p)        org_lwjgl_free(p)
-int DISABLE_WARNIN;
 
-int GS();
+int DISABLE_WARNINGS();
 
 #define STBI_MALLOC(sz)    org_lwjgl_malloc(sz)
 #define STBI_REALLOC(p, sz) org_lwjgl_realloc(p,sz)
@@ -28,13 +26,11 @@ int GS();
 
 #include "nanovg.c"
 
-int ENABLE_WARNINGS()
+int ENABLE_WARNINGS();
 
 EXTERN_C_ENTER
 
-JNIEXPORT;
-
-void JNICALL
+JNIEXPORT void JNICALL
 Java_org_lwjgl_nanovg_NanoVG_nnvgBeginFrame(JNIEnv *__env, jclass clazz, jlong ctxAddress,
                                             jfloat windowWidth, jfloat windowHeight,
                                             jfloat devicePixelRatio) {

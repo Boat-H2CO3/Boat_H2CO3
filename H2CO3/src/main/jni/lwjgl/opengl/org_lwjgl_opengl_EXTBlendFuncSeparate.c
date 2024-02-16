@@ -6,17 +6,12 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glBlendFuncSeparateEXTPROC)(jint, jint, jint, jint);
+typedef void (APIENTRY *glBlendFuncSeparateEXTPROC) (jint, jint, jint, jint);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL
-Java_org_lwjgl_opengl_EXTBlendFuncSeparate_glBlendFuncSeparateEXT(JNIEnv *__env, jclass clazz,
-                                                                  jint sfactorRGB, jint dfactorRGB,
-                                                                  jint sfactorAlpha,
-                                                                  jint dfactorAlpha) {
-    glBlendFuncSeparateEXTPROC glBlendFuncSeparateEXT = (glBlendFuncSeparateEXTPROC) tlsGetFunction(
-            1497);
+JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTBlendFuncSeparate_glBlendFuncSeparateEXT(JNIEnv *__env, jclass clazz, jint sfactorRGB, jint dfactorRGB, jint sfactorAlpha, jint dfactorAlpha) {
+    glBlendFuncSeparateEXTPROC glBlendFuncSeparateEXT = (glBlendFuncSeparateEXTPROC)tlsGetFunction(1497);
     UNUSED_PARAM(clazz)
     glBlendFuncSeparateEXT(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
 }

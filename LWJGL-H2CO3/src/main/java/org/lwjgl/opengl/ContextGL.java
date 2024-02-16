@@ -252,10 +252,14 @@ final class ContextGL implements Context {
 	public synchronized void setCLSharingProperties(final PointerBuffer properties) throws LWJGLException {
 		final ByteBuffer peer_handle = peer_info.lockAndGetHandle();
 		try {
-            throw new UnsupportedOperationException("CL/GL context sharing is not supported on this platform.");
+            switch (LWJGLUtil.getPlatform()) {
+
+                default:
+                    throw new UnsupportedOperationException("CL/GL context sharing is not supported on this platform.");
+            }
         } finally {
-			peer_info.unlock();
-		}
+            peer_info.unlock();
+        }
 	}
 
 }

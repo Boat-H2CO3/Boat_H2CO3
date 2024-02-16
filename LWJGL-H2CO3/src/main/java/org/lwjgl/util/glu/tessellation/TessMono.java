@@ -231,7 +231,7 @@ class TessMono {
                 if (!keepOnlyBoundary) {
                     e.winding = 0;
                 } else {
-                    if (Mesh.__gl_meshDelete(e)) return false;
+                    if (!Mesh.__gl_meshDelete(e)) return false;
                 }
             }
         }

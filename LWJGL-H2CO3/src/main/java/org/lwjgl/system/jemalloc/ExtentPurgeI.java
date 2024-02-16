@@ -43,12 +43,12 @@ public interface ExtentPurgeI extends CallbackI {
     @Override
     default void callback(long ret, long args) {
         boolean __result = invoke(
-            memGetAddress(memGetAddress(args)),
-            memGetAddress(memGetAddress(args + POINTER_SIZE)),
-            memGetAddress(memGetAddress(args + 2L * POINTER_SIZE)),
-            memGetAddress(memGetAddress(args + 3L * POINTER_SIZE)),
-            memGetAddress(memGetAddress(args + 4L * POINTER_SIZE)),
-            memGetInt(memGetAddress(args + 5L * POINTER_SIZE))
+                memGetAddress(memGetAddress(args)),
+                memGetAddress(memGetAddress(args + POINTER_SIZE)),
+                memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+                memGetAddress(memGetAddress(args + 3 * POINTER_SIZE)),
+                memGetAddress(memGetAddress(args + 4 * POINTER_SIZE)),
+                memGetInt(memGetAddress(args + 5 * POINTER_SIZE))
         );
         apiClosureRet(ret, __result);
     }

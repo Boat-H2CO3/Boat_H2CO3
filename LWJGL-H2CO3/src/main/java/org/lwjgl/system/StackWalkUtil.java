@@ -50,7 +50,11 @@ final class StackWalkUtil {
         }
 
         // Kotlin T.use: kotlin.AutoCloseable::closeFinally
-        return "closeFinally".equals(element.getMethodName()) && "AutoCloseable.kt".equals(element.getFileName());
+        if ("closeFinally".equals(element.getMethodName()) && "AutoCloseable.kt".equals(element.getFileName())) {
+            return true;
+        }
+
+        return false;
     }
 
     @Nullable

@@ -22,19 +22,16 @@
 #include <memory.h>
 
 #include "nanovg.h"
-
 #define FONTSTASH_IMPLEMENTATION
-
 #include "fontstash.h"
 
 #ifndef NVG_NO_STB
 //#define STB_IMAGE_IMPLEMENTATION
 #include "lwjgl/stb/stb_image.h"
-
 #endif
 
 #ifdef _MSC_VER
-                                                                                                                        #pragma warning(disable: 4100)  // unreferenced formal parameter
+#pragma warning(disable: 4100)  // unreferenced formal parameter
 #pragma warning(disable: 4127)  // conditional expression is constant
 #pragma warning(disable: 4204)  // nonstandard extension used : non-constant aggregate initializer
 #pragma warning(disable: 4706)  // assignment within conditional expression
@@ -140,11 +137,8 @@ struct NVGcontext {
 };
 
 static float nvg__sqrtf(float a) { return sqrtf(a); }
-
 static float nvg__modf(float a, float b) { return fmodf(a, b); }
-
 static float nvg__sinf(float a) { return sinf(a); }
-
 static float nvg__cosf(float a) { return cosf(a); }
 
 static float nvg__tanf(float a) { return tanf(a); }
@@ -154,17 +148,11 @@ static float nvg__atan2f(float a, float b) { return atan2f(a, b); }
 static float nvg__acosf(float a) { return acosf(a); }
 
 static int nvg__mini(int a, int b) { return a < b ? a : b; }
-
 static int nvg__maxi(int a, int b) { return a > b ? a : b; }
-
 static int nvg__clampi(int a, int mn, int mx) { return a < mn ? mn : (a > mx ? mx : a); }
-
 static float nvg__minf(float a, float b) { return a < b ? a : b; }
-
 static float nvg__maxf(float a, float b) { return a > b ? a : b; }
-
 static float nvg__absf(float a) { return a >= 0.0f ? a : -a; }
-
 static float nvg__signf(float a) { return a >= 0.0f ? 1.0f : -1.0f; }
 
 static float nvg__clampf(float a, float mn, float mx) { return a < mn ? mn : (a > mx ? mx : a); }
@@ -780,7 +768,6 @@ int nvgCreateImageMem(NVGcontext *ctx, int imageFlags, unsigned char *data, int 
     stbi_image_free(img);
     return image;
 }
-
 #endif
 
 int nvgCreateImageRGBA(NVGcontext *ctx, int w, int h, int imageFlags, const unsigned char *data) {

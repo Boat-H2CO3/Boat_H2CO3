@@ -304,7 +304,7 @@ public class XKeymapEvent extends Struct<XKeymapEvent> implements NativeResource
     public static ByteBuffer nkey_vector(long struct) { return memByteBuffer(struct + XKeymapEvent.KEY_VECTOR, 32); }
     /** Unsafe version of {@link #key_vector(int) key_vector}. */
     public static byte nkey_vector(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XKeymapEvent.KEY_VECTOR + check(index, 32));
+        return UNSAFE.getByte(null, struct + XKeymapEvent.KEY_VECTOR + check(index, 32) * 1);
     }
 
     /** Unsafe version of {@link #type(int) type}. */
@@ -320,11 +320,11 @@ public class XKeymapEvent extends Struct<XKeymapEvent> implements NativeResource
     /** Unsafe version of {@link #key_vector(ByteBuffer) key_vector}. */
     public static void nkey_vector(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 32); }
-        memCopy(memAddress(value), struct + XKeymapEvent.KEY_VECTOR, value.remaining());
+        memCopy(memAddress(value), struct + XKeymapEvent.KEY_VECTOR, value.remaining() * 1);
     }
     /** Unsafe version of {@link #key_vector(int, byte) key_vector}. */
     public static void nkey_vector(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + XKeymapEvent.KEY_VECTOR + check(index, 32), value);
+        UNSAFE.putByte(null, struct + XKeymapEvent.KEY_VECTOR + check(index, 32) * 1, value);
     }
 
     /**

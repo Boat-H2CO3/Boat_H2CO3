@@ -303,7 +303,7 @@ public class IOURing extends Struct<IOURing> implements NativeResource {
     public static byte nint_flags(long struct) { return UNSAFE.getByte(null, struct + IOURing.INT_FLAGS); }
     public static ByteBuffer npad(long struct) { return memByteBuffer(struct + IOURing.PAD, 3); }
     public static byte npad(long struct, int index) {
-        return UNSAFE.getByte(null, struct + IOURing.PAD + check(index, 3));
+        return UNSAFE.getByte(null, struct + IOURing.PAD + check(index, 3) * 1);
     }
     public static int npad2(long struct) { return UNSAFE.getInt(null, struct + IOURing.PAD2); }
 
@@ -323,10 +323,10 @@ public class IOURing extends Struct<IOURing> implements NativeResource {
     public static void nint_flags(long struct, byte value) { UNSAFE.putByte(null, struct + IOURing.INT_FLAGS, value); }
     public static void npad(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 3); }
-        memCopy(memAddress(value), struct + IOURing.PAD, value.remaining());
+        memCopy(memAddress(value), struct + IOURing.PAD, value.remaining() * 1);
     }
     public static void npad(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + IOURing.PAD + check(index, 3), value);
+        UNSAFE.putByte(null, struct + IOURing.PAD + check(index, 3) * 1, value);
     }
     public static void npad2(long struct, int value) { UNSAFE.putInt(null, struct + IOURing.PAD2, value); }
 

@@ -89,7 +89,7 @@ final class CacheLineSize {
 	}
 
 	static long memoryLoop(final int index, final int repeats, final IntBuffer memory, final int padding) {
-		final long address = MemoryUtil.getAddress(memory) + ((long) index * padding * 4);
+		final long address = MemoryUtil.getAddress(memory) + (index * padding * 4);
 
 		final long time = System.nanoTime();
 		for ( int i = 0; i < repeats; i++ ) {

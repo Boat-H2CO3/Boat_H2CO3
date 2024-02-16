@@ -167,15 +167,15 @@ public abstract class StructBuffer<T extends Struct<T>, SELF extends StructBuffe
     // as escaping when this happens, even if the iterator instance is not escaping and scalar replaced. This
     // is not a problem on Graal. Also, see JDK-8166840.
     private static class StructIterator<T extends Struct<T>> implements Iterator<T> {
-        private final long address;
+        private long address;
 
         @Nullable
-        private final ByteBuffer container;
+        private ByteBuffer container;
 
-        private final T factory;
+        private T factory;
 
         private int index;
-        private final int fence;
+        private int fence;
 
         StructIterator(long address, @Nullable ByteBuffer container, T factory, int position, int limit) {
             this.address = address;
@@ -224,15 +224,15 @@ public abstract class StructBuffer<T extends Struct<T>, SELF extends StructBuffe
     }
 
     private static class StructSpliterator<T extends Struct<T>> implements Spliterator<T> {
-        private final long address;
+        private long address;
 
         @Nullable
-        private final ByteBuffer container;
+        private ByteBuffer container;
 
-        private final T factory;
+        private T factory;
 
         private int index;
-        private final int fence;
+        private int fence;
 
         StructSpliterator(long address, @Nullable ByteBuffer container, T factory, int position, int limit) {
             this.address = address;

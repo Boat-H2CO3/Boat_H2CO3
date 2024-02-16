@@ -37,12 +37,12 @@
 //////                       GLFW internal API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int GLFW_ANY_PLATFORM = 0x60000,
-        GLFW_PLATFORM_WIN32 = 0x60001,
-        GLFW_PLATFORM_COCOA = 0x60002,
+int     GLFW_ANY_PLATFORM     = 0x60000,
+        GLFW_PLATFORM_WIN32   = 0x60001,
+        GLFW_PLATFORM_COCOA   = 0x60002,
         GLFW_PLATFORM_WAYLAND = 0x60003,
-        GLFW_PLATFORM_X11 = 0x60004,
-        GLFW_PLATFORM_NULL = 0x60005;
+        GLFW_PLATFORM_X11     = 0x60004,
+        GLFW_PLATFORM_NULL    = 0x60005;
 
 /*
 static const struct
@@ -124,7 +124,8 @@ GLFWbool _glfwSelectPlatform(int desiredID, _GLFWplatform* platform)
 //////                        GLFW public API                       //////
 //////////////////////////////////////////////////////////////////////////
 
-GLFWAPI int glfwGetPlatform(void) {
+GLFWAPI int glfwGetPlatform(void)
+{
     /*
     _GLFW_REQUIRE_INIT_OR_RETURN(0);
     return _glfw.platform.platformID;
@@ -132,7 +133,8 @@ GLFWAPI int glfwGetPlatform(void) {
     return GLFW_PLATFORM_X11;
 }
 
-GLFWAPI int glfwPlatformSupported(int platformID) {
+GLFWAPI int glfwPlatformSupported(int platformID)
+{
     /*
     const size_t count = sizeof(supportedPlatforms) / sizeof(supportedPlatforms[0]);
     size_t i;
@@ -161,6 +163,7 @@ GLFWAPI int glfwPlatformSupported(int platformID) {
     return GLFW_TRUE;
 }
 
-GLFWAPI const char *glfwGetVersionString(void) {
+GLFWAPI const char* glfwGetVersionString(void)
+{
     return _glfwPlatformGetVersionString();
 }

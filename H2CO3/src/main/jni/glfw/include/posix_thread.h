@@ -1,4 +1,6 @@
-
+//
+// Created by Tungsten on 2022/10/11.
+//
 
 #include <pthread.h>
 
@@ -8,16 +10,18 @@
 
 // POSIX-specific thread local storage data
 //
-typedef struct _GLFWtlsPOSIX {
-    GLFWbool allocated;
-    pthread_key_t key;
+typedef struct _GLFWtlsPOSIX
+{
+    GLFWbool        allocated;
+    pthread_key_t   key;
 
 } _GLFWtlsPOSIX;
 
 // POSIX-specific mutex data
 //
-typedef struct _GLFWmutexPOSIX {
-    GLFWbool allocated;
+typedef struct _GLFWmutexPOSIX
+{
+    GLFWbool        allocated;
     pthread_mutex_t handle;
 
 } _GLFWmutexPOSIX;

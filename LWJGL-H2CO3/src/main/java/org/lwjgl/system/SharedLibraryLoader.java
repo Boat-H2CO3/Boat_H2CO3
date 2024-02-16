@@ -40,7 +40,7 @@ final class SharedLibraryLoader {
     @Nullable
     private static Path extractPath;
 
-    private static final HashSet<Path> extractPaths = new HashSet<>(4);
+    private static HashSet<Path> extractPaths = new HashSet<>(4);
 
     private static boolean checkedJDK8195129;
 
@@ -342,7 +342,6 @@ final class SharedLibraryLoader {
             for (int i = 0; i < filepath.length(); i++) {
                 if (0x80 <= filepath.charAt(i)) {
                     mustCheck = true;
-                    break;
                 }
             }
             if (mustCheck) {

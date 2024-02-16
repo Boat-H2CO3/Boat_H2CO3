@@ -112,16 +112,18 @@ class Render {
         private FaceCount() {
         }
 
-        private FaceCount(long size, GLUhalfEdge eStart, renderCallBack render) {
-            this.size = size;
-            this.eStart = eStart;
-            this.render = render;
-        }
-
-        long size;		/* number of triangles used */
-        GLUhalfEdge eStart;	/* edge where this primitive starts */
-        renderCallBack render;
+    private FaceCount(long size, GLUhalfEdge eStart, renderCallBack render) {
+        this.size = size;
+        this.eStart = eStart;
+        this.render = render;
     }
+
+    long size;        /* number of triangles used */
+    GLUhalfEdge eStart;    /* edge where this primitive starts */
+    renderCallBack render;
+}
+
+    ;
 
     private interface renderCallBack {
         void render(GLUtessellatorImpl tess, GLUhalfEdge e, long size);
@@ -129,9 +131,9 @@ class Render {
 
     /************************ Strips and Fans decomposition ******************/
 
-/* __gl_renderMesh( tess, mesh ) takes a mesh and breaks it into triangle
- * fans, strips, and separate triangles.  A substantial effort is made
- * to use as few rendering primitives as possible (ie. to make the fans
+    /* __gl_renderMesh( tess, mesh ) takes a mesh and breaks it into triangle
+     * fans, strips, and separate triangles.  A substantial effort is made
+     * to use as few rendering primitives as possible (ie. to make the fans
  * and strips as large as possible).
  *
  * The rendering output is provided as callbacks (see the api).

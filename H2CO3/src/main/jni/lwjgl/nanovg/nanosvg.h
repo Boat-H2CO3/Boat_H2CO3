@@ -225,7 +225,6 @@ static int nsvg__isdigit(char c) {
 }
 
 static NSVG_INLINE float nsvg__minf(float a, float b) { return a < b ? a : b; }
-
 static NSVG_INLINE float nsvg__maxf(float a, float b) { return a > b ? a : b; }
 
 

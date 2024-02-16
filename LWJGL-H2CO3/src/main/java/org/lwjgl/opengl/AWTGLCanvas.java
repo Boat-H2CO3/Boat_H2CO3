@@ -65,8 +65,8 @@ public class AWTGLCanvas extends Canvas implements DrawableLWJGL, ComponentListe
 	private static final long serialVersionUID = 1L;
 
 	private static final AWTCanvasImplementation implementation;
-	private              boolean                 update_context;
-	private final Object SYNC_LOCK = new Object();
+	private boolean update_context;
+    private Object SYNC_LOCK = new Object();
 
 	/** The requested pixel format */
 	private final PixelFormat pixel_format;
@@ -96,7 +96,11 @@ public class AWTGLCanvas extends Canvas implements DrawableLWJGL, ComponentListe
 	}
 
 	static AWTCanvasImplementation createImplementation() {
-        throw new IllegalStateException("Unsupported platform");
+        switch (LWJGLUtil.getPlatform()) {
+
+            default:
+                throw new IllegalStateException("Unsupported platform");
+        }
     }
 
 	private void setUpdate() {

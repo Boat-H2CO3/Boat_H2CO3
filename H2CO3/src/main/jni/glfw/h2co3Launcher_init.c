@@ -1,3 +1,6 @@
+//
+// Created by Tungsten on 2022/10/11.
+//
 //========================================================================
 // This file is derived from x11_init.c
 //========================================================================
@@ -234,7 +237,7 @@ void _glfwPlatformTerminate(void) {
 }
 
 const char *_glfwPlatformGetVersionString(void) {
-    return _GLFW_VERSION_NUMBER " H2CO3Launcher EGL OSMesa"
+    return _GLFW_VERSION_NUMBER " H2CO3LAUNCHER EGL OSMesa"
            #if defined(_POSIX_TIMERS) && defined(_POSIX_MONOTONIC_CLOCK)
            " clock_gettime"
            #else

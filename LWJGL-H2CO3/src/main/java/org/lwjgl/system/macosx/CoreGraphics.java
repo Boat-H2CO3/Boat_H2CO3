@@ -979,13 +979,13 @@ public class CoreGraphics {
         if (CHECKS) {
             checkSafe(actualStringLength, 1);
         }
-        invokePNPPV(event, lengthSafe(unicodeString), memAddressSafe(actualStringLength), unicodeString, __functionAddress);
+        invokePNPPV(event, (long) lengthSafe(unicodeString), memAddressSafe(actualStringLength), unicodeString, __functionAddress);
     }
 
     /** Array version of: {@link #CGEventKeyboardSetUnicodeString EventKeyboardSetUnicodeString} */
     public static void CGEventKeyboardSetUnicodeString(@NativeType("CGEventRef") long event, @NativeType("UniChar const *") short[] unicodeString) {
         long __functionAddress = Functions.EventKeyboardSetUnicodeString;
-        invokePNPV(event, unicodeString.length, unicodeString, __functionAddress);
+        invokePNPV(event, (long) unicodeString.length, unicodeString, __functionAddress);
     }
 
     /** Array version of: {@link #CGGetEventTapList GetEventTapList} */

@@ -85,7 +85,7 @@ public class MappedHelper {
 	}
 
 	public static void put_view(MappedObject mapped, int view, int sizeof) {
-		mapped.setViewAddress(mapped.baseAddress + (long) view * sizeof);
+		mapped.setViewAddress(mapped.baseAddress + view * sizeof);
 	}
 
 	public static int get_view(MappedObject mapped, int sizeof) {
@@ -93,7 +93,7 @@ public class MappedHelper {
 	}
 
 	public static void put_view_shift(MappedObject mapped, int view, int sizeof_shift) {
-		mapped.setViewAddress(mapped.baseAddress + ((long) view << sizeof_shift));
+        mapped.setViewAddress(mapped.baseAddress + (view << sizeof_shift));
 	}
 
 	public static int get_view_shift(MappedObject mapped, int sizeof_shift) {

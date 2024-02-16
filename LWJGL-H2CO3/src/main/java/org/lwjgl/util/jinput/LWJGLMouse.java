@@ -148,9 +148,9 @@ final class LWJGLMouse extends Mouse {
 	}
 
 	static final class Axis extends AbstractComponent {
-		Axis(Identifier.Axis axis_id) {
-			super(axis_id.getName(), axis_id);
-		}
+		Axis(Component.Identifier.Axis axis_id) {
+            super(axis_id.getName(), axis_id);
+        }
 
 		public boolean isRelative() {
 			return true;
@@ -168,9 +168,9 @@ final class LWJGLMouse extends Mouse {
 	static final class Button extends AbstractComponent {
 		private float value;
 
-		Button(Identifier.Button button_id) {
-			super(button_id.getName(), button_id);
-		}
+        Button(Component.Identifier.Button button_id) {
+            super(button_id.getName(), button_id);
+        }
 
 		void setValue(float value) {
 			this.value = value;

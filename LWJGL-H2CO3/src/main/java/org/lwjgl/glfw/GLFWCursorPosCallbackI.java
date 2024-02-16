@@ -44,7 +44,7 @@ public interface GLFWCursorPosCallbackI extends CallbackI {
         invoke(
             memGetAddress(memGetAddress(args)),
             memGetDouble(memGetAddress(args + POINTER_SIZE)),
-            memGetDouble(memGetAddress(args + 2L * POINTER_SIZE))
+            memGetDouble(memGetAddress(args + 2 * POINTER_SIZE))
         );
     }
 

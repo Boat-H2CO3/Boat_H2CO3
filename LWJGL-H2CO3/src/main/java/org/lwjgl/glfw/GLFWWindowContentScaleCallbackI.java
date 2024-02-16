@@ -44,7 +44,7 @@ public interface GLFWWindowContentScaleCallbackI extends CallbackI {
         invoke(
             memGetAddress(memGetAddress(args)),
             memGetFloat(memGetAddress(args + POINTER_SIZE)),
-            memGetFloat(memGetAddress(args + 2L * POINTER_SIZE))
+            memGetFloat(memGetAddress(args + 2 * POINTER_SIZE))
         );
     }
 

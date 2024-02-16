@@ -201,7 +201,7 @@ public final class Library {
 
     /**
      * Loads a shared library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
-     * {@link org.lwjgl.system.h2co3.DynamicLinkLoader#dlopen dlopen}).
+     * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
      *
      * @param context the class to use to discover the shared library in the classpath
      * @param module  the module to which the shared library belongs
@@ -217,7 +217,7 @@ public final class Library {
 
     /**
      * Loads a shared library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
-     * {@link org.lwjgl.system.h2co3.DynamicLinkLoader#dlopen dlopen}).
+     * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
      *
      * @param context          the class to use to discover the shared library in the classpath
      * @param module           the module to which the shared library belongs
@@ -425,7 +425,7 @@ public final class Library {
             }
         }
 
-        if (fallback == null && defaultNames.length == 1) {
+        if (fallback == null && defaultNames.length <= 1) {
             return loadNative(context, module, defaultNames[0]);
         }
 

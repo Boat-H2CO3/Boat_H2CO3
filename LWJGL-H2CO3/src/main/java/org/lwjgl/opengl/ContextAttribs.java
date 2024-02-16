@@ -83,28 +83,28 @@ public final class ContextAttribs {
 
 	public static final int CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB = 0x8256,
 		NO_RESET_NOTIFICATION_ARB                                   = 0x8261,
-		LOSE_CONTEXT_ON_RESET_ARB                                   = 0x8252;
+            LOSE_CONTEXT_ON_RESET_ARB = 0x8252;
 
-	public static final int CONTEXT_RELEASE_BEHABIOR_ARB = 0x2097,
-		CONTEXT_RELEASE_BEHAVIOR_NONE_ARB                = 0x0000,
-		CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB               = 0x2098;
+    public static final int CONTEXT_RELEASE_BEHABIOR_ARB = 0x2097,
+            CONTEXT_RELEASE_BEHAVIOR_NONE_ARB = 0x0000,
+            CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB = 0x2098;
 
-	public static final int CONTEXT_LAYER_PLANE_ARB = 0x2093; // WGL-only
+    public static final int CONTEXT_LAYER_PLANE_ARB = 0x2093; // WGL-only
 
-	// STATE
+    // STATE
 
-	private final int majorVersion;
-	private final int minorVersion;
+    private int majorVersion;
+    private int minorVersion;
 
-	private int profileMask;
-	private int contextFlags;
+    private int profileMask;
+    private int contextFlags;
 
-	private int contextResetNotificationStrategy = NO_RESET_NOTIFICATION_ARB;
-	private int contextReleaseBehavior           = CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB;
+    private int contextResetNotificationStrategy = NO_RESET_NOTIFICATION_ARB;
+    private int contextReleaseBehavior = CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB;
 
-	private int layerPlane;
+    private int layerPlane;
 
-	// CONSTRUCTORS
+    // CONSTRUCTORS
 
 	/** Creates the default ContextAttribs instance. No special attributes will be used when creating the OpenGL context. */
 	public ContextAttribs() {

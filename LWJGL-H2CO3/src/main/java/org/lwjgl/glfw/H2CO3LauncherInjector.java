@@ -12,6 +12,7 @@ import static org.lwjgl.system.APIUtil.apiLog;
 
 /**
  * By Tungsten
+ * This class is for Fold Craft Launcher.
  */
 public class H2CO3LauncherInjector {
 
@@ -48,7 +49,7 @@ public class H2CO3LauncherInjector {
     private static String param3 = null;
 
     public static void setClassLoader(ClassLoader classLoader) {
-        String prop = System.getProperty("h2co3launcher.injector");
+        String prop = System.getProperty("fcl.injector");
         if (!get && prop != null && !prop.isEmpty()) {
             H2CO3LauncherInjector.classLoader = classLoader;
             String[] props = prop.split(":");
@@ -143,8 +144,10 @@ public class H2CO3LauncherInjector {
                     }
                 }
                 success = true;
-            } catch (ClassNotFoundException | NoSuchFieldException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            } catch (ClassNotFoundException | NoSuchFieldException | NoSuchMethodException |
+                     IllegalAccessException | InvocationTargetException e) {
                 apiLog(e.getMessage());
+                apiLog("H2CO3Launcher Injector not initialized!");
             }
             if (level == INJECTOR_LEVEL_2) {
                 if (success && type == null) {

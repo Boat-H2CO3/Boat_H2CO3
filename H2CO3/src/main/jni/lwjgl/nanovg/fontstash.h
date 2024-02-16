@@ -71,7 +71,6 @@ struct FONSparams {
 
     void (*renderDelete)(void *uptr);
 };
-
 typedef struct FONSparams FONSparams;
 
 struct FONSquad {

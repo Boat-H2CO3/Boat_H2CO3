@@ -28,7 +28,7 @@
 #pragma once
 
 #if defined(_GLFW_USE_CONFIG_H)
-#include <glfw_config.h>
+ #include <glfw_config.h>
 #endif
 
 #if defined(GLFW_INCLUDE_GLCOREARB) || \
@@ -45,7 +45,6 @@
 #endif
 
 #define GLFW_INCLUDE_NONE
-
 #include <glfw3.h>
 #include "gl/gl.h"
 
@@ -447,6 +446,7 @@ struct _GLFWmonitor {
 
     // This is defined in the window API's platform.h
     _GLFW_PLATFORM_MONITOR_STATE;
+
 };
 
 // Cursor structure
@@ -567,6 +567,7 @@ struct _GLFWlibrary {
     _GLFW_EGL_LIBRARY_CONTEXT_STATE;
     // This is defined in osmesa_context.h
     _GLFW_OSMESA_LIBRARY_CONTEXT_STATE;
+
 };
 
 // Global state shared between compilation units of GLFW

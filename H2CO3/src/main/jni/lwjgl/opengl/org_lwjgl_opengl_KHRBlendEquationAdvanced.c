@@ -6,13 +6,12 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glBlendBarrierKHRPROC)(void);
+typedef void (APIENTRY *glBlendBarrierKHRPROC) (void);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL
-Java_org_lwjgl_opengl_KHRBlendEquationAdvanced_glBlendBarrierKHR(JNIEnv *__env, jclass clazz) {
-    glBlendBarrierKHRPROC glBlendBarrierKHR = (glBlendBarrierKHRPROC) tlsGetFunction(1903);
+JNIEXPORT void JNICALL Java_org_lwjgl_opengl_KHRBlendEquationAdvanced_glBlendBarrierKHR(JNIEnv *__env, jclass clazz) {
+    glBlendBarrierKHRPROC glBlendBarrierKHR = (glBlendBarrierKHRPROC)tlsGetFunction(1903);
     UNUSED_PARAM(clazz)
     glBlendBarrierKHR();
 }

@@ -88,6 +88,8 @@ extern "C" {
 /* This should always refer to the last type code (for sanity checks).  */
 #define FFI_TYPE_LAST       FFI_TYPE_COMPLEX
 
+#include <ffitarget.h>
+
 #ifndef LIBFFI_ASM
 
 #if defined(_MSC_VER) && !defined(__clang__)
@@ -96,7 +98,6 @@ extern "C" {
 
 #include <stddef.h>
 #include <limits.h>
-#include "ffitarget.h"
 
 /* LONG_LONG_MAX is not always defined (not if STRICT_ANSI, for example).
    But we can find it either under the correct ANSI name, or under GNU
@@ -328,11 +329,9 @@ void ffi_java_raw_call (ffi_cif *cif,
 FFI_API
 void
 ffi_java_ptrarray_to_raw(ffi_cif *cif, void **args, ffi_java_raw *raw) __attribute__((deprecated));
-
 FFI_API
 void
 ffi_java_raw_to_ptrarray(ffi_cif *cif, ffi_java_raw *raw, void **args) __attribute__((deprecated));
-
 FFI_API
 size_t ffi_java_raw_size(ffi_cif *cif) __attribute__((deprecated));
 

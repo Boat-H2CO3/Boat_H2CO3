@@ -1,4 +1,6 @@
-
+//
+// Created by Tungsten on 2022/10/11.
+//
 
 #include <internal.h>
 
@@ -217,7 +219,8 @@ GLFWAPI void glfwTerminate(void) {
     terminate();
 }
 
-GLFWAPI void glfwInitHint(int hint, int value) {}
+GLFWAPI void glfwInitHint(int hint, int value) {
+}
 
 GLFWAPI void glfwInitAllocator(const GLFWallocator *allocator) {
     if (allocator) {

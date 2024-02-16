@@ -133,7 +133,7 @@ LOCAL_SRC_FILES         := lwjgl/h2co3Launcher_hook.c \
                            lwjgl/org_lwjgl_system_dyncall_DynCall.c \
                            lwjgl/org_lwjgl_system_dyncall_DynCallback.c \
                            lwjgl/org_lwjgl_system_dyncall_DynLoad.c \
-                           lwjgl/org_lwjgl_system_h2co3Launcher_DynamicLinkLoader.c \
+                           lwjgl/org_lwjgl_system_linux_DynamicLinkLoader.c \
                            lwjgl/org_lwjgl_system_JNI.c \
                            lwjgl/org_lwjgl_system_jni_JNINativeInterface.c \
                            lwjgl/org_lwjgl_system_libc_LibCErrno.c \
@@ -170,7 +170,7 @@ LOCAL_SRC_FILES         := lwjgl/nanovg/org_lwjgl_nanovg_Blendish.c \
                            lwjgl/nanovg/org_lwjgl_nanovg_NanoVGGLES2.c \
                            lwjgl/nanovg/org_lwjgl_nanovg_NanoVGGLES3.c \
                            lwjgl/nanovg/org_lwjgl_nanovg_OUI.c
-LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_H2CO3Launcher -Wunused-value
+LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_FCL -Wunused-value
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)

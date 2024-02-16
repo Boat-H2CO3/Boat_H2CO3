@@ -43,12 +43,12 @@ public interface GLDebugMessageAMDCallbackI extends CallbackI {
     @Override
     default void callback(long ret, long args) {
         invoke(
-            memGetInt(memGetAddress(args)),
-            memGetInt(memGetAddress(args + POINTER_SIZE)),
-            memGetInt(memGetAddress(args + 2L * POINTER_SIZE)),
-            memGetInt(memGetAddress(args + 3L * POINTER_SIZE)),
-            memGetAddress(memGetAddress(args + 4L * POINTER_SIZE)),
-            memGetAddress(memGetAddress(args + 5L * POINTER_SIZE))
+                memGetInt(memGetAddress(args)),
+                memGetInt(memGetAddress(args + POINTER_SIZE)),
+                memGetInt(memGetAddress(args + 2 * POINTER_SIZE)),
+                memGetInt(memGetAddress(args + 3 * POINTER_SIZE)),
+                memGetAddress(memGetAddress(args + 4 * POINTER_SIZE)),
+                memGetAddress(memGetAddress(args + 5 * POINTER_SIZE))
         );
     }
 

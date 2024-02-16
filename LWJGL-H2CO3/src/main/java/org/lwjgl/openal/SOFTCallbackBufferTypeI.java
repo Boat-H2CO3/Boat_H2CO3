@@ -40,7 +40,7 @@ public interface SOFTCallbackBufferTypeI extends CallbackI {
         long __result = invoke(
             memGetAddress(memGetAddress(args)),
             memGetAddress(memGetAddress(args + POINTER_SIZE)),
-            memGetInt(memGetAddress(args + 2L * POINTER_SIZE))
+            memGetInt(memGetAddress(args + 2 * POINTER_SIZE))
         );
         apiClosureRetP(ret, __result);
     }

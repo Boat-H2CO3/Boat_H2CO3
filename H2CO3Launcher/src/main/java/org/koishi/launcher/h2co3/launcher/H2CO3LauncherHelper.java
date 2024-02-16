@@ -135,7 +135,7 @@ public class H2CO3LauncherHelper {
     public static void addCommonEnv(Context context, HashMap<String, String> envMap) {
         envMap.put("HOME", H2CO3Tools.LOG_DIR);
         envMap.put("JAVA_HOME", getJavaPath());
-        envMap.put("H2CO3Launcher_NATIVEDIR", context.getApplicationInfo().nativeLibraryDir);
+        envMap.put("H2CO3LAUNCHER_NATIVEDIR", context.getApplicationInfo().nativeLibraryDir);
         envMap.put("TMPDIR", context.getCacheDir().getAbsolutePath());
     }
 
@@ -309,7 +309,7 @@ public class H2CO3LauncherHelper {
 
     public static H2CO3LauncherBridge launchJarExecutor(Context context, int width, int height) {
 
-        // initialize FCLBridge
+        // initialize H2CO3LAUNCHERBridge
         H2CO3LauncherBridge bridge = new H2CO3LauncherBridge();
         bridge.setLogPath(H2CO3Tools.LOG_FILE_PATH + "/latest_jar_executor.log");
         Thread javaGUIThread = new Thread(() -> {
@@ -344,7 +344,7 @@ public class H2CO3LauncherHelper {
 
     public static H2CO3LauncherBridge launchAPIInstaller(Context context, int width, int height) {
 
-        // initialize FCLBridge
+        // initialize H2CO3LAUNCHERBridge
         H2CO3LauncherBridge bridge = new H2CO3LauncherBridge();
         bridge.setLogPath(H2CO3Tools.LOG_DIR + "/latest_api_installer.log");
         Thread apiInstallerThread = new Thread(() -> {
@@ -378,7 +378,7 @@ public class H2CO3LauncherHelper {
         H2CO3Tools.loadPaths(context);
         H2CO3GameHelper.setRender(H2CO3Tools.GL_GL114);
         MinecraftVersion version = MinecraftVersion.fromDirectory(new File(H2CO3GameHelper.getGameCurrentVersion()));
-        String lwjglPath = H2CO3Tools.RUNTIME_DIR + "/boat/lwjgl";
+        String lwjglPath = H2CO3Tools.RUNTIME_DIR + "/h2co3Launcher/lwjgl";
         String javaPath = getJavaPath();
         boolean highVersion = version.minimumLauncherVersion >= 21;
         String classPath;

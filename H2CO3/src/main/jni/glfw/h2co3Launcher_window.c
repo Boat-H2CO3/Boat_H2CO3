@@ -1,3 +1,9 @@
+//
+// Created by Tungsten on 2022/10/11.
+//
+//========================================================================
+// This file is derived from x11_window.c
+//========================================================================
 
 #include <internal.h>
 
@@ -9,8 +15,9 @@
 #include <assert.h>
 #include <h2co3Launcher_event.h>
 #include <h2co3Launcher_bridge.h>
-#include <h2co3Launcher_internal.h>
 
+// Translates an H2CO3LAUNCHER event modifier state mask
+//
 static int translateState(int state) {
     int mods = 0;
 
@@ -30,6 +37,8 @@ static int translateState(int state) {
     return mods;
 }
 
+// Translates an H2CO3LAUNCHER key code to a GLFW key token
+//
 static int translateKey(int scancode) {
     // Use the pre-filled LUT (see createKeyTables() in h2co3Launcher_init.c)
     if (scancode < 0 || scancode > 255)
@@ -71,7 +80,7 @@ static GLFWbool createNativeWindow(_GLFWwindow *window,
 
     if (!window->h2co3Launcher.handle) {
         _glfwInputError(GLFW_PLATFORM_ERROR,
-                        "H2CO3Launcher: Failed to get window");
+                        "H2CO3LAUNCHER: Failed to get window");
         return GLFW_FALSE;
     }
 
@@ -103,6 +112,8 @@ static void releaseMonitor(_GLFWwindow *window) {
     _glfwInputMonitorWindow(window->monitor, NULL);
 }
 
+// Process the specified H2CO3LAUNCHER event
+//
 static void processEvent(H2CO3LauncherEvent *event) {
     _GLFWwindow *window = _glfw.h2co3Launcher.eventCurrent;
 
@@ -140,7 +151,7 @@ static void processEvent(H2CO3LauncherEvent *event) {
             else if (event->button == Button3)
                 _glfwInputMouseClick(window, GLFW_MOUSE_BUTTON_RIGHT, GLFW_PRESS, mods);
 
-                // Like X11, H2CO3Launcher provides scroll events as mouse button presses
+                // Like X11, H2CO3LAUNCHER provides scroll events as mouse button presses
             else if (event->button == Button4)
                 _glfwInputScroll(window, 0.0, 1.0);
             else if (event->button == Button5)
@@ -254,7 +265,7 @@ static void processEvent(H2CO3LauncherEvent *event) {
 
         case H2CO3LauncherMessage: {
             if (event->message == CloseRequest) {
-                // The H2CO3Launcher was asked to close the window, for
+                // The H2CO3LAUNCHER was asked to close the window, for
                 // example by the user pressing 'back' key
                 _glfwInputWindowCloseRequest(window);
             }
@@ -513,7 +524,7 @@ void _glfwPlatformPostEmptyEvent(void) {
 void _glfwPlatformGetCursorPos(_GLFWwindow *window, double *xpos, double *ypos) {
     int x, y;
 
-    // h2co3GetCursorPos(&x, &y);
+    // h2co3LauncherGetCursorPos(&x, &y);
     x = 0;
     y = 0;
 
@@ -527,7 +538,7 @@ void _glfwPlatformSetCursorPos(_GLFWwindow *window, double x, double y) {
     // Store the new position so it can be recognized later
     window->h2co3Launcher.warpCursorPosX = (int) x;
     window->h2co3Launcher.warpCursorPosY = (int) y;
-    // h2co3SetCursorPos(x, y);
+    // h2co3LauncherSetCursorPos(x, y);
 }
 
 void _glfwPlatformSetInjectorMode(int mode) {
@@ -544,7 +555,8 @@ void _glfwPlatformSetHitResultType(int type) {
 
 void _glfwPlatformSetCursorMode(_GLFWwindow *window, int mode) {
     if (mode == GLFW_CURSOR_DISABLED) {
-        disableCursor(window);
+        if (_glfwPlatformWindowFocused(window))
+            disableCursor(window);
     } else if (_glfw.h2co3Launcher.disabledCursorWindow == window)
         enableCursor(window);
     // else
@@ -619,7 +631,7 @@ VkResult _glfwPlatformCreateWindowSurface(VkInstance instance,
             vkGetInstanceProcAddr(instance, "vkCreateAndroidSurfaceKHR");
     if (!vkCreateAndroidSurfaceKHR) {
         _glfwInputError(GLFW_API_UNAVAILABLE,
-                        "H2CO3Launcher: Vulkan instance missing VK_KHR_android_surface extension");
+                        "H2CO3LAUNCHER: Vulkan instance missing VK_KHR_android_surface extension");
         return VK_ERROR_EXTENSION_NOT_PRESENT;
     }
 
@@ -630,7 +642,7 @@ VkResult _glfwPlatformCreateWindowSurface(VkInstance instance,
     err = vkCreateAndroidSurfaceKHR(instance, &sci, allocator, surface);
     if (err) {
         _glfwInputError(GLFW_PLATFORM_ERROR,
-                        "H2CO3Launcher: Failed to create Vulkan Android surface: %s",
+                        "H2CO3LAUNCHER: Failed to create Vulkan Android surface: %s",
                         _glfwGetVulkanResultString(err));
     }
 
@@ -642,7 +654,7 @@ VkResult _glfwPlatformCreateWindowSurface(VkInstance instance,
 //////                        GLFW native API                       //////
 //////////////////////////////////////////////////////////////////////////
 
-GLFWAPI struct ANativeWindow *glfwGetH2CO3LauncherWindow(GLFWwindow *handle) {
+GLFWAPI struct ANativeWindow *glfwGetH2CO3LAUNCHERWindow(GLFWwindow *handle) {
     _GLFWwindow *window = (_GLFWwindow *) handle;
     _GLFW_REQUIRE_INIT_OR_RETURN(NULL);
     return window->h2co3Launcher.handle;

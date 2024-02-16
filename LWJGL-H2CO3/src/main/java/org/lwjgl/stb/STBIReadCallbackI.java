@@ -42,7 +42,7 @@ public interface STBIReadCallbackI extends CallbackI {
         int __result = invoke(
             memGetAddress(memGetAddress(args)),
             memGetAddress(memGetAddress(args + POINTER_SIZE)),
-            memGetInt(memGetAddress(args + 2L * POINTER_SIZE))
+            memGetInt(memGetAddress(args + 2 * POINTER_SIZE))
         );
         apiClosureRet(ret, __result);
     }

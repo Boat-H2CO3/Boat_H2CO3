@@ -257,7 +257,7 @@ public class CMsghdr extends Struct<CMsghdr> implements NativeResource {
     public static ByteBuffer ncmsg_data(long struct) { return memByteBuffer(struct + CMsghdr.CMSG_DATA, 0); }
     /** Unsafe version of {@link #cmsg_data(int) cmsg_data}. */
     public static byte ncmsg_data(long struct, int index) {
-        return UNSAFE.getByte(null, struct + CMsghdr.CMSG_DATA + check(index, 0));
+        return UNSAFE.getByte(null, struct + CMsghdr.CMSG_DATA + check(index, 0) * 1);
     }
 
     /** Unsafe version of {@link #cmsg_len(int) cmsg_len}. */
@@ -269,11 +269,11 @@ public class CMsghdr extends Struct<CMsghdr> implements NativeResource {
     /** Unsafe version of {@link #cmsg_data(ByteBuffer) cmsg_data}. */
     public static void ncmsg_data(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 0); }
-        memCopy(memAddress(value), struct + CMsghdr.CMSG_DATA, value.remaining());
+        memCopy(memAddress(value), struct + CMsghdr.CMSG_DATA, value.remaining() * 1);
     }
     /** Unsafe version of {@link #cmsg_data(int, byte) cmsg_data}. */
     public static void ncmsg_data(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + CMsghdr.CMSG_DATA + check(index, 0), value);
+        UNSAFE.putByte(null, struct + CMsghdr.CMSG_DATA + check(index, 0) * 1, value);
     }
 
     // -----------------------------------

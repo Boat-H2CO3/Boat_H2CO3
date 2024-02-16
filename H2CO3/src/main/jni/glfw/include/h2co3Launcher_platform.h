@@ -1,4 +1,6 @@
-
+//
+// Created by Tungsten on 2022/10/11.
+//
 //========================================================================
 // This file is derived from x11_platform.h
 //========================================================================
@@ -19,8 +21,10 @@ typedef struct VkAndroidSurfaceCreateInfoKHR {
     struct ANativeWindow *window;
 } VkAndroidSurfaceCreateInfoKHR;
 
-typedef VkResult (APIENTRY
-*PFN_vkCreateAndroidSurfaceKHR)(VkInstance, const VkAndroidSurfaceCreateInfoKHR*, const VkAllocationCallbacks*, VkSurfaceKHR*);
+typedef VkResult (APIENTRY *PFN_vkCreateAndroidSurfaceKHR)(VkInstance,
+                                                           const VkAndroidSurfaceCreateInfoKHR *,
+                                                           const VkAllocationCallbacks *,
+                                                           VkSurfaceKHR *);
 
 #include "posix_thread.h"
 #include "posix_time.h"
@@ -42,7 +46,7 @@ typedef VkResult (APIENTRY
 #define _GLFW_PLATFORM_CONTEXT_STATE         struct { int dummyContext; }
 #define _GLFW_PLATFORM_LIBRARY_CONTEXT_STATE struct { int dummyLibraryContext; }
 
-// H2CO3Launcher-specific per-window data
+// H2CO3LAUNCHER-specific per-window data
 //
 typedef struct _GLFWwindowH2CO3Launcher {
     struct ANativeWindow *handle;
@@ -65,16 +69,16 @@ typedef struct _GLFWwindowH2CO3Launcher {
 
 } _GLFWwindowH2CO3Launcher;
 
-// H2CO3Launcher-specific global data
+// H2CO3LAUNCHER-specific global data
 //
 typedef struct _GLFWlibraryH2CO3Launcher {
     // System content scale
     float contentScaleX, contentScaleY;
     // Key name string
     char keynames[GLFW_KEY_LAST + 1][5];
-    // H2CO3Launcher keycode to GLFW key LUT
+    // H2CO3LAUNCHER keycode to GLFW key LUT
     short int keycodes[256];
-    // GLFW key to H2CO3Launcher keycode LUT
+    // GLFW key to H2CO3LAUNCHER keycode LUT
     short int scancodes[GLFW_KEY_LAST + 1];
     // Where to place the cursor when re-enabled
     double restoreCursorPosX, restoreCursorPosY;
@@ -85,7 +89,7 @@ typedef struct _GLFWlibraryH2CO3Launcher {
 
 } _GLFWlibraryH2CO3Launcher;
 
-// H2CO3Launcher-specific per-monitor data
+// H2CO3LAUNCHER-specific per-monitor data
 //
 typedef struct _GLFWmonitorH2CO3Launcher {
     // Current monitor mode index
@@ -93,7 +97,7 @@ typedef struct _GLFWmonitorH2CO3Launcher {
 
 } _GLFWmonitorH2CO3Launcher;
 
-// H2CO3Launcher-specific per-cursor data
+// H2CO3LAUNCHER-specific per-cursor data
 //
 typedef struct _GLFWcursorH2CO3Launcher {
     // Useless struct filler

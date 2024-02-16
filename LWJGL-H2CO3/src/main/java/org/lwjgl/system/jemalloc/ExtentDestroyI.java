@@ -42,11 +42,11 @@ public interface ExtentDestroyI extends CallbackI {
     @Override
     default void callback(long ret, long args) {
         boolean __result = invoke(
-            memGetAddress(memGetAddress(args)),
-            memGetAddress(memGetAddress(args + POINTER_SIZE)),
-            memGetAddress(memGetAddress(args + 2L * POINTER_SIZE)),
-            memGetByte(memGetAddress(args + 3L * POINTER_SIZE)) != 0,
-            memGetInt(memGetAddress(args + 4L * POINTER_SIZE))
+                memGetAddress(memGetAddress(args)),
+                memGetAddress(memGetAddress(args + POINTER_SIZE)),
+                memGetAddress(memGetAddress(args + 2 * POINTER_SIZE)),
+                memGetByte(memGetAddress(args + 3 * POINTER_SIZE)) != 0,
+                memGetInt(memGetAddress(args + 4 * POINTER_SIZE))
         );
         apiClosureRet(ret, __result);
     }

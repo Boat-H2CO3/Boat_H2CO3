@@ -110,10 +110,12 @@ public final class ThreadLocalUtil {
         int JNI_VERSION = GetVersion();
 
         int reservedCount;
-        if (JNI_VERSION == JNI_VERSION_1_1) {
-            reservedCount = 12;
-        } else {
-            reservedCount = 4;
+        switch (JNI_VERSION) {
+            case JNI_VERSION_1_1:
+                reservedCount = 12;
+                break;
+            default:
+                reservedCount = 4;
         }
 
         int jniCallCount;

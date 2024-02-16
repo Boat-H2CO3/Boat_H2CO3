@@ -359,7 +359,6 @@ void nvgTransformPoint(float *dstx, float *dsty, const float *xform, float srcx,
 
 // Converts degrees to radians and vice versa.
 float nvgDegToRad(float deg);
-
 float nvgRadToDeg(float rad);
 
 //

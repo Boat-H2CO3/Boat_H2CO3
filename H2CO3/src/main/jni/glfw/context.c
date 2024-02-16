@@ -1,3 +1,7 @@
+//
+// Created by Tungsten on 2022/10/11.
+//
+
 #include <internal.h>
 
 #include <assert.h>
@@ -362,7 +366,7 @@ GLFWAPI void *glfwGetOSMesaCurrentContext() {
 
 GLFWAPI long glfwGetGraphicBuffersAddr(GLFWwindow *handle) {
     _GLFWwindow *window = (_GLFWwindow *) handle;
-    return (long) &window->context.osmesa.buffer;
+    return &window->context.osmesa.buffer;
 }
 
 GLFWAPI void glfwMakeContextCurrent(GLFWwindow *handle) {

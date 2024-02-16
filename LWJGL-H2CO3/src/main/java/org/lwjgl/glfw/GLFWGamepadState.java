@@ -258,7 +258,7 @@ public class GLFWGamepadState extends Struct<GLFWGamepadState> implements Native
     public static ByteBuffer nbuttons(long struct) { return memByteBuffer(struct + GLFWGamepadState.BUTTONS, 15); }
     /** Unsafe version of {@link #buttons(int) buttons}. */
     public static byte nbuttons(long struct, int index) {
-        return UNSAFE.getByte(null, struct + GLFWGamepadState.BUTTONS + check(index, 15));
+        return UNSAFE.getByte(null, struct + GLFWGamepadState.BUTTONS + check(index, 15) * 1);
     }
     /** Unsafe version of {@link #axes}. */
     public static FloatBuffer naxes(long struct) { return memFloatBuffer(struct + GLFWGamepadState.AXES, 6); }
@@ -270,11 +270,11 @@ public class GLFWGamepadState extends Struct<GLFWGamepadState> implements Native
     /** Unsafe version of {@link #buttons(ByteBuffer) buttons}. */
     public static void nbuttons(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 15); }
-        memCopy(memAddress(value), struct + GLFWGamepadState.BUTTONS, value.remaining());
+        memCopy(memAddress(value), struct + GLFWGamepadState.BUTTONS, value.remaining() * 1);
     }
     /** Unsafe version of {@link #buttons(int, byte) buttons}. */
     public static void nbuttons(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + GLFWGamepadState.BUTTONS + check(index, 15), value);
+        UNSAFE.putByte(null, struct + GLFWGamepadState.BUTTONS + check(index, 15) * 1, value);
     }
     /** Unsafe version of {@link #axes(FloatBuffer) axes}. */
     public static void naxes(long struct, FloatBuffer value) {

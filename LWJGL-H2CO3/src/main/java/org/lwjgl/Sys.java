@@ -144,20 +144,21 @@ public final class Sys {
 			// Lookup the javax.jnlp.BasicService object
 			final Class<?> serviceManagerClass = Class.forName("javax.jnlp.ServiceManager");
 			Method lookupMethod = AccessController.doPrivileged(new PrivilegedExceptionAction<Method>() {
-				public Method run() throws Exception {
-					return serviceManagerClass.getMethod("lookup", String.class);
-				}
-			});
-			Object basicService = lookupMethod.invoke(serviceManagerClass, "javax.jnlp.BasicService");
-			final Class<?> basicServiceClass = Class.forName("javax.jnlp.BasicService");
+                public Method run() throws Exception {
+                    return serviceManagerClass.getMethod("lookup", String.class);
+                }
+            });
+            Object basicService = lookupMethod.invoke(serviceManagerClass, new Object[]{"javax.jnlp.BasicService"});
+            final Class<?> basicServiceClass = Class.forName("javax.jnlp.BasicService");
 			Method showDocumentMethod = AccessController.doPrivileged(new PrivilegedExceptionAction<Method>() {
 				public Method run() throws Exception {
 					return basicServiceClass.getMethod("showDocument", URL.class);
 				}
 			});
 			try {
-				return (Boolean) showDocumentMethod.invoke(basicService, new URL(url));
-			} catch (MalformedURLException e) {
+                Boolean ret = (Boolean) showDocumentMethod.invoke(basicService, new URL(url));
+                return ret;
+            } catch (MalformedURLException e) {
 				e.printStackTrace(System.err);
 				return false;
 			}

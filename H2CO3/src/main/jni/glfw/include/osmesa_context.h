@@ -1,4 +1,6 @@
-
+//
+// Created by Tungsten on 2022/10/11.
+//
 
 #include <internal.h>
 
@@ -13,29 +15,20 @@
 #define OSMESA_CONTEXT_MAJOR_VERSION 0x36
 #define OSMESA_CONTEXT_MINOR_VERSION 0x37
 
-#define OSMESA_ROW_LENGTH    0x10
-#define OSMESA_Y_UP        0x11
+#define OSMESA_ROW_LENGTH	0x10
+#define OSMESA_Y_UP		0x11
 
-typedef void *OSMesaContext;
-
+typedef void* OSMesaContext;
 typedef void (*OSMESAproc)(void);
 
-typedef OSMesaContext (GLAPIENTRY
-* PFN_OSMesaCreateContext)(GLenum,OSMesaContext);
-typedef OSMesaContext (GLAPIENTRY
-* PFN_OSMesaGetCurrentContext)(void);
-typedef void (GLAPIENTRY
-* PFN_OSMesaDestroyContext)(OSMesaContext);
-typedef void (GLAPIENTRY
-* PFN_OSMesaPixelStore)(GLint,GLint);
-typedef int (GLAPIENTRY
-* PFN_OSMesaMakeCurrent)(OSMesaContext,void*,int,int,int);
-typedef int (GLAPIENTRY
-* PFN_OSMesaGetColorBuffer)(OSMesaContext,int*,int*,int*,void**);
-typedef int (GLAPIENTRY
-* PFN_OSMesaGetDepthBuffer)(OSMesaContext,int*,int*,int*,void**);
-typedef GLFWglproc (GLAPIENTRY
-* PFN_OSMesaGetProcAddress)(const char*);
+typedef OSMesaContext (GLAPIENTRY * PFN_OSMesaCreateContext)(GLenum,OSMesaContext);
+typedef OSMesaContext (GLAPIENTRY * PFN_OSMesaGetCurrentContext)(void);
+typedef void (GLAPIENTRY * PFN_OSMesaDestroyContext)(OSMesaContext);
+typedef void (GLAPIENTRY * PFN_OSMesaPixelStore)(GLint,GLint);
+typedef int (GLAPIENTRY * PFN_OSMesaMakeCurrent)(OSMesaContext,void*,int,int,int);
+typedef int (GLAPIENTRY * PFN_OSMesaGetColorBuffer)(OSMesaContext,int*,int*,int*,void**);
+typedef int (GLAPIENTRY * PFN_OSMesaGetDepthBuffer)(OSMesaContext,int*,int*,int*,void**);
+typedef GLFWglproc (GLAPIENTRY * PFN_OSMesaGetProcAddress)(const char*);
 #define OSMesaCreateContext _glfw.osmesa.CreateContext
 #define OSMesaGetCurrentContext _glfw.osmesa.GetCurrentContext
 #define OSMesaDestroyContext _glfw.osmesa.DestroyContext
@@ -51,36 +44,36 @@ typedef GLFWglproc (GLAPIENTRY
 
 // OSMesa-specific per-context data
 //
-typedef struct _GLFWcontextOSMesa {
-    OSMesaContext handle;
-    int width;
-    int height;
-    void *buffer;
+typedef struct _GLFWcontextOSMesa
+{
+    OSMesaContext       handle;
+    int                 width;
+    int                 height;
+    void*               buffer;
 
 } _GLFWcontextOSMesa;
 
 // OSMesa-specific global data
 //
-typedef struct _GLFWlibraryOSMesa {
-    void *handle;
+typedef struct _GLFWlibraryOSMesa
+{
+    void*           handle;
 
-    PFN_OSMesaCreateContext CreateContext;
-    PFN_OSMesaGetCurrentContext GetCurrentContext;
-    PFN_OSMesaDestroyContext DestroyContext;
-    PFN_OSMesaPixelStore PixelStore;
-    PFN_OSMesaMakeCurrent MakeCurrent;
-    PFN_OSMesaGetColorBuffer GetColorBuffer;
-    PFN_OSMesaGetDepthBuffer GetDepthBuffer;
-    PFN_OSMesaGetProcAddress GetProcAddress;
+    PFN_OSMesaCreateContext         CreateContext;
+    PFN_OSMesaGetCurrentContext     GetCurrentContext;
+    PFN_OSMesaDestroyContext        DestroyContext;
+    PFN_OSMesaPixelStore            PixelStore;
+    PFN_OSMesaMakeCurrent           MakeCurrent;
+    PFN_OSMesaGetColorBuffer        GetColorBuffer;
+    PFN_OSMesaGetDepthBuffer        GetDepthBuffer;
+    PFN_OSMesaGetProcAddress        GetProcAddress;
 
 } _GLFWlibraryOSMesa;
 
 
 GLFWbool _glfwInitOSMesa(void);
-
 void _glfwTerminateOSMesa(void);
-
-GLFWbool _glfwCreateContextOSMesa(_GLFWwindow *window,
-                                  const _GLFWctxconfig *ctxconfig,
-                                  const _GLFWfbconfig *fbconfig);
+GLFWbool _glfwCreateContextOSMesa(_GLFWwindow* window,
+                                  const _GLFWctxconfig* ctxconfig,
+                                  const _GLFWfbconfig* fbconfig);
 

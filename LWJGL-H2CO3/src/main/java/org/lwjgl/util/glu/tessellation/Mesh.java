@@ -167,24 +167,25 @@ class Mesh {
                            GLUhalfEdge eOrig, GLUvertex vNext) {
         GLUhalfEdge e;
         GLUvertex vPrev;
+        GLUvertex vNew = newVertex;
 
-        assert (newVertex != null);
+        assert (vNew != null);
 
         /* insert in circular doubly-linked list before vNext */
         vPrev = vNext.prev;
-        newVertex.prev = vPrev;
-        vPrev.next = newVertex;
-        newVertex.next = vNext;
-        vNext.prev = newVertex;
+        vNew.prev = vPrev;
+        vPrev.next = vNew;
+        vNew.next = vNext;
+        vNext.prev = vNew;
 
-        newVertex.anEdge = eOrig;
-        newVertex.data = null;
+        vNew.anEdge = eOrig;
+        vNew.data = null;
         /* leave coords, s, t undefined */
 
         /* fix other edges on this vertex loop */
         e = eOrig;
         do {
-            e.Org = newVertex;
+            e.Org = vNew;
             e = e.Onext;
         } while (e != eOrig);
     }
@@ -198,30 +199,31 @@ class Mesh {
     static void MakeFace(GLUface newFace, GLUhalfEdge eOrig, GLUface fNext) {
         GLUhalfEdge e;
         GLUface fPrev;
+        GLUface fNew = newFace;
 
-        assert (newFace != null);
+        assert (fNew != null);
 
         /* insert in circular doubly-linked list before fNext */
         fPrev = fNext.prev;
-        newFace.prev = fPrev;
-        fPrev.next = newFace;
-        newFace.next = fNext;
-        fNext.prev = newFace;
+        fNew.prev = fPrev;
+        fPrev.next = fNew;
+        fNew.next = fNext;
+        fNext.prev = fNew;
 
-        newFace.anEdge = eOrig;
-        newFace.data = null;
-        newFace.trail = null;
-        newFace.marked = false;
+        fNew.anEdge = eOrig;
+        fNew.data = null;
+        fNew.trail = null;
+        fNew.marked = false;
 
         /* The new face is marked "inside" if the old one was.  This is a
          * convenience for the common case where a face has been split in two.
          */
-        newFace.inside = fNext.inside;
+        fNew.inside = fNext.inside;
 
         /* fix other edges on this face loop */
         e = eOrig;
         do {
-            e.Lface = newFace;
+            e.Lface = fNew;
             e = e.Lnext;
         } while (e != eOrig);
     }
@@ -336,7 +338,7 @@ class Mesh {
         boolean joiningLoops = false;
         boolean joiningVertices = false;
 
-        if (eOrg == eDst) return false;
+        if (eOrg == eDst) return true;
 
         if (eDst.Org != eOrg.Org) {
             /* We are merging two disjoint vertices -- destroy eDst->Org */
@@ -371,7 +373,7 @@ class Mesh {
             eOrg.Lface.anEdge = eOrg;
         }
 
-        return false;
+        return true;
     }
 
 
@@ -430,7 +432,7 @@ class Mesh {
         /* Any isolated vertices or faces have already been freed. */
         KillEdge(eDel);
 
-        return false;
+        return true;
     }
 
 

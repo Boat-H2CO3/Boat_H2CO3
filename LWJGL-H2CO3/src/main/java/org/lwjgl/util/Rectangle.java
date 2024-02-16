@@ -267,14 +267,17 @@ public final class Rectangle implements ReadableRectangle, WritableRectangle, Se
 			// x+w did not overflow and x+w is smaller than X+W
 			if (w >= x && W > w)
 				return false;
-		}
-		h += y;
-		H += Y;
-		if (H <= Y) {
-            return h < y && H <= h;
-		} else {
-            return h < y || H <= h;
-		}
+        }
+        h += y;
+        H += Y;
+        if (H <= Y) {
+            if (h >= y || H > h)
+                return false;
+        } else {
+            if (h >= y && H > h)
+                return false;
+        }
+        return true;
     }
 
 	/**

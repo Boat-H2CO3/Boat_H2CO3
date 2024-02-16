@@ -371,7 +371,7 @@ public class XClientMessageEvent extends Struct<XClientMessageEvent> implements 
     public static ByteBuffer ndata_b(long struct) { return memByteBuffer(struct + XClientMessageEvent.DATA_B, 20); }
     /** Unsafe version of {@link #data_b(int) data_b}. */
     public static byte ndata_b(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XClientMessageEvent.DATA_B + check(index, 20));
+        return UNSAFE.getByte(null, struct + XClientMessageEvent.DATA_B + check(index, 20) * 1);
     }
     /** Unsafe version of {@link #data_s}. */
     public static ShortBuffer ndata_s(long struct) { return memShortBuffer(struct + XClientMessageEvent.DATA_S, 10); }
@@ -403,11 +403,11 @@ public class XClientMessageEvent extends Struct<XClientMessageEvent> implements 
     /** Unsafe version of {@link #data_b(ByteBuffer) data_b}. */
     public static void ndata_b(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 20); }
-        memCopy(memAddress(value), struct + XClientMessageEvent.DATA_B, value.remaining());
+        memCopy(memAddress(value), struct + XClientMessageEvent.DATA_B, value.remaining() * 1);
     }
     /** Unsafe version of {@link #data_b(int, byte) data_b}. */
     public static void ndata_b(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + XClientMessageEvent.DATA_B + check(index, 20), value);
+        UNSAFE.putByte(null, struct + XClientMessageEvent.DATA_B + check(index, 20) * 1, value);
     }
     /** Unsafe version of {@link #data_s(ShortBuffer) data_s}. */
     public static void ndata_s(long struct, ShortBuffer value) {

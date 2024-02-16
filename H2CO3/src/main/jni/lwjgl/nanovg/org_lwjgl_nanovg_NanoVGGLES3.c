@@ -5,24 +5,23 @@
  */
 #include "lwjgl/common_tools.h"
 #include "lwjgl/lwjgl_malloc.h"
-
 #define NVG_MALLOC(sz)     org_lwjgl_malloc(sz)
 #define NVG_REALLOC(p, sz)  org_lwjgl_realloc(p,sz)
 #define NVG_FREE(p)        org_lwjgl_free(p)
+
 int DISABLE_WARNINGS();
+
 #define NANOVG_GLES3_IMPLEMENTATION
 
 #include "nanovg.h"
 #include "nanovg_gl.h"
 #include "nanovg_gl_utils.h"
 
-int ENABLE_WARNINGS()
+int ENABLE_WARNINGS();
 
 EXTERN_C_ENTER
 
-JNIEXPORT;
-
-jint JNICALL
+JNIEXPORT jint JNICALL
 Java_org_lwjgl_nanovg_NanoVGGLES3_nnvglCreateImageFromHandle(JNIEnv *__env, jclass clazz,
                                                              jlong ctxAddress, jint textureId,
                                                              jint w, jint h, jint flags) {

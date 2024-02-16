@@ -319,7 +319,7 @@ public class GL20C extends GL15C {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             long stringsAddress = APIUtil.apiArrayi(stack, MemoryUtil::memUTF8, strings);
-            nglShaderSource(shader, strings.length, stringsAddress, stringsAddress - ((long) strings.length << 2));
+            nglShaderSource(shader, strings.length, stringsAddress, stringsAddress - (strings.length << 2));
             APIUtil.apiArrayFree(stringsAddress, strings.length);
         } finally {
             stack.setPointer(stackPointer);

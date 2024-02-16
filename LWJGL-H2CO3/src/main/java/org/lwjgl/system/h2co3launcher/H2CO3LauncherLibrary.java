@@ -2,17 +2,17 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: https://www.lwjgl.org/license
  */
-package org.lwjgl.system.h2co3;
+package org.lwjgl.system.h2co3launcher;
 
 import org.lwjgl.system.*;
+
+import javax.annotation.*;
 
 import java.nio.*;
 
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.h2co3.DynamicLinkLoader.*;
-
-import javax.annotation.Nullable;
+import static org.lwjgl.system.h2co3launcher.DynamicLinkLoader.*;
 
 /**
  * Implements a {@link SharedLibrary} on the Linux OS.
@@ -30,7 +30,7 @@ public class H2CO3LauncherLibrary extends SharedLibrary.Default {
     private static long loadLibrary(String name) {
         long handle;
         try (MemoryStack stack = stackPush()) {
-            handle = dlopen(stack.ASCII(name), RTLD_LAZY | RTLD_LOCAL);
+            handle = dlopen(stack.UTF8(name), RTLD_LAZY | RTLD_LOCAL);
         }
         if (handle == NULL) {
             throw new UnsatisfiedLinkError("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");

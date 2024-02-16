@@ -3,9 +3,8 @@
  * License terms: https://www.lwjgl.org/license
  */
 #ifdef LWJGL_WINDOWS
-__pragma(warning(disable : 4710))
+    __pragma(warning(disable : 4710))
 #endif
-
 #include "common_tools.h"
 #include "h2co3Launcher_hook.h"
 #include <stdlib.h>

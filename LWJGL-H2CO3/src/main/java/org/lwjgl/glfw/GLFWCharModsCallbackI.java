@@ -46,7 +46,7 @@ public interface GLFWCharModsCallbackI extends CallbackI {
         invoke(
             memGetAddress(memGetAddress(args)),
             memGetInt(memGetAddress(args + POINTER_SIZE)),
-            memGetInt(memGetAddress(args + 2L * POINTER_SIZE))
+            memGetInt(memGetAddress(args + 2 * POINTER_SIZE))
         );
     }
 

@@ -7,31 +7,24 @@
 #include <stddef.h>
 
 int DISABLE_WARNINGS();
-
 #include "ffi.h"
-
-int ENABLE_WARNINGS()
+int ENABLE_WARNINGS();
 #ifdef LWJGL_WINDOWS
-#define alignof __alignof
+    #define alignof __alignof
 #else
-
-#include <stdalign.h>
-
+    #include <stdalign.h>
 #endif
 
 EXTERN_C_ENTER
 
-JNIEXPORT;
-
-jint JNICALL
-Java_org_lwjgl_system_libffi_FFIClosure_offsets(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    jint *buffer = (jint *) (uintptr_t) bufferAddress;
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_libffi_FFIClosure_offsets(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+    jint *buffer = (jint *)(uintptr_t)bufferAddress;
 
     UNUSED_PARAMS(__env, clazz)
 
-    buffer[0] = (jint) offsetof(ffi_closure, cif);
-    buffer[1] = (jint) offsetof(ffi_closure, fun);
-    buffer[2] = (jint) offsetof(ffi_closure, user_data);
+    buffer[0] = (jint)offsetof(ffi_closure, cif);
+    buffer[1] = (jint)offsetof(ffi_closure, fun);
+    buffer[2] = (jint)offsetof(ffi_closure, user_data);
 
     buffer[3] = alignof(ffi_closure);
 

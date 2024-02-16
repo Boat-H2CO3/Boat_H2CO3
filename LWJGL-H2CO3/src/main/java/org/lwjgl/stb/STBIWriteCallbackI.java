@@ -42,7 +42,7 @@ public interface STBIWriteCallbackI extends CallbackI {
         invoke(
             memGetAddress(memGetAddress(args)),
             memGetAddress(memGetAddress(args + POINTER_SIZE)),
-            memGetInt(memGetAddress(args + 2L * POINTER_SIZE))
+            memGetInt(memGetAddress(args + 2 * POINTER_SIZE))
         );
     }
 

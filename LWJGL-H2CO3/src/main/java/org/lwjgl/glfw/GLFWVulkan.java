@@ -15,6 +15,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.EXTMetalSurface.VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT;
@@ -282,7 +283,7 @@ public class GLFWVulkan {
         if (CHECKS) {
             check(surface, 1);
         }
-        if (Platform.get() == Platform.H2CO3Launcher) {
+        if (Platform.get() == Platform.LINUX) {
             VkAndroidSurfaceCreateInfoKHR pCreateInfo = VkAndroidSurfaceCreateInfoKHR
                     .calloc()
                     .sType(VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR)

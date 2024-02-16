@@ -178,8 +178,8 @@ public class GLUtessellatorImpl implements GLUtessellator {
     private GLUtessellatorCallback callCombineData;
 
     private static final double GLU_TESS_DEFAULT_TOLERANCE = 0.0;
-//    private static final int GLU_TESS_MESH = 100112;	/* void (*)(GLUmesh *mesh)	    */
-    private static final GLUtessellatorCallback NULL_CB = new GLUtessellatorCallbackAdapter();
+    //    private static final int GLU_TESS_MESH = 100112;	/* void (*)(GLUmesh *mesh)	    */
+    private static GLUtessellatorCallback NULL_CB = new GLUtessellatorCallbackAdapter();
 
 //    #define MAX_FAST_ALLOC	(MAX(sizeof(EdgePair), \
 //                 MAX(sizeof(GLUvertex),sizeof(GLUface))))
@@ -320,6 +320,7 @@ public class GLUtessellatorImpl implements GLUtessellator {
                 value[value_offset] = windingRule;
                 break;
             case GLU_TESS_BOUNDARY_ONLY:
+                assert (boundaryOnly == true || boundaryOnly == false);
                 value[value_offset] = boundaryOnly ? 1 : 0;
                 break;
             default:
@@ -386,6 +387,7 @@ public class GLUtessellatorImpl implements GLUtessellator {
 //                return;
             default:
                 callErrorOrErrorData(GLU_INVALID_ENUM);
+                return;
         }
     }
 
@@ -397,13 +399,13 @@ public class GLUtessellatorImpl implements GLUtessellator {
             /* Make a self-loop (one vertex, one edge). */
 
             e = Mesh.__gl_meshMakeEdge(mesh);
-            if (e == null) return true;
-            if (Mesh.__gl_meshSplice(e, e.Sym)) return true;
+            if (e == null) return false;
+            if (!Mesh.__gl_meshSplice(e, e.Sym)) return false;
         } else {
 /* Create a new vertex and edge which immediately follow e
  * in the ordering around the left face.
  */
-            if (Mesh.__gl_meshSplitEdge(e) == null) return true;
+            if (Mesh.__gl_meshSplitEdge(e) == null) return false;
             e = e.Lnext;
         }
 
@@ -423,7 +425,7 @@ public class GLUtessellatorImpl implements GLUtessellator {
 
         lastEdge = e;
 
-        return false;
+        return true;
     }
 
     private void cacheVertex(double[] coords, Object vertexData) {
@@ -445,16 +447,16 @@ public class GLUtessellatorImpl implements GLUtessellator {
         CachedVertex[] v = cache;
 
         mesh = Mesh.__gl_meshNewMesh();
-        if (mesh == null) return true;
+        if (mesh == null) return false;
 
         for (int i = 0; i < cacheCount; i++) {
             CachedVertex vertex = v[i];
-            if (addVertex(vertex.coords, vertex.data)) return true;
+            if (!addVertex(vertex.coords, vertex.data)) return false;
         }
         cacheCount = 0;
         flushCacheOnNextVertex = false;
 
-        return false;
+        return true;
     }
 
     public void gluTessVertex(double[] coords, int coords_offset, Object vertexData) {
@@ -466,7 +468,7 @@ public class GLUtessellatorImpl implements GLUtessellator {
         requireState(TessState.T_IN_CONTOUR);
 
         if (flushCacheOnNextVertex) {
-            if (flushCache()) {
+            if (!flushCache()) {
                 callErrorOrErrorData(GLU_OUT_OF_MEMORY);
                 return;
             }
@@ -493,13 +495,13 @@ public class GLUtessellatorImpl implements GLUtessellator {
                 cacheVertex(clamped, vertexData);
                 return;
             }
-            if (flushCache()) {
+            if (!flushCache()) {
                 callErrorOrErrorData(GLU_OUT_OF_MEMORY);
                 return;
             }
         }
 
-        if (addVertex(clamped, vertexData)) {
+        if (!addVertex(clamped, vertexData)) {
             callErrorOrErrorData(GLU_OUT_OF_MEMORY);
         }
     }
@@ -557,7 +559,7 @@ public class GLUtessellatorImpl implements GLUtessellator {
                         return;
                     }
                 }
-                if (flushCache()) throw new RuntimeException(); /* could've used a label*/
+                if (!flushCache()) throw new RuntimeException(); /* could've used a label*/
             }
 
 /* Determine the polygon normal and project vertices onto the plane

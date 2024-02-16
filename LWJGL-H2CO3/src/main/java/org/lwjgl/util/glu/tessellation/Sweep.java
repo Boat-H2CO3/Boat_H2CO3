@@ -194,7 +194,13 @@ class Sweep {
 
 
     static void DeleteRegion(GLUtessellatorImpl tess, ActiveRegion reg) {
-        assert !reg.fixUpperEdge || (reg.eUp.winding == 0);
+        if (reg.fixUpperEdge) {
+            /* It was created with zero winding number, so it better be
+             * deleted with zero winding number (ie. it better not get merged
+             * with a real edge).
+             */
+            assert (reg.eUp.winding == 0);
+        }
         reg.eUp.activeRegion = null;
         Dict.dictDelete(tess.dict, reg.nodeUp); /* __gl_dictListDelete */
     }
@@ -205,12 +211,12 @@ class Sweep {
  * Replace an upper edge which needs fixing (see ConnectRightVertex).
  */ {
         assert (reg.fixUpperEdge);
-        if (Mesh.__gl_meshDelete(reg.eUp)) return true;
+        if (!Mesh.__gl_meshDelete(reg.eUp)) return false;
         reg.fixUpperEdge = false;
         reg.eUp = newEdge;
         newEdge.activeRegion = reg;
 
-        return false;
+        return true;
     }
 
     static ActiveRegion TopLeftRegion(ActiveRegion reg) {
@@ -228,7 +234,7 @@ class Sweep {
         if (reg.fixUpperEdge) {
             e = Mesh.__gl_meshConnect(RegionBelow(reg).eUp.Sym, reg.eUp.Lnext);
             if (e == null) return null;
-            if (FixUpperEdge(reg, e)) return null;
+            if (!FixUpperEdge(reg, e)) return null;
             reg = RegionAbove(reg);
         }
         return reg;
@@ -350,13 +356,13 @@ class Sweep {
                  */
                 e = Mesh.__gl_meshConnect(ePrev.Onext.Sym, e.Sym);
                 if (e == null) throw new RuntimeException();
-                if (FixUpperEdge(reg, e)) throw new RuntimeException();
+                if (!FixUpperEdge(reg, e)) throw new RuntimeException();
             }
 
             /* Relink edges so that ePrev.Onext == e */
             if (ePrev.Onext != e) {
-                if (Mesh.__gl_meshSplice(e.Sym.Lnext, e)) throw new RuntimeException();
-                if (Mesh.__gl_meshSplice(ePrev, e)) throw new RuntimeException();
+                if (!Mesh.__gl_meshSplice(e.Sym.Lnext, e)) throw new RuntimeException();
+                if (!Mesh.__gl_meshSplice(ePrev, e)) throw new RuntimeException();
             }
             FinishRegion(tess, regPrev);	/* may change reg.eUp */
             ePrev = reg.eUp;
@@ -407,8 +413,8 @@ class Sweep {
 
             if (e.Onext != ePrev) {
                 /* Unlink e from its current position, and relink below ePrev */
-                if (Mesh.__gl_meshSplice(e.Sym.Lnext, e)) throw new RuntimeException();
-                if (Mesh.__gl_meshSplice(ePrev.Sym.Lnext, e)) throw new RuntimeException();
+                if (!Mesh.__gl_meshSplice(e.Sym.Lnext, e)) throw new RuntimeException();
+                if (!Mesh.__gl_meshSplice(ePrev.Sym.Lnext, e)) throw new RuntimeException();
             }
             /* Compute the winding number and "inside" flag for the new regions */
             reg.windingNumber = regPrev.windingNumber - e.winding;
@@ -421,7 +427,7 @@ class Sweep {
             if (!firstTime && CheckForRightSplice(tess, regPrev)) {
                 AddWinding(e, ePrev);
                 DeleteRegion(tess, regPrev);
-                if (Mesh.__gl_meshDelete(ePrev)) throw new RuntimeException();
+                if (!Mesh.__gl_meshDelete(ePrev)) throw new RuntimeException();
             }
             firstTime = false;
             regPrev = reg;
@@ -475,7 +481,7 @@ class Sweep {
         data[0] = e1.Org.data;
         data[1] = e2.Org.data;
         CallCombine(tess, e1.Org, data, weights, false);
-        if (Mesh.__gl_meshSplice(e1, e2)) throw new RuntimeException();
+        if (!Mesh.__gl_meshSplice(e1, e2)) throw new RuntimeException();
     }
 
     static void VertexWeights(GLUvertex isect, GLUvertex org, GLUvertex dst,
@@ -562,7 +568,7 @@ class Sweep {
             if (!Geom.VertEq(eUp.Org, eLo.Org)) {
                 /* Splice eUp.Org into eLo */
                 if (Mesh.__gl_meshSplitEdge(eLo.Sym) == null) throw new RuntimeException();
-                if (Mesh.__gl_meshSplice(eUp, eLo.Sym.Lnext)) throw new RuntimeException();
+                if (!Mesh.__gl_meshSplice(eUp, eLo.Sym.Lnext)) throw new RuntimeException();
                 regUp.dirty = regLo.dirty = true;
 
             } else if (eUp.Org != eLo.Org) {
@@ -576,7 +582,7 @@ class Sweep {
             /* eLo.Org appears to be above eUp, so splice eLo.Org into eUp */
             RegionAbove(regUp).dirty = regUp.dirty = true;
             if (Mesh.__gl_meshSplitEdge(eUp.Sym) == null) throw new RuntimeException();
-            if (Mesh.__gl_meshSplice(eLo.Sym.Lnext, eUp)) throw new RuntimeException();
+            if (!Mesh.__gl_meshSplice(eLo.Sym.Lnext, eUp)) throw new RuntimeException();
         }
         return true;
     }
@@ -614,7 +620,7 @@ class Sweep {
             RegionAbove(regUp).dirty = regUp.dirty = true;
             e = Mesh.__gl_meshSplitEdge(eUp);
             if (e == null) throw new RuntimeException();
-            if (Mesh.__gl_meshSplice(eLo.Sym, e)) throw new RuntimeException();
+            if (!Mesh.__gl_meshSplice(eLo.Sym, e)) throw new RuntimeException();
             e.Lface.inside = regUp.inside;
         } else {
             if (Geom.EdgeSign(eLo.Sym.Org, eUp.Sym.Org, eLo.Org) > 0) return false;
@@ -623,7 +629,7 @@ class Sweep {
             regUp.dirty = regLo.dirty = true;
             e = Mesh.__gl_meshSplitEdge(eLo);
             if (e == null) throw new RuntimeException();
-            if (Mesh.__gl_meshSplice(eUp.Lnext, eLo.Sym)) throw new RuntimeException();
+            if (!Mesh.__gl_meshSplice(eUp.Lnext, eLo.Sym)) throw new RuntimeException();
             e.Sym.Lface.inside = regUp.inside;
         }
         return true;
@@ -719,7 +725,7 @@ class Sweep {
             if (dstLo == tess.event) {
                 /* Splice dstLo into eUp, and process the new region(s) */
                 if (Mesh.__gl_meshSplitEdge(eUp.Sym) == null) throw new RuntimeException();
-                if (Mesh.__gl_meshSplice(eLo.Sym, eUp)) throw new RuntimeException();
+                if (!Mesh.__gl_meshSplice(eLo.Sym, eUp)) throw new RuntimeException();
                 regUp = TopLeftRegion(regUp);
                 if (regUp == null) throw new RuntimeException();
                 eUp = RegionBelow(regUp).eUp;
@@ -730,7 +736,7 @@ class Sweep {
             if (dstUp == tess.event) {
                 /* Splice dstUp into eLo, and process the new region(s) */
                 if (Mesh.__gl_meshSplitEdge(eLo.Sym) == null) throw new RuntimeException();
-                if (Mesh.__gl_meshSplice(eUp.Lnext, eLo.Sym.Lnext)) throw new RuntimeException();
+                if (!Mesh.__gl_meshSplice(eUp.Lnext, eLo.Sym.Lnext)) throw new RuntimeException();
                 regLo = regUp;
                 regUp = TopRightRegion(regUp);
                 e = RegionBelow(regUp).eUp.Sym.Onext;
@@ -769,7 +775,7 @@ class Sweep {
          */
         if (Mesh.__gl_meshSplitEdge(eUp.Sym) == null) throw new RuntimeException();
         if (Mesh.__gl_meshSplitEdge(eLo.Sym) == null) throw new RuntimeException();
-        if (Mesh.__gl_meshSplice(eLo.Sym.Lnext, eUp)) throw new RuntimeException();
+        if (!Mesh.__gl_meshSplice(eLo.Sym.Lnext, eUp)) throw new RuntimeException();
         eUp.Org.s = isect.s;
         eUp.Org.t = isect.t;
         eUp.Org.pqHandle = tess.pq.pqInsert(eUp.Org); /* __gl_pqSortInsert */
@@ -823,12 +829,12 @@ class Sweep {
                      */
                     if (regLo.fixUpperEdge) {
                         DeleteRegion(tess, regLo);
-                        if (Mesh.__gl_meshDelete(eLo)) throw new RuntimeException();
+                        if (!Mesh.__gl_meshDelete(eLo)) throw new RuntimeException();
                         regLo = RegionBelow(regUp);
                         eLo = regLo.eUp;
                     } else if (regUp.fixUpperEdge) {
                         DeleteRegion(tess, regUp);
-                        if (Mesh.__gl_meshDelete(eUp)) throw new RuntimeException();
+                        if (!Mesh.__gl_meshDelete(eUp)) throw new RuntimeException();
                         regUp = RegionAbove(regLo);
                         eUp = regUp.eUp;
                     }
@@ -861,7 +867,7 @@ class Sweep {
                 /* A degenerate loop consisting of only two edges -- delete it. */
                 AddWinding(eLo, eUp);
                 DeleteRegion(tess, regUp);
-                if (Mesh.__gl_meshDelete(eUp)) throw new RuntimeException();
+                if (!Mesh.__gl_meshDelete(eUp)) throw new RuntimeException();
                 regUp = RegionAbove(regLo);
             }
         }
@@ -916,7 +922,7 @@ class Sweep {
          * through vEvent, or may coincide with new intersection vertex
          */
         if (Geom.VertEq(eUp.Org, tess.event)) {
-            if (Mesh.__gl_meshSplice(eTopLeft.Sym.Lnext, eUp)) throw new RuntimeException();
+            if (!Mesh.__gl_meshSplice(eTopLeft.Sym.Lnext, eUp)) throw new RuntimeException();
             regUp = TopLeftRegion(regUp);
             if (regUp == null) throw new RuntimeException();
             eTopLeft = RegionBelow(regUp).eUp;
@@ -924,7 +930,7 @@ class Sweep {
             degenerate = true;
         }
         if (Geom.VertEq(eLo.Org, tess.event)) {
-            if (Mesh.__gl_meshSplice(eBottomLeft, eLo.Sym.Lnext)) throw new RuntimeException();
+            if (!Mesh.__gl_meshSplice(eBottomLeft, eLo.Sym.Lnext)) throw new RuntimeException();
             eBottomLeft = FinishLeftRegions(tess, regLo, null);
             degenerate = true;
         }
@@ -986,10 +992,10 @@ class Sweep {
             if (Mesh.__gl_meshSplitEdge(e.Sym) == null) throw new RuntimeException();
             if (regUp.fixUpperEdge) {
                 /* This edge was fixable -- delete unused portion of original edge */
-                if (Mesh.__gl_meshDelete(e.Onext)) throw new RuntimeException();
+                if (!Mesh.__gl_meshDelete(e.Onext)) throw new RuntimeException();
                 regUp.fixUpperEdge = false;
             }
-            if (Mesh.__gl_meshSplice(vEvent.anEdge, e)) throw new RuntimeException();
+            if (!Mesh.__gl_meshSplice(vEvent.anEdge, e)) throw new RuntimeException();
             SweepEvent(tess, vEvent);	/* recurse */
             return;
         }
@@ -1008,10 +1014,10 @@ class Sweep {
              */
             assert (eTopLeft != eTopRight);   /* there are some left edges too */
             DeleteRegion(tess, reg);
-            if (Mesh.__gl_meshDelete(eTopRight)) throw new RuntimeException();
+            if (!Mesh.__gl_meshDelete(eTopRight)) throw new RuntimeException();
             eTopRight = eTopLeft.Sym.Lnext;
         }
-        if (Mesh.__gl_meshSplice(vEvent.anEdge, eTopRight)) throw new RuntimeException();
+        if (!Mesh.__gl_meshSplice(vEvent.anEdge, eTopRight)) throw new RuntimeException();
         if (!Geom.EdgeGoesLeft(eTopLeft)) {
             /* e.Sym.Org had no left-going edges -- indicate this to AddRightEdges() */
             eTopLeft = null;
@@ -1072,7 +1078,7 @@ class Sweep {
                 eNew = tempHalfEdge.Sym;
             }
             if (reg.fixUpperEdge) {
-                if (FixUpperEdge(reg, eNew)) throw new RuntimeException();
+                if (!FixUpperEdge(reg, eNew)) throw new RuntimeException();
             } else {
                 ComputeWinding(tess, AddRegionBelow(tess, regUp, eNew));
             }
@@ -1231,7 +1237,7 @@ class Sweep {
                 /* Zero-length edge, contour has at least 3 edges */
 
                 SpliceMergeVertices(tess, eLnext, e);	/* deletes e.Org */
-                if (Mesh.__gl_meshDelete(e)) throw new RuntimeException(); /* e is a self-loop */
+                if (!Mesh.__gl_meshDelete(e)) throw new RuntimeException(); /* e is a self-loop */
                 e = eLnext;
                 eLnext = e.Lnext;
             }
@@ -1242,12 +1248,12 @@ class Sweep {
                     if (eLnext == eNext || eLnext == eNext.Sym) {
                         eNext = eNext.next;
                     }
-                    if (Mesh.__gl_meshDelete(eLnext)) throw new RuntimeException();
+                    if (!Mesh.__gl_meshDelete(eLnext)) throw new RuntimeException();
                 }
                 if (e == eNext || e == eNext.Sym) {
                     eNext = eNext.next;
                 }
-                if (Mesh.__gl_meshDelete(e)) throw new RuntimeException();
+                if (!Mesh.__gl_meshDelete(e)) throw new RuntimeException();
             }
         }
     }
@@ -1315,7 +1321,7 @@ class Sweep {
             if (e.Lnext.Lnext == e) {
                 /* A face with only two edges */
                 AddWinding(e.Onext, e);
-                if (Mesh.__gl_meshDelete(e)) return false;
+                if (!Mesh.__gl_meshDelete(e)) return false;
             }
         }
         return true;

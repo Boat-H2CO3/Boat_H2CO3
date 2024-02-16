@@ -713,7 +713,7 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     public static ByteBuffer ncmd(long struct) { return memByteBuffer(struct + IOURingSQE.CMD, 0); }
     /** Unsafe version of {@link #cmd(int) cmd}. */
     public static byte ncmd(long struct, int index) {
-        return UNSAFE.getByte(null, struct + IOURingSQE.CMD + check(index, 0));
+        return UNSAFE.getByte(null, struct + IOURingSQE.CMD + check(index, 0) * 1);
     }
 
     /** Unsafe version of {@link #opcode(byte) opcode}. */
@@ -808,11 +808,11 @@ public class IOURingSQE extends Struct<IOURingSQE> implements NativeResource {
     /** Unsafe version of {@link #cmd(ByteBuffer) cmd}. */
     public static void ncmd(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, 0); }
-        memCopy(memAddress(value), struct + IOURingSQE.CMD, value.remaining());
+        memCopy(memAddress(value), struct + IOURingSQE.CMD, value.remaining() * 1);
     }
     /** Unsafe version of {@link #cmd(int, byte) cmd}. */
     public static void ncmd(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + IOURingSQE.CMD + check(index, 0), value);
+        UNSAFE.putByte(null, struct + IOURingSQE.CMD + check(index, 0) * 1, value);
     }
 
     // -----------------------------------

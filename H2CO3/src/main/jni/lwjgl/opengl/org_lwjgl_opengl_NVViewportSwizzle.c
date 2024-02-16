@@ -6,15 +6,12 @@
 #include "lwjgl/common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glViewportSwizzleNVPROC)(jint, jint, jint, jint, jint);
+typedef void (APIENTRY *glViewportSwizzleNVPROC) (jint, jint, jint, jint, jint);
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL
-Java_org_lwjgl_opengl_NVViewportSwizzle_glViewportSwizzleNV(JNIEnv *__env, jclass clazz, jint index,
-                                                            jint swizzlex, jint swizzley,
-                                                            jint swizzlez, jint swizzlew) {
-    glViewportSwizzleNVPROC glViewportSwizzleNV = (glViewportSwizzleNVPROC) tlsGetFunction(2209);
+JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVViewportSwizzle_glViewportSwizzleNV(JNIEnv *__env, jclass clazz, jint index, jint swizzlex, jint swizzley, jint swizzlez, jint swizzlew) {
+    glViewportSwizzleNVPROC glViewportSwizzleNV = (glViewportSwizzleNVPROC)tlsGetFunction(2209);
     UNUSED_PARAM(clazz)
     glViewportSwizzleNV(index, swizzlex, swizzley, swizzlez, swizzlew);
 }

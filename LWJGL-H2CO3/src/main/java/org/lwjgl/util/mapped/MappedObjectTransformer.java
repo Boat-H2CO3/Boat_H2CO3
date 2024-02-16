@@ -917,12 +917,13 @@ public class MappedObjectTransformer {
 		final MappedSubtypeInfo mappedSubtype;
 		mappedSubtype = className_to_subtype.get(fieldInsn.owner);
 		if ( mappedSubtype == null ) { // early out
-			// MappedSet.view
+            // MappedSet.view
+            outer:
             if ("view".equals(fieldInsn.name) && fieldInsn.owner.startsWith(MAPPEDSET_PREFIX))
                 return generateSetViewInstructions(fieldInsn);
 
-			return null; // early out
-		}
+            return null; // early out
+        }
 
 		if ( "SIZEOF".equals(fieldInsn.name) )
 			return generateSIZEOFInstructions(fieldInsn, mappedSubtype);

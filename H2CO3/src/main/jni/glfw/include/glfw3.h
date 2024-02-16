@@ -93,7 +93,7 @@ extern "C" {
 /* If we are we on Windows, we want a single define for it.
  */
 #if !defined(_WIN32) && (defined(__WIN32__) || defined(WIN32) || defined(__MINGW32__))
-#define _WIN32
+ #define _WIN32
 #endif /* _WIN32 */
 
 /* Include because most Windows GLU headers need wchar_t and
@@ -4352,18 +4352,18 @@ GLFWAPI int glfwGetInputMode(GLFWwindow *window, int mode);
 GLFWAPI void glfwSetInputMode(GLFWwindow *window, int mode, int value);
 
 /**
- * For H2CO3Launcher, set injector mode
+ * For H2CO3LAUNCHER, set injector mode
  * @param mode 0 is disable, 1 is enable, when enabled, lwjgl will try to get hit result type
  */
 GLFWAPI void glfwSetInjectorMode(int mode);
 
 /**
- * For H2CO3Launcher, get injector mode
+ * For H2CO3LAUNCHER, get injector mode
  */
 GLFWAPI int glfwGetInjectorMode();
 
 /**
- * For H2CO3Launcher, set type of what player's cursor point to
+ * For H2CO3LAUNCHER, set type of what player's cursor point to
  * @param type Hit result type
  */
 GLFWAPI void glfwSetHitResultType(int type);

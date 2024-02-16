@@ -4,22 +4,26 @@
  */
 #pragma once
 
-#include <jni.h>
-
 #ifdef LWJGL_WINDOWS
 #include "WindowsConfig.h"
 #endif
 #ifdef LWJGL_LINUX
-#include "H2CO3LauncherConfig.h"
+#include "LinuxConfig.h"
 #endif
-#ifdef LWJGL_H2CO3Launcher
-
+#ifdef LWJGL_H2CO3LAUNCHER
 #include "H2CO3LauncherConfig.h"
-
 #endif
 #ifdef LWJGL_MACOS
 #include "macOSConfig.h"
 #endif
+
+int DISABLE_WARNINGS();
+
+#include <jni.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int ENABLE_WARNINGS();
 
 // Per-thread data, stored in a platform-specific thread-local.
 // Present in threads that had Callback invocations, saveErrno/saveLastError calls, OpenGL(ES) contexts made current.

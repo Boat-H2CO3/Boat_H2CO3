@@ -18,7 +18,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Native bindings to &lt;dlfcn.h&gt;.
  */
-public class DynamicLinkLoader extends org.lwjgl.system.h2co3.DynamicLinkLoader {
+public class DynamicLinkLoader {
+
+    static {
+        Library.initialize();
+    }
 
     /** The {@code mode} argument to {@link #dlopen} contains one of the following. */
     public static final int
@@ -27,10 +31,6 @@ public class DynamicLinkLoader extends org.lwjgl.system.h2co3.DynamicLinkLoader 
             RTLD_BINDING_MASK = 0x3,
             RTLD_NOLOAD = 0x4,
             RTLD_DEEPBIND = 0x8;
-
-    static {
-        Library.initialize();
-    }
 
     /**
      * If the following bit is set in the {@code mode} argument to {@link #dlopen}, the symbols of the loaded object and its dependencies are made visible as
