@@ -6,8 +6,9 @@ on:
     tags:
       - v*
   pull_request:
-    tags:
-      - v*
+    branches:
+      - H2CO3_main
+
 jobs:
   build:
 
@@ -15,7 +16,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: set-on JDK 17
+
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
@@ -23,13 +25,7 @@ jobs:
           cache: gradle
 
       - name: Build Debug .apk
-        run: |
-          # Build the launcher
-          gradle :H2CO3:assembleDebug
-
-      - name: Get Version Name
-        id: get-version
-        run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
+        run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v3
