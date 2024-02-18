@@ -328,12 +328,18 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
             showErrorDialog("下载失败");
         }
 
-        private void showErrorDialog(String message) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("错误")
-                    .setMessage(message)
-                    .setPositiveButton("确定", null)
-                    .show();
-        }
+        private AlertDialog dialog;
+
+private void showErrorDialog(String message) {
+    if (dialog == null || !dialog.isShowing()) {
+        dialog = new AlertDialog.Builder(context)
+                .setTitle("错误")
+                .setMessage(message)
+                .setPositiveButton("确定", null)
+                .create();
+    }
+    dialog.show();
+}
+
     }
 }
