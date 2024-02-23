@@ -1,19 +1,15 @@
 package org.lwjgl.glfw;
 
-import org.lwjgl.system.*;
+import static org.lwjgl.system.APIUtil.apiGetFunctionAddress;
+import static org.lwjgl.system.APIUtil.apiLog;
 
-import javax.annotation.Nullable;
+import org.lwjgl.system.JNI;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static org.lwjgl.system.APIUtil.apiGetFunctionAddress;
-import static org.lwjgl.system.APIUtil.apiLog;
-
-/**
- * By Tungsten
- * This class is for Fold Craft Launcher.
- */
+import javax.annotation.Nullable;
 public class H2CO3LauncherInjector {
 
     public static final long GetInjectorMode = apiGetFunctionAddress(GLFW.GLFW, "glfwGetInjectorMode");
@@ -49,7 +45,7 @@ public class H2CO3LauncherInjector {
     private static String param3 = null;
 
     public static void setClassLoader(ClassLoader classLoader) {
-        String prop = System.getProperty("fcl.injector");
+        String prop = System.getProperty("h2co3Launcher.injector");
         if (!get && prop != null && !prop.isEmpty()) {
             H2CO3LauncherInjector.classLoader = classLoader;
             String[] props = prop.split(":");

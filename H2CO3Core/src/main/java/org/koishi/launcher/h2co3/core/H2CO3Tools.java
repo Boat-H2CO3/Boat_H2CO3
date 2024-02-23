@@ -285,7 +285,6 @@ public class H2CO3Tools {
             return type.cast(value);
         }
 
-        // 根据type的类型进行相应的转换操作
         return switch (type.getSimpleName()) {
             case "String" -> type.cast(value.toString());
             case "Integer" -> type.cast(Integer.parseInt(value.toString()));

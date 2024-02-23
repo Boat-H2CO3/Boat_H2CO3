@@ -83,24 +83,9 @@ LOCAL_CFLAGS            := -Wall
 LOCAL_LDLIBS            := -llog -ldl -landroid
 ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
 LOCAL_CFLAGS            += -DADRENO_POSSIBLE
-LOCAL_LDLIBS            += -lEGL -lGLESv2 -lEGL
+LOCAL_LDLIBS            += -lEGL -lGLESv2
 endif
 include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE            := dyncall
-LOCAL_SRC_FILES         := lwjgl/dyncall/$(TARGET_ARCH_ABI)/libdyncall_s.a
-include $(PREBUILT_STATIC_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE            := dyncallback
-LOCAL_SRC_FILES         := lwjgl/dyncall/$(TARGET_ARCH_ABI)/libdyncallback_s.a
-include $(PREBUILT_STATIC_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE            := dynload
-LOCAL_SRC_FILES         := lwjgl/dyncall/$(TARGET_ARCH_ABI)/libdynload_s.a
-include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE            := angle_gles2
@@ -122,17 +107,11 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE            := lwjgl
-LOCAL_STATIC_LIBRARIES  := dyncall \
-						   dyncallback \
-						   dynload \
-						   libffi
+LOCAL_STATIC_LIBRARIES  := libffi
 LOCAL_SHARED_LIBRARIES  := h2co3Launcher
 LOCAL_SRC_FILES         := lwjgl/h2co3Launcher_hook.c \
 						   lwjgl/common_tools.c \
                            lwjgl/org_lwjgl_system_Callback.c \
-                           lwjgl/org_lwjgl_system_dyncall_DynCall.c \
-                           lwjgl/org_lwjgl_system_dyncall_DynCallback.c \
-                           lwjgl/org_lwjgl_system_dyncall_DynLoad.c \
                            lwjgl/org_lwjgl_system_linux_DynamicLinkLoader.c \
                            lwjgl/org_lwjgl_system_JNI.c \
                            lwjgl/org_lwjgl_system_jni_JNINativeInterface.c \
@@ -149,14 +128,14 @@ LOCAL_SRC_FILES         := lwjgl/h2co3Launcher_hook.c \
                            lwjgl/org_lwjgl_system_SharedLibraryUtil.c \
                            lwjgl/org_lwjgl_system_ThreadLocalUtil.c
 LOCAL_C_INCLUDES        := $(LOCAL_PATH)/lwjgl/libffi/$(TARGET_ARCH_ABI)
-LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_H2CO3Launcher -Wunused-value
+LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_H2CO3LAUNCHER -Wunused-value
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE            := lwjgl_tinyfd
 LOCAL_SRC_FILES         := lwjgl/tinyfd/org_lwjgl_util_tinyfd_TinyFileDialogs.c \
                            lwjgl/tinyfd/tinyfiledialogs.c
-LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_H2CO3Launcher -Wunused-value
+LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_H2CO3LAUNCHER -Wunused-value
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -170,7 +149,7 @@ LOCAL_SRC_FILES         := lwjgl/nanovg/org_lwjgl_nanovg_Blendish.c \
                            lwjgl/nanovg/org_lwjgl_nanovg_NanoVGGLES2.c \
                            lwjgl/nanovg/org_lwjgl_nanovg_NanoVGGLES3.c \
                            lwjgl/nanovg/org_lwjgl_nanovg_OUI.c
-LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_FCL -Wunused-value
+LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_H2CO3LAUNCHER -Wunused-value
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -186,7 +165,7 @@ LOCAL_SRC_FILES         := lwjgl/stb/org_lwjgl_stb_LibSTB.c \
                            lwjgl/stb/org_lwjgl_stb_STBTruetype.c \
                            lwjgl/stb/org_lwjgl_stb_STBTTFontinfo.c \
                            lwjgl/stb/org_lwjgl_stb_STBVorbis.c
-LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_H2CO3Launcher -Wunused-value
+LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_H2CO3LAUNCHER -Wunused-value
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -374,7 +353,7 @@ LOCAL_SRC_FILES         := lwjgl/opengl/org_lwjgl_opengl_AMDDebugOutput.c \
                            lwjgl/opengl/org_lwjgl_opengl_NVXGpuMulticast2.c \
                            lwjgl/opengl/org_lwjgl_opengl_NVXProgressFence.c \
                            lwjgl/opengl/org_lwjgl_opengl_OVRMultiview.c
-LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_H2CO3Launcher -Wunused-value
+LOCAL_CFLAGS            := -O2 -Wall -c -fPIC -std=c99 -Wunused -DLWJGL_H2CO3LAUNCHER -Wunused-value
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
