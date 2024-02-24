@@ -1,7 +1,3 @@
-//
-// Created by mio on 2023/7/9.
-//
-
 #include "h2co3Launcher_hook.h"
 #include <dlfcn.h>
 #include <stdio.h>
