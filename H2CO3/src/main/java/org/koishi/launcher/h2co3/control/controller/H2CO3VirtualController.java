@@ -65,7 +65,7 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         }
         dButton = new DragFloatActionButton(context);
         dButton.setLayoutParams(new ViewGroup.LayoutParams(DisplayUtils.getPxFromDp(context, 30), DisplayUtils.getPxFromDp(context, 30)));
-        dButton.setBackground(ContextCompat.getDrawable(context, org.koishi.launcher.h2co3.resources.R.drawable.background_floatbutton));
+        dButton.setBackground(ContextCompat.getDrawable(context, org.koishi.launcher.h2co3.resources.R.drawable.bg_game_menu));
         double x = 0.0;
         double y = 0.0;
         Object xObj = H2CO3Tools.getH2CO3Value("controller_float_position_x", screenWidth / 2.0, Object.class);

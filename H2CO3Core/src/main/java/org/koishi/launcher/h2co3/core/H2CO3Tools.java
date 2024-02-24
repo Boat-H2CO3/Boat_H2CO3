@@ -276,24 +276,6 @@ public class H2CO3Tools {
         }
     }
 
-    public static <T> T convertValue(Object value, Class<T> type) {
-        if (value == null) {
-            return null;
-        }
-
-        if (type.isAssignableFrom(value.getClass())) {
-            return type.cast(value);
-        }
-
-        return switch (type.getSimpleName()) {
-            case "String" -> type.cast(value.toString());
-            case "Integer" -> type.cast(Integer.parseInt(value.toString()));
-            case "Boolean" -> type.cast(Boolean.parseBoolean(value.toString()));
-            case "Double" -> type.cast(Double.parseDouble(value.toString()));
-            default -> null;
-        };
-    }
-
     public static String getArchitectureString(int architecture) {
         return switch (architecture) {
             case Architecture.ARCH_ARM -> "aarch32";
