@@ -1,16 +1,10 @@
-package org.koishi.launcher.h2co3.launcher;
-
-import static org.koishi.launcher.h2co3.core.game.H2CO3GameHelper.*;
+package org.koishi.launcher.h2co3.launcher.utils;
 
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
-import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
-import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridge;
-import org.koishi.launcher.h2co3.core.game.MinecraftVersion;
-import org.koishi.launcher.h2co3.core.game.TouchInjector;
 import org.koishi.launcher.h2co3.core.utils.Architecture;
 import org.koishi.launcher.h2co3.core.utils.CommandBuilder;
 import org.koishi.launcher.h2co3.core.utils.Logging;
@@ -23,7 +17,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -128,13 +121,13 @@ public class H2CO3LauncherHelper {
             throw new IllegalStateException("Illegal command line " + rawCommandLine);
         }
         List<String> argList = new ArrayList<>(rawCommandLine);
-        argList.add(0, getJavaPath() + "/bin/java");
+        argList.add(0, H2CO3GameHelper.getJavaPath() + "/bin/java");
         return argList.toArray(new String[0]);
     }
 
     public static void addCommonEnv(Context context, HashMap<String, String> envMap) {
         envMap.put("HOME", H2CO3Tools.LOG_DIR);
-        envMap.put("JAVA_HOME", getJavaPath());
+        envMap.put("JAVA_HOME", H2CO3GameHelper.getJavaPath());
         envMap.put("H2CO3LAUNCHER_NATIVEDIR", context.getApplicationInfo().nativeLibraryDir);
         envMap.put("TMPDIR", context.getCacheDir().getAbsolutePath());
     }
@@ -142,7 +135,7 @@ public class H2CO3LauncherHelper {
     public static void addRendererEnv(Context context, HashMap<String, String> envMap, String render) {
         envMap.put("LIBGL_STRING", render);
         if (render.equals(H2CO3Tools.GL_GL114)) {
-            envMap.put("LIBGL_NAME", "libgl4es.so");
+            envMap.put("LIBGL_NAME", "libgl4es_114.so");
             envMap.put("LIBEGL_NAME", "libEGL.so");
             setGLValues(envMap, "2", "3", "1", "1", "1", "1");
         } else if (render.equals(H2CO3Tools.GL_VGPU)) {
@@ -206,14 +199,14 @@ public class H2CO3LauncherHelper {
 
     public static void setGLLib(Context context, H2CO3LauncherBridge bridge, String render) {
         if (render.equals(H2CO3Tools.GL_GL114)) {
-            bridge.dlopen(context.getApplicationInfo().nativeLibraryDir + "/libgl4es.so");
+            bridge.dlopen(context.getApplicationInfo().nativeLibraryDir + "/libgl4es_114.so");
         }
     }
 
     public static void setUpJavaRuntime(Context context, H2CO3LauncherBridge bridge) throws IOException {
-        String jreLibDir = getJavaPath() + getJreLibDir(getJavaPath());
+        String jreLibDir = H2CO3GameHelper.getJavaPath() + getJreLibDir(H2CO3GameHelper.getJavaPath());
         String jliLibDir = new File(jreLibDir + "/jli/libjli.so").exists() ? jreLibDir + "/jli" : jreLibDir;
-        String jvmLibDir = jreLibDir + getJvmLibDir(getJavaPath());
+        String jvmLibDir = jreLibDir + getJvmLibDir(H2CO3GameHelper.getJavaPath());
         // dlopen jre
         bridge.dlopen(jliLibDir + "/libjli.so");
         bridge.dlopen(jvmLibDir + "/libjvm.so");
@@ -230,7 +223,7 @@ public class H2CO3LauncherHelper {
         bridge.dlopen(context.getApplicationInfo().nativeLibraryDir + "/libopenal.so");
         bridge.dlopen(context.getApplicationInfo().nativeLibraryDir + "/libglfw.so");
         bridge.dlopen(context.getApplicationInfo().nativeLibraryDir + "/liblwjgl.so");
-        File javaPath = new File(getJavaPath());
+        File javaPath = new File(H2CO3GameHelper.getJavaPath());
         for (File file : locateLibs(javaPath)) {
             bridge.dlopen(file.getAbsolutePath());
         }
@@ -266,7 +259,7 @@ public class H2CO3LauncherHelper {
             bridge.getCallback().onLog(task + " argument: " + arg);
         }
         bridge.setupJLI();
-        bridge.setLdLibraryPath(getLibraryPath(context, getJavaPath()));
+        bridge.setLdLibraryPath(getLibraryPath(context, H2CO3GameHelper.getJavaPath()));
         bridge.getCallback().onLog("Hook exit " + (bridge.setupExitTrap(bridge) == 0 ? "success" : "failed"));
         int exitCode = bridge.jliLaunch(args);
         Log.e(TAG, "Jvm Exited With Code:" + exitCode);
@@ -379,7 +372,7 @@ public class H2CO3LauncherHelper {
         H2CO3GameHelper.setRender(H2CO3Tools.GL_GL114);
         MinecraftVersion version = MinecraftVersion.fromDirectory(new File(H2CO3GameHelper.getGameCurrentVersion()));
         String lwjglPath = H2CO3Tools.RUNTIME_DIR + "/h2co3Launcher/lwjgl";
-        String javaPath = getJavaPath();
+        String javaPath = H2CO3GameHelper.getJavaPath();
         boolean highVersion = version.minimumLauncherVersion >= 21;
         String classPath;
         boolean isJava8 = javaPath.equals(H2CO3Tools.JAVA_8_PATH);
@@ -427,7 +420,7 @@ public class H2CO3LauncherHelper {
         if (H2CO3GameHelper.getRender().equals(H2CO3Tools.GL_VIRGL)) {
             args.addDefault("-Dorg.lwjgl.opengl.libname=", "libGL.so.1");
         } else {
-            args.addDefault("-Dorg.lwjgl.opengl.libname=", "libgl4es.so");
+            args.addDefault("-Dorg.lwjgl.opengl.libname=", "libgl4es_114.so");
         }
         args.addDefault("-Djava.io.tmpdir=", H2CO3Tools.CACHE_DIR);
 

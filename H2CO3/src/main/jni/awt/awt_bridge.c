@@ -80,8 +80,8 @@ Java_sun_awt_peer_cacio_H2CO3LauncherClipboard_clipboardCopy(JNIEnv *env, jclass
 }
 
 JNIEXPORT jintArray JNICALL JNIEXPORT
-Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_renderAWTScreenFrame(JNIEnv *env,
-                                                                              jclass clazz) {
+Java_org_koishi_launcher_h2co3_launcher_utils_H2CO3LauncherBridge_renderAWTScreenFrame(JNIEnv *env,
+                                                                                       jclass clazz) {
     if (runtimeJNIEnvPtr_GRAPHICS == NULL) {
         if (runtimeJavaVMPtr == NULL) {
             return NULL;
@@ -136,8 +136,11 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_renderAWTScreenFram
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_nativeSendData(JNIEnv *env, jclass clazz, jint type,
-                                                             jint i1, jint i2, jint i3, jint i4) {
+Java_org_koishi_launcher_h2co3_launcher_utils_H2CO3LauncherBridge_nativeSendData(JNIEnv *env,
+                                                                                 jclass clazz,
+                                                                                 jint type,
+                                                                                 jint i1, jint i2,
+                                                                                 jint i3, jint i4) {
     if (runtimeJNIEnvPtr_INPUT == NULL) {
         if (runtimeJavaVMPtr == NULL) {
             return;
@@ -171,8 +174,10 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_nativeSendData(JNIE
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_nativeMoveWindow(JNIEnv *env, jclass clazz, jint x,
-                                                               jint y) {
+Java_org_koishi_launcher_h2co3_launcher_utils_H2CO3LauncherBridge_nativeMoveWindow(JNIEnv *env,
+                                                                                   jclass clazz,
+                                                                                   jint x,
+                                                                                   jint y) {
     if (runtimeJNIEnvPtr_INPUT == NULL) {
         if (runtimeJavaVMPtr == NULL) {
             return;

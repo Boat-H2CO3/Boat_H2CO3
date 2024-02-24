@@ -654,7 +654,7 @@ VkResult _glfwPlatformCreateWindowSurface(VkInstance instance,
 //////                        GLFW native API                       //////
 //////////////////////////////////////////////////////////////////////////
 
-GLFWAPI struct ANativeWindow *glfwGetH2CO3LAUNCHERWindow(GLFWwindow *handle) {
+GLFWAPI struct ANativeWindow *glfwGetH2CO3LauncherWindow(GLFWwindow *handle) {
     _GLFWwindow *window = (_GLFWwindow *) handle;
     _GLFW_REQUIRE_INIT_OR_RETURN(NULL);
     return window->h2co3Launcher.handle;

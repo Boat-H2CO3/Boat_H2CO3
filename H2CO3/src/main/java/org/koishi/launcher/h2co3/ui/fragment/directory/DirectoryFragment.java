@@ -36,7 +36,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.adapter.BaseRecycleAdapter;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
-import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
+import org.koishi.launcher.h2co3.launcher.utils.H2CO3GameHelper;
 import org.koishi.launcher.h2co3.core.utils.data.DbDao;
 import org.koishi.launcher.h2co3.core.utils.file.AssetsUtils;
 import org.koishi.launcher.h2co3.resources.component.H2CO3Fragment;

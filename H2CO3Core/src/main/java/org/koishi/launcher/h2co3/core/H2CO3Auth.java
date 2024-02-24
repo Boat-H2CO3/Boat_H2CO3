@@ -1,4 +1,4 @@
-package org.koishi.launcher.h2co3.core.game;
+package org.koishi.launcher.h2co3.core;
 
 import org.json.JSONArray;
 import org.json.JSONException;

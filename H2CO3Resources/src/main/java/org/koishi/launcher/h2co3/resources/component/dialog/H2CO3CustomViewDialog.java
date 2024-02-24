@@ -41,11 +41,7 @@ public class H2CO3CustomViewDialog extends H2CO3MaterialDialog {
     @Override
     public AlertDialog create() {
         AlertDialog dialog = super.create();
-        Window window = dialog.getWindow();
-        if (window != null) {
-            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
+        //Window window = dialog.getWindow();
         return dialog;
     }
 

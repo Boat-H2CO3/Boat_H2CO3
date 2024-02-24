@@ -17,8 +17,8 @@ import com.hjq.permissions.XXPermissions;
 
 import org.koishi.launcher.h2co3.R;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
-import org.koishi.launcher.h2co3.core.game.H2CO3Auth;
-import org.koishi.launcher.h2co3.core.game.H2CO3GameHelper;
+import org.koishi.launcher.h2co3.core.H2CO3Auth;
+import org.koishi.launcher.h2co3.launcher.utils.H2CO3GameHelper;
 import org.koishi.launcher.h2co3.core.utils.LocaleUtils;
 import org.koishi.launcher.h2co3.core.utils.RuntimeUtils;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;

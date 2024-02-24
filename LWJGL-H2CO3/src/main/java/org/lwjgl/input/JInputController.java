@@ -47,7 +47,7 @@ import java.util.ArrayList;
  * @author Kevin Glass
  */
 class JInputController implements Controller {
-	/**
+    /**
      * The JInput controller this class is wrapping
      */
     private net.java.games.input.Controller target;
@@ -95,16 +95,26 @@ class JInputController implements Controller {
      * The index of the X axis or -1 if no X axis is defined
      */
     private int xaxis = -1;
-	/** The index of the Y axis or -1 if no Y axis is defined */
-	private int yaxis = -1;
-	/** The index of the X axis or -1 if no Z axis is defined */
-	private int zaxis = -1;
-	/** The index of the RX axis or -1 if no RX axis is defined */
-	private int rxaxis = -1;
-	/** The index of the RY axis or -1 if no RY axis is defined */
-	private int ryaxis = -1;
-	/** The index of the RZ axis or -1 if no RZ axis is defined */
-	private int rzaxis = -1;
+    /**
+     * The index of the Y axis or -1 if no Y axis is defined
+     */
+    private int yaxis = -1;
+    /**
+     * The index of the X axis or -1 if no Z axis is defined
+     */
+    private int zaxis = -1;
+    /**
+     * The index of the RX axis or -1 if no RX axis is defined
+     */
+    private int rxaxis = -1;
+    /**
+     * The index of the RY axis or -1 if no RY axis is defined
+     */
+    private int ryaxis = -1;
+    /**
+     * The index of the RZ axis or -1 if no RZ axis is defined
+     */
+    private int rzaxis = -1;
 
 	/**
 	 * Create a new controller that wraps round a JInput controller and hopefully

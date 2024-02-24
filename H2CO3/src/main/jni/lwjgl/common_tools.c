@@ -22,7 +22,7 @@ static inline JNIEnv *attachCurrentThreadAsDaemon(void) {
     JNIEnv *env;
     (*jvm)->AttachCurrentThreadAsDaemon(jvm, (void **) &env, NULL);
     if (env == NULL) {
-        fprintf(stderr, "[LWJGL] Failed to attach native thread to the JVM.");
+        fprintf(stderr, "[H2CO3LAUNCHER-LWJGL] Failed to attach native thread to the JVM.");
         fflush(stderr);
         exit(1);
     }
@@ -31,7 +31,7 @@ static inline JNIEnv *attachCurrentThreadAsDaemon(void) {
 
 static inline void detachCurrentThread(void) {
     if ((*jvm)->DetachCurrentThread(jvm) != JNI_OK) {
-        fprintf(stderr, "[LWJGL] Failed to detach native thread from the JVM.");
+        fprintf(stderr, "[H2CO3LAUNCHER-LWJGL] Failed to detach native thread from the JVM.");
         fflush(stderr);
     }
 }
@@ -80,7 +80,7 @@ BOOL WINAPI DllMain(HINSTANCE hDLL, DWORD fdwReason, LPVOID lpvReserved) {
 static inline void tlsInit(void) {
     envTLS = TlsAlloc();
     if (envTLS == TLS_OUT_OF_INDEXES) {
-        fprintf(stderr, "[LWJGL] Failed to allocate TLS for JNIEnv.");
+        fprintf(stderr, "[H2CO3LAUNCHER-LWJGL] Failed to allocate TLS for JNIEnv.");
         fflush(stderr);
     }
 }
@@ -144,7 +144,7 @@ static void autoDetach(void *value) {
 
 static inline void tlsInit(void) {
     if (pthread_key_create(&envTLS, autoDetach) != 0) {
-        fprintf(stderr, "[LWJGL] Failed to allocate TLS for JNIEnv.");
+        fprintf(stderr, "[H2CO3LAUNCHER-LWJGL] Failed to allocate TLS for JNIEnv.");
         fflush(stderr);
     }
 }

@@ -83,16 +83,16 @@ public class LWJGLUtil {
                     "\071\174\265\377\072\175\265\377\304\330\351\377\377\377\377\377" +
                     "\377\377\377\377\377\377\377\377\377\377\377\377\306\331\351\377" +
                     "\201\253\316\377\035\035\035\377\000\000\000\377\000\000\000\377" +
-		"\000\000\000\377\146\146\146\377\377\377\377\377\320\340\355\377" +
-		"\072\175\265\377\072\175\265\377\215\264\324\377\377\377\377\377" +
-		"\362\362\362\377\245\245\245\377\337\337\337\377\242\301\334\377" +
-		"\260\305\326\377\012\012\012\377\000\000\000\377\000\000\000\377" +
-		"\000\000\000\377\250\250\250\377\377\377\377\377\227\272\330\377" +
-		"\072\175\265\377\072\175\265\377\161\241\312\377\377\377\377\377" +
-		"\241\241\241\377\000\000\000\377\001\001\001\377\043\043\043\377" +
-		"\314\314\314\377\320\320\320\377\245\245\245\377\204\204\204\377" +
-		"\134\134\134\377\357\357\357\377\377\377\377\377\140\226\303\377" +
-		"\072\175\265\377\072\175\265\377\155\236\310\377\377\377\377\377" +
+                    "\000\000\000\377\146\146\146\377\377\377\377\377\320\340\355\377" +
+                    "\072\175\265\377\072\175\265\377\215\264\324\377\377\377\377\377" +
+                    "\362\362\362\377\245\245\245\377\337\337\337\377\242\301\334\377" +
+                    "\260\305\326\377\012\012\012\377\000\000\000\377\000\000\000\377" +
+                    "\000\000\000\377\250\250\250\377\377\377\377\377\227\272\330\377" +
+                    "\072\175\265\377\072\175\265\377\161\241\312\377\377\377\377\377" +
+                    "\241\241\241\377\000\000\000\377\001\001\001\377\043\043\043\377" +
+                    "\314\314\314\377\320\320\320\377\245\245\245\377\204\204\204\377" +
+                    "\134\134\134\377\357\357\357\377\377\377\377\377\140\226\303\377" +
+                    "\072\175\265\377\072\175\265\377\155\236\310\377\377\377\377\377" +
 		"\136\136\136\377\000\000\000\377\000\000\000\377\000\000\000\377" +
 		"\317\317\317\377\037\037\037\377\003\003\003\377\053\053\053\377" +
 		"\154\154\154\377\306\306\306\377\372\374\375\377\236\277\332\377" +
@@ -274,7 +274,7 @@ public class LWJGLUtil {
 	private static final int PLATFORM;
 
 	static {
-		final String osName = getPrivilegedProperty("os.name");
+        final String osName = getPrivilegedProperty("os.name");
         if (osName.startsWith("Windows"))
             PLATFORM = PLATFORM_WINDOWS;
         else if (osName.startsWith("Linux") || osName.startsWith("FreeBSD") || osName.startsWith("OpenBSD") || osName.startsWith("SunOS") || osName.startsWith("Unix"))
@@ -283,7 +283,7 @@ public class LWJGLUtil {
             PLATFORM = PLATFORM_MACOSX;
         else
             throw new LinkageError("Unknown platform: " + osName);
-	}
+    }
 
     private static ByteBuffer loadIcon(String data) {
         int len = data.length();
@@ -322,16 +322,15 @@ public class LWJGLUtil {
             default:
                 return "unknown";
         }
-	}
+    }
 
-	/**
-	 * Wraps {@link System#mapLibraryName}. On OS X with JDK 6, the .jnilib file
-	 * extension will be replaced with .dylib.
-	 *
-	 * @param name the name of the library.
-	 *
-	 * @return a platform-dependent native library name.
-	 */
+    /**
+     * Wraps {@link System#mapLibraryName}. On OS X with JDK 6, the .jnilib file
+     * extension will be replaced with .dylib.
+     *
+     * @param name the name of the library.
+     * @return a platform-dependent native library name.
+     */
 	public static String mapLibraryName(String name) {
 		String libName = System.mapLibraryName(name);
 		return LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_MACOSX && libName.endsWith(".jnilib")
@@ -398,9 +397,9 @@ public class LWJGLUtil {
 
 			//add pure library (no path, let OS search)
 			possible_paths.add(platform_lib_name);
-		}
+        }
 
-		//create needed string array
+        //create needed string array
         return possible_paths.toArray(new String[possible_paths.size()]);
 	}
 
@@ -449,7 +448,7 @@ public class LWJGLUtil {
 				final Class<?> clazz = c;
 				try {
 					return AccessController.doPrivileged(new PrivilegedExceptionAction<String>() {
-						public String run() throws Exception {
+                        public String run() throws Exception {
                             Method findLibrary = clazz.getDeclaredMethod("findLibrary", String.class);
                             findLibrary.setAccessible(true);
                             String path = (String) findLibrary.invoke(classloader, libname);

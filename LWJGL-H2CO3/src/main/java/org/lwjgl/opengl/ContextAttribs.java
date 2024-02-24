@@ -75,14 +75,14 @@ public final class ContextAttribs {
 		CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB        = 0x00000002,
 		CONTEXT_ES2_PROFILE_BIT_EXT                  = 0x00000004;
 
-	public static final int CONTEXT_FLAGS_ARB = 0x2094,
-		CONTEXT_DEBUG_BIT_ARB                 = 0x0001,
-		CONTEXT_FORWARD_COMPATIBLE_BIT_ARB    = 0x0002,
-		CONTEXT_ROBUST_ACCESS_BIT_ARB         = 0x00000004,
-		CONTEXT_RESET_ISOLATION_BIT_ARB       = 0x00000008;
+    public static final int CONTEXT_FLAGS_ARB = 0x2094,
+            CONTEXT_DEBUG_BIT_ARB = 0x0001,
+            CONTEXT_FORWARD_COMPATIBLE_BIT_ARB = 0x0002,
+            CONTEXT_ROBUST_ACCESS_BIT_ARB = 0x00000004,
+            CONTEXT_RESET_ISOLATION_BIT_ARB = 0x00000008;
 
-	public static final int CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB = 0x8256,
-		NO_RESET_NOTIFICATION_ARB                                   = 0x8261,
+    public static final int CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB = 0x8256,
+            NO_RESET_NOTIFICATION_ARB = 0x8261,
             LOSE_CONTEXT_ON_RESET_ARB = 0x8252;
 
     public static final int CONTEXT_RELEASE_BEHABIOR_ARB = 0x2097,
@@ -106,10 +106,12 @@ public final class ContextAttribs {
 
     // CONSTRUCTORS
 
-	/** Creates the default ContextAttribs instance. No special attributes will be used when creating the OpenGL context. */
-	public ContextAttribs() {
-		this(1, 0);
-	}
+    /**
+     * Creates the default ContextAttribs instance. No special attributes will be used when creating the OpenGL context.
+     */
+    public ContextAttribs() {
+        this(1, 0);
+    }
 
 	/** Creates a ContextAttribs instance for the given OpenGL version. */
 	public ContextAttribs(int majorVersion, int minorVersion) {

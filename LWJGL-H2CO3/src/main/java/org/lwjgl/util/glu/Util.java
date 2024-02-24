@@ -209,17 +209,17 @@ public class Util {
 				break;
 			case GL_RGB:
 			case GL_BGR:
-				n = 3;
-				break;
-			case GL_RGBA:
-			case GL_BGRA:
-				n = 4;
-				break;
-			default :
-				n = 0;
-		}
+                n = 3;
+                break;
+            case GL_RGBA:
+            case GL_BGRA:
+                n = 4;
+                break;
+            default:
+                n = 0;
+        }
 
-		switch ( type) {
+        switch (type) {
             case GL_UNSIGNED_BYTE:
                 m = 1;
                 break;
@@ -246,9 +246,9 @@ public class Util {
                 break;
             default:
                 m = 0;
-		}
+        }
 
-		return n * m;
+        return n * m;
 	}
 
 	/**

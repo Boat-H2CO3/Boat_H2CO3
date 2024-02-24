@@ -462,16 +462,16 @@ public final class Color implements ReadableColor, Serializable, WritableColor {
             l = b;
         int i1 = r >= g ? g : r;
         if (b < i1)
-			i1 = b;
-		float brightness = l / 255F;
-		float saturation;
-		if (l != 0)
-			saturation = (float) (l - i1) / (float) l;
-		else
-			saturation = 0.0F;
-		float hue;
-		if (saturation == 0.0F) {
-			hue = 0.0F;
+            i1 = b;
+        float brightness = l / 255F;
+        float saturation;
+        if (l != 0)
+            saturation = (float) (l - i1) / (float) l;
+        else
+            saturation = 0.0F;
+        float hue;
+        if (saturation == 0.0F) {
+            hue = 0.0F;
 		} else {
 			float f3 = (float) (l - r) / (float) (l - i1);
 			float f4 = (float) (l - g) / (float) (l - i1);

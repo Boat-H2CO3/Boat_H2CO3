@@ -185,12 +185,12 @@ public final class Display {
 					int f1 = accessor.getInt(dm1);
 					int f2 = accessor.getInt(dm2);
 
-					if ( accessor.usePreferred && f1 != f2 ) {
-						if ( f1 == accessor.preferred )
-							return -1;
-						else if ( f2 == accessor.preferred )
-							return 1;
-						else {
+                    if (accessor.usePreferred && f1 != f2) {
+                        if (f1 == accessor.preferred)
+                            return -1;
+                        else if (f2 == accessor.preferred)
+                            return 1;
+                        else {
                             // Score according to the difference between the values
                             int absf1 = Math.abs(f1 - accessor.preferred);
                             int absf2 = Math.abs(f2 - accessor.preferred);

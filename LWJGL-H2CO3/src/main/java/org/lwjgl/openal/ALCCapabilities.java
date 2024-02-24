@@ -6,11 +6,8 @@
 package org.lwjgl.openal;
 
 import org.lwjgl.system.*;
-
 import java.util.Set;
-
 import org.lwjgl.*;
-
 import java.util.function.IntFunction;
 
 import static org.lwjgl.system.Checks.*;
@@ -26,16 +23,16 @@ public final class ALCCapabilities {
             alcCloseDevice,
             alcCreateContext,
             alcMakeContextCurrent,
-        alcProcessContext,
-        alcSuspendContext,
-        alcDestroyContext,
-        alcGetCurrentContext,
-        alcGetContextsDevice,
-        alcIsExtensionPresent,
-        alcGetProcAddress,
-        alcGetEnumValue,
-        alcGetError,
-        alcGetString,
+            alcProcessContext,
+            alcSuspendContext,
+            alcDestroyContext,
+            alcGetCurrentContext,
+            alcGetContextsDevice,
+            alcIsExtensionPresent,
+            alcGetProcAddress,
+            alcGetEnumValue,
+            alcGetError,
+            alcGetString,
         alcGetIntegerv;
 
     // ALC11

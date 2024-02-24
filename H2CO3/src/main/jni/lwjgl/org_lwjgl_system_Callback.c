@@ -21,7 +21,8 @@ typedef struct LWJGLCallback {
 #endif
 
 noinline static void asyncCallbackException(JNIEnv* env) {
-    fprintf(stderr, "[LWJGL] Exception in callback that was invoked asynchronously from a native thread.\n");
+    fprintf(stderr,
+            "[H2CO3LAUNCHER-LWJGL] Exception in callback that was invoked asynchronously from a native thread.\n");
     fflush(stderr);
 
     (*env)->ExceptionDescribe(env);

@@ -257,16 +257,16 @@ public final class Rectangle implements ReadableRectangle, WritableRectangle, Se
 		if (W <= X) {
 			// X+W overflowed or W was zero, return false if...
 			// either original w or W was zero or
-			// x+w did not overflow or
-			// the overflowed x+w is smaller than the overflowed X+W
-			if (w >= x || W > w)
-				return false;
-		} else {
-			// X+W did not overflow and W was not zero, return false if...
-			// original w was zero or
-			// x+w did not overflow and x+w is smaller than X+W
-			if (w >= x && W > w)
-				return false;
+            // x+w did not overflow or
+            // the overflowed x+w is smaller than the overflowed X+W
+            if (w >= x || W > w)
+                return false;
+        } else {
+            // X+W did not overflow and W was not zero, return false if...
+            // original w was zero or
+            // x+w did not overflow and x+w is smaller than X+W
+            if (w >= x && W > w)
+                return false;
         }
         h += y;
         H += Y;

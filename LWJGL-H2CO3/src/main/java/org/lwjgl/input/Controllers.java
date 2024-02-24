@@ -43,7 +43,7 @@ import java.util.ArrayList;
  * @author Kevin Glass
  */
 public class Controllers {
-	/**
+    /**
      * The controllers available
      */
     private static ArrayList<JInputController> controllers = new ArrayList<JInputController>();
@@ -61,15 +61,17 @@ public class Controllers {
      */
     private static ControllerEvent event;
 
-	/** Whether controllers were created */
-	private static boolean created;
+    /**
+     * Whether controllers were created
+     */
+    private static boolean created;
 
-	/**
-	 * Initialise the controllers collection
-	 *
-	 * @throws LWJGLException Indicates a failure to initialise the controller library.
-	 */
-	public static void create() throws LWJGLException {
+    /**
+     * Initialise the controllers collection
+     *
+     * @throws LWJGLException Indicates a failure to initialise the controller library.
+     */
+    public static void create() throws LWJGLException {
 		if (created)
 			return;
 

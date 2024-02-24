@@ -5,7 +5,6 @@
 package org.lwjgl.openal;
 
 import javax.annotation.*;
-
 import java.nio.*;
 import java.util.*;
 

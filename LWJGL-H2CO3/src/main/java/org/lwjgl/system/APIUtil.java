@@ -11,7 +11,6 @@ import org.lwjgl.system.macosx.*;
 import org.lwjgl.system.windows.*;
 
 import javax.annotation.*;
-
 import java.io.*;
 import java.lang.reflect.*;
 import java.nio.*;

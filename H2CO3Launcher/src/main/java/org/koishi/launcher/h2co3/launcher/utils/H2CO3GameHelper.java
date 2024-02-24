@@ -1,4 +1,4 @@
-package org.koishi.launcher.h2co3.core.game;
+package org.koishi.launcher.h2co3.launcher.utils;
 
 import static org.koishi.launcher.h2co3.core.H2CO3Tools.getH2CO3LauncherValue;
 import static org.koishi.launcher.h2co3.core.H2CO3Tools.getH2CO3Value;

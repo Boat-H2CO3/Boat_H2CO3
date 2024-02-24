@@ -1,15 +1,20 @@
 package org.lwjgl.glfw;
 
-import static org.lwjgl.system.APIUtil.apiGetFunctionAddress;
-import static org.lwjgl.system.APIUtil.apiLog;
+import org.lwjgl.system.*;
 
-import org.lwjgl.system.JNI;
+import javax.annotation.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import javax.annotation.Nullable;
+import static org.lwjgl.system.APIUtil.apiGetFunctionAddress;
+import static org.lwjgl.system.APIUtil.apiLog;
+
+/**
+ * By Tungsten
+ * This class is for Fold Craft Launcher.
+ */
 public class H2CO3LauncherInjector {
 
     public static final long GetInjectorMode = apiGetFunctionAddress(GLFW.GLFW, "glfwGetInjectorMode");
@@ -19,7 +24,7 @@ public class H2CO3LauncherInjector {
     private static boolean get = false;
     private static ClassLoader classLoader;
 
-    private static final String HIT_RESULT_TYPE_UNKNOWN      = "UNKNOWN";
+    private static final String HIT_RESULT_TYPE_UNKNOWN = "UNKNOWN";
     private static final String HIT_RESULT_TYPE_MISS         = "MISS";
     private static final String HIT_RESULT_TYPE_BLOCK        = "BLOCK";
     private static final String HIT_RESULT_TYPE_BLOCK_OLD    = "TILE";
@@ -45,7 +50,7 @@ public class H2CO3LauncherInjector {
     private static String param3 = null;
 
     public static void setClassLoader(ClassLoader classLoader) {
-        String prop = System.getProperty("h2co3Launcher.injector");
+        String prop = System.getProperty("h2co3launcher.injector");
         if (!get && prop != null && !prop.isEmpty()) {
             H2CO3LauncherInjector.classLoader = classLoader;
             String[] props = prop.split(":");
@@ -143,7 +148,6 @@ public class H2CO3LauncherInjector {
             } catch (ClassNotFoundException | NoSuchFieldException | NoSuchMethodException |
                      IllegalAccessException | InvocationTargetException e) {
                 apiLog(e.getMessage());
-                apiLog("H2CO3Launcher Injector not initialized!");
             }
             if (level == INJECTOR_LEVEL_2) {
                 if (success && type == null) {

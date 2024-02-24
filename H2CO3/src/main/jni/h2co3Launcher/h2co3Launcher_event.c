@@ -20,7 +20,6 @@ void EventQueue_add(EventQueue *queue, H2CO3LauncherEvent *event) {
     if (e == NULL) {
         return;
     }
-    memset(e, 0, sizeof(QueueElement));
     if (queue->count > 0) {
         queue->tail->next = e;
         queue->tail = e;
@@ -70,6 +69,7 @@ void h2co3LauncherSetCursorMode(int mode) {
                                                                      &env, 0);
     if (result != JNI_OK || env == 0) {
         H2CO3_INTERNAL_LOG("h2co3LauncherSetCursorMode:Failed to attach thread");
+        (*h2co3Launcher->android_jvm)->DetachCurrentThread(h2co3Launcher->android_jvm);
         abort();
     }
 
@@ -125,13 +125,14 @@ int h2co3LauncherPollEvent(H2CO3LauncherEvent *event) {
     }
     if (pthread_mutex_unlock(&h2co3Launcher->event_queue_mutex) != 0) {
         H2CO3_INTERNAL_LOG("h2co3LauncherPollEvent:Failed to release mutex");
-        return 0;
     }
     return ret;
 }
 
+
 JNIEXPORT jintArray JNICALL
-Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_getPointer(JNIEnv *env, jclass thiz) {
+Java_org_koishi_launcher_h2co3_launcher_utils_H2CO3LauncherBridge_getPointer(JNIEnv *env,
+                                                                             jclass thiz) {
     jintArray ja = (*env)->NewIntArray(env, 2);
     int arr[2] = {current_event.x, current_event.y};
     (*env)->SetIntArrayRegion(env, ja, 0, 2, arr);
@@ -139,10 +140,11 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_getPointer(JNIEnv *
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_pushEvent(JNIEnv *env, jclass clazz,
-                                                                       jlong time,
-                                                                       jint type, jint p1,
-                                                                       jint p2) {
+Java_org_koishi_launcher_h2co3_launcher_utils_H2CO3LauncherBridge_pushEvent(JNIEnv *env,
+                                                                            jclass clazz,
+                                                                            jlong time,
+                                                                            jint type, jint p1,
+                                                                            jint p2) {
     if (!h2co3Launcher->has_event_pipe) {
         return;
     }
@@ -197,10 +199,16 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_pushEvent(JNIEnv *e
         H2CO3_INTERNAL_LOG(
                 "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_pushEvent:Failed to release mutex");
     }
+
+    if (write(h2co3Launcher->event_pipe_fd[1], "E", 1) != 1) {
+        H2CO3_INTERNAL_LOG(
+                "Java_org_koishi_launcher_h2co3_launcher_utils_H2CO3LauncherBridge_pushEvent:Failed to write to event pipe");
+    }
 }
 
 JNIEXPORT void JNICALL
-Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_setEventPipe(JNIEnv *env, jclass clazz) {
+Java_org_koishi_launcher_h2co3_launcher_utils_H2CO3LauncherBridge_setEventPipe(JNIEnv *env,
+                                                                               jclass clazz) {
     if (pipe(h2co3Launcher->event_pipe_fd) == -1) {
         H2CO3_INTERNAL_LOG(
                 "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to create event pipe : %s",
@@ -219,8 +227,11 @@ Java_org_koishi_launcher_h2co3_core_game_H2CO3LauncherBridge_setEventPipe(JNIEnv
     ev.data.fd = h2co3Launcher->event_pipe_fd[0];
     if (epoll_ctl(h2co3Launcher->epoll_fd, EPOLL_CTL_ADD, h2co3Launcher->event_pipe_fd[0], &ev) ==
         -1) {
+        close(h2co3Launcher->event_pipe_fd[0]);
+        close(h2co3Launcher->event_pipe_fd[1]);
+        close(h2co3Launcher->epoll_fd);
         H2CO3_INTERNAL_LOG(
-                "Java_org_koishi_launcher_h2co3_launcher_H2CO3LauncherLib_setEventPipe:Failed to add epoll event : %s",
+                "Java_org_koishi_launcher_h2co3_launcher_utils_H2CO3LauncherBridge_setEventPipe:Failed to add epoll event : %s",
                 strerror(errno));
         return;
     }

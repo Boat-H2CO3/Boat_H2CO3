@@ -7,14 +7,11 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
-import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridge;
-import org.koishi.launcher.h2co3.launcher.function.ApiInstallerCallback;
-
-import java.util.ArrayList;
+import org.koishi.launcher.h2co3.launcher.utils.H2CO3LauncherBridgeCallBack;
 
 public class H2CO3ApiService extends Service {
 
-    public ApiInstallerCallback callback;
+    public H2CO3LauncherBridgeCallBack callback;
 
     public static void onExit(Context context, int exitCode) {
         ((H2CO3ApiService) context).callback.onExit(exitCode);

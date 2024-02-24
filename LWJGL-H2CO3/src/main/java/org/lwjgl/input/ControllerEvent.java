@@ -37,16 +37,24 @@ package org.lwjgl.input;
  * @author Kevin Glass
  */
 class ControllerEvent {
-	/** Indicates the event was caused by a button */
-	public static final int BUTTON = 1;
-	/** Indicates the event was caused by a axis */
-	public static final int AXIS = 2;
-	/** Indicates the event was caused by a pov X */
-	public static final int POVX = 3;
-	/** Indicates the event was caused by a pov Y */
-	public static final int POVY = 4;
+    /**
+     * Indicates the event was caused by a button
+     */
+    public static final int BUTTON = 1;
+    /**
+     * Indicates the event was caused by a axis
+     */
+    public static final int AXIS = 2;
+    /**
+     * Indicates the event was caused by a pov X
+     */
+    public static final int POVX = 3;
+    /**
+     * Indicates the event was caused by a pov Y
+     */
+    public static final int POVY = 4;
 
-	/**
+    /**
      * The controller generating the event
      */
     private Controller source;
@@ -83,15 +91,15 @@ class ControllerEvent {
      */
     private float yaxisValue;
 
-	/**
-	 * Create a new event
-	 *
-	 * @param source The source of the event
-	 * @param timeStamp The time stamp given for this event
-	 * @param type The type of control generating this event
-	 * @param index The index of the input that generated the event
-	 * @param xaxis True if this event was caused by the x-axis
-	 * @param yaxis True if this event was caused by the y-axis
+    /**
+     * Create a new event
+     *
+     * @param source The source of the event
+     * @param timeStamp The time stamp given for this event
+     * @param type The type of control generating this event
+     * @param index The index of the input that generated the event
+     * @param xaxis True if this event was caused by the x-axis
+     * @param yaxis True if this event was caused by the y-axis
 	 */
 	ControllerEvent(Controller source,long timeStamp, int type,int index,boolean xaxis,boolean yaxis) {
 		this(source, timeStamp, type, index, false, xaxis, yaxis, 0, 0);

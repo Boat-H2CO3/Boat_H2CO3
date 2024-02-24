@@ -1,7 +1,8 @@
-package org.koishi.launcher.h2co3.core.game;
+package org.koishi.launcher.h2co3.launcher.utils;
 
 import com.google.gson.Gson;
 
+import org.koishi.launcher.h2co3.core.H2CO3Auth;
 import org.koishi.launcher.h2co3.core.utils.file.FileTools;
 
 import java.io.File;

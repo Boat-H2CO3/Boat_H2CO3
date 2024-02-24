@@ -1,4 +1,4 @@
-package org.koishi.launcher.h2co3.core.game;
+package org.koishi.launcher.h2co3.launcher.utils;
 
 import org.koishi.launcher.h2co3.core.utils.CommandBuilder;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;

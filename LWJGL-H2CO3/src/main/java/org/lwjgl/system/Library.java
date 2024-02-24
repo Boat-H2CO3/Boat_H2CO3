@@ -207,7 +207,9 @@ public final class Library {
      * @param module  the module to which the shared library belongs
      * @param name    the library name. OS-specific prefixes and file extensions are optional (e.g. both {@code "GL"} and {@code "libGL.so.1"} are
      *                valid on Linux)
+     *
      * @return the shared library
+     *
      * @throws UnsatisfiedLinkError if the library could not be loaded
      */
     @SuppressWarnings("try")

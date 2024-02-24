@@ -6,11 +6,8 @@
 package org.lwjgl.openal;
 
 import org.lwjgl.system.*;
-
 import java.util.Set;
-
 import org.lwjgl.*;
-
 import java.util.function.IntFunction;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -27,16 +24,16 @@ public final class ALCapabilities {
             alEnable,
             alDisable,
             alIsEnabled,
-        alGetBoolean,
-        alGetInteger,
-        alGetFloat,
-        alGetDouble,
-        alGetBooleanv,
-        alGetIntegerv,
-        alGetFloatv,
-        alGetDoublev,
-        alGetString,
-        alDistanceModel,
+            alGetBoolean,
+            alGetInteger,
+            alGetFloat,
+            alGetDouble,
+            alGetBooleanv,
+            alGetIntegerv,
+            alGetFloatv,
+            alGetDoublev,
+            alGetString,
+            alDistanceModel,
         alDopplerFactor,
         alDopplerVelocity,
         alListenerf,
