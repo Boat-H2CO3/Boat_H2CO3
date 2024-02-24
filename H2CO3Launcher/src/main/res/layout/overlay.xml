@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <org.koishi.launcher.h2co3.resources.component.ControlLayout
+                <TextureView
                     android:id="@+id/main_game_render_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

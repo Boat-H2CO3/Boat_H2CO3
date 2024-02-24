@@ -11,7 +11,8 @@ A Minecraft launcher based on the Boat App as the core.
 
 <h1 align="left">Status</h1>
 
-[![Android CI](https://github.com/bilicainiaohh/Boat_H2CO3NewUI/actions/workflows/android.yml/badge.svg)](https://github.com/bilicainiaohh/Boat_H2CO3NewUI/actions/workflows/android.yml)
+[![Android CI](https://github.com/Boat-H2CO3/Boat_H2CO3/actions/workflows/android.yml/badge.svg)](https://github.com/Boat-H2CO3/Boat_H2CO3/actions/workflows/android.yml)
+![Downloads](https://img.shields.io/github/downloads/Boat-H2CO3/Boat_H2CO3/total?color=green&style=for-the-badge)
 
 <h1 align="left">Third-Party Libraries Used</h1>
 

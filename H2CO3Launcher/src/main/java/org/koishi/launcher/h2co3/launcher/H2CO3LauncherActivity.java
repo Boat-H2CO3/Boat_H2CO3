@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 
 import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridge;
 import org.koishi.launcher.h2co3.core.game.H2CO3LauncherBridgeCallBack;
-import org.koishi.launcher.h2co3.resources.component.ControlLayout;
 import org.koishi.launcher.h2co3.resources.component.activity.H2CO3Activity;
 
 import java.util.Timer;
@@ -30,7 +29,7 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
 
-    public ControlLayout mainTextureView;
+    public TextureView mainTextureView;
     public RelativeLayout baseLayout;
     public H2CO3LauncherBridgeCallBack h2co3LauncherCallback;
     private Timer timer;
@@ -89,10 +88,6 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
         if (output < 1) {
             output++;
         }
-    }
-
-    public void setH2CO3LauncherCallback(H2CO3LauncherBridgeCallBack callback) {
-        this.h2co3LauncherCallback = callback;
     }
 
     public abstract void onClick(View view);
@@ -191,10 +186,6 @@ public abstract class H2CO3LauncherActivity extends H2CO3Activity implements Tex
     }
 
     public void exit(Context context, int code) {
-    }
-
-    public static void onExit(Context ctx, int code) {
-        ((H2CO3LauncherActivity) ctx).h2co3LauncherCallback.onExit(code);
     }
 
     public interface IH2CO3Launcher {
