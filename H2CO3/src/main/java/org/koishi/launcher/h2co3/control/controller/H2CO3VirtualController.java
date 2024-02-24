@@ -8,7 +8,6 @@ import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.MOUS
 import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.TYPE_WORDS;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,7 +27,6 @@ import org.koishi.launcher.h2co3.control.client.H2CO3ControlClient;
 import org.koishi.launcher.h2co3.control.codes.Translation;
 import org.koishi.launcher.h2co3.control.event.BaseKeyEvent;
 import org.koishi.launcher.h2co3.control.input.Input;
-import org.koishi.launcher.h2co3.control.input.OnscreenInput;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
 
@@ -79,15 +77,29 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         dButton.setLayoutParams(new ViewGroup.LayoutParams(DisplayUtils.getPxFromDp(context, 30), DisplayUtils.getPxFromDp(context, 30)));
         dButton.setBackground(ContextCompat.getDrawable(context, org.koishi.launcher.h2co3.resources.R.drawable.background_floatbutton));
 
-        double x = H2CO3Tools.getH2CO3Value("controller_float_position_x", (double) screenWidth / 2, Double.class).doubleValue();
-        double y = H2CO3Tools.getH2CO3Value("controller_float_position_y", (double) screenHeight / 2, Double.class).doubleValue();
+        double x = 0.0;
+        double y = 0.0;
+        Object xObj = H2CO3Tools.getH2CO3Value("controller_float_position_x", screenWidth / 2.0, Object.class);
+        Object yObj = H2CO3Tools.getH2CO3Value("controller_float_position_y", screenHeight / 2.0, Object.class);
+
+        if (xObj instanceof Double) {
+            x = (Double) xObj;
+        } else if (xObj instanceof Integer) {
+            x = ((Integer) xObj).doubleValue();
+        }
+
+        if (yObj instanceof Double) {
+            y = (Double) yObj;
+        } else if (yObj instanceof Integer) {
+            y = ((Integer) yObj).doubleValue();
+        }
+
         if (x != -1 && y != -1) {
             dButton.setX((float) x);
             dButton.setY((float) y);
         } else {
-            // 如果没有保存的位置，则将其移动到屏幕中间
-            dButton.setX((float) screenWidth / 2);
-            dButton.setY((float) screenHeight / 2);
+            dButton.setX(screenWidth / 2.0f);
+            dButton.setY(screenHeight / 2.0f);
         }
         dButton.setTodo(new ArrangeRule() {
             @Override
@@ -305,7 +317,7 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         }
 
         public void savePosition() {
-            H2CO3Tools.setH2CO3Value("controller_float_po sition_x", getX());
+            H2CO3Tools.setH2CO3Value("controller_float_position_x", getX());
             H2CO3Tools.setH2CO3Value("controller_float_position_y", getY());
         }
     }
