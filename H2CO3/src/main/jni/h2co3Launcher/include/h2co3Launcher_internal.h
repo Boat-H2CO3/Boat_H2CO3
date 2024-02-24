@@ -43,10 +43,10 @@ struct H2CO3LauncherInternal {
 extern struct H2CO3LauncherInternal *h2co3Launcher;
 
 #define H2CO3_INTERNAL_LOG(x...) do { \
-    fprintf(stderr, "[H2CO3Launcher Internal] %s:%d\n", __FILE__, __LINE__); \
-    fprintf(stderr, x); \
-    fprintf(stderr, "\n"); \
-    fflush(stderr); \
+    fprintf(h2co3Launcher->logFile, "[H2CO3Launcher Internal] %s:%d\n", __FILE__, __LINE__); \
+    fprintf(h2co3Launcher->logFile, x); \
+    fprintf(h2co3Launcher->logFile, "\n"); \
+    fflush(h2co3Launcher->logFile); \
     } while (0)
 
 #define PrepareH2CO3LauncherBridgeJNI() \
