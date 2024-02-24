@@ -9,6 +9,7 @@ import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.TYPE
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,29 +36,21 @@ import java.util.Objects;
 
 import timber.log.Timber;
 
-
 public class H2CO3VirtualController extends BaseController implements View.OnClickListener, MaterialSwitch.OnCheckedChangeListener {
 
     private final Translation mTranslation;
     private final int screenWidth;
     private final int screenHeight;
-    DragFloatActionButton dButton;
+    private DragFloatActionButton dButton;
     private VirtualControllerSetting settingDialog;
-    //绑定
     private HashMap<View, Input> bindingViews;
 
     public H2CO3VirtualController(H2CO3ControlClient h2CO3ControlClient, int transType) {
         super(h2CO3ControlClient, true);
-
-        //初始化键值翻译器
         this.mTranslation = new Translation(transType);
-
-        screenWidth = this.getConfig().getScreenWidth();
-        screenHeight = this.getConfig().getScreenHeight();
-
-        //初始化
+        screenWidth = getConfig().getScreenWidth();
+        screenHeight = getConfig().getScreenHeight();
         init();
-
     }
 
     @Override
@@ -66,17 +59,13 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
     }
 
     public void init() {
-        //初始化Setting对话框
         settingDialog = new VirtualControllerSetting(context);
-
-        //全部隐藏
         for (Input i : inputs) {
             i.setEnabled(false);
         }
         dButton = new DragFloatActionButton(context);
         dButton.setLayoutParams(new ViewGroup.LayoutParams(DisplayUtils.getPxFromDp(context, 30), DisplayUtils.getPxFromDp(context, 30)));
         dButton.setBackground(ContextCompat.getDrawable(context, org.koishi.launcher.h2co3.resources.R.drawable.background_floatbutton));
-
         double x = 0.0;
         double y = 0.0;
         Object xObj = H2CO3Tools.getH2CO3Value("controller_float_position_x", screenWidth / 2.0, Object.class);
@@ -101,42 +90,36 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
             dButton.setX(screenWidth / 2.0f);
             dButton.setY(screenHeight / 2.0f);
         }
-        dButton.setTodo(new ArrangeRule() {
-            @Override
-            public void run() {
-                settingDialog.show();
-            }
-        });
+        dButton.setTodo(this::showSettingDialog);
         h2CO3ControlClient.addContentView(dButton, dButton.getLayoutParams());
-
-        //绑定
         bindViewWithInput();
     }
 
     public void bindViewWithInput() {
-        //绑定Input对象与ImageButton和Switch
         bindingViews = new HashMap<>();
     }
 
     @Override
     public void sendKey(BaseKeyEvent e) {
-        //日志输出
         toLog(e);
-        //事件分配
         switch (e.getType()) {
-            case KEYBOARD_BUTTON, MOUSE_BUTTON -> {
+            case KEYBOARD_BUTTON:
+            case MOUSE_BUTTON:
                 String KeyName = e.getKeyName();
                 String[] strs = KeyName.split(MARK_KEYNAME_SPLIT);
                 for (String str : strs) {
-                    //Log.e(e.getTag(),"切分: " + str + " 总大小: " + strs.length );
+                    Log.e(e.getTag(), "切分: " + str + " 总大小: " + strs.length);
                     sendKeyEvent(new BaseKeyEvent(e.getTag(), str, e.isPressed(), e.getType(), e.getPointer()));
                 }
-            }
-            case MOUSE_POINTER, MOUSE_POINTER_INC, TYPE_WORDS -> sendKeyEvent(e);
-            default -> {
-            }
+                break;
+            case MOUSE_POINTER:
+            case MOUSE_POINTER_INC:
+            case TYPE_WORDS:
+                sendKeyEvent(e);
+                break;
+            default:
+                break;
         }
-
     }
 
     private void toLog(BaseKeyEvent event) {
@@ -155,7 +138,6 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         Timber.tag(event.getTag()).e(info);
     }
 
-    //事件发送
     private void sendKeyEvent(BaseKeyEvent e) {
         switch (e.getType()) {
             case KEYBOARD_BUTTON:
@@ -176,13 +158,14 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
                 if (e.getPointer() != null) {
                     h2CO3ControlClient.setPointerInc(e.getPointer()[0], e.getPointer()[1]);
                 }
+                break;
             default:
+                break;
         }
     }
 
     @Override
     public void onClick(View v) {
-
         if (v instanceof ImageButton && bindingViews.containsKey(v)) {
             Objects.requireNonNull(bindingViews.get(v)).runConfigure();
         }
@@ -191,19 +174,16 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
     @Override
     public void onStop() {
         super.onStop();
-        // 保存位置
         dButton.savePosition();
     }
 
-    /**
-     * Called when the checked state of a compound button has changed.
-     *
-     * @param buttonView The compound button view whose state has changed.
-     * @param isChecked  The new checked state of buttonView.
-     */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        // do nothing
+    }
 
+    private void showSettingDialog() {
+        settingDialog.show();
     }
 
     private static class VirtualControllerSetting extends MaterialAlertDialogBuilder {
@@ -223,11 +203,10 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
 
         private boolean isDrag;
 
-        private ArrangeRule aRule;
+        private Runnable todo;
 
         private float initialX;
         private float initialY;
-
 
         public DragFloatActionButton(Context context) {
             super(context);
@@ -286,11 +265,9 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
                     break;
                 case MotionEvent.ACTION_UP:
                     if (isDrag) {
-                        //恢复按压效果
                         setPressed(false);
                         savePosition();
                     } else {
-                        //执行点击操作
                         startTodo();
                     }
                     break;
@@ -306,25 +283,19 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
             return false;
         }
 
-        public void setTodo(ArrangeRule ar) {
-            this.aRule = ar;
+        public void setTodo(Runnable todo) {
+            this.todo = todo;
         }
 
         public void startTodo() {
-            if (aRule != null) {
-                aRule.run();
+            if (todo != null) {
+                todo.run();
             }
         }
 
         public void savePosition() {
             H2CO3Tools.setH2CO3Value("controller_float_position_x", getX());
             H2CO3Tools.setH2CO3Value("controller_float_position_y", getY());
-        }
-    }
-
-    private static class ArrangeRule {
-        public void run() {
-            // Override this method.
         }
     }
 }
