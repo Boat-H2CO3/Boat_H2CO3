@@ -13,9 +13,11 @@ import org.koishi.launcher.h2co3.core.utils.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,6 +26,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TimeZone;
 import java.util.logging.Level;
+import java.util.stream.Stream;
 
 public class H2CO3LauncherHelper {
 
@@ -41,7 +44,8 @@ public class H2CO3LauncherHelper {
 
     public static Map<String, String> readJREReleaseProperties(String javaPath) throws IOException {
         Map<String, String> jreReleaseMap = new HashMap<>();
-        try (BufferedReader jreReleaseReader = new BufferedReader(new FileReader(javaPath + "/release"))) {
+        Path releaseFilePath = Paths.get(javaPath, "release");
+        try (BufferedReader jreReleaseReader = Files.newBufferedReader(releaseFilePath)) {
             String currLine;
             while ((currLine = jreReleaseReader.readLine()) != null) {
                 if (currLine.contains("=")) {
@@ -83,35 +87,15 @@ public class H2CO3LauncherHelper {
         String jreLibDir = getJreLibDir(javaPath);
         String jvmLibDir = getJvmLibDir(javaPath);
         String jliLibDir = "/jli";
-        String split = ":";
-        return javaPath +
-                jreLibDir +
-                split +
-
-                javaPath +
-                jreLibDir +
-                jliLibDir +
-                split +
-
-                javaPath +
-                jreLibDir +
-                jvmLibDir +
-                split +
-
-                "/system/" +
-                libDirName +
-                split +
-
-                "/vendor/" +
-                libDirName +
-                split +
-
-                "/vendor/" +
-                libDirName +
-                "/hw" +
-                split +
-
-                nativeDir;
+        return String.join(":",
+                javaPath + jreLibDir,
+                javaPath + jreLibDir + jliLibDir,
+                javaPath + jreLibDir + jvmLibDir,
+                "/system/" + libDirName,
+                "/vendor/" + libDirName,
+                "/vendor/" + libDirName + "/hw",
+                nativeDir
+        );
     }
 
     public static String[] rebaseArgs(Context context, int width, int height) throws IOException {
@@ -190,17 +174,11 @@ public class H2CO3LauncherHelper {
         addCommonEnv(context, envMap);
         addRendererEnv(context, envMap, H2CO3GameHelper.getRender());
         printTaskTitle(bridge, "Env Map");
-        for (String key : envMap.keySet()) {
-            bridge.getCallback().onLog("Env: " + key + "=" + envMap.get(key));
-            bridge.setenv(key, envMap.get(key));
-        }
+        envMap.forEach((key, value) -> {
+            bridge.getCallback().onLog("Env: " + key + "=" + value);
+            bridge.setenv(key, value);
+        });
         printTaskTitle(bridge, "Env Map");
-    }
-
-    public static void setGLLib(Context context, H2CO3LauncherBridge bridge, String render) {
-        if (render.equals(H2CO3Tools.GL_GL114)) {
-            bridge.dlopen(context.getApplicationInfo().nativeLibraryDir + "/libgl4es_114.so");
-        }
     }
 
     public static void setUpJavaRuntime(Context context, H2CO3LauncherBridge bridge) throws IOException {
@@ -229,20 +207,12 @@ public class H2CO3LauncherHelper {
         }
     }
 
-    public static ArrayList<File> locateLibs(File path) {
+    public static ArrayList<File> locateLibs(File path) throws IOException {
         ArrayList<File> returnValue = new ArrayList<>();
-        ArrayList<File> stack = new ArrayList<>();
-        stack.add(path);
-        while (!stack.isEmpty()) {
-            File file = stack.remove(stack.size() - 1);
-            if (file.isFile() && file.getName().endsWith(".so")) {
-                returnValue.add(file);
-            } else if (file.isDirectory()) {
-                File[] files = file.listFiles();
-                if (files != null) {
-                    Collections.addAll(stack, files);
-                }
-            }
+        try (Stream<Path> walk = Files.walk(path.toPath())) {
+            walk.filter(Files::isRegularFile)
+                    .filter(p -> p.toString().endsWith(".so"))
+                    .forEach(p -> returnValue.add(p.toFile()));
         }
         return returnValue;
     }
@@ -260,10 +230,14 @@ public class H2CO3LauncherHelper {
         }
         bridge.setupJLI();
         bridge.setLdLibraryPath(getLibraryPath(context, H2CO3GameHelper.getJavaPath()));
+        printTaskTitle(bridge, task + " Arguments");
+        bridge.getCallback().onLog("");
+        printTaskTitle(bridge, task + " Logs");
         bridge.getCallback().onLog("Hook exit " + (bridge.setupExitTrap(bridge) == 0 ? "success" : "failed"));
         int exitCode = bridge.jliLaunch(args);
         Log.e(TAG, "Jvm Exited With Code:" + exitCode);
         bridge.onExit(exitCode);
+        printTaskTitle(bridge, task + " Logs");
     }
 
     public static H2CO3LauncherBridge launchMinecraft(Context context, int width, int height) {
@@ -391,7 +365,7 @@ public class H2CO3LauncherHelper {
         args.addDefault("-Dorg.lwjgl.util.DebugLoader=", "true");
         args.addDefault("-Dorg.lwjgl.util.Debug=", "true");
         args.addDefault("-Dos.name=", "Linux");
-        args.addDefault("-Dos.version=Android-" , Build.VERSION.RELEASE);
+        args.addDefault("-Dos.version=Android-", Build.VERSION.RELEASE);
         args.addDefault("-Dlwjgl.platform=", "H2CO3Launcher");
         args.addDefault("-Duser.language=", System.getProperty("user.language"));
         args.addDefault("-Dwindow.width=", String.valueOf(width));

@@ -8,17 +8,13 @@ import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.MOUS
 import static org.koishi.launcher.h2co3.control.definitions.id.key.KeyEvent.TYPE_WORDS;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
@@ -30,6 +26,7 @@ import org.koishi.launcher.h2co3.control.event.BaseKeyEvent;
 import org.koishi.launcher.h2co3.control.input.Input;
 import org.koishi.launcher.h2co3.core.H2CO3Tools;
 import org.koishi.launcher.h2co3.core.login.utils.DisplayUtils;
+import org.koishi.launcher.h2co3.resources.component.MenuView;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -41,7 +38,7 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
     private final Translation mTranslation;
     private final int screenWidth;
     private final int screenHeight;
-    private DragFloatActionButton dButton;
+    private MenuView dButton;
     private VirtualControllerSetting settingDialog;
     private HashMap<View, Input> bindingViews;
 
@@ -63,9 +60,8 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         for (Input i : inputs) {
             i.setEnabled(false);
         }
-        dButton = new DragFloatActionButton(context);
-        dButton.setLayoutParams(new ViewGroup.LayoutParams(DisplayUtils.getPxFromDp(context, 30), DisplayUtils.getPxFromDp(context, 30)));
-        dButton.setBackground(ContextCompat.getDrawable(context, org.koishi.launcher.h2co3.resources.R.drawable.bg_game_menu));
+        dButton = new MenuView(context);
+        dButton.setLayoutParams(new ViewGroup.LayoutParams(DisplayUtils.getPxFromDp(context, 40), DisplayUtils.getPxFromDp(context, 40)));
         double x = 0.0;
         double y = 0.0;
         Object xObj = H2CO3Tools.getH2CO3Value("controller_float_position_x", screenWidth / 2.0, Object.class);
@@ -179,7 +175,6 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        // do nothing
     }
 
     private void showSettingDialog() {
@@ -190,112 +185,6 @@ public class H2CO3VirtualController extends BaseController implements View.OnCli
         public VirtualControllerSetting(@NonNull Context context) {
             super(context);
             setView(R.layout.dialog_controller_functions);
-        }
-    }
-
-    private static class DragFloatActionButton extends LinearLayoutCompat implements View.OnTouchListener {
-
-        private int parentHeight;
-        private int parentWidth;
-
-        private int lastX;
-        private int lastY;
-
-        private boolean isDrag;
-
-        private Runnable todo;
-
-        private float initialX;
-        private float initialY;
-
-        public DragFloatActionButton(Context context) {
-            super(context);
-            this.setOnTouchListener(this);
-        }
-
-        public DragFloatActionButton(Context context, AttributeSet attrs) {
-            super(context, attrs);
-        }
-
-        public DragFloatActionButton(Context context, AttributeSet attrs, int defStyleAttr) {
-            super(context, attrs, defStyleAttr);
-        }
-
-        @Override
-        public boolean performClick() {
-            super.performClick();
-            return false;
-        }
-
-        public void behave(MotionEvent event) {
-            int rawX = (int) event.getRawX();
-            int rawY = (int) event.getRawY();
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    isDrag = false;
-                    this.setAlpha(0.9f);
-                    getParent().requestDisallowInterceptTouchEvent(true);
-                    lastX = rawX;
-                    lastY = rawY;
-                    initialX = getX();
-                    initialY = getY();
-                    if (getParent() != null) {
-                        ViewGroup parent = (ViewGroup) getParent();
-                        parentHeight = parent.getHeight();
-                        parentWidth = parent.getWidth();
-                    }
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    this.setAlpha(0.9f);
-                    int dx = rawX - lastX;
-                    int dy = rawY - lastY;
-                    int distance = (int) Math.sqrt(dx * dx + dy * dy);
-                    if (distance > 2 && !isDrag) {
-                        isDrag = true;
-                    }
-                    float x = getX() + dx;
-                    float y = getY() + dy;
-                    //检测是否到达边缘 左上右下
-                    x = x < 0 ? 0 : x > parentWidth - getWidth() ? parentWidth - getWidth() : x;
-                    y = getY() < 0 ? 0 : getY() + getHeight() > parentHeight ? parentHeight - getHeight() : y;
-                    setX(x);
-                    setY(y);
-                    lastX = rawX;
-                    lastY = rawY;
-                    break;
-                case MotionEvent.ACTION_UP:
-                    if (isDrag) {
-                        setPressed(false);
-                        savePosition();
-                    } else {
-                        startTodo();
-                    }
-                    break;
-            }
-        }
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (v == this) {
-                this.behave(event);
-                return true;
-            }
-            return false;
-        }
-
-        public void setTodo(Runnable todo) {
-            this.todo = todo;
-        }
-
-        public void startTodo() {
-            if (todo != null) {
-                todo.run();
-            }
-        }
-
-        public void savePosition() {
-            H2CO3Tools.setH2CO3Value("controller_float_position_x", getX());
-            H2CO3Tools.setH2CO3Value("controller_float_position_y", getY());
         }
     }
 }

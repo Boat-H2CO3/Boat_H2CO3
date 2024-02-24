@@ -10,6 +10,8 @@ public class LineTextView extends H2CO3TextView {
     private final Paint line;
     private final Paint textPaint;
     private final int paddingStart;
+    private static final int LINE_INDICATOR_OFFSET = 5;
+    private static final float LINE_HEIGHT_FRACTION = 0.25f;
 
     public LineTextView(Context context) {
         super(context);
@@ -17,29 +19,27 @@ public class LineTextView extends H2CO3TextView {
         line = new Paint();
         line.setColor(Color.BLUE);
         line.setStrokeWidth(2);
-        paddingStart = dpToPx(context, 95);
+        paddingStart = dpToPx(context, 50);
         setPadding(paddingStart, 0, 0, 0);
         setGravity(Gravity.TOP);
         textPaint = new Paint();
-        textPaint.setColor(Color.WHITE);
         textPaint.setTextSize(getTextSize());
     }
 
     @Override
     protected void onDraw(final Canvas canvas) {
-        if (getText().length() != 0) {
+        super.onDraw(canvas);
+        if (getLayout() != null && getText().length() != 0) {
             int lineHeight = getLineHeight();
             int lineCount = getLineCount();
+            float lineIndicatorYOffset = lineHeight * LINE_HEIGHT_FRACTION;
             for (int l = 0; l < lineCount; l++) {
-                float y = (l + 1) * lineHeight - (float) lineHeight / 4;
+                float y = (l + 1) * lineHeight - lineIndicatorYOffset;
                 canvas.drawText(String.valueOf(l + 1), 0, y, textPaint);
             }
+            int y = (getLayout().getLineForOffset(getSelectionStart()) + 1) * lineHeight;
+            canvas.drawLine(paddingStart - LINE_INDICATOR_OFFSET, 0, paddingStart - LINE_INDICATOR_OFFSET, getHeight(), line);
         }
-        int lineHeight = getLineHeight();
-        int lineCount = getLineCount();
-        int y = (getLayout().getLineForOffset(getSelectionStart()) + 1) * lineHeight;
-        canvas.drawLine(paddingStart - 5, 0, paddingStart - 5, getHeight() + (lineCount * lineHeight), line);
-        super.onDraw(canvas);
     }
 
     private int dpToPx(Context context, int dp) {
