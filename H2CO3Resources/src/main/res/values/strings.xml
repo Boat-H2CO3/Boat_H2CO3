@@ -156,7 +156,7 @@
 
     <string name="add_directory">New Directory</string>
 
-    <string name="ver_input_hint">/storage/emulated/0 or /sdcard or /mnt/sdcard</string>
+    <string name="ver_input_hint" translatable="false">/storage/emulated/0 or /sdcard or /mnt/sdcard</string>
     <string name="ver_not_dir">It is not a directory</string>
     <string name="ver_already_exists">Directory already exists</string>
     <string name="ver_not_right_dir">It is not a right directory.</string>
@@ -178,7 +178,6 @@
     <string name="download_page_title">Downloading</string>
     <string name="total">Progress</string>
     <string name="spinner_official">official</string>
-    <string name="spinner_mcbbs">mcbbs</string>
     <string name="spinner_bmclapi">bmclapi</string>
     <string name="refresh">Refresh</string>
 

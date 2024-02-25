@@ -33,7 +33,6 @@ import java.util.List;
 public class VanillaActivity extends H2CO3Activity {
 
     private static final String API_URL_BMCLAPI = "https://bmclapi2.bangbang93.com/mc/game/version_manifest_v2.json";
-    private static final String API_URL_MCBBS = "https://download.mcbbs.net/mc/game/version_manifest_v2.json";
     private static final String API_URL_MOJANG = "https://launchermeta.mojang.com/mc/game/version_manifest_v2.json";
 
     private RecyclerView recyclerView;
@@ -64,7 +63,7 @@ public class VanillaActivity extends H2CO3Activity {
         recyclerView.setAdapter(versionAdapter);
 
         // 自动获取版本列表
-        fetchVersionsFromApi(2);
+        fetchVersionsFromApi(0);
     }
 
     private void initView() {
@@ -111,8 +110,7 @@ public class VanillaActivity extends H2CO3Activity {
     private String getApiUrl(int position) {
         return switch (position) {
             case 0 -> API_URL_BMCLAPI;
-            case 1 -> API_URL_MCBBS;
-            case 2 -> API_URL_MOJANG;
+            case 1 -> API_URL_MOJANG;
             default -> null;
         };
     }

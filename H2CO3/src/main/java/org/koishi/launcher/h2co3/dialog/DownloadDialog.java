@@ -4,6 +4,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,18 +24,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.koishi.launcher.h2co3.R;
-import org.koishi.launcher.h2co3.launcher.utils.H2CO3GameHelper;
 import org.koishi.launcher.h2co3.download.DownloadItem;
+import org.koishi.launcher.h2co3.launcher.utils.H2CO3GameHelper;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -91,32 +100,35 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
 
     private void parseJsonString() {
         try {
-            JSONObject json = new JSONObject(jsonString);
-            JSONArray libraries = json.getJSONArray("libraries");
+            JSONObject rootJsonObject = new JSONObject(jsonString);
+            JSONArray libraries = rootJsonObject.getJSONArray("libraries");
 
             for (int i = 0; i < libraries.length(); i++) {
                 JSONObject library = libraries.getJSONObject(i);
+                if (shouldFilterLibrary(library)) {
+                    continue;
+                }
+
                 JSONObject downloads = library.getJSONObject("downloads");
                 JSONObject artifact = downloads.getJSONObject("artifact");
 
                 String name = library.getString("name");
                 String path = artifact.getString("path");
                 String url = artifact.getString("url");
-
                 int size = artifact.getInt("size");
-
-                // 过滤掉name中包含"windows"或"macos"的项
-                if (name.contains("windows") || name.contains("macos")) {
-                    continue;
-                }
 
                 DownloadItem item = new DownloadItem(name, path, url, size);
                 downloadItems.add(item);
             }
-
         } catch (JSONException e) {
+            // Consider logging the error with more context or rethrowing a custom exception
             e.printStackTrace();
         }
+    }
+
+    private boolean shouldFilterLibrary(JSONObject library) throws JSONException {
+        String name = library.getString("name");
+        return name.contains("windows") || name.contains("macos");
     }
 
     private int getThreadCount() {
@@ -136,11 +148,11 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
 
     private static class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHolder> {
         private final Context context;
-        private final List<DownloadItem> downloadItems;
+        private final CopyOnWriteArrayList<DownloadItem> downloadItems;
 
         public DownloadAdapter(Context context, List<DownloadItem> downloadItems) {
             this.context = context;
-            this.downloadItems = downloadItems;
+            this.downloadItems = new CopyOnWriteArrayList<>(downloadItems);
         }
 
         @NonNull
@@ -152,30 +164,30 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            synchronized (downloadItems) {
-                if (position >= 0 && position < downloadItems.size()) {
-                    DownloadItem item = downloadItems.get(position);
-                    holder.bind(item);
-                }
+            if (position >= 0 && position < downloadItems.size()) {
+                DownloadItem item = downloadItems.get(position);
+                holder.bind(item);
             }
         }
 
         @Override
         public int getItemCount() {
-            synchronized (downloadItems) {
-                return downloadItems.size();
-            }
+            return downloadItems.size();
         }
 
         public void removeCompletedItems() {
-            synchronized (downloadItems) {
-                for (int i = downloadItems.size() - 1; i >= 0; i--) {
-                    DownloadItem item = downloadItems.get(i);
-                    File file = new File(DOWNLOAD_PATH + "/" + item.getPath());
-                    if (item.getProgress() == 100 && file.exists() && file.length() == item.getSize()) {
-                        downloadItems.remove(i);
-                        notifyItemRemoved(i);
-                    }
+            List<DownloadItem> itemsToRemove = new ArrayList<>();
+            for (DownloadItem item : downloadItems) {
+                File file = new File(DOWNLOAD_PATH + File.separator + item.getPath());
+                if (item.getProgress() == 100 && file.exists() && file.length() == item.getSize()) {
+                    itemsToRemove.add(item);
+                }
+            }
+            for (DownloadItem itemToRemove : itemsToRemove) {
+                int index = downloadItems.indexOf(itemToRemove);
+                if (index != -1) {
+                    downloadItems.remove(itemToRemove);
+                    notifyItemRemoved(index);
                 }
             }
         }
@@ -206,21 +218,13 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
             this.adapter = adapter;
         }
 
-
         @Override
         protected Void doInBackground(Void... voids) {
-            int totalSize = 0;
-
-            for (DownloadItem item : downloadItems) {
-                totalSize += item.getSize();
-            }
-
             List<Future<Void>> futures = new ArrayList<>();
             for (int i = 0; i < downloadItems.size(); i++) {
                 DownloadItem item = downloadItems.get(i);
 
-                File file = new File(DOWNLOAD_PATH + "/" + item.getPath());
-                if (file.exists() && file.length() == item.getSize()) {
+                if (isFileValid(item)) {
                     item.setProgress(100);
                     publishProgress(i);
                     continue;
@@ -228,61 +232,41 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
 
                 int finalI = i;
                 Future<Void> future = executorService.submit(() -> {
-                    int retryCount = 0;
-                    while (retryCount < 3) { // 最多重试3次
-                        try {
-                            if (isCancelled()) {
-                                return null;
-                            }
+                    try {
+                        URL url = new URL(item.getUrl());
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.connect();
 
-                            URL url = new URL(item.getUrl());
-                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                            connection.connect();
+                        createDirectoryForItem(item);
 
-                            connection.getContentLength();
+                        try (InputStream input = new BufferedInputStream(connection.getInputStream());
+                             OutputStream output = new BufferedOutputStream(new FileOutputStream(DOWNLOAD_PATH + "/" + item.getPath()))) {
 
-                            int lastIndex = item.getPath().lastIndexOf("/");
-                            String folderPath = DOWNLOAD_PATH + "/" + item.getPath().substring(0, lastIndex + 1);
-                            File folder = new File(folderPath);
-                            if (!folder.exists()) {
-                                if (!folder.mkdirs()) {
-                                    throw new IOException("Failed to create folder: " + folderPath);
+                            byte[] data = new byte[BUFFER_SIZE];
+                            int count;
+                            int downloadedSizeForItem = 0;
+                            while ((count = input.read(data)) != -1) {
+                                if (isCancelled()) {
+                                    return null;
                                 }
-                            }
 
-                            try (InputStream input = new BufferedInputStream(url.openStream());
-                                 FileOutputStream output = new FileOutputStream(DOWNLOAD_PATH + "/" + item.getPath())) {
-
-                                byte[] data = new byte[BUFFER_SIZE];
-                                int count;
-                                int downloadedSizeForItem = 0;
-                                while ((count = input.read(data)) != -1) {
-                                    if (isCancelled()) {
-                                        return null;
-                                    }
-
-                                    downloadedSizeForItem += count;
-                                    output.write(data, 0, count);
+                                downloadedSizeForItem += count;
+                                output.write(data, 0, count);
+                                if (item.getSize() > 0) { // 避免除以零的错误
                                     int progress = (downloadedSizeForItem * 100) / item.getSize();
-                                    synchronized (downloadItems) {
-                                        item.setProgress(progress);
-                                    }
-                                    if (progress % 5 == 0) {
-                                        publishProgress(finalI);
-                                    }
+                                    item.setProgress(progress);
+                                    publishProgress(finalI);
                                 }
                             }
-
-                            break;
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            retryCount++;
-                            showErrorDialog(e.getMessage());
-                            publishProgress(finalI);
                         }
+                    } catch (Exception e) {
+                        Log.e("DownloadTask", "Error downloading file: " + e.getMessage());
+                        showErrorDialogOnUIThread(e.getMessage());
+                        cancel(true);
+                        downloadItems.remove(item);
+                        publishProgress(finalI);
+                        throw new RuntimeException("Error downloading file: " + item.getUrl(), e);
                     }
-
                     return null;
                 });
                 futures.add(future);
@@ -292,8 +276,8 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
                 try {
                     future.get();
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    cancel(true); // 取消所有下载任务
+                    Log.e("DownloadTask", "Error executing download task: " + e.getMessage());
+                    cancel(true);
                     break;
                 }
             }
@@ -303,43 +287,49 @@ public class DownloadDialog extends MaterialAlertDialogBuilder {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            synchronized (downloadItems) {
-                adapter.notifyItemChanged(values[0]);
-                adapter.removeCompletedItems();
-            }
+            adapter.notifyItemChanged(values[0]);
+            adapter.removeCompletedItems();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            synchronized (downloadItems) {
-                adapter.removeCompletedItems();
-
-                if (downloadItems.isEmpty()) {
-                    dialog.dismiss();
-                }
-
-                adapter.notifyDataSetChanged();
+            adapter.removeCompletedItems();
+            if (downloadItems.isEmpty()) {
+                dialog.dismiss();
             }
+            adapter.notifyDataSetChanged();
         }
 
         @Override
         protected void onCancelled() {
             super.onCancelled();
-            showErrorDialog("下载失败");
+            showErrorDialogOnUIThread("下载失败");
+        }
+
+        private boolean isFileValid(DownloadItem item) {
+            File file = new File(DOWNLOAD_PATH + "/" + item.getPath());
+            return file.exists() && file.length() == item.getSize();
+        }
+
+        private void createDirectoryForItem(DownloadItem item) throws IOException {
+            int lastIndex = item.getPath().lastIndexOf("/");
+            Path folderPath = Paths.get(DOWNLOAD_PATH, item.getPath().substring(0, lastIndex + 1));
+            Files.createDirectories(folderPath);
         }
 
         private AlertDialog dialog;
 
-private void showErrorDialog(String message) {
-    if (dialog == null || !dialog.isShowing()) {
-        dialog = new AlertDialog.Builder(context)
-                .setTitle("错误")
-                .setMessage(message)
-                .setPositiveButton("确定", null)
-                .create();
-    }
-    dialog.show();
-}
-
+        private void showErrorDialogOnUIThread(String message) {
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (dialog == null || !dialog.isShowing()) {
+                    dialog = new AlertDialog.Builder(context)
+                            .setTitle("错误")
+                            .setMessage(message)
+                            .setPositiveButton("确定", null)
+                            .create();
+                }
+                dialog.show();
+            });
+        }
     }
 }
